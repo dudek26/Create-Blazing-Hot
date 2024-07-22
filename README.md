@@ -39,21 +39,21 @@ and existing metals, most notably their liquid forms.
 
 <details>
     <summary>Food</summary>
-    <p>This mod adds new Apple and Carrot variants:</p>
+    <p>This mod adds <b>new Apple and Carrot variants</b>. The metal variants are crafted from Ingots and Nuggets respectively, or by <b>filling with Molten Metals</b>. Each metal has its own stats and effects.<br>Metal Apples can be later upgraded into their <b>Stellar</b> forms by deploying a <b>Nether Star</b> on them.<br>In Sequenced Assembly, Stellar Apples can be turned into their <b>Enchanted</b> forms. </p> 
+    <p>Currently, you can make Carrots and Apples out of:</p>
     <ul>
-        <li><b>Blaze Carrot</b> - has the stats of a Golden Carrot, but it also extinguishes on consumption</li>
-        <li><b>Blaze Apple</b> - crafted with Blaze Gold, has the effects of the Golden Apple and 5 minutes of Fire Resistance</li>
-        <li><b>Stellar Blaze Apple</b> - crafted by deploying a Nether Star on a Blaze Apple and gives 8 minutes of Fire Resistance instead of 5</li>
-        <li><b>Enchanted Blaze Apple</b> - crafted in Sequenced Assembly, has the effects of the Stellar Blaze Apple, but gives Absorption III instead of I and also gives Strength for 5 minutes</li>
-        <li><b>Stellar Golden Apple</b> - has the stats of a Golden Apple and also gives Fire Resistance for 5 minutes; can be crafted into an Enchanted Golden Apple</li>
+        <li><b>Gold</b> (like in Vanilla, but with the addition of the Stellar variant)</li>
+        <li><b>Blaze Gold</b> (focused on Damage and Fire Resistance)</li>
+        <li><b>Iron</b> (focused on Defence)</li>
     </ul>
     <ul>
-        <li>There are more foods planned in the future for other metals.</li>
+        <li>There is more food planned in the future for other metals.</li>
     </ul>
 </details>
 
-There is more content planned for the future.
+There is more content planned for the future as the mod is actively being developed.
 
-## 🔨 Forge and versions below 1.20.1
+## 🔨 Forge support and older versions
 
-Support for Forge and versions below 1.20.1 is not planned.
+There **may** be support for Forge in the future, but I don't guarantee anything.<br>
+Support for older Minecraft versions (before 1.20.1) is not planned.
