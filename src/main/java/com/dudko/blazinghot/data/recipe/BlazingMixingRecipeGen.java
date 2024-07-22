@@ -17,6 +17,7 @@ import net.minecraft.world.level.material.Fluid;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
 
     public BlazingMixingRecipeGen(FabricDataOutput output) {

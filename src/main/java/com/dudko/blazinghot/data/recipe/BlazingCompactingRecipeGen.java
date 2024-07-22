@@ -7,6 +7,7 @@ import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.world.item.Items;
 
+@SuppressWarnings("unused")
 public class BlazingCompactingRecipeGen extends BlazingProcessingRecipeGen {
 
     public BlazingCompactingRecipeGen(FabricDataOutput output) {

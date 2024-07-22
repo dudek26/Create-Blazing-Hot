@@ -121,7 +121,8 @@ public class BlazingTags {
 
     public enum Fluids {
         MOLTEN_BLAZE_GOLD(COMMON),
-        MOLTEN_GOLD(COMMON);
+        MOLTEN_GOLD(COMMON),
+        MOLTEN_IRON(COMMON);
 
         public final TagKey<Fluid> tag;
         public final boolean alwaysDatagen;

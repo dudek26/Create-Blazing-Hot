@@ -3,6 +3,7 @@ package com.dudko.blazinghot.data.recipe;
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
+import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.foundation.utility.RegisteredObjects;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -66,6 +67,8 @@ public class BlazingCraftingRecipeGen extends BlazingRecipeProvider {
         decompressing(BLAZE_GOLD_INGOT, BLAZE_GOLD_NUGGET, 9, BLAZE_GOLD_INGOT);
 
         covering(Items.CARROT, BLAZE_GOLD_NUGGETS.tag, BLAZE_CARROT, BLAZE_GOLD_NUGGETS.tag);
+        covering(Items.CARROT, BlazingTags.commonItemTag("iron_nuggets"), IRON_CARROT, BlazingTags.commonItemTag("iron_ingots"));
+        covering(Items.APPLE, BlazingTags.commonItemTag("iron_ingots"), IRON_APPLE, BlazingTags.commonItemTag("iron_ingots"));
     }
 
     GeneratedRecipe

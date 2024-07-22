@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 
+@SuppressWarnings("unused")
 public class BlazingCrushingRecipeGen extends BlazingProcessingRecipeGen {
 
     public BlazingCrushingRecipeGen(FabricDataOutput output) {

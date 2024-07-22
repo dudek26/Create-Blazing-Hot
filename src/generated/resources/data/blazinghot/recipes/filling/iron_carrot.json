@@ -1,0 +1,13 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "amount": 8000,
+      "fluidTag": "c:molten_iron"
+    }
+  ],
+  "results": []
+}

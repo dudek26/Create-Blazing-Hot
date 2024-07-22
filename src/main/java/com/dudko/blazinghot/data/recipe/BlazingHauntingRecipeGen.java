@@ -5,6 +5,7 @@ import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 
+@SuppressWarnings("unused")
 public class BlazingHauntingRecipeGen extends BlazingProcessingRecipeGen {
 
     public BlazingHauntingRecipeGen(FabricDataOutput output) {

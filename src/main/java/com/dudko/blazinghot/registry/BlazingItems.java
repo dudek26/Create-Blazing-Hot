@@ -146,7 +146,7 @@ public class BlazingItems {
             .alwaysEat()
             .saturationMod(1.1f)
             .addEffect(MobEffects.ABSORPTION, tickMinutes(1), 1)
-            .addEffect(MobEffects.REGENERATION, tickSeconds(10), 1)
+            .addEffect(MobEffects.REGENERATION, tickSeconds(10))
             .addEffect(MobEffects.DAMAGE_RESISTANCE, tickMinutes(2), 1)
             .register();
     public static final ItemEntry<SequencedAssemblyItem> HEAVY_STELLAR_IRON_APPLE =
@@ -159,7 +159,7 @@ public class BlazingItems {
                     .saturationMod(1.1f)
                     .addEffect(MobEffects.ABSORPTION, tickMinutes(1), 1)
                     .addEffect(MobEffects.REGENERATION, tickSeconds(10), 1)
-                    .addEffect(MobEffects.DAMAGE_RESISTANCE, tickMinutes(2), 2)
+                    .addEffect(MobEffects.DAMAGE_RESISTANCE, tickMinutes(3), 2)
                     .register();
 
     public static void register() {

@@ -13,39 +13,44 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.UnaryOperator;
 
+import static com.dudko.blazinghot.data.recipe.BlazingProcessingRecipeGen.BUCKET;
 import static com.dudko.blazinghot.registry.BlazingItems.*;
 
+@SuppressWarnings("unused")
 public class BlazingSequencedAssemblyRecipeGen extends BlazingRecipeProvider {
 
     public BlazingSequencedAssemblyRecipeGen(FabricDataOutput dataOutput) {
         super(dataOutput);
     }
 
-    GeneratedRecipe
-            ENCHANTED_GOLDEN_APPLE =
-            create("enchanted_golden_apple", b -> b
-                    .require(STELLAR_GOLDEN_APPLE)
-                    .transitionTo(GILDED_STELLAR_GOLDEN_APPLE)
-                    .addOutput(Items.ENCHANTED_GOLDEN_APPLE, 1)
+    GeneratedRecipe ENCHANTED_GOLDEN_APPLE = create("enchanted_golden_apple", b -> b
+            .require(STELLAR_GOLDEN_APPLE)
+            .transitionTo(GILDED_STELLAR_GOLDEN_APPLE)
+            .addOutput(Items.ENCHANTED_GOLDEN_APPLE, 1)
+            .loops(4)
+            .addStep(FillingRecipe::new, r -> r.require(BlazingTags.Fluids.MOLTEN_GOLD.tag, BUCKET))
+            .addStep(DeployerApplicationRecipe::new, r -> r.require(Items.DIAMOND))
+            .addStep(PressingRecipe::new, r -> r)), ENCHANTED_BLAZE_APPLE = create("enchanted_blaze_apple",
+            b -> b
+                    .require(STELLAR_BLAZE_APPLE)
+                    .transitionTo(BURNING_STELLAR_BLAZE_APPLE)
+                    .addOutput(BlazingItems.ENCHANTED_BLAZE_APPLE, 1)
                     .loops(4)
-                    .addStep(FillingRecipe::new, r -> r.require(BlazingTags.Fluids.MOLTEN_GOLD.tag, 81000))
+                    .addStep(FillingRecipe::new, r -> r.require(BlazingTags.Fluids.MOLTEN_BLAZE_GOLD.tag, BUCKET))
                     .addStep(DeployerApplicationRecipe::new, r -> r.require(Items.DIAMOND))
-                    .addStep(PressingRecipe::new, r -> r)),
-            ENCHANTED_BLAZE_APPLE =
-                    create("enchanted_blaze_apple", b -> b
-                            .require(STELLAR_BLAZE_APPLE)
-                            .transitionTo(BURNING_STELLAR_BLAZE_APPLE)
-                            .addOutput(BlazingItems.ENCHANTED_BLAZE_APPLE, 1)
-                            .loops(4)
-                            .addStep(FillingRecipe::new,
-                                     r -> r.require(BlazingTags.Fluids.MOLTEN_BLAZE_GOLD.tag, 81000))
-                            .addStep(DeployerApplicationRecipe::new, r -> r.require(Items.DIAMOND))
-                            .addStep(PressingRecipe::new, r -> r));
+                    .addStep(PressingRecipe::new, r -> r)), ENCHANTED_IRON_APPLE = create("enchanted_iron_apple",
+            b -> b
+                    .require(STELLAR_IRON_APPLE)
+                    .transitionTo(HEAVY_STELLAR_IRON_APPLE)
+                    .addOutput(BlazingItems.ENCHANTED_IRON_APPLE, 1)
+                    .loops(4)
+                    .addStep(FillingRecipe::new, r -> r.require(BlazingTags.Fluids.MOLTEN_IRON.tag, BUCKET))
+                    .addStep(DeployerApplicationRecipe::new, r -> r.require(Items.DIAMOND))
+                    .addStep(PressingRecipe::new, r -> r));
 
     private GeneratedRecipe create(String name, UnaryOperator<SequencedAssemblyRecipeBuilder> transform) {
-        GeneratedRecipe
-                generatedRecipe =
-                c -> transform.apply(new SequencedAssemblyRecipeBuilder(BlazingHot.asResource(name))).build(c);
+        GeneratedRecipe generatedRecipe = c -> transform.apply(
+                new SequencedAssemblyRecipeBuilder(BlazingHot.asResource(name))).build(c);
         all.add(generatedRecipe);
         return generatedRecipe;
     }

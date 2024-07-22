@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 
 import static com.dudko.blazinghot.registry.BlazingItems.BLAZE_GOLD_INGOT;
 
+@SuppressWarnings("unused")
 public class BlazingPressingRecipeGen extends BlazingProcessingRecipeGen {
 
     public BlazingPressingRecipeGen(FabricDataOutput output) {
