@@ -1,0 +1,23 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "minecraft:stone"
+    }
+  ],
+  "processingTime": 250,
+  "results": [
+    {
+      "count": 2,
+      "item": "blazinghot:stone_dust"
+    },
+    {
+      "chance": 0.6,
+      "item": "blazinghot:stone_dust"
+    },
+    {
+      "chance": 0.4,
+      "item": "blazinghot:stone_dust"
+    }
+  ]
+}

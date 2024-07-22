@@ -1,0 +1,6 @@
+{
+  "parent": "blazinghot:block/cyan_modern_lamp",
+  "textures": {
+    "#all": "blazinghot:block/modern_lamp/cyan"
+  }
+}

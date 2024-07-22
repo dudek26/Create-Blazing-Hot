@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_modern_lamps": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "blazinghot:modern_lamp_panels"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "blazinghot:crafting/modern_lamp_panel/purple_modern_lamp_panel_from_full_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_modern_lamps",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "blazinghot:crafting/modern_lamp_panel/purple_modern_lamp_panel_from_full_block"
+    ]
+  },
+  "sends_telemetry_event": false
+}

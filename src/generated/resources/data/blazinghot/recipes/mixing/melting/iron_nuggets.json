@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "c:iron_nuggets"
+    }
+  ],
+  "processingTime": 40,
+  "results": [
+    {
+      "amount": 1000,
+      "fluid": "blazinghot:molten_iron"
+    }
+  ]
+}

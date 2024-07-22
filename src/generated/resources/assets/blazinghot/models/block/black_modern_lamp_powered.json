@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "blazinghot:block/modern_lamp/black_powered"
+  }
+}

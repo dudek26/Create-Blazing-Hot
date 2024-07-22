@@ -1,0 +1,16 @@
+{
+  "type": "create:item_application",
+  "ingredients": [
+    {
+      "item": "create:copper_casing"
+    },
+    {
+      "tag": "c:blaze_gold_ingots"
+    }
+  ],
+  "results": [
+    {
+      "item": "blazinghot:blaze_casing"
+    }
+  ]
+}

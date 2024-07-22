@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": {
+      "item": "blazinghot:blaze_gold_rod"
+    },
+    "Y": {
+      "item": "minecraft:glowstone"
+    }
+  },
+  "pattern": [
+    " X ",
+    "XYX",
+    " X "
+  ],
+  "result": {
+    "item": "blazinghot:white_modern_lamp"
+  },
+  "show_notification": true
+}

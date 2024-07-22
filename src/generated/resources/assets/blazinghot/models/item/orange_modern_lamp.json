@@ -1,0 +1,6 @@
+{
+  "parent": "blazinghot:block/orange_modern_lamp",
+  "textures": {
+    "#all": "blazinghot:block/modern_lamp/orange"
+  }
+}

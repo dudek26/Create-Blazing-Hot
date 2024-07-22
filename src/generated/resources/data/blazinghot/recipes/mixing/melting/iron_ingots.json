@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "c:iron_ingots"
+    }
+  ],
+  "processingTime": 300,
+  "results": [
+    {
+      "amount": 9000,
+      "fluid": "blazinghot:molten_iron"
+    }
+  ]
+}

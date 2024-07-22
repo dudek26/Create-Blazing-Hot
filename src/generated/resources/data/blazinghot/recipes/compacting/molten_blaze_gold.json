@@ -1,0 +1,15 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "amount": 9000,
+      "fluid": "blazinghot:molten_blaze_gold",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "blazinghot:blaze_gold_ingot"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "fluid:minecraft:water",
+    "fluid:blazinghot:molten_gold"
+  ],
+  "text": "emi.blazinghot.info.molten_gold_cobblestone"
+}

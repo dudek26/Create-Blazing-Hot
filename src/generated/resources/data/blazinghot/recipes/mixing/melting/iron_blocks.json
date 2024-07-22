@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "c:iron_blocks"
+    }
+  ],
+  "processingTime": 2400,
+  "results": [
+    {
+      "amount": 81000,
+      "fluid": "blazinghot:molten_iron"
+    }
+  ]
+}

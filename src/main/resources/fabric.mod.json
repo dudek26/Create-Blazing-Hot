@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "blazinghot",
+  "version": "${version}",
+  "name": "Create: Blazing Hot",
+  "description": "Nether- and metal-related features and QoL recipes.",
+  "authors": [
+    "dudko"
+  ],
+  "license": "MIT",
+  "icon": "assets/blazinghot/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.dudko.blazinghot.BlazingHot"
+    ],
+    "client": [
+      "com.dudko.blazinghot.BlazingHotClient"
+    ],
+    "fabric-datagen": [
+      "com.dudko.blazinghot.BlazingHotData"
+    ]
+  },
+  "mixins": [
+    "blazinghot.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "fabric-api": ">=${fabric_api_version}",
+    "create": ">=${create_version}",
+    "minecraft": "${minecraft_version}"
+  }
+}
