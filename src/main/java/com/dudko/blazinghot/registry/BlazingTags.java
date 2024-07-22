@@ -237,19 +237,19 @@ public class BlazingTags {
         for (Blocks blockTag : Blocks.values()) {
             ResourceLocation loc = blockTag.tag.location();
             consumer.accept("tag.block." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
-                            titleCaseConversion(blockTag.name()).replace('_', ' '));
+                    titleCaseConversion(blockTag.name()).replace('_', ' '));
         }
 
         for (Items itemTag : Items.values()) {
             ResourceLocation loc = itemTag.tag.location();
             consumer.accept("tag.item." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
-                            titleCaseConversion(itemTag.name().replace('_', ' ')));
+                    titleCaseConversion(itemTag.name().replace('_', ' ')));
         }
 
         for (Fluids itemTag : Fluids.values()) {
             ResourceLocation loc = itemTag.tag.location();
             consumer.accept("tag.fluid." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
-                            titleCaseConversion(itemTag.name().replace('_', ' ')));
+                    titleCaseConversion(itemTag.name().replace('_', ' ')));
         }
     }
 

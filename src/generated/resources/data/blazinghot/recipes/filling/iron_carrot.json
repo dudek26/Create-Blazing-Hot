@@ -9,5 +9,9 @@
       "fluidTag": "c:molten_iron"
     }
   ],
-  "results": []
+  "results": [
+    {
+      "item": "blazinghot:iron_carrot"
+    }
+  ]
 }

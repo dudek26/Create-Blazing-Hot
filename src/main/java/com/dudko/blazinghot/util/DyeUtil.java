@@ -17,14 +17,9 @@ public class DyeUtil {
 
 
     public static ShapedRecipeBuilder dyeingMultiple(RecipeCategory category, TagKey<Item> tag, ItemLike result, DyeColor dyeColor) {
-        return ShapedRecipeBuilder
-                .shaped(category, result, 8)
-                .pattern("###")
-                .pattern("#d#")
-                .pattern("###")
-                .define('#', tag)
-                .define('d', dyeColor.getTag())
-                .unlockedBy("has_" + tag.location().getPath(), RegistrateRecipeProvider.has(tag));
+        return ShapedRecipeBuilder.shaped(category, result, 8).pattern("###").pattern("#d#").pattern("###").define('#',
+                tag).define('d', dyeColor.getTag()).unlockedBy("has_" + tag.location().getPath(),
+                RegistrateRecipeProvider.has(tag));
     }
 
     public static ShapelessRecipeBuilder dyeingSingle(RecipeCategory category, TagKey<Item> tag, ItemLike result, DyeColor dyeColor) {

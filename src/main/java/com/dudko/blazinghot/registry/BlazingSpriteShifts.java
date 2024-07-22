@@ -15,8 +15,9 @@ public class BlazingSpriteShifts {
     }
 
     private static CTSpriteShiftEntry getCT(CTType type, String blockTextureName) {
-        return CTSpriteShifter.getCT(type, BlazingHot.asResource("block/" + blockTextureName),
-                                     BlazingHot.asResource("block/" + blockTextureName + "_connected"));
+        return CTSpriteShifter.getCT(type,
+                BlazingHot.asResource("block/" + blockTextureName),
+                BlazingHot.asResource("block/" + blockTextureName + "_connected"));
     }
 
 }

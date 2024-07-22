@@ -79,8 +79,10 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 
             @Override
             public @NotNull CompletableFuture<?> run(@NotNull CachedOutput dc) {
-                return CompletableFuture.allOf(
-                        GENERATORS.stream().map(gen -> gen.run(dc)).toArray(CompletableFuture[]::new));
+                return CompletableFuture.allOf(GENERATORS
+                        .stream()
+                        .map(gen -> gen.run(dc))
+                        .toArray(CompletableFuture[]::new));
             }
         };
     }
@@ -89,14 +91,10 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
         ProcessingRecipeSerializer<T> serializer = getSerializer();
         GeneratedRecipe generatedRecipe = c -> {
             ItemLike itemLike = singleIngredient.get();
-            transform
-                    .apply(new ProcessingRecipeBuilder<>(serializer.getFactory(), new ResourceLocation(namespace,
-                                                                                                       RegisteredObjects
-                                                                                                               .getKeyOrThrow(
-                                                                                                                       itemLike.asItem())
-                                                                                                               .getPath())).withItemIngredients(
-                            Ingredient.of(itemLike)))
-                    .build(c);
+            transform.apply(new ProcessingRecipeBuilder<>(serializer.getFactory(),
+                    new ResourceLocation(namespace,
+                            RegisteredObjects.getKeyOrThrow(itemLike.asItem()).getPath())).withItemIngredients(
+                    Ingredient.of(itemLike))).build(c);
         };
         all.add(generatedRecipe);
         return generatedRecipe;
@@ -112,9 +110,8 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 
     protected <T extends ProcessingRecipe<?>> GeneratedRecipe createWithDeferredId(Supplier<ResourceLocation> name, UnaryOperator<ProcessingRecipeBuilder<T>> transform) {
         ProcessingRecipeSerializer<T> serializer = getSerializer();
-        GeneratedRecipe
-                generatedRecipe =
-                c -> transform.apply(new ProcessingRecipeBuilder<>(serializer.getFactory(), name.get())).build(c);
+        GeneratedRecipe generatedRecipe = c -> transform.apply(new ProcessingRecipeBuilder<>(serializer.getFactory(),
+                name.get())).build(c);
         all.add(generatedRecipe);
         return generatedRecipe;
     }

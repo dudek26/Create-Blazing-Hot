@@ -45,18 +45,13 @@ public class BlazingCraftingRecipeGen extends BlazingRecipeProvider {
     }
 
     private GeneratedRecipe decompressing(ItemLike ingredient, ItemLike result, int count, ItemLike unlockedBy) {
-        return create(() -> result)
-                .returns(count)
-                .unlockedBy(() -> unlockedBy)
-                .withSuffix("_from_" + ingredient.asItem())
-                .viaShapeless(b -> b.requires(ingredient));
+        return create(() -> result).returns(count).unlockedBy(() -> unlockedBy).withSuffix("_from_"
+                + ingredient.asItem()).viaShapeless(b -> b.requires(ingredient));
     }
 
     private GeneratedRecipe covering(ItemLike ingredient, TagKey<Item> cover, ItemLike result, TagKey<Item> unlockedBy) {
-        return create(() -> result)
-                .unlockedByTag(() -> unlockedBy)
-                .viaShaped(
-                        b -> b.define('Y', ingredient).define('X', cover).pattern("XXX").pattern("XYX").pattern("XXX"));
+        return create(() -> result).unlockedByTag(() -> unlockedBy).viaShaped(b -> b.define('Y', ingredient).define('X',
+                cover).pattern("XXX").pattern("XYX").pattern("XXX"));
     }
 
     private void generate() {
@@ -67,31 +62,31 @@ public class BlazingCraftingRecipeGen extends BlazingRecipeProvider {
         decompressing(BLAZE_GOLD_INGOT, BLAZE_GOLD_NUGGET, 9, BLAZE_GOLD_INGOT);
 
         covering(Items.CARROT, BLAZE_GOLD_NUGGETS.tag, BLAZE_CARROT, BLAZE_GOLD_NUGGETS.tag);
-        covering(Items.CARROT, BlazingTags.commonItemTag("iron_nuggets"), IRON_CARROT, BlazingTags.commonItemTag("iron_ingots"));
-        covering(Items.APPLE, BlazingTags.commonItemTag("iron_ingots"), IRON_APPLE, BlazingTags.commonItemTag("iron_ingots"));
+        covering(Items.CARROT,
+                BlazingTags.commonItemTag("iron_nuggets"),
+                IRON_CARROT,
+                BlazingTags.commonItemTag("iron_ingots"));
+        covering(Items.APPLE,
+                BlazingTags.commonItemTag("iron_ingots"),
+                IRON_APPLE,
+                BlazingTags.commonItemTag("iron_ingots"));
     }
 
-    GeneratedRecipe
-            WHITE_MODERN_LAMP =
-            create(BlazingBlocks.MODERN_LAMP_BLOCKS.get(DyeColor.WHITE))
-                    .unlockedBy(BLAZE_GOLD_ROD)
-                    .viaShaped(b -> b
-                            .define('X', BLAZE_GOLD_ROD)
-                            .define('Y', Blocks.GLOWSTONE)
-                            .pattern(" X ")
-                            .pattern("XYX")
-                            .pattern(" X ")),
-            BLAZE_ARROW =
-                    create(BlazingItems.BLAZE_ARROW)
-                            .unlockedBy(BLAZE_GOLD_ROD)
-                            .returns(2)
-                            .viaShaped(b -> b
-                                    .define('X', ItemTags.COALS)
-                                    .define('Y', BLAZE_GOLD_ROD)
-                                    .define('Z', Items.FEATHER)
-                                    .pattern(" X ")
-                                    .pattern(" Y ")
-                                    .pattern(" Z "));
+    GeneratedRecipe WHITE_MODERN_LAMP = create(BlazingBlocks.MODERN_LAMP_BLOCKS.get(DyeColor.WHITE)).unlockedBy(
+            BLAZE_GOLD_ROD).viaShaped(b -> b
+            .define('X', BLAZE_GOLD_ROD)
+            .define('Y', Blocks.GLOWSTONE)
+            .pattern(" X ")
+            .pattern("XYX")
+            .pattern(" X ")), BLAZE_ARROW =
+            create(BlazingItems.BLAZE_ARROW).unlockedBy(BLAZE_GOLD_ROD).returns(2).viaShaped(b -> b
+                    .define('X',
+                            ItemTags.COALS)
+                    .define('Y', BLAZE_GOLD_ROD)
+                    .define('Z', Items.FEATHER)
+                    .pattern(" X ")
+                    .pattern(" Y ")
+                    .pattern(" Z "));
 
     GeneratedRecipeBuilder create(Supplier<ItemLike> result) {
         return new GeneratedRecipeBuilder("/", result);
@@ -158,9 +153,9 @@ public class BlazingCraftingRecipeGen extends BlazingRecipeProvider {
 
         GeneratedRecipe viaShaped(UnaryOperator<ShapedRecipeBuilder> builder) {
             return register(consumer -> {
-                ShapedRecipeBuilder
-                        b =
-                        builder.apply(ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result.get(), amount));
+                ShapedRecipeBuilder b = builder.apply(ShapedRecipeBuilder.shaped(RecipeCategory.MISC,
+                        result.get(),
+                        amount));
                 if (unlockedBy != null) b.unlockedBy("has_item", inventoryTrigger(unlockedBy.get()));
                 b.save(consumer, createLocation("crafting"));
             });
@@ -168,9 +163,9 @@ public class BlazingCraftingRecipeGen extends BlazingRecipeProvider {
 
         GeneratedRecipe viaShapeless(UnaryOperator<ShapelessRecipeBuilder> builder) {
             return register(consumer -> {
-                ShapelessRecipeBuilder
-                        b =
-                        builder.apply(ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, result.get(), amount));
+                ShapelessRecipeBuilder b = builder.apply(ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,
+                        result.get(),
+                        amount));
                 if (unlockedBy != null) b.unlockedBy("has_item", inventoryTrigger(unlockedBy.get()));
                 b.save(consumer, createLocation("crafting"));
             });

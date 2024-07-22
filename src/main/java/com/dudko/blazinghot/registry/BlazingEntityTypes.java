@@ -22,24 +22,23 @@ public class BlazingEntityTypes {
 
     private static final CreateRegistrate REGISTRATE = BlazingHot.REGISTRATE;
 
-    public static final EntityEntry<BlazeArrowEntity>
-            BLAZE_ARROW =
-            register("blaze_arrow", BlazeArrowEntity::new, () -> BlazeArrowRenderer::new, MobCategory.MISC, 4, 20, true,
-                     false, BlazeArrowEntity::build).tag(EntityTypeTags.ARROWS).register();
+    public static final EntityEntry<BlazeArrowEntity> BLAZE_ARROW = register("blaze_arrow",
+            BlazeArrowEntity::new,
+            () -> BlazeArrowRenderer::new,
+            MobCategory.MISC,
+            4,
+            20,
+            true,
+            false,
+            BlazeArrowEntity::build).tag(EntityTypeTags.ARROWS).register();
 
     private static <T extends Entity> CreateEntityBuilder<T, ?> register(String name, EntityType.EntityFactory<T> factory, NonNullSupplier<NonNullFunction<EntityRendererProvider.Context, EntityRenderer<? super T>>> renderer, MobCategory group, int range, int updateFrequency, boolean sendVelocity, boolean immuneToFire, NonNullConsumer<FabricEntityTypeBuilder<T>> propertyBuilder) {
         String id = Lang.asId(name);
-        return (CreateEntityBuilder<T, ?>) REGISTRATE
-                .entity(id, factory, group)
-                .properties(b -> b
-                        .trackRangeChunks(range)
-                        .trackedUpdateRate(updateFrequency)
-                        .forceTrackedVelocityUpdates(sendVelocity))
-                .properties(propertyBuilder)
-                .properties(b -> {
-                    if (immuneToFire) b.fireImmune();
-                })
-                .renderer(renderer);
+        return (CreateEntityBuilder<T, ?>) REGISTRATE.entity(id, factory, group).properties(b -> b.trackRangeChunks(
+                range).trackedUpdateRate(updateFrequency).forceTrackedVelocityUpdates(sendVelocity)).properties(
+                propertyBuilder).properties(b -> {
+            if (immuneToFire) b.fireImmune();
+        }).renderer(renderer);
     }
 
     public static void register() {

@@ -14,13 +14,10 @@ public class BlazingCompactingRecipeGen extends BlazingProcessingRecipeGen {
         super(output);
     }
 
-    GeneratedRecipe
-            MOLTEN_GOLD =
-            create("molten_gold", b -> b.require(BlazingFluids.MOLTEN_GOLD.get(), INGOT).output(Items.GOLD_INGOT)),
-            MOLTEN_BLAZE_GOLD =
-                    create("molten_blaze_gold", b -> b
-                            .require(BlazingFluids.MOLTEN_BLAZE_GOLD.get(), INGOT)
-                            .output(BlazingItems.BLAZE_GOLD_INGOT));
+    GeneratedRecipe MOLTEN_GOLD = create("molten_gold",
+            b -> b.require(BlazingFluids.MOLTEN_GOLD.get(), INGOT).output(Items.GOLD_INGOT)), MOLTEN_BLAZE_GOLD =
+            create("molten_blaze_gold",
+                    b -> b.require(BlazingFluids.MOLTEN_BLAZE_GOLD.get(), INGOT).output(BlazingItems.BLAZE_GOLD_INGOT));
 
     @Override
     protected IRecipeTypeInfo getRecipeType() {

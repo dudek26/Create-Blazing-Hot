@@ -68,6 +68,11 @@ public class FoodItemBuilder<T extends Item> {
         return this;
     }
 
+    protected FoodItemBuilder<T> fireResistant() {
+        properties = properties.fireResistant();
+        return this;
+    }
+
     protected FoodItemBuilder<T> nutrition(int nutrition) {
         foodProperties = foodProperties.nutrition(nutrition);
         return this;
@@ -123,8 +128,10 @@ public class FoodItemBuilder<T extends Item> {
      * @see #register()
      */
     protected ItemBuilder<T, CreateRegistrate> build() {
-        ItemBuilder<T, CreateRegistrate> builder =
-                REGISTRATE.item(name, factory).properties(p -> finishProperties()).tag(BlazingTags.Items.FOODS.tag);
+        ItemBuilder<T, CreateRegistrate> builder = REGISTRATE
+                .item(name, factory)
+                .properties(p -> finishProperties())
+                .tag(BlazingTags.Items.FOODS.tag);
         if (tags.length > 0) builder.tag(tags);
         if (description != null) builder.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, description));
         return builder;

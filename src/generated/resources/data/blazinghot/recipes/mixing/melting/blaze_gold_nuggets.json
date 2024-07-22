@@ -1,5 +1,6 @@
 {
   "type": "create:mixing",
+  "heatRequirement": "superheated",
   "ingredients": [
     {
       "tag": "c:blaze_gold_nuggets"

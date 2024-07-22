@@ -38,11 +38,12 @@ public class BlazingTagGen {
     }
 
     public static void generateItemTags(RegistrateTagsProvider<Item> prov) {
-        prov
-                .addTag(BlazingTags.Items.NETHER_FLORA.tag)
-                .add(net.minecraft.world.item.Items.WARPED_FUNGUS, net.minecraft.world.item.Items.CRIMSON_FUNGUS,
-                     net.minecraft.world.item.Items.WARPED_ROOTS, net.minecraft.world.item.Items.CRIMSON_ROOTS,
-                     net.minecraft.world.item.Items.WEEPING_VINES, net.minecraft.world.item.Items.TWISTING_VINES);
+        prov.addTag(BlazingTags.Items.NETHER_FLORA.tag).add(net.minecraft.world.item.Items.WARPED_FUNGUS,
+                net.minecraft.world.item.Items.CRIMSON_FUNGUS,
+                net.minecraft.world.item.Items.WARPED_ROOTS,
+                net.minecraft.world.item.Items.CRIMSON_ROOTS,
+                net.minecraft.world.item.Items.WEEPING_VINES,
+                net.minecraft.world.item.Items.TWISTING_VINES);
 
         for (BlazingTags.Items tag : BlazingTags.Items.values()) {
             if (tag.alwaysDatagen) tagAppender(prov, tag);

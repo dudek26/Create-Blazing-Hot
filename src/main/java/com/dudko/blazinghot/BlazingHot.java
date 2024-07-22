@@ -28,9 +28,8 @@ public class BlazingHot implements ModInitializer {
     public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(ID);
 
     static {
-        REGISTRATE.setTooltipModifierFactory(
-                item -> new ItemDescription.Modifier(item, TooltipHelper.Palette.STANDARD_CREATE).andThen(
-                        TooltipModifier.mapNull(KineticStats.create(item))));
+        REGISTRATE.setTooltipModifierFactory(item -> new ItemDescription.Modifier(item,
+                TooltipHelper.Palette.STANDARD_CREATE).andThen(TooltipModifier.mapNull(KineticStats.create(item))));
     }
 
     @Override
@@ -48,7 +47,7 @@ public class BlazingHot implements ModInitializer {
 
         LOGGER.info("Create addon mod [{}] is loading alongside Create [{}]!", NAME, Create.VERSION);
         LOGGER.info(EnvExecutor.unsafeRunForDist(() -> () -> "{} is accessing Porting Lib from the client!",
-                                                 () -> () -> "{} is accessing Porting Lib from the server!"), NAME);
+                () -> () -> "{} is accessing Porting Lib from the server!"), NAME);
 
 
     }

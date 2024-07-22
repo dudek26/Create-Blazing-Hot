@@ -17,9 +17,8 @@ import java.util.function.Supplier;
 
 public final class BlazingCreativeTabs {
 
-    public static final TabInfo
-            BLAZING_TAB =
-            register("blazinghot", FabricItemGroup
+    public static final TabInfo BLAZING_TAB = register("blazinghot",
+            FabricItemGroup
                     .builder()
                     .title(Component.translatable("itemGroup.blazinghot"))
                     .icon(() -> BlazingItems.BLAZE_GOLD_INGOT.asItem().getDefaultInstance())

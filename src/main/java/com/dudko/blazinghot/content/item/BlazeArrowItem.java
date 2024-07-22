@@ -18,10 +18,10 @@ public class BlazeArrowItem extends ArrowItem {
 
     @Override
     public @NotNull AbstractArrow createArrow(@NotNull Level level, @NotNull ItemStack stack, @NotNull LivingEntity shooter) {
-        BlazeArrowEntity
-                arrow =
-                new BlazeArrowEntity(BlazingEntityTypes.BLAZE_ARROW.get(), shooter, level,
-                                     BlazingItems.BLAZE_ARROW.get());
+        BlazeArrowEntity arrow = new BlazeArrowEntity(BlazingEntityTypes.BLAZE_ARROW.get(),
+                shooter,
+                level,
+                BlazingItems.BLAZE_ARROW.get());
         if (level.dimension() == ContraptionWorld.NETHER) arrow.setBaseDamage(arrow.getBaseDamage() * 1.5);
 
         return arrow;

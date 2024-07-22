@@ -1,6 +1,5 @@
 package com.dudko.blazinghot.mixin;
 
-import com.dudko.blazinghot.BlazingHot;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.main.GameConfig;
 import org.spongepowered.asm.mixin.Mixin;

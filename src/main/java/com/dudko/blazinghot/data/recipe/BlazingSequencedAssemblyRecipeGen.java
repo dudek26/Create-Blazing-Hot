@@ -23,14 +23,15 @@ public class BlazingSequencedAssemblyRecipeGen extends BlazingRecipeProvider {
         super(dataOutput);
     }
 
-    GeneratedRecipe ENCHANTED_GOLDEN_APPLE = create("enchanted_golden_apple", b -> b
-            .require(STELLAR_GOLDEN_APPLE)
-            .transitionTo(GILDED_STELLAR_GOLDEN_APPLE)
-            .addOutput(Items.ENCHANTED_GOLDEN_APPLE, 1)
-            .loops(4)
-            .addStep(FillingRecipe::new, r -> r.require(BlazingTags.Fluids.MOLTEN_GOLD.tag, BUCKET))
-            .addStep(DeployerApplicationRecipe::new, r -> r.require(Items.DIAMOND))
-            .addStep(PressingRecipe::new, r -> r)), ENCHANTED_BLAZE_APPLE = create("enchanted_blaze_apple",
+    GeneratedRecipe ENCHANTED_GOLDEN_APPLE = create("enchanted_golden_apple",
+            b -> b
+                    .require(STELLAR_GOLDEN_APPLE)
+                    .transitionTo(GILDED_STELLAR_GOLDEN_APPLE)
+                    .addOutput(Items.ENCHANTED_GOLDEN_APPLE, 1)
+                    .loops(4)
+                    .addStep(FillingRecipe::new, r -> r.require(BlazingTags.Fluids.MOLTEN_GOLD.tag, BUCKET))
+                    .addStep(DeployerApplicationRecipe::new, r -> r.require(Items.DIAMOND))
+                    .addStep(PressingRecipe::new, r -> r)), ENCHANTED_BLAZE_APPLE = create("enchanted_blaze_apple",
             b -> b
                     .require(STELLAR_BLAZE_APPLE)
                     .transitionTo(BURNING_STELLAR_BLAZE_APPLE)
@@ -49,8 +50,8 @@ public class BlazingSequencedAssemblyRecipeGen extends BlazingRecipeProvider {
                     .addStep(PressingRecipe::new, r -> r));
 
     private GeneratedRecipe create(String name, UnaryOperator<SequencedAssemblyRecipeBuilder> transform) {
-        GeneratedRecipe generatedRecipe = c -> transform.apply(
-                new SequencedAssemblyRecipeBuilder(BlazingHot.asResource(name))).build(c);
+        GeneratedRecipe generatedRecipe = c -> transform.apply(new SequencedAssemblyRecipeBuilder(BlazingHot.asResource(
+                name))).build(c);
         all.add(generatedRecipe);
         return generatedRecipe;
     }

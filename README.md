@@ -1,4 +1,4 @@
-# [Create: Blazing Hot](https://modrinth.com/mod/create-blazing-hot)
+# Create: Blazing Hot
 
 Nether- and metal-related features and QoL recipes.
 

@@ -37,6 +37,7 @@ public class BlazingBlocks {
             .tag(BlazingTags.Blocks.BLAZE_GOLD_BLOCKS.tag)
             .item()
             .tag(Tags.Items.STORAGE_BLOCKS)
+            .tag(BlazingTags.Items.BLAZE_GOLD_BLOCKS.tag)
             .build()
             .register();
 
@@ -58,7 +59,7 @@ public class BlazingBlocks {
                     DyeUtil
                             .dyeingMultiple(RecipeCategory.REDSTONE, BlazingTags.Items.MODERN_LAMPS.tag, c.get(), color)
                             .save(p,
-                                  BlazingHot.asResource("crafting/modern_lamp/" + c.getName() + "_from_other_lamps"));
+                                    BlazingHot.asResource("crafting/modern_lamp/" + c.getName() + "_from_other_lamps"));
                     DyeUtil
                             .dyeingSingle(RecipeCategory.REDSTONE, BlazingTags.Items.MODERN_LAMPS.tag, c.get(), color)
                             .save(p, BlazingHot.asResource("crafting/modern_lamp/" + c.getName() + "_from_other_lamp"));
@@ -80,24 +81,20 @@ public class BlazingBlocks {
                 .tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag, BlazingTags.Blocks.MODERN_LAMP_PANELS.tag)
                 .blockstate(new ModernLampPanelGenerator(color)::generate)
                 .recipe((c, p) -> {
-                    ShapedRecipeBuilder
-                            .shaped(RecipeCategory.REDSTONE, c.get(), 4)
-                            .pattern("ll")
-                            .define('l', MODERN_LAMP_BLOCKS.get(color))
-                            .unlockedBy("has_modern_lamps",
-                                        RegistrateRecipeProvider.has(BlazingTags.Items.MODERN_LAMP_PANELS.tag))
-                            .save(p, BlazingHot.asResource(
-                                    "crafting/modern_lamp_panel/" + c.getName() + "_from_full_block"));
-                    DyeUtil
-                            .dyeingMultiple(RecipeCategory.REDSTONE, BlazingTags.Items.MODERN_LAMP_PANELS.tag, c.get(),
-                                            color)
-                            .save(p, BlazingHot.asResource(
-                                    "crafting/modern_lamp_panel/" + c.getName() + "_from_other_lamps"));
-                    DyeUtil
-                            .dyeingSingle(RecipeCategory.REDSTONE, BlazingTags.Items.MODERN_LAMP_PANELS.tag, c.get(),
-                                          color)
-                            .save(p, BlazingHot.asResource(
-                                    "crafting/modern_lamp_panel/" + c.getName() + "_from_other_lamp"));
+                    ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, c.get(), 4).pattern("ll").define('l',
+                            MODERN_LAMP_BLOCKS.get(color)).unlockedBy("has_modern_lamps",
+                            RegistrateRecipeProvider.has(BlazingTags.Items.MODERN_LAMP_PANELS.tag)).save(p,
+                            BlazingHot.asResource("crafting/modern_lamp_panel/" + c.getName() + "_from_full_block"));
+                    DyeUtil.dyeingMultiple(RecipeCategory.REDSTONE,
+                            BlazingTags.Items.MODERN_LAMP_PANELS.tag,
+                            c.get(),
+                            color).save(p,
+                            BlazingHot.asResource("crafting/modern_lamp_panel/" + c.getName() + "_from_other_lamps"));
+                    DyeUtil.dyeingSingle(RecipeCategory.REDSTONE,
+                            BlazingTags.Items.MODERN_LAMP_PANELS.tag,
+                            c.get(),
+                            color).save(p,
+                            BlazingHot.asResource("crafting/modern_lamp_panel/" + c.getName() + "_from_other_lamp"));
                 })
                 .item()
                 .tag(BlazingTags.Items.MODERN_LAMP_PANELS.tag)

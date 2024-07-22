@@ -12,9 +12,8 @@ public class BlazingHauntingRecipeGen extends BlazingProcessingRecipeGen {
         super(output);
     }
 
-    GeneratedRecipe
-            NETHER_COMPOUND =
-            create("nether_compound", b -> b.require(BlazingItems.NETHER_COMPOUND).output(BlazingItems.NETHER_ESSENCE));
+    GeneratedRecipe NETHER_COMPOUND = create("nether_compound",
+            b -> b.require(BlazingItems.NETHER_COMPOUND).output(BlazingItems.NETHER_ESSENCE));
 
     @Override
     protected IRecipeTypeInfo getRecipeType() {
