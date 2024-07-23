@@ -3,8 +3,7 @@
   "ingredients": [
     {
       "amount": 9000,
-      "fluid": "blazinghot:molten_blaze_gold",
-      "nbt": {}
+      "fluidTag": "c:molten_blaze_gold"
     }
   ],
   "results": [

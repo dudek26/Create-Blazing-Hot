@@ -64,7 +64,16 @@ public class BlazingItems {
             ItemTags.ARROWS).onRegisterAfter(Registries.ITEM,
             v -> ItemDescription.useKey(v, "item.blazinghot.blaze_arrow")).register();
 
-    public static final ItemEntry<Item> IRON_CARROT = new FoodItemBuilder<>("iron_carrot", Item::new)
+    public static final ItemEntry<Item> STELLAR_GOLDEN_APPLE = new FoodItemBuilder<>("stellar_golden_apple", Item::new)
+            .alwaysEat()
+            .nutrition(4)
+            .saturationMod(1.1f)
+            .addEffect(MobEffects.ABSORPTION, tickMinutes(2), 1)
+            .addEffect(MobEffects.REGENERATION, tickSeconds(20), 1)
+            .addEffect(MobEffects.FIRE_RESISTANCE, tickMinutes(5))
+            .rarity(Rarity.RARE)
+            .fireResistant()
+            .register(), IRON_CARROT = new FoodItemBuilder<>("iron_carrot", Item::new)
             .nutrition(5)
             .saturationMod(0.8f)
             .register(), IRON_APPLE = new FoodItemBuilder<>("iron_apple", Item::new)
@@ -82,15 +91,16 @@ public class BlazingItems {
             .addEffect(MobEffects.ABSORPTION, tickMinutes(1), 1)
             .addEffect(MobEffects.REGENERATION, tickSeconds(10))
             .addEffect(MobEffects.DAMAGE_RESISTANCE, tickMinutes(2), 1)
-            .register(), STELLAR_GOLDEN_APPLE = new FoodItemBuilder<>("stellar_golden_apple", Item::new)
-            .alwaysEat()
+            .register();
+    public static final ItemEntry<FoilableItem> ENCHANTED_IRON_APPLE = new FoodItemBuilder<>("enchanted_iron_apple",
+            FoilableItem::new)
+            .rarity(Rarity.EPIC)
             .nutrition(4)
+            .alwaysEat()
             .saturationMod(1.1f)
-            .addEffect(MobEffects.ABSORPTION, tickMinutes(2), 1)
-            .addEffect(MobEffects.REGENERATION, tickSeconds(20), 1)
-            .addEffect(MobEffects.FIRE_RESISTANCE, tickMinutes(5))
-            .rarity(Rarity.RARE)
-            .fireResistant()
+            .addEffect(MobEffects.ABSORPTION, tickMinutes(1), 1)
+            .addEffect(MobEffects.REGENERATION, tickSeconds(10), 1)
+            .addEffect(MobEffects.DAMAGE_RESISTANCE, tickMinutes(3), 2)
             .register();
     public static final ItemEntry<ExtinguishingItem> BLAZE_CARROT = new FoodItemBuilder<>("blaze_carrot",
             ExtinguishingItem::new).nutrition(6).saturationMod(1.2f).alwaysEat().fireResistant().description(
@@ -132,16 +142,7 @@ public class BlazingItems {
             "heavy_stellar_iron_apple",
             Rarity.RARE), GILDED_STELLAR_GOLDEN_APPLE = sequencedIngredient("gilded_stellar_golden_apple", Rarity.RARE),
             BURNING_STELLAR_BLAZE_APPLE = sequencedIngredient("burning_stellar_blaze_apple", Rarity.RARE);
-    public static final ItemEntry<FoilableItem> ENCHANTED_IRON_APPLE = new FoodItemBuilder<>("enchanted_iron_apple",
-            FoilableItem::new)
-            .rarity(Rarity.EPIC)
-            .nutrition(4)
-            .alwaysEat()
-            .saturationMod(1.1f)
-            .addEffect(MobEffects.ABSORPTION, tickMinutes(1), 1)
-            .addEffect(MobEffects.REGENERATION, tickSeconds(10), 1)
-            .addEffect(MobEffects.DAMAGE_RESISTANCE, tickMinutes(3), 2)
-            .register();
+
 
     public static void register() {
         BlazingHot.LOGGER.info("Registering Mod Items for " + BlazingHot.NAME);
