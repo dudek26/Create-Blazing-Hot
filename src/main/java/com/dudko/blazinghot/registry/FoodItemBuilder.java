@@ -124,7 +124,7 @@ public class FoodItemBuilder<T extends Item> {
      * Builds the item.
      *
      * @return The item builder.
-     * @apiNote This does not register the item to the game. Use for other modifications, such as a custom tooltip.
+     * @apiNote This does not init the item to the game. Use for other modifications, such as a custom tooltip.
      * @see #register()
      */
     protected ItemBuilder<T, CreateRegistrate> build() {

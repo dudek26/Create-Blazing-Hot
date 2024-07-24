@@ -2,6 +2,7 @@ package com.dudko.blazinghot;
 
 import com.dudko.blazinghot.content.entity.renderer.BlazeArrowRenderer;
 import com.dudko.blazinghot.registry.BlazingEntityTypes;
+import com.dudko.blazinghot.registry.BlazingPartialModels;
 import com.mojang.datafixers.util.Pair;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
@@ -19,6 +20,7 @@ public class BlazingHotClient implements ClientModInitializer {
     public void onInitializeClient() {
 
         EntityRendererRegistry.register(BlazingEntityTypes.BLAZE_ARROW.get(), BlazeArrowRenderer::new);
+        BlazingPartialModels.init();
 
         ItemTooltipCallback.EVENT.register(((stack, context, lines) -> {
 

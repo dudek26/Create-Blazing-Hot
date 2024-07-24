@@ -5,16 +5,24 @@ import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampGenerator;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelGenerator;
+import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlock;
 import com.dudko.blazinghot.util.DyeUtil;
 import com.simibubi.create.AllTags;
+import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
+import com.simibubi.create.content.kinetics.BlockStressDefaults;
+import com.simibubi.create.content.kinetics.mixer.MechanicalMixerBlock;
+import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
 import com.simibubi.create.foundation.block.DyedBlockList;
+import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.BuilderTransformers;
 import com.simibubi.create.foundation.data.ModelGen;
+import com.simibubi.create.foundation.data.SharedProperties;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import io.github.fabricators_of_create.porting_lib.tags.Tags;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -24,6 +32,8 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
 
 import static com.dudko.blazinghot.BlazingHot.REGISTRATE;
+import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
+import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 
 public class BlazingBlocks {
 
@@ -46,6 +56,18 @@ public class BlazingBlocks {
             .transform(BuilderTransformers.casing(() -> BlazingSpriteShifts.BLAZE_CASING))
             .properties(p -> p.mapColor(MapColor.CRIMSON_NYLIUM).sound(SoundType.NETHER_WOOD))
             .register();
+
+    public static final BlockEntry<BlazeMixerBlock> BLAZE_MIXER =
+            REGISTRATE.block("blaze_mixer", BlazeMixerBlock::new)
+                             .initialProperties(SharedProperties::stone)
+                             .properties(p -> p.noOcclusion().mapColor(MapColor.STONE))
+                             .transform(axeOrPickaxe())
+                             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
+                             .addLayer(() -> RenderType::cutoutMipped)
+                             .transform(BlockStressDefaults.setImpact(4.0))
+                             .item(AssemblyOperatorBlockItem::new)
+                             .transform(customItemModel())
+                             .register();
 
     public static final DyedBlockList<ModernLampBlock> MODERN_LAMP_BLOCKS = new DyedBlockList<>(color -> {
         String colorName = color.getSerializedName();

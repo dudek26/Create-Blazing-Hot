@@ -35,15 +35,17 @@ public class BlazingHot implements ModInitializer {
     @Override
     public void onInitialize() {
 
+        BlazingTags.init();
         BlazingCreativeTabs.register();
-        BlazingItems.register();
         BlazingBlocks.register();
+        BlazingItems.register();
         BlazingFluids.register();
-        BlazingFluids.registerFluidInteractions();
         BlazingEntityTypes.register();
-        BlazingTags.register();
+        BlazingBlockEntityTypes.register();
 
         REGISTRATE.register();
+
+        BlazingFluids.registerFluidInteractions();
 
         LOGGER.info("Create addon mod [{}] is loading alongside Create [{}]!", NAME, Create.VERSION);
         LOGGER.info(EnvExecutor.unsafeRunForDist(() -> () -> "{} is accessing Porting Lib from the client!",

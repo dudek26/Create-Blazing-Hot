@@ -168,7 +168,7 @@ public class BlazingTags {
         }
     }
 
-    public static void register() {
+    public static void init() {
         Blocks.register();
         Fluids.register();
         Items.register();
