@@ -18,9 +18,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 
-public class BlazingEntityTypes {
+import static com.dudko.blazinghot.BlazingHot.REGISTRATE;
 
-    private static final CreateRegistrate REGISTRATE = BlazingHot.REGISTRATE;
+public class BlazingEntityTypes {
 
     public static final EntityEntry<BlazeArrowEntity> BLAZE_ARROW = register("blaze_arrow",
             BlazeArrowEntity::new,

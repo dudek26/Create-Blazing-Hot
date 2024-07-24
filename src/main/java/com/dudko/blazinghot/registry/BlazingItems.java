@@ -149,6 +149,6 @@ public class BlazingItems {
     }
 
     public static void setupCreativeTab() {
-        REGISTRATE.setCreativeTab(BlazingCreativeTabs.getKey());
+        REGISTRATE.setCreativeTab(BlazingCreativeTabs.getKey(BlazingCreativeTabs.BLAZING_BASE_TAB));
     }
 }

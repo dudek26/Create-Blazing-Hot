@@ -46,15 +46,10 @@ public class BlazingBlocks {
             .tag(BlockTags.BEACON_BASE_BLOCKS)
             .tag(BlazingTags.Blocks.BLAZE_GOLD_BLOCKS.tag)
             .item()
+            .tab(BlazingCreativeTabs.getKey(BlazingCreativeTabs.BLAZING_BUILDING_TAB))
             .tag(Tags.Items.STORAGE_BLOCKS)
             .tag(BlazingTags.Items.BLAZE_GOLD_BLOCKS.tag)
             .build()
-            .register();
-
-    public static final BlockEntry<CasingBlock> BLAZE_CASING = REGISTRATE
-            .block("blaze_casing", CasingBlock::new)
-            .transform(BuilderTransformers.casing(() -> BlazingSpriteShifts.BLAZE_CASING))
-            .properties(p -> p.mapColor(MapColor.CRIMSON_NYLIUM).sound(SoundType.NETHER_WOOD))
             .register();
 
     public static final BlockEntry<BlazeMixerBlock> BLAZE_MIXER =
@@ -68,6 +63,12 @@ public class BlazingBlocks {
                              .item(AssemblyOperatorBlockItem::new)
                              .transform(customItemModel())
                              .register();
+
+    public static final BlockEntry<CasingBlock> BLAZE_CASING = REGISTRATE
+            .block("blaze_casing", CasingBlock::new)
+            .transform(BuilderTransformers.casing(() -> BlazingSpriteShifts.BLAZE_CASING))
+            .properties(p -> p.mapColor(MapColor.CRIMSON_NYLIUM).sound(SoundType.NETHER_WOOD))
+            .register();
 
     public static final DyedBlockList<ModernLampBlock> MODERN_LAMP_BLOCKS = new DyedBlockList<>(color -> {
         String colorName = color.getSerializedName();
@@ -87,6 +88,7 @@ public class BlazingBlocks {
                             .save(p, BlazingHot.asResource("crafting/modern_lamp/" + c.getName() + "_from_other_lamp"));
                 })
                 .item()
+                .tab(BlazingCreativeTabs.getKey(BlazingCreativeTabs.BLAZING_BUILDING_TAB))
                 .tag(BlazingTags.Items.MODERN_LAMPS.tag)
                 .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "item.blazinghot.modern_lamp"))
                 .model((c, b) -> b.blockItem(c).texture("#all", b.modLoc("block/modern_lamp/" + colorName)))
@@ -119,6 +121,7 @@ public class BlazingBlocks {
                             BlazingHot.asResource("crafting/modern_lamp_panel/" + c.getName() + "_from_other_lamp"));
                 })
                 .item()
+                .tab(BlazingCreativeTabs.getKey(BlazingCreativeTabs.BLAZING_BUILDING_TAB))
                 .tag(BlazingTags.Items.MODERN_LAMP_PANELS.tag)
                 .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "item.blazinghot.modern_lamp"))
                 .transform(ModelGen.customItemModel("modern_lamp_panel", colorName))

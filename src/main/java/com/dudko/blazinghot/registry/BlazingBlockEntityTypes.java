@@ -6,7 +6,8 @@ import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerRenderer;
 import com.simibubi.create.AllBlocks;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 
-import static com.simibubi.create.Create.REGISTRATE;
+import static com.dudko.blazinghot.BlazingHot.REGISTRATE;
+
 
 public class BlazingBlockEntityTypes {
 
