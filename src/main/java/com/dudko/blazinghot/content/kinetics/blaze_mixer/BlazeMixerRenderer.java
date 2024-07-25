@@ -2,6 +2,7 @@ package com.dudko.blazinghot.content.kinetics.blaze_mixer;
 
 import com.dudko.blazinghot.registry.BlazingPartialModels;
 import com.jozufozu.flywheel.backend.Backend;
+import com.jozufozu.flywheel.core.PartialModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
@@ -49,6 +50,7 @@ public class BlazeMixerRenderer extends KineticBlockEntityRenderer<BlazeMixerBlo
 				.renderInto(ms, vb);
 
 		VertexConsumer vbCutout = buffer.getBuffer(RenderType.cutoutMipped());
+
 		SuperByteBuffer headRender = CachedBufferer.partial(BlazingPartialModels.BLAZE_MIXER_HEAD, blockState);
 		headRender.rotateCentered(Direction.UP, angle)
 				.translate(0, -renderedHeadOffset, 0)

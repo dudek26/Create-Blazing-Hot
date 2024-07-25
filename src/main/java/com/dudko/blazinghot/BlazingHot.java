@@ -61,6 +61,7 @@ public class BlazingHot implements ModInitializer {
     public static void gatherData(FabricDataGenerator.Pack pack) {
         REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, BlazingTagGen::generateBlockTags);
         REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, BlazingTagGen::generateItemTags);
+        REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, BlazingTagGen::generateFluidTags);
         REGISTRATE.addDataGenerator(ProviderType.LANG, BlazingLangGen::generate);
 
         pack.addProvider(BlazingSequencedAssemblyRecipeGen::new);
