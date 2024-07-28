@@ -1,0 +1,76 @@
+------------------------------------------------------
+Create: Blazing Hot 0.3
+------------------------------------------------------
+## Added:
+- Molten Iron
+- Iron Carrot, Iron Apple, Stellar Iron Apple, Enchanted Iron Apple
+- Recipes for melting Blaze Gold in the Mixer
+- Blaze Casing
+## Changes:
+- Slightly adjusted some recipes
+- Extended Stellar Blaze Apple's and Enchanted Blaze Apple's Regeneration effect to 20 seconds
+## Bugfixes:
+- Blaze Gold Block no longer emits light
+------------------------------------------------------
+Create: Blazing Hot 0.2
+------------------------------------------------------
+## Added:
+- Colored variants of Modern Lamps and Modern Lamp Panels
+## Changed:
+- Updated textures for White Modern Lamp and White Modern Lamp Panel
+------------------------------------------------------
+Create: Blazing Hot 0.2
+------------------------------------------------------
+## Added:
+- Blaze Apple, Stellar Blaze Apple, Enchanted Blaze Apple
+## Changed:
+- Renamed:
+- - `Modern Lamp` -> `White Modern Lamp`
+- - `Modern Lamp Panel` -> `White Modern Lamp Panel`
+- Added new tooltips to Modern Lamps
+- Added redstone functionality of Modern Redstone Lamps to regular Modern Lamps
+- ID changes:
+- - `blazinghot:modern_lamp` -> `blazinghot:white_modern_lamp`
+- - `blazinghot:modern_lamp_panel` -> `blazinghot:white_modern_lamp_panel`
+- Updated Blaze Carrot tooltip
+- Blaze Gold Blocks can now be used in the Beacon base
+- Blaze Gold Ingots can now be used in Beacons
+## Removed:
+- Modern Redstone Lamp
+- Modern Redstone Lamp Panel
+------------------------------------------------------
+Create: Blazing Hot 0.1.1
+------------------------------------------------------
+## Changed:
+- Blaze Carrots now extinguish after being eaten
+- Blaze Carrots no longer give Fire Resistance
+- Molten Blaze Gold and Molten Gold no longer use Tinker's Construct's textures
+- Gilded Stellar Golden Apple's rarity is now Rare instead of Epic
+## Fixed:
+- Effect tooltips now show the amplifiers of the effects (#2)
+- Removed Cobblestone milling into Stone Dust recipe due to conflicts with Cobblestone crushing into Gravel recipe (#3)
+## Removed:
+- Rail Grass Slab
+------------------------------------------------------
+Create: Blazing Hot 0.1
+------------------------------------------------------
+### Molten Metals
+- Currently: Gold, Blaze Gold
+- Gold can be melted in superheated mixing
+- Blaze Gold can be acquired by mixing Molten Gold and **Nether Essence**
+- Molten Gold can replace lava in cobblestone generators to make the process faster
+- Molten Blaze Gold creates Netherrack when touching water
+### Nether Essence
+- Obtained by haunting Nether Compound
+- Nether Compound can be obtained by mixing some nether and overworld resources
+### Blaze Gold:
+- Comes in six forms: liquid, nuggets, ingots, blocks, sheets and rods
+- Blaze Gold Rods can be crushed into Blaze Powder and crafted into Blaze Arrows that deal more damage in the Nether
+- Blaze Gold Nuggets and Molten Blaze Gold can be used to craft Blaze Carrot that grant 10 seconds of Fire Resistance
+### Misc:
+- Added Stellar Golden Apple, which is obtained by deploying a Nether Star on a Golden Apple
+- Added recipe for Enchanted Golden Apple that uses the Stellar Golden Apple
+- Added Stone Dust, Netherrack Dust and Soul Dust
+- Added filling recipes for Golden Carrots, Golden Apples and Glistering Melons
+- Added toggleable Modern Lamps, Modern Lamp Panels and their redstone-powered variants.
+- Added Rail Grass (a scuffed grass slab)
