@@ -17,7 +17,7 @@ group = project.maven_group
 // example: 1.0.0+1.18.2-100
 // adding 78 to build number because that was the last build before the repository migration
 String buildNumber = System.getenv("GITHUB_RUN_NUMBER")
-version = "${mod_version}-build." + (buildNumber != null ? "${buildNumber.toInteger() + 78}" : "") + "+${minecraft_version}"
+version = "${mod_version}" + (buildNumber != null ? "-build.${buildNumber.toInteger() + 78}" : "") + "+${minecraft_version}"
 
 repositories {
     maven { url = "https://maven.shedaniel.me/" } // Cloth Config, REI
