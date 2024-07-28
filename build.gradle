@@ -185,7 +185,7 @@ publish {
         changelog = ChangelogText.getChangelogText(rootProject).toString()
         versionType = release_type
         versionName = "Create: Blazing Hot v${mod_version} for Fabric ${minecraft_version}"
-        versionNumber = mod_version
+        versionNumber = version
         uploadFile = remapJar
 
         dependencies {
