@@ -59,6 +59,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -74,7 +75,6 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
     public int dripTicks = 0;
     public boolean running;
     public boolean fueled;
-    public long minFuel = FluidConstants.fromBucketFraction(1, 100);
     public boolean blazeMixing;
     public long fuelCost;
 
@@ -124,6 +124,9 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         tank = SmartFluidTankBehaviour.single(this, FluidConstants.BUCKET);
+        tank.whenFluidUpdates(() -> {
+            if (getBasin().isPresent()) getBasin().get().notifyChangeOfContents();
+        });
         behaviours.add(tank);
 
         super.addBehaviours(behaviours);
@@ -156,6 +159,7 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
         super.write(compound, clientPacket);
     }
 
+    @NotNull
     public FluidStack getFluidStack() {
         return tank.getPrimaryTank().getTank().getFluid();
     }
@@ -163,7 +167,7 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
     public void updateFueled() {
         FluidState fluidState = getFluidStack().getFluid().defaultFluidState();
 
-        fueled = fluidState.is(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag) && fuelAmount() >= minFuel;
+        fueled = fluidState.is(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag) && fuelAmount() > 0;
     }
 
     public boolean hasFuel(double amount) {
@@ -208,26 +212,29 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
             if ((!level.isClientSide || isVirtual()) && runningTicks == 20) {
                 if (processingTicks < 0) {
                     float recipeSpeed = 1;
-                    fuelCost = minFuel;
+                    fuelCost = 0;
+                    blazeMixing = false;
                     if (currentRecipe instanceof ProcessingRecipe) {
                         int t = ((ProcessingRecipe<?>) currentRecipe).getProcessingDuration();
                         if (t != 0) {
                             recipeSpeed = t / 100f;
-                            if (currentRecipe instanceof BlazeMixingRecipe blazeMixingRecipe
-                                    && blazeMixingRecipe.hasFuel(getFluidStack())) {
-                                fuelCost = blazeMixingRecipe.getFuelFluid().getRequiredAmount();
+                        }
+                        long calculatedCost = BlazeMixingRecipe.durationToFuelCost(t);
+
+                        if (currentRecipe instanceof BlazeMixingRecipe blazeMixingRecipe && blazeMixingRecipe
+                                .getFuelFluid()
+                                .test(getFluidStack())) {
+                            fuelCost = blazeMixingRecipe.getFuelFluid().getRequiredAmount();
+                            blazeMixing = true;
+                        }
+                        else {
+                            if (hasFuel(calculatedCost)) {
+                                recipeSpeed /= 2;
                                 blazeMixing = true;
-                            }
-                            else {
-                                fuelCost = t * 27L;
-                                if (hasFuel(fuelCost)) {
-                                    recipeSpeed /= 2;
-                                    fuelCost = t * 27L;
-                                    blazeMixing = true;
-                                }
-                                else blazeMixing = false;
+                                fuelCost = calculatedCost;
                             }
                         }
+
                     }
 
                     processingTicks = Mth.clamp((Mth.log2((int) (512 / speed))) * Mth.ceil(recipeSpeed * 15) + 1,
@@ -251,10 +258,8 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
                     if (processingTicks == 0) {
                         runningTicks++;
                         processingTicks = -1;
-                        if (blazeMixing) {
-                            tank.getPrimaryTank().getTank().getFluid().setAmount(fuelAmount() - fuelCost);
-                            blazeMixing = false;
-                        }
+                        blazeMixing = false;
+                        tank.getPrimaryTank().getTank().setFluid(getFluidStack().setAmount(fuelAmount() - fuelCost));
                         applyBasinRecipe();
                         sendData();
                     }
@@ -325,13 +330,17 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
         Vec3 center = offset.add(VecHelper.getCenterOf(worldPosition));
         target = VecHelper.offsetRandomly(target.subtract(offset), level.random, 1 / 128f);
         level.addParticle(data, center.x, center.y - 1.75f, center.z, target.x, target.y, target.z);
-        if (blazeMixing && Math.random() > 0.75f) level.addParticle(ParticleTypes.SMALL_FLAME,
+        if (blazeMixing) level.addParticle(ParticleTypes.SMALL_FLAME,
                 center.x,
                 center.y - 1.75f,
                 center.z,
                 target.x / 4,
                 target.y / 4,
                 target.z / 4);
+    }
+
+    protected void flameSpillParticle() {
+
     }
 
     @Override

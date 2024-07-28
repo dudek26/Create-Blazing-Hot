@@ -1,2 +1,6 @@
-// 1.20.1	2024-07-28T10:44:32.4312109	Create: Blazing Hot/Blazing Hot Blaze Mixing Recipes
+// 1.20.1	2024-07-28T20:25:13.2422512	Create: Blazing Hot/Blazing Hot Blaze Mixing Recipes
 26a56b09609d491df4dc9efacd23d942fc584b84 data\blazinghot\recipes\blaze_mixing\blaze_rod.json
+fe3047f16d8ac39dcda23a98e580d5e1a75144fc data\blazinghot\recipes\blaze_mixing\melting\blaze_gold_nuggets.json
+6d1ee306cbdcfd3dec6aa7528d2b57d83ed9122b data\blazinghot\recipes\blaze_mixing\melting\blaze_gold_plates.json
+9f1d0370e98bdc5960df1b02a7c98dcaeed70240 data\blazinghot\recipes\blaze_mixing\melting\blaze_gold_ingots.json
+dfccd160ff3ef885f582aef92a5b4d7496dc01ce data\blazinghot\recipes\blaze_mixing\melting\blaze_gold_blocks.json

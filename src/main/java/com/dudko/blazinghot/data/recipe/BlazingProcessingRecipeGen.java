@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.data.recipe;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
@@ -11,6 +12,8 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.NotNull;
@@ -48,10 +51,24 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
             this.meltingTime = meltingTime;
         }
 
-        public String tag(String material) {
-            return material + "_" + tagSuffix;
+        public TagKey<Item> tag(String material) {
+            return BlazingTags.commonItemTag(material + "_" + tagSuffix);
         }
 
+        public TagKey<Item> tag(Meltables meltable) {
+            return BlazingTags.commonItemTag(meltable.name + "_" + tagSuffix);
+        }
+
+    }
+
+    protected enum Meltables {
+        IRON("iron"), GOLD("gold"), BLAZE_GOLD("blaze_gold");
+
+        public final String name;
+
+        Meltables(String name) {
+            this.name = name;
+        }
     }
 
     public BlazingProcessingRecipeGen(FabricDataOutput output) {

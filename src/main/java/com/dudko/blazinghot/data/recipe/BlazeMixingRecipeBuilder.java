@@ -18,7 +18,6 @@ import net.fabricmc.fabric.api.recipe.v1.ingredient.CustomIngredient;
 import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
 import net.fabricmc.fabric.api.resource.conditions.v1.DefaultResourceConditions;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
-import net.fabricmc.fabric.impl.datagen.FabricDataGenHelper;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
@@ -29,6 +28,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ import java.util.function.Consumer;
  *
  * @see ProcessingRecipeBuilder
  */
-@SuppressWarnings({"unused", "UnusedReturnValue"})
+@SuppressWarnings({"UnusedReturnValue"})
 public class BlazeMixingRecipeBuilder {
 
     public BlazeMixingRecipeParams params;
@@ -61,30 +61,14 @@ public class BlazeMixingRecipeBuilder {
         return this;
     }
 
-    public BlazeMixingRecipeBuilder withSingleItemOutput(ItemStack output) {
-        return withItemOutputs(new ProcessingOutput(output, 1));
-    }
-
-    public BlazeMixingRecipeBuilder withItemOutputs(ProcessingOutput... outputs) {
-        return withItemOutputs(NonNullList.of(ProcessingOutput.EMPTY, outputs));
-    }
-
     public BlazeMixingRecipeBuilder withItemOutputs(NonNullList<ProcessingOutput> outputs) {
         params.results = outputs;
         return this;
     }
 
-    public BlazeMixingRecipeBuilder withFluidIngredients(FluidIngredient... ingredients) {
-        return withFluidIngredients(NonNullList.of(FluidIngredient.EMPTY, ingredients));
-    }
-
     public BlazeMixingRecipeBuilder withFluidIngredients(NonNullList<FluidIngredient> ingredients) {
         params.fluidIngredients = ingredients;
         return this;
-    }
-
-    public BlazeMixingRecipeBuilder withFluidOutputs(FluidStack... outputs) {
-        return withFluidOutputs(NonNullList.of(FluidStack.EMPTY, outputs));
     }
 
     public BlazeMixingRecipeBuilder withFluidOutputs(NonNullList<FluidStack> outputs) {
@@ -95,10 +79,6 @@ public class BlazeMixingRecipeBuilder {
     public BlazeMixingRecipeBuilder duration(int ticks) {
         params.processingDuration = ticks;
         return this;
-    }
-
-    public BlazeMixingRecipeBuilder averageProcessingDuration() {
-        return duration(100);
     }
 
     public BlazeMixingRecipeBuilder requiresHeat(HeatCondition condition) {
@@ -230,10 +210,6 @@ public class BlazeMixingRecipeBuilder {
         return this;
     }
 
-    public BlazeMixingRecipeBuilder requireFuel(Fluid fluid, long amount) {
-        return requireFuel(FluidIngredient.fromFluid(fluid, amount));
-    }
-
     public BlazeMixingRecipeBuilder requireFuel(TagKey<Fluid> fluidTag, long amount) {
         return requireFuel(FluidIngredient.fromTag(fluidTag, amount));
     }
@@ -278,10 +254,10 @@ public class BlazeMixingRecipeBuilder {
 
     public static class DataGenResult implements FinishedRecipe {
 
-        private List<ConditionJsonProvider> recipeConditions;
-        private BlazeMixingRecipeSerializer serializer;
-        private ResourceLocation id;
-        private BlazeMixingRecipe recipe;
+        private final List<ConditionJsonProvider> recipeConditions;
+        private final BlazeMixingRecipeSerializer serializer;
+        private final ResourceLocation id;
+        private final BlazeMixingRecipe recipe;
 
         @SuppressWarnings("unchecked")
         public DataGenResult(BlazeMixingRecipe recipe, List<ConditionJsonProvider> recipeConditions) {
@@ -299,7 +275,7 @@ public class BlazeMixingRecipeBuilder {
         }
 
         @Override
-        public void serializeRecipeData(JsonObject json) {
+        public void serializeRecipeData(@NotNull JsonObject json) {
             serializer.write(json, recipe);
             if (recipeConditions.isEmpty())
                 return;
@@ -310,12 +286,12 @@ public class BlazeMixingRecipeBuilder {
         }
 
         @Override
-        public ResourceLocation getId() {
+        public @NotNull ResourceLocation getId() {
             return id;
         }
 
         @Override
-        public RecipeSerializer<?> getType() {
+        public @NotNull RecipeSerializer<?> getType() {
             return serializer;
         }
 

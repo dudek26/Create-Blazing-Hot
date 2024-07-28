@@ -45,9 +45,9 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
                     .requiresHeat(HeatCondition.SUPERHEATED)
                     .output(BlazingFluids.MOLTEN_BLAZE_GOLD.get(), INGOT / 2));
 
-    List<GeneratedRecipe> GOLD_MELTING = meltingAll("gold", BlazingFluids.MOLTEN_GOLD.get());
-    List<GeneratedRecipe> IRON_MELTING = meltingAll("iron", BlazingFluids.MOLTEN_IRON.get());
-    List<GeneratedRecipe> BLAZE_GOLD_MELTING = meltingAll("blaze_gold", BlazingFluids.MOLTEN_BLAZE_GOLD.get());
+    List<GeneratedRecipe> GOLD_MELTING = meltingAll(Meltables.GOLD, BlazingFluids.MOLTEN_GOLD.get());
+    List<GeneratedRecipe> IRON_MELTING = meltingAll(Meltables.IRON, BlazingFluids.MOLTEN_IRON.get());
+    List<GeneratedRecipe> BLAZE_GOLD_MELTING = meltingAll(Meltables.BLAZE_GOLD, BlazingFluids.MOLTEN_BLAZE_GOLD.get());
 
     @Override
     protected IRecipeTypeInfo getRecipeType() {
@@ -56,13 +56,13 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
 
     private GeneratedRecipe melting(TagKey<Item> tag, Fluid result, long amount, int duration) {
         return create("melting/" + tag.location().getPath(),
-                b -> b.require(tag).duration(duration).requiresHeat(HeatCondition.SUPERHEATED).output(result, amount));
+                b -> b.require(tag).duration(duration*5).requiresHeat(HeatCondition.SUPERHEATED).output(result, amount));
     }
 
-    private List<GeneratedRecipe> meltingAll(String material, Fluid result) {
+    private List<GeneratedRecipe> meltingAll(Meltables material, Fluid result) {
         List<GeneratedRecipe> recipes = new ArrayList<>();
         for (Forms form : Forms.values()) {
-            melting(BlazingTags.commonItemTag(form.tag(material)), result, form.amount, form.meltingTime);
+            melting(form.tag(material), result, form.amount, form.meltingTime);
         }
         return recipes;
     }
