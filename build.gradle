@@ -175,7 +175,7 @@ publishing {
     }
 }
 
-publish {
+
 
     modrinth {
         projectId = "JLq1oaUM"
@@ -193,4 +193,3 @@ publish {
             optional.project "emi"
         }
     }
-}
