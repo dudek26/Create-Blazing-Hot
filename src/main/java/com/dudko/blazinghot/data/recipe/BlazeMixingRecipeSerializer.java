@@ -30,19 +30,19 @@ public class BlazeMixingRecipeSerializer implements RecipeSerializer<BlazeMixing
         JsonArray jsonIngredients = new JsonArray();
         JsonArray jsonOutputs = new JsonArray();
 
-        recipe.ingredients.forEach(i -> jsonIngredients.add(i.toJson()));
-        recipe.fluidIngredients.forEach(i -> jsonIngredients.add(i.serialize()));
+        recipe.getIngredients().forEach(i -> jsonIngredients.add(i.toJson()));
+        recipe.getFluidIngredients().forEach(i -> jsonIngredients.add(i.serialize()));
 
-        recipe.results.forEach(o -> jsonOutputs.add(o.serialize()));
-        recipe.fluidResults.forEach(o -> jsonOutputs.add(FluidHelper.serializeFluidStack(o)));
+        recipe.getResults().forEach(o -> jsonOutputs.add(o.serialize()));
+        recipe.getFluidResults().forEach(o -> jsonOutputs.add(FluidHelper.serializeFluidStack(o)));
 
         json.add("ingredients", jsonIngredients);
         json.add("results", jsonOutputs);
 
-        int processingDuration = recipe.processingDuration;
+        int processingDuration = recipe.getProcessingDuration();
         if (processingDuration > 0) json.addProperty("processingTime", processingDuration);
 
-        HeatCondition requiredHeat = recipe.requiredHeat;
+        HeatCondition requiredHeat = recipe.getRequiredHeat();
         if (requiredHeat != HeatCondition.NONE) json.addProperty("heatRequirement", requiredHeat.serialize());
 
         FluidIngredient fuel = recipe.getFuelFluid();
@@ -92,10 +92,10 @@ public class BlazeMixingRecipeSerializer implements RecipeSerializer<BlazeMixing
     }
 
     protected void writeToBuffer(FriendlyByteBuf buffer, BlazeMixingRecipe recipe) {
-        NonNullList<Ingredient> ingredients = recipe.ingredients;
-        NonNullList<FluidIngredient> fluidIngredients = recipe.fluidIngredients;
-        NonNullList<ProcessingOutput> outputs = recipe.results;
-        NonNullList<FluidStack> fluidOutputs = recipe.fluidResults;
+        NonNullList<Ingredient> ingredients = recipe.getIngredients();
+        NonNullList<FluidIngredient> fluidIngredients = recipe.getFluidIngredients();
+        NonNullList<ProcessingOutput> outputs = recipe.getResults();
+        NonNullList<FluidStack> fluidOutputs = recipe.getFluidResults();
         FluidIngredient fuel = recipe.getFuelFluid();
 
         buffer.writeVarInt(ingredients.size());
@@ -109,8 +109,8 @@ public class BlazeMixingRecipeSerializer implements RecipeSerializer<BlazeMixing
         fluidOutputs.forEach(o -> o.writeToPacket(buffer));
 
         fuel.write(buffer);
-        buffer.writeVarInt(recipe.processingDuration);
-        buffer.writeVarInt(recipe.requiredHeat.ordinal());
+        buffer.writeVarInt(recipe.getProcessingDuration());
+        buffer.writeVarInt(recipe.getRequiredHeat().ordinal());
 
         recipe.writeAdditional(buffer);
     }
