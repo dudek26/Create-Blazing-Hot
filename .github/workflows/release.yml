@@ -39,4 +39,4 @@ jobs:
         env:
           RELEASE_BUILD: true
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
-        run: ./gradlew modrinth
+        run: ./gradlew publishMod

@@ -176,12 +176,12 @@ publishing {
 }
 
 
-
+tasks.register("publishMod") {
     modrinth {
         projectId = "JLq1oaUM"
         token = System.getenv("MODRINTH_TOKEN")
-        gameVersions = [ minecraft_version ]
-        loaders = [ "fabric", "quilt" ]
+        gameVersions = [minecraft_version]
+        loaders = ["fabric", "quilt"]
         changelog = ChangelogText.getChangelogText(rootProject).toString()
         versionType = release_type
         versionName = "Create: Blazing Hot v${mod_version} for Fabric ${minecraft_version}"
@@ -193,3 +193,4 @@ publishing {
             optional.project "emi"
         }
     }
+}
