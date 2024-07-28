@@ -2,6 +2,7 @@ package com.dudko.blazinghot;
 
 import com.dudko.blazinghot.data.BlazingLangGen;
 import com.dudko.blazinghot.data.BlazingTagGen;
+import com.dudko.blazinghot.data.recipe.AbstractBlazeMixingRecipeGen;
 import com.dudko.blazinghot.data.recipe.BlazingCraftingRecipeGen;
 import com.dudko.blazinghot.data.recipe.BlazingProcessingRecipeGen;
 import com.dudko.blazinghot.data.recipe.BlazingSequencedAssemblyRecipeGen;
@@ -42,6 +43,7 @@ public class BlazingHot implements ModInitializer {
         BlazingFluids.register();
         BlazingEntityTypes.register();
         BlazingBlockEntityTypes.register();
+        BlazingRecipeTypes.register();
 
         REGISTRATE.register();
 
@@ -67,5 +69,6 @@ public class BlazingHot implements ModInitializer {
         pack.addProvider(BlazingSequencedAssemblyRecipeGen::new);
         pack.addProvider(BlazingCraftingRecipeGen::new);
         pack.addProvider(BlazingProcessingRecipeGen::registerAll);
+        pack.addProvider(AbstractBlazeMixingRecipeGen::registerAll);
     }
 }
