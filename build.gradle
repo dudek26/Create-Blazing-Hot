@@ -1,11 +1,14 @@
 //file:noinspection GroovyAssignabilityCheck
 //file:noinspection GroovyAccessibility
 //file:noinspection GradlePackageVersionRange
+import dev.ithundxr.silk.ChangelogText
+
 plugins {
     id "fabric-loom" version "1.6-SNAPSHOT"
     id "io.github.p03w.machete" version "1.+" // automatic jar compressing on build
     id "maven-publish"
     id "dev.ithundxr.silk" version "0.11.16"
+    id "com.modrinth.minotaur" version "2.+" // modrinth publishing
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -169,5 +172,25 @@ publishing {
         // Notice: This block does NOT have the same function as the block in the top level.
         // The repositories here will be used for publishing your artifact, not for
         // retrieving dependencies.
+    }
+}
+
+publish {
+
+    modrinth {
+        projectId = "JLq1oaUM"
+        token = System.getenv("MODRINTH_TOKEN")
+        gameVersions = [ minecraft_version ]
+        loaders = [ "fabric", "quilt" ]
+        changelog = ChangelogText.getChangelogText(rootProject).toString()
+        versionType = release_type
+        versionName = "Create: Blazing Hot v${mod_version} for Fabric ${minecraft_version}"
+        versionNumber = mod_version
+        uploadFile = remapJar
+
+        dependencies {
+            required.project "create-fabric"
+            optional.project "emi"
+        }
     }
 }
