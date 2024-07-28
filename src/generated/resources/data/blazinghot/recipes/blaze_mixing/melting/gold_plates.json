@@ -1,0 +1,20 @@
+{
+  "type": "blazinghot:blaze_mixing",
+  "fuel": {
+    "amount": 10125,
+    "fluidTag": "blazinghot:blaze_mixer_fuel"
+  },
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "c:gold_plates"
+    }
+  ],
+  "processingTime": 500,
+  "results": [
+    {
+      "amount": 9000,
+      "fluid": "blazinghot:molten_gold"
+    }
+  ]
+}
