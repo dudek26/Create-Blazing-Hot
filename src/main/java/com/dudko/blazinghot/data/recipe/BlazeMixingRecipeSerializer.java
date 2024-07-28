@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.data.recipe;
 
+import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -15,7 +16,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.NotNull;
 
 public class BlazeMixingRecipeSerializer implements RecipeSerializer<BlazeMixingRecipe> {
@@ -57,7 +57,7 @@ public class BlazeMixingRecipeSerializer implements RecipeSerializer<BlazeMixing
         NonNullList<FluidIngredient> fluidIngredients = NonNullList.create();
         NonNullList<ProcessingOutput> results = NonNullList.create();
         NonNullList<FluidStack> fluidResults = NonNullList.create();
-        FluidStack fuel = new FluidStack(Fluids.LAVA, 8100);
+        FluidIngredient fuel = FluidIngredient.EMPTY;
 
         for (JsonElement je : GsonHelper.getAsJsonArray(json, "ingredients")) {
             if (FluidIngredient.isFluidIngredient(je)) fluidIngredients.add(FluidIngredient.deserialize(je));
@@ -71,20 +71,21 @@ public class BlazeMixingRecipeSerializer implements RecipeSerializer<BlazeMixing
             else results.add(ProcessingOutput.deserialize(je));
         }
 
-        JsonObject fuelObject = GsonHelper.getNonNull(json, "fuel").getAsJsonObject();
-        if (GsonHelper.isValidNode(fuelObject, "fluid")) fuel = FluidHelper.deserializeFluidStack(fuelObject);
-
         builder
                 .withItemIngredients(ingredients)
                 .withItemOutputs(results)
                 .withFluidIngredients(fluidIngredients)
-                .withFluidOutputs(fluidResults)
-                .requireFuel(fuel);
+                .withFluidOutputs(fluidResults);
 
         if (GsonHelper.isValidNode(json, "processingTime")) builder.duration(GsonHelper.getAsInt(json,
                 "processingTime"));
         if (GsonHelper.isValidNode(json, "heatRequirement"))
             builder.requiresHeat(HeatCondition.deserialize(GsonHelper.getAsString(json, "heatRequirement")));
+        JsonElement fuelElement = GsonHelper.getNonNull(json, "fuel");
+        if (FluidIngredient.isFluidIngredient(fuelElement)) {
+            fuel = FluidIngredient.deserialize(fuelElement);
+        }
+        builder.requireFuel(fuel);
 
         BlazeMixingRecipe recipe = builder.build();
         recipe.readAdditional(json);

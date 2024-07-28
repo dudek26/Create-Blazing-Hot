@@ -19,6 +19,7 @@ import com.simibubi.create.foundation.advancement.CreateAdvancement;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour.TankSegment;
+import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import com.simibubi.create.foundation.utility.Couple;
@@ -178,8 +179,8 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
         return getFluidStack().getFluid().defaultFluidState().is(tag) && fuelAmount() >= amount;
     }
 
-    public boolean hasFuel(Fluid fluid, double amount) {
-        return getFluidStack().getFluid().defaultFluidState().is(fluid) && fuelAmount() >= amount;
+    public boolean hasFuel(FluidIngredient fluidIngredient) {
+        return fluidIngredient.test(getFluidStack()) && fluidIngredient.getRequiredAmount() <= fuelAmount();
     }
 
     private long fuelAmount() {
@@ -387,9 +388,18 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
         Optional<BasinBlockEntity> basin = getBasin();
         if (basin.isEmpty()) return false;
 
-        if (recipe instanceof BlazeMixingRecipe blazeMixingRecipe) {
-            return BasinRecipe.match(basin.get(), blazeMixingRecipe) && blazeMixingRecipe.getFuelFluid().test(
-                    getFluidStack()) && fuelAmount() >= blazeMixingRecipe.getFuelFluid().getRequiredAmount();
+        if (recipe instanceof BlazeMixingRecipe bmxRecipe) {
+            return BasinRecipe.match(basin.get(), bmxRecipe)
+                    && bmxRecipe.getFuelFluid().test(getFluidStack())
+                    && fuelAmount() >= bmxRecipe.getFuelFluid().getRequiredAmount();
+        }
+        else if (recipe instanceof MixingRecipe) {
+            assert level != null;
+            Optional<ProcessingRecipe<SmartInventory>> rec = BlazingRecipeTypes.BLAZE_MIXING.find(basin
+                    .get()
+                    .getInputInventory(), level);
+            if (rec.isEmpty()) rec = AllRecipeTypes.MIXING.find(basin.get().getInputInventory(), level);
+            if (rec.isEmpty()) return false;
         }
 
         return BasinRecipe.match(basin.get(), recipe);

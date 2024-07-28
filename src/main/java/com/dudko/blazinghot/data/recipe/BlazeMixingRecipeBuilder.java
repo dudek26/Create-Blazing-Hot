@@ -246,7 +246,7 @@ public class BlazeMixingRecipeBuilder {
             results = NonNullList.create();
             fluidIngredients = NonNullList.create();
             fluidResults = NonNullList.create();
-            fuelFluid = FluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, 8100);
+            fuelFluid = FluidIngredient.EMPTY;
             processingDuration = 0;
             requiredHeat = HeatCondition.NONE;
         }

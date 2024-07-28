@@ -45,22 +45,18 @@ public class BlazeMixingRecipe extends BasinRecipe {
         requiredHeat = params.requiredHeat;
     }
 
-    public boolean hasFuel(FluidStack fluidStack) {
-        return getFuelFluid().test(fluidStack) && fluidStack.getAmount() >= getFuelFluid().getRequiredAmount();
-    }
-
     public FluidIngredient getFuelFluid() {
         if (fuelFluid == null) return FluidIngredient.fromFluidStack(FluidStack.EMPTY);
         return fuelFluid;
     }
 
     @Override
-    public NonNullList<FluidIngredient> getFluidIngredients() {
+    public @NotNull NonNullList<FluidIngredient> getFluidIngredients() {
         return fluidIngredients;
     }
 
     @Override
-    public NonNullList<FluidStack> getFluidResults() {
+    public @NotNull NonNullList<FluidStack> getFluidResults() {
         return fluidResults;
     }
 
@@ -70,12 +66,12 @@ public class BlazeMixingRecipe extends BasinRecipe {
     }
 
     @Override
-    public HeatCondition getRequiredHeat() {
+    public @NotNull HeatCondition getRequiredHeat() {
         return requiredHeat;
     }
 
     @Override
-    public NonNullList<Ingredient> getIngredients() {
+    public @NotNull NonNullList<Ingredient> getIngredients() {
         return ingredients;
     }
 

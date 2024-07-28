@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.data.recipe;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
@@ -36,19 +37,25 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
     protected static final long BOTTLE = FluidConstants.BOTTLE;
 
     protected enum Forms {
-        INGOT(BlazingProcessingRecipeGen.INGOT, "ingots", 300),
-        NUGGET(BlazingProcessingRecipeGen.NUGGET, "nuggets", 40),
-        BLOCK(BlazingProcessingRecipeGen.BUCKET, "blocks", 2400),
-        SHEET(BlazingProcessingRecipeGen.INGOT, "plates", 300);
+        INGOT(BlazingProcessingRecipeGen.INGOT, "ingots", 500),
+        NUGGET(BlazingProcessingRecipeGen.NUGGET, "nuggets", 65),
+        BLOCK(BlazingProcessingRecipeGen.BUCKET, "blocks", 3200),
+        SHEET(BlazingProcessingRecipeGen.INGOT, "plates", 500);
 
         public final long amount;
         public final String tagSuffix;
         public final int meltingTime;
+        public final long fuelCost;
 
-        Forms(long amount, String tagSuffix, int meltingTime) {
+        Forms(long amount, String tagSuffix, int meltingTime, long fuelCost) {
             this.amount = amount;
             this.tagSuffix = tagSuffix;
             this.meltingTime = meltingTime;
+            this.fuelCost = fuelCost;
+        }
+
+        Forms(long amount, String tagSuffix, int meltingTime) {
+            this(amount, tagSuffix, meltingTime, BlazeMixingRecipe.durationToFuelCost(meltingTime));
         }
 
         public TagKey<Item> tag(String material) {
@@ -56,7 +63,7 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
         }
 
         public TagKey<Item> tag(Meltables meltable) {
-            return BlazingTags.commonItemTag(meltable.name + "_" + tagSuffix);
+            return tag(meltable.name);
         }
 
     }
