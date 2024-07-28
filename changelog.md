@@ -6,10 +6,10 @@ Create: Blazing Hot 0.3
 - Iron Carrot, Iron Apple, Stellar Iron Apple, Enchanted Iron Apple
 - Recipes for melting Blaze Gold in the Mixer
 - Blaze Casing
-## Changes:
+## Changed:
 - Slightly adjusted some recipes
 - Extended Stellar Blaze Apple's and Enchanted Blaze Apple's Regeneration effect to 20 seconds
-## Bugfixes:
+## Fixed:
 - Blaze Gold Block no longer emits light
 ------------------------------------------------------
 Create: Blazing Hot 0.2
