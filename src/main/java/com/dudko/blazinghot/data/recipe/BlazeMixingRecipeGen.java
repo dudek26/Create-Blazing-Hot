@@ -40,13 +40,14 @@ public class BlazeMixingRecipeGen extends AbstractBlazeMixingRecipeGen {
 
     GeneratedRecipe NETHER_LAVA = create("nether_lava", b -> requireMultiple(b, BlazingItems.NETHER_ESSENCE, 4)
             .require(FluidIngredient.fromFluid(Fluids.LAVA, FluidConstants.BLOCK / 10))
+            .requiresHeat(HeatCondition.SUPERHEATED)
             .output(BlazingFluids.NETHER_LAVA.getSource(), FluidConstants.BLOCK / 10)), MOLTEN_BLAZE_GOLD = create(
             "molten_blaze_gold",
             b -> requireMultiple(b, BlazingItems.NETHER_ESSENCE, 4)
                     .requireFuel(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag,
                             FluidConstants.BLOCK / 20)
                     .require(BlazingTags.Fluids.MOLTEN_GOLD.tag, INGOT)
-                    .requiresHeat(HeatCondition.HEATED)
+                    .requiresHeat(HeatCondition.SUPERHEATED)
                     .output(BlazingFluids.MOLTEN_BLAZE_GOLD.get(), INGOT));
 
     private GeneratedRecipe melting(TagKey<Item> tag, Fluid result, long amount, int duration, long fuelCost) {
