@@ -1,58 +1,71 @@
 ------------------------------------------------------
-Create: Blazing Hot 0.3
+## Create: Blazing Hot 0.4
 ------------------------------------------------------
-## Added:
+### Added:
+- Blaze Mixer:
+  - A Mixer capable of holding fluids (fuel).
+  - All recipes from Mechanical Mixer can be applied in the Blaze Mixer.
+  - When there is enough fuel present, the Blaze Mixer will work twice as fast.
+  - There are some recipes exclusive to the Blaze Mixer
+- Melting recipes for Blaze Gold Rod
+### Changed:
+- Drastically increased melting time for metals in the Mechanical Mixer
+  - Melting with fueled Blaze Mixer is 5 times faster than in the Mechanical Mixer
+------------------------------------------------------
+## Create: Blazing Hot 0.3
+------------------------------------------------------
+### Added:
 - Molten Iron
 - Iron Carrot, Iron Apple, Stellar Iron Apple, Enchanted Iron Apple
 - Recipes for melting Blaze Gold in the Mixer
 - Blaze Casing
-## Changed:
+### Changed:
 - Slightly adjusted some recipes
 - Extended Stellar Blaze Apple's and Enchanted Blaze Apple's Regeneration effect to 20 seconds
-## Fixed:
+### Fixed:
 - Blaze Gold Block no longer emits light
 ------------------------------------------------------
-Create: Blazing Hot 0.2
+## Create: Blazing Hot 0.2
 ------------------------------------------------------
-## Added:
+### Added:
 - Colored variants of Modern Lamps and Modern Lamp Panels
-## Changed:
+### Changed:
 - Updated textures for White Modern Lamp and White Modern Lamp Panel
 ------------------------------------------------------
-Create: Blazing Hot 0.2
+## Create: Blazing Hot 0.2
 ------------------------------------------------------
-## Added:
+### Added:
 - Blaze Apple, Stellar Blaze Apple, Enchanted Blaze Apple
-## Changed:
+### Changed:
 - Renamed:
-- - `Modern Lamp` -> `White Modern Lamp`
-- - `Modern Lamp Panel` -> `White Modern Lamp Panel`
+  - `Modern Lamp` -> `White Modern Lamp`
+  - `Modern Lamp Panel` -> `White Modern Lamp Panel`
 - Added new tooltips to Modern Lamps
 - Added redstone functionality of Modern Redstone Lamps to regular Modern Lamps
 - ID changes:
-- - `blazinghot:modern_lamp` -> `blazinghot:white_modern_lamp`
-- - `blazinghot:modern_lamp_panel` -> `blazinghot:white_modern_lamp_panel`
+  - `blazinghot:modern_lamp` -> `blazinghot:white_modern_lamp`
+  - `blazinghot:modern_lamp_panel` -> `blazinghot:white_modern_lamp_panel`
 - Updated Blaze Carrot tooltip
 - Blaze Gold Blocks can now be used in the Beacon base
 - Blaze Gold Ingots can now be used in Beacons
-## Removed:
+### Removed:
 - Modern Redstone Lamp
 - Modern Redstone Lamp Panel
 ------------------------------------------------------
-Create: Blazing Hot 0.1.1
+## Create: Blazing Hot 0.1.1
 ------------------------------------------------------
-## Changed:
+### Changed:
 - Blaze Carrots now extinguish after being eaten
 - Blaze Carrots no longer give Fire Resistance
 - Molten Blaze Gold and Molten Gold no longer use Tinker's Construct's textures
 - Gilded Stellar Golden Apple's rarity is now Rare instead of Epic
-## Fixed:
+### Fixed:
 - Effect tooltips now show the amplifiers of the effects (#2)
 - Removed Cobblestone milling into Stone Dust recipe due to conflicts with Cobblestone crushing into Gravel recipe (#3)
-## Removed:
+### Removed:
 - Rail Grass Slab
 ------------------------------------------------------
-Create: Blazing Hot 0.1
+## Create: Blazing Hot 0.1
 ------------------------------------------------------
 ### Molten Metals
 - Currently: Gold, Blaze Gold
