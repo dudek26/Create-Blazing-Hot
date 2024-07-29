@@ -104,10 +104,4 @@ public class BlazingEmiPlugin implements EmiPlugin {
         }
     }
 
-    @SuppressWarnings("unchecked")
-    private <T extends Recipe<?>> void addAll(EmiRegistry registry, AllRecipeTypes type, EmiRecipeCategory category, BiFunction<EmiRecipeCategory, T, EmiRecipe> constructor) {
-        for (T recipe : (List<T>) registry.getRecipeManager().getAllRecipesFor(type.getType())) {
-            registry.addRecipe(constructor.apply(category, recipe));
-        }
-    }
 }

@@ -9,6 +9,7 @@ import com.simibubi.create.content.processing.recipe.HeatCondition;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 
@@ -51,11 +52,10 @@ public class BlazeMixingRecipeGen extends AbstractBlazeMixingRecipeGen {
                         .requireFuel(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, fuelCost));
     }
 
-
     private List<GeneratedRecipe> meltingAll(Meltables material, Fluid result) {
         List<GeneratedRecipe> recipes = new ArrayList<>();
         for (Forms form : Forms.values()) {
-            melting(form.tag(material), result, form.amount, form.meltingTime, form.fuelCost);
+            recipes.add(melting(form.tag(material), result, form.amount, form.meltingTime, form.fuelCost));
         }
         return recipes;
     }

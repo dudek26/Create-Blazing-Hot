@@ -6,6 +6,7 @@ import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.tags.ItemTags;
@@ -36,12 +37,10 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
                     .require(AllItems.CINDER_FLOUR)
                     .require(BlazingItems.STONE_DUST)
                     .output(BlazingItems.NETHERRACK_DUST)), MOLTEN_BLAZE_GOLD = create("molten_blaze_gold",
-            b -> b
-                    .require(BlazingTags.Fluids.MOLTEN_GOLD.tag, INGOT / 2)
-                    .require(BlazingItems.NETHER_ESSENCE)
-                    .require(BlazingItems.NETHER_ESSENCE)
-                    .require(BlazingItems.NETHER_ESSENCE)
-                    .require(BlazingItems.NETHER_ESSENCE)
+            b -> ((BlazingPRB<ProcessingRecipe<?>>) b)
+                    .requireMultiple(BlazingItems.NETHER_ESSENCE, 4)
+                    .require(BlazingTags.Fluids.MOLTEN_GOLD.tag,
+                            INGOT / 2)
                     .requiresHeat(HeatCondition.SUPERHEATED)
                     .output(BlazingFluids.MOLTEN_BLAZE_GOLD.get(), INGOT / 2));
 
@@ -55,14 +54,17 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
     }
 
     private GeneratedRecipe melting(TagKey<Item> tag, Fluid result, long amount, int duration) {
-        return create("melting/" + tag.location().getPath(),
-                b -> b.require(tag).duration(duration*5).requiresHeat(HeatCondition.SUPERHEATED).output(result, amount));
+        return create("melting/" + tag.location().getPath(), b -> b
+                .require(tag)
+                .duration(duration * 5)
+                .requiresHeat(HeatCondition.SUPERHEATED)
+                .output(result, amount));
     }
 
     private List<GeneratedRecipe> meltingAll(Meltables material, Fluid result) {
         List<GeneratedRecipe> recipes = new ArrayList<>();
         for (Forms form : Forms.values()) {
-            melting(form.tag(material), result, form.amount, form.meltingTime);
+            recipes.add(melting(form.tag(material), result, form.amount, form.meltingTime));
         }
         return recipes;
     }
