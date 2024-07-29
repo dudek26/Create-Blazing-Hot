@@ -1,0 +1,33 @@
+{
+  "type": "blazinghot:blaze_mixing",
+  "fuel": {
+    "amount": 0,
+    "fluid": "minecraft:empty",
+    "nbt": {}
+  },
+  "ingredients": [
+    {
+      "item": "blazinghot:nether_essence"
+    },
+    {
+      "item": "blazinghot:nether_essence"
+    },
+    {
+      "item": "blazinghot:nether_essence"
+    },
+    {
+      "item": "blazinghot:nether_essence"
+    },
+    {
+      "amount": 8100,
+      "fluid": "minecraft:lava",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 8100,
+      "fluid": "blazinghot:nether_lava"
+    }
+  ]
+}

@@ -3,10 +3,10 @@
   "category": "misc",
   "key": {
     "X": {
-      "tag": "c:blaze_gold_ingots"
+      "tag": "c:brass_ingots"
     },
     "Y": {
-      "tag": "c:brass_ingots"
+      "tag": "c:blaze_gold_plates"
     }
   },
   "pattern": [

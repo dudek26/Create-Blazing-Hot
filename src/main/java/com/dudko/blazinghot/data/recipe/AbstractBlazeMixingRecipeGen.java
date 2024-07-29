@@ -8,6 +8,7 @@ import com.simibubi.create.foundation.utility.RegisteredObjects;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
@@ -23,7 +24,7 @@ public abstract class AbstractBlazeMixingRecipeGen extends BlazingRecipeProvider
 
     protected static final List<AbstractBlazeMixingRecipeGen> GENERATORS = new ArrayList<>();
 
-    public AbstractBlazeMixingRecipeGen(FabricDataOutput output) {
+    public AbstractBlazeMixingRecipeGen(PackOutput output) {
         super(output);
     }
 
@@ -31,7 +32,7 @@ public abstract class AbstractBlazeMixingRecipeGen extends BlazingRecipeProvider
         return BlazingRecipeTypes.BLAZE_MIXING;
     }
 
-    public static DataProvider registerAll(FabricDataOutput output) {
+    public static DataProvider registerAll(PackOutput output) {
         GENERATORS.add(new BlazeMixingRecipeGen(output));
 
         return new DataProvider() {

@@ -4,11 +4,12 @@ import com.dudko.blazinghot.registry.BlazingItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.minecraft.data.PackOutput;
 
 @SuppressWarnings("unused")
 public class BlazingHauntingRecipeGen extends BlazingProcessingRecipeGen {
 
-    public BlazingHauntingRecipeGen(FabricDataOutput output) {
+    public BlazingHauntingRecipeGen(PackOutput output) {
         super(output);
     }
 

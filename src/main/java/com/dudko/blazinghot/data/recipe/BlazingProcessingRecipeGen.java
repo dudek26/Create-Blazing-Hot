@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -78,11 +79,11 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
         }
     }
 
-    public BlazingProcessingRecipeGen(FabricDataOutput output) {
+    public BlazingProcessingRecipeGen(PackOutput output) {
         super(output);
     }
 
-    public static DataProvider registerAll(FabricDataOutput output) {
+    public static DataProvider registerAll(PackOutput output) {
         GENERATORS.add(new BlazingPressingRecipeGen(output));
         GENERATORS.add(new BlazingCompactingRecipeGen(output));
         GENERATORS.add(new BlazingCrushingRecipeGen(output));

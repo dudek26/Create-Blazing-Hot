@@ -40,10 +40,10 @@ public class BlazeMixingEmiRecipe extends BasinEmiRecipe {
 
     @Override
     public void addWidgets(WidgetHolder widgets) {
-        if (!fuels.isEmpty() && fuels.get(0).isEmpty()) {
+        if (!fuels.isEmpty() && !fuels.get(0).isEmpty()) {
             addSlot(widgets, fuels.get(0), 35, 31).appendTooltip(Component
                     .translatable("emi.blazinghot.tooltip.blaze_mixing.fuel")
-                    .withStyle(ChatFormatting.GREEN));
+                    .withStyle(ChatFormatting.DARK_GREEN));
         }
         super.addWidgets(widgets);
 

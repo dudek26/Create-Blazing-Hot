@@ -10,6 +10,7 @@ import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.press.PressingRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,7 +22,7 @@ import static com.dudko.blazinghot.registry.BlazingItems.*;
 @SuppressWarnings("unused")
 public class BlazingSequencedAssemblyRecipeGen extends BlazingRecipeProvider {
 
-    public BlazingSequencedAssemblyRecipeGen(FabricDataOutput dataOutput) {
+    public BlazingSequencedAssemblyRecipeGen(PackOutput dataOutput) {
         super(dataOutput);
     }
 

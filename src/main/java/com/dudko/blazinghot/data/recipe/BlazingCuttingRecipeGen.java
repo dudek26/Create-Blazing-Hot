@@ -5,11 +5,12 @@ import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.minecraft.data.PackOutput;
 
 @SuppressWarnings("unused")
 public class BlazingCuttingRecipeGen extends BlazingProcessingRecipeGen {
 
-    public BlazingCuttingRecipeGen(FabricDataOutput output) {
+    public BlazingCuttingRecipeGen(PackOutput output) {
         super(output);
     }
 

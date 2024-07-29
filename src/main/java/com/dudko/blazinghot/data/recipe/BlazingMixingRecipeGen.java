@@ -10,6 +10,7 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.minecraft.data.PackOutput;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -24,7 +25,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
 
-    public BlazingMixingRecipeGen(FabricDataOutput output) {
+    public BlazingMixingRecipeGen(PackOutput output) {
         super(output);
     }
 
@@ -70,18 +71,18 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
         return recipes;
     }
 
-    protected static <T extends ProcessingRecipe<?>> ProcessingRecipeBuilder<T> requireMultiple(ProcessingRecipeBuilder<T> builder, Ingredient ingredient, int count) {
+    private static <T extends ProcessingRecipe<?>> ProcessingRecipeBuilder<T> requireMultiple(ProcessingRecipeBuilder<T> builder, Ingredient ingredient, int count) {
         for (int i = 0; i < count; i++) {
             builder.require(ingredient);
         }
         return builder;
     }
 
-    protected static <T extends ProcessingRecipe<?>> ProcessingRecipeBuilder<T> requireMultiple(ProcessingRecipeBuilder<T> builder, ItemLike item, int count) {
+    private static <T extends ProcessingRecipe<?>> ProcessingRecipeBuilder<T> requireMultiple(ProcessingRecipeBuilder<T> builder, ItemLike item, int count) {
         return requireMultiple(builder, Ingredient.of(item), count);
     }
 
-    protected static <T extends ProcessingRecipe<?>> ProcessingRecipeBuilder<T> requireMultiple(ProcessingRecipeBuilder<T> builder, TagKey<Item> tag, int count) {
+    private static <T extends ProcessingRecipe<?>> ProcessingRecipeBuilder<T> requireMultiple(ProcessingRecipeBuilder<T> builder, TagKey<Item> tag, int count) {
         return requireMultiple(builder, Ingredient.of(tag), count);
     }
 
