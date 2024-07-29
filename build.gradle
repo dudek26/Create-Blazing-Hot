@@ -183,12 +183,15 @@ tasks.register("publishMod") {
     dependsOn = ["modrinth", "curseforge"]
 }
 
+String uncutChangelogText = ChangelogText.getChangelogText(rootProject).toString()
+String changelogText = uncutChangelogText.startsWith("Create:") ? uncutChangelogText.split(":", 3)[2] : uncutChangelogText.split(":", 2)[1]
+
 modrinth {
     projectId = modrinth_id
     token = System.getenv("MODRINTH_TOKEN")
     gameVersions = [minecraft_version]
     loaders = ["fabric", "quilt"]
-    changelog = ChangelogText.getChangelogText(rootProject).toString()
+    changelog = changelogText
     versionType = release_type
     versionName = "Create: Blazing Hot v${mod_version} for Fabric ${minecraft_version}"
     versionNumber = version
@@ -205,7 +208,7 @@ curseforge {
     apiKey = token == null || token.isEmpty() ? "unset" : token
     project {
         id = curseforge_id
-        changelog = ChangelogText.getChangelogText(rootProject).toString()
+        changelog = changelogText
         releaseType = release_type
         addGameVersion("Fabric")
         addGameVersion("Quilt")
