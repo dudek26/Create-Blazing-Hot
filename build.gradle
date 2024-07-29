@@ -9,6 +9,7 @@ plugins {
     id "maven-publish"
     id "dev.ithundxr.silk" version "0.11.16"
     id "com.modrinth.minotaur" version "2.+" // modrinth publishing
+    id "com.matthewprenger.cursegradle" version "1.+" // curseforge publishing
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -17,11 +18,13 @@ targetCompatibility = JavaVersion.VERSION_17
 archivesBaseName = project.archives_base_name
 group = project.maven_group
 
+Boolean isRelease = System.getenv("RELEASE_BUILD")?.toBoolean() ?: false
+
 // Formats the mod version to include the Minecraft version and build number (if present)
 // example: 1.0.0+1.18.2-100
 // adding 78 to build number because that was the last build before the repository migration
 String buildNumber = System.getenv("GITHUB_RUN_NUMBER")
-version = "${mod_version}" + (buildNumber != null ? "-build.${buildNumber.toInteger() + 78}" : "") + "+${minecraft_version}"
+version = "${mod_version}" + (buildNumber != null && !isRelease ? "-build.${buildNumber.toInteger() + 78}" : "") + "+${minecraft_version}"
 
 repositories {
     maven { url = "https://maven.shedaniel.me/" } // Cloth Config, REI
@@ -136,7 +139,7 @@ processResources {
 
 machete {
     // disable machete locally for faster builds
-    enabled = buildNumber != null
+    enabled = buildNumber != null || isRelease
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -177,20 +180,45 @@ publishing {
 
 
 tasks.register("publishMod") {
-    modrinth {
-        projectId = "JLq1oaUM"
-        token = System.getenv("MODRINTH_TOKEN")
-        gameVersions = [minecraft_version]
-        loaders = ["fabric", "quilt"]
-        changelog = ChangelogText.getChangelogText(rootProject).toString()
-        versionType = release_type
-        versionName = "Create: Blazing Hot v${mod_version} for Fabric ${minecraft_version}"
-        versionNumber = version
-        uploadFile = remapJar
+    dependsOn = ["modrinth", "curseforge"]
+}
 
-        dependencies {
-            required.project "create-fabric"
-            optional.project "emi"
+modrinth {
+    projectId = modrinth_id
+    token = System.getenv("MODRINTH_TOKEN")
+    gameVersions = [minecraft_version]
+    loaders = ["fabric", "quilt"]
+    changelog = ChangelogText.getChangelogText(rootProject).toString()
+    versionType = release_type
+    versionName = "Create: Blazing Hot v${mod_version} for Fabric ${minecraft_version}"
+    versionNumber = version
+    uploadFile = remapJar
+
+    dependencies {
+        required.project "create-fabric"
+        optional.project "emi"
+    }
+}
+
+curseforge {
+    String token = System.getenv("CURSEFORGE_TOKEN")
+    apiKey = token == null || token.isEmpty() ? "unset" : token
+    project {
+        id = curseforge_id
+        changelog = ChangelogText.getChangelogText(rootProject).toString()
+        releaseType = release_type
+        addGameVersion("Fabric")
+        addGameVersion("Quilt")
+        addGameVersion(minecraft_version)
+        relations {
+            requiredDependency("create-fabric")
+        }
+        mainArtifact(remapJar) {
+            displayName = "Create: Blazing Hot v${mod_version} for Fabric ${minecraft_version}"
+        }
+        afterEvaluate {
+            uploadTask.dependsOn(remapJar)
         }
     }
+    curseGradleOptions.forgeGradleIntegration = false
 }

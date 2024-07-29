@@ -42,4 +42,5 @@ jobs:
         env:
           RELEASE_BUILD: true
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
         run: ./gradlew publishMod
