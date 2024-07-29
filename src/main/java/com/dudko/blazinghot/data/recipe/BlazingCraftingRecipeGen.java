@@ -86,7 +86,13 @@ public class BlazingCraftingRecipeGen extends BlazingRecipeProvider {
                     .define('Z', Items.FEATHER)
                     .pattern(" X ")
                     .pattern(" Y ")
-                    .pattern(" Z "));
+                    .pattern(" Z ")), BLAZE_WHISK =
+            create(BlazingItems.BLAZE_WHISK).unlockedBy(BLAZE_GOLD_INGOT).viaShaped(b -> b
+                    .define('X', BlazingTags.Items.BLAZE_GOLD_INGOTS.tag)
+                    .define('Y', BlazingTags.commonItemTag("brass_ingots"))
+                    .pattern(" X ")
+                    .pattern("YXY")
+                    .pattern("YYY"));
 
     GeneratedRecipeBuilder create(Supplier<ItemLike> result) {
         return new GeneratedRecipeBuilder("/", result);

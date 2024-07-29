@@ -7,12 +7,15 @@ import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 
 import java.util.ArrayList;
@@ -37,10 +40,8 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
                     .require(AllItems.CINDER_FLOUR)
                     .require(BlazingItems.STONE_DUST)
                     .output(BlazingItems.NETHERRACK_DUST)), MOLTEN_BLAZE_GOLD = create("molten_blaze_gold",
-            b -> ((BlazingPRB<ProcessingRecipe<?>>) b)
-                    .requireMultiple(BlazingItems.NETHER_ESSENCE, 4)
-                    .require(BlazingTags.Fluids.MOLTEN_GOLD.tag,
-                            INGOT / 2)
+            b -> requireMultiple(b, BlazingItems.NETHER_ESSENCE, 4)
+                    .require(BlazingTags.Fluids.MOLTEN_GOLD.tag, INGOT / 2)
                     .requiresHeat(HeatCondition.SUPERHEATED)
                     .output(BlazingFluids.MOLTEN_BLAZE_GOLD.get(), INGOT / 2));
 
@@ -67,6 +68,21 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
             recipes.add(melting(form.tag(material), result, form.amount, form.meltingTime));
         }
         return recipes;
+    }
+
+    protected static <T extends ProcessingRecipe<?>> ProcessingRecipeBuilder<T> requireMultiple(ProcessingRecipeBuilder<T> builder, Ingredient ingredient, int count) {
+        for (int i = 0; i < count; i++) {
+            builder.require(ingredient);
+        }
+        return builder;
+    }
+
+    protected static <T extends ProcessingRecipe<?>> ProcessingRecipeBuilder<T> requireMultiple(ProcessingRecipeBuilder<T> builder, ItemLike item, int count) {
+        return requireMultiple(builder, Ingredient.of(item), count);
+    }
+
+    protected static <T extends ProcessingRecipe<?>> ProcessingRecipeBuilder<T> requireMultiple(ProcessingRecipeBuilder<T> builder, TagKey<Item> tag, int count) {
+        return requireMultiple(builder, Ingredient.of(tag), count);
     }
 
 }
