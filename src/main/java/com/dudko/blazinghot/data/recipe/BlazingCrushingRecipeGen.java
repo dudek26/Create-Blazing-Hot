@@ -4,13 +4,14 @@ import com.dudko.blazinghot.registry.BlazingItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 
 @SuppressWarnings("unused")
 public class BlazingCrushingRecipeGen extends BlazingProcessingRecipeGen {
 
-    public BlazingCrushingRecipeGen(FabricDataOutput output) {
+    public BlazingCrushingRecipeGen(PackOutput output) {
         super(output);
     }
 

@@ -1,4 +1,8 @@
 {
   "emi.blazinghot.info.molten_gold_cobblestone": "You can build even faster Cobblestone generators when using Molten Gold instead of Lava or Molten Iron.",
-  "emi.blazinghot.info.molten_iron_cobblestone": "You can build faster Cobblestone generators when using Molten Iron instead of Lava."
+  "emi.blazinghot.info.molten_iron_cobblestone": "You can build faster Cobblestone generators when using Molten Iron instead of Lava.",
+  "emi.blazinghot.tooltip.blaze_mixing.fuel": "Blaze Mixer's fuel",
+  "emi.category.blazinghot.blaze_mixing": "Blaze Mixing",
+  "emi.category.blazinghot.blaze_automatic_shapeless": "Blaze Automated Shapeless Crafting",
+  "emi.category.blazinghot.blaze_automatic_brewing": "Blaze Automated Brewing"
 }

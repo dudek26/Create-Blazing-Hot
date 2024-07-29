@@ -1,0 +1,32 @@
+{
+  "type": "blazinghot:blaze_mixing",
+  "fuel": {
+    "amount": 4050,
+    "fluidTag": "blazinghot:blaze_mixer_fuel"
+  },
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "item": "blazinghot:nether_essence"
+    },
+    {
+      "item": "blazinghot:nether_essence"
+    },
+    {
+      "item": "blazinghot:nether_essence"
+    },
+    {
+      "item": "blazinghot:nether_essence"
+    },
+    {
+      "amount": 9000,
+      "fluidTag": "c:molten_gold"
+    }
+  ],
+  "results": [
+    {
+      "amount": 9000,
+      "fluid": "blazinghot:molten_blaze_gold"
+    }
+  ]
+}

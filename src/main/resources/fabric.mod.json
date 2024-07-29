@@ -24,6 +24,9 @@
     ],
     "fabric-datagen": [
       "com.dudko.blazinghot.BlazingHotData"
+    ],
+    "emi": [
+      "com.dudko.blazinghot.compat.emi.BlazingEmiPlugin"
     ]
   },
   "mixins": [

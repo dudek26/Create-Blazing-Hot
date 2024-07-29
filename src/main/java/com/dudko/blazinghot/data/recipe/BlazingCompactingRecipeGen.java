@@ -6,12 +6,13 @@ import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
 
 @SuppressWarnings("unused")
 public class BlazingCompactingRecipeGen extends BlazingProcessingRecipeGen {
 
-    public BlazingCompactingRecipeGen(FabricDataOutput output) {
+    public BlazingCompactingRecipeGen(PackOutput output) {
         super(output);
     }
 

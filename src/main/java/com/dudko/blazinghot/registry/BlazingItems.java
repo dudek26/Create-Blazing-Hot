@@ -52,6 +52,13 @@ public class BlazingItems {
             PLATES.tag), BLAZE_GOLD_ROD = REGISTRATE.item("blaze_gold_rod", Item::new).tag(BlazingTags.commonItemTag(
             "blaze_gold_rods")).model((c, p) -> p.handheld(c)).register();
 
+    public static final ItemEntry<Item> BLAZE_WHISK = ingredient("blaze_whisk");
+
+    public static final ItemEntry<SequencedAssemblyItem> INCOMPLETE_BLAZE_MIXER = REGISTRATE.item(
+            "incomplete_blaze_mixer",
+            SequencedAssemblyItem::new).model((c, p) -> p.withExistingParent(c.getName(),
+            BlazingHot.asResource("block/blaze_mixer/block"))).register();
+
     public static final ItemEntry<Item> NETHERRACK_DUST = taggedIngredient("netherrack_dust",
             BlazingTags.commonItemTag("netherrack_dusts")), STONE_DUST = taggedIngredient("stone_dust",
             BlazingTags.commonItemTag("stone_dusts")), SOUL_DUST = taggedIngredient("soul_dust",

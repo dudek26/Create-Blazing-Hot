@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.data.recipe;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import org.jetbrains.annotations.NotNull;
@@ -13,7 +14,7 @@ public abstract class BlazingRecipeProvider extends RecipeProvider {
 
     protected final List<GeneratedRecipe> all = new ArrayList<>();
 
-    public BlazingRecipeProvider(FabricDataOutput output) {
+    public BlazingRecipeProvider(PackOutput output) {
         super(output);
     }
 

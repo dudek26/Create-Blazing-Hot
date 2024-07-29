@@ -1,6 +1,8 @@
 package com.dudko.blazinghot.data.recipe;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
+import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
@@ -10,7 +12,10 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.NotNull;
@@ -33,32 +38,52 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
     protected static final long BOTTLE = FluidConstants.BOTTLE;
 
     protected enum Forms {
-        INGOT(BlazingProcessingRecipeGen.INGOT, "ingots", 300),
-        NUGGET(BlazingProcessingRecipeGen.NUGGET, "nuggets", 40),
-        BLOCK(BlazingProcessingRecipeGen.BUCKET, "blocks", 2400),
-        SHEET(BlazingProcessingRecipeGen.INGOT, "plates", 300);
+        INGOT(BlazingProcessingRecipeGen.INGOT, "ingots", 500),
+        NUGGET(BlazingProcessingRecipeGen.NUGGET, "nuggets", 65),
+        BLOCK(BlazingProcessingRecipeGen.BUCKET, "blocks", 3200),
+        SHEET(BlazingProcessingRecipeGen.INGOT, "plates", 500);
 
         public final long amount;
         public final String tagSuffix;
         public final int meltingTime;
+        public final long fuelCost;
 
-        Forms(long amount, String tagSuffix, int meltingTime) {
+        Forms(long amount, String tagSuffix, int meltingTime, long fuelCost) {
             this.amount = amount;
             this.tagSuffix = tagSuffix;
             this.meltingTime = meltingTime;
+            this.fuelCost = fuelCost;
         }
 
-        public String tag(String material) {
-            return material + "_" + tagSuffix;
+        Forms(long amount, String tagSuffix, int meltingTime) {
+            this(amount, tagSuffix, meltingTime, BlazeMixingRecipe.durationToFuelCost(meltingTime));
+        }
+
+        public TagKey<Item> tag(String material) {
+            return BlazingTags.commonItemTag(material + "_" + tagSuffix);
+        }
+
+        public TagKey<Item> tag(Meltables meltable) {
+            return tag(meltable.name);
         }
 
     }
 
-    public BlazingProcessingRecipeGen(FabricDataOutput output) {
+    protected enum Meltables {
+        IRON("iron"), GOLD("gold"), BLAZE_GOLD("blaze_gold");
+
+        public final String name;
+
+        Meltables(String name) {
+            this.name = name;
+        }
+    }
+
+    public BlazingProcessingRecipeGen(PackOutput output) {
         super(output);
     }
 
-    public static DataProvider registerAll(FabricDataOutput output) {
+    public static DataProvider registerAll(PackOutput output) {
         GENERATORS.add(new BlazingPressingRecipeGen(output));
         GENERATORS.add(new BlazingCompactingRecipeGen(output));
         GENERATORS.add(new BlazingCrushingRecipeGen(output));

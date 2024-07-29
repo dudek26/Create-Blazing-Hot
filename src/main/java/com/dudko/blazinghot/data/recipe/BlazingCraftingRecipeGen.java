@@ -8,6 +8,7 @@ import com.simibubi.create.foundation.utility.RegisteredObjects;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
@@ -31,7 +32,7 @@ import static com.dudko.blazinghot.registry.BlazingTags.Items.BLAZE_GOLD_NUGGETS
 @SuppressWarnings({"UnusedReturnValue", "SameParameterValue", "unused"})
 public class BlazingCraftingRecipeGen extends BlazingRecipeProvider {
 
-    public BlazingCraftingRecipeGen(FabricDataOutput output) {
+    public BlazingCraftingRecipeGen(PackOutput output) {
         super(output);
         generate();
     }
@@ -86,7 +87,13 @@ public class BlazingCraftingRecipeGen extends BlazingRecipeProvider {
                     .define('Z', Items.FEATHER)
                     .pattern(" X ")
                     .pattern(" Y ")
-                    .pattern(" Z "));
+                    .pattern(" Z ")), BLAZE_WHISK =
+            create(BlazingItems.BLAZE_WHISK).unlockedBy(BLAZE_GOLD_INGOT).viaShaped(b -> b
+                    .define('X', BlazingTags.commonItemTag("brass_ingots"))
+                    .define('Y', BlazingTags.Items.BLAZE_GOLD_PLATES.tag)
+                    .pattern(" X ")
+                    .pattern("YXY")
+                    .pattern("YYY"));
 
     GeneratedRecipeBuilder create(Supplier<ItemLike> result) {
         return new GeneratedRecipeBuilder("/", result);

@@ -1,24 +1,29 @@
 package com.dudko.blazinghot.content.kinetics.blaze_mixer;
 
+import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.fluids.FluidFX;
 import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
+import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
+import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.foundation.advancement.AllAdvancements;
 import com.simibubi.create.foundation.advancement.CreateAdvancement;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour.TankSegment;
+import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import com.simibubi.create.foundation.utility.Couple;
+import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.VecHelper;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
@@ -42,6 +47,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
@@ -50,9 +56,11 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -68,7 +76,8 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
     public int dripTicks = 0;
     public boolean running;
     public boolean fueled;
-    public long minFuel = FluidConstants.fromBucketFraction(1, 100);
+    public boolean blazeMixing;
+    public long fuelCost;
 
     SmartFluidTankBehaviour tank;
 
@@ -86,7 +95,7 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
                 num = ((2 - Mth.cos((float) (num * Math.PI))) / 2);
                 offset = num - .5f;
             }
-            else if (runningTicks <= 20) {
+            else if (runningTicks == 20) {
                 offset = 1;
             }
             else {
@@ -116,7 +125,11 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         tank = SmartFluidTankBehaviour.single(this, FluidConstants.BUCKET);
+        tank.whenFluidUpdates(() -> {
+            if (getBasin().isPresent()) getBasin().get().notifyChangeOfContents();
+        });
         behaviours.add(tank);
+
         super.addBehaviours(behaviours);
         registerAwardables(behaviours, AllAdvancements.MIXER);
     }
@@ -131,6 +144,7 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
         running = compound.getBoolean("Running");
         runningTicks = compound.getInt("Ticks");
         fueled = compound.getBoolean("Fueled");
+        blazeMixing = compound.getBoolean("BlazeMixing");
         super.read(compound, clientPacket);
 
         if (clientPacket && hasLevel()) getBasin().ifPresent(bte -> bte.setAreFluidsMoving(running
@@ -142,14 +156,35 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
         compound.putBoolean("Running", running);
         compound.putInt("Ticks", runningTicks);
         compound.putBoolean("Fueled", fueled);
+        compound.putBoolean("BlazeMixing", blazeMixing);
         super.write(compound, clientPacket);
     }
 
-    public void updateFueled() {
-        FluidStack fluidStack = tank.getPrimaryTank().getTank().getFluid();
-        FluidState fluidState = fluidStack.getFluid().defaultFluidState();
+    @NotNull
+    public FluidStack getFluidStack() {
+        return tank.getPrimaryTank().getTank().getFluid();
+    }
 
-        fueled = fluidState.is(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag) && fluidStack.getAmount() >= minFuel;
+    public void updateFueled() {
+        FluidState fluidState = getFluidStack().getFluid().defaultFluidState();
+
+        fueled = fluidState.is(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag) && fuelAmount() > 0;
+    }
+
+    public boolean hasFuel(double amount) {
+        return hasFuel(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, amount);
+    }
+
+    public boolean hasFuel(TagKey<Fluid> tag, double amount) {
+        return getFluidStack().getFluid().defaultFluidState().is(tag) && fuelAmount() >= amount;
+    }
+
+    public boolean hasFuel(FluidIngredient fluidIngredient) {
+        return fluidIngredient.test(getFluidStack()) && fluidIngredient.getRequiredAmount() <= fuelAmount();
+    }
+
+    private long fuelAmount() {
+        return getFluidStack().getAmount();
     }
 
     @Override
@@ -178,9 +213,29 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
             if ((!level.isClientSide || isVirtual()) && runningTicks == 20) {
                 if (processingTicks < 0) {
                     float recipeSpeed = 1;
+                    fuelCost = 0;
+                    blazeMixing = false;
                     if (currentRecipe instanceof ProcessingRecipe) {
                         int t = ((ProcessingRecipe<?>) currentRecipe).getProcessingDuration();
-                        if (t != 0) recipeSpeed = t / 100f;
+                        if (t != 0) {
+                            recipeSpeed = t / 100f;
+                        }
+                        long calculatedCost = BlazeMixingRecipe.durationToFuelCost(t);
+
+                        if (currentRecipe instanceof BlazeMixingRecipe blazeMixingRecipe && blazeMixingRecipe
+                                .getFuelFluid()
+                                .test(getFluidStack())) {
+                            fuelCost = blazeMixingRecipe.getFuelFluid().getRequiredAmount();
+                            blazeMixing = true;
+                        }
+                        else {
+                            if (hasFuel(calculatedCost)) {
+                                recipeSpeed /= 2;
+                                blazeMixing = true;
+                                fuelCost = calculatedCost;
+                            }
+                        }
+
                     }
 
                     processingTicks = Mth.clamp((Mth.log2((int) (512 / speed))) * Mth.ceil(recipeSpeed * 15) + 1,
@@ -204,6 +259,8 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
                     if (processingTicks == 0) {
                         runningTicks++;
                         processingTicks = -1;
+                        blazeMixing = false;
+                        tank.getPrimaryTank().getTank().setFluid(getFluidStack().setAmount(fuelAmount() - fuelCost));
                         applyBasinRecipe();
                         sendData();
                     }
@@ -215,19 +272,28 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
     }
 
     public void renderFuelParticles() {
-
         FluidStack fluidStack = tank.getPrimaryTank().getTank().getFluid();
         if (fluidStack.isEmpty()) return;
 
         Vec3 offset = new Vec3(-0.3 + Math.random() * 0.55, -0.3 + Math.random() * 0.55, -0.3 + Math.random() * 0.55);
         Vec3 center = offset.add(VecHelper.getCenterOf(worldPosition));
 
-        level.addParticle(FluidFX.getDrippingParticle(fluidStack), center.x, center.y - 1, center.z, 0, 0, 0);
+        double runningOffset = running && runningTicks != 0 ? 1 - (double) 1 / Math.min(runningTicks, 40) : 0;
+
+        assert level != null;
+
+        level.addParticle(FluidFX.getDrippingParticle(fluidStack),
+                center.x,
+                center.y - 1 - runningOffset,
+                center.z,
+                0,
+                0,
+                0);
 
         if (fluidStack.getFluid().defaultFluidState().is(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag)) level.addParticle(
-                ParticleTypes.FLAME,
+                ParticleTypes.SMALL_FLAME,
                 center.x,
-                center.y - 1,
+                center.y - 1 - runningOffset,
                 center.z,
                 offset.x * 0.05,
                 offset.y * 0.05,
@@ -236,7 +302,7 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
 
     public void renderParticles() {
         Optional<BasinBlockEntity> basin = getBasin();
-        if (!basin.isPresent() || level == null) return;
+        if (basin.isEmpty() || level == null) return;
 
         for (SmartInventory inv : basin.get().getInvs()) {
             for (int slot = 0; slot < inv.getSlotCount(); slot++) {
@@ -257,6 +323,7 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
     }
 
     protected void spillParticle(ParticleOptions data) {
+        assert level != null;
         float angle = level.random.nextFloat() * 360;
         Vec3 offset = new Vec3(0, 0, 0.25f);
         offset = VecHelper.rotate(offset, angle, Axis.Y);
@@ -264,6 +331,17 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
         Vec3 center = offset.add(VecHelper.getCenterOf(worldPosition));
         target = VecHelper.offsetRandomly(target.subtract(offset), level.random, 1 / 128f);
         level.addParticle(data, center.x, center.y - 1.75f, center.z, target.x, target.y, target.z);
+        if (blazeMixing) level.addParticle(ParticleTypes.SMALL_FLAME,
+                center.x,
+                center.y - 1.75f,
+                center.z,
+                target.x / 4,
+                target.y / 4,
+                target.z / 4);
+    }
+
+    protected void flameSpillParticle() {
+
     }
 
     @Override
@@ -273,7 +351,7 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
         if (!AllConfigs.server().recipes.allowBrewingInMixer.get()) return matchingRecipes;
 
         Optional<BasinBlockEntity> basin = getBasin();
-        if (!basin.isPresent()) return matchingRecipes;
+        if (basin.isEmpty()) return matchingRecipes;
 
         BasinBlockEntity basinBlockEntity = basin.get();
         if (basin.isEmpty()) return matchingRecipes;
@@ -300,7 +378,31 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
                 && AllConfigs.server().recipes.allowShapelessInMixer.get()
                 && r.getIngredients().size() > 1
                 && !MechanicalPressBlockEntity.canCompress(r)) && !AllRecipeTypes.shouldIgnoreInAutomation(r)
-                || r.getType() == AllRecipeTypes.MIXING.getType());
+                || r.getType() == AllRecipeTypes.MIXING.getType()
+                || r.getType() == BlazingRecipeTypes.BLAZE_MIXING.getType());
+    }
+
+    @Override
+    protected <C extends Container> boolean matchBasinRecipe(Recipe<C> recipe) {
+        if (recipe == null) return false;
+        Optional<BasinBlockEntity> basin = getBasin();
+        if (basin.isEmpty()) return false;
+
+        if (recipe instanceof BlazeMixingRecipe bmxRecipe) {
+            return BasinRecipe.match(basin.get(), bmxRecipe)
+                    && bmxRecipe.getFuelFluid().test(getFluidStack())
+                    && fuelAmount() >= bmxRecipe.getFuelFluid().getRequiredAmount();
+        }
+        else if (recipe instanceof MixingRecipe) {
+            assert level != null;
+            Optional<ProcessingRecipe<SmartInventory>> rec = BlazingRecipeTypes.BLAZE_MIXING.find(basin
+                    .get()
+                    .getInputInventory(), level);
+            if (rec.isEmpty()) rec = AllRecipeTypes.MIXING.find(basin.get().getInputInventory(), level);
+            if (rec.isEmpty()) return false;
+        }
+
+        return BasinRecipe.match(basin.get(), recipe);
     }
 
     @Override
@@ -310,6 +412,7 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
         running = true;
         runningTicks = 0;
     }
+
 
     @Override
     public boolean continueWithPreviousRecipe() {
@@ -332,10 +435,6 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
     @Override
     protected boolean isRunning() {
         return running;
-    }
-
-    protected boolean isFueled() {
-        return fueled;
     }
 
     @Override
@@ -364,6 +463,25 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        return containedFluidTooltip(tooltip, isPlayerSneaking, getFluidStorage(null));
+
+        boolean kinetics = kineticStatsTooltip(tooltip, isPlayerSneaking);
+        if (kinetics) tooltip.add(Component.empty());
+        boolean fluids = containedFluidTooltip(tooltip, isPlayerSneaking, getFluidStorage(null));
+
+        return kinetics || fluids;
+    }
+
+    private boolean kineticStatsTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+        boolean added = false;
+
+        if (!IRotate.StressImpact.isEnabled()) return added;
+        float stressAtBase = calculateStressApplied();
+        if (Mth.equal(stressAtBase, 0)) return added;
+
+        Lang.translate("gui.goggles.kinetic_stats").forGoggles(tooltip);
+
+        addStressImpactStats(tooltip, stressAtBase);
+
+        return true;
     }
 }

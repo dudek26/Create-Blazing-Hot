@@ -32,12 +32,38 @@ import static net.minecraft.world.item.Items.BUCKET;
 @SuppressWarnings("UnstableApiUsage")
 public class BlazingFluids {
 
-    public static final FluidEntry<SimpleFlowableFluid.Flowing> MOLTEN_GOLD = moltenMetal("molten_gold", 5);
-    public static final FluidEntry<SimpleFlowableFluid.Flowing> MOLTEN_BLAZE_GOLD = moltenMetal("molten_blaze_gold",
-            30);
-    public static final FluidEntry<SimpleFlowableFluid.Flowing> MOLTEN_IRON = moltenMetal("molten_iron", 15);
+    public static final FluidEntry<SimpleFlowableFluid.Flowing> MOLTEN_GOLD = createFromLava("molten_gold");
+    public static final FluidEntry<SimpleFlowableFluid.Flowing> MOLTEN_BLAZE_GOLD = createFromLava("molten_blaze_gold");
+    public static final FluidEntry<SimpleFlowableFluid.Flowing> MOLTEN_IRON = createFromLava("molten_iron");
 
-    private static FluidEntry<SimpleFlowableFluid.Flowing> moltenMetal(String name, int tickRate) {
+    public static final FluidEntry<SimpleFlowableFluid.Flowing> NETHER_LAVA =
+            REGISTRATE
+                    .standardFluid("nether_lava")
+                    .tag(BlazingTags.commonFluidTag("nether_lava"),
+                            FluidTags.LAVA) // fabric: lava tag controls physics
+                    .fluidProperties(p -> p.levelDecreasePerBlock(1).tickRate(10).flowSpeed(3).blastResistance(100f))
+                    .fluidAttributes(() -> new CreateAttributeHandler("block.blazinghot.nether_lava", 1500, 1400))
+                    .block()
+                    .properties(p -> p.lightLevel(s -> 15))
+                    .build()
+                    .onRegisterAfter(Registries.ITEM, f -> {
+                        Fluid source = f.getSource();
+                        // transfer values
+                        FluidStorage
+                                .combinedItemApiProvider(source.getBucket())
+                                .register(context -> new FullItemFluidStorage(context,
+                                        bucket -> ItemVariant.of(BUCKET),
+                                        FluidVariant.of(source),
+                                        FluidConstants.BUCKET));
+                        FluidStorage.combinedItemApiProvider(BUCKET).register(context -> new EmptyItemFluidStorage(
+                                context,
+                                bucket -> ItemVariant.of(source.getBucket()),
+                                source,
+                                FluidConstants.BUCKET));
+                    })
+                    .register();
+
+    private static FluidEntry<SimpleFlowableFluid.Flowing> createFromLava(String name, int tickRate) {
         return REGISTRATE.standardFluid(name).tag(BlazingTags.commonFluidTag(name),
                                  FluidTags.LAVA) // fabric: lava tag controls physics
                          .fluidProperties(p -> p
@@ -63,6 +89,10 @@ public class BlazingFluids {
                                     source,
                                     FluidConstants.BUCKET));
                         }).register();
+    }
+
+    private static FluidEntry<SimpleFlowableFluid.Flowing> createFromLava(String name) {
+        return createFromLava(name, 30);
     }
 
     private record CreateAttributeHandler(Component name, int viscosity,
@@ -118,12 +148,6 @@ public class BlazingFluids {
     @Nullable
     public static BlockState getWaterInteraction(FluidState fluidState) {
         Fluid fluid = fluidState.getType();
-        if (fluid.isSame(MOLTEN_GOLD.get())) {
-            return Blocks.COBBLESTONE.defaultBlockState();
-        }
-        if (fluid.isSame(MOLTEN_IRON.get())) {
-            return Blocks.COBBLESTONE.defaultBlockState();
-        }
         if (fluid.isSame(MOLTEN_BLAZE_GOLD.get())) {
             return Blocks.NETHERRACK.defaultBlockState();
         }
