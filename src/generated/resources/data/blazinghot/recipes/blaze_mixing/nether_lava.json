@@ -5,6 +5,7 @@
     "fluid": "minecraft:empty",
     "nbt": {}
   },
+  "heatRequirement": "superheated",
   "ingredients": [
     {
       "item": "blazinghot:nether_essence"

@@ -1,4 +1,8 @@
 {
+  "blazinghot.recipe.blaze_automatic_brewing": "Blaze Automated Brewing",
+  "blazinghot.recipe.blaze_automatic_shapeless": "Blaze Automated Shapeless Crafting",
+  "blazinghot.recipe.blaze_mixing": "Blaze Mixing",
+  "blazinghot.tooltip.blaze_mixing.fuel": "Blaze Mixer's fuel",
   "block.blazinghot.black_modern_lamp": "Black Modern Lamp",
   "block.blazinghot.black_modern_lamp_panel": "Black Modern Lamp Panel",
   "block.blazinghot.blaze_casing": "Blaze Casing",
@@ -38,8 +42,7 @@
   "block.blazinghot.white_modern_lamp_panel": "White Modern Lamp Panel",
   "block.blazinghot.yellow_modern_lamp": "Yellow Modern Lamp",
   "block.blazinghot.yellow_modern_lamp_panel": "Yellow Modern Lamp Panel",
-  "emi.blazinghot.info.molten_gold_cobblestone": "You can build even faster Cobblestone generators when using Molten Gold instead of Lava or Molten Iron.",
-  "emi.blazinghot.info.molten_iron_cobblestone": "You can build faster Cobblestone generators when using Molten Iron instead of Lava.",
+  "emi.blazinghot.info.nether_lava_cobblestone": "You can build faster Cobblestone generators when using Nether Lava instead of the regular Lava.",
   "emi.blazinghot.tooltip.blaze_mixing.fuel": "Blaze Mixer's fuel",
   "emi.category.blazinghot.blaze_automatic_brewing": "Blaze Automated Brewing",
   "emi.category.blazinghot.blaze_automatic_shapeless": "Blaze Automated Shapeless Crafting",

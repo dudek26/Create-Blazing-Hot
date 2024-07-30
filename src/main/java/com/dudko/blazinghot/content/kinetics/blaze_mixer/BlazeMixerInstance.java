@@ -13,77 +13,74 @@ import net.minecraft.core.Direction;
 
 public class BlazeMixerInstance extends EncasedCogInstance implements DynamicInstance {
 
-	private final RotatingData mixerHead;
-	private final OrientedData mixerPole;
-	private final BlazeMixerBlockEntity mixer;
+    private final RotatingData mixerHead;
+    private final OrientedData mixerPole;
+    private final BlazeMixerBlockEntity mixer;
 
-	public BlazeMixerInstance(MaterialManager materialManager, BlazeMixerBlockEntity blockEntity) {
-		super(materialManager, blockEntity, false);
-		this.mixer = blockEntity;
+    public BlazeMixerInstance(MaterialManager materialManager, BlazeMixerBlockEntity blockEntity) {
+        super(materialManager, blockEntity, false);
+        this.mixer = blockEntity;
 
-		mixerHead = materialManager.defaultCutout()
-			.material(AllMaterialSpecs.ROTATING)
-			.getModel(BlazingPartialModels.BLAZE_MIXER_HEAD, blockState)
-			.createInstance();
+        mixerHead = materialManager
+                .defaultCutout()
+                .material(AllMaterialSpecs.ROTATING)
+                .getModel(BlazingPartialModels.BLAZE_MIXER_HEAD, blockState)
+                .createInstance();
 
-		mixerHead.setRotationAxis(Direction.Axis.Y);
+        mixerHead.setRotationAxis(Direction.Axis.Y);
 
-		mixerPole = getOrientedMaterial()
-				.getModel(BlazingPartialModels.BLAZE_MIXER_POLE, blockState)
-				.createInstance();
+        mixerPole = getOrientedMaterial().getModel(BlazingPartialModels.BLAZE_MIXER_POLE, blockState).createInstance();
 
 
-		float renderedHeadOffset = getRenderedHeadOffset();
+        float renderedHeadOffset = getRenderedHeadOffset();
 
-		transformPole(renderedHeadOffset);
-		transformHead(renderedHeadOffset);
-	}
+        transformPole(renderedHeadOffset);
+        transformHead(renderedHeadOffset);
+    }
 
-	@Override
-	protected Instancer<RotatingData> getCogModel() {
-		return materialManager.defaultSolid()
-			.material(AllMaterialSpecs.ROTATING)
-			.getModel(BlazingPartialModels.SHAFTLESS_CRIMSON_COGWHEEL, blockEntity.getBlockState());
-	}
+    @Override
+    protected Instancer<RotatingData> getCogModel() {
+        return materialManager
+                .defaultSolid()
+                .material(AllMaterialSpecs.ROTATING)
+                .getModel(BlazingPartialModels.SHAFTLESS_CRIMSON_COGWHEEL, blockEntity.getBlockState());
+    }
 
-	@Override
-	public void beginFrame() {
+    @Override
+    public void beginFrame() {
 
-		float renderedHeadOffset = getRenderedHeadOffset();
+        float renderedHeadOffset = getRenderedHeadOffset();
 
-		transformPole(renderedHeadOffset);
-		transformHead(renderedHeadOffset);
-	}
+        transformPole(renderedHeadOffset);
+        transformHead(renderedHeadOffset);
+    }
 
-	private void transformHead(float renderedHeadOffset) {
-		float speed = mixer.getRenderedHeadRotationSpeed(AnimationTickHolder.getPartialTicks());
+    private void transformHead(float renderedHeadOffset) {
+        float speed = mixer.getRenderedHeadRotationSpeed(AnimationTickHolder.getPartialTicks());
 
-		mixerHead.setPosition(getInstancePosition())
-				.nudge(0, -renderedHeadOffset, 0)
-				.setRotationalSpeed(speed * 2);
-	}
+        mixerHead.setPosition(getInstancePosition()).nudge(0, -renderedHeadOffset, 0).setRotationalSpeed(speed * 2);
+    }
 
-	private void transformPole(float renderedHeadOffset) {
-		mixerPole.setPosition(getInstancePosition())
-				.nudge(0, -renderedHeadOffset, 0);
-	}
+    private void transformPole(float renderedHeadOffset) {
+        mixerPole.setPosition(getInstancePosition()).nudge(0, -renderedHeadOffset, 0);
+    }
 
-	private float getRenderedHeadOffset() {
-		return mixer.getRenderedHeadOffset(AnimationTickHolder.getPartialTicks());
-	}
+    private float getRenderedHeadOffset() {
+        return mixer.getRenderedHeadOffset(AnimationTickHolder.getPartialTicks());
+    }
 
-	@Override
-	public void updateLight() {
-		super.updateLight();
+    @Override
+    public void updateLight() {
+        super.updateLight();
 
-		relight(pos.below(), mixerHead);
-		relight(pos, mixerPole);
-	}
+        relight(pos.below(), mixerHead);
+        relight(pos, mixerPole);
+    }
 
-	@Override
-	public void remove() {
-		super.remove();
-		mixerHead.delete();
-		mixerPole.delete();
-	}
+    @Override
+    public void remove() {
+        super.remove();
+        mixerHead.delete();
+        mixerPole.delete();
+    }
 }

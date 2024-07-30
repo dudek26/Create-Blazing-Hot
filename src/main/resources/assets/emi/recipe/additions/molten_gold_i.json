@@ -2,7 +2,7 @@
   "type": "emi:info",
   "stacks": [
     "fluid:minecraft:water",
-    "fluid:blazinghot:molten_gold"
+    "fluid:blazinghot:nether_lava"
   ],
-  "text": "emi.blazinghot.info.molten_gold_cobblestone"
+  "text": "emi.blazinghot.info.nether_lava_cobblestone"
 }

@@ -9,7 +9,6 @@ import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.press.PressingRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
@@ -57,7 +56,8 @@ public class BlazingSequencedAssemblyRecipeGen extends BlazingRecipeProvider {
             .transitionTo(INCOMPLETE_BLAZE_MIXER)
             .addOutput(BlazingBlocks.BLAZE_MIXER, 1)
             .loops(1)
-            .addStep(PressingRecipe::new, r -> r)
+            .addStep(PressingRecipe::new,
+                    r -> r)
             .addStep(DeployerApplicationRecipe::new, r -> r.require(BLAZE_WHISK))
             .addStep(DeployerApplicationRecipe::new, r -> r.require(AllBlocks.COGWHEEL))
             .addStep(DeployerApplicationRecipe::new, r -> r.require(AllBlocks.PISTON_EXTENSION_POLE)));

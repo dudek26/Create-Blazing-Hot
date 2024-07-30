@@ -72,7 +72,6 @@ public enum BlazingRecipeTypes implements IRecipeTypeInfo {
     }
 
     public <C extends Container, T extends Recipe<C>> Optional<T> find(C inv, Level world) {
-        return world.getRecipeManager()
-                    .getRecipeFor(getType(), inv, world);
+        return world.getRecipeManager().getRecipeFor(getType(), inv, world);
     }
 }

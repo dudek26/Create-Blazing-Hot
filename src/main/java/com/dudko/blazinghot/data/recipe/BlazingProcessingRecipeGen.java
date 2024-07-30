@@ -8,7 +8,6 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.foundation.utility.RegisteredObjects;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
@@ -70,7 +69,9 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
     }
 
     protected enum Meltables {
-        IRON("iron"), GOLD("gold"), BLAZE_GOLD("blaze_gold");
+        IRON("iron"),
+        GOLD("gold"),
+        BLAZE_GOLD("blaze_gold");
 
         public final String name;
 

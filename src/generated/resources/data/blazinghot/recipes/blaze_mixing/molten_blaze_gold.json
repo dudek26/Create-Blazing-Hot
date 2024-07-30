@@ -4,7 +4,7 @@
     "amount": 4050,
     "fluidTag": "blazinghot:blaze_mixer_fuel"
   },
-  "heatRequirement": "heated",
+  "heatRequirement": "superheated",
   "ingredients": [
     {
       "item": "blazinghot:nether_essence"

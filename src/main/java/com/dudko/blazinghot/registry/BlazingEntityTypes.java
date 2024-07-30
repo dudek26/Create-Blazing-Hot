@@ -1,10 +1,8 @@
 package com.dudko.blazinghot.registry;
 
-import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.entity.BlazeArrowEntity;
 import com.dudko.blazinghot.content.entity.renderer.BlazeArrowRenderer;
 import com.simibubi.create.foundation.data.CreateEntityBuilder;
-import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.utility.Lang;
 import com.tterrag.registrate.util.entry.EntityEntry;
 import com.tterrag.registrate.util.nullness.NonNullConsumer;

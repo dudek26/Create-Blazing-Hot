@@ -21,62 +21,62 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BlazeMixerBlock extends KineticBlock implements IBE<BlazeMixerBlockEntity>, ICogWheel {
 
-	public BlazeMixerBlock(Properties properties) {
-		super(properties);
-	}
+    public BlazeMixerBlock(Properties properties) {
+        super(properties);
+    }
 
-	@Override
-	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
-		return !AllBlocks.BASIN.has(worldIn.getBlockState(pos.below()));
-	}
+    @Override
+    public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
+        return !AllBlocks.BASIN.has(worldIn.getBlockState(pos.below()));
+    }
 
-	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-		if (context instanceof EntityCollisionContext
-			&& ((EntityCollisionContext) context).getEntity() instanceof Player)
-			return AllShapes.CASING_14PX.get(Direction.DOWN);
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+        if (context instanceof EntityCollisionContext
+                && ((EntityCollisionContext) context).getEntity() instanceof Player) return AllShapes.CASING_14PX.get(
+                Direction.DOWN);
 
-		return AllShapes.MECHANICAL_PROCESSOR_SHAPE;
-	}
+        return AllShapes.MECHANICAL_PROCESSOR_SHAPE;
+    }
 
-	@Override
-	public Axis getRotationAxis(BlockState state) {
-		return Axis.Y;
-	}
+    @Override
+    public Axis getRotationAxis(BlockState state) {
+        return Axis.Y;
+    }
 
-	@Override
-	public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
-		return false;
-	}
+    @Override
+    public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
+        return false;
+    }
 
-	@Override
-	public float getParticleTargetRadius() {
-		return .85f;
-	}
+    @Override
+    public float getParticleTargetRadius() {
+        return .85f;
+    }
 
-	@Override
-	public float getParticleInitialRadius() {
-		return .75f;
-	}
+    @Override
+    public float getParticleInitialRadius() {
+        return .75f;
+    }
 
-	@Override
-	public SpeedLevel getMinimumRequiredSpeedLevel() {
-		return SpeedLevel.MEDIUM;
-	}
+    @Override
+    public SpeedLevel getMinimumRequiredSpeedLevel() {
+        return SpeedLevel.MEDIUM;
+    }
 
-	@Override
-	public Class<BlazeMixerBlockEntity> getBlockEntityClass() {
-		return BlazeMixerBlockEntity.class;
-	}
+    @Override
+    public Class<BlazeMixerBlockEntity> getBlockEntityClass() {
+        return BlazeMixerBlockEntity.class;
+    }
 
-	@Override
-	public BlockEntityType<? extends BlazeMixerBlockEntity> getBlockEntityType() {
-		return BlazingBlockEntityTypes.BLAZE_MIXER.get();
-	}
+    @Override
+    public BlockEntityType<? extends BlazeMixerBlockEntity> getBlockEntityType() {
+        return BlazingBlockEntityTypes.BLAZE_MIXER.get();
+    }
 
-	@Override
-	public boolean isPathfindable(BlockState state, BlockGetter reader, BlockPos pos, PathComputationType type) {
-		return false;
-	}
+    @Override
+    public boolean isPathfindable(BlockState state, BlockGetter reader, BlockPos pos, PathComputationType type) {
+        return false;
+    }
 
 }

@@ -1,4 +1,8 @@
 {
+  "blazinghot.recipe.blaze_automatic_brewing": "buıʍǝɹᗺ pǝʇɐɯoʇnⱯ ǝzɐןᗺ",
+  "blazinghot.recipe.blaze_automatic_shapeless": "buıʇɟɐɹƆ ssǝןǝdɐɥS pǝʇɐɯoʇnⱯ ǝzɐןᗺ",
+  "blazinghot.recipe.blaze_mixing": "buıxıW ǝzɐןᗺ",
+  "blazinghot.tooltip.blaze_mixing.fuel": "ןǝnɟ s,ɹǝxıW ǝzɐןᗺ",
   "block.blazinghot.black_modern_lamp": "dɯɐꞀ uɹǝpoW ʞɔɐןᗺ",
   "block.blazinghot.black_modern_lamp_panel": "ןǝuɐԀ dɯɐꞀ uɹǝpoW ʞɔɐןᗺ",
   "block.blazinghot.blaze_casing": "buısɐƆ ǝzɐןᗺ",
@@ -38,8 +42,7 @@
   "block.blazinghot.white_modern_lamp_panel": "ןǝuɐԀ dɯɐꞀ uɹǝpoW ǝʇıɥM",
   "block.blazinghot.yellow_modern_lamp": "dɯɐꞀ uɹǝpoW ʍoןןǝʎ",
   "block.blazinghot.yellow_modern_lamp_panel": "ןǝuɐԀ dɯɐꞀ uɹǝpoW ʍoןןǝʎ",
-  "emi.blazinghot.info.molten_gold_cobblestone": "˙uoɹI uǝʇןoW ɹo ɐʌɐꞀ ɟo pɐǝʇsuı pןo⅁ uǝʇןoW buısn uǝɥʍ sɹoʇɐɹǝuǝb ǝuoʇsǝןqqoƆ ɹǝʇsɐɟ uǝʌǝ pןınq uɐɔ noʎ",
-  "emi.blazinghot.info.molten_iron_cobblestone": "˙ɐʌɐꞀ ɟo pɐǝʇsuı uoɹI uǝʇןoW buısn uǝɥʍ sɹoʇɐɹǝuǝb ǝuoʇsǝןqqoƆ ɹǝʇsɐɟ pןınq uɐɔ noʎ",
+  "emi.blazinghot.info.nether_lava_cobblestone": "˙ɐʌɐꞀ ɹɐןnbǝɹ ǝɥʇ ɟo pɐǝʇsuı ɐʌɐꞀ ɹǝɥʇǝN buısn uǝɥʍ sɹoʇɐɹǝuǝb ǝuoʇsǝןqqoƆ ɹǝʇsɐɟ pןınq uɐɔ noʎ",
   "emi.blazinghot.tooltip.blaze_mixing.fuel": "ןǝnɟ s,ɹǝxıW ǝzɐןᗺ",
   "emi.category.blazinghot.blaze_automatic_brewing": "buıʍǝɹᗺ pǝʇɐɯoʇnⱯ ǝzɐןᗺ",
   "emi.category.blazinghot.blaze_automatic_shapeless": "buıʇɟɐɹƆ ssǝןǝdɐɥS pǝʇɐɯoʇnⱯ ǝzɐןᗺ",

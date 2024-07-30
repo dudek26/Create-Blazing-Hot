@@ -27,6 +27,9 @@
     ],
     "emi": [
       "com.dudko.blazinghot.compat.emi.BlazingEmiPlugin"
+    ],
+    "jei_mod_plugin": [
+      "com.dudko.blazinghot.compat.jei.BlazingJEI"
     ]
   },
   "mixins": [

@@ -8,10 +8,8 @@ import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelGenerator;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlock;
 import com.dudko.blazinghot.util.DyeUtil;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
-import com.simibubi.create.content.kinetics.mixer.MechanicalMixerBlock;
 import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
 import com.simibubi.create.foundation.block.DyedBlockList;
 import com.simibubi.create.foundation.data.AssetLookup;
@@ -52,17 +50,17 @@ public class BlazingBlocks {
             .build()
             .register();
 
-    public static final BlockEntry<BlazeMixerBlock> BLAZE_MIXER =
-            REGISTRATE.block("blaze_mixer", BlazeMixerBlock::new)
-                             .initialProperties(SharedProperties::stone)
-                             .properties(p -> p.noOcclusion().mapColor(MapColor.STONE))
-                             .transform(axeOrPickaxe())
-                             .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
-                             .addLayer(() -> RenderType::cutoutMipped)
-                             .transform(BlockStressDefaults.setImpact(4.0))
-                             .item(AssemblyOperatorBlockItem::new)
-                             .transform(customItemModel())
-                             .register();
+    public static final BlockEntry<BlazeMixerBlock> BLAZE_MIXER = REGISTRATE
+            .block("blaze_mixer", BlazeMixerBlock::new)
+            .initialProperties(SharedProperties::stone)
+            .properties(p -> p.noOcclusion().mapColor(MapColor.STONE))
+            .transform(axeOrPickaxe())
+            .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
+            .addLayer(() -> RenderType::cutoutMipped)
+            .transform(BlockStressDefaults.setImpact(4.0))
+            .item(AssemblyOperatorBlockItem::new)
+            .transform(customItemModel())
+            .register();
 
     public static final BlockEntry<CasingBlock> BLAZE_CASING = REGISTRATE
             .block("blaze_casing", CasingBlock::new)

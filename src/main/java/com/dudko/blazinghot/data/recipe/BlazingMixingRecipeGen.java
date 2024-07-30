@@ -9,7 +9,6 @@ import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -42,7 +41,8 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
                     .require(BlazingItems.STONE_DUST)
                     .output(BlazingItems.NETHERRACK_DUST)), MOLTEN_BLAZE_GOLD = create("molten_blaze_gold",
             b -> requireMultiple(b, BlazingItems.NETHER_ESSENCE, 4)
-                    .require(BlazingTags.Fluids.MOLTEN_GOLD.tag, INGOT / 2)
+                    .require(BlazingTags.Fluids.MOLTEN_GOLD.tag,
+                            INGOT / 2)
                     .requiresHeat(HeatCondition.SUPERHEATED)
                     .output(BlazingFluids.MOLTEN_BLAZE_GOLD.get(), INGOT / 2));
 

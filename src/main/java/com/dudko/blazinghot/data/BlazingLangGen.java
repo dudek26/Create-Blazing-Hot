@@ -16,9 +16,7 @@ public class BlazingLangGen {
 
         BlazingTags.provideLangEntries(langConsumer);
         provideDefaultLang("tooltips", langConsumer);
-        provideDefaultLang("messages", langConsumer);
         provideDefaultLang("interface", langConsumer);
-        provideDefaultLang("emi", langConsumer);
     }
 
     private static void provideDefaultLang(String fileName, BiConsumer<String, String> consumer) {

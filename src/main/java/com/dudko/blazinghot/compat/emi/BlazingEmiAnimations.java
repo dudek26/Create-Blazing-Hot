@@ -5,7 +5,6 @@ import com.dudko.blazinghot.registry.BlazingPartialModels;
 import com.jozufozu.flywheel.core.PartialModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.compat.emi.CreateEmiAnimations;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import dev.emi.emi.api.widget.WidgetHolder;
@@ -27,28 +26,17 @@ public class BlazingEmiAnimations extends CreateEmiAnimations {
                     .scale(scale)
                     .render(graphics);
 
-            blockElement(BlazingBlocks.BLAZE_MIXER.getDefaultState())
-                    .atLocal(0, 0, 0)
-                    .scale(scale)
-                    .render(graphics);
+            blockElement(BlazingBlocks.BLAZE_MIXER.getDefaultState()).atLocal(0, 0, 0).scale(scale).render(graphics);
 
             float animation = ((Mth.sin(AnimationTickHolder.getRenderTime() / 32f) + 1) / 5) + .5f;
 
-            blockElement(BlazingPartialModels.BLAZE_MIXER_POLE)
-                    .atLocal(0, animation, 0)
-                    .scale(scale)
-                    .render(graphics);
+            blockElement(BlazingPartialModels.BLAZE_MIXER_POLE).atLocal(0, animation, 0).scale(scale).render(graphics);
 
-            blockElement(BlazingPartialModels.BLAZE_MIXER_HEAD)
-                    .rotateBlock(0, getCurrentAngle() * 4, 0)
-                    .atLocal(0, animation, 0)
-                    .scale(scale)
-                    .render(graphics);
+            blockElement(BlazingPartialModels.BLAZE_MIXER_HEAD).rotateBlock(0, getCurrentAngle() * 4, 0).atLocal(0,
+                    animation,
+                    0).scale(scale).render(graphics);
 
-            blockElement(AllBlocks.BASIN.getDefaultState())
-                    .atLocal(0, 1.65, 0)
-                    .scale(scale)
-                    .render(graphics);
+            blockElement(AllBlocks.BASIN.getDefaultState()).atLocal(0, 1.65, 0).scale(scale).render(graphics);
         });
     }
 

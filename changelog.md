@@ -9,7 +9,7 @@ Create: Blazing Hot 0.4
     - All recipes from Mechanical Mixer can be applied in the Blaze Mixer
     - When there is enough fuel present, the Blaze Mixer will work twice as fast
     - There are some recipes exclusive to the Blaze Mixer
-- Blaze Mixing (use [EMI](https://modrinth.com/mod/emi) to see all the recipes, JEI and REI support will be added in the future)
+- Blaze Mixing 
 - Blaze Whisk (crafting ingredient)
 - Melting recipes for Blaze Gold Rod
 - Separate creative tab for building blocks

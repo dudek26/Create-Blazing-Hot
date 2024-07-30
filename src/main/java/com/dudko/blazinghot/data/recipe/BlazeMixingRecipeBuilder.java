@@ -1,11 +1,12 @@
 package com.dudko.blazinghot.data.recipe;
 
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
-import com.dudko.blazinghot.registry.BlazingTags;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.simibubi.create.Create;
-import com.simibubi.create.content.processing.recipe.*;
+import com.simibubi.create.content.processing.recipe.HeatCondition;
+import com.simibubi.create.content.processing.recipe.ProcessingOutput;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.foundation.data.SimpleDatagenIngredient;
 import com.simibubi.create.foundation.data.recipe.Mods;
 import com.simibubi.create.foundation.fluid.FluidHelper;
@@ -266,8 +267,8 @@ public class BlazeMixingRecipeBuilder {
             IRecipeTypeInfo recipeType = this.recipe.getTypeInfo();
             ResourceLocation typeId = recipeType.getId();
 
-            if (!(recipeType.getSerializer() instanceof BlazeMixingRecipeSerializer))
-                throw new IllegalStateException("Cannot datagen BlazeMixingRecipeSerializer of type: " + typeId);
+            if (!(recipeType.getSerializer() instanceof BlazeMixingRecipeSerializer)) throw new IllegalStateException(
+                    "Cannot datagen BlazeMixingRecipeSerializer of type: " + typeId);
 
             this.id = new ResourceLocation(recipe.getId().getNamespace(),
                     typeId.getPath() + "/" + recipe.getId().getPath());
@@ -277,8 +278,7 @@ public class BlazeMixingRecipeBuilder {
         @Override
         public void serializeRecipeData(@NotNull JsonObject json) {
             serializer.write(json, recipe);
-            if (recipeConditions.isEmpty())
-                return;
+            if (recipeConditions.isEmpty()) return;
 
             JsonArray conds = new JsonArray();
             recipeConditions.forEach(c -> conds.add(c.toJson())); // FabricDataGenHelper.addConditions(json, recipeConditions.toArray());?

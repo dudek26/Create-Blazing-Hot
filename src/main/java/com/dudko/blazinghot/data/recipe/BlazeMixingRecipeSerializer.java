@@ -1,6 +1,5 @@
 package com.dudko.blazinghot.data.recipe;
 
-import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

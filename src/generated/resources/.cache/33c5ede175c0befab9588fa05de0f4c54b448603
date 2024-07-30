@@ -1,14 +1,14 @@
-// 1.20.1	2024-07-29T16:33:30.8018794	Create: Blazing Hot/Blazing Hot Blaze Mixing Recipes
+// 1.20.1	2024-07-30T21:35:11.8598724	Create: Blazing Hot/Blazing Hot Blaze Mixing Recipes
 c566e7694ba8f4b5edaf69313fcdd728daa08358 data\blazinghot\recipes\blaze_mixing\melting\iron_ingots.json
 42905c75f3e1a2cf25ce69f09d7fbd815fdcaae4 data\blazinghot\recipes\blaze_mixing\melting\iron_blocks.json
-313c119fb1e9ab221e1df88dcb6060ca94ae6c06 data\blazinghot\recipes\blaze_mixing\molten_blaze_gold.json
+fcb7eb83cd485a8a4d6399ac4e14d9a92603b0f9 data\blazinghot\recipes\blaze_mixing\molten_blaze_gold.json
 01e4fc9699748b7444f7534603d1c2292492d103 data\blazinghot\recipes\blaze_mixing\melting\gold_blocks.json
 639328f42edef0873bbaf767edbf4b0ef5ed2323 data\blazinghot\recipes\blaze_mixing\melting\gold_ingots.json
 24de1701bbe3cbaa3d9d9f4329c5570b8ce5c03d data\blazinghot\recipes\blaze_mixing\melting\blaze_gold_nuggets.json
 d57ec5479812b1b421a98ef3408bd05d1e795e6d data\blazinghot\recipes\blaze_mixing\melting\gold_nuggets.json
 ea19e327478cb26cfaa78648533178413e406857 data\blazinghot\recipes\blaze_mixing\melting\blaze_gold_blocks.json
 e90fb5508e28c1cb027d7a5fc8995523c3687b19 data\blazinghot\recipes\blaze_mixing\melting\iron_nuggets.json
-63021599766af0cb4a73d13b2c511568318114be data\blazinghot\recipes\blaze_mixing\nether_lava.json
+06e3e9dfffc3c173d2a1d5e4c99df7126c676ea6 data\blazinghot\recipes\blaze_mixing\nether_lava.json
 a439e3226413ea081880968620fe179ae71c2fbe data\blazinghot\recipes\blaze_mixing\melting\iron_plates.json
 c1b568396dbc5d43275a0acfee586a2a1d746af0 data\blazinghot\recipes\blaze_mixing\melting\blaze_gold_plates.json
 9be3ec3585fed4db5f6375863a3bbe8dcffb84e1 data\blazinghot\recipes\blaze_mixing\melting\blaze_gold_ingots.json

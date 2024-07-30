@@ -14,6 +14,7 @@ import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
+import com.simibubi.create.infrastructure.config.AllConfigs;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiRecipe;
@@ -42,7 +43,6 @@ public class BlazingEmiPlugin implements EmiPlugin {
             register("blaze_automatic_brewing",
                     DoubleItemIcon.of(BlazingBlocks.BLAZE_MIXER.get(), Items.BREWING_STAND));
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
     public void register(EmiRegistry registry) {
         ALL.forEach((id, category) -> registry.addCategory(category));
@@ -77,6 +77,7 @@ public class BlazingEmiPlugin implements EmiPlugin {
 
         for (CraftingRecipe recipe : manager.getAllRecipesFor(RecipeType.CRAFTING)) {
             if (recipe instanceof ShapelessRecipe
+                    && AllConfigs.server().recipes.allowShapelessInMixer.get()
                     && !MechanicalPressBlockEntity.canCompress(recipe)
                     && !AllRecipeTypes.shouldIgnoreInAutomation(recipe)
                     && recipe.getIngredients().size() > 1) {
@@ -86,7 +87,9 @@ public class BlazingEmiPlugin implements EmiPlugin {
         }
 
         for (MixingRecipe recipe : PotionMixingRecipes.ALL) {
-            registry.addRecipe(new BlazeMixingEmiRecipe(BLAZE_AUTOMATIC_BREWING, recipe));
+            if (AllConfigs.server().recipes.allowBrewingInMixer.get()) registry.addRecipe(new BlazeMixingEmiRecipe(
+                    BLAZE_AUTOMATIC_BREWING,
+                    recipe));
         }
     }
 
