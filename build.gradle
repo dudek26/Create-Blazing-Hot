@@ -182,7 +182,7 @@ publishing {
 tasks.register("publishMod") {
     String target = System.getenv("TARGET");
     if (target == null) {
-        System.print("Target platform is null! Publishing to Modrinth...")
+        System.println("Target platform is null! Publishing to Modrinth...")
         dependsOn = ["modrinth"]
     }
     if (target == "modrinth") dependsOn = ["modrinth"]
