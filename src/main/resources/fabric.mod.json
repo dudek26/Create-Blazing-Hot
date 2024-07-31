@@ -30,6 +30,9 @@
     ],
     "jei_mod_plugin": [
       "com.dudko.blazinghot.compat.jei.BlazingJEI"
+    ],
+    "rei_client": [
+      "com.dudko.blazinghot.compat.rei.BlazingREI"
     ]
   },
   "mixins": [
