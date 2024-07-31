@@ -193,7 +193,7 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
         super.tick();
 
         dripTicks++;
-        if (dripTicks >= 10) {
+        if (level != null && level.isClientSide && dripTicks >= 10) {
             dripTicks = 0;
             renderFuelParticles();
         }
@@ -330,13 +330,6 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
         Vec3 center = offset.add(VecHelper.getCenterOf(worldPosition));
         target = VecHelper.offsetRandomly(target.subtract(offset), level.random, 1 / 128f);
         level.addParticle(data, center.x, center.y - 1.75f, center.z, target.x, target.y, target.z);
-        if (blazeMixing) level.addParticle(ParticleTypes.SMALL_FLAME,
-                center.x,
-                center.y - 1.75f,
-                center.z,
-                target.x / 4,
-                target.y / 4,
-                target.z / 4);
     }
 
     @Override
