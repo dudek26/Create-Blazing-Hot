@@ -34,6 +34,11 @@ Create: Blazing Hot 0.4
     - Added mod platform
     - Example: `0.3-build.89+1.20.1` -> `0.4+fabric-mc1.20.1`
 
+### Removed:
+
+- Iron Block, Gold Block and Blaze Gold Block melting recipes in the Mechanical Mixer
+  - These blocks can still be melted in the Blaze Mixer
+
 ------------------------------------------------------
 Create: Blazing Hot 0.3
 ------------------------------------------------------
