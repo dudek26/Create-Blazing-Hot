@@ -180,14 +180,7 @@ publishing {
 
 
 tasks.register("publishMod") {
-    String target = System.getenv("TARGET");
-    if (target == null) {
-        System.println("Target platform is null! Publishing to Modrinth...")
-        dependsOn = ["modrinth"]
-    }
-    if (target == "modrinth") dependsOn = ["modrinth"]
-    if (target == "curseforge") dependsOn = ["curseforge"]
-    if (target == "both") dependsOn = ["modrinth", "curseforge"]
+    //todo
 }
 
 String uncutChangelogText = ChangelogText.getChangelogText(rootProject).toString()
