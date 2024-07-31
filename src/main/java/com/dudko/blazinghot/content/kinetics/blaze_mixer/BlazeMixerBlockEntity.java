@@ -1,7 +1,5 @@
 package com.dudko.blazinghot.content.kinetics.blaze_mixer;
 
-import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.compat.emi.recipes.BlazeMixingEmiRecipe;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.AllRecipeTypes;
@@ -68,8 +66,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
-
-import static com.simibubi.create.compat.emi.CreateEmiPlugin.doInputsMatch;
 
 @SuppressWarnings("UnstableApiUsage")
 public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements IHaveGoggleInformation, SidedStorageBlockEntity {
@@ -215,32 +211,30 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
         if (running && level != null) {
             if (level.isClientSide && runningTicks == 20) renderParticles();
 
+
             if ((!level.isClientSide || isVirtual()) && runningTicks == 20) {
                 if (processingTicks < 0) {
                     float recipeSpeed = 1;
                     fuelCost = 0;
                     blazeMixing = false;
+                    int t = 0;
                     if (currentRecipe instanceof ProcessingRecipe) {
-                        int t = ((ProcessingRecipe<?>) currentRecipe).getProcessingDuration();
+                        t = ((ProcessingRecipe<?>) currentRecipe).getProcessingDuration();
                         if (t != 0) {
                             recipeSpeed = t / 100f;
                         }
-                        long calculatedCost = BlazeMixingRecipe.durationToFuelCost(t);
-
                         if (currentRecipe instanceof BlazeMixingRecipe blazeMixingRecipe && blazeMixingRecipe
                                 .getFuelFluid()
                                 .test(getFluidStack())) {
                             fuelCost = blazeMixingRecipe.getFuelFluid().getRequiredAmount();
                             blazeMixing = true;
                         }
-                        else {
-                            if (hasFuel(calculatedCost)) {
-                                recipeSpeed /= 2;
-                                blazeMixing = true;
-                                fuelCost = calculatedCost;
-                            }
-                        }
-
+                    }
+                    long calculatedCost = BlazeMixingRecipe.durationToFuelCost(t);
+                    if (hasFuel(calculatedCost)) {
+                        recipeSpeed /= 2;
+                        blazeMixing = true;
+                        fuelCost = calculatedCost;
                     }
 
                     processingTicks = Mth.clamp((Mth.log2((int) (512 / speed))) * Mth.ceil(recipeSpeed * 15) + 1,
@@ -337,23 +331,6 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
         target = VecHelper.offsetRandomly(target.subtract(offset), level.random, 1 / 128f);
         level.addParticle(data, center.x, center.y - 1.75f, center.z, target.x, target.y, target.z);
         if (blazeMixing) level.addParticle(ParticleTypes.SMALL_FLAME,
-                center.x,
-                center.y - 1.75f,
-                center.z,
-                target.x / 4,
-                target.y / 4,
-                target.z / 4);
-    }
-
-    protected void flameSpillParticle() {
-        assert level != null;
-        float angle = level.random.nextFloat() * 360;
-        Vec3 offset = new Vec3(0, 0, 0.25f);
-        offset = VecHelper.rotate(offset, angle, Axis.Y);
-        Vec3 target = VecHelper.rotate(offset, getSpeed() > 0 ? 25 : -25, Axis.Y).add(0, .25f, 0);
-        Vec3 center = offset.add(VecHelper.getCenterOf(worldPosition));
-        target = VecHelper.offsetRandomly(target.subtract(offset), level.random, 1 / 128f);
-        level.addParticle(ParticleTypes.SMALL_FLAME,
                 center.x,
                 center.y - 1.75f,
                 center.z,
