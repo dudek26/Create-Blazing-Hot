@@ -28,15 +28,9 @@ public class BlazeMixingCategory extends BasinCategory {
     MixingType type;
 
     protected enum MixingType {
-        MIXING("blaze_mixing"),
-        AUTO_SHAPELESS("blaze_automatic_shapeless"),
-        AUTO_BREWING("blaze_automatic_brewing");
-
-        public final String name;
-
-        MixingType(String name) {
-            this.name = name;
-        }
+        MIXING,
+        AUTO_SHAPELESS,
+        AUTO_BREWING
     }
 
     public static BlazeMixingCategory standard(Info<BasinRecipe> info) {

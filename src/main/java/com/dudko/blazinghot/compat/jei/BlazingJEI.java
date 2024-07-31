@@ -27,6 +27,7 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -267,7 +268,7 @@ public class BlazingJEI implements IModPlugin {
 
             CreateRecipeCategory.Info<T> info = new CreateRecipeCategory.Info<>(new mezz.jei.api.recipe.RecipeType<>(
                     BlazingHot.asResource(name),
-                    recipeClass), Lang.translateDirect("recipe." + name), background, icon, recipesSupplier, catalysts);
+                    recipeClass), Component.translatable(BlazingHot.ID + ".recipe." + name), background, icon, recipesSupplier, catalysts);
             CreateRecipeCategory<T> category = factory.create(info);
             allCategories.add(category);
             return category;
