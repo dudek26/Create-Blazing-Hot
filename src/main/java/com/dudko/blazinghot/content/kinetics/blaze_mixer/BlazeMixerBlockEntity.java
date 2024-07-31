@@ -1,5 +1,7 @@
 package com.dudko.blazinghot.content.kinetics.blaze_mixer;
 
+import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.compat.emi.recipes.BlazeMixingEmiRecipe;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.AllRecipeTypes;
@@ -53,6 +55,7 @@ import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -65,6 +68,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
+
+import static com.simibubi.create.compat.emi.CreateEmiPlugin.doInputsMatch;
 
 @SuppressWarnings("UnstableApiUsage")
 public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements IHaveGoggleInformation, SidedStorageBlockEntity {
@@ -341,7 +346,20 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
     }
 
     protected void flameSpillParticle() {
-
+        assert level != null;
+        float angle = level.random.nextFloat() * 360;
+        Vec3 offset = new Vec3(0, 0, 0.25f);
+        offset = VecHelper.rotate(offset, angle, Axis.Y);
+        Vec3 target = VecHelper.rotate(offset, getSpeed() > 0 ? 25 : -25, Axis.Y).add(0, .25f, 0);
+        Vec3 center = offset.add(VecHelper.getCenterOf(worldPosition));
+        target = VecHelper.offsetRandomly(target.subtract(offset), level.random, 1 / 128f);
+        level.addParticle(ParticleTypes.SMALL_FLAME,
+                center.x,
+                center.y - 1.75f,
+                center.z,
+                target.x / 4,
+                target.y / 4,
+                target.z / 4);
     }
 
     @Override
@@ -378,8 +396,8 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
                 && AllConfigs.server().recipes.allowShapelessInMixer.get()
                 && r.getIngredients().size() > 1
                 && !MechanicalPressBlockEntity.canCompress(r)) && !AllRecipeTypes.shouldIgnoreInAutomation(r)
-                || r.getType() == AllRecipeTypes.MIXING.getType()
-                || r.getType() == BlazingRecipeTypes.BLAZE_MIXING.getType());
+                || r.getType() == AllRecipeTypes.MIXING.getType())
+                || r.getType() == BlazingRecipeTypes.BLAZE_MIXING.getType();
     }
 
     @Override
@@ -395,15 +413,28 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
         }
         else if (recipe instanceof MixingRecipe) {
             assert level != null;
-            Optional<ProcessingRecipe<SmartInventory>> rec = BlazingRecipeTypes.BLAZE_MIXING.find(basin
-                    .get()
-                    .getInputInventory(), level);
-            if (rec.isEmpty()) rec = AllRecipeTypes.MIXING.find(basin.get().getInputInventory(), level);
-            if (rec.isEmpty()) return false;
+            RecipeManager manager = level.getRecipeManager();
+            List<BlazeMixingRecipe> bmRecipes = manager.getAllRecipesFor(BlazingRecipeTypes.BLAZE_MIXING.getType());
+            for (BlazeMixingRecipe bmRecipe : bmRecipes) {
+                if (doInputsMatch(bmRecipe, recipe)) return false;
+            }
         }
 
         return BasinRecipe.match(basin.get(), recipe);
     }
+
+    private static boolean doInputsMatch(Recipe<?> a, Recipe<?> b) {
+        if (!a.getIngredients().isEmpty() && !b.getIngredients().isEmpty()) {
+            ItemStack[] matchingStacks = a.getIngredients().get(0).getItems();
+            if (matchingStacks.length != 0) {
+                if (b.getIngredients().get(0).test(matchingStacks[0])) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
     @Override
     public void startProcessingBasin() {
