@@ -23,7 +23,7 @@ Boolean isRelease = System.getenv("RELEASE_BUILD")?.toBoolean() ?: false
 // Formats the mod version to include the Minecraft version and build number (if present)
 // example: 1.0.0+1.18.2-100
 // adding 78 to build number because that was the last build before the repository migration
-String buildNumber = System.getenv("GITHUB_RUN_NUMBER")
+String buildNumber = null
 version = "${mod_version}" + (buildNumber != null && !isRelease ? "-build.${buildNumber.toInteger() + 78}" : "") + "+fabric-mc${minecraft_version}"
 
 repositories {
