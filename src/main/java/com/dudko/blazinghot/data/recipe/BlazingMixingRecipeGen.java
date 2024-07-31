@@ -66,6 +66,7 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
     private List<GeneratedRecipe> meltingAll(Meltables material, Fluid result) {
         List<GeneratedRecipe> recipes = new ArrayList<>();
         for (Forms form : Forms.values()) {
+            if (form == Forms.BLOCK) continue;
             recipes.add(melting(form.tag(material), result, form.amount, form.meltingTime));
         }
         return recipes;
