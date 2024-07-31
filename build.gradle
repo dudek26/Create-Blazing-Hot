@@ -90,8 +90,8 @@ dependencies {
     // if you would like to add integration with them, uncomment them here.
     modCompileOnly("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}")
     modCompileOnly("mezz.jei:jei-${minecraft_version}-common:${jei_version}")
-    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${rei_version}")
-    modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${rei_version}")
+//    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${rei_version}")
+//    modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${rei_version}")
     modCompileOnly("dev.emi:emi-fabric:${emi_version}")
 }
 
