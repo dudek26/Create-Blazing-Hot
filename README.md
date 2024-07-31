@@ -10,14 +10,13 @@ and existing metals, most notably their liquid forms.
 ## 🔧 Features
 
 <details>
-    <summary>Molten Metals</summary>
-    <p>Create: Blazing Hot adds molten variants of metals to the game. Currently, only Gold and Blaze Gold have their liquid forms, but more will be added in the future.</p>
+    <summary>New fluids</summary>
+    <p>Create: Blazing Hot adds molten variants of metals to the game. Currently, only Iron, Gold and Blaze Gold have their liquid forms, but more will be added in the future.</p>
+    <p>Blocks, ingots, sheets and nuggets can be slowly melted in superheated Mixing or in superheated Blaze Mixing</p>
     <p>There are new <b>filling recipes</b> using Molten Gold for <b>Golden Carrots, Glistering Melons and Golden Apples.</b></p>
-    <p>Molten metals can also interact with Water:</p>
-    <ul>
-        <li><b>Molten Gold</b> turns into Cobblestone, but it's way faster than Lava.</li>
-        <li><b>Molten Blaze</b> Gold turns into Netherrack.</li>
-    </ul>
+    <p>Molten Blaze Gold generates <b>Netherrack</b> when touching lava.</p>
+    <p>There is also a new Lava variant: <B>Nether Lava</B>. It behaves exactly like Lava in the Nether, granting the possibility of creating faster Cobblestone generators!</p>
+
 </details>
 
 <details>
@@ -29,7 +28,17 @@ and existing metals, most notably their liquid forms.
         <li>Either Blaze Gold Nuggets or Molten Blaze Gold can be used to craft <b>Blaze Carrots</b>, which stop the player from burning on being eaten.</li>
         <li>Molten Blaze Gold can be used to craft <b>new variants of Apples</b>, that give longer Fire Resistance effect and Strength.</li>
     </ul>
-    <p>More features for Blaze Gold are planned, such as Blaze Casings and some new machinery!</p>
+</details>
+
+<details>
+    <summary>Blaze Mixing</summary>
+    <p>Using Blaze Gold, you can upgrade Copper Casings to <b>Blaze Casings</b>. They can be later used to craft a new machine - the <b>Blaze Mixer</b>:</p>
+    <ul>
+        <li>When there is no fuel inside, the Blaze Mixer behaves exactly like the Mechanical Mixer.</li>
+        <li>If the mixer is fueled (by default, the fuel can be either Lava or Nether Lava) it works <b>twice as fast</b> as the Mechanical Mixer, and melting metals is five times faster.</li>
+        <li>There are also some recipes <b>exclusive to Blaze Mixer</b>, such as the Nether Lava recipe or more efficient Molten Blaze Gold and melting recipes.</li>
+    </ul>
+    <p><i>Currently, there is no support for Roughly Enough Items (REI). Use EMI or JEI if you want to view the recipes.</i></p>
 </details>
 
 <details>
@@ -55,5 +64,5 @@ There is more content planned for the future as the mod is actively being develo
 
 ## 🔨 Forge support and older versions
 
-There **may** be support for Forge in the future, but I don't guarantee anything.<br>
+Forge support will come in the future.<br>
 Support for older Minecraft versions (before 1.20.1) is not planned.
