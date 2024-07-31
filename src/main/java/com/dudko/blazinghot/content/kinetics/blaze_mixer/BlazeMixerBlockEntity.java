@@ -389,9 +389,9 @@ public class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements 
         if (basin.isEmpty()) return false;
 
         if (recipe instanceof BlazeMixingRecipe bmxRecipe) {
-            return BasinRecipe.match(basin.get(), bmxRecipe)
-                    && bmxRecipe.getFuelFluid().test(getFluidStack())
-                    && fuelAmount() >= bmxRecipe.getFuelFluid().getRequiredAmount();
+            return BasinRecipe.match(basin.get(), bmxRecipe) && ((bmxRecipe.getFuelFluid().test(getFluidStack())
+                    && fuelAmount() >= bmxRecipe.getFuelFluid().getRequiredAmount()) || bmxRecipe.getFuelFluid().test(
+                    FluidStack.EMPTY));
         }
         else if (recipe instanceof MixingRecipe) {
             assert level != null;

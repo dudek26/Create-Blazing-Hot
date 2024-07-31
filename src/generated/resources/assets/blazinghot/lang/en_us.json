@@ -61,6 +61,8 @@
   "item.blazinghot.blaze_gold_nugget": "Blaze Gold Nugget",
   "item.blazinghot.blaze_gold_rod": "Blaze Gold Rod",
   "item.blazinghot.blaze_gold_sheet": "Blaze Gold Sheet",
+  "item.blazinghot.blaze_mixer.tooltip": "BLAZE MIXER",
+  "item.blazinghot.blaze_mixer.tooltip.summary": "A _Blaze_ variant of the _Mechanical Mixer_ that works _twice as fast_ when _fueled_, and has some _special_ recipes.",
   "item.blazinghot.blaze_whisk": "Blaze Whisk",
   "item.blazinghot.burning_stellar_blaze_apple": "Burning Stellar Blaze Apple",
   "item.blazinghot.enchanted_blaze_apple": "Enchanted Blaze Apple",

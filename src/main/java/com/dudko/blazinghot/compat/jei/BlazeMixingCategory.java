@@ -88,9 +88,4 @@ public class BlazeMixingCategory extends BasinCategory {
                 55);
         mixer.draw(graphics, getBackground().getWidth() / 2 + 3, 34);
     }
-
-    @Override
-    public @NotNull Component getTitle() {
-        return Component.translatable("blazinghot.recipe." + type.name);
-    }
 }

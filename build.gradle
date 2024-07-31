@@ -24,7 +24,7 @@ Boolean isRelease = System.getenv("RELEASE_BUILD")?.toBoolean() ?: false
 // example: 1.0.0+1.18.2-100
 // adding 78 to build number because that was the last build before the repository migration
 String buildNumber = System.getenv("GITHUB_RUN_NUMBER")
-version = "${mod_version}" + (buildNumber != null && !isRelease ? "-build.${buildNumber.toInteger() + 78}" : "") + "+${minecraft_version}"
+version = "${mod_version}" + (buildNumber != null && !isRelease ? "-build.${buildNumber.toInteger() + 78}" : "") + "+fabric-mc${minecraft_version}"
 
 repositories {
     maven { url = "https://maven.shedaniel.me/" } // Cloth Config, REI
@@ -90,8 +90,8 @@ dependencies {
     // if you would like to add integration with them, uncomment them here.
     modCompileOnly("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}")
     modCompileOnly("mezz.jei:jei-${minecraft_version}-common:${jei_version}")
-//    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${rei_version}")
-//    modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${rei_version}")
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${rei_version}")
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${rei_version}")
     modCompileOnly("dev.emi:emi-fabric:${emi_version}")
 }
 

@@ -5,7 +5,6 @@ import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllRecipeTypes;
-import com.simibubi.create.Create;
 import com.simibubi.create.compat.jei.*;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
@@ -267,7 +266,7 @@ public class BlazingJEI implements IModPlugin {
             }
 
             CreateRecipeCategory.Info<T> info = new CreateRecipeCategory.Info<>(new mezz.jei.api.recipe.RecipeType<>(
-                    Create.asResource(name),
+                    BlazingHot.asResource(name),
                     recipeClass), Lang.translateDirect("recipe." + name), background, icon, recipesSupplier, catalysts);
             CreateRecipeCategory<T> category = factory.create(info);
             allCategories.add(category);

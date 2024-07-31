@@ -9,7 +9,8 @@ Create: Blazing Hot 0.4
     - All recipes from Mechanical Mixer can be applied in the Blaze Mixer
     - When there is enough fuel present, the Blaze Mixer will work twice as fast
     - There are some recipes exclusive to the Blaze Mixer
-- Blaze Mixing 
+- Blaze Mixing (no support for REI yet, use [EMI](https://modrinth.com/mod/emi) or [JEI](https://modrinth.com/mod/jei)
+  to see the recipes)
 - Blaze Whisk (crafting ingredient)
 - Melting recipes for Blaze Gold Rod
 - Separate creative tab for building blocks
@@ -22,10 +23,16 @@ Create: Blazing Hot 0.4
     - Melting with fueled Blaze Mixer is 5 times faster than in the Mechanical Mixer
 - Moved Blaze Gold Block and Modern Lamps to the new creative tab
 - Made Molten Gold and Molten Iron behave like lava:
-    - Their source blocks turn into Obsidian when touching water, and their tick rate has been reduced from `5` and `15` to `30`
-    - You can generate Cobblestone faster using Nether Lava. In the future, these metals will have some new unique
+    - Their source blocks turn into Obsidian when touching water, and their tick rate has been reduced from `5` and `15`
+      to `30`
+    - You can generate Cobblestone faster using Nether Lava.
+    - In the future, these metals will have some new unique
       interactions with other fluids
 - New changelog format
+- New version naming scheme:
+    - Removed build number from published files
+    - Added mod platform
+    - Example: `0.3-build.89+1.20.1` -> `0.4+fabric-mc1.20.1`
 
 ------------------------------------------------------
 Create: Blazing Hot 0.3

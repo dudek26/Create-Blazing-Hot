@@ -59,6 +59,7 @@ public class BlazingBlocks {
             .addLayer(() -> RenderType::cutoutMipped)
             .transform(BlockStressDefaults.setImpact(4.0))
             .item(AssemblyOperatorBlockItem::new)
+            .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "item.blazinghot.blaze_mixer"))
             .transform(customItemModel())
             .register();
 
