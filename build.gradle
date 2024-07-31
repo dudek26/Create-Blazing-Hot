@@ -204,8 +204,7 @@ modrinth {
 }
 
 curseforge {
-    String token = System.getenv("CURSEFORGE_TOKEN")
-    apiKey = token == null || token.isEmpty() ? "unset" : token
+    apiKey = System.getenv("CURSEFORGE_TOKEN")
     project {
         id = curseforge_id
         changelog = changelogText
