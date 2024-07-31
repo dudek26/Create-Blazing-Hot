@@ -180,29 +180,29 @@ publishing {
 
 
 tasks.register("publishMod") {
-    //todo
-}
 
-String uncutChangelogText = ChangelogText.getChangelogText(rootProject).toString()
-String changelogText = uncutChangelogText.startsWith("Create:") ? uncutChangelogText.split(":", 3)[2] : uncutChangelogText.split(":", 2)[1]
+    String uncutChangelogText = ChangelogText.getChangelogText(rootProject).toString()
+    String changelogText = uncutChangelogText.startsWith("Create:") ? uncutChangelogText.split(":", 3)[2] : uncutChangelogText.split(":", 2)[1]
 
-modrinth {
-    projectId = modrinth_id
-    token = System.getenv("MODRINTH_TOKEN")
-    gameVersions = [minecraft_version]
-    loaders = ["fabric", "quilt"]
-    changelog = changelogText
-    versionType = release_type
-    versionName = "Create: Blazing Hot v${mod_version} for Fabric ${minecraft_version}"
-    versionNumber = version
-    uploadFile = remapJar
+    modrinth {
+        projectId = modrinth_id
+        token = System.getenv("MODRINTH_TOKEN")
+        gameVersions = [minecraft_version]
+        loaders = ["fabric", "quilt"]
+        changelog = changelogText
+        versionType = release_type
+        versionName = "Create: Blazing Hot v${mod_version} for Fabric ${minecraft_version}"
+        versionNumber = version
+        uploadFile = remapJar
 
-    dependencies {
-        required.project "create-fabric"
-        optional.project "emi"
+        dependencies {
+            required.project "create-fabric"
+            optional.project "emi"
+        }
     }
 }
 
+/*
 curseforge {
 
     project {
@@ -225,3 +225,4 @@ curseforge {
     }
     curseGradleOptions.forgeGradleIntegration = false
 }
+*/

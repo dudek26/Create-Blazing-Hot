@@ -2,19 +2,6 @@ name: Publish Release
 
 on:
   workflow_dispatch:
-    inputs:
-      platform:
-        type: choice
-        description: Platform
-        options:
-          - fabric
-      target:
-        type: choice
-        description: Target
-        options:
-          - curseforge
-          - modrinth
-          - both
 
 jobs:
   build:
