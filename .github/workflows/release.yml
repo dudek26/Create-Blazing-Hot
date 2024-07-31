@@ -8,6 +8,13 @@ on:
         description: Platform
         options:
           - fabric
+      target:
+        type: choice
+        description: Target
+        options:
+          - curseforge
+          - modrinth
+          - both
 
 jobs:
   build:

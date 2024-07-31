@@ -180,7 +180,8 @@ publishing {
 
 
 tasks.register("publishMod") {
-    dependsOn = ["modrinth", "curseforge"]
+    String target = System.getenv("TARGET");
+    dependsOn = target == "both" ? ["modrinth", "curseforge"] : target
 }
 
 String uncutChangelogText = ChangelogText.getChangelogText(rootProject).toString()
