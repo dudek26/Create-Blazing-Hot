@@ -181,7 +181,13 @@ publishing {
 
 tasks.register("publishMod") {
     String target = System.getenv("TARGET");
-    dependsOn = target == "both" ? ["modrinth", "curseforge"] : target
+    if (target == null) {
+        System.print("Target platform is null! Publishing to Modrinth...")
+        dependsOn = "modrinth"
+    }
+    if (target == "modrinth") dependsOn = "modrinth"
+    if (target == "curseforge") dependsOn = "curseforge"
+    if (target == "both") dependsOn = ["modrinth", "curseforge"]
 }
 
 String uncutChangelogText = ChangelogText.getChangelogText(rootProject).toString()
@@ -205,6 +211,7 @@ modrinth {
 }
 
 curseforge {
+
     project {
         apiKey = System.getenv("CURSEFORGE_TOKEN")
         id = curseforge_id
