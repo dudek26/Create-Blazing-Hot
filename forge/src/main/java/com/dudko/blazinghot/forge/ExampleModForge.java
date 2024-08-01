@@ -1,17 +1,22 @@
-package net.examplemod.forge;
+package com.dudko.blazinghot.forge;
 
-import net.examplemod.ExampleBlocks;
-import net.examplemod.ExampleMod;
+import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.registry.ExampleBlocks;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-@Mod(ExampleMod.MOD_ID)
+@Mod(BlazingHot.MOD_ID)
+@Mod.EventBusSubscriber
 public class ExampleModForge {
+    static IEventBus eventBus;
+
     public ExampleModForge() {
         // registrate must be given the mod event bus on forge before registration
-        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ExampleBlocks.REGISTRATE.registerEventListeners(eventBus);
-        ExampleMod.init();
+        BlazingHot.init();
     }
+
+
 }

@@ -1,32 +1,35 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "blazinghot",
   "version": "${version}",
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Create: Blazing Hot",
+  "description": "Nether- and metal-related features and QoL recipes.",
   "authors": [
-    "Me!"
+    "dudko"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://modrinth.com/mod/create-blazing-hot",
+    "sources": "https://github.com/dudek26/Create-Blazing-Hot",
+    "issues": "https://github.com/dudek26/Create-Blazing-Hot/issues"
   },
-  "license": "Insert License Here",
-  "icon": "assets/examplemod/icon.png",
+  "license": "MIT",
+  "icon": "assets/blazinghot/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.examplemod.fabric.ExampleModFabric"
+      "com.dudko.blazinghot.fabric.BlazingHotImpl"
+    ],
+    "client": [
+      "com.dudko.blazinghot.fabric.BlazingHotClientImpl"
     ]
   },
   "mixins": [
-    "examplemod.mixins.json",
-    "examplemod-common.mixins.json"
+    "blazinghot.mixins.json"
   ],
   "depends": {
-    "minecraft": "${minecraft_version}",
     "fabricloader": ">=${fabric_loader_version}",
     "fabric-api": ">=${fabric_api_version}",
-    "create": "${create_version}"
+    "create": ">=${create_version}",
+    "minecraft": "${minecraft_version}"
   }
 }

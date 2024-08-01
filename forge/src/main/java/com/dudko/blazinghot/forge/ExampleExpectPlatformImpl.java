@@ -1,4 +1,4 @@
-package net.examplemod.forge;
+package com.dudko.blazinghot.forge;
 
 public class ExampleExpectPlatformImpl {
 	public static String platformName() {

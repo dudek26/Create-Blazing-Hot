@@ -1,4 +1,4 @@
-package net.examplemod;
+package com.dudko.blazinghot;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 
@@ -10,7 +10,7 @@ public class ExampleExpectPlatform {
      * platform sub-package, with its class suffixed with {@code Impl}.
      * <p>
      * Example:
-     * Expect: net.examplemod.ExampleExpectPlatform#platformName()
+     * Expect: com.dudko.blazinghot.ExampleExpectPlatform#platformName()
      * Actual Fabric: net.examplemod.fabric.ExampleExpectPlatformImpl#platformName()
      * Actual Forge: net.examplemod.forge.ExampleExpectPlatformImpl#platformName()
      * <p>
