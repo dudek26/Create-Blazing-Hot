@@ -10,8 +10,6 @@ public class BlazingBlocks {
 
 	public static final BlockEntry<Block> EXAMPLE_BLOCK = REGISTRATE.block("example_block", Block::new).register();
 
-	public static void init() {
-		// load the class and register everything
-		BlazingHot.LOGGER.info("Registering blocks for " + BlazingHot.NAME);
+	public static void register() {
 	}
 }
