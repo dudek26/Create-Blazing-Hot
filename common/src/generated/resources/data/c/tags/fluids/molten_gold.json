@@ -1,4 +1,7 @@
 {
   "replace": false,
-  "values": []
+  "values": [
+    "blazinghot:flowing_molten_gold",
+    "blazinghot:molten_gold"
+  ]
 }

@@ -101,7 +101,8 @@ public class BlazingTags {
     }
 
     public enum Fluids {
-        BLAZE_MIXER_FUEL;
+        BLAZE_MIXER_FUEL,
+        NETHER_LAVA;
 
         public final TagKey<Fluid> tag;
         public final boolean alwaysDatagen;
