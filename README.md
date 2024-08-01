@@ -1,92 +1,74 @@
-# Create Multi-Loader Addon Template
-A template based on Architectury for creating addons for Create on Forge, Fabric, and Quilt, simultaneously.
+# Create: Blazing Hot
 
-## How does it work?
-This template is powered by the [Architectury](https://github.com/architectury) toolchain.
-Architectury allows developers to create the majority of their mod in common, loader-agnostic code that
-only touches Minecraft itself. This can be found in the [common](common) subproject. Each loader target 
-also has its own subproject: those being [forge](forge) and [fabric](fabric). (Quilt support: you 
-shouldn't need anything special and the Fabric version should work fine, but it is possible to add a 
-`quilt` subproject if needed.) These loader-specific projects bridge between their respective loaders 
-and the common code.
+Nether- and metal-related features and QoL recipes.
 
-This system can be extended to work with Create as well as plain Minecraft. The common project gives
-access to most of Create, Registrate, and Flywheel.
+## 📝 About
 
-## Limitations
-Minecraft has a lot of differences across loaders. You'll need to manage these differences using
-abstractions. Architectury does provide an [API](https://github.com/architectury/architectury-api)
-which you may use if desired, but it means you have another dependency to worry about.
+This [Create](https://modrinth.com/mod/create-fabric) addon focuses on adding new content related to Nether resources
+and existing metals, most notably their liquid forms.
 
-This also applies to Create, which underwent significant changes in porting to Fabric. This means a lot 
-of it will be different between loaders. The `common` project is only capable of referencing the code 
-on one loader (Fabric in this template), so you should be careful to not reference things that don't 
-exist on the other one. Test often, and check the code on both loaders. When you do need to use these 
-changed things, that leads us to...
+## 🔧 Features
 
-## Solutions
-There's a bunch of ways to work around the differences.
+<details>
+    <summary>New fluids</summary>
+    <p>Create: Blazing Hot adds molten variants of metals to the game. Currently, only Iron, Gold and Blaze Gold have their liquid forms, but more will be added in the future.</p>
+    <p>Blocks, ingots, sheets and nuggets can be slowly melted in superheated Mixing or in superheated Blaze Mixing</p>
+    <p>There are new <b>filling recipes</b> using Molten Gold for <b>Golden Carrots, Glistering Melons and Golden Apples.</b></p>
+    <p>Molten Blaze Gold generates <b>Netherrack</b> when touching lava.</p>
+    <p>There is also a new Lava variant: <B>Nether Lava</B>. It behaves exactly like Lava in the Nether, granting the possibility of creating faster Cobblestone generators!</p>
 
-First is Architectury API. It provides cross-loader abstractions that can be used in common code for
-a decent amount of Minecraft. However, it means you need to worry about another dependency. It also
-doesn't really help with Create.
+</details>
 
-Next is the `@ExpectPlatform` annotation. It allows the implementation of a method to be replaced
-at compile time per-loader, letting you make your own abstractions. It is part of the Architectury
-plugin and does not cause an extra dependency. However, it can only be placed on static methods. See 
-[ExampleExpectPlatform](common/src/main/java/net/examplemod/ExampleExpectPlatform.java) in common 
-for an example.
+<details>
+    <summary>Blaze Gold</summary>
+    <p>This new alloy is the main part of the mod. It is obtained by mixing <b>Molten Gold</b> and a new ingredient - <b>Nether Essence</b>. Blaze Gold is used in various recipes:</p>
+    <ul>
+        <li>Crushing Blaze Gold Rods has a chance of dropping <b>Blaze Powder</b>, allowing for easy automation of it.</li>
+        <li>Blaze Gold Rods are also used in the crafting of <b>Modern Lamps</b> - a new block to light up your builds, and <b>Blaze Arrows</b> - a new type of arrow that deals extra damage when shot in The Nether dimension!</li>
+        <li>Either Blaze Gold Nuggets or Molten Blaze Gold can be used to craft <b>Blaze Carrots</b>, which stop the player from burning on being eaten.</li>
+        <li>Molten Blaze Gold can be used to craft <b>new variants of Apples</b>, that give longer Fire Resistance effect and Strength.</li>
+    </ul>
+</details>
 
-Finally, simply have a common interface with implementation based on the loader. You might have a
-`PlatformHelper` common interface, with a static instance somewhere. On Fabric, set it to a
-`FabricPlatformHelper`, and a `ForgePlatformHelper` on Forge. The implementation is kept as a detail
-so you can use your helper from common code.
+<details>
+    <summary>Blaze Mixing</summary>
+    <p>Using Blaze Gold, you can upgrade Copper Casings to <b>Blaze Casings</b>. They can be later used to craft a new machine - the <b>Blaze Mixer</b>:</p>
+    <ul>
+        <li>When there is no fuel inside, the Blaze Mixer behaves exactly like the Mechanical Mixer.</li>
+        <li>If the mixer is fueled (by default, the fuel can be either Lava or Nether Lava) it works <b>twice as fast</b> as the Mechanical Mixer, and melting metals is five times faster.</li>
+        <li>There are also some recipes <b>exclusive to Blaze Mixer</b>, such as the Nether Lava recipe or more efficient Molten Blaze Gold and melting recipes.</li>
+    </ul>
+    <p><i>Currently, there is no support for Roughly Enough Items (REI). Use EMI or JEI if you want to view the recipes.</i></p>
+</details>
 
-## Features
-- Access to Create and all of its dependencies on both loaders
-- Mojang Mappings base, with Quilt Mappings and Parchment providing Javadoc and parameters
-- VineFlower decompiler for high quality Minecraft sources: `gradlew genSourcesWithVineflower`
-- GitHub Actions automatic build workflow
-- Machete Gradle plugin to shrink jar file sizes
-- Developer QOL: Mod Menu, LazyDFU, JEI
+<details>
+    <summary>Nether Compound and Nether Essence</summary>
+    <p><b>Nether Compound</b> can be obtained by mixing some Overworld and Nether materials together. It can be haunted into the <b>Nether Essence</b>. Currently, it's only used in the Blaze Gold recipe, but there is more content planned for these items.</p>
+</details>
 
-## Use
-Ready to get started? First you'll want to create a new repository using this template. You can do it
-through GitHub with the big green button near the top that says `Use this template`. 
+<details>
+    <summary>Food</summary>
+    <p>This mod adds <b>new Apple and Carrot variants</b>. The metal variants are crafted from Ingots and Nuggets respectively, or by <b>filling with Molten Metals</b>. Each metal has its own stats and effects.<br>Metal Apples can be later upgraded into their <b>Stellar</b> forms by deploying a <b>Nether Star</b> on them.<br>In Sequenced Assembly, Stellar Apples can be turned into their <b>Enchanted</b> forms. </p> 
+    <p>Currently, you can make Carrots and Apples out of:</p>
+    <ul>
+        <li><b>Gold</b> (like in Vanilla, but with the addition of the Stellar variant)</li>
+        <li><b>Blaze Gold</b> (focused on Damage and Fire Resistance)</li>
+        <li><b>Iron</b> (focused on Defence)</li>
+    </ul>
+    <ul>
+        <li>There is more food planned in the future for other metals.</li>
+    </ul>
+</details>
 
-Once you've got your repository set up, you'll want to change all the branding to your mod instead 
-of the template. Every `examplemod`, every placeholder. 
+There is more content planned for the future as the mod is actively being developed.
 
-You're free to change your license: CC0 lets you do whatever you want. Base Create is MIT, for reference. 
+## 🔨 Forge support and older versions
 
-Replace this README with information about your addon. Give it an icon and change the metadata in the 
-[fabric.mod.json](fabric/src/main/resources/fabric.mod.json) and the
-[mods.toml](forge/src/main/resources/META-INF/mods.toml).
+Forge support will come in the future.<br>
+Support for older Minecraft versions (before 1.20.1) is not planned.
 
-Configure your dependencies. Each subproject `build.gradle` has optional dependencies commented.
-Either remove them or uncomment them. For Fabric, set your preferred recipe viewer with 
-`fabric_recipe_viewer` in the root [gradle.properties](gradle.properties).
+[//]: # (github only part)
+## 📜 License
+Create: Blazing Hot is licensed under the MIT license. See [LICENSE](https://github.com/dudek26/Create-Blazing-Hot/blob/1.20.1/LICENSE) for more information.
 
-Remember to remove any example code you don't need anymore.
-
-Get modding!
-
-## Notes
-- Architectury does not merge jars; When you build, you get separate jars for each loader.
-  There is an independent project that can merge these into one if desired called
-  [Forgix](https://github.com/PacifistMC/Forgix).
-- The file names and versions of jars are configured in the root [build.gradle](build.gradle). Feel 
-free to change the format if desired, but make sure it follows SemVer to work well on Fabric.
-- When publishing, you should always let GitHub Actions build your release jars. These builds will
-have build number metadata, and will be compressed by the Machete plugin.
-
-## Other Templates
-- [Fabric-only template](https://github.com/Fabricators-of-Create/create-fabric-addon-template)
-- [Forge-only template](https://github.com/kotakotik22/CreateAddonTemplate)
-
-## Help
-Questions? Join us in the #devchat channel of the [Create Discord](https://discord.com/invite/hmaD7Se).
-
-## License
-
-This template is available under the CC0 license. Feel free to do as you wish with it.
+Certain sections of the code are from the Create mod, which is licensed under the MIT license. See [Create's license](https://github.com/Creators-of-Create/Create/blob/mc1.18/dev/LICENSE) for more information.
