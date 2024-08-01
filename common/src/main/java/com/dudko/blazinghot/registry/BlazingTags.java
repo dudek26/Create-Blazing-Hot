@@ -30,22 +30,6 @@ public class BlazingTags {
         return TagKey.create(registry.key(), id);
     }
 
-    public static <T> TagKey<T> commonTag(Registry<T> registry, String path) {
-        return optionalTag(registry, new ResourceLocation("c", path));
-    }
-
-    public static TagKey<Block> commonBlockTag(String path) {
-        return commonTag(BuiltInRegistries.BLOCK, path);
-    }
-
-    public static TagKey<Item> commonItemTag(String path) {
-        return commonTag(BuiltInRegistries.ITEM, path);
-    }
-
-    public static TagKey<Fluid> commonFluidTag(String path) {
-        return commonTag(BuiltInRegistries.FLUID, path);
-    }
-
     public enum NameSpace {
         MOD(BlazingHot.ID, false, true),
         COMMON("c");

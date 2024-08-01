@@ -15,7 +15,6 @@ import com.simibubi.create.foundation.data.ModelGen;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
-import io.github.fabricators_of_create.porting_lib.tags.Tags;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -33,13 +32,13 @@ public class BlazingBlocks {
             .initialProperties(() -> net.minecraft.world.level.block.Blocks.GOLD_BLOCK)
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .tag(BlockTags.NEEDS_IRON_TOOL)
-            .tag(Tags.Blocks.STORAGE_BLOCKS)
+            .tag(CommonTags.Blocks.STORAGE_BLOCKS.bothTags())
             .tag(BlockTags.BEACON_BASE_BLOCKS)
-            .tag(BlazingTags.Blocks.BLAZE_GOLD_BLOCKS.tag)
+            .tag(CommonTags.Blocks.BLAZE_GOLD_BLOCKS.bothTags())
             .item()
 //            .tab(BlazingCreativeTabs.getKey(BlazingCreativeTabs.BLAZING_BUILDING_TAB))
-            .tag(Tags.Items.STORAGE_BLOCKS)
-            .tag(BlazingTags.Items.BLAZE_GOLD_BLOCKS.tag)
+            .tag(CommonTags.Items.STORAGE_BLOCKS.bothTags())
+            .tag(CommonTags.Items.BLAZE_GOLD_BLOCKS.bothTags())
             .build()
             .register();
 
@@ -69,7 +68,7 @@ public class BlazingBlocks {
                 .initialProperties(() -> net.minecraft.world.level.block.Blocks.GLOWSTONE)
                 .properties(p -> p.mapColor(color).lightLevel(s -> s.getValue(ModernLampBlock.LIT) ? 15 : 0))
                 .tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag, BlazingTags.Blocks.MODERN_LAMPS.tag)
-                .blockstate(new ModernLampGenerator(color)::generate)
+//                .blockstate(new ModernLampGenerator(color)::generate) TODO - uses porting lib, make something new
                 .recipe((c, p) -> {
                     DyeUtil
                             .dyeingMultiple(RecipeCategory.REDSTONE, BlazingTags.Items.MODERN_LAMPS.tag, c.get(), color)
@@ -95,7 +94,7 @@ public class BlazingBlocks {
                 .initialProperties(() -> net.minecraft.world.level.block.Blocks.GLOWSTONE)
                 .properties(p -> p.mapColor(color).lightLevel(s -> s.getValue(ModernLampPanelBlock.LIT) ? 15 : 0))
                 .tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag, BlazingTags.Blocks.MODERN_LAMP_PANELS.tag)
-                .blockstate(new ModernLampPanelGenerator(color)::generate)
+//                .blockstate(new ModernLampPanelGenerator(color)::generate) TODO - uses porting lib, make something new
                 .recipe((c, p) -> {
                     ShapedRecipeBuilder
                             .shaped(RecipeCategory.REDSTONE, c.get(), 4)

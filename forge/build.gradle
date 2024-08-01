@@ -71,7 +71,7 @@ processResources {
 loom {
     forge {
         mixinConfig(
-                "examplemod-common.mixins.json",
+                "blazinghot-common.mixins.json",
                 "blazinghot.mixins.json"
         )
     }

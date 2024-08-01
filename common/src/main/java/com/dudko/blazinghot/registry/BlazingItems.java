@@ -27,7 +27,6 @@ import static com.dudko.blazinghot.content.item.BlazingFoodItem.BProperties.EXTI
 import static com.dudko.blazinghot.content.item.BlazingFoodItem.BProperties.FOIL;
 import static com.dudko.blazinghot.registry.BlazingItems.FoodItemBuilder.tickMinutes;
 import static com.dudko.blazinghot.registry.BlazingItems.FoodItemBuilder.tickSeconds;
-import static com.simibubi.create.AllTags.AllItemTags.PLATES;
 
 @SuppressWarnings({"SameParameterValue", "unused"})
 public class BlazingItems {
@@ -58,17 +57,23 @@ public class BlazingItems {
     public static final ItemEntry<Item>
             BLAZE_GOLD_INGOT =
             taggedIngredient("blaze_gold_ingot",
-                             BlazingTags.commonItemTag("blaze_gold_ingots"),
+                             CommonTags.Items.BLAZE_GOLD_INGOTS.forge,
+                             CommonTags.Items.BLAZE_GOLD_INGOTS.fabric,
                              ItemTags.BEACON_PAYMENT_ITEMS),
 
-    BLAZE_GOLD_NUGGET = taggedIngredient("blaze_gold_nugget", BlazingTags.commonItemTag("blaze_gold_nuggets")),
+    BLAZE_GOLD_NUGGET = taggedIngredient("blaze_gold_nugget", CommonTags.Items.BLAZE_GOLD_NUGGETS.bothTags()),
 
-    BLAZE_GOLD_SHEET = taggedIngredient("blaze_gold_sheet", BlazingTags.commonItemTag("blaze_gold_plates"), PLATES.tag),
+    BLAZE_GOLD_SHEET =
+            taggedIngredient("blaze_gold_sheet",
+                             CommonTags.Items.BLAZE_GOLD_PLATES.fabric,
+                             CommonTags.Items.BLAZE_GOLD_PLATES.forge,
+                             CommonTags.Items.PLATES.forge,
+                             CommonTags.Items.PLATES.fabric),
 
     BLAZE_GOLD_ROD =
             REGISTRATE
                     .item("blaze_gold_rod", Item::new)
-                    .tag(BlazingTags.commonItemTag("blaze_gold_rods"))
+                    .tag(CommonTags.Items.BLAZE_GOLD_RODS.fabric)
                     .model((c, p) -> p.handheld(c))
                     .register();
 
@@ -84,11 +89,11 @@ public class BlazingItems {
 
     public static final ItemEntry<Item>
             NETHERRACK_DUST =
-            taggedIngredient("netherrack_dust", BlazingTags.commonItemTag("netherrack_dusts")),
+            taggedIngredient("netherrack_dust", CommonTags.Items.NETHERRACK_DUSTS.bothTags()),
 
-    STONE_DUST = taggedIngredient("stone_dust", BlazingTags.commonItemTag("stone_dusts")),
+    STONE_DUST = taggedIngredient("stone_dust", CommonTags.Items.STONE_DUSTS.bothTags()),
 
-    SOUL_DUST = taggedIngredient("soul_dust", BlazingTags.commonItemTag("soul_sand_dusts"));
+    SOUL_DUST = taggedIngredient("soul_dust", CommonTags.Items.SOUL_SAND_DUSTS.bothTags());
 
     public static final ItemEntry<Item> NETHER_COMPOUND = ingredient("nether_compound"),
             NETHER_ESSENCE =
@@ -211,7 +216,7 @@ public class BlazingItems {
     }
 
     public static void setupCreativeTab() {
-        REGISTRATE.setCreativeTab(BlazingCreativeTabs.getBaseTabKey());
+//        REGISTRATE.setCreativeTab(BlazingCreativeTabs.getBaseTabKey());
     }
 
     @SuppressWarnings("unused")

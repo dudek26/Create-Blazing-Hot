@@ -19,6 +19,7 @@ public class BlazingHot {
         LOGGER.info("Create mod addon {} initializing! Create version: {}", NAME, Create.VERSION);
 
         BlazingTags.register();
+        CommonTags.register();
         BlazingCreativeTabs.register();
         BlazingBlocks.register();
         BlazingItems.register();
@@ -26,6 +27,8 @@ public class BlazingHot {
         BlazingEntityTypes.register();
         BlazingBlockEntityTypes.register();
         BlazingRecipeTypes.register();
+
+        finalizeRegistrate();
     }
 
     public static ResourceLocation asResource(String path) {
