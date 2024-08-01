@@ -16,12 +16,6 @@ import java.util.List;
 
 public class BlazingFoodItem extends Item {
 
-    public enum BProperties {
-        EXTINGUISHING,
-        FOIL,
-        DISABLE_EFFECT_TOOLTIP
-    }
-
     private boolean foil;
     private boolean extinguishing;
     private boolean effectTooltip = true;
@@ -77,5 +71,11 @@ public class BlazingFoodItem extends Item {
                 .append(MobEffectUtil.formatDuration(effect, 1))
                 .append(")")
                 .withStyle(effect.getEffect().getCategory().getTooltipFormatting()));
+    }
+
+    public enum BProperties {
+        EXTINGUISHING,
+        FOIL,
+        DISABLE_EFFECT_TOOLTIP
     }
 }

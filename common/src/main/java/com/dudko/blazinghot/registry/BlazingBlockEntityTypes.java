@@ -1,7 +1,7 @@
 package com.dudko.blazinghot.registry;
+
 import com.dudko.blazinghot.BlazingHot;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.tterrag.registrate.util.entry.BlockEntityEntry;
 
 public class BlazingBlockEntityTypes {
 
