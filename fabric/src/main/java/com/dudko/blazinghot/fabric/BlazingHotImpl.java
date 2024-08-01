@@ -1,7 +1,7 @@
 package com.dudko.blazinghot.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.registry.ExampleBlocks;
+import com.dudko.blazinghot.registry.BlazingBlocks;
 import io.github.fabricators_of_create.porting_lib.util.EnvExecutor;
 import net.fabricmc.api.ModInitializer;
 
@@ -13,7 +13,9 @@ public class BlazingHotImpl implements ModInitializer {
                 () -> () -> "{} is accessing Porting Lib on a Fabric client!",
                 () -> () -> "{} is accessing Porting Lib on a Fabric server!"
                 ), BlazingHot.NAME);
-        // on fabric, Registrates must be explicitly finalized and registered.
-        ExampleBlocks.REGISTRATE.register();
+    }
+
+    public static void finalizeRegistrate() {
+        BlazingHot.registrate().register();
     }
 }

@@ -5,8 +5,8 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.world.level.block.Block;
 
-public class ExampleBlocks {
-	public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(BlazingHot.MOD_ID);
+public class BlazingBlocks {
+	private static final CreateRegistrate REGISTRATE = BlazingHot.registrate();
 
 	public static final BlockEntry<Block> EXAMPLE_BLOCK = REGISTRATE.block("example_block", Block::new).register();
 

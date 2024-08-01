@@ -72,7 +72,7 @@ loom {
     forge {
         mixinConfig(
                 "examplemod-common.mixins.json",
-                "examplemod.mixins.json"
+                "blazinghot.mixins.json"
         )
     }
 }

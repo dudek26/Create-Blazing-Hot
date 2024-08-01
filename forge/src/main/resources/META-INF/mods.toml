@@ -1,33 +1,33 @@
 modLoader = "javafml"
 loaderVersion = "[${forge_version},)"
-#issueTrackerURL = ""
-license = "Insert License Here"
+issueTrackerURL = "https://github.com/dudek26/Create-Blazing-Hot/issues"
+license = "MIT"
 
 [[mods]]
-modId = "examplemod"
+modId = "blazinghot"
 version = "${version}"
-displayName = "Example Mod"
-authors = "Me!"
+displayName = "Create: Blazing Hot"
+authors = "dudko"
 description = '''
-This is an example description! Tell everyone what your mod is about!
+Nether- and metal-related features and QoL recipes.
 '''
 logoFile = "icon.png"
 
-[[dependencies.examplemod]]
+[[dependencies.blazinghot]]
 modId = "forge"
 mandatory = true
 versionRange = "[${forge_version},)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.examplemod]]
+[[dependencies.blazinghot]]
 modId = "minecraft"
 mandatory = true
 versionRange = "${minecraft_version}"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.examplemod]]
+[[dependencies.blazinghot]]
 modId="create"
 mandatory=true
 versionRange="${create_version}"

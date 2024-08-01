@@ -1,0 +1,18 @@
+{
+  "itemGroup.blazinghot": "Create: Blazing Hot",
+  "itemGroup.blazinghot.building": "Blazing Building Blocks",
+
+  "message.blazinghot.modern_lamp.lock": "Lamp locked.",
+  "message.blazinghot.modern_lamp.unlock": "Lamp unlocked.",
+
+  "emi.blazinghot.info.nether_lava_cobblestone": "You can build faster Cobblestone generators when using Nether Lava instead of the regular Lava.",
+  "emi.blazinghot.tooltip.blaze_mixing.fuel": "Blaze Mixer's fuel",
+  "emi.category.blazinghot.blaze_mixing": "Blaze Mixing",
+  "emi.category.blazinghot.blaze_automatic_shapeless": "Blaze Automated Shapeless Crafting",
+  "emi.category.blazinghot.blaze_automatic_brewing": "Blaze Automated Brewing",
+
+  "blazinghot.recipe.blaze_mixing": "Blaze Mixing",
+  "blazinghot.recipe.blaze_automatic_shapeless": "Blaze Automated Shapeless Crafting",
+  "blazinghot.recipe.blaze_automatic_brewing": "Blaze Automated Brewing",
+  "blazinghot.tooltip.blaze_mixing.fuel": "Blaze Mixer's fuel"
+}
