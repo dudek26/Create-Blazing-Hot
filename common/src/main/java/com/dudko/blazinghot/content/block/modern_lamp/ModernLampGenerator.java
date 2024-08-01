@@ -8,6 +8,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
+//todo - new generator as this uses Porting Lib
 public class ModernLampGenerator extends SpecialBlockStateGen {
 
     private final DyeColor color;

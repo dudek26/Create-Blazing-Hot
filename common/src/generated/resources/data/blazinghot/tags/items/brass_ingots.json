@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/brass",
+    "#c:brass_ingots"
+  ]
+}

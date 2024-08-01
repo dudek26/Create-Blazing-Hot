@@ -2,6 +2,9 @@ package com.dudko.blazinghot;
 
 import com.dudko.blazinghot.data.BlazingLangGen;
 import com.dudko.blazinghot.data.BlazingTagGen;
+import com.dudko.blazinghot.data.recipe.BlazingCraftingRecipeGen;
+import com.dudko.blazinghot.data.recipe.BlazingProcessingRecipeGen;
+import com.dudko.blazinghot.data.recipe.BlazingSequencedAssemblyRecipeGen;
 import com.dudko.blazinghot.registry.*;
 import com.simibubi.create.Create;
 import com.simibubi.create.foundation.data.CreateRegistrate;
@@ -49,7 +52,9 @@ public class BlazingHot {
         REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, BlazingTagGen::generateFluidTags);
         REGISTRATE.addDataGenerator(ProviderType.LANG, BlazingLangGen::generate);
 
-
+        pack.addProvider(BlazingSequencedAssemblyRecipeGen::new);
+        pack.addProvider(BlazingCraftingRecipeGen::new);
+        pack.addProvider(BlazingProcessingRecipeGen::registerAll);
     }
 
     @ExpectPlatform

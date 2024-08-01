@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.data;
 
 import com.dudko.blazinghot.registry.BlazingTags;
+import com.dudko.blazinghot.registry.CommonTags;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.simibubi.create.foundation.utility.FilesHelper;
@@ -15,6 +16,7 @@ public class BlazingLangGen {
         BiConsumer<String, String> langConsumer = provider::add;
 
         BlazingTags.provideLangEntries(langConsumer);
+        CommonTags.provideLangEntries(langConsumer);
         provideDefaultLang("tooltips", langConsumer);
         provideDefaultLang("interface", langConsumer);
     }

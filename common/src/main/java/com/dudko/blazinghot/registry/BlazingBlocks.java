@@ -61,6 +61,7 @@ public class BlazingBlocks {
             .properties(p -> p.mapColor(MapColor.CRIMSON_NYLIUM).sound(SoundType.NETHER_WOOD))
             .register();
 
+    /*
     public static final DyedBlockList<ModernLampBlock> MODERN_LAMP_BLOCKS = new DyedBlockList<>(color -> {
         String colorName = color.getSerializedName();
         return REGISTRATE
@@ -129,6 +130,8 @@ public class BlazingBlocks {
                 .transform(ModelGen.customItemModel("modern_lamp_panel", colorName))
                 .register();
     });
+
+     */
 
     public static void register() {
     }

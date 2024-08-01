@@ -1,0 +1,26 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "blazinghot:nether_flora"
+    },
+    {
+      "tag": "minecraft:coals"
+    },
+    {
+      "item": "minecraft:clay_ball"
+    },
+    {
+      "item": "blazinghot:netherrack_dust"
+    },
+    {
+      "item": "blazinghot:soul_dust"
+    }
+  ],
+  "results": [
+    {
+      "count": 2,
+      "item": "blazinghot:nether_compound"
+    }
+  ]
+}

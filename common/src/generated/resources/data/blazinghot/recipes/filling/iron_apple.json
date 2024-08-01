@@ -1,0 +1,17 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:apple"
+    },
+    {
+      "amount": 72000,
+      "fluidTag": "blazinghot:molten_iron"
+    }
+  ],
+  "results": [
+    {
+      "item": "blazinghot:iron_apple"
+    }
+  ]
+}

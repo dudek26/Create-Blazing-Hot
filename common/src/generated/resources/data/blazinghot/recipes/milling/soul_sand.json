@@ -1,0 +1,17 @@
+{
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "minecraft:soul_sand"
+    }
+  ],
+  "results": [
+    {
+      "item": "blazinghot:soul_dust"
+    },
+    {
+      "chance": 0.5,
+      "item": "blazinghot:soul_dust"
+    }
+  ]
+}

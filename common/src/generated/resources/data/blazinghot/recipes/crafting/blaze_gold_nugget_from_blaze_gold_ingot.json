@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "blazinghot:blaze_gold_ingot"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "blazinghot:blaze_gold_nugget"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "blazinghot:block/blaze_gold_block"
+  }
+}

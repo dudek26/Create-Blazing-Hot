@@ -241,7 +241,7 @@ public class BlazingItems {
         protected FoodItemBuilder(String name, NonNullFunction<Item.Properties, T> factory) {
             this.name = name;
             this.factory = factory;
-            this.tags = List.of(BlazingTags.Items.FOODS.tag).toArray(new TagKey[1]);
+            this.tags = List.of(CommonTags.Items.FOODS.bothTags()).toArray(new TagKey[1]);
         }
 
         protected FoodItemBuilder<T> maxStackSize(int maxStackSize) {
@@ -330,7 +330,7 @@ public class BlazingItems {
         protected ItemBuilder<T, CreateRegistrate> build() {
             ItemBuilder<T, CreateRegistrate>
                     builder =
-                    REGISTRATE.item(name, factory).properties(p -> finishProperties()).tag(BlazingTags.Items.FOODS.tag);
+                    REGISTRATE.item(name, factory).properties(p -> finishProperties()).tag(CommonTags.Items.FOODS.bothTags());
             if (tags.length > 0) builder.tag(tags);
             if (description != null)
                 builder.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, description));

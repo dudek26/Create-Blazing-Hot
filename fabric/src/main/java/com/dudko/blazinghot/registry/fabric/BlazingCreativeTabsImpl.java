@@ -62,8 +62,7 @@ public class BlazingCreativeTabsImpl {
             register("building",
                      () -> FabricItemGroup
                              .builder()
-                             .icon(() -> BlazingBlocks.MODERN_LAMP_BLOCKS
-                                     .get(DyeColor.WHITE)
+                             .icon(() -> BlazingBlocks.BLAZE_GOLD_BLOCK
                                      .asItem()
                                      .getDefaultInstance())
                              .title(Component.translatable("itemGroup.blazinghot.building"))

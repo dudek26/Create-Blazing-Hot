@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "blazinghot:item/gilded_stellar_golden_apple"
+  }
+}

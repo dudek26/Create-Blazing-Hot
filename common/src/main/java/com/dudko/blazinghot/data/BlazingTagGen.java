@@ -1,8 +1,9 @@
 package com.dudko.blazinghot.data;
 
-import com.dudko.blazinghot.registry.BlazingFluids;
 import com.dudko.blazinghot.registry.BlazingTags;
+import com.dudko.blazinghot.registry.CommonTags;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -39,12 +40,15 @@ public class BlazingTagGen {
             for (ResourceLocation loc : OPTIONAL_TAGS.get(tag))
                 appender.addOptional(loc);
         }
+        for (CommonTags.Blocks tag : CommonTags.Blocks.values()) {
+            tagAppender(prov, tag.fabric);
+            tagAppender(prov, tag.forge);
+            tagAppender(prov, tag.internal).addTag(tag.forge).addTag(tag.fabric);
+        }
     }
 
     public static void generateFluidTags(RegistrateTagsProvider<Fluid> prov) {
-        prov
-                .addTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag)
-                .add(Fluids.LAVA);
+        prov.addTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag).add(Fluids.LAVA);
 //                .add(BlazingFluids.NETHER_LAVA.getSource()); todo
 
         for (BlazingTags.Fluids tag : BlazingTags.Fluids.values()) {
@@ -52,34 +56,50 @@ public class BlazingTagGen {
                 tagAppender(prov, tag);
             }
         }
+        for (CommonTags.Fluids tag : CommonTags.Fluids.values()) {
+            tagAppender(prov, tag.fabric);
+            tagAppender(prov, tag.forge);
+            tagAppender(prov, tag.internal).addTag(tag.forge).addTag(tag.fabric);
+        }
     }
 
     public static void generateItemTags(RegistrateTagsProvider<Item> prov) {
-        prov.addTag(BlazingTags.Items.NETHER_FLORA.tag).add(Items.WARPED_FUNGUS,
-                                                            Items.CRIMSON_FUNGUS,
-                                                            Items.WARPED_ROOTS,
-                                                            Items.CRIMSON_ROOTS,
-                                                            Items.WEEPING_VINES,
-                                                            Items.TWISTING_VINES);
+        prov
+                .addTag(BlazingTags.Items.NETHER_FLORA.tag)
+                .add(Items.WARPED_FUNGUS,
+                     Items.CRIMSON_FUNGUS,
+                     Items.WARPED_ROOTS,
+                     Items.CRIMSON_ROOTS,
+                     Items.WEEPING_VINES,
+                     Items.TWISTING_VINES);
 
         for (BlazingTags.Items tag : BlazingTags.Items.values()) {
             if (tag.alwaysDatagen) tagAppender(prov, tag);
         }
+        for (CommonTags.Items tag : CommonTags.Items.values()) {
+            tagAppender(prov, tag.fabric);
+            tagAppender(prov, tag.forge);
+            tagAppender(prov, tag.internal).addTag(tag.forge).addTag(tag.fabric);
+        }
+
     }
 
     public static TagsProvider.TagAppender<Item> tagAppender(RegistrateTagsProvider<Item> prov, BlazingTags.Items tag) {
         return tagAppender(prov, tag.tag);
     }
 
-    public static TagsProvider.TagAppender<Block> tagAppender(RegistrateTagsProvider<Block> prov, BlazingTags.Blocks tag) {
+    public static TagsProvider.TagAppender<Block> tagAppender(RegistrateTagsProvider<Block> prov,
+                                                              BlazingTags.Blocks tag) {
         return tagAppender(prov, tag.tag);
     }
 
-    public static TagsProvider.TagAppender<Fluid> tagAppender(RegistrateTagsProvider<Fluid> prov, BlazingTags.Fluids tag) {
+    public static TagsProvider.TagAppender<Fluid> tagAppender(RegistrateTagsProvider<Fluid> prov,
+                                                              BlazingTags.Fluids tag) {
         return tagAppender(prov, tag.tag);
     }
 
+    @ExpectPlatform
     public static <T> TagsProvider.TagAppender<T> tagAppender(RegistrateTagsProvider<T> prov, TagKey<T> tag) {
-        return prov.addTag(tag);
+        throw new AssertionError();
     }
 }

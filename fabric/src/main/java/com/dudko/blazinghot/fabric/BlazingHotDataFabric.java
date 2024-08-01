@@ -16,9 +16,9 @@ public class BlazingHotDataFabric implements DataGeneratorEntrypoint {
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator generator) {
         ExistingFileHelper helper = ExistingFileHelper.withResourcesFromArg();
-        REGISTRATE.setupDatagen(generator.createPack(), helper);
 
-        DataGenerator.PackGenerator pack = generator.createPack();
+        FabricDataGenerator.Pack pack = generator.createPack();
+        REGISTRATE.setupDatagen(pack, helper);
         gatherData(pack);
     }
 }

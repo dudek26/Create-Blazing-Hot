@@ -1,0 +1,17 @@
+{
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "minecraft:stone"
+    }
+  ],
+  "results": [
+    {
+      "item": "blazinghot:stone_dust"
+    },
+    {
+      "chance": 0.5,
+      "item": "blazinghot:stone_dust"
+    }
+  ]
+}

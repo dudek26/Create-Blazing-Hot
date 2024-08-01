@@ -20,7 +20,6 @@ import java.util.Locale;
 import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 
-import static com.dudko.blazinghot.registry.BlazingTags.NameSpace.COMMON;
 import static com.dudko.blazinghot.registry.BlazingTags.NameSpace.MOD;
 
 @SuppressWarnings("unused")
@@ -31,8 +30,7 @@ public class BlazingTags {
     }
 
     public enum NameSpace {
-        MOD(BlazingHot.ID, false, true),
-        COMMON("c");
+        MOD(BlazingHot.ID, false, true);
 
         public final String id;
         public final boolean optionalDefault;
@@ -51,7 +49,6 @@ public class BlazingTags {
     }
 
     public enum Blocks {
-        BLAZE_GOLD_BLOCKS(COMMON),
         MODERN_LAMPS,
         MODERN_LAMP_PANELS;
 
@@ -104,10 +101,6 @@ public class BlazingTags {
     }
 
     public enum Fluids {
-        MOLTEN_BLAZE_GOLD(COMMON),
-        MOLTEN_GOLD(COMMON),
-        MOLTEN_IRON(COMMON),
-
         BLAZE_MIXER_FUEL;
 
         public final TagKey<Fluid> tag;
@@ -161,17 +154,6 @@ public class BlazingTags {
     }
 
     public enum Items {
-        BLAZE_GOLD_BLOCKS(COMMON),
-        BLAZE_GOLD_INGOTS(COMMON),
-        BLAZE_GOLD_RODS(COMMON),
-        BLAZE_GOLD_NUGGETS(COMMON),
-        BLAZE_GOLD_PLATES(COMMON),
-        MOLTEN_GOLD_BUCKETS(COMMON),
-        MOLTEN_BLAZE_GOLD_BUCKETS(COMMON),
-        NETHERRACK_DUSTS(COMMON),
-        SOUL_SAND_DUSTS(COMMON),
-        FOODS(COMMON),
-
         MODERN_LAMPS,
         MODERN_LAMP_PANELS,
         NETHER_FLORA;
@@ -239,7 +221,7 @@ public class BlazingTags {
         }
     }
 
-    private static String titleCaseConversion(String inputString) {
+    protected static String titleCaseConversion(String inputString) {
         if (StringUtils.isBlank(inputString)) {
             return "";
         }

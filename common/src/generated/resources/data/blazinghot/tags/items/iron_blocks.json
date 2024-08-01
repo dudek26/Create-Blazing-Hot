@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:storage_blocks/iron",
+    "#c:iron_blocks"
+  ]
+}

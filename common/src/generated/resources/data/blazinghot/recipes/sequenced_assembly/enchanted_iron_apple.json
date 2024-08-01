@@ -1,0 +1,63 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "blazinghot:stellar_iron_apple"
+  },
+  "loops": 4,
+  "results": [
+    {
+      "item": "blazinghot:enchanted_iron_apple"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "blazinghot:heavy_stellar_iron_apple"
+        },
+        {
+          "amount": 81000,
+          "fluidTag": "blazinghot:molten_iron"
+        }
+      ],
+      "results": [
+        {
+          "item": "blazinghot:heavy_stellar_iron_apple"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "blazinghot:heavy_stellar_iron_apple"
+        },
+        {
+          "item": "minecraft:diamond"
+        }
+      ],
+      "results": [
+        {
+          "item": "blazinghot:heavy_stellar_iron_apple"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "blazinghot:heavy_stellar_iron_apple"
+        }
+      ],
+      "results": [
+        {
+          "item": "blazinghot:heavy_stellar_iron_apple"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "blazinghot:heavy_stellar_iron_apple"
+  }
+}
