@@ -1,9 +1,13 @@
 package com.dudko.blazinghot;
 
+import com.dudko.blazinghot.data.BlazingLangGen;
+import com.dudko.blazinghot.data.BlazingTagGen;
 import com.dudko.blazinghot.registry.*;
 import com.simibubi.create.Create;
 import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.tterrag.registrate.providers.ProviderType;
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +41,15 @@ public class BlazingHot {
 
     public static CreateRegistrate registrate() {
         return REGISTRATE;
+    }
+
+    public static void gatherData(DataGenerator.PackGenerator pack) {
+        REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, BlazingTagGen::generateBlockTags);
+        REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, BlazingTagGen::generateItemTags);
+        REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, BlazingTagGen::generateFluidTags);
+        REGISTRATE.addDataGenerator(ProviderType.LANG, BlazingLangGen::generate);
+
+
     }
 
     @ExpectPlatform
