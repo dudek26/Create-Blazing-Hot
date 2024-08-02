@@ -35,7 +35,7 @@ public enum BlazingRecipeTypes implements IRecipeTypeInfo {
         type = () -> typeObject;
     }
 
-//    BlazingRecipeTypes(BlazeMixingRecipeBuilder.BlazeMixingRecipeFactory processingFactory) {
+//    BlazingRecipeTypes(BlazeMixingRecipeBuilder.BlazeMixingRecipeFactory processingFactory) { todo
 //        this(() -> new BlazeMixingRecipeSerializer(processingFactory));
 //    }
 

@@ -6,7 +6,8 @@
   "client": [
   ],
   "mixins": [
-    "EntityMixin"
+    "EntityMixin",
+    "ProcessingRecipeSerializerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

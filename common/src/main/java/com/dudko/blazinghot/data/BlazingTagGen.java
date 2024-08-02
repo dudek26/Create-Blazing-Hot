@@ -1,5 +1,7 @@
 package com.dudko.blazinghot.data;
 
+import com.dudko.blazinghot.registry.BlazingFluids;
+import com.dudko.blazinghot.registry.BlazingFluids.MultiloaderFluids;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
@@ -48,8 +50,10 @@ public class BlazingTagGen {
     }
 
     public static void generateFluidTags(RegistrateTagsProvider<Fluid> prov) {
-        prov.addTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag).add(Fluids.LAVA);
-//                .add(BlazingFluids.NETHER_LAVA.getSource()); todo
+        prov
+                .addTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag)
+                .add(Fluids.LAVA)
+                .add(BlazingFluids.getEntry(MultiloaderFluids.NETHER_LAVA).getSource());
 
         for (BlazingTags.Fluids tag : BlazingTags.Fluids.values()) {
             if (tag.alwaysDatagen) {
@@ -67,12 +71,12 @@ public class BlazingTagGen {
         prov
                 .addTag(BlazingTags.Items.NETHER_FLORA.tag)
                 .add(Items.WARPED_FUNGUS,
-                     Items.CRIMSON_FUNGUS,
-                     Items.WARPED_ROOTS,
-                     Items.CRIMSON_ROOTS,
-                     Items.WEEPING_VINES,
-                     Items.TWISTING_VINES,
-                     Items.NETHER_SPROUTS);
+                        Items.CRIMSON_FUNGUS,
+                        Items.WARPED_ROOTS,
+                        Items.CRIMSON_ROOTS,
+                        Items.WEEPING_VINES,
+                        Items.TWISTING_VINES,
+                        Items.NETHER_SPROUTS);
 
         for (BlazingTags.Items tag : BlazingTags.Items.values()) {
             if (tag.alwaysDatagen) tagAppender(prov, tag);

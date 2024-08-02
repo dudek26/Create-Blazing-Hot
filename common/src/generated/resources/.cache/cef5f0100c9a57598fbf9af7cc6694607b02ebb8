@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-01T22:45:52.2188965	Create: Blazing Hot/Blazing Hot Processing Recipes
+// 1.20.1	2024-08-02T17:01:00.7834207	Create: Blazing Hot/Blazing Hot Processing Recipes
 6a082eaaf268d3390d9fe59b134343c71ac807df data\blazinghot\recipes\filling\iron_apple.json
 43f13a0d9b8fdf784a61a209595719f4c4909a4d data\blazinghot\recipes\filling\blaze_apple.json
 dfa1800ae40059ae5ba1930163ac33ede28b8c89 data\blazinghot\recipes\crushing\blaze_gold_rod.json
@@ -12,6 +12,7 @@ f7b406d5d60e852d7a2181076250ec32476ea20a data\blazinghot\recipes\milling\soul_sa
 bfbf229fd5f14cae4d3640a113e54bc306ea25ca data\blazinghot\recipes\deploying\stellar_blaze_apple.json
 b34bcbd3a9ad0ba20218aa076f505206023af14c data\blazinghot\recipes\mixing\nether_compound.json
 099e640ff17ab988309b87f6658cf2862d37b4c9 data\blazinghot\recipes\mixing\netherrack_dust.json
+1a2c60c1ad4fad63a1e1d551987a5508df8c1045 data\blazinghot\recipes\mixing\molten_blaze_gold.json
 0a4b07d9a0e611ea6df494cdbae8ed3d3fc50b03 data\blazinghot\recipes\crushing\soul_sand.json
 af04a9be16ce8f222ae67527b127ac1f59a05f74 data\blazinghot\recipes\filling\golden_carrot.json
 7c44cef22d6962f81b9b0d1bad75da317f7e6bc9 data\blazinghot\recipes\haunting\nether_compound.json
