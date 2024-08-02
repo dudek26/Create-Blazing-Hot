@@ -71,7 +71,8 @@ public class BlazingTagGen {
                      Items.WARPED_ROOTS,
                      Items.CRIMSON_ROOTS,
                      Items.WEEPING_VINES,
-                     Items.TWISTING_VINES);
+                     Items.TWISTING_VINES,
+                     Items.NETHER_SPROUTS);
 
         for (BlazingTags.Items tag : BlazingTags.Items.values()) {
             if (tag.alwaysDatagen) tagAppender(prov, tag);
@@ -88,13 +89,11 @@ public class BlazingTagGen {
         return tagAppender(prov, tag.tag);
     }
 
-    public static TagsProvider.TagAppender<Block> tagAppender(RegistrateTagsProvider<Block> prov,
-                                                              BlazingTags.Blocks tag) {
+    public static TagsProvider.TagAppender<Block> tagAppender(RegistrateTagsProvider<Block> prov, BlazingTags.Blocks tag) {
         return tagAppender(prov, tag.tag);
     }
 
-    public static TagsProvider.TagAppender<Fluid> tagAppender(RegistrateTagsProvider<Fluid> prov,
-                                                              BlazingTags.Fluids tag) {
+    public static TagsProvider.TagAppender<Fluid> tagAppender(RegistrateTagsProvider<Fluid> prov, BlazingTags.Fluids tag) {
         return tagAppender(prov, tag.tag);
     }
 
