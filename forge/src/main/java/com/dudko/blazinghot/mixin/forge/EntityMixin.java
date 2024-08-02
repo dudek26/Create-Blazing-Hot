@@ -1,6 +1,6 @@
 package com.dudko.blazinghot.mixin.forge;
 
-import com.dudko.blazinghot.registry.BlazingFluids;
+import com.dudko.blazinghot.registry.forge.BlazingFluidsImpl;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import net.minecraft.world.entity.Entity;
@@ -23,15 +23,15 @@ public class EntityMixin {
 
     @Unique
     private boolean blazinghot$isInBurningFluid() {
-        return !firstTick && blazinghot$BURNING_FLUIDS.stream().anyMatch(f -> forgeFluidTypeHeight.getDouble(f) > 0.0);
+        List<FluidType>
+                burningFluids =
+                List.of(BlazingFluidsImpl.MOLTEN_BLAZE_GOLD.getType(),
+                        BlazingFluidsImpl.NETHER_LAVA.getType(),
+                        BlazingFluidsImpl.MOLTEN_IRON.getType(),
+                        BlazingFluidsImpl.MOLTEN_GOLD.getType());
+        return !firstTick && burningFluids.stream().anyMatch(f -> forgeFluidTypeHeight.getDouble(f) > 0.0);
     }
 
-    @Unique
-    private final List<FluidType> blazinghot$BURNING_FLUIDS =
-            List.of(BlazingFluids.MOLTEN_BLAZE_GOLD.getType(),
-                    BlazingFluids.MOLTEN_GOLD.getType(),
-                    BlazingFluids.MOLTEN_IRON.getType(),
-                    BlazingFluids.NETHER_LAVA.getType());
 
     @ModifyReturnValue(method = "isInLava", at = @At("RETURN"))
     public boolean blazinghot$isInLavaInjector(boolean original) {

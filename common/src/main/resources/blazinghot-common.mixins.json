@@ -4,9 +4,9 @@
   "package": "com.dudko.blazinghot.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "MixinTitleScreen"
   ],
   "mixins": [
+    "ItemMixin"
   ],
   "injectors": {
     "defaultRequire": 1

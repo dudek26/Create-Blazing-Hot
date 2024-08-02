@@ -2,6 +2,7 @@ package com.dudko.blazinghot.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.registry.BlazingBlocks;
+import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
 import io.github.fabricators_of_create.porting_lib.util.EnvExecutor;
 import net.fabricmc.api.ModInitializer;
 
@@ -17,5 +18,7 @@ public class BlazingHotImpl implements ModInitializer {
 
     public static void finalizeRegistrate() {
         BlazingHot.registrate().register();
+
+        BlazingFluidsImpl.registerFluidInteractions();
     }
 }

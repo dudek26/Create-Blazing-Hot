@@ -9,31 +9,29 @@ public class BlazingFluids {
 
     private static final CreateRegistrate REGISTRATE = BlazingHot.registrate();
 
-    public static final FluidEntry<?>
-
-            MOLTEN_GOLD = createFromLava(REGISTRATE, "molten_gold"),
-            MOLTEN_BLAZE_GOLD =
-                    createFromLava(REGISTRATE, "molten_blaze_gold"),
-            MOLTEN_IRON =
-                    createFromLava(REGISTRATE, "molten_iron"),
-            NETHER_LAVA =
-                    createFromLava(REGISTRATE, "nether_lava", 10, 1);
-
     public static void register() {
+        platformRegister();
     }
 
     @ExpectPlatform
-    public static FluidEntry<?> createFromLava(CreateRegistrate registrate, String name, int tickRate, int decreaseRate) {
+    public static void platformRegister() {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static FluidEntry<?> createFromLava(CreateRegistrate registrate, String name, int tickRate) {
+    public static void registerFluidInteractions() {
         throw new AssertionError();
     }
 
+    public enum MultiloaderFluids {
+        MOLTEN_GOLD,
+        MOLTEN_BLAZE_GOLD,
+        MOLTEN_IRON,
+        NETHER_LAVA;
+    }
+
     @ExpectPlatform
-    public static FluidEntry<?> createFromLava(CreateRegistrate registrate, String name) {
+    public static FluidEntry<?> getEntry(MultiloaderFluids fluid) {
         throw new AssertionError();
     }
 

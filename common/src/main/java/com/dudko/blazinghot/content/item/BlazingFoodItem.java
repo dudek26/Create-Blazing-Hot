@@ -14,6 +14,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+import static com.dudko.blazinghot.util.TooltipUtil.addEffectTooltip;
+
 public class BlazingFoodItem extends Item {
 
     private boolean foil;
@@ -58,19 +60,6 @@ public class BlazingFoodItem extends Item {
                     .forEach(mobEffectInstance -> addEffectTooltip(lines, mobEffectInstance));
         }
         super.appendHoverText(stack, level, lines, isAdvanced);
-    }
-
-    private void addEffectTooltip(List<Component> lines, MobEffectInstance effect) {
-        Component amplifier = effect.getAmplifier() == 0 ? Component.empty() : Component.translatable("potion.potency."
-                + effect.getAmplifier()).append(" ");
-        lines.add(Component
-                .translatable(effect.getDescriptionId())
-                .append(" ")
-                .append(amplifier)
-                .append("(")
-                .append(MobEffectUtil.formatDuration(effect, 1))
-                .append(")")
-                .withStyle(effect.getEffect().getCategory().getTooltipFormatting()));
     }
 
     public enum BProperties {
