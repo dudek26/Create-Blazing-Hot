@@ -1,4 +1,4 @@
-package com.dudko.blazinghot.mixin;
+package com.dudko.blazinghot.mixin.fabric;
 
 import com.dudko.blazinghot.data.recipe.IProcessingRecipe;
 import com.dudko.blazinghot.data.recipe.IProcessingRecipeBuilder;
@@ -8,7 +8,6 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,0 +1,16 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "blazinghot:iron_ingots"
+    }
+  ],
+  "processingTime": 2500,
+  "results": [
+    {
+      "amount": 9000,
+      "fluid": "blazinghot:molten_iron"
+    }
+  ]
+}

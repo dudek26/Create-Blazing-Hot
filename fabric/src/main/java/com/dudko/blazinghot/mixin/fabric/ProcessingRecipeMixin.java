@@ -1,4 +1,4 @@
-package com.dudko.blazinghot.mixin;
+package com.dudko.blazinghot.mixin.fabric;
 
 import com.dudko.blazinghot.data.recipe.IProcessingRecipe;
 import com.dudko.blazinghot.data.recipe.IProcessingRecipeParams;

@@ -239,12 +239,10 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
         else if (recipe instanceof MixingRecipe) {
             assert level != null;
             RecipeManager manager = level.getRecipeManager();
-            /* todo
             List<BlazeMixingRecipe> bmRecipes = manager.getAllRecipesFor(BlazingRecipeTypes.BLAZE_MIXING.getType());
             for (BlazeMixingRecipe bmRecipe : bmRecipes) {
                 if (doInputsMatch(bmRecipe, recipe)) return false;
             }
-             */
         }
 
         return BasinRecipe.match(basin.get(), recipe);

@@ -201,8 +201,8 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
                 && AllConfigs.server().recipes.allowShapelessInMixer.get()
                 && r.getIngredients().size() > 1
                 && !MechanicalPressBlockEntity.canCompress(r)) && !AllRecipeTypes.shouldIgnoreInAutomation(r)
-                || r.getType() == AllRecipeTypes.MIXING.getType());
-//                || r.getType() == BlazingRecipeTypes.BLAZE_MIXING.getType(); todo
+                || r.getType() == AllRecipeTypes.MIXING.getType())
+                || r.getType() == BlazingRecipeTypes.BLAZE_MIXING.getType();
     }
 
     @Override

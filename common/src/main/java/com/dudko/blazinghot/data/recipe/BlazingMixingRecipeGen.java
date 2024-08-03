@@ -58,12 +58,9 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
                             .output(BlazingFluids.getEntry(MultiloaderFluids.MOLTEN_BLAZE_GOLD).getSource(),
                                     INGOT / 2));
 
-    /*
-    List<GeneratedRecipe> GOLD_MELTING = meltingAll(Meltables.GOLD, BlazingFluids.MOLTEN_GOLD.get());
-    List<GeneratedRecipe> IRON_MELTING = meltingAll(Meltables.IRON, BlazingFluids.MOLTEN_IRON.get());
-    List<GeneratedRecipe> BLAZE_GOLD_MELTING = meltingAll(Meltables.BLAZE_GOLD, BlazingFluids.MOLTEN_BLAZE_GOLD.get());
-    todo
-     */
+    List<GeneratedRecipe> GOLD_MELTING = meltingAll(Meltables.GOLD, MultiloaderFluids.MOLTEN_GOLD.get());
+    List<GeneratedRecipe> IRON_MELTING = meltingAll(Meltables.IRON, MultiloaderFluids.MOLTEN_IRON.get());
+    List<GeneratedRecipe> BLAZE_GOLD_MELTING = meltingAll(Meltables.BLAZE_GOLD, MultiloaderFluids.MOLTEN_BLAZE_GOLD.get());
 
     @Override
     protected IRecipeTypeInfo getRecipeType() {
@@ -80,7 +77,6 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
                         .output(result, amount));
     }
 
-    /* todo
     private List<GeneratedRecipe> meltingAll(Meltables material, Fluid result) {
         List<GeneratedRecipe> recipes = new ArrayList<>();
         for (Forms form : Forms.values()) {
@@ -88,7 +84,7 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
             recipes.add(melting(form.tag(material), result, form.amount, form.meltingTime));
         }
         return recipes;
-    }*/
+    }
 
 
     private static <T extends ProcessingRecipe<?>> ProcessingRecipeBuilder<T> requireMultiple(ProcessingRecipeBuilder<T> builder, Ingredient ingredient, int count) {

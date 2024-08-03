@@ -1,6 +1,5 @@
-package com.dudko.blazinghot.mixin;
+package com.dudko.blazinghot.mixin.fabric;
 
-import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.dudko.blazinghot.data.recipe.IProcessingRecipeBuilder;
 import com.dudko.blazinghot.data.recipe.IProcessingRecipeParams;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;

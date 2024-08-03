@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.registry;
 
 import com.dudko.blazinghot.BlazingHot;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -14,6 +15,27 @@ import static com.dudko.blazinghot.registry.BlazingTags.titleCaseConversion;
 
 @SuppressWarnings("unchecked")
 public class CommonTags {
+
+    public static <T> TagKey<T> optionalTag(Registry<T> registry,
+                                            ResourceLocation id) {
+        return TagKey.create(registry.key(), id);
+    }
+
+    public static <T> TagKey<T> internalTagOf(Registry<T> registry, String path) {
+        return optionalTag(registry, new ResourceLocation(BlazingHot.ID, path));
+    }
+
+    public static TagKey<Block> internalBlockTagOf(String path) {
+        return internalTagOf(BuiltInRegistries.BLOCK, path);
+    }
+
+    public static TagKey<Item> internalItemTagOf(String path) {
+        return internalTagOf(BuiltInRegistries.ITEM, path);
+    }
+
+    public static TagKey<Fluid> internalFluidTagOf(String path) {
+        return internalTagOf(BuiltInRegistries.FLUID, path);
+    }
 
     public enum Blocks {
         STORAGE_BLOCKS("storage_blocks"),

@@ -1,7 +1,10 @@
 package com.dudko.blazinghot.data.recipe;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.dudko.blazinghot.registry.BlazingTags;
+import com.dudko.blazinghot.registry.CommonTags;
+import com.dudko.blazinghot.util.FluidUtil;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
@@ -35,12 +38,11 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
     protected static final long NUGGET = FluidConstants.NUGGET;
     protected static final long BOTTLE = FluidConstants.BOTTLE;
 
-    /* todo
     protected enum Forms {
-        INGOT(BlazingProcessingRecipeGen.INGOT, "ingots", 500),
-        NUGGET(BlazingProcessingRecipeGen.NUGGET, "nuggets", 65),
-        BLOCK(BlazingProcessingRecipeGen.BUCKET, "blocks", 3200),
-        SHEET(BlazingProcessingRecipeGen.INGOT, "plates", 500);
+        INGOT(FluidUtil.INGOT, "ingots", 500),
+        NUGGET(FluidUtil.NUGGET, "nuggets", 65),
+        BLOCK(FluidUtil.BUCKET, "blocks", 3200),
+        SHEET(FluidUtil.INGOT, "plates", 500);
 
         public final long amount;
         public final String tagSuffix;
@@ -59,7 +61,7 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
         }
 
         public TagKey<Item> tag(String material) {
-            return BlazingTags.commonItemTag(material + "_" + tagSuffix);
+            return CommonTags.internalItemTagOf(material + "_" + tagSuffix);
         }
 
         public TagKey<Item> tag(Meltables meltable) {
@@ -67,7 +69,6 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
         }
 
     }
-     */
 
     protected enum Meltables {
         IRON("iron"),
@@ -96,6 +97,7 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
         GENERATORS.add(new BlazingFillingRecipeGen(output));
         GENERATORS.add(new BlazingHauntingRecipeGen(output));
         GENERATORS.add(new BlazingItemApplicationRecipeGen(output));
+        GENERATORS.add(new BlazeMixingRecipeGen(output));
 
         return new DataProvider() {
 

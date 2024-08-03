@@ -2,6 +2,8 @@ package com.dudko.blazinghot.registry;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.foundation.utility.Lang;
 import net.minecraft.core.Registry;
@@ -18,7 +20,7 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 public enum BlazingRecipeTypes implements IRecipeTypeInfo {
-//    BLAZE_MIXING(BlazeMixingRecipe::new)
+    BLAZE_MIXING(BlazeMixingRecipe::new)
     ;
 
     private final ResourceLocation id;
@@ -36,9 +38,9 @@ public enum BlazingRecipeTypes implements IRecipeTypeInfo {
         type = () -> typeObject;
     }
 
-//    BlazingRecipeTypes(BlazeMixingRecipeBuilder.BlazeMixingRecipeFactory processingFactory) { todo
-//        this(() -> new BlazeMixingRecipeSerializer(processingFactory));
-//    }
+    BlazingRecipeTypes(ProcessingRecipeBuilder.ProcessingRecipeFactory<?> processingFactory) {
+        this(() -> new ProcessingRecipeSerializer<>(processingFactory));
+    }
 
     public static <T extends Recipe<?>> RecipeType<T> simpleType(ResourceLocation id) {
         String stringId = id.toString();

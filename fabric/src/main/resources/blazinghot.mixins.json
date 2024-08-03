@@ -6,6 +6,10 @@
   "client": [
   ],
   "mixins": [
+    "ProcessingRecipeBuilderMixin",
+    "ProcessingRecipeMixin",
+    "ProcessingRecipeParamsMixin",
+    "ProcessingRecipeSerializerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

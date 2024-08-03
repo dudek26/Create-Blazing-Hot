@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-03T15:49:42.2838703	Create: Blazing Hot/Registrate Provider for blazinghot [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2024-08-03T20:04:05.9340249	Create: Blazing Hot/Registrate Provider for blazinghot [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\blazinghot\tags\items\modern_lamp_panels.json
 6714b522370fefa1369c85eeb1d55d20e7ff01c1 data\blazinghot\tags\items\blaze_gold_blocks.json
 2c1c204ce899f7d8afaae5f2ad8f80cd2ea53daf data\forge\tags\blocks\storage_blocks\blaze_gold.json
@@ -93,8 +93,8 @@ e8dabbff8a43c712de93f4ac7b7ed051121703d2 assets\blazinghot\models\item\soul_dust
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\c\tags\items\iron_nuggets.json
 76de634a6d28e84bebc70c244502ca8299ecdd13 assets\blazinghot\models\item\stellar_iron_apple.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\forge\tags\items\ingots\zinc.json
-9a427c5eacbf8f3d8e25449b212ed78481f5c30d assets\blazinghot\models\item\heavy_stellar_iron_apple.json
 a280b7238012b1d028d2d67dd09bc5d6c59a40ff assets\blazinghot\models\item\blaze_arrow.json
+9a427c5eacbf8f3d8e25449b212ed78481f5c30d assets\blazinghot\models\item\heavy_stellar_iron_apple.json
 be575f6df2bee12b490a13a1451364ee38086d71 assets\blazinghot\models\item\burning_stellar_blaze_apple.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\blazinghot\tags\blocks\modern_lamp_panels.json
 65f47c24863f5958865568093030d02112457111 assets\blazinghot\blockstates\molten_gold.json
@@ -153,8 +153,8 @@ fa7505e8a7e0f70d39707be36843002b90faef5c assets\blazinghot\models\item\blaze_gol
 c4d101deca17704482f454ac5f68c4e2f6d4dfdc assets\blazinghot\models\item\blaze_casing.json
 2c1c204ce899f7d8afaae5f2ad8f80cd2ea53daf data\forge\tags\items\storage_blocks.json
 e9faf984cd05c06b895d5f50722a634aed1145a0 data\c\tags\items\stone_dusts.json
-d8b8b261a28f6bedab3e2221044f42ba04153b32 data\blazinghot\tags\fluids\blaze_mixer_fuel.json
 20c22f13a49ef46ecfd0a85f0b9f54895cf97d8f data\minecraft\tags\blocks\mineable\axe.json
+d8b8b261a28f6bedab3e2221044f42ba04153b32 data\blazinghot\tags\fluids\blaze_mixer_fuel.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\forge\tags\items\ingots\copper.json
 df3f808c6018741801abe0f403118cc3e09c7403 data\blazinghot\tags\items\iron_nuggets.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\c\tags\items\zinc_ingots.json
