@@ -8,6 +8,10 @@ import com.dudko.blazinghot.data.recipe.BlazingSequencedAssemblyRecipeGen;
 import com.dudko.blazinghot.registry.*;
 import com.simibubi.create.Create;
 import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.simibubi.create.foundation.item.ItemDescription;
+import com.simibubi.create.foundation.item.KineticStats;
+import com.simibubi.create.foundation.item.TooltipHelper;
+import com.simibubi.create.foundation.item.TooltipModifier;
 import com.tterrag.registrate.providers.ProviderType;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.data.DataGenerator;
@@ -21,6 +25,11 @@ public class BlazingHot {
     public static final Logger LOGGER = LoggerFactory.getLogger(NAME);
 
     private static final CreateRegistrate REGISTRATE = CreateRegistrate.create(BlazingHot.ID);
+
+    static {
+        REGISTRATE.setTooltipModifierFactory(item -> new ItemDescription.Modifier(item,
+                TooltipHelper.Palette.STANDARD_CREATE).andThen(TooltipModifier.mapNull(KineticStats.create(item))));
+    }
 
     public static void init() {
         LOGGER.info("Create mod addon {} initializing! Create version: {}", NAME, Create.VERSION);
