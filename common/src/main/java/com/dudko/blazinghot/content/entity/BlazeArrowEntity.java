@@ -40,10 +40,6 @@ public class BlazeArrowEntity extends AbstractArrow {
 
     }
 
-    public static EntityType.Builder<?> build(EntityType.Builder<?> builder) {
-        return builder.sized(0.25f, 0.25f);
-    }
-
     @ExpectPlatform
     public static BlazeArrowEntity create(EntityType<? extends AbstractArrow> entityType, LivingEntity shooter, Level level, Item referenceItem) {
         throw new AssertionError();
