@@ -147,7 +147,9 @@ public class CommonTags {
     public enum Fluids {
         MOLTEN_GOLD("molten_gold"),
         MOLTEN_BLAZE_GOLD("molten_blaze_gold"),
-        MOLTEN_IRON("molten_iron");
+        MOLTEN_IRON("molten_iron"),
+
+        NETHER_LAVA("nether_lava");
 
         public final TagKey<Fluid> internal;
         public final TagKey<Fluid> forge;

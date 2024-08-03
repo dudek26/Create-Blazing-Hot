@@ -18,7 +18,7 @@ public class EntityMixin {
 
     @Shadow
     protected boolean firstTick;
-    @Shadow
+    @Shadow(remap = false)
     protected Object2DoubleMap<FluidType> forgeFluidTypeHeight;
 
     @Unique

@@ -7,10 +7,8 @@
   ],
   "mixins": [
     "ItemMixin",
-    "ProcessingRecipeParamsMixin",
-    "ProcessingRecipeBuilderMixin",
-    "ProcessingRecipeMixin",
-    "ProcessingRecipeSerializerMixin"
+    "MechanicalMixerBlockEntityMixin",
+    "accessor.BasinOperatingBlockEntityAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

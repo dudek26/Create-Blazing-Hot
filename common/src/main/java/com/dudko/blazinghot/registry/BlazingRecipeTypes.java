@@ -6,6 +6,7 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.foundation.utility.Lang;
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -32,9 +33,9 @@ public enum BlazingRecipeTypes implements IRecipeTypeInfo {
     BlazingRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier) {
         String name = Lang.asId(name());
         id = BlazingHot.asResource(name);
-        serializerObject = Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, id, serializerSupplier.get());
+        serializerObject = Registry.register(getSerializerRegistry(), id, serializerSupplier.get());
         typeObject = simpleType(id);
-        Registry.register(BuiltInRegistries.RECIPE_TYPE, id, typeObject);
+        Registry.register(getTypeRegistry(), id, typeObject);
         type = () -> typeObject;
     }
 
@@ -50,6 +51,18 @@ public enum BlazingRecipeTypes implements IRecipeTypeInfo {
                 return stringId;
             }
         };
+    }
+
+
+    // TODO - replace this when porting to NeoForge in 1.21
+    @ExpectPlatform
+    public static Registry<RecipeSerializer<?>> getSerializerRegistry() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Registry<RecipeType<?>> getTypeRegistry() {
+        throw new AssertionError();
     }
 
     public static void register() {

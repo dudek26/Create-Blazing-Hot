@@ -9,18 +9,6 @@ architectury {
 
 loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath
-
-    runs {
-        create("datagen") {
-            client()
-
-            name "Fabric Datagen"
-            vmArg("-Dfabric-api.datagen")
-            vmArg("-Dfabric-api.datagen.output-dir=${project.rootProject.file("common/src/generated/resources")}")
-            vmArg("-Dfabric-api.datagen.modid=blazinghot")
-            vmArg("-Dporting_lib.datagen.existing_resources=${project.rootProject.file("common/src/main/resources")}")
-        }
-    }
 }
 
 configurations {

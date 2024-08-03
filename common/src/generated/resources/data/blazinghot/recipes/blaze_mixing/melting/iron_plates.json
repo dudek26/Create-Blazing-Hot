@@ -1,6 +1,6 @@
 {
   "type": "blazinghot:blaze_mixing",
-  "fuel": {
+  "blazinghot:fuel": {
     "amount": 10125,
     "fluidTag": "blazinghot:blaze_mixer_fuel"
   },

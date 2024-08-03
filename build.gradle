@@ -15,6 +15,7 @@ subprojects {
         silentMojangMappingsLicense()
     }
 
+
     repositories {
         mavenCentral()
         maven { url = "https://maven.shedaniel.me/" } // Cloth Config, REI
@@ -76,4 +77,5 @@ allprojects {
         // disable machete locally for faster builds
         enabled = buildNumber != null
     }
+
 }

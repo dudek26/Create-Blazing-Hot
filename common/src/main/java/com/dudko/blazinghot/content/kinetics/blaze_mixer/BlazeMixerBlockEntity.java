@@ -59,7 +59,6 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
     public boolean running;
     public boolean fueled;
     public boolean blazeMixing;
-    public long fuelCost;
 
     protected SmartFluidTankBehaviour tank;
 
@@ -143,14 +142,6 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
     }
 
     public abstract void updateFueled();
-
-    public abstract boolean hasFuel(double amount);
-
-    public abstract boolean hasFuel(TagKey<Fluid> tag, double amount);
-
-    public abstract boolean hasFuel(FluidIngredient fluidIngredient);
-
-    public abstract long fuelAmount();
 
     public abstract void renderFuelParticles();
 

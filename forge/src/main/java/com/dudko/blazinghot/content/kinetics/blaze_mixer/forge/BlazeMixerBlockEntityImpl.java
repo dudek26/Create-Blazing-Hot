@@ -1,4 +1,4 @@
-package com.dudko.blazinghot.content.kinetics.blaze_mixer.fabric;
+package com.dudko.blazinghot.content.kinetics.blaze_mixer.forge;
 
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
@@ -18,10 +18,6 @@ import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.utility.Couple;
 import com.simibubi.create.foundation.utility.VecHelper;
-import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
-import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.SidedStorageBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ItemParticleOption;
@@ -40,16 +36,22 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
 
-@SuppressWarnings("UnstableApiUsage")
-public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements SidedStorageBlockEntity {
+import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe.durationToFuelCost;
+import static com.dudko.blazinghot.util.FluidUtil.platformedAmount;
 
-    public long fuelCost;
+@SuppressWarnings("UnstableApiUsage")
+public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
+
+    public int fuelCost;
 
     public BlazeMixerBlockEntityImpl(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -57,7 +59,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-        tank = SmartFluidTankBehaviour.single(this, FluidUtil.platformedAmount(FluidUtil.BUCKET));
+        tank = SmartFluidTankBehaviour.single(this, (int) platformedAmount(FluidUtil.BUCKET));
         tank.whenFluidUpdates(() -> {
             if (getBasin().isPresent()) getBasin().get().notifyChangeOfContents();
         });
@@ -69,7 +71,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
 
     @NotNull
     public FluidStack getFluidStack() {
-        return tank.getPrimaryTank().getTank().getFluid();
+        return tank.getPrimaryHandler().getFluid();
     }
 
     public void updateFueled() {
@@ -78,12 +80,12 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
         fueled = fluidState.is(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag) && fuelAmount() > 0;
     }
 
-    public boolean hasFuel(double amount) {
+    public boolean hasFuel(int amount) {
         return hasFuel(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, amount);
     }
 
-    public boolean hasFuel(TagKey<Fluid> tag, double amount) {
-        return getFluidStack().getFluid().defaultFluidState().is(tag) && fuelAmount() >= amount;
+    public boolean hasFuel(TagKey<Fluid> tag, int amount) {
+        return hasFuel(FluidIngredient.fromTag(tag, amount));
     }
 
     public boolean hasFuel(FluidIngredient fluidIngredient) {
@@ -91,7 +93,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
                 || fluidIngredient.getRequiredAmount() == 0;
     }
 
-    public long fuelAmount() {
+    public int fuelAmount() {
         return getFluidStack().getAmount();
     }
 
@@ -137,7 +139,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
                             blazeMixing = true;
                         }
                     }
-                    long calculatedCost = BlazeMixingRecipe.durationToFuelCost(t);
+                    int calculatedCost = (int) platformedAmount(durationToFuelCost(t));
                     if (hasFuel(calculatedCost) && !(currentRecipe instanceof BlazeMixingRecipe)) {
                         recipeSpeed /= 2;
                         blazeMixing = true;
@@ -165,7 +167,9 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
                         runningTicks++;
                         processingTicks = -1;
                         blazeMixing = false;
-                        tank.getPrimaryTank().getTank().setFluid(getFluidStack().setAmount(fuelAmount() - fuelCost));
+                        FluidStack newFuel = getFluidStack().copy();
+                        newFuel.setAmount(getFluidStack().getAmount() - fuelCost);
+                        tank.getPrimaryHandler().setFluid(newFuel);
                         applyBasinRecipe();
                         sendData();
                     }
@@ -209,7 +213,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
         if (basin.isEmpty() || level == null) return;
 
         for (SmartInventory inv : basin.get().getInvs()) {
-            for (int slot = 0; slot < inv.getSlotCount(); slot++) {
+            for (int slot = 0; slot < inv.getSlots(); slot++) {
                 ItemStack stackInSlot = inv.getItem(slot);
                 if (stackInSlot.isEmpty()) continue;
                 ItemParticleOption data = new ItemParticleOption(ParticleTypes.ITEM, stackInSlot);
@@ -248,18 +252,18 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
     }
 
     @Override
-    public @Nullable Storage<FluidVariant> getFluidStorage(@Nullable Direction face) {
-        if (face != Direction.DOWN) {
-            return tank.getCapability();
-        }
-        return null;
+    public <T> @NotNull LazyOptional<T> getCapability(@NotNull Capability<T> cap, Direction side) {
+        if (cap == ForgeCapabilities.FLUID_HANDLER && side != Direction.DOWN) return tank.getCapability().cast();
+        return super.getCapability(cap, side);
     }
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         boolean kinetics = kineticStatsTooltip(tooltip, isPlayerSneaking);
         if (kinetics) tooltip.add(Component.empty());
-        boolean fluids = containedFluidTooltip(tooltip, isPlayerSneaking, getFluidStorage(null));
+        boolean
+                fluids =
+                containedFluidTooltip(tooltip, isPlayerSneaking, getCapability(ForgeCapabilities.FLUID_HANDLER));
 
         return kinetics || fluids;
     }

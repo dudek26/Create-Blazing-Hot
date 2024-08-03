@@ -1,4 +1,7 @@
 {
   "replace": false,
-  "values": []
+  "values": [
+    "#forge:nether_lava",
+    "#c:nether_lava"
+  ]
 }

@@ -23,7 +23,7 @@ public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
     protected void blazinghot$writeFuelToJson(JsonObject json, T recipe, CallbackInfo ci) {
         FluidIngredient blazinghot$fuel = ((IProcessingRecipe) recipe).blazinghot$getFuelFluid();
         if (blazinghot$fuel != FluidIngredient.EMPTY) {
-            json.add("fuel", blazinghot$fuel.serialize());
+            json.add("blazinghot:fuel", blazinghot$fuel.serialize());
         }
     }
 
@@ -33,15 +33,8 @@ public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
                     target = "Lcom/simibubi/create/content/processing/recipe/ProcessingRecipeBuilder;withFluidOutputs(Lnet/minecraft/core/NonNullList;)Lcom/simibubi/create/content/processing/recipe/ProcessingRecipeBuilder;"),
             remap = false)
     protected void blazinghot$readFuelFromJson(ResourceLocation recipeId, JsonObject json, CallbackInfoReturnable<T> cir, @Local ProcessingRecipeBuilder<T> builder) {
-        if (GsonHelper.isValidNode(json, "fuel"))
-            ((IProcessingRecipeBuilder<T>) builder).blazinghot$requireFuel(FluidIngredient.deserialize(json.get("fuel")));
+        if (GsonHelper.isValidNode(json, "blazinghot:fuel"))
+            ((IProcessingRecipeBuilder<T>) builder).blazinghot$requireFuel(FluidIngredient.deserialize(json.get("blazinghot:fuel")));
     }
-
-//    @Inject(method = "readFromBuffer",
-//            at = @At(value = "INVOKE",
-//                    target = ""))
-//    protected void blazinghot$readFuelFromBuffer(ResourceLocation recipeId, FriendlyByteBuf buffer, CallbackInfoReturnable<T> cir) {
-//
-//    }
 
 }
