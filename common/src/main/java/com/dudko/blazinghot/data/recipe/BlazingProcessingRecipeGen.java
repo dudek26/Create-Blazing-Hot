@@ -87,7 +87,7 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 
     public static DataProvider registerAll(PackOutput output) {
         GENERATORS.add(new BlazingPressingRecipeGen(output));
-//        GENERATORS.add(new BlazingCompactingRecipeGen(output)); todo - add after fluids
+        GENERATORS.add(new BlazingCompactingRecipeGen(output));
         GENERATORS.add(new BlazingCrushingRecipeGen(output));
         GENERATORS.add(new BlazingCuttingRecipeGen(output));
         GENERATORS.add(new BlazingDeployingRecipeGen(output));
