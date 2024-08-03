@@ -31,7 +31,7 @@ public class BlazingHot {
         BlazingBlocks.register();
         BlazingItems.register();
         BlazingFluids.register();
-        BlazingEntityTypes.register();
+        BlazingEntities.register();
         BlazingBlockEntityTypes.register();
         BlazingRecipeTypes.register();
 
