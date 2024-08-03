@@ -1,65 +1,69 @@
 package com.dudko.blazinghot.registry;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.ModernLampGenerator;
-import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelGenerator;
-import com.dudko.blazinghot.util.DyeUtil;
-import com.simibubi.create.AllTags;
+import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlock;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
-import com.simibubi.create.foundation.block.DyedBlockList;
+import com.simibubi.create.content.kinetics.BlockStressDefaults;
+import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
+import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.BuilderTransformers;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.foundation.data.ModelGen;
+import com.simibubi.create.foundation.data.SharedProperties;
 import com.simibubi.create.foundation.item.ItemDescription;
-import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
 
+import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
+import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
+
 public class BlazingBlocks {
 
     private static final CreateRegistrate REGISTRATE = BlazingHot.registrate();
 
-    public static final BlockEntry<Block> BLAZE_GOLD_BLOCK = REGISTRATE
-            .block("blaze_gold_block", Block::new)
-            .initialProperties(() -> net.minecraft.world.level.block.Blocks.GOLD_BLOCK)
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .tag(BlockTags.NEEDS_IRON_TOOL)
-            .tag(CommonTags.Blocks.STORAGE_BLOCKS.bothTags())
-            .tag(BlockTags.BEACON_BASE_BLOCKS)
-            .tag(CommonTags.Blocks.BLAZE_GOLD_BLOCKS.bothTags())
-            .item()
+    public static final BlockEntry<Block>
+            BLAZE_GOLD_BLOCK =
+            REGISTRATE
+                    .block("blaze_gold_block", Block::new)
+                    .initialProperties(() -> net.minecraft.world.level.block.Blocks.GOLD_BLOCK)
+                    .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                    .tag(BlockTags.NEEDS_IRON_TOOL)
+                    .tag(CommonTags.Blocks.STORAGE_BLOCKS.bothTags())
+                    .tag(BlockTags.BEACON_BASE_BLOCKS)
+                    .tag(CommonTags.Blocks.BLAZE_GOLD_BLOCKS.bothTags())
+                    .item()
 //            .tab(BlazingCreativeTabs.getKey(BlazingCreativeTabs.BLAZING_BUILDING_TAB))
-            .tag(CommonTags.Items.STORAGE_BLOCKS.bothTags())
-            .tag(CommonTags.Items.BLAZE_GOLD_BLOCKS.bothTags())
-            .build()
-            .register();
+                    .tag(CommonTags.Items.STORAGE_BLOCKS.bothTags())
+                    .tag(CommonTags.Items.BLAZE_GOLD_BLOCKS.bothTags())
+                    .build()
+                    .register();
 
-//    public static final BlockEntry<BlazeMixerBlock> BLAZE_MIXER = REGISTRATE
-//            .block("blaze_mixer", BlazeMixerBlock::new)
-//            .initialProperties(SharedProperties::stone)
-//            .properties(p -> p.noOcclusion().mapColor(MapColor.STONE))
-//            .transform(axeOrPickaxe())
-//            .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
-//            .addLayer(() -> RenderType::cutoutMipped)
-//            .transform(BlockStressDefaults.setImpact(4.0))
-//            .item(AssemblyOperatorBlockItem::new)
-//            .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "item.blazinghot.blaze_mixer"))
-//            .transform(customItemModel())
-//            .register();
+    public static final BlockEntry<BlazeMixerBlock>
+            BLAZE_MIXER =
+            REGISTRATE
+                    .block("blaze_mixer", BlazeMixerBlock::new)
+                    .initialProperties(SharedProperties::stone)
+                    .properties(p -> p.noOcclusion().mapColor(MapColor.STONE))
+                    .transform(axeOrPickaxe())
+                    .blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .transform(BlockStressDefaults.setImpact(4.0))
+                    .item(AssemblyOperatorBlockItem::new)
+                    .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "item.blazinghot.blaze_mixer"))
+                    .transform(customItemModel())
+                    .register();
 
-    public static final BlockEntry<CasingBlock> BLAZE_CASING = REGISTRATE
-            .block("blaze_casing", CasingBlock::new)
-            .transform(BuilderTransformers.casing(() -> BlazingSpriteShifts.BLAZE_CASING))
-            .properties(p -> p.mapColor(MapColor.CRIMSON_NYLIUM).sound(SoundType.NETHER_WOOD))
-            .register();
+    public static final BlockEntry<CasingBlock>
+            BLAZE_CASING =
+            REGISTRATE
+                    .block("blaze_casing", CasingBlock::new)
+                    .transform(BuilderTransformers.casing(() -> BlazingSpriteShifts.BLAZE_CASING))
+                    .properties(p -> p.mapColor(MapColor.CRIMSON_NYLIUM).sound(SoundType.NETHER_WOOD))
+                    .register();
 
     /*
     public static final DyedBlockList<ModernLampBlock> MODERN_LAMP_BLOCKS = new DyedBlockList<>(color -> {

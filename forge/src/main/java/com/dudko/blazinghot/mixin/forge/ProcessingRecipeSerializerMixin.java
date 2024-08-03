@@ -19,7 +19,6 @@ public class ProcessingRecipeSerializerMixin {
 
     /**
      * Converts fluid amounts in C:BH recipes' FluidIngredients from Fabric's droplets to milibuckets.
-     * @apiNote why make separate datagens when mixins exist?
      */
     @ModifyArg(method = "readFromJson",
             remap = false,
@@ -44,7 +43,6 @@ public class ProcessingRecipeSerializerMixin {
 
     /**
      * Converts fluid amounts in C:BH recipes' results from Fabric's droplets to milibuckets.
-     * @apiNote why make separate datagens when mixins exist?
      */
     @ModifyArg(method = "readFromJson",
             remap = false,

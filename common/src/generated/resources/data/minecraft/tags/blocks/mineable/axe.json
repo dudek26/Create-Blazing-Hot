@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "blazinghot:blaze_mixer",
     "blazinghot:blaze_casing"
   ]
 }
