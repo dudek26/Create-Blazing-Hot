@@ -135,7 +135,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
                         }
                     }
                     long calculatedCost = BlazeMixingRecipe.durationToFuelCost(t);
-                    if (hasFuel(calculatedCost)) {
+                    if (hasFuel(calculatedCost) && !(currentRecipe instanceof BlazeMixingRecipe)) {
                         recipeSpeed /= 2;
                         blazeMixing = true;
                         fuelCost = calculatedCost;
@@ -232,9 +232,8 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
 
         if (recipe instanceof BlazeMixingRecipe bmxRecipe) {
             return BasinRecipe.match(basin.get(), bmxRecipe) && ((bmxRecipe.getFuelFluid().test(getFluidStack())
-                    && fuelAmount() >= bmxRecipe.getFuelFluid().getRequiredAmount()) || bmxRecipe
-                    .getFuelFluid()
-                    .test(FluidStack.EMPTY));
+                    && fuelAmount() >= bmxRecipe.getFuelFluid().getRequiredAmount())
+                    || bmxRecipe.getFuelFluid().getRequiredAmount() == 0);
         }
         else if (recipe instanceof MixingRecipe) {
             assert level != null;
