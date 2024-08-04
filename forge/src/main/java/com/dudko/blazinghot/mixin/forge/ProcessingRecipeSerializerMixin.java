@@ -1,7 +1,7 @@
 package com.dudko.blazinghot.mixin.forge;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.data.recipe.IProcessingRecipe;
+import com.dudko.blazinghot.data.recipe.forge.IProcessingRecipe;
 import com.dudko.blazinghot.data.recipe.forge.IProcessingRecipeBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

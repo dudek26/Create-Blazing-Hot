@@ -1,4 +1,4 @@
-package com.dudko.blazinghot.data.recipe;
+package com.dudko.blazinghot.mixin;
 
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;

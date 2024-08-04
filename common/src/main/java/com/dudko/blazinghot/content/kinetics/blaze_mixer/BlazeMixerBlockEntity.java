@@ -104,18 +104,6 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
     }
 
     @Override
-    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-        tank = SmartFluidTankBehaviour.single(this, FluidUtil.platformedAmount(FluidUtil.BUCKET));
-        tank.whenFluidUpdates(() -> {
-            if (getBasin().isPresent()) getBasin().get().notifyChangeOfContents();
-        });
-        behaviours.add(tank);
-
-        super.addBehaviours(behaviours);
-        registerAwardables(behaviours, AllAdvancements.MIXER);
-    }
-
-    @Override
     protected AABB createRenderBoundingBox() {
         return new AABB(worldPosition).expandTowards(0, -1.5, 0);
     }
@@ -156,44 +144,6 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
         Vec3 center = offset.add(VecHelper.getCenterOf(worldPosition));
         target = VecHelper.offsetRandomly(target.subtract(offset), level.random, 1 / 128f);
         level.addParticle(data, center.x, center.y - 1.75f, center.z, target.x, target.y, target.z);
-    }
-
-    @Override
-    protected List<Recipe<?>> getMatchingRecipes() {
-        List<Recipe<?>> matchingRecipes = super.getMatchingRecipes();
-
-        if (!AllConfigs.server().recipes.allowBrewingInMixer.get()) return matchingRecipes;
-
-        Optional<BasinBlockEntity> basin = getBasin();
-        if (basin.isEmpty()) return matchingRecipes;
-
-        BasinBlockEntity basinBlockEntity = basin.get();
-        if (basin.isEmpty()) return matchingRecipes;
-
-        Storage<ItemVariant> availableItems = basinBlockEntity.getItemStorage(null);
-        if (availableItems == null) return matchingRecipes;
-
-        try (Transaction t = TransferUtil.getTransaction()) {
-            for (StorageView<ItemVariant> view : availableItems.nonEmptyViews()) {
-                List<MixingRecipe> list = PotionMixingRecipes.BY_ITEM.get(view.getResource().getItem());
-                if (list == null) continue;
-                for (MixingRecipe mixingRecipe : list)
-                    if (matchBasinRecipe(mixingRecipe)) matchingRecipes.add(mixingRecipe);
-            }
-        }
-
-        return matchingRecipes;
-    }
-
-    @Override
-    protected <C extends Container> boolean matchStaticFilters(Recipe<C> r) {
-        return ((r instanceof CraftingRecipe
-                && !(r instanceof ShapedRecipe)
-                && AllConfigs.server().recipes.allowShapelessInMixer.get()
-                && r.getIngredients().size() > 1
-                && !MechanicalPressBlockEntity.canCompress(r)) && !AllRecipeTypes.shouldIgnoreInAutomation(r)
-                || r.getType() == AllRecipeTypes.MIXING.getType())
-                || r.getType() == BlazingRecipeTypes.BLAZE_MIXING.getType();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.data.recipe;
 
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
+import com.dudko.blazinghot.mixin.IProcessingRecipeBuilder;
 import com.dudko.blazinghot.registry.BlazingFluids.MultiloaderFluids;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@SuppressWarnings({"UnstableApiUsage"})
+@SuppressWarnings({"UnstableApiUsage", "unchecked"})
 public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 
     public BlazeMixingRecipeGen(PackOutput output) {
@@ -34,7 +35,7 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 
     @Override
     protected IRecipeTypeInfo getRecipeType() {
-        return BlazingRecipeTypes.BLAZE_MIXING;
+        return BlazingRecipeTypes.BLAZE_MIXING.get();
     }
 
 

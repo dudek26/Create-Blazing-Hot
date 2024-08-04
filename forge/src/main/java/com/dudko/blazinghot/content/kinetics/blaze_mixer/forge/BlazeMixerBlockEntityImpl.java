@@ -4,9 +4,13 @@ import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.dudko.blazinghot.registry.BlazingTags;
+import com.dudko.blazinghot.registry.forge.BlazingRecipeTypesImpl;
 import com.dudko.blazinghot.util.FluidUtil;
+import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.fluids.FluidFX;
+import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
+import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
@@ -18,6 +22,7 @@ import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.utility.Couple;
 import com.simibubi.create.foundation.utility.VecHelper;
+import com.simibubi.create.infrastructure.config.AllConfigs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ItemParticleOption;
@@ -29,8 +34,10 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
@@ -40,6 +47,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -231,6 +239,43 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
     }
 
     @Override
+    protected List<Recipe<?>> getMatchingRecipes() {
+        List<Recipe<?>> matchingRecipes = super.getMatchingRecipes();
+
+        if (!AllConfigs.server().recipes.allowBrewingInMixer.get())
+            return matchingRecipes;
+
+        Optional<BasinBlockEntity> basin = getBasin();
+        if (!basin.isPresent())
+            return matchingRecipes;
+
+        BasinBlockEntity basinBlockEntity = basin.get();
+        if (basin.isEmpty())
+            return matchingRecipes;
+
+        IItemHandler availableItems = basinBlockEntity
+                .getCapability(ForgeCapabilities.ITEM_HANDLER)
+                .orElse(null);
+        if (availableItems == null)
+            return matchingRecipes;
+
+        for (int i = 0; i < availableItems.getSlots(); i++) {
+            ItemStack stack = availableItems.getStackInSlot(i);
+            if (stack.isEmpty())
+                continue;
+
+            List<MixingRecipe> list = PotionMixingRecipes.BY_ITEM.get(stack.getItem());
+            if (list == null)
+                continue;
+            for (MixingRecipe mixingRecipe : list)
+                if (matchBasinRecipe(mixingRecipe))
+                    matchingRecipes.add(mixingRecipe);
+        }
+
+        return matchingRecipes;
+    }
+
+    @Override
     protected <C extends Container> boolean matchBasinRecipe(Recipe<C> recipe) {
         if (recipe == null) return false;
         Optional<BasinBlockEntity> basin = getBasin();
@@ -242,13 +287,24 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
         else if (recipe instanceof MixingRecipe) {
             assert level != null;
             RecipeManager manager = level.getRecipeManager();
-            List<BlazeMixingRecipe> bmRecipes = manager.getAllRecipesFor(BlazingRecipeTypes.BLAZE_MIXING.getType());
+            List<BlazeMixingRecipe> bmRecipes = manager.getAllRecipesFor(BlazingRecipeTypesImpl.BLAZE_MIXING.getType());
             for (BlazeMixingRecipe bmRecipe : bmRecipes) {
                 if (doInputsMatch(bmRecipe, recipe)) return false;
             }
         }
 
         return BasinRecipe.match(basin.get(), recipe);
+    }
+
+    @Override
+    protected <C extends Container> boolean matchStaticFilters(Recipe<C> r) {
+        return ((r instanceof CraftingRecipe
+                && !(r instanceof ShapedRecipe)
+                && AllConfigs.server().recipes.allowShapelessInMixer.get()
+                && r.getIngredients().size() > 1
+                && !MechanicalPressBlockEntity.canCompress(r)) && !AllRecipeTypes.shouldIgnoreInAutomation(r)
+                || r.getType() == AllRecipeTypes.MIXING.getType())
+                || r.getType() == BlazingRecipeTypesImpl.BLAZE_MIXING.getType();
     }
 
     @Override

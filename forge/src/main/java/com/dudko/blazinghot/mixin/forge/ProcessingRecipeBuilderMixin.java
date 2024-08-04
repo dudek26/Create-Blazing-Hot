@@ -1,7 +1,7 @@
-package com.dudko.blazinghot.mixin.fabric;
+package com.dudko.blazinghot.mixin.forge;
 
-import com.dudko.blazinghot.data.recipe.fabric.IProcessingRecipeBuilder;
-import com.dudko.blazinghot.data.recipe.fabric.IProcessingRecipeParams;
+import com.dudko.blazinghot.data.recipe.forge.IProcessingRecipeBuilder;
+import com.dudko.blazinghot.data.recipe.forge.IProcessingRecipeParams;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.foundation.fluid.FluidIngredient;

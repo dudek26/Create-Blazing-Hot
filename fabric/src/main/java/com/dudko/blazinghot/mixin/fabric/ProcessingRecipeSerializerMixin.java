@@ -1,7 +1,7 @@
 package com.dudko.blazinghot.mixin.fabric;
 
-import com.dudko.blazinghot.data.recipe.IProcessingRecipe;
-import com.dudko.blazinghot.data.recipe.IProcessingRecipeBuilder;
+import com.dudko.blazinghot.data.recipe.fabric.IProcessingRecipe;
+import com.dudko.blazinghot.data.recipe.fabric.IProcessingRecipeBuilder;
 import com.google.gson.JsonObject;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;

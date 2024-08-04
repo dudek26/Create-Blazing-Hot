@@ -1,6 +1,6 @@
-// 1.20.1	2024-08-04T00:19:18.7319973	Create: Blazing Hot/Registrate Provider for blazinghot [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
-6714b522370fefa1369c85eeb1d55d20e7ff01c1 data\blazinghot\tags\items\blaze_gold_blocks.json
+// 1.20.1	2024-08-04T12:12:11.9733785	Create: Blazing Hot/Registrate Provider for blazinghot [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\blazinghot\tags\items\modern_lamp_panels.json
+6714b522370fefa1369c85eeb1d55d20e7ff01c1 data\blazinghot\tags\items\blaze_gold_blocks.json
 2c1c204ce899f7d8afaae5f2ad8f80cd2ea53daf data\forge\tags\blocks\storage_blocks\blaze_gold.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\c\tags\items\copper_blocks.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\blazinghot\tags\blocks\modern_lamps.json
@@ -28,13 +28,13 @@ b46669819967073a32bf2a9ed929614937d06d01 data\blazinghot\tags\items\iron_plates.
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\c\tags\items\gold_blocks.json
 7f1abd5a5bc935fdcd6b3dcd3687d3e82109530c data\blazinghot\tags\items\netherrack_dusts.json
 0839e81e7431513abbfa093f7dea15cbe73b5388 data\forge\tags\items\dusts\netherrack.json
-28f3f6488fbf24975269e7bc77316663667fab64 data\forge\tags\items\dusts\soul_sand.json
 3282d1bd604343ec72d455c48bb9333272b3bef5 data\create\tags\items\casing.json
+28f3f6488fbf24975269e7bc77316663667fab64 data\forge\tags\items\dusts\soul_sand.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\forge\tags\items\nuggets\gold.json
 166ab31406d965aa8edf422fea56c8cc35089f4a assets\blazinghot\models\item\blaze_gold_rod.json
 673e052b0cd70bbd0dc75bbfbcf08909b245f6e5 data\minecraft\tags\items\arrows.json
-8abc803c159387fdb4f65fc64a40c044e4941b72 data\blazinghot\tags\items\gold_nuggets.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\c\tags\items\gold_nuggets.json
+8abc803c159387fdb4f65fc64a40c044e4941b72 data\blazinghot\tags\items\gold_nuggets.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\forge\tags\fluids\nether_lava.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\forge\tags\fluids\molten_iron.json
 9ab7a5d9be84c0218d8b2c9fd2a01a4d47577148 assets\blazinghot\models\block\molten_gold.json
@@ -127,8 +127,8 @@ a590a23b122c283991ff608a5b63fd42a560c2ba assets\blazinghot\models\block\molten_i
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\c\tags\items\copper_plates.json
 2c1c204ce899f7d8afaae5f2ad8f80cd2ea53daf data\c\tags\items\storage_blocks.json
 a9e59aec6517c89ff63cb8c3e37d528617fbee31 data\blazinghot\tags\items\iron_ingots.json
-0533e8435c752f6f5da513a55a7649c19aad3b67 data\blazinghot\tags\items\copper_blocks.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\forge\tags\items\nuggets\iron.json
+0533e8435c752f6f5da513a55a7649c19aad3b67 data\blazinghot\tags\items\copper_blocks.json
 12c3e4e84f4d6e5d20a3074c39ffe4b05d703516 data\c\tags\items\plates.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\c\tags\items\iron_plates.json
 2430927f18c3e9eeecb2620d735163c5bdcb9eb1 assets\blazinghot\models\item\molten_iron_bucket.json
@@ -154,8 +154,8 @@ fa7505e8a7e0f70d39707be36843002b90faef5c assets\blazinghot\models\item\blaze_gol
 c4d101deca17704482f454ac5f68c4e2f6d4dfdc assets\blazinghot\models\item\blaze_casing.json
 2c1c204ce899f7d8afaae5f2ad8f80cd2ea53daf data\forge\tags\items\storage_blocks.json
 e9faf984cd05c06b895d5f50722a634aed1145a0 data\c\tags\items\stone_dusts.json
-20c22f13a49ef46ecfd0a85f0b9f54895cf97d8f data\minecraft\tags\blocks\mineable\axe.json
 d8b8b261a28f6bedab3e2221044f42ba04153b32 data\blazinghot\tags\fluids\blaze_mixer_fuel.json
+20c22f13a49ef46ecfd0a85f0b9f54895cf97d8f data\minecraft\tags\blocks\mineable\axe.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\forge\tags\items\ingots\copper.json
 df3f808c6018741801abe0f403118cc3e09c7403 data\blazinghot\tags\items\iron_nuggets.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\c\tags\items\zinc_ingots.json
