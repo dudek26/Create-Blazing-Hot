@@ -1,7 +1,6 @@
-package com.dudko.blazinghot.data.recipe;
+package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.registry.BlazingItems;
-import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;

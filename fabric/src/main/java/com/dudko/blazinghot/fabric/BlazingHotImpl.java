@@ -1,14 +1,23 @@
 package com.dudko.blazinghot.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.registry.BlazingBlocks;
-import com.dudko.blazinghot.registry.BlazingRecipeTypes;
+import com.dudko.blazinghot.data.fabric.BlazingLangGen;
+import com.dudko.blazinghot.data.fabric.BlazingTagGen;
+import com.dudko.blazinghot.data.recipe.fabric.BlazingCraftingRecipeGen;
+import com.dudko.blazinghot.data.recipe.fabric.BlazingProcessingRecipeGen;
+import com.dudko.blazinghot.data.recipe.fabric.BlazingSequencedAssemblyRecipeGen;
 import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
 import com.dudko.blazinghot.registry.fabric.BlazingRecipeTypesImpl;
+import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.tterrag.registrate.providers.ProviderType;
 import io.github.fabricators_of_create.porting_lib.util.EnvExecutor;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.data.DataGenerator;
 
 public class BlazingHotImpl implements ModInitializer {
+
+    private static final CreateRegistrate REGISTRATE = BlazingHot.registrate();
+
     @Override
     public void onInitialize() {
         BlazingHot.init();
@@ -23,5 +32,16 @@ public class BlazingHotImpl implements ModInitializer {
         BlazingHot.registrate().register();
 
         BlazingFluidsImpl.registerFluidInteractions();
+    }
+
+    public static void gatherData(DataGenerator.PackGenerator pack) {
+        REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, BlazingTagGen::generateBlockTags);
+        REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, BlazingTagGen::generateItemTags);
+        REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, BlazingTagGen::generateFluidTags);
+        REGISTRATE.addDataGenerator(ProviderType.LANG, BlazingLangGen::generate);
+
+        pack.addProvider(BlazingSequencedAssemblyRecipeGen::new);
+        pack.addProvider(BlazingCraftingRecipeGen::new);
+        pack.addProvider(BlazingProcessingRecipeGen::registerAll);
     }
 }

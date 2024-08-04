@@ -1,7 +1,6 @@
-package com.dudko.blazinghot.data.recipe;
+package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
-import com.dudko.blazinghot.mixin.IProcessingRecipeBuilder;
 import com.dudko.blazinghot.registry.BlazingFluids.MultiloaderFluids;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;

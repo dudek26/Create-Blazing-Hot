@@ -1,17 +1,15 @@
-package com.dudko.blazinghot.data.recipe;
+package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.registry.BlazingFluids;
 import com.dudko.blazinghot.registry.BlazingFluids.MultiloaderFluids;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
-import com.google.gson.JsonElement;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.ItemTags;

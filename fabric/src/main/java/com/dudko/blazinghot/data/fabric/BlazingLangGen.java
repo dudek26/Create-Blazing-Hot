@@ -1,4 +1,4 @@
-package com.dudko.blazinghot.data;
+package com.dudko.blazinghot.data.fabric;
 
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;

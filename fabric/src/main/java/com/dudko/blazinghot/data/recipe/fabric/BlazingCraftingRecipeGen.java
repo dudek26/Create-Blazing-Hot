@@ -1,4 +1,4 @@
-package com.dudko.blazinghot.data.recipe;
+package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.registry.BlazingItems;

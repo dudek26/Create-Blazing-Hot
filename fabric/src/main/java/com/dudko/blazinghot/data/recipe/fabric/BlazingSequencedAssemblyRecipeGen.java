@@ -1,4 +1,4 @@
-package com.dudko.blazinghot.data.recipe;
+package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.registry.BlazingItems;
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.UnaryOperator;
 
-import static com.dudko.blazinghot.data.recipe.BlazingProcessingRecipeGen.BUCKET;
+import static com.dudko.blazinghot.data.recipe.fabric.BlazingProcessingRecipeGen.BUCKET;
 import static com.dudko.blazinghot.registry.BlazingItems.*;
 
 @SuppressWarnings("unused")

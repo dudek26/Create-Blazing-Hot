@@ -1,11 +1,10 @@
-package com.dudko.blazinghot.data;
+package com.dudko.blazinghot.data.fabric;
 
 import com.dudko.blazinghot.registry.BlazingFluids;
 import com.dudko.blazinghot.registry.BlazingFluids.MultiloaderFluids;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -101,8 +100,7 @@ public class BlazingTagGen {
         return tagAppender(prov, tag.tag);
     }
 
-    @ExpectPlatform
     public static <T> TagsProvider.TagAppender<T> tagAppender(RegistrateTagsProvider<T> prov, TagKey<T> tag) {
-        throw new AssertionError();
+        return prov.addTag(tag);
     }
 }

@@ -68,17 +68,6 @@ public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
         return json;
     }
 
-    //can't put this in common because fabric datagen doesn't see it for some reason
-    @Inject(method = "writeToJson(Lcom/google/gson/JsonObject;Lcom/simibubi/create/content/processing/recipe/ProcessingRecipe;)V",
-            at = @At("HEAD"),
-            remap = false)
-    protected void blazinghot$writeFuelToJson(JsonObject json, T recipe, CallbackInfo ci) {
-        FluidIngredient blazinghot$fuel = ((IProcessingRecipe) recipe).blazinghot$getFuelFluid();
-        if (blazinghot$fuel != FluidIngredient.EMPTY) {
-            json.add("blazinghot:fuel", blazinghot$fuel.serialize());
-        }
-    }
-
     @SuppressWarnings("unchecked")
     @Inject(method = "readFromJson(Lnet/minecraft/resources/ResourceLocation;Lcom/google/gson/JsonObject;)Lcom/simibubi/create/content/processing/recipe/ProcessingRecipe;",
             at = @At(value = "INVOKE_ASSIGN",

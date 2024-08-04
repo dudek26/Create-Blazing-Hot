@@ -1,7 +1,7 @@
-package com.dudko.blazinghot.mixin;
+package com.dudko.blazinghot.mixin.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.mixin.accessor.BasinOperatingBlockEntityAccessor;
+import com.dudko.blazinghot.mixin.fabric.accessor.BasinOperatingBlockEntityAccessor;
 import com.simibubi.create.content.kinetics.mixer.MechanicalMixerBlockEntity;
 import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,11 +15,9 @@ public abstract class MechanicalMixerBlockEntityMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(III)I"),
             index = 2,
             remap = false)
-    public int blazinghot$extendDuration(int max) {
+    protected int blazinghot$extendDuration(int max) {
         ResourceLocation blazinghot$id = ((BasinOperatingBlockEntityAccessor) this).getCurrentRecipe().getId();
-        BlazingHot.LOGGER.info("Attempting to extend duration of {} to {} ", blazinghot$id.getPath(), max);
         if (blazinghot$id.getPath().startsWith("mixing/melting")) {
-            BlazingHot.LOGGER.info("Extended duration of {} to {} ", blazinghot$id.getPath(), max);
             return max * 16;
         }
         else return max;

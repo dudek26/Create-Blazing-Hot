@@ -1,4 +1,4 @@
-package com.dudko.blazinghot.mixin.accessor;
+package com.dudko.blazinghot.mixin.forge.accessor;
 
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
 import net.minecraft.world.item.crafting.Recipe;

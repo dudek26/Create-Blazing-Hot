@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
 @Mixin(Item.class)
-public class ItemMixin {
+public abstract class ItemMixin {
 
     //todo - add config for that
     @Unique
