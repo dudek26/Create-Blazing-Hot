@@ -17,6 +17,7 @@ Create: Blazing Hot 0.5
 * Melting with Mechanical Mixer is now 3 times longer compared to Blaze Mixer (previously 5)
 * Renamed `fuel` property in Blaze Mixing recipes to `blazinghot:fuel`
 * Nether Sprouts can now be used to craft Nether Compound
+* Updated textures for Blaze Gold Ingot, Nugget, Sheet and Block
 
 ### Fixed:
 
