@@ -3,13 +3,13 @@ package com.dudko.blazinghot.data.recipe.fabric;
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.dudko.blazinghot.registry.CommonTags;
+import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
 import com.dudko.blazinghot.util.FluidUtil;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.foundation.utility.RegisteredObjects;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
@@ -18,6 +18,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.material.Fluid;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -30,33 +31,48 @@ import java.util.function.UnaryOperator;
 public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 
     protected static final List<BlazingProcessingRecipeGen> GENERATORS = new ArrayList<>();
-    protected static final long BUCKET = FluidConstants.BUCKET;
-    protected static final long INGOT = FluidConstants.INGOT;
-    protected static final long INGOT_COVER = FluidConstants.INGOT * 8;
-    protected static final long NUGGET_COVER = FluidConstants.NUGGET * 8;
-    protected static final long NUGGET = FluidConstants.NUGGET;
-    protected static final long BOTTLE = FluidConstants.BOTTLE;
+    protected static final long BUCKET = FluidUtil.BUCKET;
+    protected static final long INGOT = FluidUtil.INGOT;
+    protected static final long INGOT_COVER = FluidUtil.INGOT * 8;
+    protected static final long NUGGET_COVER = FluidUtil.NUGGET * 8;
+    protected static final long NUGGET = FluidUtil.NUGGET;
+    protected static final long BOTTLE = FluidUtil.BOTTLE;
 
     protected enum Forms {
-        INGOT(FluidUtil.INGOT, "ingots", 500),
+        INGOT(FluidUtil.INGOT, "ingots", 400),
         NUGGET(FluidUtil.NUGGET, "nuggets", 65),
-        BLOCK(FluidUtil.BUCKET, "blocks", 3200),
-        SHEET(FluidUtil.INGOT, "plates", 500);
+        BLOCK(FluidUtil.BUCKET, "blocks", 2400, false),
+        SHEET(FluidUtil.INGOT, "plates", 400),
+        ROD(FluidUtil.INGOT / 2, "rods", 250);
 
         public final long amount;
         public final String tagSuffix;
         public final int meltingTime;
         public final long fuelCost;
+        public final boolean mechanicalMixerMelting;
 
-        Forms(long amount, String tagSuffix, int meltingTime, long fuelCost) {
+        Forms(long amount, String tagSuffix, int meltingTime, long fuelCost, boolean mechanicalMixerMelting) {
             this.amount = amount;
             this.tagSuffix = tagSuffix;
             this.meltingTime = meltingTime;
             this.fuelCost = fuelCost;
+            this.mechanicalMixerMelting = mechanicalMixerMelting;
         }
 
         Forms(long amount, String tagSuffix, int meltingTime) {
             this(amount, tagSuffix, meltingTime, BlazeMixingRecipe.durationToFuelCost(meltingTime));
+        }
+
+        Forms(long amount, String tagSuffix, int meltingTime, boolean mechanicalMixerMelting) {
+            this(amount,
+                    tagSuffix,
+                    meltingTime,
+                    BlazeMixingRecipe.durationToFuelCost(meltingTime),
+                    mechanicalMixerMelting);
+        }
+
+        Forms(long amount, String tagSuffix, int meltingTime, long fuelCost) {
+            this(amount, tagSuffix, meltingTime, BlazeMixingRecipe.durationToFuelCost(meltingTime), true);
         }
 
         public TagKey<Item> tag(String material) {
@@ -70,14 +86,16 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
     }
 
     protected enum Meltables {
-        IRON("iron"),
-        GOLD("gold"),
-        BLAZE_GOLD("blaze_gold");
+        IRON("iron", BlazingFluidsImpl.MOLTEN_IRON.get()),
+        GOLD("gold", BlazingFluidsImpl.MOLTEN_GOLD.get()),
+        BLAZE_GOLD("blaze_gold", BlazingFluidsImpl.MOLTEN_BLAZE_GOLD.get());
 
         public final String name;
+        public final Fluid fluid;
 
-        Meltables(String name) {
+        Meltables(String name, Fluid fluid) {
             this.name = name;
+            this.fluid = fluid;
         }
     }
 
@@ -119,10 +137,12 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
         ProcessingRecipeSerializer<T> serializer = getSerializer();
         GeneratedRecipe generatedRecipe = c -> {
             ItemLike itemLike = singleIngredient.get();
-            transform.apply(new ProcessingRecipeBuilder<>(serializer.getFactory(),
-                    new ResourceLocation(namespace,
-                            RegisteredObjects.getKeyOrThrow(itemLike.asItem()).getPath())).withItemIngredients(
-                    Ingredient.of(itemLike))).build(c);
+            transform
+                    .apply(new ProcessingRecipeBuilder<>(serializer.getFactory(),
+                            new ResourceLocation(namespace,
+                                    RegisteredObjects.getKeyOrThrow(itemLike.asItem()).getPath())).withItemIngredients(
+                            Ingredient.of(itemLike)))
+                    .build(c);
         };
         all.add(generatedRecipe);
         return generatedRecipe;
@@ -138,8 +158,9 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 
     protected <T extends ProcessingRecipe<?>> GeneratedRecipe createWithDeferredId(Supplier<ResourceLocation> name, UnaryOperator<ProcessingRecipeBuilder<T>> transform) {
         ProcessingRecipeSerializer<T> serializer = getSerializer();
-        GeneratedRecipe generatedRecipe = c -> transform.apply(new ProcessingRecipeBuilder<>(serializer.getFactory(),
-                name.get())).build(c);
+        GeneratedRecipe
+                generatedRecipe =
+                c -> transform.apply(new ProcessingRecipeBuilder<>(serializer.getFactory(), name.get())).build(c);
         all.add(generatedRecipe);
         return generatedRecipe;
     }

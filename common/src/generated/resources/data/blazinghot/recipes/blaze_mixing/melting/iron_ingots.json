@@ -1,7 +1,7 @@
 {
   "type": "blazinghot:blaze_mixing",
   "blazinghot:fuel": {
-    "amount": 10125,
+    "amount": 8100,
     "fluidTag": "blazinghot:blaze_mixer_fuel"
   },
   "heatRequirement": "superheated",
@@ -10,7 +10,7 @@
       "tag": "blazinghot:iron_ingots"
     }
   ],
-  "processingTime": 500,
+  "processingTime": 400,
   "results": [
     {
       "amount": 9000,

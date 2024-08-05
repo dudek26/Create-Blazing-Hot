@@ -1,6 +1,5 @@
 package com.dudko.blazinghot.mixin;
 
-import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.util.TooltipUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;

@@ -2,20 +2,27 @@
 Create: Blazing Hot 0.5
 ------------------------------------------------------
 
-### This version contains some major backend changes. Please backup your worlds before updating the mod in case something goes wrong.
+##### This version contains some major backend changes. Please back up your worlds before updating the mod in case something goes wrong.
 
 ### Added:
 
-- **Forge support 🎉**
+* **Forge support**
+* Melting Blaze Gold Rods with Mechanical Mixer
 
 ### Changed:
 
-- something i guess
+* Reduced melting time with Blaze Mixer
+* Reduces fuel costs for melting with Blaze Mixer
+* Extended processing time of Molten Blaze Gold mixing and blaze mixing recipe
+* Melting with Mechanical Mixer is now 3 times longer compared to Blaze Mixer (previously 5)
+* Renamed `fuel` property in Blaze Mixing recipes to `blazinghot:fuel`
+* Nether Sprouts can now be used to craft Nether Compound
 
 ### Fixed:
 
-- Blaze Mixing recipes now consume the correct amount of fuel
-- Blaze Mixing recipes' speed is no longer affected by the fuel
+* Blaze mixing recipes now consume the correct amount of fuel
+* Blaze mixing recipes' speed is no longer affected by the fuel
+* Melting time no longer caps at 512 ticks (25.6 seconds)
 
 ------------------------------------------------------
 Create: Blazing Hot 0.4

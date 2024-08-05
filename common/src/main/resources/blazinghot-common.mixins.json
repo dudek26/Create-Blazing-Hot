@@ -6,7 +6,9 @@
   "client": [
   ],
   "mixins": [
-    "ItemMixin"
+    "ItemMixin",
+    "MechanicalMixerBlockEntityMixin",
+    "accessor.BasinOperatingBlockEntityAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

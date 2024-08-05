@@ -6,12 +6,10 @@
   "client": [
   ],
   "mixins": [
-    "MechanicalMixerBlockEntityMixin",
     "ProcessingRecipeBuilderMixin",
     "ProcessingRecipeMixin",
     "ProcessingRecipeParamsMixin",
-    "ProcessingRecipeSerializerMixin",
-    "accessor.BasinOperatingBlockEntityAccessor"
+    "ProcessingRecipeSerializerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

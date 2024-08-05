@@ -1,7 +1,6 @@
-package com.dudko.blazinghot.mixin.fabric;
+package com.dudko.blazinghot.mixin;
 
-import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.mixin.fabric.accessor.BasinOperatingBlockEntityAccessor;
+import com.dudko.blazinghot.mixin.accessor.BasinOperatingBlockEntityAccessor;
 import com.simibubi.create.content.kinetics.mixer.MechanicalMixerBlockEntity;
 import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.Mixin;

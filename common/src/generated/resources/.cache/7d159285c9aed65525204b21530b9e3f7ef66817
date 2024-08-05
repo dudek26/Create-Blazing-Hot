@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-04T20:09:06.063363	Create: Blazing Hot/Registrate Provider for blazinghot [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2024-08-05T15:59:31.9815581	Create: Blazing Hot/Registrate Provider for blazinghot [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\blazinghot\tags\items\modern_lamp_panels.json
 6714b522370fefa1369c85eeb1d55d20e7ff01c1 data\blazinghot\tags\items\blaze_gold_blocks.json
 2c1c204ce899f7d8afaae5f2ad8f80cd2ea53daf data\forge\tags\blocks\storage_blocks\blaze_gold.json
@@ -102,7 +102,7 @@ be575f6df2bee12b490a13a1451364ee38086d71 assets\blazinghot\models\item\burning_s
 f934065b5efb5042b5fe978befa0d4644cdb41ee data\blazinghot\tags\blocks\storage_blocks.json
 8ca798f9fd204c254bf186c259e59273f4512de4 assets\blazinghot\models\item\blaze_gold_block.json
 3ac195a1bef2c14c737c600a2a4f166f61c27694 assets\blazinghot\models\item\molten_gold_bucket.json
-bdb12532830542f654bc40bc65efcda0c3cf0279 data\minecraft\tags\blocks\mineable\pickaxe.json
+71583b2480fd2c1394a5144f341b6dd0759cdcbc data\minecraft\tags\blocks\mineable\pickaxe.json
 12c3e4e84f4d6e5d20a3074c39ffe4b05d703516 data\forge\tags\items\plates\blaze_gold.json
 ec78c00a615850efbc11ffe8caa0c897090db82f data\forge\tags\items\foods.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\blazinghot\tags\items\modern_lamps.json

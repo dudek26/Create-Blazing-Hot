@@ -1,6 +1,5 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
-import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.dudko.blazinghot.registry.BlazingFluids.MultiloaderFluids;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
@@ -37,27 +36,17 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
         return BlazingRecipeTypes.BLAZE_MIXING.get();
     }
 
+    List<GeneratedRecipe> ALL_MELTING_RECIPES = meltingAll();
 
     GeneratedRecipe
             BLAZE_GOLD_ROD_MELTING =
-            melting(CommonTags.Items.BLAZE_GOLD_RODS.internal,
-                    MultiloaderFluids.MOLTEN_BLAZE_GOLD.get(),
-                    INGOT / 2,
-                    300,
-                    BlazeMixingRecipe.durationToFuelCost(300));
-    List<GeneratedRecipe>
-            BLAZE_GOLD_MELTING =
-            meltingAll(Meltables.BLAZE_GOLD, MultiloaderFluids.MOLTEN_BLAZE_GOLD.get());
-    List<GeneratedRecipe> IRON_MELTING = meltingAll(Meltables.IRON, MultiloaderFluids.MOLTEN_IRON.get());
-    List<GeneratedRecipe> GOLD_MELTING = meltingAll(Meltables.GOLD, MultiloaderFluids.MOLTEN_GOLD.get());
-
-    GeneratedRecipe
+            melting(CommonTags.Items.BLAZE_GOLD_RODS.internal, MultiloaderFluids.MOLTEN_BLAZE_GOLD.get(), Forms.ROD),
             NETHER_LAVA =
-            create("nether_lava",
-                    b -> requireMultiple(b, BlazingItems.NETHER_ESSENCE, 4)
-                            .require(FluidIngredient.fromFluid(Fluids.LAVA, FluidUtil.BLOCK / 10))
-                            .requiresHeat(HeatCondition.SUPERHEATED)
-                            .output(MultiloaderFluids.NETHER_LAVA.get(), FluidConstants.BLOCK / 10)),
+                    create("nether_lava",
+                            b -> requireMultiple(b, BlazingItems.NETHER_ESSENCE, 4)
+                                    .require(FluidIngredient.fromFluid(Fluids.LAVA, FluidUtil.BLOCK / 10))
+                                    .requiresHeat(HeatCondition.SUPERHEATED)
+                                    .output(MultiloaderFluids.NETHER_LAVA.get(), FluidConstants.BLOCK / 10)),
             MOLTEN_BLAZE_GOLD =
                     create("molten_blaze_gold",
                             b -> ((IProcessingRecipeBuilder<ProcessingRecipe<?>>) requireMultiple(b,
@@ -79,6 +68,10 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
                         .output(result, amount));
     }
 
+    private GeneratedRecipe melting(TagKey<Item> tag, Fluid result, Forms form) {
+        return melting(tag, result, form.amount, form.meltingTime, form.fuelCost);
+    }
+
     private GeneratedRecipe melting(ItemLike item, Fluid result, long amount, int duration, long fuelCost) {
         return create("melting/" + item.asItem(),
                 b -> ((IProcessingRecipeBuilder<ProcessingRecipe<?>>) b)
@@ -89,10 +82,19 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
                         .output(result, amount));
     }
 
-    private List<GeneratedRecipe> meltingAll(Meltables material, Fluid result) {
+    private List<GeneratedRecipe> melting(Meltables material) {
         List<GeneratedRecipe> recipes = new ArrayList<>();
         for (Forms form : Forms.values()) {
-            recipes.add(melting(form.tag(material), result, form.amount, form.meltingTime, form.fuelCost));
+            if (form == Forms.ROD) continue;
+            recipes.add(melting(form.tag(material), material.fluid, form));
+        }
+        return recipes;
+    }
+
+    private List<GeneratedRecipe> meltingAll() {
+        List<GeneratedRecipe> recipes = new ArrayList<>();
+        for (Meltables meltable : Meltables.values()) {
+            recipes.addAll(melting(meltable));
         }
         return recipes;
     }

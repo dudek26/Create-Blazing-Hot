@@ -3,13 +3,13 @@
   "heatRequirement": "superheated",
   "ingredients": [
     {
-      "tag": "blazinghot:blaze_gold_nuggets"
+      "tag": "blazinghot:blaze_gold_rods"
     }
   ],
-  "processingTime": 195,
+  "processingTime": 750,
   "results": [
     {
-      "amount": 1000,
+      "amount": 4500,
       "fluid": "blazinghot:molten_blaze_gold"
     }
   ]

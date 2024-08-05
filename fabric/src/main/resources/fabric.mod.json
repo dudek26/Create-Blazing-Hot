@@ -27,7 +27,8 @@
     ]
   },
   "mixins": [
-    "blazinghot.mixins.json"
+    "blazinghot.mixins.json",
+    "blazinghot-common.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${fabric_loader_version}",

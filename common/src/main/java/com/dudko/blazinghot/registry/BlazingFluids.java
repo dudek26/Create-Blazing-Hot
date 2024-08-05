@@ -8,19 +8,12 @@ import net.minecraft.world.level.material.Fluid;
 
 public class BlazingFluids {
 
-    private static final CreateRegistrate REGISTRATE = BlazingHot.registrate();
-
     public static void register() {
         platformRegister();
     }
 
     @ExpectPlatform
     public static void platformRegister() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static void registerFluidInteractions() {
         throw new AssertionError();
     }
 

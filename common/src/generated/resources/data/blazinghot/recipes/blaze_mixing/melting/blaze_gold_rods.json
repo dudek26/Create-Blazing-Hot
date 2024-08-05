@@ -1,7 +1,7 @@
 {
   "type": "blazinghot:blaze_mixing",
   "blazinghot:fuel": {
-    "amount": 6075,
+    "amount": 5063,
     "fluidTag": "blazinghot:blaze_mixer_fuel"
   },
   "heatRequirement": "superheated",
@@ -10,7 +10,7 @@
       "tag": "blazinghot:blaze_gold_rods"
     }
   ],
-  "processingTime": 300,
+  "processingTime": 250,
   "results": [
     {
       "amount": 4500,

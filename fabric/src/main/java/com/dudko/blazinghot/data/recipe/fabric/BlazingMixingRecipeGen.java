@@ -5,6 +5,7 @@ import com.dudko.blazinghot.registry.BlazingFluids.MultiloaderFluids;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
+import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
@@ -40,25 +41,27 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
                             .require(BlazingItems.NETHERRACK_DUST)
                             .require(BlazingItems.SOUL_DUST)
                             .output(BlazingItems.NETHER_COMPOUND, 2)),
+            NETHERRACK_DUST =
+                    create("netherrack_dust",
+                            b -> b
+                                    .require(AllItems.CINDER_FLOUR)
+                                    .require(BlazingItems.STONE_DUST)
+                                    .output(BlazingItems.NETHERRACK_DUST)),
+            MOLTEN_BLAZE_GOLD =
+                    create("molten_blaze_gold",
+                            b -> requireMultiple(b, BlazingItems.NETHER_ESSENCE, 4)
+                                    .require(CommonTags.Fluids.MOLTEN_GOLD.internal, INGOT / 2)
+                                    .requiresHeat(HeatCondition.SUPERHEATED)
+                                    .duration(200)
+                                    .output(BlazingFluids.getEntry(MultiloaderFluids.MOLTEN_BLAZE_GOLD).getSource(),
+                                            INGOT / 2)),
+            BLAZE_GOLD_ROD_MELTING =
+                    melting(CommonTags.Items.BLAZE_GOLD_RODS.internal,
+                            BlazingFluidsImpl.MOLTEN_BLAZE_GOLD.get(),
+                            Forms.ROD.amount,
+                            Forms.ROD.meltingTime);
 
-    NETHERRACK_DUST =
-            create("netherrack_dust",
-                    b -> b
-                            .require(AllItems.CINDER_FLOUR)
-                            .require(BlazingItems.STONE_DUST)
-                            .output(BlazingItems.NETHERRACK_DUST)),
-
-    MOLTEN_BLAZE_GOLD =
-            create("molten_blaze_gold",
-                    b -> requireMultiple(b, BlazingItems.NETHER_ESSENCE, 4)
-                            .require(CommonTags.Fluids.MOLTEN_GOLD.internal, INGOT / 2)
-                            .requiresHeat(HeatCondition.SUPERHEATED)
-                            .output(BlazingFluids.getEntry(MultiloaderFluids.MOLTEN_BLAZE_GOLD).getSource(),
-                                    INGOT / 2));
-
-    List<GeneratedRecipe> GOLD_MELTING = meltingAll(Meltables.GOLD, MultiloaderFluids.MOLTEN_GOLD.get());
-    List<GeneratedRecipe> IRON_MELTING = meltingAll(Meltables.IRON, MultiloaderFluids.MOLTEN_IRON.get());
-    List<GeneratedRecipe> BLAZE_GOLD_MELTING = meltingAll(Meltables.BLAZE_GOLD, MultiloaderFluids.MOLTEN_BLAZE_GOLD.get());
+    List<GeneratedRecipe> ALL_MELTING_RECIPES = meltingAll();
 
     @Override
     protected IRecipeTypeInfo getRecipeType() {
@@ -70,17 +73,29 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
         return create("melting/" + tag.location().getPath(),
                 b -> b
                         .require(tag)
-                        .duration(duration * 5)
+                        .duration(duration * 3)
                         .requiresHeat(HeatCondition.SUPERHEATED)
                         .output(result, amount));
     }
 
-    private List<GeneratedRecipe> meltingAll(Meltables material, Fluid result) {
+    private GeneratedRecipe melting(TagKey<Item> tag, Fluid result, Forms form) {
+        return melting(tag, result, form.amount, form.meltingTime);
+    }
+
+    private List<GeneratedRecipe> melting(Meltables material) {
         List<GeneratedRecipe> recipes = new ArrayList<>();
         for (Forms form : Forms.values()) {
-            if (form == Forms.BLOCK) continue;
-            recipes.add(melting(form.tag(material), result, form.amount, form.meltingTime));
+            if (!form.mechanicalMixerMelting) continue;
+            if (form == Forms.ROD) continue;
+            recipes.add(melting(form.tag(material), material.fluid, form));
         }
+        return recipes;
+    }
+
+    private List<GeneratedRecipe> meltingAll() {
+        List<GeneratedRecipe> recipes = new ArrayList<>();
+        for (Meltables material : Meltables.values())
+            recipes.addAll(melting(material));
         return recipes;
     }
 

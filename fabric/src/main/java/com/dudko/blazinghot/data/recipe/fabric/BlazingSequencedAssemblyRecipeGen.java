@@ -1,8 +1,10 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.CommonTags;
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.press.PressingRecipe;
@@ -57,16 +59,16 @@ public class BlazingSequencedAssemblyRecipeGen extends BlazingRecipeProvider {
                                    .addStep(DeployerApplicationRecipe::new, r -> r.require(Items.DIAMOND))
                                    .addStep(PressingRecipe::new, r -> r));
 
-//    GeneratedRecipe BLAZE_MIXER = create("blaze_mixer", b -> b todo
-//            .require(BlazingBlocks.BLAZE_CASING)
-//            .transitionTo(INCOMPLETE_BLAZE_MIXER)
-//            .addOutput(BlazingBlocks.BLAZE_MIXER, 1)
-//            .loops(1)
-//            .addStep(PressingRecipe::new,
-//                    r -> r)
-//            .addStep(DeployerApplicationRecipe::new, r -> r.require(BLAZE_WHISK))
-//            .addStep(DeployerApplicationRecipe::new, r -> r.require(AllBlocks.COGWHEEL))
-//            .addStep(DeployerApplicationRecipe::new, r -> r.require(AllBlocks.PISTON_EXTENSION_POLE)));
+    GeneratedRecipe BLAZE_MIXER = create("blaze_mixer", b -> b
+            .require(BlazingBlocks.BLAZE_CASING)
+            .transitionTo(INCOMPLETE_BLAZE_MIXER)
+            .addOutput(BlazingBlocks.BLAZE_MIXER, 1)
+            .loops(1)
+            .addStep(PressingRecipe::new,
+                    r -> r)
+            .addStep(DeployerApplicationRecipe::new, r -> r.require(BLAZE_WHISK))
+            .addStep(DeployerApplicationRecipe::new, r -> r.require(AllBlocks.COGWHEEL))
+            .addStep(DeployerApplicationRecipe::new, r -> r.require(AllBlocks.PISTON_EXTENSION_POLE)));
 
     private GeneratedRecipe create(String name, UnaryOperator<SequencedAssemblyRecipeBuilder> transform) {
         GeneratedRecipe

@@ -1,0 +1,78 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "blazinghot:blaze_casing"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "blazinghot:blaze_mixer"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "blazinghot:incomplete_blaze_mixer"
+        }
+      ],
+      "results": [
+        {
+          "item": "blazinghot:incomplete_blaze_mixer"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "blazinghot:incomplete_blaze_mixer"
+        },
+        {
+          "item": "blazinghot:blaze_whisk"
+        }
+      ],
+      "results": [
+        {
+          "item": "blazinghot:incomplete_blaze_mixer"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "blazinghot:incomplete_blaze_mixer"
+        },
+        {
+          "item": "create:cogwheel"
+        }
+      ],
+      "results": [
+        {
+          "item": "blazinghot:incomplete_blaze_mixer"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "blazinghot:incomplete_blaze_mixer"
+        },
+        {
+          "item": "create:piston_extension_pole"
+        }
+      ],
+      "results": [
+        {
+          "item": "blazinghot:incomplete_blaze_mixer"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "blazinghot:incomplete_blaze_mixer"
+  }
+}

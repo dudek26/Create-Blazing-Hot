@@ -37,7 +37,7 @@ public class BlazingFluidsImpl {
 
     private static final CreateRegistrate REGISTRATE = BlazingHot.registrate();
 
-    private static final FluidEntry<SimpleFlowableFluid.Flowing>
+    public static final FluidEntry<SimpleFlowableFluid.Flowing>
 
             NETHER_LAVA = createFromLava("nether_lava", 10, 1),
 
