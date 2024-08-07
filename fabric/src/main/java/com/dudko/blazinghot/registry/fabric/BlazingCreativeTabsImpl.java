@@ -19,8 +19,7 @@ import java.util.function.Supplier;
 
 public class BlazingCreativeTabsImpl {
 
-    private static final TabInfo
-            MAIN_TAB =
+    private static final TabInfo BASE_TAB =
             register("create_blazing_hot",
                     () -> FabricItemGroup
                             .builder()
@@ -38,7 +37,7 @@ public class BlazingCreativeTabsImpl {
                                     .build());
 
     public static ResourceKey<CreativeModeTab> getBaseTabKey() {
-        return MAIN_TAB.key();
+        return BASE_TAB.key();
     }
 
     public static ResourceKey<CreativeModeTab> getBuildingTabKey() {
@@ -51,5 +50,13 @@ public class BlazingCreativeTabsImpl {
         CreativeModeTab tab = supplier.get();
         Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, key, tab);
         return new TabInfo(key, tab);
+    }
+
+    public static void useBaseTab() {
+        BlazingHot.registrate().setCreativeTab(getBaseTabKey());
+    }
+
+    public static void useBuildingTab() {
+        BlazingHot.registrate().setCreativeTab(getBuildingTabKey());
     }
 }

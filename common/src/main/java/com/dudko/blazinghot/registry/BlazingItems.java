@@ -35,7 +35,7 @@ public class BlazingItems {
     private static final CreateRegistrate REGISTRATE = BlazingHot.registrate();
 
     static {
-        REGISTRATE.setCreativeTab(BlazingCreativeTabs.getBaseTabKey());
+        BlazingCreativeTabs.useBaseTab();
     }
 
     private static ItemEntry<Item> ingredient(String name) {

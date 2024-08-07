@@ -57,6 +57,16 @@ public class BlazingCreativeTabs {
         throw new AssertionError();
     }
 
+    @ExpectPlatform
+    public static void useBaseTab() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static void useBuildingTab() {
+        throw new AssertionError();
+    }
+
     @SuppressWarnings("RedundantOperationOnEmptyContainer")
     public static class RegistrateDisplayItemsGenerator implements DisplayItemsGenerator {
 

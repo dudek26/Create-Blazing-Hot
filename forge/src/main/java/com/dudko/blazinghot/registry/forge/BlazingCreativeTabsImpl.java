@@ -12,6 +12,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.eventbus.EventBus;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -29,7 +30,7 @@ public class BlazingCreativeTabsImpl {
             REGISTER.register("create_blazing_hot",
                     () -> CreativeModeTab
                             .builder()
-                            .title(Components.translatable("itemGroup.create.base"))
+                            .title(Components.translatable("itemGroup.blazinghot"))
                             .withTabsBefore(AllCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
                             .icon(() -> BlazingItems.BLAZE_GOLD_INGOT.asItem().getDefaultInstance())
                             .displayItems(new RegistrateDisplayItemsGenerator(true, Tabs.BASE))
@@ -40,13 +41,13 @@ public class BlazingCreativeTabsImpl {
             REGISTER.register("create_blazing_hot_building",
                     () -> CreativeModeTab
                             .builder()
-                            .title(Components.translatable("itemGroup.create.palettes"))
+                            .title(Components.translatable("itemGroup.blazinghot.building"))
                             .withTabsBefore(BlazingCreativeTabsImpl.BASE_TAB.getKey())
                             .icon(BlazingBlocks.BLAZE_GOLD_BLOCK::asStack)
                             .displayItems(new RegistrateDisplayItemsGenerator(false, Tabs.BUILDING))
                             .build());
 
-    public static void register(EventBus eventBus) {
+    public static void register(IEventBus eventBus) {
         REGISTER.register(eventBus);
     }
 
@@ -56,6 +57,14 @@ public class BlazingCreativeTabsImpl {
 
     public static ResourceKey<CreativeModeTab> getBuildingTabKey() {
         return BUILDING_TAB.getKey();
+    }
+
+    public static void useBaseTab() {
+        BlazingHot.registrate().setCreativeTab(BASE_TAB);
+    }
+
+    public static void useBuildingTab() {
+        BlazingHot.registrate().setCreativeTab(BUILDING_TAB);
     }
 
 }
