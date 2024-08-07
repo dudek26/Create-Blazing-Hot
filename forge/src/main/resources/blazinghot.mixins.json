@@ -9,7 +9,8 @@
     "EntityMixin",
     "ProcessingRecipeBuilderMixin",
     "ProcessingRecipeParamsMixin",
-    "ProcessingRecipeSerializerMixin"
+    "ProcessingRecipeSerializerMixin",
+    "RecipeManagerAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
