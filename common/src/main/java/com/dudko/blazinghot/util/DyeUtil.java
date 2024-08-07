@@ -15,21 +15,18 @@ import java.util.Arrays;
 
 public class DyeUtil {
 
-    public static ShapedRecipeBuilder dyeingMultiple(RecipeCategory category, TagKey<Item> tag, ItemLike result,
-                                                     DyeColor dyeColor) {
+    public static ShapedRecipeBuilder dyeingMultiple(RecipeCategory category, TagKey<Item> tag, ItemLike result, DyeColor dyeColor) {
         return ShapedRecipeBuilder
                 .shaped(category, result, 8)
                 .pattern("###")
                 .pattern("#d#")
                 .pattern("###")
-                .define('#',
-                        tag)
+                .define('#', tag)
                 .define('d', getDyeTag(dyeColor))
                 .unlockedBy("has_" + tag.location().getPath(), RegistrateRecipeProvider.has(tag));
     }
 
-    public static ShapelessRecipeBuilder dyeingSingle(RecipeCategory category, TagKey<Item> tag, ItemLike result,
-                                                      DyeColor dyeColor) {
+    public static ShapelessRecipeBuilder dyeingSingle(RecipeCategory category, TagKey<Item> tag, ItemLike result, DyeColor dyeColor) {
         return ShapelessRecipeBuilder
                 .shapeless(category, result, 1)
                 .requires(tag)

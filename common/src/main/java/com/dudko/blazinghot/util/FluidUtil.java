@@ -20,7 +20,8 @@ public class FluidUtil {
 
         if (total % denominator != 0) {
             throw new IllegalArgumentException("Not a valid number of droplets!");
-        } else {
+        }
+        else {
             return total / denominator;
         }
     }

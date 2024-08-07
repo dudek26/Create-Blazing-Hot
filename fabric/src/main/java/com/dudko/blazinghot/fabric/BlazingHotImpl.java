@@ -21,10 +21,8 @@ public class BlazingHotImpl implements ModInitializer {
     @Override
     public void onInitialize() {
         BlazingHot.init();
-        BlazingHot.LOGGER.info(EnvExecutor.unsafeRunForDist(
-                () -> () -> "{} is accessing Porting Lib on a Fabric client!",
-                () -> () -> "{} is accessing Porting Lib on a Fabric server!"
-                ), BlazingHot.NAME);
+        BlazingHot.LOGGER.info(EnvExecutor.unsafeRunForDist(() -> () -> "{} is accessing Porting Lib on a Fabric client!",
+                () -> () -> "{} is accessing Porting Lib on a Fabric server!"), BlazingHot.NAME);
     }
 
     public static void finalizeRegistrate() {

@@ -2,7 +2,6 @@ package com.dudko.blazinghot.content.kinetics.blaze_mixer.forge;
 
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
-import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.forge.BlazingRecipeTypesImpl;
 import com.dudko.blazinghot.util.FluidUtil;
@@ -242,34 +241,25 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
     protected List<Recipe<?>> getMatchingRecipes() {
         List<Recipe<?>> matchingRecipes = super.getMatchingRecipes();
 
-        if (!AllConfigs.server().recipes.allowBrewingInMixer.get())
-            return matchingRecipes;
+        if (!AllConfigs.server().recipes.allowBrewingInMixer.get()) return matchingRecipes;
 
         Optional<BasinBlockEntity> basin = getBasin();
-        if (!basin.isPresent())
-            return matchingRecipes;
+        if (!basin.isPresent()) return matchingRecipes;
 
         BasinBlockEntity basinBlockEntity = basin.get();
-        if (basin.isEmpty())
-            return matchingRecipes;
+        if (basin.isEmpty()) return matchingRecipes;
 
-        IItemHandler availableItems = basinBlockEntity
-                .getCapability(ForgeCapabilities.ITEM_HANDLER)
-                .orElse(null);
-        if (availableItems == null)
-            return matchingRecipes;
+        IItemHandler availableItems = basinBlockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).orElse(null);
+        if (availableItems == null) return matchingRecipes;
 
         for (int i = 0; i < availableItems.getSlots(); i++) {
             ItemStack stack = availableItems.getStackInSlot(i);
-            if (stack.isEmpty())
-                continue;
+            if (stack.isEmpty()) continue;
 
             List<MixingRecipe> list = PotionMixingRecipes.BY_ITEM.get(stack.getItem());
-            if (list == null)
-                continue;
+            if (list == null) continue;
             for (MixingRecipe mixingRecipe : list)
-                if (matchBasinRecipe(mixingRecipe))
-                    matchingRecipes.add(mixingRecipe);
+                if (matchBasinRecipe(mixingRecipe)) matchingRecipes.add(mixingRecipe);
         }
 
         return matchingRecipes;

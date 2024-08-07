@@ -14,11 +14,13 @@ public class BlazingItemApplicationRecipeGen extends BlazingProcessingRecipeGen 
         super(output);
     }
 
-    GeneratedRecipe BLAZE_CASING = create("blaze_casing_from_log",
-            b -> b
-                    .require(AllBlocks.COPPER_CASING)
-                    .require(CommonTags.Items.BLAZE_GOLD_PLATES.internal)
-                    .output(BlazingBlocks.BLAZE_CASING));
+    GeneratedRecipe
+            BLAZE_CASING =
+            create("blaze_casing_from_log",
+                    b -> b
+                            .require(AllBlocks.COPPER_CASING)
+                            .require(CommonTags.Items.BLAZE_GOLD_PLATES.internal)
+                            .output(BlazingBlocks.BLAZE_CASING));
 
 
     @Override

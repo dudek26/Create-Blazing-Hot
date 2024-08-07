@@ -16,8 +16,7 @@ import static com.dudko.blazinghot.registry.BlazingTags.titleCaseConversion;
 @SuppressWarnings("unchecked")
 public class CommonTags {
 
-    public static <T> TagKey<T> optionalTag(Registry<T> registry,
-                                            ResourceLocation id) {
+    public static <T> TagKey<T> optionalTag(Registry<T> registry, ResourceLocation id) {
         return TagKey.create(registry.key(), id);
     }
 
@@ -194,21 +193,21 @@ public class CommonTags {
             for (TagKey<Block> tag : blockTag.allTags()) {
                 ResourceLocation loc = tag.location();
                 consumer.accept("tag.block." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
-                                titleCaseConversion(blockTag.name()).replace('_', ' '));
+                        titleCaseConversion(blockTag.name()).replace('_', ' '));
             }
         }
         for (Items itemTag : Items.values()) {
             for (TagKey<Item> tag : itemTag.allTags()) {
                 ResourceLocation loc = tag.location();
                 consumer.accept("tag.item." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
-                                titleCaseConversion(itemTag.name().replace('_', ' ')));
+                        titleCaseConversion(itemTag.name().replace('_', ' ')));
             }
         }
         for (Fluids itemTag : Fluids.values()) {
             for (TagKey<Fluid> tag : itemTag.allTags()) {
                 ResourceLocation loc = tag.location();
                 consumer.accept("tag.fluid." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
-                                titleCaseConversion(itemTag.name().replace('_', ' ')));
+                        titleCaseConversion(itemTag.name().replace('_', ' ')));
             }
         }
     }

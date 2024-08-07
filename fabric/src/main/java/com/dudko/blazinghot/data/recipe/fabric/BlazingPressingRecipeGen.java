@@ -14,8 +14,9 @@ public class BlazingPressingRecipeGen extends BlazingProcessingRecipeGen {
         super(output);
     }
 
-    GeneratedRecipe BLAZE_GOLD = create("blaze_gold_ingot",
-            b -> b.require(BLAZE_GOLD_INGOT).output(BlazingItems.BLAZE_GOLD_SHEET.get()));
+    GeneratedRecipe
+            BLAZE_GOLD =
+            create("blaze_gold_ingot", b -> b.require(BLAZE_GOLD_INGOT).output(BlazingItems.BLAZE_GOLD_SHEET.get()));
 
     @Override
     protected IRecipeTypeInfo getRecipeType() {

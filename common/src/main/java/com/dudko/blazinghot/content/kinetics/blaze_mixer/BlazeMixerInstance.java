@@ -21,11 +21,12 @@ public class BlazeMixerInstance extends EncasedCogInstance implements DynamicIns
         super(materialManager, blockEntity, false);
         this.mixer = blockEntity;
 
-        mixerHead = materialManager
-                .defaultCutout()
-                .material(AllMaterialSpecs.ROTATING)
-                .getModel(BlazingPartialModels.BLAZE_MIXER_HEAD, blockState)
-                .createInstance();
+        mixerHead =
+                materialManager
+                        .defaultCutout()
+                        .material(AllMaterialSpecs.ROTATING)
+                        .getModel(BlazingPartialModels.BLAZE_MIXER_HEAD, blockState)
+                        .createInstance();
 
         mixerHead.setRotationAxis(Direction.Axis.Y);
 

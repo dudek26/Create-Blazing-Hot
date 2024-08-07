@@ -34,8 +34,9 @@ public class BlazeMixerRenderer extends KineticBlockEntityRenderer<BlazeMixerBlo
 
         VertexConsumer vb = buffer.getBuffer(RenderType.solid());
 
-        SuperByteBuffer superBuffer = CachedBufferer.partial(BlazingPartialModels.SHAFTLESS_CRIMSON_COGWHEEL,
-                blockState);
+        SuperByteBuffer
+                superBuffer =
+                CachedBufferer.partial(BlazingPartialModels.SHAFTLESS_CRIMSON_COGWHEEL, blockState);
         standardKineticRotationTransform(superBuffer, be, light).renderInto(ms, vb);
 
         float renderedHeadOffset = be.getRenderedHeadOffset(partialTicks);
@@ -49,8 +50,11 @@ public class BlazeMixerRenderer extends KineticBlockEntityRenderer<BlazeMixerBlo
         VertexConsumer vbCutout = buffer.getBuffer(RenderType.cutoutMipped());
 
         SuperByteBuffer headRender = CachedBufferer.partial(BlazingPartialModels.BLAZE_MIXER_HEAD, blockState);
-        headRender.rotateCentered(Direction.UP, angle).translate(0, -renderedHeadOffset, 0).light(light).renderInto(ms,
-                vbCutout);
+        headRender
+                .rotateCentered(Direction.UP, angle)
+                .translate(0, -renderedHeadOffset, 0)
+                .light(light)
+                .renderInto(ms, vbCutout);
     }
 
 }

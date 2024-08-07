@@ -19,7 +19,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ProcessingRecipeSerializer.class)
 public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
 
-    @Inject(method = "writeToJson(Lcom/google/gson/JsonObject;Lcom/simibubi/create/content/processing/recipe/ProcessingRecipe;)V", at = @At("HEAD"), remap = false)
+    @Inject(method = "writeToJson(Lcom/google/gson/JsonObject;Lcom/simibubi/create/content/processing/recipe/ProcessingRecipe;)V",
+            at = @At("HEAD"),
+            remap = false)
     protected void blazinghot$writeFuelToJson(JsonObject json, T recipe, CallbackInfo ci) {
         FluidIngredient blazinghot$fuel = ((IProcessingRecipe) recipe).blazinghot$getFuelFluid();
         if (blazinghot$fuel != FluidIngredient.EMPTY) {
@@ -34,7 +36,8 @@ public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
             remap = false)
     protected void blazinghot$readFuelFromJson(ResourceLocation recipeId, JsonObject json, CallbackInfoReturnable<T> cir, @Local ProcessingRecipeBuilder<T> builder) {
         if (GsonHelper.isValidNode(json, "blazinghot:fuel"))
-            ((IProcessingRecipeBuilder<T>) builder).blazinghot$requireFuel(FluidIngredient.deserialize(json.get("blazinghot:fuel")));
+            ((IProcessingRecipeBuilder<T>) builder).blazinghot$requireFuel(FluidIngredient.deserialize(json.get(
+                    "blazinghot:fuel")));
     }
 
 }

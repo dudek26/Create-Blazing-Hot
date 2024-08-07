@@ -14,8 +14,6 @@ import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.FluidInteractionRegistry;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 
-import java.util.function.Supplier;
-
 public class BlazingFluidsImpl {
 
     private static final CreateRegistrate REGISTRATE = BlazingHot.registrate();

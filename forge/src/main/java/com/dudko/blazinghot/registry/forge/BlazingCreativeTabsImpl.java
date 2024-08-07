@@ -6,12 +6,10 @@ import com.dudko.blazinghot.registry.BlazingCreativeTabs.RegistrateDisplayItemsG
 import com.dudko.blazinghot.registry.BlazingCreativeTabs.Tabs;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.simibubi.create.AllCreativeModeTabs;
-import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraftforge.eventbus.EventBus;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;

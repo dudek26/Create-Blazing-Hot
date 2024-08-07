@@ -3,7 +3,6 @@ package com.dudko.blazinghot.registry.forge;
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
-import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
@@ -14,7 +13,6 @@ import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -97,8 +95,11 @@ public enum BlazingRecipeTypesImpl implements IRecipeTypeInfo {
 
     private static class Registers {
         private static final DeferredRegister<RecipeSerializer<?>>
-                SERIALIZER_REGISTER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, BlazingHot.ID);
-        private static final DeferredRegister<RecipeType<?>> TYPE_REGISTER = DeferredRegister.create(Registries.RECIPE_TYPE, BlazingHot.ID);
+                SERIALIZER_REGISTER =
+                DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, BlazingHot.ID);
+        private static final DeferredRegister<RecipeType<?>>
+                TYPE_REGISTER =
+                DeferredRegister.create(Registries.RECIPE_TYPE, BlazingHot.ID);
     }
 
 }

@@ -49,8 +49,7 @@ public class BlazingCraftingRecipeGen extends BlazingRecipeProvider {
                 .viaShapeless(b -> b.requires(ingredient));
     }
 
-    private GeneratedRecipe covering(ItemLike ingredient, TagKey<Item> cover, ItemLike result,
-                                     TagKey<Item> unlockedBy) {
+    private GeneratedRecipe covering(ItemLike ingredient, TagKey<Item> cover, ItemLike result, TagKey<Item> unlockedBy) {
         return create(() -> result)
                 .unlockedByTag(() -> unlockedBy)
                 .viaShaped(b -> b
@@ -68,14 +67,8 @@ public class BlazingCraftingRecipeGen extends BlazingRecipeProvider {
         decompressing(BLAZE_GOLD_BLOCK, BLAZE_GOLD_INGOT, 9, BLAZE_GOLD_INGOT);
         decompressing(BLAZE_GOLD_INGOT, BLAZE_GOLD_NUGGET, 9, BLAZE_GOLD_INGOT);
 
-        covering(Items.CARROT,
-                 BLAZE_GOLD_NUGGETS.internal,
-                 BLAZE_CARROT,
-                 BLAZE_GOLD_INGOTS.internal);
-        covering(Items.CARROT,
-                 IRON_NUGGETS.fabric,
-                 IRON_CARROT,
-                 IRON_INGOTS.internal);
+        covering(Items.CARROT, BLAZE_GOLD_NUGGETS.internal, BLAZE_CARROT, BLAZE_GOLD_INGOTS.internal);
+        covering(Items.CARROT, IRON_NUGGETS.fabric, IRON_CARROT, IRON_INGOTS.internal);
         covering(Items.APPLE, IRON_INGOTS.internal, IRON_APPLE, IRON_INGOTS.internal);
     }
 

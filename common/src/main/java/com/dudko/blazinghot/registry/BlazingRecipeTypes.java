@@ -6,8 +6,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 
 // TODO - replace this when porting to NeoForge in 1.21
 public enum BlazingRecipeTypes {
-    BLAZE_MIXING()
-    ;
+    BLAZE_MIXING();
 
     BlazingRecipeTypes() {
     }

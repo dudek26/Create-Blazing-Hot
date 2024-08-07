@@ -17,15 +17,15 @@ public class BlazingCompactingRecipeGen extends BlazingProcessingRecipeGen {
     GeneratedRecipe
             MOLTEN_GOLD =
             create("molten_gold",
-                   b -> b.require(CommonTags.Fluids.MOLTEN_GOLD.internal, INGOT).output(Items.GOLD_INGOT)),
+                    b -> b.require(CommonTags.Fluids.MOLTEN_GOLD.internal, INGOT).output(Items.GOLD_INGOT)),
             MOLTEN_BLAZE_GOLD =
                     create("molten_blaze_gold",
-                           b -> b
-                                   .require(CommonTags.Fluids.MOLTEN_BLAZE_GOLD.internal, INGOT)
-                                   .output(BlazingItems.BLAZE_GOLD_INGOT)),
+                            b -> b
+                                    .require(CommonTags.Fluids.MOLTEN_BLAZE_GOLD.internal, INGOT)
+                                    .output(BlazingItems.BLAZE_GOLD_INGOT)),
             MOLTEN_IRON =
                     create("molten_iron",
-                           b -> b.require(CommonTags.Fluids.MOLTEN_IRON.internal, INGOT).output(Items.IRON_INGOT));
+                            b -> b.require(CommonTags.Fluids.MOLTEN_IRON.internal, INGOT).output(Items.IRON_INGOT));
 
     @Override
     protected IRecipeTypeInfo getRecipeType() {

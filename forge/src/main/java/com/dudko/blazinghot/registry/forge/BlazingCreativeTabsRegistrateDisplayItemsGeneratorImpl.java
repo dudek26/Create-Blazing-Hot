@@ -12,9 +12,11 @@ public class BlazingCreativeTabsRegistrateDisplayItemsGeneratorImpl {
         RegistryObject<CreativeModeTab> tabObject;
         if (tab == BlazingCreativeTabs.getBaseTabKey()) {
             tabObject = BlazingCreativeTabsImpl.BASE_TAB;
-        } else if (tab == BlazingCreativeTabs.getBuildingTabKey()) {
+        }
+        else if (tab == BlazingCreativeTabs.getBuildingTabKey()) {
             tabObject = BlazingCreativeTabsImpl.BUILDING_TAB;
-        } else {
+        }
+        else {
             tabObject = BlazingCreativeTabsImpl.BASE_TAB;
         }
         return CreateRegistrate.isInCreativeTab(entry, tabObject);

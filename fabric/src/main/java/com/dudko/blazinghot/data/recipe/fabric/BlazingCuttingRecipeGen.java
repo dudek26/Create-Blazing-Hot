@@ -13,8 +13,10 @@ public class BlazingCuttingRecipeGen extends BlazingProcessingRecipeGen {
         super(output);
     }
 
-    GeneratedRecipe BLAZE_GOLD_SHEET = create("blaze_gold_sheet",
-            b -> b.require(CommonTags.Items.BLAZE_GOLD_PLATES.internal).output(BlazingItems.BLAZE_GOLD_ROD, 2));
+    GeneratedRecipe
+            BLAZE_GOLD_SHEET =
+            create("blaze_gold_sheet",
+                    b -> b.require(CommonTags.Items.BLAZE_GOLD_PLATES.internal).output(BlazingItems.BLAZE_GOLD_ROD, 2));
 
     @Override
     protected IRecipeTypeInfo getRecipeType() {

@@ -7,7 +7,7 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 
-public class BlazeArrowEntityImpl extends BlazeArrowEntity{
+public class BlazeArrowEntityImpl extends BlazeArrowEntity {
 
     public BlazeArrowEntityImpl(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);

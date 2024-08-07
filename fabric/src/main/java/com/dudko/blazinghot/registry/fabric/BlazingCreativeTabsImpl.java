@@ -19,7 +19,8 @@ import java.util.function.Supplier;
 
 public class BlazingCreativeTabsImpl {
 
-    private static final TabInfo BASE_TAB =
+    private static final TabInfo
+            BASE_TAB =
             register("create_blazing_hot",
                     () -> FabricItemGroup
                             .builder()
