@@ -9,6 +9,7 @@ import com.simibubi.create.foundation.fluid.FluidIngredient;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.NonNullList;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("UnstableApiUsage")
@@ -27,6 +28,7 @@ public class BlazeMixingRecipe extends BasinRecipe {
         throw new AssertionError();
     }
 
+    @NotNull
     public FluidIngredient getFuelFluid() {
         if (fuelFluid == null) return FluidIngredient.EMPTY;
         return fuelFluid;

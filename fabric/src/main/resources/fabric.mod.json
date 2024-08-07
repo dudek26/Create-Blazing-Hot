@@ -24,6 +24,12 @@
     ],
     "fabric-datagen": [
       "com.dudko.blazinghot.fabric.BlazingHotDataFabric"
+    ],
+    "emi": [
+      "com.dudko.blazinghot.compat.emi.fabric.BlazingEmiPlugin"
+    ],
+    "jei_mod_plugin": [
+      "com.dudko.blazinghot.compat.jei.fabric.BlazingJEI"
     ]
   },
   "mixins": [
