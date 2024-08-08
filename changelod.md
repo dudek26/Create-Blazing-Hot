@@ -18,6 +18,9 @@ Create: Blazing Hot 0.5
 * Renamed `fuel` property in Blaze Mixing recipes to `blazinghot:fuel`
 * Nether Sprouts can now be used when crafting Nether Compound
 * Updated textures for Blaze Gold Ingot, Nugget, Sheet and Block
+* Modern Lamp crafting recipe now returns 2 lamps instead of 1
+* Blaze Arrow crafting recipe now returns 4 arrows instead of 2
+* Reduced amount of required Nether Essence to obtain Molten Blaze Gold from 4 to 2
 
 ### Fixed:
 

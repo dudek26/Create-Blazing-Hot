@@ -6,6 +6,7 @@ import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
+import com.dudko.blazinghot.util.FluidUtil;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
@@ -20,6 +21,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +51,7 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
                                     .output(BlazingItems.NETHERRACK_DUST)),
             MOLTEN_BLAZE_GOLD =
                     create("molten_blaze_gold",
-                            b -> requireMultiple(b, BlazingItems.NETHER_ESSENCE, 4)
+                            b -> requireMultiple(b, BlazingItems.NETHER_ESSENCE, 2)
                                     .require(CommonTags.Fluids.MOLTEN_GOLD.internal, INGOT / 2)
                                     .requiresHeat(HeatCondition.SUPERHEATED)
                                     .duration(200)

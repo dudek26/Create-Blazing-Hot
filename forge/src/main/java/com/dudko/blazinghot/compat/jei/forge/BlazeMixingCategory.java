@@ -63,7 +63,9 @@ public class BlazeMixingCategory extends BasinCategory {
             fuelFluid = FluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, calculatedCost);
         }
 
-        List<FluidStack> fuels = new ArrayList<>(fuelFluid.getMatchingFluidStacks());
+        List<FluidStack> fuels;
+        if (fuelFluid == FluidIngredient.EMPTY) fuels = new ArrayList<>();
+        else fuels = new ArrayList<>(fuelFluid.getMatchingFluidStacks());
 
         if (!fuels.isEmpty() && !fuels.get(0).isEmpty() && fuels.get(0) != null) builder
                 .addSlot(RecipeIngredientRole.INPUT, 36, 32)

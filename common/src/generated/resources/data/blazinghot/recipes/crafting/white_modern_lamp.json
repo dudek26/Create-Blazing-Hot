@@ -3,23 +3,20 @@
   "category": "misc",
   "key": {
     "X": {
-      "tag": "minecraft:coals"
-    },
-    "Y": {
       "item": "blazinghot:blaze_gold_rod"
     },
-    "Z": {
-      "item": "minecraft:feather"
+    "Y": {
+      "item": "minecraft:glowstone"
     }
   },
   "pattern": [
     " X ",
-    " Y ",
-    " Z "
+    "XYX",
+    " X "
   ],
   "result": {
-    "count": 4,
-    "item": "blazinghot:blaze_arrow"
+    "count": 2,
+    "item": "blazinghot:white_modern_lamp"
   },
   "show_notification": true
 }

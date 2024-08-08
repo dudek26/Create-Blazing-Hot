@@ -1,6 +1,8 @@
 package com.dudko.blazinghot.compat.jei.forge;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
+import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.dudko.blazinghot.mixin.forge.RecipeManagerAccessor;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
@@ -12,6 +14,7 @@ import com.simibubi.create.compat.jei.EmptyBackground;
 import com.simibubi.create.compat.jei.ItemIcon;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
+import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.foundation.config.ConfigBase;
@@ -309,6 +312,9 @@ public class BlazingJEI implements IModPlugin {
     }
 
     public static boolean doInputsMatch(Recipe<?> recipe1, Recipe<?> recipe2) {
+        if (recipe1 instanceof MixingRecipe mixing && recipe2 instanceof BlazeMixingRecipe blazeMixing) {
+            return BlazeMixerBlockEntity.doInputsMatch(mixing, blazeMixing);
+        }
         if (recipe1.getIngredients().isEmpty() || recipe2.getIngredients().isEmpty()) {
             return false;
         }

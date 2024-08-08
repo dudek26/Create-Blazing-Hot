@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.simibubi.create.foundation.utility.RegisteredObjects;
@@ -13,9 +14,11 @@ import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
@@ -73,20 +76,20 @@ public class BlazingCraftingRecipeGen extends BlazingRecipeProvider {
     }
 
     GeneratedRecipe
-            /* todo - fix lamp generator first
             WHITE_MODERN_LAMP =
             create(BlazingBlocks.MODERN_LAMP_BLOCKS.get(DyeColor.WHITE))
                     .unlockedBy(BLAZE_GOLD_ROD)
+                    .returns(2)
                     .viaShaped(b -> b
                             .define('X', BLAZE_GOLD_ROD)
                             .define('Y', Blocks.GLOWSTONE)
                             .pattern(" X ")
                             .pattern("XYX")
-                            .pattern(" X ")),*/
+                            .pattern(" X ")),
             BLAZE_ARROW =
             create(BlazingItems.BLAZE_ARROW)
                     .unlockedBy(BLAZE_GOLD_ROD)
-                    .returns(2)
+                    .returns(4)
                     .viaShaped(b -> b
                             .define('X', ItemTags.COALS)
                             .define('Y', BLAZE_GOLD_ROD)

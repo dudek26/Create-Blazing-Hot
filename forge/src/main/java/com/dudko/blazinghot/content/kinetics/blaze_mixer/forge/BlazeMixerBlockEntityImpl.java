@@ -33,10 +33,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingRecipe;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
@@ -274,12 +271,12 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
         if (recipe instanceof BlazeMixingRecipe bmxRecipe) {
             return BasinRecipe.match(basin.get(), bmxRecipe) && hasFuel(bmxRecipe.getFuelFluid());
         }
-        else if (recipe instanceof MixingRecipe) {
+        else if (recipe instanceof MixingRecipe mRecipe) {
             assert level != null;
             RecipeManager manager = level.getRecipeManager();
             List<BlazeMixingRecipe> bmRecipes = manager.getAllRecipesFor(BlazingRecipeTypesImpl.BLAZE_MIXING.getType());
             for (BlazeMixingRecipe bmRecipe : bmRecipes) {
-                if (doInputsMatch(bmRecipe, recipe)) return false;
+                if (doInputsMatch(bmRecipe, mRecipe)) return false;
             }
         }
 
@@ -312,5 +309,20 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
                 containedFluidTooltip(tooltip, isPlayerSneaking, getCapability(ForgeCapabilities.FLUID_HANDLER));
 
         return kinetics || fluids;
+    }
+
+    public static boolean doFluidInputsMatch(ProcessingRecipe<?> a, ProcessingRecipe<?> b) {
+        if (!a.getFluidIngredients().isEmpty() && !b.getFluidIngredients().isEmpty()) {
+            List<List<FluidStack>> allItems = a.getFluidIngredients().stream().map(FluidIngredient::getMatchingFluidStacks).toList();
+            for (List<FluidStack> matchingStacks : allItems) {
+                boolean matched = false;
+                if (!matchingStacks.isEmpty()) {
+                    matched = b.getFluidIngredients().stream().anyMatch(i -> i.test(matchingStacks.getFirst()));
+                }
+                if (matched) continue;
+                return false;
+            }
+            return true;
+        } else return !a.getIngredients().isEmpty() && !b.getIngredients().isEmpty();
     }
 }

@@ -4,12 +4,14 @@ import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.foundation.advancement.AllAdvancements;
 import com.simibubi.create.foundation.advancement.CreateAdvancement;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.VecHelper;
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.core.BlockPos;
@@ -20,6 +22,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -130,14 +133,28 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
     @Override
     protected abstract <C extends Container> boolean matchBasinRecipe(Recipe<C> recipe);
 
-    public static boolean doInputsMatch(Recipe<?> a, Recipe<?> b) {
+    public static boolean doInputsMatch(ProcessingRecipe<?> a, ProcessingRecipe<?> b) {
+        return doItemInputsMatch(a, b) && doFluidInputsMatch(a, b);
+    }
+
+    public static boolean doItemInputsMatch(ProcessingRecipe<?> a, ProcessingRecipe<?> b) {
         if (!a.getIngredients().isEmpty() && !b.getIngredients().isEmpty()) {
-            ItemStack[] matchingStacks = a.getIngredients().get(0).getItems();
-            if (matchingStacks.length != 0) {
-                return b.getIngredients().get(0).test(matchingStacks[0]);
+            List<ItemStack[]> allItems = a.getIngredients().stream().map(Ingredient::getItems).toList();
+            for (ItemStack[] matchingStacks : allItems) {
+                boolean matched = false;
+                if (matchingStacks.length != 0) {
+                    matched = b.getIngredients().stream().anyMatch(i -> i.test(matchingStacks[0]));
+                }
+                if (matched) continue;
+                return false;
             }
-        }
-        return false;
+            return true;
+        } else return !a.getFluidIngredients().isEmpty() && !b.getFluidIngredients().isEmpty();
+    }
+
+    @ExpectPlatform
+    public static boolean doFluidInputsMatch(ProcessingRecipe<?> a, ProcessingRecipe<?> b) {
+        return true; // no assertion error so IntelliJ doesn't cry
     }
 
 

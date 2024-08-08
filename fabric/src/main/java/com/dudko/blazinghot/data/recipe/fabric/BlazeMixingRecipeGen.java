@@ -5,6 +5,7 @@ import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
+import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
 import com.dudko.blazinghot.util.FluidUtil;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
@@ -43,7 +44,7 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
             melting(CommonTags.Items.BLAZE_GOLD_RODS.internal, MultiloaderFluids.MOLTEN_BLAZE_GOLD.get(), Forms.ROD),
             NETHER_LAVA =
                     create("nether_lava",
-                            b -> requireMultiple(b, BlazingItems.NETHER_ESSENCE, 4)
+                            b -> requireMultiple(b, BlazingItems.NETHER_ESSENCE, 2)
                                     .require(FluidIngredient.fromFluid(Fluids.LAVA, FluidUtil.BLOCK / 10))
                                     .requiresHeat(HeatCondition.SUPERHEATED)
                                     .output(MultiloaderFluids.NETHER_LAVA.get(), FluidConstants.BLOCK / 10)),
@@ -51,7 +52,7 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
                     create("molten_blaze_gold",
                             b -> ((IProcessingRecipeBuilder<ProcessingRecipe<?>>) requireMultiple(b,
                                     BlazingItems.NETHER_ESSENCE,
-                                    4))
+                                    2))
                                     .blazinghot$requireFuel(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag,
                                             FluidConstants.BLOCK / 20)
                                     .require(CommonTags.Fluids.MOLTEN_GOLD.internal, INGOT)

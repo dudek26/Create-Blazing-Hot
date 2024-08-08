@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.compat.emi.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.fabric.BlazingRecipeTypesImpl;
@@ -20,6 +21,7 @@ import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.render.EmiRenderable;
 import dev.emi.emi.api.stack.EmiStack;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 
@@ -96,6 +98,22 @@ public class BlazingEmiPlugin implements EmiPlugin {
         EmiRecipeCategory category = new EmiRecipeCategory(id, icon);
         ALL.put(id, category);
         return category;
+    }
+
+    public static boolean doInputsMatch(Recipe<?> a, Recipe<?> b) {
+        if (a instanceof MixingRecipe mixing && b instanceof BlazeMixingRecipe blazeMixing) {
+            return BlazeMixerBlockEntity.doInputsMatch(mixing, blazeMixing);
+        }
+
+        if (!a.getIngredients().isEmpty() && !b.getIngredients().isEmpty()) {
+            ItemStack[] matchingStacks = a.getIngredients().get(0).getItems();
+            if (matchingStacks.length != 0) {
+                if (b.getIngredients().get(0).test(matchingStacks[0])) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @SuppressWarnings("unchecked")

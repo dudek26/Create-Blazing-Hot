@@ -284,12 +284,12 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
         if (recipe instanceof BlazeMixingRecipe bmxRecipe) {
             return BasinRecipe.match(basin.get(), bmxRecipe) && hasFuel(bmxRecipe.getFuelFluid());
         }
-        else if (recipe instanceof MixingRecipe) {
+        else if (recipe instanceof MixingRecipe mRecipe) {
             assert level != null;
             RecipeManager manager = level.getRecipeManager();
             List<BlazeMixingRecipe> bmRecipes = manager.getAllRecipesFor(BlazingRecipeTypes.BLAZE_MIXING.getType());
             for (BlazeMixingRecipe bmRecipe : bmRecipes) {
-                if (doInputsMatch(bmRecipe, recipe)) return false;
+                if (doInputsMatch(bmRecipe, mRecipe)) return false;
             }
         }
 
@@ -311,5 +311,20 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
         boolean fluids = containedFluidTooltip(tooltip, isPlayerSneaking, getFluidStorage(null));
 
         return kinetics || fluids;
+    }
+
+    public static boolean doFluidInputsMatch(ProcessingRecipe<?> a, ProcessingRecipe<?> b) {
+        if (!a.getFluidIngredients().isEmpty() && !b.getFluidIngredients().isEmpty()) {
+            List<List<FluidStack>> allItems = a.getFluidIngredients().stream().map(FluidIngredient::getMatchingFluidStacks).toList();
+            for (List<FluidStack> matchingStacks : allItems) {
+                boolean matched = false;
+                if (!matchingStacks.isEmpty()) {
+                    matched = b.getFluidIngredients().stream().anyMatch(i -> i.test(matchingStacks.getFirst()));
+                }
+                if (matched) continue;
+                return false;
+            }
+            return true;
+        } else return !a.getIngredients().isEmpty() && !b.getIngredients().isEmpty();
     }
 }
