@@ -1,7 +1,8 @@
- plugins {
+plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT"
     id "dev.architectury.loom" version "1.6-SNAPSHOT" apply false
     id "io.github.p03w.machete" version "1.+" // automatic jar compressing on build
+    id "dev.ithundxr.silk" version "0.11.16"
 }
 
 architectury {
@@ -80,6 +81,13 @@ allprojects {
 
 }
 
- tasks.create("publishMod") {
-     
- }
+String platform = System.getenv("PLATFORM")
+tasks.register("blazinghotPublish") {
+    if (platform == "both") {
+        dependsOn(tasks.build, ":fabric:publishMods", ":forge:publishMods")
+    }
+    else if (platform == "forge" || platform == "fabric") {
+        dependsOn("${platform}:build", "${platform}:publishMods")
+    }
+    else throw new NullPointerException("Invalid platform")
+}

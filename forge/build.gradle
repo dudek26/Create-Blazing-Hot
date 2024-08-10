@@ -1,5 +1,8 @@
+import dev.ithundxr.silk.ChangelogText
+
 plugins {
     id "com.github.johnrengelman.shadow" version "7.1.2"
+    id "me.modmuss50.mod-publish-plugin" version "0.6.3"
 }
 
 architectury {
