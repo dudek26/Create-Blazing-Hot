@@ -1,9 +1,13 @@
 package com.dudko.blazinghot.content.kinetics.blaze_mixer;
 
-import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.config.BlazingConfigs;
+import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.kinetics.base.IRotate;
+import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
+import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.foundation.advancement.AllAdvancements;
@@ -12,7 +16,9 @@ import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTank
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.VecHelper;
+import com.simibubi.create.infrastructure.config.AllConfigs;
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import io.github.fabricators_of_create.porting_lib.brewing.BrewingRecipe;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.core.BlockPos;
@@ -23,8 +29,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -114,6 +122,23 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
         super.write(compound, clientPacket);
     }
 
+    public static float multipliedRecipeSpeed(float speed, Recipe<?> r) {
+        if (r instanceof MixingRecipe && PotionMixingRecipes.ALL.contains(r)) {
+            return speed / BlazingConfigs.server().blazeBrewingSpeedMultiplier.getF();
+        }
+        else if (r.getType() == AllRecipeTypes.MIXING.getType()) {
+            return speed / BlazingConfigs.server().blazeMixingSpeedMultiplier.getF();
+        }
+        else if ((r instanceof CraftingRecipe
+                && !(r instanceof ShapedRecipe)
+                && AllConfigs.server().recipes.allowShapelessInMixer.get()
+                && r.getIngredients().size() > 1
+                && !MechanicalPressBlockEntity.canCompress(r)) && !AllRecipeTypes.shouldIgnoreInAutomation(r)) {
+            return speed / BlazingConfigs.server().blazeShapelessSpeedMultiplier.getF();
+        }
+        return speed;
+    }
+
     public abstract void updateFueled();
 
     public abstract void renderFuelParticles();
@@ -150,7 +175,8 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
                 return false;
             }
             return true;
-        } else return !a.getFluidIngredients().isEmpty() && !b.getFluidIngredients().isEmpty();
+        }
+        else return !a.getFluidIngredients().isEmpty() && !b.getFluidIngredients().isEmpty();
     }
 
     @ExpectPlatform

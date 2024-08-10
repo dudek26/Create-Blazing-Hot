@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.compat.emi.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.dudko.blazinghot.registry.BlazingBlocks;
@@ -30,6 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 
+import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe.getFuelCost;
 import static com.simibubi.create.compat.emi.CreateEmiPlugin.doInputsMatch;
 
 public class BlazingEmiPlugin implements EmiPlugin {
@@ -77,17 +79,17 @@ public class BlazingEmiPlugin implements EmiPlugin {
 
         for (CraftingRecipe recipe : manager.getAllRecipesFor(RecipeType.CRAFTING)) {
             if (recipe instanceof ShapelessRecipe
-                    && AllConfigs.server().recipes.allowShapelessInMixer.get()
+                    && BlazingConfigs.server().allowShapelessInBlazeMixer.get()
                     && !MechanicalPressBlockEntity.canCompress(recipe)
                     && !AllRecipeTypes.shouldIgnoreInAutomation(recipe)
                     && recipe.getIngredients().size() > 1) {
                 registry.addRecipe(new BlazeShapelessEmiRecipe(BLAZE_AUTOMATIC_SHAPELESS,
-                        BasinRecipe.convertShapeless(recipe)));
+                        BasinRecipe.convertShapeless(recipe), getFuelCost(recipe)));
             }
         }
 
         for (MixingRecipe recipe : PotionMixingRecipes.ALL) {
-            if (AllConfigs.server().recipes.allowBrewingInMixer.get()) registry.addRecipe(new BlazeMixingEmiRecipe(
+            if (BlazingConfigs.server().allowBrewingInBlazeMixer.get()) registry.addRecipe(new BlazeMixingEmiRecipe(
                     BLAZE_AUTOMATIC_BREWING,
                     recipe));
         }

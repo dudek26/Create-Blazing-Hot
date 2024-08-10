@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.content.kinetics.blaze_mixer.forge;
 
+import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.dudko.blazinghot.registry.BlazingTags;
@@ -21,7 +22,6 @@ import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.utility.Couple;
 import com.simibubi.create.foundation.utility.VecHelper;
-import com.simibubi.create.infrastructure.config.AllConfigs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ItemParticleOption;
@@ -33,7 +33,10 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
@@ -49,7 +52,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Optional;
 
-import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe.durationToFuelCost;
+import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe.getFuelCost;
 import static com.dudko.blazinghot.util.FluidUtil.platformedAmount;
 
 @SuppressWarnings("UnstableApiUsage")
@@ -130,9 +133,8 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
                     float recipeSpeed = 1;
                     fuelCost = 0;
                     blazeMixing = false;
-                    int t = 0;
                     if (currentRecipe instanceof ProcessingRecipe) {
-                        t = ((ProcessingRecipe<?>) currentRecipe).getProcessingDuration();
+                        int t = ((ProcessingRecipe<?>) currentRecipe).getProcessingDuration();
                         if (t != 0) {
                             recipeSpeed = t / 100f;
                         }
@@ -143,9 +145,9 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
                             blazeMixing = true;
                         }
                     }
-                    int calculatedCost = (int) durationToFuelCost(t);
+                    int calculatedCost = (int) getFuelCost(currentRecipe);
                     if (hasFuel(calculatedCost) && !(currentRecipe instanceof BlazeMixingRecipe)) {
-                        recipeSpeed /= 2;
+                        recipeSpeed = multipliedRecipeSpeed(recipeSpeed, currentRecipe);
                         blazeMixing = true;
                         fuelCost = calculatedCost;
                     }
@@ -238,7 +240,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
     protected List<Recipe<?>> getMatchingRecipes() {
         List<Recipe<?>> matchingRecipes = super.getMatchingRecipes();
 
-        if (!AllConfigs.server().recipes.allowBrewingInMixer.get()) return matchingRecipes;
+        if (!BlazingConfigs.server().allowBrewingInBlazeMixer.get()) return matchingRecipes;
 
         Optional<BasinBlockEntity> basin = getBasin();
         if (!basin.isPresent()) return matchingRecipes;
@@ -287,10 +289,11 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
     protected <C extends Container> boolean matchStaticFilters(Recipe<C> r) {
         return ((r instanceof CraftingRecipe
                 && !(r instanceof ShapedRecipe)
-                && AllConfigs.server().recipes.allowShapelessInMixer.get()
+                && BlazingConfigs.server().allowShapelessInBlazeMixer.get()
                 && r.getIngredients().size() > 1
                 && !MechanicalPressBlockEntity.canCompress(r)) && !AllRecipeTypes.shouldIgnoreInAutomation(r)
-                || r.getType() == AllRecipeTypes.MIXING.getType())
+                || (r.getType() == AllRecipeTypes.MIXING.getType()
+                && BlazingConfigs.server().allowMixingInBlazeMixer.get()))
                 || r.getType() == BlazingRecipeTypesImpl.BLAZE_MIXING.getType();
     }
 
@@ -313,7 +316,9 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 
     public static boolean doFluidInputsMatch(ProcessingRecipe<?> a, ProcessingRecipe<?> b) {
         if (!a.getFluidIngredients().isEmpty() && !b.getFluidIngredients().isEmpty()) {
-            List<List<FluidStack>> allItems = a.getFluidIngredients().stream().map(FluidIngredient::getMatchingFluidStacks).toList();
+            List<List<FluidStack>>
+                    allItems =
+                    a.getFluidIngredients().stream().map(FluidIngredient::getMatchingFluidStacks).toList();
             for (List<FluidStack> matchingStacks : allItems) {
                 boolean matched = false;
                 if (!matchingStacks.isEmpty()) {
@@ -323,6 +328,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
                 return false;
             }
             return true;
-        } else return !a.getIngredients().isEmpty() && !b.getIngredients().isEmpty();
+        }
+        else return !a.getIngredients().isEmpty() && !b.getIngredients().isEmpty();
     }
 }

@@ -19,18 +19,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.dudko.blazinghot.compat.emi.fabric.BlazingEmiAnimations.addBlazeMixer;
+import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe.getFuelCost;
 
 public class BlazeMixingEmiRecipe extends BasinEmiRecipe {
 
-    private final List<EmiIngredient> fuels;
+    protected List<EmiIngredient> fuels;
 
     public BlazeMixingEmiRecipe(EmiRecipeCategory category, BasinRecipe recipe) {
         super(category, recipe, category != CreateEmiPlugin.AUTOMATIC_SHAPELESS);
         FluidIngredient fuelFluid;
         if (recipe instanceof BlazeMixingRecipe bmRecipe) fuelFluid = bmRecipe.getFuelFluid();
         else {
-            long calculatedCost = BlazeMixingRecipe.durationToFuelCost(recipe.getProcessingDuration());
-            fuelFluid = FluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, calculatedCost);
+            long calculatedCost = getFuelCost(recipe);
+            fuelFluid =
+                    calculatedCost > 0 ?
+                    FluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, calculatedCost) :
+                    FluidIngredient.EMPTY;
 
             ResourceLocation id = recipe.getId();
             this.id = new ResourceLocation("emi", "blazinghot/blaze_mixing/" + id.getNamespace() + "/" + id.getPath());

@@ -8,6 +8,9 @@ Create: Blazing Hot 0.5
 
 * **⚒ Forge support**
 * Regular mixing recipe for melting Blaze Gold Rods
+* Configuration options for toggling effect tooltips for custom food
+* Toggleable effect tooltips for vanilla Golden Apples
+* New configuration options for blaze mixing
 
 ### Changed:
 

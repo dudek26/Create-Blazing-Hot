@@ -21,6 +21,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe.getFuelCost;
+
 public class BlazeMixingCategory extends BasinCategory {
 
     private final AnimatedBlazeMixer mixer = new AnimatedBlazeMixer();
@@ -56,8 +58,11 @@ public class BlazeMixingCategory extends BasinCategory {
         FluidIngredient fuelFluid;
         if (recipe instanceof BlazeMixingRecipe bmRecipe) fuelFluid = bmRecipe.getFuelFluid();
         else {
-            long calculatedCost = BlazeMixingRecipe.durationToFuelCost(recipe.getProcessingDuration());
-            fuelFluid = FluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, calculatedCost);
+            long calculatedCost = getFuelCost(recipe);
+            fuelFluid =
+                    calculatedCost > 0 ?
+                    FluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, calculatedCost) :
+                    FluidIngredient.EMPTY;
         }
 
         List<FluidStack> fuels;

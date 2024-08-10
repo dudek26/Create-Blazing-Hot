@@ -2,7 +2,6 @@ package com.dudko.blazinghot.compat.jei.forge;
 
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.dudko.blazinghot.registry.BlazingTags;
-import com.dudko.blazinghot.util.FluidUtil;
 import com.simibubi.create.compat.jei.category.BasinCategory;
 import com.simibubi.create.compat.jei.category.animations.AnimatedBlazeBurner;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
@@ -57,10 +56,11 @@ public class BlazeMixingCategory extends BasinCategory {
         FluidIngredient fuelFluid;
         if (recipe instanceof BlazeMixingRecipe bmRecipe) fuelFluid = bmRecipe.getFuelFluid();
         else {
-            int
-                    calculatedCost =
-                    (int) BlazeMixingRecipe.durationToFuelCost(recipe.getProcessingDuration());
-            fuelFluid = FluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, calculatedCost);
+            int calculatedCost = (int) BlazeMixingRecipe.getFuelCost(recipe);
+            fuelFluid =
+                    calculatedCost > 0 ?
+                    FluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, calculatedCost) :
+                    FluidIngredient.EMPTY;
         }
 
         List<FluidStack> fuels;
