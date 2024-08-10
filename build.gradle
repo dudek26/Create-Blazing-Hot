@@ -89,5 +89,5 @@ tasks.register("blazinghotPublish") {
     else if (platform == "forge" || platform == "fabric") {
         dependsOn("${platform}:build", "${platform}:publishMods")
     }
-    else throw new NullPointerException("Invalid platform")
+    else throw new NullPointerException("Invalid platform: " + platform)
 }

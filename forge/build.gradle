@@ -20,6 +20,37 @@ loom {
 
 }
 
+publishMods {
+    String uncutChangelogText = ChangelogText.getChangelogText(rootProject).toString()
+    String changelogText = uncutChangelogText.startsWith("Create:") ? uncutChangelogText.split(":", 3)[2] : uncutChangelogText.split(":", 2)[1]
+
+    file = jar.archiveFile
+    modLoaders.add("forge")
+    modLoaders.add("neoforge")
+    changelog = changelogText
+    displayName = "Create: Blazing Hot v${mod_version} for Forge ${minecraft_version}"
+    type = release_type.equalsIgnoreCase("beta") ? BETA : release_type.equalsIgnoreCase("alpha") ? ALPHA : STABLE
+
+    modrinth {
+        minecraftVersions.add("1.20.1")
+        projectId = modrinth_id
+        accessToken = System.getenv("MODRINTH_TOKEN")
+
+        requires("create")
+    }
+
+    /* TODO - disabled for testing
+    curseforge {
+        minecraftVersions.add("1.20.1")
+        projectId = curseforge_id
+        accessToken = System.getenv("CURSEFORGE_TOKEN")
+
+        requires("create-fabric")
+        optional("emi")
+    }
+     */
+}
+
 configurations {
     common
     shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.

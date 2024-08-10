@@ -45,5 +45,5 @@ jobs:
           RELEASE_BUILD: true
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
           CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
-          PLATFORM: ${{ github.events.inputs.platform }}
+          PLATFORM: ${{ inputs.platform }}
         run: ./gradlew blazinghotPublish
