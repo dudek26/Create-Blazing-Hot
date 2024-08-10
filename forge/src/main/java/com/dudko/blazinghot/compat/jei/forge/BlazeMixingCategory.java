@@ -59,7 +59,7 @@ public class BlazeMixingCategory extends BasinCategory {
         else {
             int
                     calculatedCost =
-                    (int) FluidUtil.platformedAmount(BlazeMixingRecipe.durationToFuelCost(recipe.getProcessingDuration()));
+                    (int) BlazeMixingRecipe.durationToFuelCost(recipe.getProcessingDuration());
             fuelFluid = FluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, calculatedCost);
         }
 

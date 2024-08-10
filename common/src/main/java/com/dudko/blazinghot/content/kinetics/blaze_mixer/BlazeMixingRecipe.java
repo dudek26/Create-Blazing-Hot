@@ -42,6 +42,9 @@ public class BlazeMixingRecipe extends BasinRecipe {
         return results;
     }
 
+    /**
+     * @apiNote Already platformed.
+     */
     public static long durationToFuelCost(int duration) {
         float recipeSpeed = 1;
         if (duration != 0) {

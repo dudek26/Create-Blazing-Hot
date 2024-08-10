@@ -289,7 +289,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
             RecipeManager manager = level.getRecipeManager();
             List<BlazeMixingRecipe> bmRecipes = manager.getAllRecipesFor(BlazingRecipeTypes.BLAZE_MIXING.getType());
             for (BlazeMixingRecipe bmRecipe : bmRecipes) {
-                if (doInputsMatch(bmRecipe, mRecipe)) return false;
+                if (doInputsMatch(mRecipe, bmRecipe)) return false;
             }
         }
 
@@ -319,7 +319,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
             for (List<FluidStack> matchingStacks : allItems) {
                 boolean matched = false;
                 if (!matchingStacks.isEmpty()) {
-                    matched = b.getFluidIngredients().stream().anyMatch(i -> i.test(matchingStacks.getFirst()));
+                    matched = b.getFluidIngredients().stream().anyMatch(i -> i.test(matchingStacks.get(0)));
                 }
                 if (matched) continue;
                 return false;

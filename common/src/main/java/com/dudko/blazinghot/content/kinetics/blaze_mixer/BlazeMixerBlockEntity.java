@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.content.kinetics.blaze_mixer;
 
+import com.dudko.blazinghot.BlazingHot;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.base.IRotate;

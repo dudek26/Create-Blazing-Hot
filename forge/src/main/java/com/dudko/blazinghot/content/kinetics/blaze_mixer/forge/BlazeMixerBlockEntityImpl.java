@@ -143,7 +143,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
                             blazeMixing = true;
                         }
                     }
-                    int calculatedCost = (int) platformedAmount(durationToFuelCost(t));
+                    int calculatedCost = (int) durationToFuelCost(t);
                     if (hasFuel(calculatedCost) && !(currentRecipe instanceof BlazeMixingRecipe)) {
                         recipeSpeed /= 2;
                         blazeMixing = true;
@@ -276,7 +276,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
             RecipeManager manager = level.getRecipeManager();
             List<BlazeMixingRecipe> bmRecipes = manager.getAllRecipesFor(BlazingRecipeTypesImpl.BLAZE_MIXING.getType());
             for (BlazeMixingRecipe bmRecipe : bmRecipes) {
-                if (doInputsMatch(bmRecipe, mRecipe)) return false;
+                if (doInputsMatch(mRecipe, bmRecipe)) return false;
             }
         }
 
@@ -317,7 +317,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
             for (List<FluidStack> matchingStacks : allItems) {
                 boolean matched = false;
                 if (!matchingStacks.isEmpty()) {
-                    matched = b.getFluidIngredients().stream().anyMatch(i -> i.test(matchingStacks.getFirst()));
+                    matched = b.getFluidIngredients().stream().anyMatch(i -> i.test(matchingStacks.get(0)));
                 }
                 if (matched) continue;
                 return false;

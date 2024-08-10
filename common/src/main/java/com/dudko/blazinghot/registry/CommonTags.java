@@ -13,6 +13,9 @@ import java.util.function.BiConsumer;
 
 import static com.dudko.blazinghot.registry.BlazingTags.titleCaseConversion;
 
+/**
+ * @apiNote Internal tags are used for recipes, advancements etc.
+ */
 @SuppressWarnings("unchecked")
 public class CommonTags {
 

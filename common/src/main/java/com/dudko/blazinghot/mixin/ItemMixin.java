@@ -20,7 +20,6 @@ import java.util.List;
 @Mixin(Item.class)
 public abstract class ItemMixin {
 
-    //todo - add config for that
     @Unique
     private boolean blazinghot$isEligibleItem() {
         if (!BlazingConfigs.client().vanillaAppleTooltips.get()) return false;
