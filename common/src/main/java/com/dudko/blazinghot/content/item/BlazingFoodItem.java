@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.content.item;
 
+import com.dudko.blazinghot.config.BlazingConfigs;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
@@ -48,7 +49,7 @@ public class BlazingFoodItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> lines, TooltipFlag isAdvanced) {
-        if (effectTooltip) {
+        if (effectTooltip && BlazingConfigs.client().foodTooltips.get()) {
             Item item = stack.getItem();
             if (item.getFoodProperties() != null) item
                     .getFoodProperties()

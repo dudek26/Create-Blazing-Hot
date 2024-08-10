@@ -27,6 +27,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
+import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe.defaultDurationToFuelCost;
+
 @SuppressWarnings({"unused", "UnstableApiUsage"})
 public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 
@@ -60,19 +62,19 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
         }
 
         Forms(long amount, String tagSuffix, int meltingTime) {
-            this(amount, tagSuffix, meltingTime, BlazeMixingRecipe.durationToFuelCost(meltingTime));
+            this(amount, tagSuffix, meltingTime, defaultDurationToFuelCost(meltingTime));
         }
 
         Forms(long amount, String tagSuffix, int meltingTime, boolean mechanicalMixerMelting) {
             this(amount,
                     tagSuffix,
                     meltingTime,
-                    BlazeMixingRecipe.durationToFuelCost(meltingTime),
+                    defaultDurationToFuelCost(meltingTime),
                     mechanicalMixerMelting);
         }
 
         Forms(long amount, String tagSuffix, int meltingTime, long fuelCost) {
-            this(amount, tagSuffix, meltingTime, BlazeMixingRecipe.durationToFuelCost(meltingTime), true);
+            this(amount, tagSuffix, meltingTime, defaultDurationToFuelCost(meltingTime), true);
         }
 
         public TagKey<Item> tag(String material) {

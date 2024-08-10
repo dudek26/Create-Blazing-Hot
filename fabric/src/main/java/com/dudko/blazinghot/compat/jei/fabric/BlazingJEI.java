@@ -115,7 +115,7 @@ public class BlazingJEI implements IModPlugin {
     }
 
     @Override
-    public void registerRecipes(IRecipeRegistration registration) {
+    public void registerRecipes(@NotNull IRecipeRegistration registration) {
         allCategories.forEach(c -> c.registerRecipes(registration));
     }
 
@@ -124,6 +124,7 @@ public class BlazingJEI implements IModPlugin {
         allCategories.forEach(c -> c.registerCatalysts(registration));
     }
 
+    @SuppressWarnings({"unused", "UnusedReturnValue", "unchecked"})
     private class CategoryBuilder<T extends Recipe<?>> {
         private final Class<? extends T> recipeClass;
         private Predicate<CRecipes> predicate = cRecipes -> true;

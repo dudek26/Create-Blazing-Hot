@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.config.fabric.BlazingConfigsImpl;
 import com.dudko.blazinghot.data.fabric.BlazingLangGen;
 import com.dudko.blazinghot.data.fabric.BlazingTagGen;
 import com.dudko.blazinghot.data.recipe.fabric.BlazingCraftingRecipeGen;
@@ -21,6 +22,7 @@ public class BlazingHotImpl implements ModInitializer {
     @Override
     public void onInitialize() {
         BlazingHot.init();
+        BlazingConfigsImpl.register();
         BlazingHot.LOGGER.info(EnvExecutor.unsafeRunForDist(() -> () -> "{} is accessing Porting Lib on a Fabric client!",
                 () -> () -> "{} is accessing Porting Lib on a Fabric server!"), BlazingHot.NAME);
     }

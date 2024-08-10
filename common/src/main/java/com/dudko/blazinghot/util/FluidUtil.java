@@ -31,4 +31,14 @@ public class FluidUtil {
         throw new AssertionError();
     }
 
+    @ExpectPlatform
+    public static String platformedName() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static String conversionNote() {
+        throw new AssertionError();
+    }
+
 }

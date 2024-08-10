@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.content.kinetics.blaze_mixer;
 
+import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.dudko.blazinghot.util.FluidUtil;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
@@ -9,8 +10,11 @@ import com.simibubi.create.foundation.fluid.FluidIngredient;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.NonNullList;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import static com.dudko.blazinghot.util.FluidUtil.fromBucketFraction;
 
 @SuppressWarnings("UnstableApiUsage")
 public class BlazeMixingRecipe extends BasinRecipe {
@@ -43,6 +47,18 @@ public class BlazeMixingRecipe extends BasinRecipe {
         if (duration != 0) {
             recipeSpeed = duration / 100f;
         }
-        return Mth.ceil(recipeSpeed * FluidUtil.fromBucketFraction(1, 40));
+        return Mth.ceil(recipeSpeed * BlazingConfigs.server().durationToFuelConversion.get());
+    }
+
+    /**
+     * Used in melting recipes' datagen
+     */
+    @ApiStatus.Internal
+    public static long defaultDurationToFuelCost(int duration) {
+        float recipeSpeed = 1;
+        if (duration != 0) {
+            recipeSpeed = duration / 100f;
+        }
+        return Mth.ceil(recipeSpeed * fromBucketFraction(1, 40));
     }
 }

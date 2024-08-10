@@ -1,12 +1,15 @@
 package com.dudko.blazinghot.forge;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.config.forge.BlazingConfigsImpl;
+import com.dudko.blazinghot.multiloader.Env;
 import com.dudko.blazinghot.registry.forge.BlazingCreativeTabsImpl;
 import com.dudko.blazinghot.registry.forge.BlazingFluidsImpl;
 import com.dudko.blazinghot.registry.forge.BlazingRecipeTypesImpl;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -22,6 +25,7 @@ public class BlazingHotImpl {
 
         BlazingCreativeTabsImpl.register(modEventBus);
         BlazingHot.init();
+        BlazingConfigsImpl.register(ModLoadingContext.get());
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> BlazingHotClientImpl.onCtorClient(modEventBus));
     }
 

@@ -79,3 +79,7 @@ allprojects {
     }
 
 }
+
+ tasks.create("publishMod") {
+     
+ }

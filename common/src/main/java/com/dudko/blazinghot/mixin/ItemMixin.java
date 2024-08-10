@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.mixin;
 
+import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.util.TooltipUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -22,6 +23,7 @@ public abstract class ItemMixin {
     //todo - add config for that
     @Unique
     private boolean blazinghot$isEligibleItem() {
+        if (!BlazingConfigs.client().vanillaAppleTooltips.get()) return false;
         Item blazinghot$self = (Item) (Object) this;
         List<Item> blazinghot$targetTooltipItems = List.of(Items.GOLDEN_APPLE, Items.ENCHANTED_GOLDEN_APPLE);
         return blazinghot$targetTooltipItems.contains(blazinghot$self);
