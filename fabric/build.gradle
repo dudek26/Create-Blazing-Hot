@@ -31,7 +31,7 @@ publishMods {
     String uncutChangelogText = ChangelogText.getChangelogText(rootProject).toString()
     String changelogText = uncutChangelogText.startsWith("Create:") ? uncutChangelogText.split(":", 3)[2] : uncutChangelogText.split(":", 2)[1]
 
-    file = remapJar.archiveFile
+    file = tasks.remapJar.archiveFile
     modLoaders.add("fabric")
     modLoaders.add("quilt")
     changelog = changelogText

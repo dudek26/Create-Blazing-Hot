@@ -56,10 +56,12 @@ allprojects {
     archivesBaseName = rootProject.archives_base_name
     group = rootProject.maven_group
 
+    Boolean isRelease = System.getenv("RELEASE_BUILD")?.toBoolean() ?: false
+
     // Formats the mod version to include the loader and Minecraft version
     // example: 0.5+fabric-mc1.20.1
     String buildNumber = System.getenv("GITHUB_RUN_NUMBER")
-    version = "${mod_version}+${project.name}-mc${minecraft_version}" + (buildNumber != null ? "-${buildNumber}" : "")
+    version = "${mod_version}+${project.name}-mc${minecraft_version}" + (buildNumber != null && !isRelease ? "-${buildNumber}" : "")
 
     repositories {
         // Add repositories to retrieve artifacts from in here.
@@ -79,7 +81,7 @@ allprojects {
 
     machete {
         // disable machete locally for faster builds
-        enabled = buildNumber != null
+        enabled = buildNumber != null || isRelease
     }
 
 }
@@ -106,7 +108,7 @@ publishMods {
     github {
         accessToken = System.getenv("GITHUB_TOKEN")
         repository = "dudek26/RyePG-Addons"
-        commitish = "main"
+        commitish = "${minecraft_version}/multiloader"
         tagName = "v${mod_version}"
 
         // Allow the release to be initially created without any files.

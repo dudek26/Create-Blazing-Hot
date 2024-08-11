@@ -24,7 +24,7 @@ publishMods {
     String uncutChangelogText = ChangelogText.getChangelogText(rootProject).toString()
     String changelogText = uncutChangelogText.startsWith("Create:") ? uncutChangelogText.split(":", 3)[2] : uncutChangelogText.split(":", 2)[1]
 
-    file = jar.archiveFile
+    file = tasks.remapJar.archiveFile
     modLoaders.add("forge")
     modLoaders.add("neoforge")
     changelog = changelogText
@@ -39,7 +39,7 @@ publishMods {
         requires("create")
     }
 
-    /* TODO - disabled for testing
+    /*
     curseforge {
         minecraftVersions.add("1.20.1")
         projectId = curseforge_id
@@ -47,8 +47,8 @@ publishMods {
 
         requires("create-fabric")
         optional("emi")
-    }
-     */
+    }*/
+
 
     github {
         accessToken = System.getenv("GITHUB_TOKEN")
