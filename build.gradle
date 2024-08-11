@@ -3,6 +3,7 @@ plugins {
     id "dev.architectury.loom" version "1.6-SNAPSHOT" apply false
     id "io.github.p03w.machete" version "1.+" // automatic jar compressing on build
     id "dev.ithundxr.silk" version "0.11.16"
+    id "me.modmuss50.mod-publish-plugin" version "0.6.3"
 }
 
 architectury {
@@ -84,10 +85,22 @@ allprojects {
 String platform = System.getenv("PLATFORM")
 tasks.register("blazinghotPublish") {
     if (platform == "both") {
-        dependsOn(tasks.build, ":fabric:publishMods", ":forge:publishMods")
+        dependsOn(tasks.build, ":publishMods", ":fabric:publishMods", ":forge:publishMods")
     }
     else if (platform == "forge" || platform == "fabric") {
-        dependsOn("${platform}:build", "${platform}:publishMods")
+        dependsOn("${platform}:build", ":publishMods", "${platform}:publishMods")
     }
     else throw new NullPointerException("Invalid platform: " + platform)
+}
+
+publishMods {
+    github {
+        accessToken = System.getenv("GITHUB_TOKEN")
+        repository = "dudek26/RyePG-Addons"
+        commitish = "main"
+        tagName = "v${mod_version}"
+
+        // Allow the release to be initially created without any files.
+        allowEmptyFiles = true
+    }
 }

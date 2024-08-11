@@ -47,6 +47,11 @@ publishMods {
         optional("emi")
     }
 
+    github {
+        accessToken = System.getenv("GITHUB_TOKEN")
+        parent project(":").tasks.named("publishGithub")
+    }
+
     /* TODO - disabled for testing
     curseforge {
         minecraftVersions.add("1.20.1")

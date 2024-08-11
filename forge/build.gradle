@@ -49,6 +49,11 @@ publishMods {
         optional("emi")
     }
      */
+
+    github {
+        accessToken = System.getenv("GITHUB_TOKEN")
+        parent project(":").tasks.named("publishGithub")
+    }
 }
 
 configurations {
