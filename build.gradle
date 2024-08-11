@@ -108,7 +108,7 @@ publishMods {
     github {
         accessToken = System.getenv("GITHUB_TOKEN")
         repository = "dudek26/RyePG-Addons"
-        commitish = "${minecraft_version}/multiloader"
+        commitish = "main"
         tagName = "v${mod_version}"
 
         // Allow the release to be initially created without any files.
