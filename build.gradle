@@ -1,3 +1,5 @@
+import dev.ithundxr.silk.ChangelogText
+
 plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT"
     id "dev.architectury.loom" version "1.6-SNAPSHOT" apply false
@@ -94,6 +96,16 @@ tasks.register("blazinghotPublish") {
 }
 
 publishMods {
+    String uncutChangelogText = ChangelogText.getChangelogText(rootProject).toString()
+    String changelogText = uncutChangelogText.startsWith("Create:") ? uncutChangelogText.split(":", 3)[2] : uncutChangelogText.split(":", 2)[1]
+
+    file = remapJar.archiveFile
+    modLoaders.add("fabric")
+    modLoaders.add("quilt")
+    changelog = changelogText
+    displayName = "Create: Blazing Hot v${mod_version} for mc${minecraft_version}"
+    type = release_type.equalsIgnoreCase("beta") ? BETA : release_type.equalsIgnoreCase("alpha") ? ALPHA : STABLE
+
     github {
         accessToken = System.getenv("GITHUB_TOKEN")
         repository = "dudek26/RyePG-Addons"
