@@ -9,11 +9,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 @Mod.EventBusSubscriber(Dist.CLIENT)
 public class BlazingHotClientImpl {
 
-    public static void onCtorClient(IEventBus modEventBus) {
-        modEventBus.addListener(BlazingHotClientImpl::init);
-    }
-
-    public static void init(final FMLClientSetupEvent event) {
+    public static void init() {
         BlazingHotClient.init();
     }
 
