@@ -12,8 +12,7 @@ public abstract class MechanicalMixerBlockEntityMixin {
 
     @ModifyArg(method = "tick",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(III)I"),
-            index = 2,
-            remap = false)
+            index = 2)
     protected int blazinghot$extendDuration(int max) {
         ResourceLocation blazinghot$id = ((BasinOperatingBlockEntityAccessor) this).getCurrentRecipe().getId();
         if (blazinghot$id.getPath().startsWith("mixing/melting")) {
