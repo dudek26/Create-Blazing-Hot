@@ -18,8 +18,7 @@ public abstract class MechanicalMixerBlockEntityMixin {
         ResourceLocation blazinghot$id = ((BasinOperatingBlockEntityAccessor) this).getCurrentRecipe().getId();
         if (blazinghot$id.getPath().startsWith("mixing/melting")) {
             return max * 16;
-        }
-        else return max;
+        } else return max;
     }
 
 }

@@ -43,17 +43,14 @@ public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
             fluidIngredientObject.remove("amount");
             fluidIngredientObject.addProperty("amount", amount / 81);
             return fluidIngredientObject;
-        }
-        else return je;
+        } else return je;
     }
 
     /**
      * Converts fluid amounts in C:BH recipes' results from Fabric's droplets to milibuckets.
      */
-    @ModifyArg(method = "readFromJson",
-            remap = false,
+    @ModifyArg(method = "readFromJson(Lnet/minecraft/resources/ResourceLocation;Lcom/google/gson/JsonObject;)Lcom/simibubi/create/content/processing/recipe/ProcessingRecipe;",
             at = @At(value = "INVOKE",
-                    remap = false,
                     target = "Lcom/simibubi/create/foundation/fluid/FluidHelper;deserializeFluidStack(Lcom/google/gson/JsonObject;)Lnet/minecraftforge/fluids/FluidStack;"))
     private JsonObject blazinghot$resultPlatformedFluidAmount(JsonObject json, @Local(argsOnly = true) ResourceLocation recipeID) {
         if (recipeID.getNamespace().equalsIgnoreCase(BlazingHot.ID)) {
@@ -69,8 +66,8 @@ public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
     @SuppressWarnings("unchecked")
     @Inject(method = "readFromJson(Lnet/minecraft/resources/ResourceLocation;Lcom/google/gson/JsonObject;)Lcom/simibubi/create/content/processing/recipe/ProcessingRecipe;",
             at = @At(value = "INVOKE_ASSIGN",
-                    target = "Lcom/simibubi/create/content/processing/recipe/ProcessingRecipeBuilder;withFluidOutputs(Lnet/minecraft/core/NonNullList;)Lcom/simibubi/create/content/processing/recipe/ProcessingRecipeBuilder;"),
-            remap = false)
+                    target = "Lcom/simibubi/create/content/processing/recipe/ProcessingRecipeBuilder;withFluidOutputs(Lnet/minecraft/core/NonNullList;)Lcom/simibubi/create/content/processing/recipe/ProcessingRecipeBuilder;")
+    )
     protected void blazinghot$readFuelFromJson(ResourceLocation recipeId, JsonObject json, CallbackInfoReturnable<T> cir, @Local ProcessingRecipeBuilder<T> builder) {
         if (GsonHelper.isValidNode(json, "blazinghot:fuel")) {
             JsonObject blazinghot$fuelElement = json.get("blazinghot:fuel").getAsJsonObject();

@@ -8,10 +8,10 @@ import com.simibubi.create.foundation.fluid.FluidIngredient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(ProcessingRecipeBuilder.class)
+@Mixin(value = ProcessingRecipeBuilder.class, remap = false)
 public class ProcessingRecipeBuilderMixin<T extends ProcessingRecipe<?>> implements IProcessingRecipeBuilder<T> {
 
-    @Shadow(remap = false)
+    @Shadow
     protected ProcessingRecipeBuilder.ProcessingRecipeParams params;
 
     @SuppressWarnings("unchecked")

@@ -20,8 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
 
     @Inject(method = "writeToJson(Lcom/google/gson/JsonObject;Lcom/simibubi/create/content/processing/recipe/ProcessingRecipe;)V",
-            at = @At("HEAD"),
-            remap = false)
+            at = @At("HEAD"), remap = false)
     protected void blazinghot$writeFuelToJson(JsonObject json, T recipe, CallbackInfo ci) {
         FluidIngredient blazinghot$fuel = ((IProcessingRecipe) recipe).blazinghot$getFuelFluid();
         if (blazinghot$fuel != FluidIngredient.EMPTY) {
@@ -32,8 +31,7 @@ public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
     @SuppressWarnings("unchecked")
     @Inject(method = "readFromJson(Lnet/minecraft/resources/ResourceLocation;Lcom/google/gson/JsonObject;)Lcom/simibubi/create/content/processing/recipe/ProcessingRecipe;",
             at = @At(value = "INVOKE_ASSIGN",
-                    target = "Lcom/simibubi/create/content/processing/recipe/ProcessingRecipeBuilder;withFluidOutputs(Lnet/minecraft/core/NonNullList;)Lcom/simibubi/create/content/processing/recipe/ProcessingRecipeBuilder;"),
-            remap = false)
+                    target = "Lcom/simibubi/create/content/processing/recipe/ProcessingRecipeBuilder;withFluidOutputs(Lnet/minecraft/core/NonNullList;)Lcom/simibubi/create/content/processing/recipe/ProcessingRecipeBuilder;"))
     protected void blazinghot$readFuelFromJson(ResourceLocation recipeId, JsonObject json, CallbackInfoReturnable<T> cir, @Local ProcessingRecipeBuilder<T> builder) {
         if (GsonHelper.isValidNode(json, "blazinghot:fuel"))
             ((IProcessingRecipeBuilder<T>) builder).blazinghot$requireFuel(FluidIngredient.deserialize(json.get(
