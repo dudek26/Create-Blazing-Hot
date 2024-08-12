@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ProcessingRecipe.class)
+@Mixin(value = ProcessingRecipe.class, remap = false)
 public class ProcessingRecipeMixin implements IProcessingRecipe {
 
     @Unique
@@ -23,7 +23,7 @@ public class ProcessingRecipeMixin implements IProcessingRecipe {
         return blazinghot$fuelFluid;
     }
 
-    @Inject(method = "<init>", at = @At("TAIL"), remap = false)
+    @Inject(method = "<init>", at = @At("TAIL"))
     protected void blazinghot$setFuelFluid(IRecipeTypeInfo typeInfo, ProcessingRecipeBuilder.ProcessingRecipeParams params, CallbackInfo ci) {
         this.blazinghot$fuelFluid = ((IProcessingRecipeParams) params).blazinghot$getFuelFluid();
     }
