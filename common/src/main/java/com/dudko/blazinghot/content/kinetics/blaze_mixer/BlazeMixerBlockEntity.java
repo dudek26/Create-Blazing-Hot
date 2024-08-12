@@ -2,7 +2,6 @@ package com.dudko.blazinghot.content.kinetics.blaze_mixer;
 
 import com.dudko.blazinghot.config.BlazingConfigs;
 import com.simibubi.create.AllRecipeTypes;
-import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.kinetics.base.IRotate;
@@ -13,14 +12,10 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.foundation.advancement.AllAdvancements;
 import com.simibubi.create.foundation.advancement.CreateAdvancement;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
-import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.VecHelper;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import io.github.fabricators_of_create.porting_lib.brewing.BrewingRecipe;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.particles.ParticleOptions;
@@ -220,17 +215,6 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
     @Override
     protected Optional<CreateAdvancement> getProcessedRecipeTrigger() {
         return Optional.of(AllAdvancements.MIXER);
-    }
-
-    @Override
-    @Environment(EnvType.CLIENT)
-    public void tickAudio() {
-        super.tickAudio();
-
-        // SoundEvents.BLOCK_STONE_BREAK
-        boolean slow = Math.abs(getSpeed()) < 65;
-        if (slow && AnimationTickHolder.getTicks() % 2 == 0) return;
-        if (runningTicks == 20) AllSoundEvents.MIXING.playAt(level, worldPosition, .75f, 1, true);
     }
 
     @Override

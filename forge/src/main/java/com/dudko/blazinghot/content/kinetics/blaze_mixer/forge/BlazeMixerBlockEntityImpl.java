@@ -7,6 +7,7 @@ import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.forge.BlazingRecipeTypesImpl;
 import com.dudko.blazinghot.util.FluidUtil;
 import com.simibubi.create.AllRecipeTypes;
+import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.fluids.FluidFX;
 import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
@@ -20,6 +21,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTank
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour.TankSegment;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.item.SmartInventory;
+import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import com.simibubi.create.foundation.utility.Couple;
 import com.simibubi.create.foundation.utility.VecHelper;
 import net.minecraft.core.BlockPos;
@@ -42,6 +44,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -312,6 +316,16 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
                 containedFluidTooltip(tooltip, isPlayerSneaking, getCapability(ForgeCapabilities.FLUID_HANDLER));
 
         return kinetics || fluids;
+    }
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void tickAudio() {
+        super.tickAudio();
+
+        // SoundEvents.BLOCK_STONE_BREAK
+        boolean slow = Math.abs(getSpeed()) < 65;
+        if (slow && AnimationTickHolder.getTicks() % 2 == 0) return;
+        if (runningTicks == 20) AllSoundEvents.MIXING.playAt(level, worldPosition, .75f, 1, true);
     }
 
     public static boolean doFluidInputsMatch(ProcessingRecipe<?> a, ProcessingRecipe<?> b) {
