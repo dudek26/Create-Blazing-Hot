@@ -3,7 +3,10 @@ Create: Blazing Hot 0.5.1
 ------------------------------------------------------
 
 ### Changed:
-*
+
+
+### Fixed:
+* Mod .jar files now use the `create_blazing_hot` name
 
 ------------------------------------------------------
 Create: Blazing Hot 0.5
