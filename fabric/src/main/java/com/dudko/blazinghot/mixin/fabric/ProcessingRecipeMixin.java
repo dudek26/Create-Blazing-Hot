@@ -17,15 +17,23 @@ public class ProcessingRecipeMixin implements IProcessingRecipe {
 
     @Unique
     FluidIngredient blazinghot$fuelFluid;
+    @Unique
+    boolean blazinghot$formConversion;
 
     @Override
     public FluidIngredient blazinghot$getFuelFluid() {
         return blazinghot$fuelFluid;
     }
 
+    @Override
+    public boolean blazinghot$formConversion() {
+        return blazinghot$formConversion;
+    }
+
     @Inject(method = "<init>", at = @At("TAIL"))
-    protected void blazinghot$setFuelFluid(IRecipeTypeInfo typeInfo, ProcessingRecipeBuilder.ProcessingRecipeParams params, CallbackInfo ci) {
+    protected void blazinghot$setCustomProperties(IRecipeTypeInfo typeInfo, ProcessingRecipeBuilder.ProcessingRecipeParams params, CallbackInfo ci) {
         this.blazinghot$fuelFluid = ((IProcessingRecipeParams) params).blazinghot$getFuelFluid();
+        this.blazinghot$formConversion = ((IProcessingRecipeParams) params).blazinghot$formConversion();
     }
 
 }

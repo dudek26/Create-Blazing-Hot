@@ -6,4 +6,6 @@ public interface IProcessingRecipe {
 
     FluidIngredient blazinghot$getFuelFluid();
 
+    boolean blazinghot$formConversion();
+
 }

@@ -15,6 +15,8 @@ public class ProcessingRecipeParamsMixin implements IProcessingRecipeParams {
 
     @Unique
     protected FluidIngredient blazinghot$fuelFluid;
+    @Unique
+    protected boolean blazinghot$formConversion;
 
     @Override
     public FluidIngredient blazinghot$getFuelFluid() {
@@ -22,13 +24,24 @@ public class ProcessingRecipeParamsMixin implements IProcessingRecipeParams {
     }
 
     @Override
+    public boolean blazinghot$formConversion() {
+        return blazinghot$formConversion;
+    }
+
+    @Override
     public void blazinghot$setFuelFluid(FluidIngredient fuelFluid) {
         blazinghot$fuelFluid = fuelFluid;
     }
 
+    @Override
+    public void blazinghot$setFormConversion(boolean formConversion) {
+        blazinghot$formConversion = formConversion;
+    }
+
     @Inject(method = "<init>", at = @At("RETURN"))
-    protected void blazinghot$setFuelFluidInit(ResourceLocation id, CallbackInfo ci) {
+    protected void blazinghot$initCustomProperties(ResourceLocation id, CallbackInfo ci) {
         blazinghot$fuelFluid = FluidIngredient.EMPTY;
+        blazinghot$formConversion = false;
     }
 
 }

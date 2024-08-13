@@ -9,14 +9,20 @@ import net.minecraft.world.level.material.Fluid;
 
 public interface IProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 
-    default ProcessingRecipeBuilder<T> blazinghot$requireFuel(TagKey<Fluid> fluidTag, long amount) {
+    default IProcessingRecipeBuilder<T> blazinghot$requireFuel(TagKey<Fluid> fluidTag, long amount) {
         return blazinghot$requireFuel(FluidIngredient.fromTag(fluidTag, amount));
     }
 
-    ProcessingRecipeBuilder<T> blazinghot$requireFuel(FluidIngredient ingredient);
+    IProcessingRecipeBuilder<T> blazinghot$requireFuel(FluidIngredient ingredient);
 
-    default ProcessingRecipeBuilder<T> blazinghot$requireFuel(FluidStack fluidStack) {
+    default IProcessingRecipeBuilder<T> blazinghot$requireFuel(FluidStack fluidStack) {
         return blazinghot$requireFuel(FluidIngredient.fromFluidStack(fluidStack));
+    }
+
+    IProcessingRecipeBuilder<T> blazinghot$convertFluidAmounts(boolean bool);
+
+    default ProcessingRecipeBuilder<T> finish() {
+        return (ProcessingRecipeBuilder<T>) this;
     }
 
 }
