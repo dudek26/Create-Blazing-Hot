@@ -1,6 +1,6 @@
-package com.dudko.blazinghot.util.fabric;
+package com.dudko.blazinghot.multiloader.fabric;
 
-public class FluidUtilImpl {
+public class MultiFluidsImpl {
     public static long platformedAmount(long droplets) {
         return droplets;
     }
