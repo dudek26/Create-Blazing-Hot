@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
+import com.dudko.blazinghot.multiloader.MultiFluids;
 import com.dudko.blazinghot.registry.BlazingFluids.MultiloaderFluids;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
@@ -48,19 +49,24 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
                                     .output(MultiloaderFluids.NETHER_LAVA.get(), FluidConstants.BLOCK / 10)),
             MOLTEN_BLAZE_GOLD =
                     create("molten_blaze_gold",
-                            b -> ((IProcessingRecipeBuilder<ProcessingRecipe<?>>) requireMultiple(b,
-                                    BlazingItems.NETHER_ESSENCE,
-                                    2))
+                            b -> custom(b).blazinghot$requireMultiple(BlazingItems.NETHER_ESSENCE, 2)
                                     .blazinghot$requireFuel(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag,
-                                            FluidConstants.BLOCK / 20)
-                                    .require(CommonTags.Fluids.MOLTEN_GOLD.internal, INGOT)
+                                            MultiFluids.fromBucketFraction(1, 20))
+                                    .blazinghot$convertMeltables()
+                                    .finish()
+                                    .require(CommonTags.Fluids.MOLTEN_GOLD.internal,
+                                            MultiFluids.Constants.INGOT.platformed())
                                     .requiresHeat(HeatCondition.SUPERHEATED)
-                                    .output(MultiloaderFluids.MOLTEN_BLAZE_GOLD.get(), INGOT));
+                                    .duration(200)
+                                    .output(MultiloaderFluids.MOLTEN_BLAZE_GOLD.get(),
+                                            MultiFluids.Constants.INGOT.platformed()));
 
     private GeneratedRecipe melting(TagKey<Item> tag, Fluid result, long amount, int duration, long fuelCost) {
         return create("melting/" + tag.location().getPath(),
-                (b) -> ((IProcessingRecipeBuilder<ProcessingRecipe<?>>) b)
+                (b) -> custom(b)
                         .blazinghot$requireFuel(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, fuelCost)
+                        .blazinghot$convertMeltables()
+                        .finish()
                         .require(tag)
                         .duration(duration)
                         .requiresHeat(HeatCondition.SUPERHEATED)
@@ -73,8 +79,9 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 
     private GeneratedRecipe melting(ItemLike item, Fluid result, long amount, int duration, long fuelCost) {
         return create("melting/" + item.asItem(),
-                b -> ((IProcessingRecipeBuilder<ProcessingRecipe<?>>) b)
+                b -> custom(b)
                         .blazinghot$requireFuel(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, fuelCost)
+                        .finish()
                         .require(item)
                         .duration(duration)
                         .requiresHeat(HeatCondition.SUPERHEATED)

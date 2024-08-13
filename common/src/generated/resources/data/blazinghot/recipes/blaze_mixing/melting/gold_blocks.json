@@ -1,5 +1,6 @@
 {
   "type": "blazinghot:blaze_mixing",
+  "blazinghot:convertMeltable": true,
   "blazinghot:fuel": {
     "amount": 48600,
     "fluidTag": "blazinghot:blaze_mixer_fuel"

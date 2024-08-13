@@ -2,6 +2,7 @@ package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
+import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
@@ -15,6 +16,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
@@ -87,16 +89,20 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
     }
 
     protected enum Meltables {
-        IRON("iron", BlazingFluidsImpl.MOLTEN_IRON.get()),
-        GOLD("gold", BlazingFluidsImpl.MOLTEN_GOLD.get()),
-        BLAZE_GOLD("blaze_gold", BlazingFluidsImpl.MOLTEN_BLAZE_GOLD.get());
+        IRON("iron", Items.IRON_INGOT, BlazingFluidsImpl.MOLTEN_IRON.get()),
+        GOLD("gold", Items.GOLD_INGOT, BlazingFluidsImpl.MOLTEN_GOLD.get()),
+        BLAZE_GOLD("blaze_gold", BlazingItems.BLAZE_GOLD_INGOT, BlazingFluidsImpl.MOLTEN_BLAZE_GOLD.get());
 
         public final String name;
+        public final ItemLike item;
         public final Fluid fluid;
+        public final TagKey<Fluid> fluidTag;
 
-        Meltables(String name, Fluid fluid) {
+        Meltables(String name, ItemLike item, Fluid fluid) {
             this.name = name;
+            this.item = item;
             this.fluid = fluid;
+            this.fluidTag = CommonTags.internalFluidTagOf("molten_" + name);
         }
     }
 
@@ -193,6 +199,11 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
             ResourceLocation registryName = RegisteredObjects.getKeyOrThrow(item.get().asItem());
             return BlazingHot.asResource(registryName.getPath() + suffix);
         };
+    }
+
+    @SuppressWarnings("unchecked")
+    protected <T extends ProcessingRecipe<?>> IProcessingRecipeBuilder<T> custom(ProcessingRecipeBuilder<T> builder) {
+        return (IProcessingRecipeBuilder<T>) builder;
     }
 
     @Override

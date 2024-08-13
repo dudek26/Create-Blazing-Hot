@@ -2,6 +2,7 @@ package com.dudko.blazinghot.mixin.forge;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.data.recipe.forge.IProcessingRecipeBuilder;
+import com.dudko.blazinghot.multiloader.MultiFluids;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
@@ -12,6 +13,7 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.util.Mth;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -32,18 +34,25 @@ public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
                     remap = false,
                     target = "Lcom/simibubi/create/foundation/fluid/FluidIngredient;deserialize(Lcom/google/gson/JsonElement;)Lcom/simibubi/create/foundation/fluid/FluidIngredient;",
                     ordinal = 0))
-    private JsonElement blazinghot$ingredientsPlatformedFluidAmount(JsonElement je, @Local(argsOnly = true) ResourceLocation recipeID) {
-        if (recipeID.getNamespace().equalsIgnoreCase(BlazingHot.ID)) {
-            JsonObject fluidIngredientObject = je.getAsJsonObject();
+    private JsonElement blazinghot$ingredientsPlatformedFluidAmount(JsonElement je, @Local JsonObject json,
+                                                                    @Local(argsOnly = true) ResourceLocation recipeID) {
+        JsonObject jsonObject = je.getAsJsonObject();
+        if (json.has("blazinghot:convertMeltable") && GsonHelper.getAsBoolean(json, "blazinghot:convertMeltable")) {
+            if (!jsonObject.has("amount")) throw new JsonSyntaxException("Fluid ingredient has to define an amount");
+            long amount = GsonHelper.getAsLong(jsonObject, "amount");
+            jsonObject.remove("amount");
+            jsonObject.addProperty("amount", Mth.ceil(amount / MultiFluids.MELTABLE_CONVERSION));
+        }
 
-            if (!fluidIngredientObject.has("amount"))
+        else if (recipeID.getNamespace().equalsIgnoreCase(BlazingHot.ID)) {
+            if (!jsonObject.has("amount"))
                 throw new JsonSyntaxException("Fluid ingredient has to define an amount");
 
-            long amount = GsonHelper.getAsLong(fluidIngredientObject, "amount");
-            fluidIngredientObject.remove("amount");
-            fluidIngredientObject.addProperty("amount", amount / 81);
-            return fluidIngredientObject;
-        } else return je;
+            long amount = GsonHelper.getAsLong(jsonObject, "amount");
+            jsonObject.remove("amount");
+            jsonObject.addProperty("amount", amount / 81);
+        }
+        return jsonObject;
     }
 
     /**
@@ -53,15 +62,24 @@ public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
             remap = false,
             at = @At(value = "INVOKE",
                     target = "Lcom/simibubi/create/foundation/fluid/FluidHelper;deserializeFluidStack(Lcom/google/gson/JsonObject;)Lnet/minecraftforge/fluids/FluidStack;"))
-    private JsonObject blazinghot$resultPlatformedFluidAmount(JsonObject json, @Local(argsOnly = true) ResourceLocation recipeID) {
-        if (recipeID.getNamespace().equalsIgnoreCase(BlazingHot.ID)) {
-            if (!json.has("amount")) throw new JsonSyntaxException("Fluid ingredient has to define an amount");
-
-            long blazinghot$amount = GsonHelper.getAsLong(json, "amount");
-            json.remove("amount");
-            json.addProperty("amount", blazinghot$amount / 81);
+    private JsonObject blazinghot$resultPlatformedFluidAmount(JsonObject jsonObject,
+                                                              @Local JsonObject json,
+                                                              @Local(argsOnly = true) ResourceLocation recipeID) {
+        if (json.has("blazinghot:convertMeltable") && GsonHelper.getAsBoolean(json, "blazinghot:convertMeltable")) {
+            if (!jsonObject.has("amount")) throw new JsonSyntaxException("Fluid result has to define an amount");
+            long amount = GsonHelper.getAsLong(jsonObject, "amount");
+            jsonObject.remove("amount");
+            jsonObject.addProperty("amount", amount / MultiFluids.MELTABLE_CONVERSION);
         }
-        return json;
+
+        else if (recipeID.getNamespace().equalsIgnoreCase(BlazingHot.ID)) {
+            if (!jsonObject.has("amount")) throw new JsonSyntaxException("Fluid result has to define an amount");
+
+            long amount = GsonHelper.getAsLong(jsonObject, "amount");
+            jsonObject.remove("amount");
+            jsonObject.addProperty("amount", amount / 81);
+        }
+        return jsonObject;
     }
 
     @SuppressWarnings("unchecked")
@@ -71,7 +89,8 @@ public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
 
                     target = "Lcom/simibubi/create/content/processing/recipe/ProcessingRecipeBuilder;withFluidOutputs(Lnet/minecraft/core/NonNullList;)Lcom/simibubi/create/content/processing/recipe/ProcessingRecipeBuilder;")
     )
-    protected void blazinghot$readFuelFromJson(ResourceLocation recipeId, JsonObject json, CallbackInfoReturnable<T> cir, @Local ProcessingRecipeBuilder<T> builder) {
+    protected void blazinghot$readFuelFromJson(ResourceLocation recipeId, JsonObject json, CallbackInfoReturnable<T> cir,
+                                               @Local ProcessingRecipeBuilder<T> builder) {
         if (GsonHelper.isValidNode(json, "blazinghot:fuel")) {
             JsonObject blazinghot$fuelElement = json.get("blazinghot:fuel").getAsJsonObject();
 

@@ -9,6 +9,8 @@ import java.util.Arrays;
 @SuppressWarnings("UnstableApiUsage")
 public class MultiFluids {
 
+    public static final float MELTABLE_CONVERSION = 62.5f;
+
     public enum Constants {
         BUCKET("bucket", 81000),
         BOTTLE("bottle", 27000),

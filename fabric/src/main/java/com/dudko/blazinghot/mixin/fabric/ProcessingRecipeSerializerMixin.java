@@ -22,7 +22,13 @@ public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
     @Inject(method = "writeToJson(Lcom/google/gson/JsonObject;Lcom/simibubi/create/content/processing/recipe/ProcessingRecipe;)V",
             at = @At("HEAD"), remap = false)
     protected void blazinghot$writeCustomToJson(JsonObject json, T recipe, CallbackInfo ci) {
-        FluidIngredient blazinghot$fuel = ((IProcessingRecipe) recipe).blazinghot$getFuelFluid();
+        IProcessingRecipe iRecipe = (IProcessingRecipe) recipe;
+
+        boolean blazinghot$convertFluidAmounts = iRecipe.blazinghot$formConversion();
+        if (blazinghot$convertFluidAmounts)
+            json.addProperty("blazinghot:convertMeltable", true);
+
+        FluidIngredient blazinghot$fuel = iRecipe.blazinghot$getFuelFluid();
         if (blazinghot$fuel != FluidIngredient.EMPTY) {
             json.add("blazinghot:fuel", blazinghot$fuel.serialize());
         }
@@ -32,7 +38,8 @@ public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
     @Inject(method = "readFromJson(Lnet/minecraft/resources/ResourceLocation;Lcom/google/gson/JsonObject;)Lcom/simibubi/create/content/processing/recipe/ProcessingRecipe;",
             at = @At(value = "INVOKE_ASSIGN",
                     target = "Lcom/simibubi/create/content/processing/recipe/ProcessingRecipeBuilder;withFluidOutputs(Lnet/minecraft/core/NonNullList;)Lcom/simibubi/create/content/processing/recipe/ProcessingRecipeBuilder;"))
-    protected void blazinghot$readCustomFromJson(ResourceLocation recipeId, JsonObject json, CallbackInfoReturnable<T> cir, @Local ProcessingRecipeBuilder<T> builder) {
+    protected void blazinghot$readCustomFromJson(ResourceLocation recipeId, JsonObject json, CallbackInfoReturnable<T> cir,
+                                                 @Local ProcessingRecipeBuilder<T> builder) {
         if (GsonHelper.isValidNode(json, "blazinghot:fuel"))
             ((IProcessingRecipeBuilder<T>) builder).blazinghot$requireFuel(FluidIngredient.deserialize(json.get(
                     "blazinghot:fuel")));

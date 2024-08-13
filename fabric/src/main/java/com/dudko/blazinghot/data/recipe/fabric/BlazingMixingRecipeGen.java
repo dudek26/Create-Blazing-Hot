@@ -1,6 +1,6 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
-import com.dudko.blazinghot.registry.BlazingFluids;
+import com.dudko.blazinghot.multiloader.MultiFluids;
 import com.dudko.blazinghot.registry.BlazingFluids.MultiloaderFluids;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingTags;
@@ -49,12 +49,15 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
                                     .output(BlazingItems.NETHERRACK_DUST)),
             MOLTEN_BLAZE_GOLD =
                     create("molten_blaze_gold",
-                            b -> requireMultiple(b, BlazingItems.NETHER_ESSENCE, 2)
-                                    .require(CommonTags.Fluids.MOLTEN_GOLD.internal, INGOT / 2)
+                            b -> custom(b).blazinghot$requireMultiple(BlazingItems.NETHER_ESSENCE, 2)
+                                    .blazinghot$convertMeltables()
+                                    .finish()
+                                    .require(CommonTags.Fluids.MOLTEN_GOLD.internal,
+                                            MultiFluids.Constants.INGOT.platformed())
                                     .requiresHeat(HeatCondition.SUPERHEATED)
                                     .duration(200)
-                                    .output(BlazingFluids.getEntry(MultiloaderFluids.MOLTEN_BLAZE_GOLD).getSource(),
-                                            INGOT / 2)),
+                                    .output(MultiloaderFluids.MOLTEN_BLAZE_GOLD.get(),
+                                            MultiFluids.Constants.INGOT.platformed())),
             BLAZE_GOLD_ROD_MELTING =
                     melting(CommonTags.Items.BLAZE_GOLD_RODS.internal,
                             BlazingFluidsImpl.MOLTEN_BLAZE_GOLD.get(),
@@ -71,7 +74,9 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
 
     private GeneratedRecipe melting(TagKey<Item> tag, Fluid result, long amount, int duration) {
         return create("melting/" + tag.location().getPath(),
-                b -> b
+                b -> custom(b)
+                        .blazinghot$convertMeltables()
+                        .finish()
                         .require(tag)
                         .duration(duration * 3)
                         .requiresHeat(HeatCondition.SUPERHEATED)

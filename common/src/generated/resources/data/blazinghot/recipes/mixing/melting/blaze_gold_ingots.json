@@ -1,5 +1,6 @@
 {
   "type": "create:mixing",
+  "blazinghot:convertMeltable": true,
   "heatRequirement": "superheated",
   "ingredients": [
     {

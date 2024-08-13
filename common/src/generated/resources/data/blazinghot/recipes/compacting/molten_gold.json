@@ -1,5 +1,6 @@
 {
   "type": "create:compacting",
+  "blazinghot:convertMeltable": true,
   "ingredients": [
     {
       "amount": 9000,

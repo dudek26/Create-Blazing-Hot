@@ -1,5 +1,6 @@
 {
   "type": "blazinghot:blaze_mixing",
+  "blazinghot:convertMeltable": true,
   "blazinghot:fuel": {
     "amount": 4050,
     "fluidTag": "blazinghot:blaze_mixer_fuel"
@@ -17,6 +18,7 @@
       "fluidTag": "blazinghot:molten_gold"
     }
   ],
+  "processingTime": 200,
   "results": [
     {
       "amount": 9000,
