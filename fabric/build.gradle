@@ -29,7 +29,8 @@ loom {
 
 publishMods {
     String uncutChangelogText = ChangelogText.getChangelogText(rootProject).toString()
-    String changelogText = uncutChangelogText.startsWith("Create:") ? uncutChangelogText.split(":", 3)[2] : uncutChangelogText.split(":", 2)[1]
+    String cutChangelogText = uncutChangelogText.startsWith("Create:") ? uncutChangelogText.split(":", 3)[2] : uncutChangelogText.split(":", 2)[1]
+    String changelogText = release_type.equalsIgnoreCase("beta") || release_type.equalsIgnoreCase("alpha") ? "Pre-release version. Back up your worlds before updating.  " + cutChangelogText : cutChangelogText
 
     file = tasks.remapJar.archiveFile
     modLoaders.add("fabric")
@@ -39,7 +40,7 @@ publishMods {
     type = release_type.equalsIgnoreCase("beta") ? BETA : release_type.equalsIgnoreCase("alpha") ? ALPHA : STABLE
 
     modrinth {
-        minecraftVersions.add("1.20.1")
+        minecraftVersions.add(minecraft_version)
         projectId = modrinth_id
         accessToken = System.getenv("MODRINTH_TOKEN")
 
@@ -52,16 +53,14 @@ publishMods {
         parent project(":").tasks.named("publishGithub")
     }
 
-    /* TODO - disabled for testing
     curseforge {
-        minecraftVersions.add("1.20.1")
+        minecraftVersions.add(minecraft_version)
         projectId = curseforge_id
         accessToken = System.getenv("CURSEFORGE_TOKEN")
 
         requires("create-fabric")
         optional("emi")
     }
-     */
 }
 
 configurations {

@@ -95,16 +95,15 @@ String platform = System.getenv("PLATFORM")
 tasks.register("blazinghotPublish") {
     if (platform == "both") {
         dependsOn(tasks.build, ":publishMods", ":fabric:publishMods", ":forge:publishMods")
-    }
-    else if (platform == "forge" || platform == "fabric") {
+    } else if (platform == "forge" || platform == "fabric") {
         dependsOn("${platform}:build", ":publishMods", "${platform}:publishMods")
-    }
-    else throw new NullPointerException("Invalid platform: " + platform)
+    } else throw new NullPointerException("Invalid platform: " + platform)
 }
 
 publishMods {
     String uncutChangelogText = ChangelogText.getChangelogText(rootProject).toString()
-    String changelogText = uncutChangelogText.startsWith("Create:") ? uncutChangelogText.split(":", 3)[2] : uncutChangelogText.split(":", 2)[1]
+    String cutChangelogText = uncutChangelogText.startsWith("Create:") ? uncutChangelogText.split(":", 3)[2] : uncutChangelogText.split(":", 2)[1]
+    String changelogText = release_type.equalsIgnoreCase("beta") || release_type.equalsIgnoreCase("alpha") ? "Pre-release version. Back up your worlds before updating.  " + cutChangelogText : cutChangelogText
 
     changelog = changelogText
     displayName = "Create: Blazing Hot v${mod_version} for mc${minecraft_version}"
@@ -113,7 +112,7 @@ publishMods {
     github {
         accessToken = System.getenv("GITHUB_TOKEN")
         repository = "dudek26/Create-Blazing-Hot"
-        commitish = "1.20.1/multiloader"
+        commitish = "${minecraft_version}/multiloader"
         tagName = "v${mod_version}"
 
         // Allow the release to be initially created without any files.
