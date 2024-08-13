@@ -1,11 +1,12 @@
 {
   "type": "create:filling",
+  "blazinghot:convertMeltable": true,
   "ingredients": [
     {
       "item": "minecraft:carrot"
     },
     {
-      "amount": 8000,
+      "amount": 6000,
       "fluidTag": "blazinghot:molten_iron"
     }
   ],

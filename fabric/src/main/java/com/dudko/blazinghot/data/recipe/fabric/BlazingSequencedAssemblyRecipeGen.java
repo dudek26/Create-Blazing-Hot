@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.UnaryOperator;
 
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingProcessingRecipeGen.BUCKET;
+import static com.dudko.blazinghot.data.recipe.fabric.BlazingProcessingRecipeGen.*;
 import static com.dudko.blazinghot.registry.BlazingItems.*;
 
 @SuppressWarnings("unused")
@@ -32,8 +32,8 @@ public class BlazingSequencedAssemblyRecipeGen extends BlazingRecipeProvider {
                             .require(STELLAR_GOLDEN_APPLE)
                             .transitionTo(GILDED_STELLAR_GOLDEN_APPLE)
                             .addOutput(Items.ENCHANTED_GOLDEN_APPLE, 1)
-                            .loops(4)
-                            .addStep(FillingRecipe::new, r -> r.require(CommonTags.Fluids.MOLTEN_GOLD.internal, BUCKET))
+                            .loops(6)
+                            .addStep(FillingRecipe::new, r -> custom(r).blazinghot$convertMeltables().blazinghot$finish().require(CommonTags.Fluids.MOLTEN_GOLD.internal, INGOT_COVER))
                             .addStep(DeployerApplicationRecipe::new, r -> r.require(Items.DIAMOND))
                             .addStep(PressingRecipe::new, r -> r)),
             ENCHANTED_BLAZE_APPLE =
@@ -42,9 +42,9 @@ public class BlazingSequencedAssemblyRecipeGen extends BlazingRecipeProvider {
                                     .require(STELLAR_BLAZE_APPLE)
                                     .transitionTo(BURNING_STELLAR_BLAZE_APPLE)
                                     .addOutput(BlazingItems.ENCHANTED_BLAZE_APPLE, 1)
-                                    .loops(4)
+                                    .loops(6)
                                     .addStep(FillingRecipe::new,
-                                            r -> r.require(CommonTags.Fluids.MOLTEN_BLAZE_GOLD.internal, BUCKET))
+                                            r -> custom(r).blazinghot$convertMeltables().blazinghot$finish().require(CommonTags.Fluids.MOLTEN_BLAZE_GOLD.internal, INGOT_COVER))
                                     .addStep(DeployerApplicationRecipe::new, r -> r.require(Items.DIAMOND))
                                     .addStep(PressingRecipe::new, r -> r)),
             ENCHANTED_IRON_APPLE =
@@ -53,9 +53,9 @@ public class BlazingSequencedAssemblyRecipeGen extends BlazingRecipeProvider {
                                     .require(STELLAR_IRON_APPLE)
                                     .transitionTo(HEAVY_STELLAR_IRON_APPLE)
                                     .addOutput(BlazingItems.ENCHANTED_IRON_APPLE, 1)
-                                    .loops(4)
+                                    .loops(6)
                                     .addStep(FillingRecipe::new,
-                                            r -> r.require(CommonTags.Fluids.MOLTEN_IRON.internal, BUCKET))
+                                            r -> custom(r).blazinghot$convertMeltables().blazinghot$finish().require(CommonTags.Fluids.MOLTEN_IRON.internal, INGOT_COVER))
                                     .addStep(DeployerApplicationRecipe::new, r -> r.require(Items.DIAMOND))
                                     .addStep(PressingRecipe::new, r -> r));
 

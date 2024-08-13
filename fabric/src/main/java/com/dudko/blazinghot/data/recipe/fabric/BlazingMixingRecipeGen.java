@@ -1,6 +1,5 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
-import com.dudko.blazinghot.multiloader.MultiFluids;
 import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
 import com.dudko.blazinghot.registry.BlazingFluids.MultiloaderFluids;
 import com.dudko.blazinghot.registry.BlazingItems;
@@ -52,7 +51,7 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
                     create("molten_blaze_gold",
                             b -> custom(b).blazinghot$requireMultiple(BlazingItems.NETHER_ESSENCE, 2)
                                     .blazinghot$convertMeltables()
-                                    .finish()
+                                    .blazinghot$finish()
                                     .require(CommonTags.Fluids.MOLTEN_GOLD.internal,
                                             Constants.ROD.platformed())
                                     .requiresHeat(HeatCondition.SUPERHEATED)
@@ -77,7 +76,7 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
         return create("melting/" + tag.location().getPath(),
                 b -> custom(b)
                         .blazinghot$convertMeltables()
-                        .finish()
+                        .blazinghot$finish()
                         .require(tag)
                         .duration(duration * 3)
                         .requiresHeat(HeatCondition.SUPERHEATED)

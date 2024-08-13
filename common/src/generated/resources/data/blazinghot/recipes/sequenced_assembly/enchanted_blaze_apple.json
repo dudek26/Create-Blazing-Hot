@@ -3,7 +3,7 @@
   "ingredient": {
     "item": "blazinghot:stellar_blaze_apple"
   },
-  "loops": 4,
+  "loops": 6,
   "results": [
     {
       "item": "blazinghot:enchanted_blaze_apple"
@@ -12,12 +12,13 @@
   "sequence": [
     {
       "type": "create:filling",
+      "blazinghot:convertMeltable": true,
       "ingredients": [
         {
           "item": "blazinghot:burning_stellar_blaze_apple"
         },
         {
-          "amount": 81000,
+          "amount": 54000,
           "fluidTag": "blazinghot:molten_blaze_gold"
         }
       ],

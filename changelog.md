@@ -23,7 +23,11 @@ Create: Blazing Hot 0.5-alpha.1
 * Updated textures for Blaze Gold Ingot, Nugget, Sheet and Block
 * Modern Lamp crafting recipe now returns 2 lamps instead of 1
 * Blaze Arrow crafting recipe now returns 4 arrows instead of 2
-* Reduced amount of required Nether Essence to obtain Molten Blaze Gold from 4 to 2
+* Reduced the amount of Nether Essence required to obtain Molten Blaze Gold from 4 to 2
+* Reduced the amount of fluid when filling Metal Carrots and Apples from 8 nuggets or ingots to 6
+* Adjusted sequenced assembly recipes for Enchanted Metal Apples:
+  * Increased the amount of loops from 4 to 6
+  * Reduced amount of fluid required per loop from 9 ingots to 6
 
 ### Fixed:
 

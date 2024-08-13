@@ -35,7 +35,7 @@ public interface IProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
     }
 
     @SuppressWarnings("unchecked")
-    default ProcessingRecipeBuilder<T> finish() {
+    default ProcessingRecipeBuilder<T> blazinghot$finish() {
         return (ProcessingRecipeBuilder<T>) this;
     }
 

@@ -1,11 +1,12 @@
 {
   "type": "create:filling",
+  "blazinghot:convertMeltable": true,
   "ingredients": [
     {
       "item": "minecraft:apple"
     },
     {
-      "amount": 72000,
+      "amount": 54000,
       "fluidTag": "blazinghot:molten_iron"
     }
   ],

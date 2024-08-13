@@ -29,7 +29,7 @@ public class BlazingCompactingRecipeGen extends BlazingProcessingRecipeGen {
     private GeneratedRecipe moltenToIngot(String materialName, TagKey<Fluid> tag, ItemLike result) {
         return create("molten_" + materialName,
                 b -> custom(b).blazinghot$convertMeltables()
-                        .finish()
+                        .blazinghot$finish()
                         .require(tag, MultiFluids.Constants.INGOT.platformed())
                         .output(result));
     }

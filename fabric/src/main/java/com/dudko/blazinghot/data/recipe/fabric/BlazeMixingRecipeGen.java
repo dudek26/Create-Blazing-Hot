@@ -53,7 +53,7 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
                                     .blazinghot$requireFuel(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag,
                                             MultiFluids.fromBucketFraction(1, 20))
                                     .blazinghot$convertMeltables()
-                                    .finish()
+                                    .blazinghot$finish()
                                     .require(CommonTags.Fluids.MOLTEN_GOLD.internal,
                                             MultiFluids.Constants.INGOT.platformed())
                                     .requiresHeat(HeatCondition.SUPERHEATED)
@@ -66,7 +66,7 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
                 (b) -> custom(b)
                         .blazinghot$requireFuel(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, fuelCost)
                         .blazinghot$convertMeltables()
-                        .finish()
+                        .blazinghot$finish()
                         .require(tag)
                         .duration(duration)
                         .requiresHeat(HeatCondition.SUPERHEATED)
@@ -81,7 +81,7 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
         return create("melting/" + item.asItem(),
                 b -> custom(b)
                         .blazinghot$requireFuel(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, fuelCost)
-                        .finish()
+                        .blazinghot$finish()
                         .require(item)
                         .duration(duration)
                         .requiresHeat(HeatCondition.SUPERHEATED)

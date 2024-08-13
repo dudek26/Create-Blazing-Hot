@@ -3,7 +3,7 @@
   "ingredient": {
     "item": "blazinghot:stellar_golden_apple"
   },
-  "loops": 4,
+  "loops": 6,
   "results": [
     {
       "item": "minecraft:enchanted_golden_apple"
@@ -12,12 +12,13 @@
   "sequence": [
     {
       "type": "create:filling",
+      "blazinghot:convertMeltable": true,
       "ingredients": [
         {
           "item": "blazinghot:gilded_stellar_golden_apple"
         },
         {
-          "amount": 81000,
+          "amount": 54000,
           "fluidTag": "blazinghot:molten_gold"
         }
       ],

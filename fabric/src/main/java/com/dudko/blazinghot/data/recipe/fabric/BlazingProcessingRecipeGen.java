@@ -36,8 +36,8 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
     protected static final List<BlazingProcessingRecipeGen> GENERATORS = new ArrayList<>();
     protected static final long BUCKET = Constants.BUCKET.platformed();
     protected static final long INGOT = Constants.INGOT.platformed();
-    protected static final long INGOT_COVER = Constants.INGOT.platformed() * 8;
-    protected static final long NUGGET_COVER = Constants.NUGGET.platformed() * 8;
+    protected static final long INGOT_COVER = Constants.INGOT.platformed() * 6;
+    protected static final long NUGGET_COVER = Constants.NUGGET.platformed() * 6;
     protected static final long NUGGET = Constants.NUGGET.platformed();
     protected static final long BOTTLE = Constants.BOTTLE.platformed();
 
@@ -202,7 +202,7 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
     }
 
     @SuppressWarnings("unchecked")
-    protected <T extends ProcessingRecipe<?>> IProcessingRecipeBuilder<T> custom(ProcessingRecipeBuilder<T> builder) {
+    protected static <T extends ProcessingRecipe<?>> IProcessingRecipeBuilder<T> custom(ProcessingRecipeBuilder<T> builder) {
         return (IProcessingRecipeBuilder<T>) builder;
     }
 
