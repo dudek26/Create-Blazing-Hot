@@ -1,11 +1,11 @@
 package com.dudko.blazinghot.config;
 
-import com.dudko.blazinghot.util.FluidUtil;
+import com.dudko.blazinghot.multiloader.MultiFluids;
 import com.simibubi.create.foundation.config.ConfigBase;
 
 public class CServer extends ConfigBase {
 
-    private static final int DEFAULT_FUEL_USAGE = (int) FluidUtil.platformedAmount(FluidUtil.fromBucketFraction(1, 40));
+    private static final int DEFAULT_FUEL_USAGE = (int) MultiFluids.fromBucketFraction(1, 40);
 
     public final ConfigBase.ConfigGroup recipes = group(0, "recipes", Comments.recipes);
     public final ConfigBool
@@ -45,19 +45,19 @@ public class CServer extends ConfigBase {
     private static class Comments {
         static String recipes = "Create: Blazing Hot's Recipes' settings";
         static String[] durationToFuelConvertion = new String[]{
-                "[in " + FluidUtil.platformedName() + "]",
-                FluidUtil.conversionNote(),
+                "[in " + MultiFluids.platformedName() + "]",
+                MultiFluids.conversionNote(),
                 "The amount of fuel that Blaze Mixer uses per 100 processing ticks (default speed) of regular mixing recipes.",
                 "Does not affect melting recipes.",
         };
         static String[] blazeBrewingFuelUsage = new String[]{
-                "[in " + FluidUtil.platformedName() + "]",
-                FluidUtil.conversionNote(),
+                "[in " + MultiFluids.platformedName() + "]",
+                MultiFluids.conversionNote(),
                 "The amount of fuel that Blaze Mixer uses for each brewing recipe.",
         };
         static String[] blazeShapelessFuelUsage = new String[]{
-                "[in " + FluidUtil.platformedName() + "]",
-                FluidUtil.conversionNote(),
+                "[in " + MultiFluids.platformedName() + "]",
+                MultiFluids.conversionNote(),
                 "The amount of fuel that Blaze Mixer uses for each shapeless crafting recipe.",
         };
         static String

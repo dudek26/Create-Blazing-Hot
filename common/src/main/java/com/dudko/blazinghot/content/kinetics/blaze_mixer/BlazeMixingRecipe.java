@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.content.kinetics.blaze_mixer;
 
 import com.dudko.blazinghot.config.BlazingConfigs;
+import com.dudko.blazinghot.multiloader.MultiFluids;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
@@ -21,7 +22,7 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.dudko.blazinghot.util.FluidUtil.fromBucketFraction;
+import static com.dudko.blazinghot.multiloader.MultiFluids.fromBucketFraction;
 
 @SuppressWarnings("UnstableApiUsage")
 public class BlazeMixingRecipe extends BasinRecipe {

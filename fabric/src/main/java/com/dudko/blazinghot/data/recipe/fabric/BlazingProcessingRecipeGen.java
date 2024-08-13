@@ -1,10 +1,9 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
+import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
-import com.dudko.blazinghot.util.FluidUtil;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
@@ -33,19 +32,19 @@ import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecip
 public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 
     protected static final List<BlazingProcessingRecipeGen> GENERATORS = new ArrayList<>();
-    protected static final long BUCKET = FluidUtil.BUCKET;
-    protected static final long INGOT = FluidUtil.INGOT;
-    protected static final long INGOT_COVER = FluidUtil.INGOT * 8;
-    protected static final long NUGGET_COVER = FluidUtil.NUGGET * 8;
-    protected static final long NUGGET = FluidUtil.NUGGET;
-    protected static final long BOTTLE = FluidUtil.BOTTLE;
+    protected static final long BUCKET = Constants.BUCKET.platformed();
+    protected static final long INGOT = Constants.INGOT.platformed();
+    protected static final long INGOT_COVER = Constants.INGOT.platformed() * 8;
+    protected static final long NUGGET_COVER = Constants.NUGGET.platformed() * 8;
+    protected static final long NUGGET = Constants.NUGGET.platformed();
+    protected static final long BOTTLE = Constants.BOTTLE.platformed();
 
     protected enum Forms {
-        INGOT(FluidUtil.INGOT, "ingots", 400),
-        NUGGET(FluidUtil.NUGGET, "nuggets", 65),
-        BLOCK(FluidUtil.BUCKET, "blocks", 2400, false),
-        SHEET(FluidUtil.INGOT, "plates", 400),
-        ROD(FluidUtil.INGOT / 2, "rods", 250);
+        INGOT(Constants.INGOT.platformed(), "ingots", 400),
+        NUGGET(Constants.NUGGET.platformed(), "nuggets", 65),
+        BLOCK(Constants.BUCKET.platformed(), "blocks", 2400, false),
+        SHEET(Constants.INGOT.platformed(), "plates", 400),
+        ROD(Constants.INGOT.platformed() / 2, "rods", 250);
 
         public final long amount;
         public final String tagSuffix;

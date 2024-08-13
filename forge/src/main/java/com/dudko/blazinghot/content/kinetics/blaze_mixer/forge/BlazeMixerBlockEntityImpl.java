@@ -3,9 +3,10 @@ package com.dudko.blazinghot.content.kinetics.blaze_mixer.forge;
 import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
+import com.dudko.blazinghot.multiloader.MultiFluids;
+import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.forge.BlazingRecipeTypesImpl;
-import com.dudko.blazinghot.util.FluidUtil;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.fluids.FluidFX;
@@ -57,7 +58,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe.getFuelCost;
-import static com.dudko.blazinghot.util.FluidUtil.platformedAmount;
+import static com.dudko.blazinghot.multiloader.MultiFluids.platformedAmount;
 
 @SuppressWarnings("UnstableApiUsage")
 public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
@@ -70,7 +71,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-        tank = SmartFluidTankBehaviour.single(this, (int) platformedAmount(FluidUtil.BUCKET));
+        tank = SmartFluidTankBehaviour.single(this, (int) platformedAmount(Constants.BUCKET.platformed()));
         tank.whenFluidUpdates(() -> {
             if (getBasin().isPresent()) getBasin().get().notifyChangeOfContents();
         });
@@ -317,6 +318,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 
         return kinetics || fluids;
     }
+
     @Override
     @OnlyIn(Dist.CLIENT)
     public void tickAudio() {

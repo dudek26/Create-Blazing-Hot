@@ -3,10 +3,10 @@ package com.dudko.blazinghot.content.kinetics.blaze_mixer.fabric;
 import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
+import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.fabric.BlazingRecipeTypesImpl;
-import com.dudko.blazinghot.util.FluidUtil;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.fluids.FluidFX;
@@ -74,7 +74,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-        tank = SmartFluidTankBehaviour.single(this, FluidUtil.platformedAmount(FluidUtil.BUCKET));
+        tank = SmartFluidTankBehaviour.single(this, Constants.BUCKET.platformed());
         tank.whenFluidUpdates(() -> {
             if (getBasin().isPresent()) getBasin().get().notifyChangeOfContents();
         });
@@ -163,7 +163,9 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
                     int maxMultiplier = currentRecipe.getId().getPath().startsWith("blaze_mixing/melting") ? 16 : 1;
 
                     processingTicks =
-                            Mth.clamp((Mth.log2((int) (512 / speed))) * Mth.ceil(recipeSpeed * 15) + 1, 1, 512 * maxMultiplier);
+                            Mth.clamp((Mth.log2((int) (512 / speed))) * Mth.ceil(recipeSpeed * 15) + 1,
+                                    1,
+                                    512 * maxMultiplier);
 
                     Optional<BasinBlockEntity> basin = getBasin();
                     if (basin.isPresent()) {
