@@ -17,10 +17,8 @@ subprojects {
 
     loom {
         silentMojangMappingsLicense()
+
         runs.configureEach {
-            vmArg("-XX:+AllowEnhancedClassRedefinition")
-            vmArg("-XX:+IgnoreUnrecognizedVMOptions")
-            vmArg("-Dmixin.debug.export=true")
             vmArg("-Dmixin.env.remapRefMap=true")
             vmArg("-Dmixin.env.refMapRemappingFile=${projectDir}/build/createSrgToMcp/output.srg")
         }
@@ -114,8 +112,8 @@ publishMods {
 
     github {
         accessToken = System.getenv("GITHUB_TOKEN")
-        repository = "dudek26/RyePG-Addons"
-        commitish = "main"
+        repository = "dudek26/Create-Blazing-Hot"
+        commitish = "1.20.1/multiloader"
         tagName = "v${mod_version}"
 
         // Allow the release to be initially created without any files.

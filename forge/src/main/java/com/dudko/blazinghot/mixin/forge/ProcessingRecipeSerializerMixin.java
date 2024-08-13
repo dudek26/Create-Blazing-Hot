@@ -58,12 +58,13 @@ public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
     /**
      * Converts fluid amounts in C:BH recipes' results from Fabric's droplets to milibuckets.
      */
-    @ModifyArg(method = "readFromJson(Lnet/minecraft/resources/ResourceLocation;Lcom/google/gson/JsonObject;)Lcom/simibubi/create/content/processing/recipe/ProcessingRecipe;",
+    @ModifyArg(method = "readFromJson",
             remap = false,
             at = @At(value = "INVOKE",
+                    remap = false,
                     target = "Lcom/simibubi/create/foundation/fluid/FluidHelper;deserializeFluidStack(Lcom/google/gson/JsonObject;)Lnet/minecraftforge/fluids/FluidStack;"))
     private JsonObject blazinghot$resultPlatformedFluidAmount(JsonObject jsonObject,
-                                                              @Local JsonObject json,
+                                                              @Local(ordinal = 0) JsonObject json,
                                                               @Local(argsOnly = true) ResourceLocation recipeID) {
         if (json.has("blazinghot:convertMeltable") && GsonHelper.getAsBoolean(json, "blazinghot:convertMeltable")) {
             if (!jsonObject.has("amount")) throw new JsonSyntaxException("Fluid result has to define an amount");
@@ -83,7 +84,7 @@ public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
     }
 
     @SuppressWarnings("unchecked")
-    @Inject(method = "readFromJson(Lnet/minecraft/resources/ResourceLocation;Lcom/google/gson/JsonObject;)Lcom/simibubi/create/content/processing/recipe/ProcessingRecipe;",
+    @Inject(method = "readFromJson",
             remap = false,
             at = @At(value = "INVOKE_ASSIGN",
 
