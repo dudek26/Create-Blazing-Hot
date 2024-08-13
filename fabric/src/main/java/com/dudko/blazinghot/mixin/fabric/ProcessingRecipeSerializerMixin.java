@@ -19,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ProcessingRecipeSerializer.class)
 public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
 
+//    TODO: make a whole new serializer and don't use mixins for that
     @Inject(method = "writeToJson(Lcom/google/gson/JsonObject;Lcom/simibubi/create/content/processing/recipe/ProcessingRecipe;)V",
             at = @At("HEAD"), remap = false)
     protected void blazinghot$writeCustomToJson(JsonObject json, T recipe, CallbackInfo ci) {

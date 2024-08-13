@@ -53,7 +53,7 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
                                     .blazinghot$convertMeltables()
                                     .finish()
                                     .require(CommonTags.Fluids.MOLTEN_GOLD.internal,
-                                            MultiFluids.Constants.INGOT.platformed())
+                                            MultiFluids.Constants.ROD.platformed())
                                     .requiresHeat(HeatCondition.SUPERHEATED)
                                     .duration(200)
                                     .output(MultiloaderFluids.MOLTEN_BLAZE_GOLD.get(),

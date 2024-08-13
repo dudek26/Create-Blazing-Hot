@@ -24,6 +24,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ProcessingRecipeSerializer.class)
 public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
 
+//    TODO: make a whole new serializer and don't use mixins for that
 
     /**
      * Converts fluid amounts in C:BH recipes' FluidIngredients from Fabric's droplets to milibuckets.
