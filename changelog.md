@@ -2,8 +2,6 @@
 Create: Blazing Hot 0.5-alpha.1
 ------------------------------------------------------
 
-#### This is an alpha version. Please back up your worlds before downloading this version and submit any [issues](https://github.com/dudek26/Create-Blazing-Hot/issues) on the GitHub page.
-
 ### Added:
 
 * **⚒ Forge support**
