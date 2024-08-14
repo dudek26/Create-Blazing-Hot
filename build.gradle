@@ -107,7 +107,7 @@ publishMods {
 
     changelog = changelogText
     displayName = "Create: Blazing Hot v${mod_version} for mc${minecraft_version}"
-    type = release_type.equalsIgnoreCase("alpha") ? ALPHA : STABLE // TODO: re-add beta check after 1.0 release
+    type = release_type.equalsIgnoreCase("alpha") ? ALPHA : release_type.equalsIgnoreCase("beta") ? BETA : STABLE
 
     github {
         accessToken = System.getenv("GITHUB_TOKEN")

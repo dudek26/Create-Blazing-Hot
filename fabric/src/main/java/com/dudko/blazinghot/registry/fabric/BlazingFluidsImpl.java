@@ -38,14 +38,10 @@ public class BlazingFluidsImpl {
     private static final CreateRegistrate REGISTRATE = BlazingHot.registrate();
 
     public static final FluidEntry<SimpleFlowableFluid.Flowing>
-
             NETHER_LAVA = createFromLava("nether_lava", 10, 1),
-
-    MOLTEN_IRON = createFromLava("molten_iron"),
-
-    MOLTEN_GOLD = createFromLava("molten_gold"),
-
-    MOLTEN_BLAZE_GOLD = createFromLava("molten_blaze_gold");
+            MOLTEN_IRON = createFromLava("molten_iron"),
+            MOLTEN_GOLD = createFromLava("molten_gold"),
+            MOLTEN_BLAZE_GOLD = createFromLava("molten_blaze_gold");
 
     private static FluidEntry<SimpleFlowableFluid.Flowing> createFromLava(String name) {
         return createFromLava(name, 30);
@@ -94,24 +90,28 @@ public class BlazingFluidsImpl {
     public static BlockState whenFluidsMeet(LevelAccessor world, BlockPos pos, BlockState blockState) {
         FluidState fluidState = blockState.getFluidState();
 
-        if (fluidState.isSource() && FluidHelper.isWater(fluidState.getType())) return null;
+        if (fluidState.isSource() && FluidHelper.isLava(fluidState.getType()))
+            return null;
 
         for (Direction direction : Iterate.directions) {
-            FluidState
-                    metFluidState =
+            FluidState metFluidState =
                     fluidState.isSource() ? fluidState : world.getFluidState(pos.relative(direction));
-            if (!metFluidState.is(FluidTags.LAVA)) continue;
-            BlockState waterInteraction = getWaterInteraction(metFluidState);
-            if (waterInteraction == null) continue;
-            return waterInteraction;
+            if (!metFluidState.is(FluidTags.WATER))
+                continue;
+            BlockState lavaInteraction = getLavaInteraction(fluidState, metFluidState);
+            if (lavaInteraction == null)
+                continue;
+            return lavaInteraction;
         }
         return null;
     }
 
     @Nullable
-    public static BlockState getWaterInteraction(FluidState fluidState) {
+    public static BlockState getLavaInteraction(FluidState fluidState, FluidState metFluidState) {
         Fluid fluid = fluidState.getType();
-        if (fluid.isSame(MOLTEN_BLAZE_GOLD.get())) {
+        Fluid metFluid = metFluidState.getType();
+
+        if (fluid.isSame(MOLTEN_BLAZE_GOLD.get()) && metFluidState.is(FluidTags.WATER)) {
             return Blocks.NETHERRACK.defaultBlockState();
         }
         return null;
@@ -130,7 +130,8 @@ public class BlazingFluidsImpl {
 
     }
 
-    private record CreateAttributeHandler(Component name, int viscosity, boolean lighterThanAir) implements FluidVariantAttributeHandler {
+    private record CreateAttributeHandler(Component name, int viscosity,
+                                          boolean lighterThanAir) implements FluidVariantAttributeHandler {
         private CreateAttributeHandler(String key, int viscosity, int density) {
             this(Component.translatable(key), viscosity, density <= 0);
         }
