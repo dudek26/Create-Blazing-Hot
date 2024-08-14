@@ -22,6 +22,9 @@ The version of Minecraft that you're running the mod on.
 **Mod loader**
 The mod loader that you're running the mod on.
 
+**Environment**
+The environment the bug occurs in (Singleplayer, Multiplayer)
+
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
