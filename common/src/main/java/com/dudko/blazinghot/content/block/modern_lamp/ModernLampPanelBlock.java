@@ -29,7 +29,7 @@ public class ModernLampPanelBlock extends ModernLampBlock implements SimpleWater
 
     public ModernLampPanelBlock(Properties properties, DyeColor color) {
         super(properties, color);
-        defaultBlockState().setValue(FACING, Direction.UP).setValue(WATERLOGGED, false);
+        registerDefaultState(defaultBlockState().setValue(FACING, Direction.UP).setValue(WATERLOGGED, false));
     }
 
     @Override
