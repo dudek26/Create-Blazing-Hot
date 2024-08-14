@@ -7,6 +7,7 @@ Create: Blazing Hot 0.5.1
 
 ### Fixed:
 * Fixed mod .jar files using `blazinghot` name instead of `create_blazing_hot`
+* Modern Lamp Panels no longer get destroyed by fluids when facing up or down
 
 ------------------------------------------------------
 Create: Blazing Hot 0.5

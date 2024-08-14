@@ -107,12 +107,12 @@ public class BlazingBlocks {
                 .register();
     });
 
-    public static final DyedBlockList<ModernLampBlock> MODERN_LAMP_PANELS = new DyedBlockList<>(color -> {
+    public static final DyedBlockList<ModernLampPanelBlock> MODERN_LAMP_PANELS = new DyedBlockList<>(color -> {
         String colorName = color.getSerializedName();
         return REGISTRATE
                 .block(colorName + "_modern_lamp_panel", p -> new ModernLampPanelBlock(p, color))
                 .initialProperties(() -> Blocks.GLOWSTONE)
-                .properties(p -> p.mapColor(color).lightLevel(s -> s.getValue(ModernLampPanelBlock.LIT) ? 15 : 0))
+                .properties(p -> p.mapColor(color).lightLevel(s -> s.getValue(ModernLampPanelBlock.LIT) ? 15 : 0).forceSolidOn())
                 .tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag, BlazingTags.Blocks.MODERN_LAMP_PANELS.tag)
                 .transform(BlazingBuilderTransformers.modernLampPanel(color))
                 .recipe((c, p) -> {
