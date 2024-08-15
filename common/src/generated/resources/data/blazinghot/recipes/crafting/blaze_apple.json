@@ -3,10 +3,10 @@
   "category": "misc",
   "key": {
     "X": {
-      "tag": "blazinghot:iron_nuggets"
+      "tag": "blazinghot:blaze_gold_ingots"
     },
     "Y": {
-      "item": "minecraft:carrot"
+      "item": "minecraft:apple"
     }
   },
   "pattern": [
@@ -15,7 +15,7 @@
     "XXX"
   ],
   "result": {
-    "item": "blazinghot:iron_carrot"
+    "item": "blazinghot:blaze_apple"
   },
   "show_notification": true
 }

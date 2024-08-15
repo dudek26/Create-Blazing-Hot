@@ -15,6 +15,7 @@ import static com.dudko.blazinghot.registry.BlazingTags.titleCaseConversion;
 
 /**
  * @apiNote Internal tags are used for recipes, advancements etc.
+ * <br> Don't use <code>[...]tagOf</code> methods on Forge, as they use <code>BuiltInRegistries</code>!!!
  */
 @SuppressWarnings("unchecked")
 public class CommonTags {
@@ -23,20 +24,39 @@ public class CommonTags {
         return TagKey.create(registry.key(), id);
     }
 
-    public static <T> TagKey<T> internalTagOf(Registry<T> registry, String path) {
-        return optionalTag(registry, new ResourceLocation(BlazingHot.ID, path));
+    public static <T> TagKey<T> tagOf(Registry<T> registry, String path, Namespace namespace) {
+        return optionalTag(registry, new ResourceLocation(namespace.namespace, path));
     }
 
-    public static TagKey<Block> internalBlockTagOf(String path) {
-        return internalTagOf(BuiltInRegistries.BLOCK, path);
+    public static TagKey<Block> blockTagOf(String path, Namespace namespace) {
+        return tagOf(BuiltInRegistries.BLOCK, path, namespace);
     }
 
-    public static TagKey<Item> internalItemTagOf(String path) {
-        return internalTagOf(BuiltInRegistries.ITEM, path);
+    public static TagKey<Item> itemTagOf(String path, Namespace namespace) {
+        return tagOf(BuiltInRegistries.ITEM, path, namespace);
     }
 
-    public static TagKey<Fluid> internalFluidTagOf(String path) {
-        return internalTagOf(BuiltInRegistries.FLUID, path);
+    public static TagKey<Fluid> fluidTagOf(String path, Namespace namespace) {
+        return tagOf(BuiltInRegistries.FLUID, path, namespace);
+    }
+
+
+    public enum Namespace {
+        INTERNAL(BlazingHot.ID, false),
+        FORGE("forge", true),
+        COMMON("c", false);
+
+        public final String namespace;
+        public final boolean useFolders;
+
+        Namespace(String namespace, boolean useFolders) {
+            this.namespace = namespace;
+            this.useFolders = useFolders;
+        }
+
+        public String tagPath(String folder, String material) {
+            return useFolders ? folderTag(folder, material) : plainTag(folder, material);
+        }
     }
 
     public enum Blocks {
@@ -83,31 +103,6 @@ public class CommonTags {
         BLAZE_GOLD_PLATES("plates/blaze_gold", "blaze_gold_plates"),
         BLAZE_GOLD_RODS("rods/blaze_gold", "blaze_gold_rods"),
 
-        IRON_BLOCKS("storage_blocks/iron", "iron_blocks"),
-        IRON_INGOTS("ingots/iron", "iron_ingots"),
-        IRON_NUGGETS("nuggets/iron", "iron_nuggets"),
-        IRON_PLATES("plates/iron", "iron_plates"),
-
-        GOLD_BLOCKS("storage_blocks/gold", "gold_blocks"),
-        GOLD_INGOTS("ingots/gold", "gold_ingots"),
-        GOLD_NUGGETS("nuggets/gold", "gold_nuggets"),
-        GOLD_PLATES("plates/gold", "gold_plates"),
-
-        COPPER_BLOCKS("storage_blocks/copper", "copper_blocks"),
-        COPPER_INGOTS("ingots/copper", "copper_ingots"),
-        COPPER_NUGGETS("nuggets/copper", "copper_nuggets"),
-        COPPER_PLATES("plates/copper", "copper_plates"),
-
-        ZINC_BLOCKS("storage_blocks/zinc", "zinc_blocks"),
-        ZINC_INGOTS("ingots/zinc", "zinc_ingots"),
-        ZINC_NUGGETS("nuggets/zinc", "zinc_nuggets"),
-        ZINC_PLATES("plates/zinc", "zinc_plates"),
-
-        BRASS_BLOCKS("storage_blocks/brass", "brass_blocks"),
-        BRASS_INGOTS("ingots/brass", "brass_ingots"),
-        BRASS_NUGGETS("nuggets/brass", "brass_nuggets"),
-        BRASS_PLATES("plates/brass", "brass_plates"),
-
         PLATES("plates"),
         FOODS("foods"),
 
@@ -147,10 +142,6 @@ public class CommonTags {
     }
 
     public enum Fluids {
-        MOLTEN_GOLD("molten_gold"),
-        MOLTEN_BLAZE_GOLD("molten_blaze_gold"),
-        MOLTEN_IRON("molten_iron"),
-
         NETHER_LAVA("nether_lava");
 
         public final TagKey<Fluid> internal;
@@ -214,5 +205,14 @@ public class CommonTags {
             }
         }
     }
+
+    public static String folderTag(String folder, String material) {
+        return (folder.equalsIgnoreCase("blocks") ? "storage_blocks" : folder) + "/" + material;
+    }
+
+    public static String plainTag(String folder, String material) {
+        return material + "_" + folder;
+    }
+
 
 }

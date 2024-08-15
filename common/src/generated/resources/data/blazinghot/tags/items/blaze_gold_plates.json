@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#forge:plates/blaze_gold",
-    "#c:blaze_gold_plates"
+    "#c:blaze_gold_plates",
+    "#forge:plates/blaze_gold"
   ]
 }

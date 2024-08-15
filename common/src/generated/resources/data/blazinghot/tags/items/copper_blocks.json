@@ -1,7 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "#forge:storage_blocks/copper",
-    "#c:copper_blocks"
-  ]
-}

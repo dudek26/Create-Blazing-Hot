@@ -6,7 +6,7 @@
       "tag": "minecraft:coals"
     },
     "Y": {
-      "item": "blazinghot:blaze_gold_rod"
+      "tag": "blazinghot:blaze_gold_rods"
     },
     "Z": {
       "item": "minecraft:feather"

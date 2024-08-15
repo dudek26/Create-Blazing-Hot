@@ -1,11 +1,15 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
+import com.dudko.blazinghot.content.fluids.MoltenMetal;
 import com.dudko.blazinghot.registry.BlazingItems;
-import com.dudko.blazinghot.registry.CommonTags;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
+
+import static com.dudko.blazinghot.content.fluids.MoltenMetal.*;
+import static com.dudko.blazinghot.data.recipe.fabric.Ingredients.*;
 
 @SuppressWarnings("unused")
 public class BlazingFillingRecipeGen extends BlazingProcessingRecipeGen {
@@ -15,51 +19,39 @@ public class BlazingFillingRecipeGen extends BlazingProcessingRecipeGen {
     }
 
     GeneratedRecipe
-            GOLDEN_APPLE =
-            create("golden_apple",
-                    b -> custom(b).blazinghot$convertMeltables().blazinghot$finish()
-                            .require(Items.APPLE)
-                            .require(CommonTags.Fluids.MOLTEN_GOLD.internal, INGOT_COVER)
-                            .output(Items.GOLDEN_APPLE)),
-            GOLDEN_CARROT =
-                    create("golden_carrot",
-                            b -> custom(b).blazinghot$convertMeltables().blazinghot$finish()
-                                    .require(Items.CARROT)
-                                    .require(CommonTags.Fluids.MOLTEN_GOLD.internal, NUGGET_COVER)
-                                    .output(Items.GOLDEN_CARROT)),
             GLISTERING_MELON =
-                    create("glistering_melon",
-                            b -> custom(b).blazinghot$convertMeltables().blazinghot$finish()
-                                    .require(Items.MELON_SLICE)
-                                    .require(CommonTags.Fluids.MOLTEN_GOLD.internal, NUGGET_COVER)
-                                    .output(Items.GLISTERING_MELON_SLICE)),
-            BLAZE_CARROT =
-                    create("blaze_carrot",
-                            b -> custom(b).blazinghot$convertMeltables().blazinghot$finish()
-                                    .require(Items.CARROT)
-                                    .require(CommonTags.Fluids.MOLTEN_BLAZE_GOLD.internal, NUGGET_COVER)
-                                    .output(BlazingItems.BLAZE_CARROT)),
-            BLAZE_APPLE =
-                    create("blaze_apple",
-                            b -> custom(b).blazinghot$convertMeltables().blazinghot$finish()
-                                    .require(Items.APPLE)
-                                    .require(CommonTags.Fluids.MOLTEN_BLAZE_GOLD.internal, INGOT_COVER)
-                                    .output(BlazingItems.BLAZE_APPLE)),
-            IRON_CARROT =
-                    create("iron_carrot",
-                            b -> custom(b).blazinghot$convertMeltables().blazinghot$finish()
-                                    .require(Items.CARROT)
-                                    .require(CommonTags.Fluids.MOLTEN_IRON.internal, NUGGET_COVER)
-                                    .output(BlazingItems.IRON_CARROT)),
-            IRON_APPLE =
-                    create("iron_apple",
-                            b -> custom(b).blazinghot$convertMeltables().blazinghot$finish()
-                                    .require(Items.APPLE)
-                                    .require(CommonTags.Fluids.MOLTEN_IRON.internal, INGOT_COVER)
-                                    .output(BlazingItems.IRON_APPLE));
+            create("glistering_melon",
+                    b -> custom(b).blazinghot$convertMeltables().blazinghot$finish()
+                            .require(melon())
+                            .require(moltenGold(), NUGGET_COVER)
+                            .output(Items.GLISTERING_MELON_SLICE)),
+            GOLDEN_APPLE = metalApple(GOLD, Items.GOLDEN_APPLE),
+            GOLDEN_CARROT = metalCarrot(GOLD, Items.GOLDEN_CARROT),
+            BLAZE_CARROT = metalCarrot(BLAZE_GOLD, BlazingItems.BLAZE_CARROT),
+            BLAZE_APPLE = metalApple(BLAZE_GOLD, BlazingItems.BLAZE_APPLE),
+            IRON_CARROT = metalCarrot(IRON, BlazingItems.IRON_CARROT),
+            IRON_APPLE = metalApple(IRON, BlazingItems.IRON_APPLE);
 
     @Override
     protected IRecipeTypeInfo getRecipeType() {
         return AllRecipeTypes.FILLING;
+    }
+
+    private GeneratedRecipe metalApple(MoltenMetal metal, ItemLike result) {
+        return create(result.asItem().toString(),
+                b -> custom(b).blazinghot$convertMeltables()
+                        .blazinghot$finish()
+                        .require(apple())
+                        .require(metal.fluidTag(), INGOT_COVER)
+                        .output(result));
+    }
+
+    private GeneratedRecipe metalCarrot(MoltenMetal metal, ItemLike result) {
+        return create(result.asItem().toString(),
+                b -> custom(b).blazinghot$convertMeltables()
+                        .blazinghot$finish()
+                        .require(carrot())
+                        .require(metal.fluidTag(), NUGGET_COVER)
+                        .output(result));
     }
 }

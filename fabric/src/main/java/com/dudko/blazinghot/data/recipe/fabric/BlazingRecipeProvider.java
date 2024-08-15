@@ -31,4 +31,12 @@ public abstract class BlazingRecipeProvider extends RecipeProvider {
     public interface GeneratedRecipe {
         void register(Consumer<FinishedRecipe> consumer);
     }
+
+    protected static String foodMetalName(String name) {
+        return switch (name.toLowerCase()) {
+            case "gold" -> "golden";
+            case "blaze_gold" -> "blaze";
+            default -> name;
+        };
+    }
 }

@@ -5,6 +5,8 @@ import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.minecraft.data.PackOutput;
 
+import static com.dudko.blazinghot.data.recipe.fabric.Ingredients.*;
+
 @SuppressWarnings("unused")
 public class BlazingHauntingRecipeGen extends BlazingProcessingRecipeGen {
 
@@ -14,7 +16,7 @@ public class BlazingHauntingRecipeGen extends BlazingProcessingRecipeGen {
 
     GeneratedRecipe
             NETHER_COMPOUND =
-            create("nether_compound", b -> b.require(BlazingItems.NETHER_COMPOUND).output(BlazingItems.NETHER_ESSENCE));
+            create("nether_compound", b -> b.require(netherCompound()).output(BlazingItems.NETHER_ESSENCE));
 
     @Override
     protected IRecipeTypeInfo getRecipeType() {

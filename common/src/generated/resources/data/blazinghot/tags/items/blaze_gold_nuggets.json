@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#forge:nuggets/blaze_gold",
-    "#c:blaze_gold_nuggets"
+    "#c:blaze_gold_nuggets",
+    "#forge:nuggets/blaze_gold"
   ]
 }

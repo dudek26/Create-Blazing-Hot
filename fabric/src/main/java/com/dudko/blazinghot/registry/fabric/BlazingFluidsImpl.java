@@ -2,7 +2,6 @@ package com.dudko.blazinghot.registry.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.fluids.MoltenMetal;
-import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.fluid.FluidHelper;
 import com.simibubi.create.foundation.utility.Iterate;
@@ -34,6 +33,9 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.function.Function;
 
+import static com.dudko.blazinghot.registry.CommonTags.Namespace.COMMON;
+import static com.dudko.blazinghot.registry.CommonTags.Namespace.FORGE;
+import static com.dudko.blazinghot.registry.CommonTags.fluidTagOf;
 import static net.minecraft.world.item.Items.BUCKET;
 
 @SuppressWarnings("UnstableApiUsage")
@@ -42,7 +44,7 @@ public class BlazingFluidsImpl {
     private static final CreateRegistrate REGISTRATE = BlazingHot.registrate();
 
     public static final MoltenMetalsList<SimpleFlowableFluid.Flowing> MOLTEN_METALS =
-            new MoltenMetalsList<>(metal -> createFromLava("molten_" + metal.name));
+            new MoltenMetalsList<>(metal -> createFromLava(metal.moltenName()));
 
     public static final FluidEntry<SimpleFlowableFluid.Flowing>
             NETHER_LAVA = createFromLava("nether_lava", 10, 1);
@@ -58,7 +60,8 @@ public class BlazingFluidsImpl {
     private static FluidEntry<SimpleFlowableFluid.Flowing> createFromLava(String name, int tickRate, int decreaseRate) {
         return REGISTRATE
                 .standardFluid(name)
-                .tag(AllTags.forgeFluidTag(name), FluidTags.LAVA) // fabric: lava tag controls physics
+                .tag(fluidTagOf(name, COMMON), fluidTagOf(name, FORGE)) // replace this with something else if the datagen fails to generate these tags
+                .tag(FluidTags.LAVA) // fabric: lava tag controls physics
                 .fluidProperties(p -> p
                         .levelDecreasePerBlock(decreaseRate)
                         .tickRate(tickRate)
@@ -173,7 +176,7 @@ public class BlazingFluidsImpl {
         }
 
         public T getFluid(MoltenMetal metal) {
-            return get(metal).get();
+            return get(metal).getSource();
         }
 
         public boolean contains(Fluid fluid) {

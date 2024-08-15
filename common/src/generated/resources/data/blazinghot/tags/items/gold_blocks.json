@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#forge:storage_blocks/gold",
-    "#c:gold_blocks"
+    "#c:gold_blocks",
+    "#forge:storage_blocks/gold"
   ]
 }

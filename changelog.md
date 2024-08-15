@@ -2,13 +2,18 @@
 Create: Blazing Hot 0.5.1
 ------------------------------------------------------
 
+### Added:
+* Crafting recipe for Blaze Apple
+
 ### Changed:
 * Molten Blaze Gold source blocks now turn into Obsidian when touching water
 * Modern Lamp Panels can now be waterlogged
+* Increased chance of getting Blaze Powder when crushing Blaze Gold Rods from 30% to 50%
 
 ### Fixed:
 * Fixed mod .jar files using `blazinghot` name instead of `create_blazing_hot`
 * Modern Lamp Panels no longer get destroyed by fluids when facing up or down
+* [Forge] Fixed Iron Carrot crafting recipe using wrong tag for iron nuggets
 
 ------------------------------------------------------
 Create: Blazing Hot 0.5

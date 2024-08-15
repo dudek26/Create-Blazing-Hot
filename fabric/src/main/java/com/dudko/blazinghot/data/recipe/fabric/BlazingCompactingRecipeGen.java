@@ -11,6 +11,7 @@ import net.minecraft.world.level.material.Fluid;
 import java.util.List;
 
 import static com.dudko.blazinghot.content.fluids.MoltenMetal.ALL_METALS;
+import static com.dudko.blazinghot.data.recipe.fabric.Ingredients.*;
 
 @SuppressWarnings("unused")
 public class BlazingCompactingRecipeGen extends BlazingProcessingRecipeGen {
@@ -20,7 +21,7 @@ public class BlazingCompactingRecipeGen extends BlazingProcessingRecipeGen {
     }
 
     List<GeneratedRecipe> ALL_MOLTEN_COMPACTING_RECIPES = ALL_METALS.stream()
-            .map(metal -> moltenToIngot(metal.name, metal.fluidTag(), metal.ingot().get()))
+            .map(metal -> moltenToIngot(metal.moltenName(), metal.fluidTag(), metal.ingot().get()))
             .toList();
 
     @Override
@@ -28,8 +29,8 @@ public class BlazingCompactingRecipeGen extends BlazingProcessingRecipeGen {
         return AllRecipeTypes.COMPACTING;
     }
 
-    private GeneratedRecipe moltenToIngot(String materialName, TagKey<Fluid> tag, ItemLike result) {
-        return create("molten_" + materialName,
+    private GeneratedRecipe moltenToIngot(String name, TagKey<Fluid> tag, ItemLike result) {
+        return create(name,
                 b -> custom(b).blazinghot$convertMeltables()
                         .blazinghot$finish()
                         .require(tag, MultiFluids.Constants.INGOT.platformed())

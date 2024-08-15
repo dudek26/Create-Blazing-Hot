@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#forge:plates/iron",
-    "#c:iron_plates"
+    "#c:iron_plates",
+    "#forge:plates/iron"
   ]
 }

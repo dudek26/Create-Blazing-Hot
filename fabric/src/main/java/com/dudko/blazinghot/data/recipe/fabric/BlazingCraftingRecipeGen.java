@@ -1,9 +1,9 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.content.fluids.MoltenMetal;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
-import com.dudko.blazinghot.registry.CommonTags;
 import com.simibubi.create.foundation.utility.RegisteredObjects;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -12,21 +12,23 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
+import static com.dudko.blazinghot.content.fluids.MoltenMetal.BLAZE_GOLD;
+import static com.dudko.blazinghot.content.fluids.MoltenMetal.Forms.INGOT;
+import static com.dudko.blazinghot.content.fluids.MoltenMetal.Forms.NUGGET;
+import static com.dudko.blazinghot.content.fluids.MoltenMetal.IRON;
+import static com.dudko.blazinghot.data.recipe.fabric.Ingredients.*;
 import static com.dudko.blazinghot.registry.BlazingBlocks.BLAZE_GOLD_BLOCK;
-import static com.dudko.blazinghot.registry.BlazingItems.*;
-import static com.dudko.blazinghot.registry.CommonTags.Items.*;
+import static com.dudko.blazinghot.registry.BlazingItems.BLAZE_GOLD_INGOT;
+import static com.dudko.blazinghot.registry.BlazingItems.BLAZE_GOLD_NUGGET;
 
 @SuppressWarnings({"UnusedReturnValue", "SameParameterValue", "unused"})
 public class BlazingCraftingRecipeGen extends BlazingRecipeProvider {
@@ -69,40 +71,40 @@ public class BlazingCraftingRecipeGen extends BlazingRecipeProvider {
 
         decompressing(BLAZE_GOLD_BLOCK, BLAZE_GOLD_INGOT, 9, BLAZE_GOLD_INGOT);
         decompressing(BLAZE_GOLD_INGOT, BLAZE_GOLD_NUGGET, 9, BLAZE_GOLD_INGOT);
-
-        covering(Items.CARROT, BLAZE_GOLD_NUGGETS.internal, BLAZE_CARROT, BLAZE_GOLD_INGOTS.internal);
-        covering(Items.CARROT, IRON_NUGGETS.fabric, IRON_CARROT, IRON_INGOTS.internal);
-        covering(Items.APPLE, IRON_INGOTS.internal, IRON_APPLE, IRON_INGOTS.internal);
     }
 
     GeneratedRecipe
+            IRON_APPLE = metalApple(IRON, BlazingItems.IRON_APPLE),
+            IRON_CARROT = metalCarrot(IRON, BlazingItems.IRON_CARROT),
+            BLAZE_APPLE = metalApple(BLAZE_GOLD, BlazingItems.BLAZE_APPLE),
+            BLAZE_CARROT = metalCarrot(BLAZE_GOLD, BlazingItems.BLAZE_CARROT),
             WHITE_MODERN_LAMP =
-            create(BlazingBlocks.MODERN_LAMP_BLOCKS.get(DyeColor.WHITE))
-                    .unlockedBy(BLAZE_GOLD_ROD)
-                    .returns(2)
-                    .viaShaped(b -> b
-                            .define('X', BLAZE_GOLD_ROD)
-                            .define('Y', Blocks.GLOWSTONE)
-                            .pattern(" X ")
-                            .pattern("XYX")
-                            .pattern(" X ")),
+                    create(BlazingBlocks.MODERN_LAMP_BLOCKS.get(DyeColor.WHITE))
+                            .unlockedByTag(Ingredients::blazeGoldRod)
+                            .returns(2)
+                            .viaShaped(b -> b
+                                    .define('X', blazeGoldRod())
+                                    .define('Y', glowstone())
+                                    .pattern(" X ")
+                                    .pattern("XYX")
+                                    .pattern(" X ")),
             BLAZE_ARROW =
-            create(BlazingItems.BLAZE_ARROW)
-                    .unlockedBy(BLAZE_GOLD_ROD)
-                    .returns(4)
-                    .viaShaped(b -> b
-                            .define('X', ItemTags.COALS)
-                            .define('Y', BLAZE_GOLD_ROD)
-                            .define('Z', Items.FEATHER)
-                            .pattern(" X ")
-                            .pattern(" Y ")
-                            .pattern(" Z ")),
+                    create(BlazingItems.BLAZE_ARROW)
+                            .unlockedByTag(Ingredients::blazeGoldRod)
+                            .returns(4)
+                            .viaShaped(b -> b
+                                    .define('X', coal())
+                                    .define('Y', blazeGoldRod())
+                                    .define('Z', feather())
+                                    .pattern(" X ")
+                                    .pattern(" Y ")
+                                    .pattern(" Z ")),
             BLAZE_WHISK =
                     create(BlazingItems.BLAZE_WHISK)
-                            .unlockedBy(BLAZE_GOLD_INGOT)
+                            .unlockedByTag(Ingredients::blazeGoldIngot)
                             .viaShaped(b -> b
-                                    .define('X', CommonTags.Items.BRASS_INGOTS.internal)
-                                    .define('Y', CommonTags.Items.BLAZE_GOLD_PLATES.internal)
+                                    .define('X', brassIngot())
+                                    .define('Y', blazeGoldSheet())
                                     .pattern(" X ")
                                     .pattern("YXY")
                                     .pattern("YYY"));
@@ -117,6 +119,14 @@ public class BlazingCraftingRecipeGen extends BlazingRecipeProvider {
 
     GeneratedRecipeBuilder create(ItemProviderEntry<? extends ItemLike> result) {
         return create(result::get);
+    }
+
+    private GeneratedRecipe metalApple(MoltenMetal metal, ItemLike result) {
+        return covering(apple(), INGOT.internalTag(metal), result, INGOT.internalTag(metal));
+    }
+
+    private GeneratedRecipe metalCarrot(MoltenMetal metal, ItemLike result) {
+        return covering(carrot(), NUGGET.internalTag(metal), result, INGOT.internalTag(metal));
     }
 
     @Override
@@ -206,8 +216,8 @@ public class BlazingCraftingRecipeGen extends BlazingRecipeProvider {
 
         private ResourceLocation getRegistryName() {
             return compatDatagenOutput == null ?
-                   RegisteredObjects.getKeyOrThrow(result.get().asItem()) :
-                   compatDatagenOutput;
+                    RegisteredObjects.getKeyOrThrow(result.get().asItem()) :
+                    compatDatagenOutput;
         }
 
     }

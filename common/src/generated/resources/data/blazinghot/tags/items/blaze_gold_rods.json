@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#forge:rods/blaze_gold",
-    "#c:blaze_gold_rods"
+    "#c:blaze_gold_rods",
+    "#forge:rods/blaze_gold"
   ]
 }

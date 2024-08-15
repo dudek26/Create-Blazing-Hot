@@ -3,7 +3,7 @@
   "blazinghot:convertMeltable": true,
   "ingredients": [
     {
-      "item": "minecraft:melon_slice"
+      "item": "minecraft:melon"
     },
     {
       "amount": 6000,

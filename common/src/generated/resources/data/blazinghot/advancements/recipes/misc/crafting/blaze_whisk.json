@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "blazinghot:blaze_gold_ingot"
-            ]
+            "tag": "blazinghot:blaze_gold_ingots"
           }
         ]
       },

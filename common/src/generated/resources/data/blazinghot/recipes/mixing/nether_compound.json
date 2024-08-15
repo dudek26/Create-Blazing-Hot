@@ -8,13 +8,13 @@
       "tag": "minecraft:coals"
     },
     {
-      "item": "minecraft:clay_ball"
+      "item": "minecraft:clay"
     },
     {
-      "item": "blazinghot:netherrack_dust"
+      "tag": "blazinghot:netherrack_dusts"
     },
     {
-      "item": "blazinghot:soul_dust"
+      "tag": "blazinghot:soul_sand_dusts"
     }
   ],
   "results": [

@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "blazinghot:blaze_gold_rods"
+            "tag": "blazinghot:blaze_gold_ingots"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "blazinghot:crafting/blaze_arrow"
+        "recipe": "blazinghot:crafting/blaze_apple"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "blazinghot:crafting/blaze_arrow"
+      "blazinghot:crafting/blaze_apple"
     ]
   },
   "sends_telemetry_event": false

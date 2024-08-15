@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#forge:ingots/iron",
-    "#c:iron_ingots"
+    "#c:iron_ingots",
+    "#forge:ingots/iron"
   ]
 }

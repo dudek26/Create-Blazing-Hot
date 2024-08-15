@@ -1,7 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "#forge:storage_blocks/zinc",
-    "#c:zinc_blocks"
-  ]
-}

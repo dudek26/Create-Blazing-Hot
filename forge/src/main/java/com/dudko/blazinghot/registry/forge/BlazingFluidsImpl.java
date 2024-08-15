@@ -25,7 +25,7 @@ public class BlazingFluidsImpl {
     private static final CreateRegistrate REGISTRATE = BlazingHot.registrate();
 
     public static MoltenMetalsList<ForgeFlowingFluid.Flowing> MOLTEN_METALS =
-            new MoltenMetalsList<>(metal -> createFromLava("molten_" + metal.name));
+            new MoltenMetalsList<>(metal -> createFromLava(metal.moltenName()));
 
     public static FluidEntry<ForgeFlowingFluid.Flowing> NETHER_LAVA = createFromLava("nether_lava", 10, 1);
 
@@ -118,7 +118,7 @@ public class BlazingFluidsImpl {
         }
 
         public T getFluid(MoltenMetal metal) {
-            return get(metal).get();
+            return get(metal).getSource();
         }
 
         public boolean contains(Fluid fluid) {

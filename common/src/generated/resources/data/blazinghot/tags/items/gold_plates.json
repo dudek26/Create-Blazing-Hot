@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#forge:plates/gold",
-    "#c:gold_plates"
+    "#c:gold_plates",
+    "#forge:plates/gold"
   ]
 }

@@ -20,7 +20,8 @@ import net.minecraft.world.level.material.Fluid;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.dudko.blazinghot.content.fluids.MoltenMetal.BLAZE_GOLD;
+import static com.dudko.blazinghot.content.fluids.MoltenMetal.*;
+import static com.dudko.blazinghot.data.recipe.fabric.Ingredients.*;
 import static com.dudko.blazinghot.util.ListUtil.compactLists;
 
 @SuppressWarnings("unused")
@@ -37,28 +38,28 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
             NETHER_COMPOUND =
             create("nether_compound",
                     b -> b
-                            .require(BlazingTags.Items.NETHER_FLORA.tag)
-                            .require(ItemTags.COALS)
-                            .require(Items.CLAY_BALL)
-                            .require(BlazingItems.NETHERRACK_DUST)
-                            .require(BlazingItems.SOUL_DUST)
+                            .require(netherFlora())
+                            .require(coal())
+                            .require(clay())
+                            .require(netherrackDust())
+                            .require(soulDust())
                             .output(BlazingItems.NETHER_COMPOUND, 2)),
             NETHERRACK_DUST =
                     create("netherrack_dust",
                             b -> b
-                                    .require(AllItems.CINDER_FLOUR)
-                                    .require(BlazingItems.STONE_DUST)
+                                    .require(cinderFlour())
+                                    .require(stoneDust())
                                     .output(BlazingItems.NETHERRACK_DUST)),
             MOLTEN_BLAZE_GOLD =
                     create("molten_blaze_gold",
-                            b -> custom(b).blazinghot$requireMultiple(BlazingItems.NETHER_ESSENCE, 2)
+                            b -> custom(b).blazinghot$requireMultiple(netherEssence(), 2)
                                     .blazinghot$convertMeltables()
                                     .blazinghot$finish()
-                                    .require(CommonTags.Fluids.MOLTEN_GOLD.internal,
+                                    .require(moltenGold(),
                                             Constants.ROD.platformed())
                                     .requiresHeat(HeatCondition.SUPERHEATED)
                                     .duration(200)
-                                    .output(BlazingFluidsImpl.MOLTEN_METALS.getFluid(BLAZE_GOLD),
+                                    .output(BLAZE_GOLD.fluid().get(),
                                             Constants.ROD.platformed()));
 
     @Override

@@ -7,6 +7,8 @@ import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.minecraft.data.PackOutput;
 
+import static com.dudko.blazinghot.data.recipe.fabric.Ingredients.*;
+
 @SuppressWarnings("unused")
 public class BlazingItemApplicationRecipeGen extends BlazingProcessingRecipeGen {
 
@@ -18,8 +20,8 @@ public class BlazingItemApplicationRecipeGen extends BlazingProcessingRecipeGen 
             BLAZE_CASING =
             create("blaze_casing_from_log",
                     b -> b
-                            .require(AllBlocks.COPPER_CASING)
-                            .require(CommonTags.Items.BLAZE_GOLD_PLATES.internal)
+                            .require(copperCasing())
+                            .require(blazeGoldSheet())
                             .output(BlazingBlocks.BLAZE_CASING));
 
 

@@ -5,6 +5,7 @@ import com.dudko.blazinghot.compat.Mods;
 import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.dudko.blazinghot.registry.CommonTags;
+import com.dudko.blazinghot.util.ListUtil;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -14,6 +15,7 @@ import java.util.*;
 import java.util.function.Supplier;
 
 import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe.defaultDurationToFuelCost;
+import static com.dudko.blazinghot.registry.CommonTags.Namespace.INTERNAL;
 
 @SuppressWarnings("unused")
 public class MoltenMetal {
@@ -28,6 +30,7 @@ public class MoltenMetal {
                             .mod(Mods.BLAZINGHOT)
                             .basicAndPlateForms()
                             .supportedForms(Forms.ROD)
+                            .alwaysGenTag()
                             .register();
 
     public static void init() {
@@ -38,15 +41,19 @@ public class MoltenMetal {
     public final Mods mod;
     public final Forms[] supportedForms;
     public final Map<Forms, Mods> compatForms;
+    public final boolean alwaysGenTag;
+    public final boolean ignoreTagGen;
 
     public final ResourceLocation ingotOverride;
 
-    MoltenMetal(String name, Mods mod, Forms[] supportedForms, Map<Forms, Mods> compatForms, ResourceLocation ingotOverride) {
+    MoltenMetal(String name, Mods mod, Forms[] supportedForms, Map<Forms, Mods> compatForms, boolean alwaysGenTag, boolean ignoreTagGen, ResourceLocation ingotOverride) {
         this.name = name;
         this.mod = mod;
         this.compatForms = compatForms;
         this.supportedForms = supportedForms;
+        this.alwaysGenTag = alwaysGenTag;
         this.ingotOverride = ingotOverride;
+        this.ignoreTagGen = ignoreTagGen;
     }
 
     public MoltenMetal register() {
@@ -68,7 +75,7 @@ public class MoltenMetal {
     }
 
     public ResourceLocation fluidLocation() {
-        return BlazingHot.asResource("molten_" + name);
+        return BlazingHot.asResource(moltenName());
     }
 
     public Supplier<Fluid> fluid() {
@@ -76,14 +83,25 @@ public class MoltenMetal {
     }
 
     public TagKey<Fluid> fluidTag() {
-        return CommonTags.internalFluidTagOf("molten_" + name);
+        return CommonTags.fluidTagOf(moltenName(), INTERNAL);
+    }
+
+    public String moltenName() {
+        return "molten_" + name;
+    }
+
+    public List<Forms> allPossibleForms() {
+        List<Forms> all = new ArrayList<>();
+        ListUtil.addIfAbsent(all, supportedForms);
+        ListUtil.addIfAbsent(all, compatForms.keySet());
+        return all;
     }
 
     public enum Forms {
         BLOCK("blocks", Constants.BLOCK, 2400, false, true),
         INGOT("ingots", Constants.INGOT, 400, true, true),
         NUGGET("nuggets", Constants.NUGGET, 65, true, true),
-        PLATE("plates", Constants.PLATE, 400, true, true),
+        PLATE("plates", Constants.PLATE, 400, true, false),
         ROD("rods", Constants.ROD, 250, true, false);
 
         public final String tagFolder;
@@ -91,23 +109,23 @@ public class MoltenMetal {
         public final int processingTime;
         public final long fuelCost;
         public final boolean mechanicalMixerMeltable;
-        public final boolean alwaysGen;
+        public final boolean alwaysGenRecipe;
 
-        Forms(String tagFolder, long amount, int processingTime, boolean mechanicalMixerMeltable, boolean alwaysGen) {
+        Forms(String tagFolder, long amount, int processingTime, boolean mechanicalMixerMeltable, boolean alwaysGenRecipe) {
             this.tagFolder = tagFolder;
             this.amount = amount;
             this.processingTime = processingTime;
             this.mechanicalMixerMeltable = mechanicalMixerMeltable;
-            this.alwaysGen = alwaysGen;
+            this.alwaysGenRecipe = alwaysGenRecipe;
             this.fuelCost = defaultDurationToFuelCost(processingTime);
         }
 
-        Forms(String tagFolder, Constants fluidConstant, int processingTime, boolean mechanicalMixerMeltable, boolean alwaysGen) {
-            this(tagFolder, fluidConstant.platformed(), processingTime, mechanicalMixerMeltable, alwaysGen);
+        Forms(String tagFolder, Constants fluidConstant, int processingTime, boolean mechanicalMixerMeltable, boolean alwaysGenRecipe) {
+            this(tagFolder, fluidConstant.platformed(), processingTime, mechanicalMixerMeltable, alwaysGenRecipe);
         }
 
         public TagKey<Item> internalTag(String material) {
-            return CommonTags.internalItemTagOf(material + "_" + tagFolder);
+            return CommonTags.itemTagOf(INTERNAL.tagPath(tagFolder, material), INTERNAL);
         }
 
         public TagKey<Item> internalTag(MoltenMetal metal) {
@@ -130,10 +148,12 @@ public class MoltenMetal {
 
     public static class Builder {
 
-        public final String name;
-        public Mods mod;
-        public List<Forms> supportedForms = new ArrayList<>();
-        public HashMap<Forms, Mods> compatForms = new HashMap<>();
+        private final String name;
+        private Mods mod;
+        private List<Forms> supportedForms = new ArrayList<>();
+        private HashMap<Forms, Mods> compatForms = new HashMap<>();
+        private boolean ignoreTagDatagen;
+        private boolean alwaysGenTag;
 
         public ResourceLocation ingotOverride;
 
@@ -170,7 +190,7 @@ public class MoltenMetal {
          */
         public Builder basicForms() {
             return supportedForms(Arrays.stream(Forms.values())
-                    .filter(form -> form.alwaysGen)
+                    .filter(form -> form.alwaysGenRecipe)
                     .toArray(Forms[]::new));
         }
 
@@ -198,11 +218,28 @@ public class MoltenMetal {
             return this;
         }
 
+        /**
+         * Data generator will not automatically create tags for all supported forms (including the internal tag). Use when the metal doesn't have common tags (like Andesite Alloy)
+         */
+        public Builder ignoreTagDatagen() {
+            this.ignoreTagDatagen = true;
+            return this;
+        }
+
+        /**
+         * Data generator will create common and forge tags for all supported forms. Use for metals added by Create: Blazing Hot
+         * @apiNote Internal tags will always generate, if {@link Builder#ignoreTagDatagen} is unset.
+         */
+        public Builder alwaysGenTag() {
+            this.alwaysGenTag = true;
+            return this;
+        }
+
         public MoltenMetal build() {
             return new MoltenMetal(name,
                     mod == null ? Mods.VANILLA : mod,
                     supportedForms.toArray(Forms[]::new),
-                    compatForms,
+                    compatForms, alwaysGenTag, ignoreTagDatagen,
                     ingotOverride);
         }
 
