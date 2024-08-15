@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,12 +24,9 @@ public class EntityMixin {
 
     @Unique
     private boolean blazinghot$isInBurningFluid() {
-        List<FluidType>
-                burningFluids =
-                List.of(BlazingFluidsImpl.MOLTEN_BLAZE_GOLD.getType(),
-                        BlazingFluidsImpl.NETHER_LAVA.getType(),
-                        BlazingFluidsImpl.MOLTEN_IRON.getType(),
-                        BlazingFluidsImpl.MOLTEN_GOLD.getType());
+        List<FluidType> burningFluids = new ArrayList<>();
+        burningFluids.add(BlazingFluidsImpl.NETHER_LAVA.getType());
+        BlazingFluidsImpl.MOLTEN_METALS.forEach(metal -> burningFluids.add(metal.getType()));
         return !firstTick && burningFluids.stream().anyMatch(f -> forgeFluidTypeHeight.getDouble(f) > 0.0);
     }
 
