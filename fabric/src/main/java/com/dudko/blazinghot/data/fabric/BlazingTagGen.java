@@ -1,9 +1,8 @@
 package com.dudko.blazinghot.data.fabric;
 
-import com.dudko.blazinghot.registry.BlazingFluids;
-import com.dudko.blazinghot.registry.BlazingFluids.MultiloaderFluids;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
+import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -52,7 +51,7 @@ public class BlazingTagGen {
         prov
                 .addTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag)
                 .add(Fluids.LAVA)
-                .add(BlazingFluids.getEntry(MultiloaderFluids.NETHER_LAVA).getSource());
+                .add(BlazingFluidsImpl.NETHER_LAVA.get());
 
         for (BlazingTags.Fluids tag : BlazingTags.Fluids.values()) {
             if (tag.alwaysDatagen) {

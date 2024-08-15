@@ -4,6 +4,7 @@ Create: Blazing Hot 0.5.1
 
 ### Changed:
 * Molten Blaze Gold source blocks now turn into Obsidian when touching water
+* Modern Lamp Panels can now be waterlogged
 
 ### Fixed:
 * Fixed mod .jar files using `blazinghot` name instead of `create_blazing_hot`

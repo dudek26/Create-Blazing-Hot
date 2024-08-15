@@ -209,7 +209,7 @@ public class CommonTags {
         for (Fluids itemTag : Fluids.values()) {
             for (TagKey<Fluid> tag : itemTag.allTags()) {
                 ResourceLocation loc = tag.location();
-                consumer.accept("tag.fluid." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
+                consumer.accept("tag.fluidLocation." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
                         titleCaseConversion(itemTag.name().replace('_', ' ')));
             }
         }

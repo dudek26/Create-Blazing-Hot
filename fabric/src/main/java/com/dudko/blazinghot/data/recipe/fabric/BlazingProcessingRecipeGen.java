@@ -2,9 +2,6 @@ package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
-import com.dudko.blazinghot.registry.BlazingItems;
-import com.dudko.blazinghot.registry.CommonTags;
-import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
@@ -14,12 +11,8 @@ import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.material.Fluid;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -28,83 +21,12 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
-import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe.defaultDurationToFuelCost;
-
-@SuppressWarnings({"unused", "UnstableApiUsage"})
+@SuppressWarnings("unused")
 public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 
     protected static final List<BlazingProcessingRecipeGen> GENERATORS = new ArrayList<>();
-    protected static final long BUCKET = Constants.BUCKET.platformed();
-    protected static final long INGOT = Constants.INGOT.platformed();
     protected static final long INGOT_COVER = Constants.INGOT.platformed() * 6;
     protected static final long NUGGET_COVER = Constants.NUGGET.platformed() * 6;
-    protected static final long NUGGET = Constants.NUGGET.platformed();
-    protected static final long BOTTLE = Constants.BOTTLE.platformed();
-
-    protected enum Forms {
-        INGOT(Constants.INGOT.platformed(), "ingots", 400),
-        NUGGET(Constants.NUGGET.platformed(), "nuggets", 65),
-        BLOCK(Constants.BUCKET.platformed(), "blocks", 2400, false),
-        SHEET(Constants.INGOT.platformed(), "plates", 400),
-        ROD(Constants.INGOT.platformed() / 2, "rods", 250);
-
-        public final long amount;
-        public final String tagSuffix;
-        public final int meltingTime;
-        public final long fuelCost;
-        public final boolean mechanicalMixerMelting;
-
-        Forms(long amount, String tagSuffix, int meltingTime, long fuelCost, boolean mechanicalMixerMelting) {
-            this.amount = amount;
-            this.tagSuffix = tagSuffix;
-            this.meltingTime = meltingTime;
-            this.fuelCost = fuelCost;
-            this.mechanicalMixerMelting = mechanicalMixerMelting;
-        }
-
-        Forms(long amount, String tagSuffix, int meltingTime) {
-            this(amount, tagSuffix, meltingTime, defaultDurationToFuelCost(meltingTime));
-        }
-
-        Forms(long amount, String tagSuffix, int meltingTime, boolean mechanicalMixerMelting) {
-            this(amount,
-                    tagSuffix,
-                    meltingTime,
-                    defaultDurationToFuelCost(meltingTime),
-                    mechanicalMixerMelting);
-        }
-
-        Forms(long amount, String tagSuffix, int meltingTime, long fuelCost) {
-            this(amount, tagSuffix, meltingTime, defaultDurationToFuelCost(meltingTime), true);
-        }
-
-        public TagKey<Item> tag(String material) {
-            return CommonTags.internalItemTagOf(material + "_" + tagSuffix);
-        }
-
-        public TagKey<Item> tag(Meltables meltable) {
-            return tag(meltable.name);
-        }
-
-    }
-
-    protected enum Meltables {
-        IRON("iron", Items.IRON_INGOT, BlazingFluidsImpl.MOLTEN_IRON.get()),
-        GOLD("gold", Items.GOLD_INGOT, BlazingFluidsImpl.MOLTEN_GOLD.get()),
-        BLAZE_GOLD("blaze_gold", BlazingItems.BLAZE_GOLD_INGOT, BlazingFluidsImpl.MOLTEN_BLAZE_GOLD.get());
-
-        public final String name;
-        public final ItemLike item;
-        public final Fluid fluid;
-        public final TagKey<Fluid> fluidTag;
-
-        Meltables(String name, ItemLike item, Fluid fluid) {
-            this.name = name;
-            this.item = item;
-            this.fluid = fluid;
-            this.fluidTag = CommonTags.internalFluidTagOf("molten_" + name);
-        }
-    }
 
     public BlazingProcessingRecipeGen(PackOutput output) {
         super(output);

@@ -8,8 +8,9 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 
-import java.util.Arrays;
 import java.util.List;
+
+import static com.dudko.blazinghot.content.fluids.MoltenMetal.ALL_METALS;
 
 @SuppressWarnings("unused")
 public class BlazingCompactingRecipeGen extends BlazingProcessingRecipeGen {
@@ -18,8 +19,9 @@ public class BlazingCompactingRecipeGen extends BlazingProcessingRecipeGen {
         super(output);
     }
 
-    List<GeneratedRecipe> ALL_MOLTEN_COMPACTING_RECIPES =
-            Arrays.stream(Meltables.values()).map(m -> moltenToIngot(m.name, m.fluidTag, m.item)).toList();
+    List<GeneratedRecipe> ALL_MOLTEN_COMPACTING_RECIPES = ALL_METALS.stream()
+            .map(metal -> moltenToIngot(metal.name, metal.fluidTag(), metal.ingot().get()))
+            .toList();
 
     @Override
     protected IRecipeTypeInfo getRecipeType() {

@@ -56,7 +56,7 @@ public class MultiFluids {
                 }
             }
             throw new IllegalArgumentException(
-                    "Invalid fluid constantAmount name: " + name + ". Must match any of these: " +
+                    "Invalid fluidLocation constantAmount name: " + name + ". Must match any of these: " +
                             Arrays.toString(Arrays.stream(Constants.values()).map(c -> c.name).toArray()));
         }
 

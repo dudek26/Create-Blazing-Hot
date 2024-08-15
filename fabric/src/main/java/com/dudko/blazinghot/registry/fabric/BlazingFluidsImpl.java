@@ -1,7 +1,7 @@
 package com.dudko.blazinghot.registry.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.registry.BlazingFluids;
+import com.dudko.blazinghot.content.fluids.MoltenMetal;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.fluid.FluidHelper;
@@ -29,6 +29,10 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.function.Function;
 
 import static net.minecraft.world.item.Items.BUCKET;
 
@@ -37,11 +41,11 @@ public class BlazingFluidsImpl {
 
     private static final CreateRegistrate REGISTRATE = BlazingHot.registrate();
 
+    public static final MoltenMetalsList<SimpleFlowableFluid.Flowing> MOLTEN_METALS =
+            new MoltenMetalsList<>(metal -> createFromLava("molten_" + metal.name));
+
     public static final FluidEntry<SimpleFlowableFluid.Flowing>
-            NETHER_LAVA = createFromLava("nether_lava", 10, 1),
-            MOLTEN_IRON = createFromLava("molten_iron"),
-            MOLTEN_GOLD = createFromLava("molten_gold"),
-            MOLTEN_BLAZE_GOLD = createFromLava("molten_blaze_gold");
+            NETHER_LAVA = createFromLava("nether_lava", 10, 1);
 
     private static FluidEntry<SimpleFlowableFluid.Flowing> createFromLava(String name) {
         return createFromLava(name, 30);
@@ -111,19 +115,10 @@ public class BlazingFluidsImpl {
         Fluid fluid = fluidState.getType();
         Fluid metFluid = metFluidState.getType();
 
-        if (fluid.isSame(MOLTEN_BLAZE_GOLD.get()) && metFluidState.is(FluidTags.WATER)) {
+        if (fluid.isSame(MOLTEN_METALS.getFluid(MoltenMetal.BLAZE_GOLD)) && metFluidState.is(FluidTags.WATER)) {
             return Blocks.NETHERRACK.defaultBlockState();
         }
         return null;
-    }
-
-    public static FluidEntry<?> getEntry(BlazingFluids.MultiloaderFluids fluid) {
-        return switch (fluid) {
-            case NETHER_LAVA -> NETHER_LAVA;
-            case MOLTEN_IRON -> MOLTEN_IRON;
-            case MOLTEN_GOLD -> MOLTEN_GOLD;
-            case MOLTEN_BLAZE_GOLD -> MOLTEN_BLAZE_GOLD;
-        };
     }
 
     public static void platformRegister() {
@@ -154,5 +149,66 @@ public class BlazingFluidsImpl {
         public boolean isLighterThanAir(FluidVariant variant) {
             return lighterThanAir;
         }
+    }
+
+    public static class MoltenMetalsList<T extends SimpleFlowableFluid> implements Iterable<FluidEntry<T>> {
+
+        private static final int METAL_AMOUNT = MoltenMetal.ALL_METALS.size();
+
+        private final FluidEntry<?>[] values = new FluidEntry<?>[METAL_AMOUNT];
+
+        private static int metalOrdinal(MoltenMetal metal) {
+            return MoltenMetal.ALL_METALS.indexOf(metal);
+        }
+
+        public MoltenMetalsList(Function<MoltenMetal, FluidEntry<? extends T>> filler) {
+            for (MoltenMetal metal : MoltenMetal.ALL_METALS) {
+                values[metalOrdinal(metal)] = filler.apply(metal);
+            }
+        }
+
+        @SuppressWarnings("unchecked")
+        public FluidEntry<T> get(MoltenMetal metal) {
+            return (FluidEntry<T>) values[metalOrdinal(metal)];
+        }
+
+        public T getFluid(MoltenMetal metal) {
+            return get(metal).get();
+        }
+
+        public boolean contains(Fluid fluid) {
+            for (FluidEntry<?> entry : values) {
+                if (entry.is(fluid)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        @SuppressWarnings("unchecked")
+        public FluidEntry<T>[] toArray() {
+            return (FluidEntry<T>[]) Arrays.copyOf(values, values.length);
+        }
+
+        @Override
+        public Iterator<FluidEntry<T>> iterator() {
+            return new Iterator<>() {
+                private int index = 0;
+
+                @Override
+                public boolean hasNext() {
+                    return index < values.length;
+                }
+
+                @SuppressWarnings("unchecked")
+                @Override
+                public FluidEntry<T> next() {
+                    if (!hasNext())
+                        throw new NoSuchElementException();
+                    return (FluidEntry<T>) values[index++];
+                }
+            };
+        }
+
     }
 }

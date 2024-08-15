@@ -217,7 +217,7 @@ public class BlazingTags {
 
         for (Fluids itemTag : Fluids.values()) {
             ResourceLocation loc = itemTag.tag.location();
-            consumer.accept("tag.fluid." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
+            consumer.accept("tag.fluidLocation." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
                     titleCaseConversion(itemTag.name().replace('_', ' ')));
         }
     }

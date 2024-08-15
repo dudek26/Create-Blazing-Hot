@@ -1,5 +1,6 @@
 package com.dudko.blazinghot;
 
+import com.dudko.blazinghot.content.fluids.MoltenMetal;
 import com.dudko.blazinghot.registry.*;
 import com.simibubi.create.Create;
 import com.simibubi.create.foundation.data.CreateRegistrate;
@@ -26,6 +27,8 @@ public class BlazingHot {
 
     public static void init() {
         LOGGER.info("Create mod addon {} initializing! Create version: {}", NAME, Create.VERSION);
+
+        MoltenMetal.init();
 
         BlazingTags.register();
         CommonTags.register();

@@ -1,31 +1,34 @@
 package com.dudko.blazinghot.registry.forge;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.registry.BlazingFluids.MultiloaderFluids;
+import com.dudko.blazinghot.content.fluids.MoltenMetal;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.FluidInteractionRegistry;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.function.Function;
+
 public class BlazingFluidsImpl {
 
     private static final CreateRegistrate REGISTRATE = BlazingHot.registrate();
 
-    public static FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_GOLD, MOLTEN_IRON, MOLTEN_BLAZE_GOLD, NETHER_LAVA;
+    public static MoltenMetalsList<ForgeFlowingFluid.Flowing> MOLTEN_METALS =
+            new MoltenMetalsList<>(metal -> createFromLava("molten_" + metal.name));
 
-    public static void platformRegister() {
-        MOLTEN_GOLD = createFromLava("molten_gold");
-        MOLTEN_IRON = createFromLava("molten_iron");
-        MOLTEN_BLAZE_GOLD = createFromLava("molten_blaze_gold");
-        NETHER_LAVA = createFromLava("nether_lava", 10, 1);
-    }
+    public static FluidEntry<ForgeFlowingFluid.Flowing> NETHER_LAVA = createFromLava("nether_lava", 10, 1);
+
 
     public static FluidEntry<ForgeFlowingFluid.Flowing> createFromLava(String name, int tickRate) {
         return createFromLava(name, tickRate, 2);
@@ -72,9 +75,9 @@ public class BlazingFluidsImpl {
     public static void registerFluidInteractions() {
 
         waterInteraction(NETHER_LAVA, Blocks.COBBLESTONE.defaultBlockState());
-        waterInteraction(MOLTEN_GOLD, Blocks.COBBLESTONE.defaultBlockState());
-        waterInteraction(MOLTEN_IRON, Blocks.COBBLESTONE.defaultBlockState());
-        waterInteraction(MOLTEN_BLAZE_GOLD, Blocks.NETHERRACK.defaultBlockState());
+        waterInteraction(MOLTEN_METALS.get(MoltenMetal.IRON), Blocks.COBBLESTONE.defaultBlockState());
+        waterInteraction(MOLTEN_METALS.get(MoltenMetal.GOLD), Blocks.COBBLESTONE.defaultBlockState());
+        waterInteraction(MOLTEN_METALS.get(MoltenMetal.BLAZE_GOLD), Blocks.NETHERRACK.defaultBlockState());
 
     }
 
@@ -90,15 +93,67 @@ public class BlazingFluidsImpl {
                 }));
     }
 
-    public static FluidEntry<ForgeFlowingFluid.Flowing> getEntry(MultiloaderFluids fluid) {
+    public static void platformRegister() {
+    }
 
-        return switch (fluid) {
-            case MOLTEN_GOLD -> MOLTEN_GOLD;
-            case MOLTEN_IRON -> MOLTEN_IRON;
-            case MOLTEN_BLAZE_GOLD -> MOLTEN_BLAZE_GOLD;
-            case NETHER_LAVA -> NETHER_LAVA;
-            default -> throw new NullPointerException("Fluid " + fluid + " not found");
-        };
+    public static class MoltenMetalsList<T extends ForgeFlowingFluid> implements Iterable<FluidEntry<T>> {
+
+        private static final int METAL_AMOUNT = MoltenMetal.ALL_METALS.size();
+
+        private final FluidEntry<?>[] values = new FluidEntry<?>[METAL_AMOUNT];
+
+        private static int metalOrdinal(MoltenMetal metal) {
+            return MoltenMetal.ALL_METALS.indexOf(metal);
+        }
+
+        public MoltenMetalsList(Function<MoltenMetal, FluidEntry<? extends T>> filler) {
+            for (MoltenMetal metal : MoltenMetal.ALL_METALS) {
+                values[metalOrdinal(metal)] = filler.apply(metal);
+            }
+        }
+
+        @SuppressWarnings("unchecked")
+        public FluidEntry<T> get(MoltenMetal metal) {
+            return (FluidEntry<T>) values[metalOrdinal(metal)];
+        }
+
+        public T getFluid(MoltenMetal metal) {
+            return get(metal).get();
+        }
+
+        public boolean contains(Fluid fluid) {
+            for (FluidEntry<?> entry : values) {
+                if (entry.is(fluid)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        @SuppressWarnings("unchecked")
+        public FluidEntry<T>[] toArray() {
+            return (FluidEntry<T>[]) Arrays.copyOf(values, values.length);
+        }
+
+        @Override
+        public Iterator<FluidEntry<T>> iterator() {
+            return new Iterator<>() {
+                private int index = 0;
+
+                @Override
+                public boolean hasNext() {
+                    return index < values.length;
+                }
+
+                @SuppressWarnings("unchecked")
+                @Override
+                public FluidEntry<T> next() {
+                    if (!hasNext())
+                        throw new NoSuchElementException();
+                    return (FluidEntry<T>) values[index++];
+                }
+            };
+        }
 
     }
 
