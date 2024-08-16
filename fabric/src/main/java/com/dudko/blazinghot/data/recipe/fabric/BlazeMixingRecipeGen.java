@@ -2,15 +2,17 @@ package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.content.fluids.MoltenMetal;
 import com.dudko.blazinghot.multiloader.MultiFluids;
+import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
-import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.Fluid;
 
 import java.util.ArrayList;
@@ -56,25 +58,51 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
                                     .output(BlazingFluidsImpl.MOLTEN_METALS.getFluid(MoltenMetal.BLAZE_GOLD),
                                             MultiFluids.Constants.INGOT.platformed()));
 
-    private GeneratedRecipe melting(TagKey<Item> tag, Fluid result, long amount, int duration, long fuelCost) {
-        return create("melting/" + tag.location().getPath(),
+    private GeneratedRecipe melting(String name, Ingredient ingredient, Fluid result, long amount, int duration, long fuelCost) {
+        return create("melting/" + name,
                 (b) -> custom(b)
                         .blazinghot$requireFuel(fuel(), fuelCost)
                         .blazinghot$convertMeltables()
                         .blazinghot$finish()
-                        .require(tag)
+                        .require(ingredient)
                         .duration(duration)
                         .requiresHeat(HeatCondition.SUPERHEATED)
                         .output(result, amount));
     }
 
+    private GeneratedRecipe melting(ResourceLocation itemLocation, Fluid result, long amount, int duration, long fuelCost) {
+        return melting(itemLocation.getPath(),
+                Ingredient.of(MultiRegistries.getItemFromRegistry(itemLocation).get()),
+                result,
+                amount,
+                duration,
+                fuelCost);
+    }
+
+    private GeneratedRecipe melting(TagKey<Item> tag, Fluid result, long amount, int duration, long fuelCost) {
+        return melting(tag.location().getPath(),
+                Ingredient.of(tag),
+                result,
+                amount,
+                duration,
+                fuelCost);
+    }
+
     private List<GeneratedRecipe> melting(MoltenMetal metal) {
         List<GeneratedRecipe> recipes = new ArrayList<>();
-        for (MoltenMetal.Forms form : metal.supportedForms) {
-            TagKey<Item> tag = form.internalTag(metal);
-            Fluid result = metal.fluid().get();
-            recipes.add(melting(tag, result, form.amount, form.processingTime, form.fuelCost));
-        }
+        metal.supportedForms().forEach(form ->
+                recipes.add(melting(form.internalTag(metal),
+                        metal.fluid().get(),
+                        form.amount,
+                        form.processingTime,
+                        form.fuelCost))
+        );
+        metal.customForms()
+                .forEach(form -> recipes.add(melting(form.customLocation,
+                        metal.fluid().get(),
+                        form.amount,
+                        form.processingTime,
+                        form.fuelCost)));
         return recipes;
     }
 

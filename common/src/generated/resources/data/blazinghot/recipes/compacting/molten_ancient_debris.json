@@ -1,0 +1,15 @@
+{
+  "type": "create:compacting",
+  "blazinghot:convertMeltable": true,
+  "ingredients": [
+    {
+      "amount": 9000,
+      "fluidTag": "blazinghot:molten_ancient_debris"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:netherite_scrap"
+    }
+  ]
+}

@@ -2,25 +2,22 @@ package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.content.fluids.MoltenMetal;
 import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
+import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.dudko.blazinghot.registry.BlazingItems;
-import com.dudko.blazinghot.registry.BlazingTags;
-import com.dudko.blazinghot.registry.CommonTags;
-import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
-import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.minecraft.data.PackOutput;
-import net.minecraft.tags.ItemTags;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.Fluid;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.dudko.blazinghot.content.fluids.MoltenMetal.*;
+import static com.dudko.blazinghot.content.fluids.MoltenMetal.BLAZE_GOLD;
 import static com.dudko.blazinghot.data.recipe.fabric.Ingredients.*;
 import static com.dudko.blazinghot.util.ListUtil.compactLists;
 
@@ -32,7 +29,10 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
     }
 
     List<GeneratedRecipe> ALL_MELTING_RECIPES =
-            compactLists(MoltenMetal.ALL_METALS.stream().map(this::melting).toList());
+            compactLists(MoltenMetal.ALL_METALS.stream()
+                    .filter(m -> m.mechanicalMixerMeltable)
+                    .map(this::melting)
+                    .toList());
 
     GeneratedRecipe
             NETHER_COMPOUND =
@@ -68,25 +68,46 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
 
     }
 
-    private GeneratedRecipe melting(TagKey<Item> tag, Fluid result, long amount, int duration) {
-        return create("melting/" + tag.location().getPath(),
-                b -> custom(b)
+    private GeneratedRecipe melting(String name, Ingredient ingredient, Fluid result, long amount, int duration) {
+        return create("melting/" + name,
+                (b) -> custom(b)
                         .blazinghot$convertMeltables()
                         .blazinghot$finish()
-                        .require(tag)
-                        .duration(duration * 3)
+                        .require(ingredient)
+                        .duration(duration)
                         .requiresHeat(HeatCondition.SUPERHEATED)
                         .output(result, amount));
     }
 
-    private List<GeneratedRecipe> melting(MoltenMetal material) {
+    private GeneratedRecipe melting(ResourceLocation itemLocation, Fluid result, long amount, int duration) {
+        return melting(itemLocation.getPath(),
+                Ingredient.of(MultiRegistries.getItemFromRegistry(itemLocation).get()),
+                result,
+                amount,
+                duration);
+    }
+
+    private GeneratedRecipe melting(TagKey<Item> tag, Fluid result, long amount, int duration) {
+        return melting(tag.location().getPath(),
+                Ingredient.of(tag),
+                result,
+                amount,
+                duration);
+    }
+
+    private List<GeneratedRecipe> melting(MoltenMetal metal) {
         List<GeneratedRecipe> recipes = new ArrayList<>();
-        for (MoltenMetal.Forms form : material.supportedForms) {
-            if (!form.mechanicalMixerMeltable) continue;
-            TagKey<Item> tag = form.internalTag(material);
-            Fluid result = material.fluid().get();
-            recipes.add(melting(tag, result, form.amount, form.processingTime));
-        }
+        metal.supportedForms().stream().filter(f -> f.mechanicalMixerMeltable).forEach(form ->
+                recipes.add(melting(form.internalTag(metal),
+                        metal.fluid().get(),
+                        form.amount,
+                        form.processingTime))
+        );
+        metal.customForms().stream().filter(f -> f.mechanicalMixerMeltable)
+                .forEach(form -> recipes.add(melting(form.customLocation,
+                        metal.fluid().get(),
+                        form.amount,
+                        form.processingTime)));
         return recipes;
     }
 

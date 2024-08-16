@@ -7,7 +7,6 @@ import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
-import io.github.fabricators_of_create.porting_lib.tags.Tags;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -17,7 +16,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
 import static com.dudko.blazinghot.content.fluids.MoltenMetal.*;
-import static com.dudko.blazinghot.content.fluids.MoltenMetal.Forms.*;
+import static com.dudko.blazinghot.content.fluids.MoltenMetal.Form.*;
 import static com.dudko.blazinghot.registry.CommonTags.Namespace.INTERNAL;
 
 public class Ingredients {

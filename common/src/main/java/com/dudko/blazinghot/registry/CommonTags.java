@@ -11,7 +11,7 @@ import net.minecraft.world.level.material.Fluid;
 
 import java.util.function.BiConsumer;
 
-import static com.dudko.blazinghot.registry.BlazingTags.titleCaseConversion;
+import static com.dudko.blazinghot.util.LangUtil.titleCaseConversion;
 
 /**
  * @apiNote Internal tags are used for recipes, advancements etc.
@@ -197,11 +197,11 @@ public class CommonTags {
                         titleCaseConversion(itemTag.name().replace('_', ' ')));
             }
         }
-        for (Fluids itemTag : Fluids.values()) {
-            for (TagKey<Fluid> tag : itemTag.allTags()) {
+        for (Fluids fluidTag : Fluids.values()) {
+            for (TagKey<Fluid> tag : fluidTag.allTags()) {
                 ResourceLocation loc = tag.location();
-                consumer.accept("tag.fluidLocation." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
-                        titleCaseConversion(itemTag.name().replace('_', ' ')));
+                consumer.accept("tag.fluid." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
+                        titleCaseConversion(fluidTag.name().replace('_', ' ')));
             }
         }
     }

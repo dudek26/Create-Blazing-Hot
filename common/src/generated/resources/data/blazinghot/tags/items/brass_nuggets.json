@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#c:brass_nuggets",
+    "#forge:nuggets/brass"
+  ]
+}

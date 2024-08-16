@@ -1,7 +1,7 @@
 package com.dudko.blazinghot.data.fabric;
 
 import com.dudko.blazinghot.content.fluids.MoltenMetal;
-import com.dudko.blazinghot.content.fluids.MoltenMetal.Forms;
+import com.dudko.blazinghot.content.fluids.MoltenMetal.Form;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
@@ -97,7 +97,7 @@ public class BlazingTagGen {
 
         for (MoltenMetal metal : MoltenMetal.ALL_METALS) {
             if (metal.ignoreTagGen) continue;
-            for (Forms form : metal.allPossibleForms()) {
+            for (Form form : metal.nonCustomForms()) {
                 TagKey<Item> forgeTag = itemTagOf(FORGE.tagPath(form.tagFolder, metal.name), FORGE);
                 TagKey<Item> commonTag = itemTagOf(COMMON.tagPath(form.tagFolder, metal.name), COMMON);
                 TagKey<Item> internalTag = itemTagOf(INTERNAL.tagPath(form.tagFolder, metal.name), INTERNAL);
@@ -108,7 +108,6 @@ public class BlazingTagGen {
                 TagsProvider.TagAppender<Item> internalTagAppender = tagAppender(prov, internalTag);
                 addTagsIfAbsent(internalTagAppender, commonTag, forgeTag);
             }
-
         }
 
         for (CommonTags.Items tag : CommonTags.Items.values()) {

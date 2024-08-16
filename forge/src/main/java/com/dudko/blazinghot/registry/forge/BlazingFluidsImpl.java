@@ -9,14 +9,15 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.FluidInteractionRegistry;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.function.Function;
 
@@ -73,17 +74,17 @@ public class BlazingFluidsImpl {
     }
 
     public static void registerFluidInteractions() {
+        fluidInteraction(NETHER_LAVA, Blocks.COBBLESTONE.defaultBlockState(), Fluids.WATER);
 
-        waterInteraction(NETHER_LAVA, Blocks.COBBLESTONE.defaultBlockState());
-        waterInteraction(MOLTEN_METALS.get(MoltenMetal.IRON), Blocks.COBBLESTONE.defaultBlockState());
-        waterInteraction(MOLTEN_METALS.get(MoltenMetal.GOLD), Blocks.COBBLESTONE.defaultBlockState());
-        waterInteraction(MOLTEN_METALS.get(MoltenMetal.BLAZE_GOLD), Blocks.NETHERRACK.defaultBlockState());
-
+        for (MoltenMetal metal : MoltenMetal.ALL_METALS) {
+            Map<Fluid, BlockState> interactions = metal.getFluidInteractions();
+            interactions.forEach((f, b) -> fluidInteraction(MOLTEN_METALS.get(metal), b, f));
+        }
     }
 
-    private static void waterInteraction(FluidEntry<ForgeFlowingFluid.Flowing> entry, BlockState result) {
+    private static void fluidInteraction(FluidEntry<ForgeFlowingFluid.Flowing> entry, BlockState result, Fluid fluid) {
         FluidInteractionRegistry.addInteraction(entry.get().getFluidType(),
-                new FluidInteractionRegistry.InteractionInformation(ForgeMod.WATER_TYPE.get(), fluidState -> {
+                new FluidInteractionRegistry.InteractionInformation(fluid.getFluidType(), fluidState -> {
                     if (fluidState.isSource()) {
                         return Blocks.OBSIDIAN.defaultBlockState();
                     }

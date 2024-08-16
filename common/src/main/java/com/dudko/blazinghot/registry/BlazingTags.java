@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.registry;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.util.LangUtil;
 import com.simibubi.create.foundation.utility.Lang;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -14,11 +15,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
-import org.apache.commons.lang3.StringUtils;
 
-import java.util.Locale;
 import java.util.function.BiConsumer;
-import java.util.stream.Stream;
 
 import static com.dudko.blazinghot.registry.BlazingTags.NameSpace.MOD;
 
@@ -206,42 +204,20 @@ public class BlazingTags {
         for (Blocks blockTag : Blocks.values()) {
             ResourceLocation loc = blockTag.tag.location();
             consumer.accept("tag.block." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
-                    titleCaseConversion(blockTag.name()).replace('_', ' '));
+                    LangUtil.titleCaseConversion(blockTag.name()).replace('_', ' '));
         }
 
         for (Items itemTag : Items.values()) {
             ResourceLocation loc = itemTag.tag.location();
             consumer.accept("tag.item." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
-                    titleCaseConversion(itemTag.name().replace('_', ' ')));
+                    LangUtil.titleCaseConversion(itemTag.name().replace('_', ' ')));
         }
 
         for (Fluids itemTag : Fluids.values()) {
             ResourceLocation loc = itemTag.tag.location();
-            consumer.accept("tag.fluidLocation." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
-                    titleCaseConversion(itemTag.name().replace('_', ' ')));
+            consumer.accept("tag.fluid." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
+                    LangUtil.titleCaseConversion(itemTag.name().replace('_', ' ')));
         }
-    }
-
-    protected static String titleCaseConversion(String inputString) {
-        if (StringUtils.isBlank(inputString)) {
-            return "";
-        }
-
-        if (StringUtils.length(inputString) == 1) {
-            return inputString.toUpperCase(Locale.ROOT);
-        }
-
-        StringBuffer resultPlaceHolder = new StringBuffer(inputString.length());
-
-        Stream.of(inputString.split(" ")).forEach(stringPart -> {
-            if (stringPart.length() > 1) resultPlaceHolder
-                    .append(stringPart.substring(0, 1).toUpperCase(Locale.ROOT))
-                    .append(stringPart.substring(1).toLowerCase(Locale.ROOT));
-            else resultPlaceHolder.append(stringPart.toUpperCase(Locale.ROOT));
-
-            resultPlaceHolder.append(" ");
-        });
-        return StringUtils.trim(resultPlaceHolder.toString());
     }
 
 }

@@ -2,20 +2,20 @@
   "type": "blazinghot:blaze_mixing",
   "blazinghot:convertMeltable": true,
   "blazinghot:fuel": {
-    "amount": 48600,
+    "amount": 1317,
     "fluidTag": "blazinghot:blaze_mixer_fuel"
   },
   "heatRequirement": "superheated",
   "ingredients": [
     {
-      "tag": "blazinghot:iron_blocks"
+      "tag": "blazinghot:copper_nuggets"
     }
   ],
-  "processingTime": 2400,
+  "processingTime": 65,
   "results": [
     {
-      "amount": 81000,
-      "fluid": "blazinghot:molten_iron"
+      "amount": 1000,
+      "fluid": "blazinghot:molten_copper"
     }
   ]
 }

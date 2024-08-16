@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#c:zinc_ingots",
+    "#forge:ingots/zinc"
+  ]
+}

@@ -2,9 +2,12 @@ package com.dudko.blazinghot.compat.emi.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.config.BlazingConfigs;
+import com.dudko.blazinghot.content.fluids.MoltenMetal;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
+import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
 import com.dudko.blazinghot.registry.BlazingBlocks;
+import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
 import com.dudko.blazinghot.registry.fabric.BlazingRecipeTypesImpl;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllRecipeTypes;
@@ -14,25 +17,35 @@ import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
-import com.simibubi.create.infrastructure.config.AllConfigs;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
+import dev.emi.emi.api.recipe.EmiInfoRecipe;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
+import dev.emi.emi.api.recipe.EmiWorldInteractionRecipe;
 import dev.emi.emi.api.render.EmiRenderable;
+import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 
+import static com.dudko.blazinghot.content.fluids.MoltenMetal.ALL_METALS;
 import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe.getFuelCost;
-import static com.simibubi.create.compat.emi.CreateEmiPlugin.doInputsMatch;
 
 public class BlazingEmiPlugin implements EmiPlugin {
 
@@ -93,6 +106,22 @@ public class BlazingEmiPlugin implements EmiPlugin {
                     BLAZE_AUTOMATIC_BREWING,
                     recipe));
         }
+
+        for (MoltenMetal metal : ALL_METALS) {
+            metal.getFluidInteractions()
+                    .forEach((f, b) -> addMoltenMetalCollisions(registry, metal));
+        }
+
+        addFluidCollision(registry,
+                "nether_lava_and_water",
+                BlazingFluidsImpl.NETHER_LAVA.get(),
+                Fluids.WATER,
+                Blocks.COBBLESTONE.defaultBlockState());
+
+        addFluidInfo(registry,
+                Component.translatable("emi.blazinghot.info.nether_lava_cobblestone"),
+                "nether_lava",
+                BlazingFluidsImpl.NETHER_LAVA.get());
     }
 
     private static EmiRecipeCategory register(String name, EmiRenderable icon) {
@@ -123,6 +152,48 @@ public class BlazingEmiPlugin implements EmiPlugin {
         for (T recipe : (List<T>) registry.getRecipeManager().getAllRecipesFor(type.getType())) {
             registry.addRecipe(constructor.apply(category, recipe));
         }
+    }
+
+    private void addMoltenMetalCollisions(EmiRegistry registry, MoltenMetal metal) {
+        metal.getFluidInteractions()
+                .forEach((f, b) -> addFluidCollision(registry,
+                        metal.moltenName() + "_and_" + BuiltInRegistries.FLUID.getKey(f).getPath(),
+                        BlazingFluidsImpl.MOLTEN_METALS.getFluid(metal),
+                        f,
+                        b));
+    }
+
+    private void addFluidCollision(EmiRegistry registry, String name, Fluid fluid1, Fluid fluid2, BlockState result) {
+        EmiStack fluidStack1 = EmiStack.of(fluid1, Constants.BUCKET.platformed());
+        fluidStack1 = fluidStack1.setRemainder(fluidStack1);
+
+        EmiStack fluidStack2 = EmiStack.of(fluid2, Constants.BUCKET.platformed());
+        fluidStack2 = fluidStack2.setRemainder(fluidStack2);
+
+        Block block = result.getBlock();
+        EmiStack output = EmiStack.of(block);
+
+        registry.addRecipe(
+                EmiWorldInteractionRecipe.builder()
+                        .id(synthetic("emi/fluid_interaction/" + name))
+                        .leftInput(fluidStack2)
+                        .rightInput(fluidStack1, false)
+                        .output(output)
+                        .build()
+        );
+    }
+
+    private void addFluidInfo(EmiRegistry registry, Component info, String id, Fluid... fluids) {
+        List<EmiIngredient> ingredients = Arrays.stream(fluids).map(f -> ((EmiIngredient) EmiStack.of(f))).toList();
+
+        registry.addRecipe(new EmiInfoRecipe(ingredients, List.of(info), synthetic("emi/info/" + id)));
+    }
+
+    private static ResourceLocation synthetic(String path) {
+        if (path.startsWith("/"))
+            throw new IllegalArgumentException("Starting slash is added automatically");
+        // EMI recommends starting synthetic IDs with a slash so that they can't possibly conflict with data packs.
+        return BlazingHot.asResource('/' + path);
     }
 
 }

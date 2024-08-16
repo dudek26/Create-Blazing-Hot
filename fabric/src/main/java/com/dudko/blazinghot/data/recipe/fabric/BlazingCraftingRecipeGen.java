@@ -22,8 +22,8 @@ import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
 import static com.dudko.blazinghot.content.fluids.MoltenMetal.BLAZE_GOLD;
-import static com.dudko.blazinghot.content.fluids.MoltenMetal.Forms.INGOT;
-import static com.dudko.blazinghot.content.fluids.MoltenMetal.Forms.NUGGET;
+import static com.dudko.blazinghot.content.fluids.MoltenMetal.Form.INGOT;
+import static com.dudko.blazinghot.content.fluids.MoltenMetal.Form.NUGGET;
 import static com.dudko.blazinghot.content.fluids.MoltenMetal.IRON;
 import static com.dudko.blazinghot.data.recipe.fabric.Ingredients.*;
 import static com.dudko.blazinghot.registry.BlazingBlocks.BLAZE_GOLD_BLOCK;

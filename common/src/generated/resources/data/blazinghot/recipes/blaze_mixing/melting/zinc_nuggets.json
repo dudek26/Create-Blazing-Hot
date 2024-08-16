@@ -1,0 +1,21 @@
+{
+  "type": "blazinghot:blaze_mixing",
+  "blazinghot:convertMeltable": true,
+  "blazinghot:fuel": {
+    "amount": 1317,
+    "fluidTag": "blazinghot:blaze_mixer_fuel"
+  },
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "blazinghot:zinc_nuggets"
+    }
+  ],
+  "processingTime": 65,
+  "results": [
+    {
+      "amount": 1000,
+      "fluid": "blazinghot:molten_zinc"
+    }
+  ]
+}

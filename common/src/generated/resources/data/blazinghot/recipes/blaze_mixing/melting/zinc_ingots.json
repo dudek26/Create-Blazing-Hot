@@ -2,20 +2,20 @@
   "type": "blazinghot:blaze_mixing",
   "blazinghot:convertMeltable": true,
   "blazinghot:fuel": {
-    "amount": 48600,
+    "amount": 8100,
     "fluidTag": "blazinghot:blaze_mixer_fuel"
   },
   "heatRequirement": "superheated",
   "ingredients": [
     {
-      "tag": "blazinghot:blaze_gold_blocks"
+      "tag": "blazinghot:zinc_ingots"
     }
   ],
-  "processingTime": 2400,
+  "processingTime": 400,
   "results": [
     {
-      "amount": 81000,
-      "fluid": "blazinghot:molten_blaze_gold"
+      "amount": 9000,
+      "fluid": "blazinghot:molten_zinc"
     }
   ]
 }
