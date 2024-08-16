@@ -6,6 +6,7 @@ import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.dudko.blazinghot.mixin.forge.RecipeManagerAccessor;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
+import com.dudko.blazinghot.registry.forge.BlazingFluidsImpl;
 import com.dudko.blazinghot.registry.forge.BlazingRecipeTypesImpl;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllRecipeTypes;
@@ -24,6 +25,7 @@ import com.simibubi.create.infrastructure.config.AllConfigs;
 import com.simibubi.create.infrastructure.config.CRecipes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
@@ -41,6 +43,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -118,6 +121,8 @@ public class BlazingJEI implements IModPlugin {
     @Override
     public void registerRecipes(@NotNull IRecipeRegistration registration) {
         allCategories.forEach(c -> c.registerRecipes(registration));
+        registration.addIngredientInfo((new FluidStack(BlazingFluidsImpl.NETHER_LAVA.getSource(), 1000)),
+                ForgeTypes.FLUID_STACK);
     }
 
     @Override

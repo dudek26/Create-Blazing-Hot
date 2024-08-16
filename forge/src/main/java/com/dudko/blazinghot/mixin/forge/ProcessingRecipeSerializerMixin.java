@@ -32,7 +32,6 @@ public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
     @ModifyArg(method = "readFromJson",
             remap = false,
             at = @At(value = "INVOKE",
-                    remap = false,
                     target = "Lcom/simibubi/create/foundation/fluid/FluidIngredient;deserialize(Lcom/google/gson/JsonElement;)Lcom/simibubi/create/foundation/fluid/FluidIngredient;",
                     ordinal = 0))
     private JsonElement blazinghot$ingredientsPlatformedFluidAmount(JsonElement je, @Local(argsOnly = true) JsonObject json,
@@ -62,7 +61,6 @@ public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
     @ModifyArg(method = "readFromJson",
             remap = false,
             at = @At(value = "INVOKE",
-                    remap = false,
                     target = "Lcom/simibubi/create/foundation/fluid/FluidHelper;deserializeFluidStack(Lcom/google/gson/JsonObject;)Lnet/minecraftforge/fluids/FluidStack;"))
     private JsonObject blazinghot$resultPlatformedFluidAmount(JsonObject jsonObject,
                                                               @Local(ordinal = 0, argsOnly = true) JsonObject json,

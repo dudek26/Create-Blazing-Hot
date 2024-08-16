@@ -79,6 +79,7 @@ public class BlazingFluidsImpl {
     }
 
     public static void registerFluidInteractions() {
+
         fluidInteraction(NETHER_LAVA, Blocks.COBBLESTONE, Fluids.WATER);
         fluidInteraction(MOLTEN_METALS.get(BLAZE_GOLD), Blocks.NETHERRACK, Fluids.WATER);
         fluidInteraction(MOLTEN_METALS.get(NETHERITE), AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get(), Fluids.WATER);
@@ -89,6 +90,7 @@ public class BlazingFluidsImpl {
         fluidInteraction(MOLTEN_METALS.get(ANDESITE), Blocks.COBBLESTONE, Fluids.WATER);
         fluidInteraction(MOLTEN_METALS.get(BRASS), Blocks.COBBLESTONE, Fluids.WATER);
         fluidInteraction(MOLTEN_METALS.get(COPPER), Blocks.COBBLESTONE, Fluids.WATER);
+
     }
 
     private static void fluidInteraction(FluidEntry<ForgeFlowingFluid.Flowing> entry, Block result, Fluid fluid) {
