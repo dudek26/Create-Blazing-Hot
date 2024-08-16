@@ -3,9 +3,12 @@ package com.dudko.blazinghot.registry.forge;
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.fluids.MoltenMetal;
 import com.simibubi.create.AllTags;
+import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.FluidEntry;
+import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
@@ -20,6 +23,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.function.Function;
+
+import static com.dudko.blazinghot.content.fluids.MoltenMetal.*;
 
 public class BlazingFluidsImpl {
 
@@ -74,22 +79,26 @@ public class BlazingFluidsImpl {
     }
 
     public static void registerFluidInteractions() {
-        fluidInteraction(NETHER_LAVA, Blocks.COBBLESTONE.defaultBlockState(), Fluids.WATER);
-
-        for (MoltenMetal metal : MoltenMetal.ALL_METALS) {
-            Map<Fluid, BlockState> interactions = metal.getFluidInteractions();
-            interactions.forEach((f, b) -> fluidInteraction(MOLTEN_METALS.get(metal), b, f));
-        }
+        fluidInteraction(NETHER_LAVA, Blocks.COBBLESTONE, Fluids.WATER);
+        fluidInteraction(MOLTEN_METALS.get(BLAZE_GOLD), Blocks.NETHERRACK, Fluids.WATER);
+        fluidInteraction(MOLTEN_METALS.get(NETHERITE), AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get(), Fluids.WATER);
+        fluidInteraction(MOLTEN_METALS.get(ANCIENT_DEBRIS), AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get(), Fluids.WATER);
+        fluidInteraction(MOLTEN_METALS.get(IRON), Blocks.COBBLESTONE, Fluids.WATER);
+        fluidInteraction(MOLTEN_METALS.get(GOLD), Blocks.COBBLESTONE, Fluids.WATER);
+        fluidInteraction(MOLTEN_METALS.get(ZINC), Blocks.COBBLESTONE, Fluids.WATER);
+        fluidInteraction(MOLTEN_METALS.get(ANDESITE), Blocks.COBBLESTONE, Fluids.WATER);
+        fluidInteraction(MOLTEN_METALS.get(BRASS), Blocks.COBBLESTONE, Fluids.WATER);
+        fluidInteraction(MOLTEN_METALS.get(COPPER), Blocks.COBBLESTONE, Fluids.WATER);
     }
 
-    private static void fluidInteraction(FluidEntry<ForgeFlowingFluid.Flowing> entry, BlockState result, Fluid fluid) {
+    private static void fluidInteraction(FluidEntry<ForgeFlowingFluid.Flowing> entry, Block result, Fluid fluid) {
         FluidInteractionRegistry.addInteraction(entry.get().getFluidType(),
                 new FluidInteractionRegistry.InteractionInformation(fluid.getFluidType(), fluidState -> {
                     if (fluidState.isSource()) {
                         return Blocks.OBSIDIAN.defaultBlockState();
                     }
                     else {
-                        return result;
+                        return result.defaultBlockState();
                     }
                 }));
     }
@@ -99,16 +108,16 @@ public class BlazingFluidsImpl {
 
     public static class MoltenMetalsList<T extends ForgeFlowingFluid> implements Iterable<FluidEntry<T>> {
 
-        private static final int METAL_AMOUNT = MoltenMetal.ALL_METALS.size();
+        private static final int METAL_AMOUNT = ALL_METALS.size();
 
         private final FluidEntry<?>[] values = new FluidEntry<?>[METAL_AMOUNT];
 
         private static int metalOrdinal(MoltenMetal metal) {
-            return MoltenMetal.ALL_METALS.indexOf(metal);
+            return ALL_METALS.indexOf(metal);
         }
 
         public MoltenMetalsList(Function<MoltenMetal, FluidEntry<? extends T>> filler) {
-            for (MoltenMetal metal : MoltenMetal.ALL_METALS) {
+            for (MoltenMetal metal : ALL_METALS) {
                 values[metalOrdinal(metal)] = filler.apply(metal);
             }
         }

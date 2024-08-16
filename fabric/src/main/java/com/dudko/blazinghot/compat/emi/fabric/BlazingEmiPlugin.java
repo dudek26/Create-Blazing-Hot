@@ -107,10 +107,7 @@ public class BlazingEmiPlugin implements EmiPlugin {
                     recipe));
         }
 
-        for (MoltenMetal metal : ALL_METALS) {
-            metal.getFluidInteractions()
-                    .forEach((f, b) -> addMoltenMetalCollisions(registry, metal));
-        }
+        ALL_METALS.forEach(m -> addMoltenMetalCollisions(registry, m));
 
         addFluidCollision(registry,
                 "nether_lava_and_water",
@@ -160,7 +157,7 @@ public class BlazingEmiPlugin implements EmiPlugin {
                         metal.moltenName() + "_and_" + BuiltInRegistries.FLUID.getKey(f).getPath(),
                         BlazingFluidsImpl.MOLTEN_METALS.getFluid(metal),
                         f,
-                        b));
+                        b.get().defaultBlockState()));
     }
 
     private void addFluidCollision(EmiRegistry registry, String name, Fluid fluid1, Fluid fluid2, BlockState result) {

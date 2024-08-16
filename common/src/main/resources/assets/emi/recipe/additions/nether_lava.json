@@ -1,6 +1,0 @@
-{
-  "type": "emi:world_interaction",
-  "left": "fluid:minecraft:water",
-  "right": "fluid:blazinghot:nether_lava",
-  "output": "item:minecraft:cobblestone"
-}

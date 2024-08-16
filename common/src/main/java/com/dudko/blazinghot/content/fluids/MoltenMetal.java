@@ -9,10 +9,12 @@ import com.dudko.blazinghot.util.ListUtil;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.foundation.utility.Pair;
+import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
@@ -53,7 +55,7 @@ public class MoltenMetal {
                             false)
                     .compactingOverride(VANILLA.asResource("netherite_scrap"), Constants.INGOT.droplets)
                     .addFluidInteraction(Fluids.WATER,
-                            AllPaletteStoneTypes.SCORCHIA.baseBlock.get().defaultBlockState())
+                            AllPaletteStoneTypes.SCORCHIA.getBaseBlock())
                     .disableMechanicalMixing()
                     .ignoreTagDatagen()
                     .register(),
@@ -61,13 +63,13 @@ public class MoltenMetal {
                     builder("netherite").supportedForms(Form.INGOT)
                             .disableMechanicalMixing()
                             .addFluidInteraction(Fluids.WATER,
-                                    AllPaletteStoneTypes.SCORCHIA.baseBlock.get().defaultBlockState())
+                                    AllPaletteStoneTypes.SCORCHIA.getBaseBlock())
                             .register(),
             BLAZE_GOLD =
                     builder("blaze_gold").mod(BLAZINGHOT)
                             .basicAndPlateForms()
                             .supportedForms(Form.ROD)
-                            .addFluidInteraction(Fluids.WATER, Blocks.NETHERRACK.defaultBlockState())
+                            .addFluidInteraction(Fluids.WATER, () -> Blocks.NETHERRACK)
                             .register(),
             ZINC = builder("zinc").mod(CREATE).basicForms().optionalForms(Form.PLATE).register(),
             BRASS = builder("brass").mod(CREATE).createForms().register(),
@@ -93,12 +95,12 @@ public class MoltenMetal {
     public final boolean ignoreTagGen;
     public final boolean mechanicalMixerMeltable;
 
-    public final Map<Fluid, BlockState> fluidInteractions;
+    public final Map<Fluid, NonNullSupplier<Block>> fluidInteractions;
 
     public final Form[] customForms;
     public final Pair<ResourceLocation, Long> compactingOverride;
 
-    MoltenMetal(String name, Mods mod, Form[] supportedForms, Form[] optionalForms, Map<Form, Mods> compatForms, boolean ignoreTagGen, boolean mechanicalMixerMeltable, Map<Fluid, BlockState> fluidInteractions, Form[] customForms, Pair<ResourceLocation, Long> compactingOverride) {
+    MoltenMetal(String name, Mods mod, Form[] supportedForms, Form[] optionalForms, Map<Form, Mods> compatForms, boolean ignoreTagGen, boolean mechanicalMixerMeltable, Map<Fluid, NonNullSupplier<Block>> fluidInteractions, Form[] customForms, Pair<ResourceLocation, Long> compactingOverride) {
         this.name = name;
         this.mod = mod;
         this.optionalForms = optionalForms;
@@ -164,10 +166,10 @@ public class MoltenMetal {
         return new ArrayList<>(List.of(customForms));
     }
 
-    public Map<Fluid, BlockState> getFluidInteractions() {
-        HashMap<Fluid, BlockState> interactions = new HashMap<>(fluidInteractions);
-        if (interactions.containsKey(Fluids.WATER))
-            interactions.put(Fluids.WATER, Blocks.COBBLESTONE.defaultBlockState());
+    public Map<Fluid, NonNullSupplier<Block>> getFluidInteractions() {
+        HashMap<Fluid, NonNullSupplier<Block>> interactions = new HashMap<>(fluidInteractions);
+        if (!interactions.containsKey(Fluids.WATER))
+            interactions.put(Fluids.WATER, () -> Blocks.COBBLESTONE);
         return interactions;
     }
 
@@ -246,8 +248,7 @@ public class MoltenMetal {
         private boolean ignoreTagDatagen;
         private final List<Form> customForms = new ArrayList<>();
         private boolean mechanicalMixerMeltable = true;
-        private final HashMap<Fluid, BlockState> fluidInteractions = new HashMap<>();
-        private final HashMap<Fluid, BlockState> fluidSourceInteractions = new HashMap<>();
+        private final HashMap<Fluid, NonNullSupplier<Block>> fluidInteractions = new HashMap<>();
 
         private Pair<ResourceLocation, Long> compactingOverride;
 
@@ -264,10 +265,10 @@ public class MoltenMetal {
         }
 
         /**
-         * Defines the fluid interactions. If no interaction with water is specified, it will default to Cobblestone.
+         * Defines the fluid interactions to display in EMI. If no interaction with water is specified, it will default to Cobblestone.
          */
-        public Builder addFluidInteraction(Fluid fluid, BlockState state) {
-            this.fluidInteractions.put(fluid, state);
+        public Builder addFluidInteraction(Fluid fluid, NonNullSupplier<Block> block) {
+            this.fluidInteractions.put(fluid, block);
             return this;
         }
 

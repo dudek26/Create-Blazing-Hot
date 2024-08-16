@@ -35,7 +35,7 @@ public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
                     remap = false,
                     target = "Lcom/simibubi/create/foundation/fluid/FluidIngredient;deserialize(Lcom/google/gson/JsonElement;)Lcom/simibubi/create/foundation/fluid/FluidIngredient;",
                     ordinal = 0))
-    private JsonElement blazinghot$ingredientsPlatformedFluidAmount(JsonElement je, @Local JsonObject json,
+    private JsonElement blazinghot$ingredientsPlatformedFluidAmount(JsonElement je, @Local(argsOnly = true) JsonObject json,
                                                                     @Local(argsOnly = true) ResourceLocation recipeID) {
         JsonObject jsonObject = je.getAsJsonObject();
         if (json.has("blazinghot:convertMeltable") && GsonHelper.getAsBoolean(json, "blazinghot:convertMeltable")) {
@@ -63,9 +63,9 @@ public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
             remap = false,
             at = @At(value = "INVOKE",
                     remap = false,
-                    target = "Lcom/simibubi/create/foundation/fluidLocation/FluidHelper;deserializeFluidStack(Lcom/google/gson/JsonObject;)Lnet/minecraftforge/fluids/FluidStack;"))
+                    target = "Lcom/simibubi/create/foundation/fluid/FluidHelper;deserializeFluidStack(Lcom/google/gson/JsonObject;)Lnet/minecraftforge/fluids/FluidStack;"))
     private JsonObject blazinghot$resultPlatformedFluidAmount(JsonObject jsonObject,
-                                                              @Local(ordinal = 0) JsonObject json,
+                                                              @Local(ordinal = 0, argsOnly = true) JsonObject json,
                                                               @Local(argsOnly = true) ResourceLocation recipeID) {
         if (json.has("blazinghot:convertMeltable") && GsonHelper.getAsBoolean(json, "blazinghot:convertMeltable")) {
             if (!jsonObject.has("amount")) throw new JsonSyntaxException("Fluid result has to define an amount");

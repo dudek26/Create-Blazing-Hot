@@ -2,6 +2,7 @@ package com.dudko.blazinghot.registry.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.fluids.MoltenMetal;
+import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.fluid.FluidHelper;
 import com.simibubi.create.foundation.utility.Iterate;
@@ -22,6 +23,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
@@ -29,7 +31,6 @@ import net.minecraft.world.level.material.FluidState;
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.function.Function;
 
@@ -118,14 +119,15 @@ public class BlazingFluidsImpl {
     @Nullable
     public static BlockState getLavaInteraction(FluidState fluidState, FluidState metFluidState) {
         Fluid fluid = fluidState.getType();
+        Fluid metFluid = metFluidState.getType();
 
-        for (MoltenMetal metal : MoltenMetal.ALL_METALS) {
-            Map<Fluid, BlockState> interactions = metal.fluidInteractions;
-
-            for (Map.Entry<Fluid, BlockState> entry : interactions.entrySet()) {
-                if (fluid.isSame(MOLTEN_METALS.getFluid(metal)) && metFluidState.is(entry.getKey()))
-                    return entry.getValue();
-            }
+        if (fluid.isSame(MOLTEN_METALS.getFluid(MoltenMetal.BLAZE_GOLD)) && metFluidState.is(FluidTags.WATER)) {
+            return Blocks.NETHERRACK.defaultBlockState();
+        }
+        if ((fluid.isSame(MOLTEN_METALS.getFluid(MoltenMetal.NETHERITE)) ||
+                fluid.isSame(MOLTEN_METALS.getFluid(MoltenMetal.ANCIENT_DEBRIS))) &&
+                metFluidState.is(FluidTags.WATER)) {
+            return AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get().defaultBlockState();
         }
         return null;
     }

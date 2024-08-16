@@ -1,8 +1,0 @@
-{
-  "type": "emi:info",
-  "stacks": [
-    "fluid:minecraft:water",
-    "fluid:blazinghot:nether_lava"
-  ],
-  "text": "emi.blazinghot.info.nether_lava_cobblestone"
-}
