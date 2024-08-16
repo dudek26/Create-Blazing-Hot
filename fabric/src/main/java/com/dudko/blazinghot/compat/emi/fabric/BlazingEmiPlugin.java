@@ -17,6 +17,7 @@ import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
+import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiInfoRecipe;
@@ -107,13 +108,15 @@ public class BlazingEmiPlugin implements EmiPlugin {
                     recipe));
         }
 
-        ALL_METALS.forEach(m -> addMoltenMetalCollisions(registry, m));
+        for (MoltenMetal metal : ALL_METALS) {
+            addMoltenMetalCollisions(registry, metal);
+        }
 
         addFluidCollision(registry,
                 "nether_lava_and_water",
                 BlazingFluidsImpl.NETHER_LAVA.get(),
                 Fluids.WATER,
-                Blocks.COBBLESTONE.defaultBlockState());
+                () -> Blocks.COBBLESTONE);
 
         addFluidInfo(registry,
                 Component.translatable("emi.blazinghot.info.nether_lava_cobblestone"),
@@ -152,22 +155,25 @@ public class BlazingEmiPlugin implements EmiPlugin {
     }
 
     private void addMoltenMetalCollisions(EmiRegistry registry, MoltenMetal metal) {
-        metal.getFluidInteractions()
-                .forEach((f, b) -> addFluidCollision(registry,
-                        metal.moltenName() + "_and_" + BuiltInRegistries.FLUID.getKey(f).getPath(),
-                        BlazingFluidsImpl.MOLTEN_METALS.getFluid(metal),
-                        f,
-                        b.get().defaultBlockState()));
+
+        for (Map.Entry<Fluid, NonNullSupplier<Block>> entry : metal.getFluidInteractions().entrySet()) {
+            addFluidCollision(registry,
+                    metal.moltenName() + "_and_" + BuiltInRegistries.FLUID.getKey(entry.getKey()).getPath(),
+                    BlazingFluidsImpl.MOLTEN_METALS.getFluid(metal),
+                    entry.getKey(),
+                    entry.getValue());
+        }
+
     }
 
-    private void addFluidCollision(EmiRegistry registry, String name, Fluid fluid1, Fluid fluid2, BlockState result) {
+    private void addFluidCollision(EmiRegistry registry, String name, Fluid fluid1, Fluid fluid2, NonNullSupplier<Block> result) {
         EmiStack fluidStack1 = EmiStack.of(fluid1, Constants.BUCKET.platformed());
         fluidStack1 = fluidStack1.setRemainder(fluidStack1);
 
         EmiStack fluidStack2 = EmiStack.of(fluid2, Constants.BUCKET.platformed());
         fluidStack2 = fluidStack2.setRemainder(fluidStack2);
 
-        Block block = result.getBlock();
+        Block block = result.get();
         EmiStack output = EmiStack.of(block);
 
         registry.addRecipe(

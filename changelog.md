@@ -5,12 +5,13 @@ Create: Blazing Hot 0.6
 ### Added:
 * New fluids: Molten Zinc, Copper, Brass, Ancient Debris, Netherite, Andesite
 * Crafting recipe for Blaze Apple
+* [Forge] Information about Nether Lava in JEI
 
 ### Changed:
-* Molten Blaze Gold source blocks now turn into Obsidian when touching water
 * Modern Lamp Panels can now be waterlogged
 * Increased chance of getting Blaze Powder when crushing Blaze Gold Rods from 30% to 50%
 * Several recipes now use item tags instead of specific items
+* [Fabric] Molten Blaze Gold source blocks now turn into Obsidian when touching water
 
 ### Removed:
 * Metal Block melting recipes
