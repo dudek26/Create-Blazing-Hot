@@ -6,7 +6,7 @@ import net.minecraft.data.PackOutput;
 
 import java.util.List;
 
-import static com.dudko.blazinghot.content.fluids.MoltenMetal.ALL_METALS;
+import static com.dudko.blazinghot.content.metal.MoltenMetal.ALL_METALS;
 
 @SuppressWarnings("unused")
 public class BlazingCompactingRecipeGen extends BlazingProcessingRecipeGen {

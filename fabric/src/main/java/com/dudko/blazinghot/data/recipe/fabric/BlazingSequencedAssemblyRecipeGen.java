@@ -1,11 +1,8 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.content.fluids.MoltenMetal;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
-import com.dudko.blazinghot.registry.CommonTags;
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.press.PressingRecipe;
@@ -16,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.UnaryOperator;
 
-import static com.dudko.blazinghot.content.fluids.MoltenMetal.*;
+import static com.dudko.blazinghot.content.metal.MoltenMetal.*;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingProcessingRecipeGen.*;
 import static com.dudko.blazinghot.data.recipe.fabric.Ingredients.*;
 import static com.dudko.blazinghot.data.recipe.fabric.Ingredients.stellarGoldenApple;

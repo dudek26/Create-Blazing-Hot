@@ -1,13 +1,15 @@
 package com.dudko.blazinghot.registry.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.content.fluids.MoltenMetal;
-import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
+import com.dudko.blazinghot.content.metal.MoltenMetal;
+import com.simibubi.create.AllFluids;
+import com.simibubi.create.AllTags.AllFluidTags;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.fluid.FluidHelper;
 import com.simibubi.create.foundation.utility.Iterate;
 import com.tterrag.registrate.fabric.SimpleFlowableFluid;
 import com.tterrag.registrate.util.entry.FluidEntry;
+import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import io.github.fabricators_of_create.porting_lib.event.common.FluidPlaceBlockCallback;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
@@ -18,19 +20,24 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.base.FullItemFluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import org.jetbrains.annotations.ApiStatus;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.function.Function;
 
@@ -116,19 +123,37 @@ public class BlazingFluidsImpl {
         return null;
     }
 
+    /**
+     * Fabric: use tags for comparing fluids
+     */
+    @ApiStatus.Experimental
+    private static final Map<Fluid, TagKey<Fluid>> fluidTags =
+            Map.of(Fluids.WATER,
+                    FluidTags.WATER,
+                    AllFluids.HONEY.get(),
+                    AllFluidTags.HONEY.tag);
+
     @Nullable
     public static BlockState getLavaInteraction(FluidState fluidState, FluidState metFluidState) {
         Fluid fluid = fluidState.getType();
         Fluid metFluid = metFluidState.getType();
 
-        if (fluid.isSame(MOLTEN_METALS.getFluid(MoltenMetal.BLAZE_GOLD)) && metFluidState.is(FluidTags.WATER)) {
-            return Blocks.NETHERRACK.defaultBlockState();
+        for (MoltenMetal metal : MoltenMetal.ALL_METALS) {
+            for (Map.Entry<Fluid, NonNullSupplier<Block>> entry : metal.getFluidInteractions().entrySet()) {
+
+                TagKey<Fluid> fluidTag = fluidTags.get(entry.getKey());
+
+                if (entry.getValue() == null) {
+                    BlazingHot.LOGGER.debug("Null fluid interaction for {}, {}", metal.moltenName(),
+                            BuiltInRegistries.FLUID.getKey(entry.getKey()));
+                    continue;
+                }
+                if (fluid.isSame(MOLTEN_METALS.getFluid(metal)) && metFluidState.is(fluidTag)) {
+                    return entry.getValue().get().defaultBlockState();
+                }
+            }
         }
-        if ((fluid.isSame(MOLTEN_METALS.getFluid(MoltenMetal.NETHERITE)) ||
-                fluid.isSame(MOLTEN_METALS.getFluid(MoltenMetal.ANCIENT_DEBRIS))) &&
-                metFluidState.is(FluidTags.WATER)) {
-            return AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get().defaultBlockState();
-        }
+
         return null;
     }
 

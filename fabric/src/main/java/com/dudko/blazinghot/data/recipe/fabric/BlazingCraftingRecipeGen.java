@@ -1,7 +1,7 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.content.fluids.MoltenMetal;
+import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.simibubi.create.foundation.utility.RegisteredObjects;
@@ -21,10 +21,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
-import static com.dudko.blazinghot.content.fluids.MoltenMetal.BLAZE_GOLD;
-import static com.dudko.blazinghot.content.fluids.MoltenMetal.Form.INGOT;
-import static com.dudko.blazinghot.content.fluids.MoltenMetal.Form.NUGGET;
-import static com.dudko.blazinghot.content.fluids.MoltenMetal.IRON;
+import static com.dudko.blazinghot.content.metal.MoltenMetal.BLAZE_GOLD;
+import static com.dudko.blazinghot.content.metal.Form.INGOT;
+import static com.dudko.blazinghot.content.metal.Form.NUGGET;
+import static com.dudko.blazinghot.content.metal.MoltenMetal.IRON;
 import static com.dudko.blazinghot.data.recipe.fabric.Ingredients.*;
 import static com.dudko.blazinghot.registry.BlazingBlocks.BLAZE_GOLD_BLOCK;
 import static com.dudko.blazinghot.registry.BlazingItems.BLAZE_GOLD_INGOT;

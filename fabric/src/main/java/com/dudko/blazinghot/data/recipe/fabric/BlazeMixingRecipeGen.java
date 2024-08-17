@@ -1,6 +1,6 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
-import com.dudko.blazinghot.content.fluids.MoltenMetal;
+import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.multiloader.MultiFluids;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;

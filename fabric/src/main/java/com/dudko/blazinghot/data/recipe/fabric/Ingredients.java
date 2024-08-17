@@ -15,8 +15,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
-import static com.dudko.blazinghot.content.fluids.MoltenMetal.*;
-import static com.dudko.blazinghot.content.fluids.MoltenMetal.Form.*;
+import static com.dudko.blazinghot.content.metal.MoltenMetal.*;
+import static com.dudko.blazinghot.content.metal.Form.*;
 import static com.dudko.blazinghot.registry.CommonTags.Namespace.INTERNAL;
 
 public class Ingredients {

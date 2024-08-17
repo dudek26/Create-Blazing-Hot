@@ -1,7 +1,7 @@
 package com.dudko.blazinghot.data.fabric;
 
-import com.dudko.blazinghot.content.fluids.MoltenMetal;
-import com.dudko.blazinghot.content.fluids.MoltenMetal.Form;
+import com.dudko.blazinghot.content.metal.MoltenMetal;
+import com.dudko.blazinghot.content.metal.Form;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;

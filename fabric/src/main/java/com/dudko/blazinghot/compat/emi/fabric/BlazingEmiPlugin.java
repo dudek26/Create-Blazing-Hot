@@ -2,7 +2,7 @@ package com.dudko.blazinghot.compat.emi.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.config.BlazingConfigs;
-import com.dudko.blazinghot.content.fluids.MoltenMetal;
+import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
@@ -35,7 +35,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
@@ -45,7 +44,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-import static com.dudko.blazinghot.content.fluids.MoltenMetal.ALL_METALS;
+import static com.dudko.blazinghot.content.metal.MoltenMetal.ALL_METALS;
 import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe.getFuelCost;
 
 public class BlazingEmiPlugin implements EmiPlugin {

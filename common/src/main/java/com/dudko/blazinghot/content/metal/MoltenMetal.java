@@ -1,4 +1,4 @@
-package com.dudko.blazinghot.content.fluids;
+package com.dudko.blazinghot.content.metal;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.compat.Mods;
@@ -16,7 +16,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
@@ -28,7 +27,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 import static com.dudko.blazinghot.compat.Mods.*;
-import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe.defaultDurationToFuelCost;
 import static com.dudko.blazinghot.registry.CommonTags.Namespace.INTERNAL;
 import static com.dudko.blazinghot.registry.CommonTags.itemTagOf;
 import static com.dudko.blazinghot.util.LangUtil.titleCaseConversion;
@@ -55,7 +53,7 @@ public class MoltenMetal {
                             false)
                     .compactingOverride(VANILLA.asResource("netherite_scrap"), Constants.INGOT.droplets)
                     .addFluidInteraction(Fluids.WATER,
-                            AllPaletteStoneTypes.SCORCHIA.getBaseBlock())
+                            () -> AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get())
                     .disableMechanicalMixing()
                     .ignoreTagDatagen()
                     .register(),
@@ -63,7 +61,7 @@ public class MoltenMetal {
                     builder("netherite").supportedForms(Form.INGOT)
                             .disableMechanicalMixing()
                             .addFluidInteraction(Fluids.WATER,
-                                    AllPaletteStoneTypes.SCORCHIA.getBaseBlock())
+                                    () -> AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get())
                             .register(),
             BLAZE_GOLD =
                     builder("blaze_gold").mod(BLAZINGHOT)
@@ -173,71 +171,6 @@ public class MoltenMetal {
         return interactions;
     }
 
-    public static class Form {
-
-        public static final Form
-                INGOT = Form.of("ingots", Constants.INGOT, 400, true),
-                NUGGET = Form.of("nuggets", Constants.NUGGET, 65, true),
-                PLATE = Form.of("plates", Constants.PLATE, 400, true),
-                ROD = Form.of("rods", Constants.ROD, 250, true);
-
-        public String tagFolder = null;
-        public final long amount;
-        public final int processingTime;
-        public final long fuelCost;
-        public final boolean mechanicalMixerMeltable;
-        public ResourceLocation customLocation = null;
-
-        Form(ResourceLocation customLocation, long amount, int processingTime, long fuelCost, boolean mechanicalMixerMeltable) {
-            this.customLocation = customLocation;
-            this.amount = amount;
-            this.processingTime = processingTime;
-            this.mechanicalMixerMeltable = mechanicalMixerMeltable;
-            this.fuelCost = fuelCost;
-        }
-
-        Form(String tagFolder, long amount, int processingTime, boolean mechanicalMixerMeltable) {
-            this.tagFolder = tagFolder;
-            this.amount = amount;
-            this.processingTime = processingTime;
-            this.mechanicalMixerMeltable = mechanicalMixerMeltable;
-            this.fuelCost = defaultDurationToFuelCost(processingTime);
-        }
-
-        Form(String tagFolder, Constants fluidConstant, int processingTime, boolean mechanicalMixerMeltable) {
-            this(tagFolder, fluidConstant.platformed(), processingTime, mechanicalMixerMeltable);
-        }
-
-        public TagKey<Item> internalTag(String material) {
-            return itemTagOf(INTERNAL.tagPath(tagFolder, material), INTERNAL);
-        }
-
-        public TagKey<Item> internalTag(MoltenMetal metal) {
-            return internalTag(metal.name);
-        }
-
-        public String simpleItemName(MoltenMetal metal) {
-            return metal.name + "_" + (this.tagFolder.endsWith("s") ? this.tagFolder.substring(0,
-                    this.tagFolder.length() - 1) : this.tagFolder);
-        }
-
-        public ResourceLocation resourceLocation(MoltenMetal metal) {
-            return resourceLocation(metal, metal.mod);
-        }
-
-        public ResourceLocation resourceLocation(MoltenMetal metal, Mods mod) {
-            return mod.asResource(simpleItemName(metal));
-        }
-
-        public static Form of(String tagFolder, Constants fluidConstant, int processingTime, boolean mechanicalMixerMeltable) {
-            return new Form(tagFolder, fluidConstant, processingTime, mechanicalMixerMeltable);
-        }
-
-        public static Form custom(ResourceLocation location, long amount, int processingTime, long fuelCost, boolean mechanicalMixerMeltable) {
-            return new Form(location, amount, processingTime, fuelCost, mechanicalMixerMeltable);
-        }
-    }
-
     public static class Builder {
 
         private final String name;
@@ -265,7 +198,11 @@ public class MoltenMetal {
         }
 
         /**
-         * Defines the fluid interactions to display in EMI. If no interaction with water is specified, it will default to Cobblestone.
+         * Defines the fluid interactions. If no interaction with water is specified, it will default to Cobblestone.
+         * <ul>
+         *      <li>Never add AllPaletteStoneTypes directly by {@code [...].getBaseBlock()}! You should always add them by <code>() -> [...].getBaseBlock().get()</code></li>
+         *      <li>Fabric: remember to update {@link com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl#fluidTags}</li>
+         * </ul>
          */
         public Builder addFluidInteraction(Fluid fluid, NonNullSupplier<Block> block) {
             this.fluidInteractions.put(fluid, block);

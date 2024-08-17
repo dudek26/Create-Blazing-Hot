@@ -1,17 +1,11 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
-import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.compat.Mods;
-import com.dudko.blazinghot.content.fluids.MoltenMetal;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
-
-import static com.dudko.blazinghot.content.fluids.MoltenMetal.*;
 
 @SuppressWarnings("unused")
 public class BlazingDeployingRecipeGen extends BlazingProcessingRecipeGen {
