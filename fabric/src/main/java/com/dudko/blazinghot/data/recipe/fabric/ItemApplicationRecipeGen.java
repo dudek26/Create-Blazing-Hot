@@ -1,18 +1,16 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.registry.BlazingBlocks;
-import com.dudko.blazinghot.registry.CommonTags;
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.minecraft.data.PackOutput;
 
-import static com.dudko.blazinghot.data.recipe.fabric.Ingredients.*;
+import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.*;
 
 @SuppressWarnings("unused")
-public class BlazingItemApplicationRecipeGen extends BlazingProcessingRecipeGen {
+public class ItemApplicationRecipeGen extends BlazingProcessingRecipeGen {
 
-    public BlazingItemApplicationRecipeGen(PackOutput output) {
+    public ItemApplicationRecipeGen(PackOutput output) {
         super(output);
     }
 

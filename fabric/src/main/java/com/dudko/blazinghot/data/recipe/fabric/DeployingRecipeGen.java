@@ -8,9 +8,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
 @SuppressWarnings("unused")
-public class BlazingDeployingRecipeGen extends BlazingProcessingRecipeGen {
+public class DeployingRecipeGen extends BlazingProcessingRecipeGen {
 
-    public BlazingDeployingRecipeGen(PackOutput output) {
+    public DeployingRecipeGen(PackOutput output) {
         super(output);
     }
 

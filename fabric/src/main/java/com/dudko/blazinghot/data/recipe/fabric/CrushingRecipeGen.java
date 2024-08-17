@@ -5,14 +5,13 @@ import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Blocks;
 
-import static com.dudko.blazinghot.data.recipe.fabric.Ingredients.*;
+import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.*;
 
 @SuppressWarnings("unused")
-public class BlazingCrushingRecipeGen extends BlazingProcessingRecipeGen {
+public class CrushingRecipeGen extends BlazingProcessingRecipeGen {
 
-    public BlazingCrushingRecipeGen(PackOutput output) {
+    public CrushingRecipeGen(PackOutput output) {
         super(output);
     }
 

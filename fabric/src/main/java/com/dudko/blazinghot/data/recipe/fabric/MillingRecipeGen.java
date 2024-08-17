@@ -4,14 +4,13 @@ import com.dudko.blazinghot.registry.BlazingItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.Items;
 
-import static com.dudko.blazinghot.data.recipe.fabric.Ingredients.*;
+import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.*;
 
 @SuppressWarnings("unused")
-public class BlazingMillingRecipeGen extends BlazingProcessingRecipeGen {
+public class MillingRecipeGen extends BlazingProcessingRecipeGen {
 
-    public BlazingMillingRecipeGen(PackOutput output) {
+    public MillingRecipeGen(PackOutput output) {
         super(output);
     }
 

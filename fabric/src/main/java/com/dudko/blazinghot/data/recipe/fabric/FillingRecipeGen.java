@@ -9,19 +9,19 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
 import static com.dudko.blazinghot.content.metal.MoltenMetal.*;
-import static com.dudko.blazinghot.data.recipe.fabric.Ingredients.*;
+import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.*;
 
 @SuppressWarnings("unused")
-public class BlazingFillingRecipeGen extends BlazingProcessingRecipeGen {
+public class FillingRecipeGen extends BlazingProcessingRecipeGen {
 
-    public BlazingFillingRecipeGen(PackOutput output) {
+    public FillingRecipeGen(PackOutput output) {
         super(output);
     }
 
     GeneratedRecipe
             GLISTERING_MELON =
             create("glistering_melon",
-                    b -> custom(b).blazinghot$convertMeltables().blazinghot$finish()
+                    b -> b.convertMeltable()
                             .require(melon())
                             .require(moltenGold(), NUGGET_COVER)
                             .output(Items.GLISTERING_MELON_SLICE)),
@@ -39,8 +39,7 @@ public class BlazingFillingRecipeGen extends BlazingProcessingRecipeGen {
 
     private GeneratedRecipe metalApple(MoltenMetal metal, ItemLike result) {
         return create(result.asItem().toString(),
-                b -> custom(b).blazinghot$convertMeltables()
-                        .blazinghot$finish()
+                b -> b.convertMeltable()
                         .require(apple())
                         .require(metal.fluidTag(), INGOT_COVER)
                         .output(result));
@@ -48,8 +47,7 @@ public class BlazingFillingRecipeGen extends BlazingProcessingRecipeGen {
 
     private GeneratedRecipe metalCarrot(MoltenMetal metal, ItemLike result) {
         return create(result.asItem().toString(),
-                b -> custom(b).blazinghot$convertMeltables()
-                        .blazinghot$finish()
+                b -> b.convertMeltable()
                         .require(carrot())
                         .require(metal.fluidTag(), NUGGET_COVER)
                         .output(result));

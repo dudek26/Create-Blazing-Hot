@@ -19,7 +19,7 @@ import static com.dudko.blazinghot.content.metal.Form.*;
 import static com.dudko.blazinghot.content.metal.MoltenMetal.*;
 import static com.dudko.blazinghot.registry.CommonTags.Namespace.INTERNAL;
 
-public class Ingredients {
+public class BlazingIngredients {
 
     //    Shortcuts
 

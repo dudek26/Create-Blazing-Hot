@@ -1,30 +1,22 @@
 package com.dudko.blazinghot.mixin.forge;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.data.recipe.forge.IProcessingRecipeBuilder;
 import com.dudko.blazinghot.multiloader.MultiFluids;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.llamalad7.mixinextras.sugar.Local;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.Mth;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 
 @Mixin(ProcessingRecipeSerializer.class)
-public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
-
-//    TODO: make a whole new serializer and don't use mixins for that
+public class ProcessingRecipeSerializerMixin {
 
     /**
      * Converts fluidLocation amounts in C:BH recipes' FluidIngredients from Fabric's droplets to milibuckets.
@@ -80,32 +72,6 @@ public class ProcessingRecipeSerializerMixin<T extends ProcessingRecipe<?>> {
             jsonObject.addProperty("amount", amount / 81);
         }
         return jsonObject;
-    }
-
-    @SuppressWarnings("unchecked")
-    @Inject(method = "readFromJson",
-            remap = false,
-            at = @At(value = "INVOKE_ASSIGN",
-
-                    target = "Lcom/simibubi/create/content/processing/recipe/ProcessingRecipeBuilder;withFluidOutputs(Lnet/minecraft/core/NonNullList;)Lcom/simibubi/create/content/processing/recipe/ProcessingRecipeBuilder;")
-    )
-    protected void blazinghot$readFuelFromJson(ResourceLocation recipeId, JsonObject json, CallbackInfoReturnable<T> cir,
-                                               @Local ProcessingRecipeBuilder<T> builder) {
-        if (GsonHelper.isValidNode(json, "blazinghot:fuel")) {
-            JsonObject blazinghot$fuelElement = json.get("blazinghot:fuel").getAsJsonObject();
-
-            if (recipeId.getNamespace().equalsIgnoreCase(BlazingHot.ID)) {
-                if (!blazinghot$fuelElement.has("amount"))
-                    throw new JsonSyntaxException("Fuel has to define an amount");
-
-                long blazinghot$amount = GsonHelper.getAsLong(blazinghot$fuelElement, "amount");
-                blazinghot$fuelElement.remove("amount");
-                blazinghot$fuelElement.addProperty("amount", blazinghot$amount / 81);
-            }
-
-            ((IProcessingRecipeBuilder<T>) builder).blazinghot$requireFuel(FluidIngredient.deserialize(
-                    blazinghot$fuelElement));
-        }
     }
 
 }

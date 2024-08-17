@@ -9,16 +9,15 @@ import java.util.List;
 import static com.dudko.blazinghot.content.metal.MoltenMetal.ALL_METALS;
 
 @SuppressWarnings("unused")
-public class BlazingCompactingRecipeGen extends BlazingProcessingRecipeGen {
+public class CompactingRecipeGen extends BlazingProcessingRecipeGen {
 
-    public BlazingCompactingRecipeGen(PackOutput output) {
+    public CompactingRecipeGen(PackOutput output) {
         super(output);
     }
 
     List<GeneratedRecipe> ALL_MOLTEN_COMPACTING_RECIPES = ALL_METALS.stream()
             .map(metal -> create(metal.moltenName(),
-                    b -> custom(b).blazinghot$convertMeltables()
-                            .blazinghot$finish()
+                    b -> b.convertMeltable()
                             .require(metal.fluidTag(), metal.compactingResult().getSecond())
                             .output(metal.compactingResult().getFirst())))
             .toList();

@@ -25,15 +25,15 @@ import static com.dudko.blazinghot.content.metal.MoltenMetal.BLAZE_GOLD;
 import static com.dudko.blazinghot.content.metal.Form.INGOT;
 import static com.dudko.blazinghot.content.metal.Form.NUGGET;
 import static com.dudko.blazinghot.content.metal.MoltenMetal.IRON;
-import static com.dudko.blazinghot.data.recipe.fabric.Ingredients.*;
+import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.*;
 import static com.dudko.blazinghot.registry.BlazingBlocks.BLAZE_GOLD_BLOCK;
 import static com.dudko.blazinghot.registry.BlazingItems.BLAZE_GOLD_INGOT;
 import static com.dudko.blazinghot.registry.BlazingItems.BLAZE_GOLD_NUGGET;
 
 @SuppressWarnings({"UnusedReturnValue", "SameParameterValue", "unused"})
-public class BlazingCraftingRecipeGen extends BlazingRecipeProvider {
+public class CraftingRecipeGen extends BlazingRecipeProvider {
 
-    public BlazingCraftingRecipeGen(PackOutput output) {
+    public CraftingRecipeGen(PackOutput output) {
         super(output);
         generate();
     }
@@ -80,7 +80,7 @@ public class BlazingCraftingRecipeGen extends BlazingRecipeProvider {
             BLAZE_CARROT = metalCarrot(BLAZE_GOLD, BlazingItems.BLAZE_CARROT),
             WHITE_MODERN_LAMP =
                     create(BlazingBlocks.MODERN_LAMP_BLOCKS.get(DyeColor.WHITE))
-                            .unlockedByTag(Ingredients::blazeGoldRod)
+                            .unlockedByTag(BlazingIngredients::blazeGoldRod)
                             .returns(2)
                             .viaShaped(b -> b
                                     .define('X', blazeGoldRod())
@@ -90,7 +90,7 @@ public class BlazingCraftingRecipeGen extends BlazingRecipeProvider {
                                     .pattern(" X ")),
             BLAZE_ARROW =
                     create(BlazingItems.BLAZE_ARROW)
-                            .unlockedByTag(Ingredients::blazeGoldRod)
+                            .unlockedByTag(BlazingIngredients::blazeGoldRod)
                             .returns(4)
                             .viaShaped(b -> b
                                     .define('X', coal())
@@ -101,7 +101,7 @@ public class BlazingCraftingRecipeGen extends BlazingRecipeProvider {
                                     .pattern(" Z ")),
             BLAZE_WHISK =
                     create(BlazingItems.BLAZE_WHISK)
-                            .unlockedByTag(Ingredients::blazeGoldIngot)
+                            .unlockedByTag(BlazingIngredients::blazeGoldIngot)
                             .viaShaped(b -> b
                                     .define('X', brassIngot())
                                     .define('Y', blazeGoldSheet())

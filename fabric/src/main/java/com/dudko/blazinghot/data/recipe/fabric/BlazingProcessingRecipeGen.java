@@ -18,8 +18,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.function.UnaryOperator;
 
 @SuppressWarnings("unused")
 public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
@@ -33,16 +33,16 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
     }
 
     public static DataProvider registerAll(PackOutput output) {
-        GENERATORS.add(new BlazingPressingRecipeGen(output));
-        GENERATORS.add(new BlazingCompactingRecipeGen(output));
-        GENERATORS.add(new BlazingCrushingRecipeGen(output));
-        GENERATORS.add(new BlazingCuttingRecipeGen(output));
-        GENERATORS.add(new BlazingDeployingRecipeGen(output));
-        GENERATORS.add(new BlazingMillingRecipeGen(output));
-        GENERATORS.add(new BlazingMixingRecipeGen(output));
-        GENERATORS.add(new BlazingFillingRecipeGen(output));
-        GENERATORS.add(new BlazingHauntingRecipeGen(output));
-        GENERATORS.add(new BlazingItemApplicationRecipeGen(output));
+        GENERATORS.add(new PressingRecipeGen(output));
+        GENERATORS.add(new CompactingRecipeGen(output));
+        GENERATORS.add(new CrushingRecipeGen(output));
+        GENERATORS.add(new CuttingRecipeGen(output));
+        GENERATORS.add(new DeployingRecipeGen(output));
+        GENERATORS.add(new MillingRecipeGen(output));
+        GENERATORS.add(new MixingRecipeGen(output));
+        GENERATORS.add(new FillingRecipeGen(output));
+        GENERATORS.add(new HauntingRecipeGen(output));
+        GENERATORS.add(new ItemApplicationRecipeGen(output));
         GENERATORS.add(new BlazeMixingRecipeGen(output));
 
         return new DataProvider() {
@@ -62,12 +62,12 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
         };
     }
 
-    protected <T extends ProcessingRecipe<?>> GeneratedRecipe create(String namespace, Supplier<ItemLike> singleIngredient, UnaryOperator<ProcessingRecipeBuilder<T>> transform) {
+    protected <T extends ProcessingRecipe<?>> GeneratedRecipe create(String namespace, Supplier<ItemLike> singleIngredient, Function<BlazingProcessingRecipeBuilder<T>, ProcessingRecipeBuilder<T>> transform) {
         ProcessingRecipeSerializer<T> serializer = getSerializer();
         GeneratedRecipe generatedRecipe = c -> {
             ItemLike itemLike = singleIngredient.get();
             transform
-                    .apply(new ProcessingRecipeBuilder<>(serializer.getFactory(),
+                    .apply((BlazingProcessingRecipeBuilder<T>) new BlazingProcessingRecipeBuilder<>(serializer.getFactory(),
                             new ResourceLocation(namespace,
                                     RegisteredObjects.getKeyOrThrow(itemLike.asItem()).getPath())).withItemIngredients(
                             Ingredient.of(itemLike)))
@@ -81,15 +81,15 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
      * Create a processing recipe with a single itemstack ingredient, using its id
      * as the name of the recipe
      */
-    <T extends ProcessingRecipe<?>> GeneratedRecipe create(Supplier<ItemLike> singleIngredient, UnaryOperator<ProcessingRecipeBuilder<T>> transform) {
+    <T extends ProcessingRecipe<?>> GeneratedRecipe create(Supplier<ItemLike> singleIngredient, Function<BlazingProcessingRecipeBuilder<T>, ProcessingRecipeBuilder<T>> transform) {
         return create(BlazingHot.ID, singleIngredient, transform);
     }
 
-    protected <T extends ProcessingRecipe<?>> GeneratedRecipe createWithDeferredId(Supplier<ResourceLocation> name, UnaryOperator<ProcessingRecipeBuilder<T>> transform) {
+    protected <T extends ProcessingRecipe<?>> GeneratedRecipe createWithDeferredId(Supplier<ResourceLocation> name, Function<BlazingProcessingRecipeBuilder<T>, ProcessingRecipeBuilder<T>> transform) {
         ProcessingRecipeSerializer<T> serializer = getSerializer();
         GeneratedRecipe
                 generatedRecipe =
-                c -> transform.apply(new ProcessingRecipeBuilder<>(serializer.getFactory(), name.get())).build(c);
+                c -> transform.apply(new BlazingProcessingRecipeBuilder<>(serializer.getFactory(), name.get())).build(c);
         all.add(generatedRecipe);
         return generatedRecipe;
     }
@@ -98,7 +98,7 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
      * Create a new processing recipe, with recipe definitions provided by the
      * function
      */
-    protected <T extends ProcessingRecipe<?>> GeneratedRecipe create(ResourceLocation name, UnaryOperator<ProcessingRecipeBuilder<T>> transform) {
+    protected <T extends ProcessingRecipe<?>> GeneratedRecipe create(ResourceLocation name, Function<BlazingProcessingRecipeBuilder<T>, ProcessingRecipeBuilder<T>> transform) {
         return createWithDeferredId(() -> name, transform);
     }
 
@@ -106,7 +106,7 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
      * Create a new processing recipe, with recipe definitions provided by the
      * function
      */
-    <T extends ProcessingRecipe<?>> GeneratedRecipe create(String name, UnaryOperator<ProcessingRecipeBuilder<T>> transform) {
+    <T extends ProcessingRecipe<?>> GeneratedRecipe create(String name, Function<BlazingProcessingRecipeBuilder<T>, ProcessingRecipeBuilder<T>> transform) {
         return create(BlazingHot.asResource(name), transform);
     }
 
@@ -121,11 +121,6 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
             ResourceLocation registryName = RegisteredObjects.getKeyOrThrow(item.get().asItem());
             return BlazingHot.asResource(registryName.getPath() + suffix);
         };
-    }
-
-    @SuppressWarnings("unchecked")
-    protected static <T extends ProcessingRecipe<?>> IProcessingRecipeBuilder<T> custom(ProcessingRecipeBuilder<T> builder) {
-        return (IProcessingRecipeBuilder<T>) builder;
     }
 
     @Override

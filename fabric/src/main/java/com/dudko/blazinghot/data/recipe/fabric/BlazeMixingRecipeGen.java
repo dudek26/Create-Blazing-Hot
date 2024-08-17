@@ -18,7 +18,7 @@ import net.minecraft.world.level.material.Fluid;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.dudko.blazinghot.data.recipe.fabric.Ingredients.*;
+import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.*;
 import static com.dudko.blazinghot.util.ListUtil.compactLists;
 
 @SuppressWarnings({"UnstableApiUsage", "unchecked"})
@@ -39,18 +39,16 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
     GeneratedRecipe
             NETHER_LAVA =
             create("nether_lava",
-                    b -> custom(b).blazinghot$requireMultiple(netherEssence(), 2)
-                            .blazinghot$finish()
+                    b -> b.requireMultiple(netherEssence(), 2)
                             .require(lava(), FluidConstants.BLOCK / 10)
                             .requiresHeat(HeatCondition.SUPERHEATED)
                             .output(BlazingFluidsImpl.NETHER_LAVA.get(), FluidConstants.BLOCK / 10)),
             MOLTEN_BLAZE_GOLD =
                     create("molten_blaze_gold",
-                            b -> custom(b).blazinghot$requireMultiple(netherEssence(), 2)
-                                    .blazinghot$requireFuel(fuel(),
+                            b -> b.requireMultiple(netherEssence(), 2)
+                                    .requireFuel(fuel(),
                                             MultiFluids.fromBucketFraction(1, 20))
-                                    .blazinghot$convertMeltables()
-                                    .blazinghot$finish()
+                                    .convertMeltable()
                                     .require(moltenGold(),
                                             MultiFluids.Constants.INGOT.platformed())
                                     .requiresHeat(HeatCondition.SUPERHEATED)
@@ -60,10 +58,9 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 
     private GeneratedRecipe melting(String name, Ingredient ingredient, Fluid result, long amount, int duration, long fuelCost) {
         return create("melting/" + name,
-                (b) -> custom(b)
-                        .blazinghot$requireFuel(fuel(), fuelCost)
-                        .blazinghot$convertMeltables()
-                        .blazinghot$finish()
+                (b) -> b
+                        .requireFuel(fuel(), fuelCost)
+                        .convertMeltable()
                         .require(ingredient)
                         .duration(duration)
                         .requiresHeat(HeatCondition.SUPERHEATED)

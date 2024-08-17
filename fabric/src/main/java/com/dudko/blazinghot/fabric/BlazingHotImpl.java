@@ -4,9 +4,9 @@ import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.config.fabric.BlazingConfigsImpl;
 import com.dudko.blazinghot.data.fabric.BlazingLangGen;
 import com.dudko.blazinghot.data.fabric.BlazingTagGen;
-import com.dudko.blazinghot.data.recipe.fabric.BlazingCraftingRecipeGen;
+import com.dudko.blazinghot.data.recipe.fabric.CraftingRecipeGen;
 import com.dudko.blazinghot.data.recipe.fabric.BlazingProcessingRecipeGen;
-import com.dudko.blazinghot.data.recipe.fabric.BlazingSequencedAssemblyRecipeGen;
+import com.dudko.blazinghot.data.recipe.fabric.SequencedAssemblyRecipeGen;
 import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
 import com.dudko.blazinghot.registry.fabric.BlazingRecipeTypesImpl;
 import com.simibubi.create.foundation.data.CreateRegistrate;
@@ -40,8 +40,8 @@ public class BlazingHotImpl implements ModInitializer {
         REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, BlazingTagGen::generateFluidTags);
         REGISTRATE.addDataGenerator(ProviderType.LANG, BlazingLangGen::generate);
 
-        pack.addProvider(BlazingSequencedAssemblyRecipeGen::new);
-        pack.addProvider(BlazingCraftingRecipeGen::new);
+        pack.addProvider(SequencedAssemblyRecipeGen::new);
+        pack.addProvider(CraftingRecipeGen::new);
         pack.addProvider(BlazingProcessingRecipeGen::registerAll);
     }
 }
