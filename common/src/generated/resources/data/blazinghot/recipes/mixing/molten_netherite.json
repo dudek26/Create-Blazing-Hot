@@ -4,18 +4,18 @@
   "heatRequirement": "superheated",
   "ingredients": [
     {
-      "amount": 36000,
+      "amount": 9000,
       "fluidTag": "blazinghot:molten_gold"
     },
     {
-      "amount": 36000,
+      "amount": 9000,
       "fluidTag": "blazinghot:molten_ancient_debris"
     }
   ],
   "processingTime": 200,
   "results": [
     {
-      "amount": 9000,
+      "amount": 2250,
       "fluid": "blazinghot:molten_netherite"
     }
   ]

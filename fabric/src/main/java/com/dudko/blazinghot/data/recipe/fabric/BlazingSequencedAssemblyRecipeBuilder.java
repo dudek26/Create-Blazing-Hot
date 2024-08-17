@@ -1,38 +1,82 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
-import com.simibubi.create.AllRecipeTypes;
+import com.dudko.blazinghot.mixin.fabric.SequencedAssemblyRecipeBuilderAccessor;
+import com.dudko.blazinghot.multiloader.MultiFluids;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
-import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
-import com.simibubi.create.content.processing.sequenced.SequencedRecipe;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 public class BlazingSequencedAssemblyRecipeBuilder extends SequencedAssemblyRecipeBuilder {
 
-    private final SequencedAssemblyRecipe recipe;
-
     public BlazingSequencedAssemblyRecipeBuilder(ResourceLocation id) {
         super(id);
-        this.recipe = new SequencedAssemblyRecipe(id,
-                AllRecipeTypes.SEQUENCED_ASSEMBLY.getSerializer());
     }
 
-    public <T extends ProcessingRecipe<?>> SequencedAssemblyRecipeBuilder addCustomStep(ProcessingRecipeBuilder.ProcessingRecipeFactory<T> factory,
-                                                                                  Function<BlazingProcessingRecipeBuilder<T>, ProcessingRecipeBuilder<T>> builder) {
+    /**
+     * Converts droplets to milibuckets on Forge not by the 81:1 ratio but by {@link MultiFluids#MELTABLE_CONVERSION}
+     */
+    public <T extends ProcessingRecipe<?>> BlazingSequencedAssemblyRecipeBuilder addMeltableStep(ProcessingRecipeBuilder.ProcessingRecipeFactory<T> factory,
+                                                                                                 Function<BlazingProcessingRecipeBuilder<T>, ProcessingRecipeBuilder<T>> builder) {
+        SequencedAssemblyRecipeBuilderAccessor self = (SequencedAssemblyRecipeBuilderAccessor) this;
         BlazingProcessingRecipeBuilder<T> recipeBuilder =
                 new BlazingProcessingRecipeBuilder<>(factory, new ResourceLocation("dummy"));
-        Item placeHolder = recipe.getTransitionalItem()
+        Item placeHolder = self.getRecipe().getTransitionalItem()
                 .getItem();
-        recipe.getSequence()
-                .add(new SequencedRecipe<>(builder.apply((BlazingProcessingRecipeBuilder<T>) recipeBuilder.require(placeHolder)
+        self.getRecipe().getSequence()
+                .add(new BlazingSequencedRecipe<>(builder.apply((BlazingProcessingRecipeBuilder<T>) recipeBuilder.require(
+                                        placeHolder)
                                 .output(placeHolder))
-                        .build()));
+                        .build(), true));
         return this;
+    }
+
+    @Override
+    public BlazingSequencedAssemblyRecipeBuilder require(TagKey<Item> tag) {
+        return (BlazingSequencedAssemblyRecipeBuilder) super.require(tag);
+    }
+
+    @Override
+    public BlazingSequencedAssemblyRecipeBuilder require(ItemLike ingredient) {
+        return (BlazingSequencedAssemblyRecipeBuilder) super.require(ingredient);
+    }
+
+    @Override
+    public BlazingSequencedAssemblyRecipeBuilder require(Ingredient ingredient) {
+        return (BlazingSequencedAssemblyRecipeBuilder) super.require(ingredient);
+    }
+
+    @Override
+    public BlazingSequencedAssemblyRecipeBuilder transitionTo(ItemLike item) {
+        return (BlazingSequencedAssemblyRecipeBuilder) super.transitionTo(item);
+    }
+
+    @Override
+    public BlazingSequencedAssemblyRecipeBuilder addOutput(ItemLike item, float weight) {
+        return (BlazingSequencedAssemblyRecipeBuilder) super.addOutput(item, weight);
+    }
+
+    @Override
+    public BlazingSequencedAssemblyRecipeBuilder addOutput(ItemStack item, float weight) {
+        return (BlazingSequencedAssemblyRecipeBuilder) super.addOutput(item, weight);
+    }
+
+    @Override
+    public BlazingSequencedAssemblyRecipeBuilder loops(int loops) {
+        return (BlazingSequencedAssemblyRecipeBuilder) super.loops(loops);
+    }
+
+    @Override
+    public <T extends ProcessingRecipe<?>> BlazingSequencedAssemblyRecipeBuilder addStep(ProcessingRecipeBuilder.ProcessingRecipeFactory<T> factory, UnaryOperator<ProcessingRecipeBuilder<T>> builder) {
+        return (BlazingSequencedAssemblyRecipeBuilder) super.addStep(factory, builder);
     }
 
 }

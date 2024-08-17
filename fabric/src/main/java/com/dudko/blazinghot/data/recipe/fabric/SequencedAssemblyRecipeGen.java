@@ -55,14 +55,14 @@ public class SequencedAssemblyRecipeGen extends BlazingRecipeProvider {
     private GeneratedRecipe enchantedMetalApple(MoltenMetal metal, ItemLike input, ItemLike transition, ItemLike output) {
         return create("enchanted_" + foodMetalName(metal.name) + "_apple",
                 b -> b
-                        .addCustomStep(FillingRecipe::new,
-                                r -> r.convertMeltable().require(metal.fluidTag(), INGOT_COVER))
-                        .addStep(DeployerApplicationRecipe::new, r -> r.require(diamond()))
-                        .addStep(PressingRecipe::new, r -> r)
                         .require(input)
                         .transitionTo(transition)
                         .addOutput(output, 1)
-                        .loops(6));
+                        .loops(6)
+                        .addMeltableStep(FillingRecipe::new,
+                                r -> r.require(metal.fluidTag(), INGOT_COVER))
+                        .addStep(DeployerApplicationRecipe::new, r -> r.require(diamond()))
+                        .addStep(PressingRecipe::new, r -> r));
     }
 
     private GeneratedRecipe create(String name, Function<BlazingSequencedAssemblyRecipeBuilder, SequencedAssemblyRecipeBuilder> transform) {
