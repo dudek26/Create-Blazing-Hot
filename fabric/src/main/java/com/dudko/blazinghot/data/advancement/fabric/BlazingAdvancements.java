@@ -28,8 +28,8 @@ public class BlazingAdvancements implements DataProvider {
     public static final BlazingAdvancement START = null,
 
     ROOT = create("root", b -> b.icon(BlazingItems.BLAZE_GOLD_INGOT)
-            .title("Create: Hell Edition")
-            .description("Don't burn yourself!")
+            .title("Blazing Hot")
+            .description("Create: Hell Edition")
             .awardedForFree()
             .special(SILENT)),
 
