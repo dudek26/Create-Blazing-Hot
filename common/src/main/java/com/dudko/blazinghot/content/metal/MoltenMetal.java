@@ -141,6 +141,10 @@ public class MoltenMetal {
         return MultiRegistries.getFluidFromRegistry(fluidLocation());
     }
 
+    public Supplier<Item> bucket() {
+        return () -> fluid().get().getBucket();
+    }
+
     public TagKey<Fluid> fluidTag() {
         return CommonTags.fluidTagOf(moltenName(), INTERNAL);
     }

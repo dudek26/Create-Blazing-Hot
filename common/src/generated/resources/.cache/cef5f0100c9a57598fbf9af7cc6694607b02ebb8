@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-17T22:27:11.0070417	Create: Blazing Hot/Blazing Hot Processing Recipes
+// 1.20.1	2024-08-17T23:33:40.5352675	Create: Blazing Hot/Blazing Hot Processing Recipes
 74d13f5e5b1631af65cb96e4287c61644559300e data\blazinghot\recipes\compacting\molten_zinc.json
 bb15ae6403c62903676bd61cad483a0b8e3d7a24 data\blazinghot\recipes\filling\blaze_apple.json
 0ab74874e7ffb20d7f4636eab8b8d3000858c28a data\blazinghot\recipes\blaze_mixing\melting\brass_nuggets.json
@@ -49,8 +49,8 @@ ddb5f7717de4cecb6ad744073d4a912d615ff759 data\blazinghot\recipes\blaze_mixing\me
 af8bbbeef890688c90c3ca190d1c9acb704d9b3c data\blazinghot\recipes\compacting\molten_netherite.json
 03b7ef01dda6770f262d822721a14ece8cb9207c data\blazinghot\recipes\blaze_mixing\molten_blaze_gold.json
 fd11cdfdc578f44f64288115cd7a3181c1a97cac data\blazinghot\recipes\mixing\molten_brass.json
-3896dbc1f15f320d7759f149fcd38e74aaba1907 data\blazinghot\recipes\compacting\molten_brass.json
 06e12759a70c122ec039c6116263d69573539320 data\blazinghot\recipes\mixing\melting\blaze_gold_plates.json
+3896dbc1f15f320d7759f149fcd38e74aaba1907 data\blazinghot\recipes\compacting\molten_brass.json
 193f24af5f94b747f48c94e8f9b42c34ecd58a4f data\blazinghot\recipes\blaze_mixing\melting\netherite_scrap.json
 70d57214325b3cf83a0cf29d6edf6147c1d1e7da data\blazinghot\recipes\blaze_mixing\melting\blaze_gold_plates.json
 829dee7117cd26ede22d7b5c911dbd8a73684a50 data\blazinghot\recipes\mixing\melting\gold_ingots.json

@@ -2,6 +2,7 @@ package com.dudko.blazinghot.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.config.fabric.BlazingConfigsImpl;
+import com.dudko.blazinghot.data.advancement.fabric.BlazingAdvancements;
 import com.dudko.blazinghot.data.fabric.BlazingLangGen;
 import com.dudko.blazinghot.data.fabric.BlazingTagGen;
 import com.dudko.blazinghot.data.recipe.fabric.CraftingRecipeGen;
@@ -43,5 +44,6 @@ public class BlazingHotImpl implements ModInitializer {
         pack.addProvider(SequencedAssemblyRecipeGen::new);
         pack.addProvider(CraftingRecipeGen::new);
         pack.addProvider(BlazingProcessingRecipeGen::registerAll);
+        pack.addProvider(BlazingAdvancements::new);
     }
 }

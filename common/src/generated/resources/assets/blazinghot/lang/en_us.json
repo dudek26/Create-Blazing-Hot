@@ -1,4 +1,8 @@
 {
+  "advancement.blazinghot.molten_gold": "Flowing Riches",
+  "advancement.blazinghot.molten_gold.desc": "Obtain a bucket of Molten Gold",
+  "advancement.blazinghot.root": "Create: Blazing Hot",
+  "advancement.blazinghot.root.desc": "Don't burn yourself!",
   "blazinghot.recipe.blaze_automatic_brewing": "Blaze Automated Brewing",
   "blazinghot.recipe.blaze_automatic_shapeless": "Blaze Automated Shapeless Crafting",
   "blazinghot.recipe.blaze_mixing": "Blaze Mixing",
