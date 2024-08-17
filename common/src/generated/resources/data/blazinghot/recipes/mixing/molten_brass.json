@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "blazinghot:convertMeltable": true,
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "amount": 9000,
+      "fluidTag": "blazinghot:molten_copper"
+    },
+    {
+      "amount": 9000,
+      "fluidTag": "blazinghot:molten_zinc"
+    }
+  ],
+  "results": [
+    {
+      "amount": 18000,
+      "fluid": "blazinghot:molten_brass"
+    }
+  ]
+}

@@ -1,9 +1,11 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
+import com.dudko.blazinghot.content.metal.Form;
 import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.dudko.blazinghot.registry.BlazingItems;
+import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
@@ -17,7 +19,7 @@ import net.minecraft.world.level.material.Fluid;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.dudko.blazinghot.content.metal.MoltenMetal.BLAZE_GOLD;
+import static com.dudko.blazinghot.content.metal.MoltenMetal.*;
 import static com.dudko.blazinghot.data.recipe.fabric.Ingredients.*;
 import static com.dudko.blazinghot.util.ListUtil.compactLists;
 
@@ -60,7 +62,30 @@ public class BlazingMixingRecipeGen extends BlazingProcessingRecipeGen {
                                     .requiresHeat(HeatCondition.SUPERHEATED)
                                     .duration(200)
                                     .output(BLAZE_GOLD.fluid().get(),
-                                            Constants.ROD.platformed()));
+                                            Constants.ROD.platformed())),
+            MOLTEN_NETHERITE = create("molten_netherite",
+                    b -> custom(b).blazinghot$convertMeltables()
+                            .blazinghot$finish()
+                            .require(moltenGold(), Form.INGOT.amount)
+                            .require(moltenAncientDebris(), Form.INGOT.amount)
+                            .duration(200)
+                            .requiresHeat(HeatCondition.SUPERHEATED)
+                            .output(BlazingFluidsImpl.MOLTEN_METALS.getFluid(NETHERITE), Form.INGOT.amount / 4)),
+            MOLTEN_ANDESITE = create("molten_andesite",
+                    b -> custom(b).blazinghot$convertMeltables()
+                            .blazinghot$finish()
+                            .require(moltenIron(), Form.NUGGET.amount)
+                            .require(andesite())
+                            .requiresHeat(HeatCondition.HEATED)
+                            .output(BlazingFluidsImpl.MOLTEN_METALS.getFluid(ANDESITE), Form.ROD.amount * 3)),
+            MOLTEN_BRASS =
+                    create("molten_brass",
+                            b -> custom(b).blazinghot$convertMeltables()
+                                    .blazinghot$finish()
+                                    .require(moltenCopper(), Form.INGOT.amount)
+                                    .require(moltenZinc(), Form.INGOT.amount)
+                                    .requiresHeat(HeatCondition.HEATED)
+                                    .output(BlazingFluidsImpl.MOLTEN_METALS.getFluid(BRASS), Form.INGOT.amount * 2));
 
     @Override
     protected IRecipeTypeInfo getRecipeType() {

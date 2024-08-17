@@ -1,0 +1,20 @@
+{
+  "type": "create:mixing",
+  "blazinghot:convertMeltable": true,
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "item": "minecraft:andesite"
+    },
+    {
+      "amount": 1000,
+      "fluidTag": "blazinghot:molten_iron"
+    }
+  ],
+  "results": [
+    {
+      "amount": 13500,
+      "fluid": "blazinghot:molten_andesite"
+    }
+  ]
+}

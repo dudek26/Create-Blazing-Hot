@@ -15,8 +15,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
-import static com.dudko.blazinghot.content.metal.MoltenMetal.*;
 import static com.dudko.blazinghot.content.metal.Form.*;
+import static com.dudko.blazinghot.content.metal.MoltenMetal.*;
 import static com.dudko.blazinghot.registry.CommonTags.Namespace.INTERNAL;
 
 public class Ingredients {
@@ -36,11 +36,11 @@ public class Ingredients {
     }
 
     public static Item modStellarApple(String material) {
-        return BuiltInRegistries.ITEM.get(BlazingHot.asResource( "stellar_" + material + "_apple"));
+        return BuiltInRegistries.ITEM.get(BlazingHot.asResource("stellar_" + material + "_apple"));
     }
 
     public static Item modEnchantedApple(String material) {
-        return BuiltInRegistries.ITEM.get(BlazingHot.asResource( "enchanted_" + material + "_apple"));
+        return BuiltInRegistries.ITEM.get(BlazingHot.asResource("enchanted_" + material + "_apple"));
     }
 
     //    Kinetics
@@ -77,8 +77,20 @@ public class Ingredients {
         return IRON.fluidTag();
     }
 
+    public static TagKey<Fluid> moltenCopper() {
+        return COPPER.fluidTag();
+    }
+
+    public static TagKey<Fluid> moltenZinc() {
+        return ZINC.fluidTag();
+    }
+
     public static TagKey<Fluid> moltenBlazeGold() {
         return BLAZE_GOLD.fluidTag();
+    }
+
+    public static TagKey<Fluid> moltenAncientDebris() {
+        return ANCIENT_DEBRIS.fluidTag();
     }
 
     public static Fluid water() {
@@ -157,6 +169,10 @@ public class Ingredients {
 
     public static Item glowstone() {
         return Items.GLOWSTONE;
+    }
+
+    public static Item andesite() {
+        return Items.ANDESITE;
     }
 
     //    Metals

@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-16T18:49:30.2250564	Create: Blazing Hot/Registrate Provider for blazinghot [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2024-08-17T14:49:05.4525262	Create: Blazing Hot/Registrate Provider for blazinghot [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 3239307c791a0a067d40d51ba9250d9bd3183945 assets\blazinghot\models\item\brown_modern_lamp_panel.json
 6425006034193608e57e8ac2afa60a4d0df306b6 assets\blazinghot\blockstates\magenta_modern_lamp.json
 c0c8bb46043d259da55b8409171ffa59fc9fdf03 assets\blazinghot\blockstates\cyan_modern_lamp.json
@@ -279,8 +279,8 @@ be575f6df2bee12b490a13a1451364ee38086d71 assets\blazinghot\models\item\burning_s
 f8695690252f9825c15d236497c8d965dd4b03c0 data\blazinghot\recipes\crafting\modern_lamp\light_blue_modern_lamp_from_other_lamp.json
 2c1c204ce899f7d8afaae5f2ad8f80cd2ea53daf data\minecraft\tags\blocks\beacon_base_blocks.json
 428dcee40587baec51c4f2de84c0cd45deebedfc data\c\tags\items\blaze_gold_ingots.json
-20c22f13a49ef46ecfd0a85f0b9f54895cf97d8f data\minecraft\tags\blocks\mineable\axe.json
 2e85b6d659d52ce89a2712eb5354f9264910fd21 data\blazinghot\tags\items\iron_rods.json
+20c22f13a49ef46ecfd0a85f0b9f54895cf97d8f data\minecraft\tags\blocks\mineable\axe.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\forge\tags\items\nuggets\zinc.json
 3cc177af62fc52d6588b82b665a9b2f71fabfabb assets\blazinghot\blockstates\purple_modern_lamp_panel.json
 ac851907ca18c09691937b4d5c67a46c1c3f71cd assets\blazinghot\models\item\brown_modern_lamp.json
@@ -406,8 +406,8 @@ bf769d5c73fac2974cc405afc3079d3b58ccfd9f assets\blazinghot\blockstates\white_mod
 cb04f841b548586d0485eff5f692a8786dbffb64 assets\blazinghot\models\item\blaze_gold_sheet.json
 0545e1f0141d464219600beb0c996595555f1b62 data\blazinghot\advancements\recipes\redstone\crafting\modern_lamp_panel\yellow_modern_lamp_panel_from_other_lamp.json
 4e834918abb3fd65e6af6a22635edc01b0245801 data\blazinghot\advancements\recipes\redstone\crafting\modern_lamp_panel\blue_modern_lamp_panel_from_full_block.json
-1547dbedb847e68076b75e1d718680730053d561 data\blazinghot\recipes\crafting\modern_lamp\pink_modern_lamp_from_other_lamps.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\c\tags\items\iron_ingots.json
+1547dbedb847e68076b75e1d718680730053d561 data\blazinghot\recipes\crafting\modern_lamp\pink_modern_lamp_from_other_lamps.json
 9d9ca79d0346d4828cb340467d0fd622fcdeca3f data\blazinghot\recipes\crafting\modern_lamp\orange_modern_lamp_from_other_lamps.json
 2c1c204ce899f7d8afaae5f2ad8f80cd2ea53daf data\c\tags\blocks\storage_blocks.json
 b8605011fe6f6a1f9e3d50a3b293d5b9062093a8 data\blazinghot\loot_tables\blocks\orange_modern_lamp.json
