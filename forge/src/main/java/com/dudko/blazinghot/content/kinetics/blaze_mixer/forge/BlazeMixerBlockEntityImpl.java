@@ -3,9 +3,7 @@ package com.dudko.blazinghot.content.kinetics.blaze_mixer.forge;
 import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
-import com.dudko.blazinghot.data.advancement.BlazingAdvancement;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
-import com.dudko.blazinghot.multiloader.MultiFluids;
 import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.forge.BlazingRecipeTypesImpl;
@@ -18,7 +16,6 @@ import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
-import com.simibubi.create.foundation.advancement.AllAdvancements;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour.TankSegment;
@@ -80,7 +77,6 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
         behaviours.add(tank);
 
         super.addBehaviours(behaviours);
-        registerAwardables(behaviours, AllAdvancements.MIXER);
     }
 
     @NotNull
@@ -184,7 +180,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
                         newFuel.setAmount(getFluidStack().getAmount() - fuelCost);
                         tank.getPrimaryHandler().setFluid(newFuel);
                         applyBasinRecipe();
-                        award(BlazingAdvancements.BLAZE_MIXING);
+                        award(BlazingAdvancements.BLAZE_MIXER);
                         sendData();
                     }
                 }

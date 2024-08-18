@@ -3,14 +3,14 @@
   "criteria": {
     "0": {
       "conditions": {},
-      "trigger": "blazinghot:blaze_mixing_builtin"
+      "trigger": "blazinghot:blaze_mixer_builtin"
     }
   },
   "display": {
     "announce_to_chat": false,
     "description": {
       "color": "#DBA213",
-      "translate": "advancement.blazinghot.blaze_mixing.desc"
+      "translate": "advancement.blazinghot.blaze_mixer.desc"
     },
     "frame": "task",
     "hidden": false,
@@ -19,7 +19,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.blazinghot.blaze_mixing"
+      "translate": "advancement.blazinghot.blaze_mixer"
     }
   },
   "requirements": [

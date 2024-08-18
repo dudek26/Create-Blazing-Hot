@@ -25,7 +25,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:blaze_carrot"
+            "blazinghot:stellar_golden_apple"
           ]
         }
       },
@@ -35,7 +35,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:iron_apple"
+            "blazinghot:stellar_blaze_apple"
           ]
         }
       },
@@ -55,7 +55,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:enchanted_iron_apple"
+            "blazinghot:stellar_iron_apple"
           ]
         }
       },
@@ -65,7 +65,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:iron_carrot"
+            "blazinghot:enchanted_iron_apple"
           ]
         }
       },
@@ -75,7 +75,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:stellar_iron_apple"
+            "blazinghot:iron_apple"
           ]
         }
       },
@@ -85,7 +85,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:enchanted_blaze_apple"
+            "blazinghot:blaze_carrot"
           ]
         }
       },
@@ -95,7 +95,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:stellar_blaze_apple"
+            "blazinghot:blaze_apple"
           ]
         }
       },
@@ -105,7 +105,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:stellar_golden_apple"
+            "blazinghot:enchanted_blaze_apple"
           ]
         }
       },
@@ -115,7 +115,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:blaze_apple"
+            "blazinghot:iron_carrot"
           ]
         }
       },

@@ -18,6 +18,7 @@ import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.foundation.advancement.AllAdvancements;
+import com.simibubi.create.foundation.advancement.CreateAdvancement;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour.TankSegment;
@@ -82,7 +83,6 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
         behaviours.add(tank);
 
         super.addBehaviours(behaviours);
-        registerAwardables(behaviours, AllAdvancements.MIXER);
     }
 
     @NotNull
@@ -186,9 +186,11 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
                         runningTicks++;
                         processingTicks = -1;
                         blazeMixing = false;
-                        tank.getPrimaryTank().getTank().setFluid(getFluidStack().setAmount(fuelAmount() - fuelCost));
+                        FluidStack updatedFuel = getFluidStack();
+                        updatedFuel.shrink(fuelCost);
+                        tank.getPrimaryHandler().setFluid(updatedFuel);
                         applyBasinRecipe();
-                        award(BlazingAdvancements.BLAZE_MIXING);
+                        award(BlazingAdvancements.BLAZE_MIXER);
                         sendData();
                     }
                 }
@@ -196,6 +198,11 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
 
             if (runningTicks != 20) runningTicks++;
         }
+    }
+
+    @Override
+    protected Optional<CreateAdvancement> getProcessedRecipeTrigger() {
+        return Optional.of(AllAdvancements.MIXER);
     }
 
     public void renderFuelParticles() {
