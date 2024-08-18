@@ -6,6 +6,7 @@ import com.simibubi.create.foundation.advancement.CreateAdvancement;
 import com.simibubi.create.foundation.utility.Components;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.critereon.*;
@@ -18,7 +19,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
@@ -54,6 +57,8 @@ public class BlazingAdvancement {
             builtinTrigger = BlazingTriggers.addSimple(id + "_builtin");
             builder.addCriterion("0", builtinTrigger.instance());
         }
+
+        if(t.rewardsBuilder != null) builder.rewards(t.rewardsBuilder);
 
         builder.display(t.icon, Components.translatable(titleKey()),
                 Components.translatable(descriptionKey()).withStyle(s -> s.withColor(0xDBA213)),
@@ -138,6 +143,7 @@ public class BlazingAdvancement {
         private boolean externalTrigger;
         private int keyIndex;
         private ItemStack icon;
+        private AdvancementRewards.Builder rewardsBuilder;
 
         Builder special(TaskType type) {
             this.type = type;
@@ -172,6 +178,13 @@ public class BlazingAdvancement {
             return this;
         }
 
+        Builder rewards(UnaryOperator<AdvancementRewards.Builder> b) {
+            AdvancementRewards.Builder rewardsBuilder = new AdvancementRewards.Builder();
+            b.apply(rewardsBuilder);
+            this.rewardsBuilder = rewardsBuilder;
+            return this;
+        }
+
         Builder whenBlockPlaced(Block block) {
             return externalTrigger(ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(block));
         }
@@ -192,6 +205,17 @@ public class BlazingAdvancement {
         Builder whenItemCollected(TagKey<Item> tag) {
             return externalTrigger(InventoryChangeTrigger.TriggerInstance
                     .hasItems(simpleTagPredicate(tag)));
+        }
+
+        Builder whenItemsCollected(ItemLike... items) {
+            return whenItemsCollected(List.of(items));
+        }
+
+        Builder whenItemsCollected(Collection<ItemLike> items) {
+            for (ItemLike i : items) {
+                whenItemCollected(i);
+            }
+            return this;
         }
 
         Builder whenIconUsed() {

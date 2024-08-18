@@ -2,6 +2,7 @@ package com.dudko.blazinghot.content.metal;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.compat.Mods;
+import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.dudko.blazinghot.registry.CommonTags;
@@ -19,12 +20,10 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import static com.dudko.blazinghot.compat.Mods.*;
 import static com.dudko.blazinghot.registry.CommonTags.Namespace.INTERNAL;
@@ -141,8 +140,18 @@ public class MoltenMetal {
         return MultiRegistries.getFluidFromRegistry(fluidLocation());
     }
 
-    public Supplier<Item> bucket() {
+    public Supplier<ItemLike> bucket() {
         return () -> fluid().get().getBucket();
+    }
+
+    /**
+     * @see BlazingAdvancements#ALL_MOLTEN_METALS
+     */
+    public static Set<ItemLike> allBuckets(boolean includeCompat) {
+        return ALL_METALS.stream()
+                .filter(m -> m.mod.alwaysIncluded || includeCompat)
+                .map(m -> m.bucket().get())
+                .collect(Collectors.toSet());
     }
 
     public TagKey<Fluid> fluidTag() {

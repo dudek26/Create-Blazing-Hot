@@ -1,20 +1,16 @@
 {
-  "parent": "blazinghot:metal_carrot",
+  "parent": "blazinghot:molten_gold",
   "criteria": {
     "0": {
-      "conditions": {
-        "item": {
-          "tag": "blazinghot:metal_apples"
-        }
-      },
-      "trigger": "minecraft:consume_item"
+      "conditions": {},
+      "trigger": "blazinghot:metal_apple_spout_builtin"
     }
   },
   "display": {
     "announce_to_chat": false,
     "description": {
       "color": "#DBA213",
-      "translate": "advancement.blazinghot.metal_apple.desc"
+      "translate": "advancement.blazinghot.metal_apple_spout.desc"
     },
     "frame": "task",
     "hidden": false,
@@ -23,7 +19,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.blazinghot.metal_apple"
+      "translate": "advancement.blazinghot.metal_apple_spout"
     }
   },
   "requirements": [

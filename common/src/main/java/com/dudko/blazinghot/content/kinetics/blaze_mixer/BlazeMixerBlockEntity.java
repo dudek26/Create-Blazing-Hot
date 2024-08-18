@@ -3,7 +3,6 @@ package com.dudko.blazinghot.content.kinetics.blaze_mixer;
 import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.mixin_interfaces.IAdvancementBehaviour;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancement;
-import com.dudko.blazinghot.data.advancement.BlazingAdvancementBehaviour;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
@@ -86,7 +85,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
         registerAwardables(behaviours, AllAdvancements.MIXER);
-        registerAwardables(behaviours, BlazingAdvancements.BLAZE_MIXER);
+        registerAwardables(behaviours, BlazingAdvancements.BLAZE_MIXER, BlazingAdvancements.MOLTEN_GOLD);
     }
 
     public float getRenderedHeadRotationSpeed(float partialTicks) {
@@ -227,10 +226,6 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
     @Override
     protected Optional<CreateAdvancement> getProcessedRecipeTrigger() {
         return Optional.of(AllAdvancements.MIXER);
-    }
-
-    protected Optional<BlazingAdvancement> getBlazingProcessedRecipeTrigger() {
-        return Optional.of(BlazingAdvancements.BLAZE_MIXER);
     }
 
     @Override

@@ -2,16 +2,8 @@
   "parent": "blazinghot:nether_essence",
   "criteria": {
     "0": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "blazinghot:molten_gold_bucket"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
+      "conditions": {},
+      "trigger": "blazinghot:molten_gold_builtin"
     }
   },
   "display": {

@@ -3,27 +3,31 @@
   "criteria": {
     "0": {
       "conditions": {
-        "item": {
-          "tag": "blazinghot:metal_carrots"
-        }
+        "items": [
+          {
+            "items": [
+              "blazinghot:blaze_gold_ingot"
+            ]
+          }
+        ]
       },
-      "trigger": "minecraft:consume_item"
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "display": {
     "announce_to_chat": false,
     "description": {
       "color": "#DBA213",
-      "translate": "advancement.blazinghot.metal_carrot.desc"
+      "translate": "advancement.blazinghot.blaze_gold_0.desc"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "blazinghot:iron_carrot"
+      "item": "blazinghot:blaze_gold_ingot"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.blazinghot.metal_carrot"
+      "translate": "advancement.blazinghot.blaze_gold_0"
     }
   },
   "requirements": [

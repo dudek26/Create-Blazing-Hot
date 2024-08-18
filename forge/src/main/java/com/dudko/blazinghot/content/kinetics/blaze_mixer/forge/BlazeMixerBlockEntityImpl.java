@@ -3,6 +3,9 @@ package com.dudko.blazinghot.content.kinetics.blaze_mixer.forge;
 import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
+import com.dudko.blazinghot.content.metal.MoltenMetal;
+import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
+import com.dudko.blazinghot.multiloader.MultiFluids;
 import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.forge.BlazingRecipeTypesImpl;
@@ -174,12 +177,16 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
                     if (processingTicks == 0) {
                         runningTicks++;
                         processingTicks = -1;
+                        award(BlazingAdvancements.BLAZE_MIXER);
                         blazeMixing = false;
                         FluidStack updatedFuel = getFluidStack().copy();
                         updatedFuel.shrink(fuelCost);
                         tank.getPrimaryHandler().setFluid(updatedFuel);
+                        if (currentRecipe instanceof ProcessingRecipe<?> recipe &&
+                                MultiFluids.recipeResultContains(recipe, MoltenMetal.GOLD.fluidTag())) {
+                            award(BlazingAdvancements.MOLTEN_GOLD);
+                        }
                         applyBasinRecipe();
-                        getBlazingProcessedRecipeTrigger().ifPresent(this::award);
                         sendData();
                     }
                 }

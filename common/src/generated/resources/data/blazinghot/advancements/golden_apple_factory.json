@@ -1,25 +1,25 @@
 {
-  "parent": "blazinghot:blaze_gold_0",
+  "parent": "blazinghot:metal_apple_spout",
   "criteria": {
     "0": {
       "conditions": {},
-      "trigger": "blazinghot:blaze_casing_builtin"
+      "trigger": "blazinghot:golden_apple_factory_builtin"
     }
   },
   "display": {
     "announce_to_chat": true,
     "description": {
       "color": "#DBA213",
-      "translate": "advancement.blazinghot.blaze_casing.desc"
+      "translate": "advancement.blazinghot.golden_apple_factory.desc"
     },
-    "frame": "task",
+    "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "blazinghot:blaze_casing"
+      "item": "minecraft:golden_apple"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.blazinghot.blaze_casing"
+      "translate": "advancement.blazinghot.golden_apple_factory"
     }
   },
   "requirements": [

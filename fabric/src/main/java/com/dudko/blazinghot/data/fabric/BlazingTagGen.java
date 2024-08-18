@@ -91,9 +91,9 @@ public class BlazingTagGen {
                         Items.TWISTING_VINES,
                         Items.NETHER_SPROUTS);
 
-        prov.addTag(BlazingTags.Items.VANILLA_METAL_CARROTS.tag).add(Items.GOLDEN_CARROT);
-        prov.addTag(BlazingTags.Items.VANILLA_METAL_APPLES.tag).add(Items.GOLDEN_APPLE);
-        prov.addTag(BlazingTags.Items.VANILLA_METAL_ENCHANTED_APPLES.tag).add(Items.ENCHANTED_GOLDEN_APPLE);
+        prov.addTag(BlazingTags.Items.METAL_CARROTS.tag).add(Items.GOLDEN_CARROT);
+        prov.addTag(BlazingTags.Items.METAL_APPLES.tag).add(Items.GOLDEN_APPLE);
+        prov.addTag(BlazingTags.Items.ENCHANTED_METAL_APPLES.tag).add(Items.ENCHANTED_GOLDEN_APPLE);
 
         for (BlazingTags.Items tag : BlazingTags.Items.values()) {
             if (tag.alwaysDatagen) tagAppender(prov, tag);

@@ -1,8 +1,11 @@
 package com.dudko.blazinghot.multiloader;
 
 import com.google.gson.JsonObject;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
+import net.minecraft.world.level.material.Fluid;
 
 import java.util.Arrays;
 
@@ -95,5 +98,8 @@ public class MultiFluids {
         throw new AssertionError();
     }
 
-
+    @ExpectPlatform
+    public static boolean recipeResultContains(ProcessingRecipe<?> r, TagKey<Fluid> fluid) {
+        return true;
+    }
 }

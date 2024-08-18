@@ -1,0 +1,31 @@
+{
+  "parent": "blazinghot:metal_apple_spout",
+  "criteria": {
+    "0": {
+      "conditions": {},
+      "trigger": "blazinghot:extinguishing_food_save_0_builtin"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.blazinghot.extinguishing_food_save_0.desc"
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "item": "blazinghot:blaze_carrot"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.blazinghot.extinguishing_food_save_0"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

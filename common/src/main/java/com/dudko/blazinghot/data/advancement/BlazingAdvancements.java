@@ -12,7 +12,6 @@ import java.util.function.UnaryOperator;
 import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
-import com.dudko.blazinghot.registry.BlazingTags;
 import com.google.common.collect.Sets;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -26,6 +25,7 @@ import net.minecraft.world.item.Items;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import static com.dudko.blazinghot.content.metal.MoltenMetal.allBuckets;
 import static com.dudko.blazinghot.data.advancement.BlazingAdvancement.TaskType.*;
 
 @SuppressWarnings("unused")
@@ -36,7 +36,7 @@ public class BlazingAdvancements implements DataProvider {
     public static final List<BlazingAdvancement> ENTRIES = new ArrayList<>();
     public static final BlazingAdvancement START = null,
 
-    ROOT = create("root", b -> b.icon(BlazingItems.BLAZE_GOLD_INGOT)
+    ROOT = create("root", b -> b.icon(BlazingItems.BLAZE_WHISK)
             .title("Blazing Hot")
             .description("Create: Hell Edition")
             .awardedForFree()
@@ -58,15 +58,50 @@ public class BlazingAdvancements implements DataProvider {
 
     MOLTEN_GOLD = create("molten_gold", b -> b.icon(MoltenMetal.GOLD.bucket().get())
             .title("Flowing Riches")
-            .description("Obtain a bucket of Molten Gold")
-            .after(NETHER_ESSENCE)
-            .whenIconCollected()),
+            .description("Melt Gold in Mixer")
+            .after(NETHER_ESSENCE)),
+
+    // All Molten Metals
+
+    ALL_MOLTEN_METALS = create("all_molten_metals_00", b -> b.icon(MoltenMetal.NETHERITE.bucket().get())
+            .title("Tinkers' Construct")
+            .description("Have a bucket of every non-compat molten metal in your inventory at the same time.")
+            .after(MOLTEN_GOLD)
+            .special(CHALLENGE)
+            .whenItemsCollected(allBuckets(false))),
+
+    // Metal Food
+
+    METAL_APPLE_SPOUT = create("metal_apple_spout", b -> b.icon(BlazingItems.IRON_APPLE)
+            .title("Budget Snacks")
+            .description("Obtain any Metal Apple by filling regular Apple in Spout")
+            .after(MOLTEN_GOLD)),
+
+    GOLDEN_APPLE_FACTORY = create("golden_apple_factory", b -> b.icon(Items.GOLDEN_APPLE)
+            .title("Gold Addiction")
+            .description("Produce 64 Golden Apples with one Spout")
+            .special(EXPERT)
+            .after(METAL_APPLE_SPOUT)),
+
+    ALL_METAL_FOOD = create("all_metal_food", b -> b.icon(Items.ENCHANTED_GOLDEN_APPLE)
+            .title("A Heavy Diet")
+            .description("Eat every Metal Apple and Carrot")
+            .after(GOLDEN_APPLE_FACTORY)
+            .special(CHALLENGE)
+            .rewards(r -> r.addExperience(10))
+            .whenAllUsed(BlazingItems.METAL_FOOD)),
+
+    EXTINGUISHING_FOOD_SAVE = create("extinguishing_food_save_0", b -> b.icon(BlazingItems.BLAZE_CARROT)
+            .title("Last Resort")
+            .description("Save yourself from burning down by eating any extinguishing food when under 2 hearts of health.")
+            .after(METAL_APPLE_SPOUT)
+            .special(SECRET)),
 
     // Blaze Gold
 
-    BLAZE_GOLD = create("blaze_gold", b -> b.icon(BlazingItems.BLAZE_GOLD_INGOT)
+    BLAZE_GOLD = create("blaze_gold_0", b -> b.icon(BlazingItems.BLAZE_GOLD_INGOT)
             .title("Hot Treasure")
-            .description("Mix Molten Gold and Nether Essence together to get Molten Blaze Gold, and then compact it")
+            .description("Mix Molten Gold and Nether Essence together, and then compact them")
             .after(MOLTEN_GOLD)
             .whenIconCollected()),
 
@@ -74,47 +109,21 @@ public class BlazingAdvancements implements DataProvider {
 
     BLAZE_CASING = create("blaze_casing", b -> b.icon(BlazingBlocks.BLAZE_CASING)
             .title("The Blaze Age")
-            .description("Obtain a Blaze Casing")
+            .description("Use Blaze Gold Sheets to upgrade your Copper Casings")
             .special(NOISY)
             .after(BLAZE_GOLD)),
 
     BLAZE_MIXER = create("blaze_mixer", b -> b.icon(BlazingBlocks.BLAZE_MIXER)
-            .title("A New Era of Mixing")
-            .description("Use a fueled Blaze Mixer to process a recipe")
+            .title("New Era of Mixing")
+            .description("Combine ingredients in a Blaze Mixer")
             .after(BLAZE_CASING)),
 
-    // Metal Food
+    BLAZE_MIXER_MAX = create("blaze_mixer_max", b -> b.icon(BlazingBlocks.BLAZE_MIXER)
+            .title("Fast and Furious")
+            .description("Run a fully fueled Blaze Mixer at max speed")
+            .after(BLAZE_MIXER)
+            .special(SECRET)),
 
-    METAL_CARROT = create("metal_carrot", b -> b.icon(BlazingItems.IRON_CARROT)
-            .title("Shiny Snacks")
-            .description("Obtain a new Metal Carrot")
-            .after(MOLTEN_GOLD)
-            .whenItemCollected(BlazingTags.Items.METAL_CARROTS.tag)),
-
-    METAL_APPLE = create("metal_apple", b -> b.icon(BlazingItems.IRON_APPLE)
-            .title("Rich Apples")
-            .description("Obtain any of the new Metal Apples")
-            .after(METAL_CARROT)
-            .whenItemCollected(BlazingTags.Items.METAL_APPLES.tag)),
-
-    STELLAR_METAL_APPLE = create("stellar_metal_apple", b -> b.icon(BlazingItems.STELLAR_IRON_APPLE)
-            .title("Fruits from the Stars")
-            .description("Obtain any Stellar Metal Apple")
-            .after(METAL_APPLE)
-            .whenItemCollected(BlazingTags.Items.STELLAR_METAL_APPLES.tag)),
-
-    ENCHANTED_METAL_APPLE = create("enchanted_metal_apple", b -> b.icon(BlazingItems.ENCHANTED_IRON_APPLE)
-            .title("Magic Food")
-            .description("Obtain any of the new Enchanted Metal Apples")
-            .after(STELLAR_METAL_APPLE)
-            .whenItemCollected(BlazingTags.Items.ENCHANTED_METAL_APPLES.tag)),
-
-    ALL_METAL_FOOD = create("all_metal_food", b -> b.icon(Items.ENCHANTED_GOLDEN_APPLE)
-            .title("A Heavy Diet")
-            .description("Eat every metal food")
-            .after(ENCHANTED_METAL_APPLE)
-            .special(CHALLENGE)
-            .whenAllUsed(BlazingItems.METAL_FOOD)),
 
     //
     END = null;

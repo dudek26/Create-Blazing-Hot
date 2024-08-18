@@ -160,11 +160,8 @@ public class BlazingTags {
         METAL_CARROTS,
         METAL_APPLES,
         STELLAR_METAL_APPLES,
-        ENCHANTED_METAL_APPLES,
+        ENCHANTED_METAL_APPLES;
 
-        VANILLA_METAL_CARROTS,
-        VANILLA_METAL_APPLES,
-        VANILLA_METAL_ENCHANTED_APPLES;
 
         public final TagKey<Item> tag;
         public final boolean alwaysDatagen;

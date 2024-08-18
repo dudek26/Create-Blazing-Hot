@@ -1,9 +1,11 @@
 package com.dudko.blazinghot.content.item;
 
 import com.dudko.blazinghot.config.BlazingConfigs;
+import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -43,7 +45,14 @@ public class BlazingFoodItem extends Item {
 
     @Override
     public @NotNull ItemStack finishUsingItem(@NotNull ItemStack stack, @NotNull Level level, LivingEntity livingEntity) {
-        if (extinguishing) livingEntity.extinguishFire();
+        if (extinguishing) {
+            if (livingEntity instanceof Player player && !level.isClientSide() &&
+                    livingEntity.getRemainingFireTicks() > 0 &&
+                    livingEntity.getHealth() < 4) {
+                BlazingAdvancements.EXTINGUISHING_FOOD_SAVE.awardTo(player);
+            }
+            livingEntity.extinguishFire();
+        }
         return super.finishUsingItem(stack, level, livingEntity);
     }
 
