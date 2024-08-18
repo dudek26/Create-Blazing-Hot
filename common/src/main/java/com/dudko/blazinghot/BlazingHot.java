@@ -1,6 +1,8 @@
 package com.dudko.blazinghot;
 
 import com.dudko.blazinghot.content.metal.MoltenMetal;
+import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
+import com.dudko.blazinghot.data.advancement.BlazingTriggers;
 import com.dudko.blazinghot.registry.*;
 import com.simibubi.create.Create;
 import com.simibubi.create.foundation.data.CreateRegistrate;
@@ -41,6 +43,9 @@ public class BlazingHot {
         BlazingRecipeTypes.register();
 
         finalizeRegistrate();
+
+        BlazingAdvancements.register();
+        BlazingTriggers.register();
     }
 
     public static ResourceLocation asResource(String path) {

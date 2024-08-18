@@ -1,0 +1,35 @@
+{
+  "parent": "blazinghot:metal_carrot",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "item": {
+          "tag": "blazinghot:metal_apples"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.blazinghot.metal_apple.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "blazinghot:iron_apple"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.blazinghot.metal_apple"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

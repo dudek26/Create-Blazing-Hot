@@ -1,0 +1,39 @@
+{
+  "parent": "blazinghot:root",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blazinghot:nether_compound"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.blazinghot.nether_compound.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "blazinghot:nether_compound"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.blazinghot.nether_compound"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

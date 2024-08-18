@@ -1,7 +1,7 @@
 package com.dudko.blazinghot.data.fabric;
 
 import com.dudko.blazinghot.content.metal.MoltenMetal;
-import com.dudko.blazinghot.data.advancement.fabric.BlazingAdvancements;
+import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.google.gson.JsonElement;

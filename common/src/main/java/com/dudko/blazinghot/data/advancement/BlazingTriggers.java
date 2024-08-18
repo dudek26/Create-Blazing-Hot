@@ -1,7 +1,5 @@
-package com.dudko.blazinghot.data.advancement.fabric;
+package com.dudko.blazinghot.data.advancement;
 
-import com.simibubi.create.foundation.advancement.CriterionTriggerBase;
-import com.simibubi.create.foundation.advancement.SimpleCreateTrigger;
 import net.minecraft.advancements.CriteriaTriggers;
 
 import java.util.LinkedList;

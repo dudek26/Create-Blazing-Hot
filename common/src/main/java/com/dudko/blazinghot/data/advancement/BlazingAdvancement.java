@@ -1,7 +1,8 @@
-package com.dudko.blazinghot.data.advancement.fabric;
+package com.dudko.blazinghot.data.advancement;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.simibubi.create.Create;
+import com.simibubi.create.foundation.advancement.CreateAdvancement;
 import com.simibubi.create.foundation.utility.Components;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import net.minecraft.advancements.Advancement;
@@ -17,6 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
+import java.util.Collection;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
@@ -30,13 +32,13 @@ public class BlazingAdvancement {
     static final String LANG = "advancement." + BlazingHot.ID + ".";
     static final String SECRET_SUFFIX = "\n\u00A77(Hidden Advancement)";
 
-    private Advancement.Builder builder;
+    private final Advancement.Builder builder;
     private SimpleBlazingTrigger builtinTrigger;
     private BlazingAdvancement parent;
 
     Advancement datagenResult;
 
-    private String id;
+    private final String id;
     private String title;
     private String description;
 
@@ -71,6 +73,7 @@ public class BlazingAdvancement {
         return titleKey() + ".desc";
     }
 
+    @SuppressWarnings("DataFlowIssue")
     public boolean isAlreadyAwardedTo(Player player) {
         if (!(player instanceof ServerPlayer sp))
             return true;
@@ -112,8 +115,7 @@ public class BlazingAdvancement {
         NOISY(FrameType.TASK, true, true, false),
         EXPERT(FrameType.GOAL, true, true, false),
         SECRET(FrameType.GOAL, true, true, true),
-
-        ;
+        CHALLENGE(FrameType.CHALLENGE, true, true, false);
 
         private final FrameType frame;
         private final boolean toast;
@@ -128,6 +130,7 @@ public class BlazingAdvancement {
         }
     }
 
+    @SuppressWarnings("SameParameterValue")
     class Builder {
 
         private TaskType
@@ -186,14 +189,47 @@ public class BlazingAdvancement {
             return externalTrigger(InventoryChangeTrigger.TriggerInstance.hasItems(itemProvider));
         }
 
-       Builder whenItemCollected(TagKey<Item> tag) {
+        Builder whenItemCollected(TagKey<Item> tag) {
             return externalTrigger(InventoryChangeTrigger.TriggerInstance
-                    .hasItems(new ItemPredicate(tag, null, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY,
-                            EnchantmentPredicate.NONE, EnchantmentPredicate.NONE, null, NbtPredicate.ANY)));
+                    .hasItems(simpleTagPredicate(tag)));
+        }
+
+        Builder whenIconUsed() {
+            return whenUsed(icon.getItem());
+        }
+
+        Builder whenUsed(ItemLike itemProvider) {
+            return externalTrigger(ConsumeItemTrigger.TriggerInstance.usedItem(itemProvider));
+        }
+
+        Builder whenUsed(ItemProviderEntry<?> item) {
+            return whenUsed(item.asItem());
+        }
+
+        Builder whenUsed(TagKey<Item> tag) {
+            return externalTrigger(ConsumeItemTrigger.TriggerInstance.usedItem(simpleTagPredicate(tag)));
+        }
+
+        Builder whenAllUsed(Collection<ItemLike> items) {
+            return whenAllUsed(items.toArray(ItemLike[]::new));
+        }
+
+        Builder whenAllUsed(ItemLike[] items) {
+            for (ItemLike item : items) {
+                whenUsed(item);
+            }
+            return this;
+        }
+
+        Builder whenAllUsed(ItemProviderEntry<?>[] items) {
+            for (ItemProviderEntry<?> item : items) {
+                whenUsed(item);
+            }
+            return this;
         }
 
         Builder awardedForFree() {
-            return externalTrigger(InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[] {}));
+            return externalTrigger(InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[]{}));
         }
 
         Builder externalTrigger(CriterionTriggerInstance trigger) {
@@ -201,6 +237,11 @@ public class BlazingAdvancement {
             externalTrigger = true;
             keyIndex++;
             return this;
+        }
+
+        private static ItemPredicate simpleTagPredicate(TagKey<Item> tag) {
+            return new ItemPredicate(tag, null, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY,
+                    EnchantmentPredicate.NONE, EnchantmentPredicate.NONE, null, NbtPredicate.ANY);
         }
 
     }

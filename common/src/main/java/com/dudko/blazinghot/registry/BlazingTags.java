@@ -155,7 +155,16 @@ public class BlazingTags {
     public enum Items {
         MODERN_LAMPS,
         MODERN_LAMP_PANELS,
-        NETHER_FLORA;
+        NETHER_FLORA,
+
+        METAL_CARROTS,
+        METAL_APPLES,
+        STELLAR_METAL_APPLES,
+        ENCHANTED_METAL_APPLES,
+
+        VANILLA_METAL_CARROTS,
+        VANILLA_METAL_APPLES,
+        VANILLA_METAL_ENCHANTED_APPLES;
 
         public final TagKey<Item> tag;
         public final boolean alwaysDatagen;

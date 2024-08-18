@@ -1,4 +1,4 @@
-package com.dudko.blazinghot.data.advancement.fabric;
+package com.dudko.blazinghot.data.advancement;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -10,7 +10,9 @@ import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 
 import com.dudko.blazinghot.content.metal.MoltenMetal;
+import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
+import com.dudko.blazinghot.registry.BlazingTags;
 import com.google.common.collect.Sets;
 
 import net.minecraft.advancements.Advancement;
@@ -19,8 +21,9 @@ import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.PackOutput.PathProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 
-import static com.dudko.blazinghot.data.advancement.fabric.BlazingAdvancement.TaskType.*;
+import static com.dudko.blazinghot.data.advancement.BlazingAdvancement.TaskType.*;
 
 public class BlazingAdvancements implements DataProvider {
 
@@ -33,12 +36,18 @@ public class BlazingAdvancements implements DataProvider {
             .awardedForFree()
             .special(SILENT)),
 
-    //
+    // The beginning
+
+    NETHER_COMPOUND = create("nether_compound", b -> b.icon(BlazingItems.NETHER_COMPOUND)
+            .title("Mixing the Nether")
+            .description("Obtain a Nether Compound")
+            .after(ROOT)
+            .whenIconCollected()),
 
     NETHER_ESSENCE = create("nether_essence", b -> b.icon(BlazingItems.NETHER_ESSENCE)
             .title("Synthetic Hell")
             .description("Haunt Nether Compound into Nether Essence")
-            .after(ROOT)
+            .after(NETHER_COMPOUND)
             .whenIconCollected()),
 
     MOLTEN_GOLD = create("molten_gold", b -> b.icon(MoltenMetal.GOLD.bucket().get())
@@ -46,6 +55,54 @@ public class BlazingAdvancements implements DataProvider {
             .description("Obtain a bucket of Molten Gold")
             .after(NETHER_ESSENCE)
             .whenIconCollected()),
+
+    // Blaze Gold
+
+    BLAZE_GOLD = create("blaze_gold", b -> b.icon(BlazingItems.BLAZE_GOLD_INGOT)
+            .title("Hot Treasure")
+            .description("Mix Molten Gold and Nether Essence together to get Molten Blaze Gold, and then compact it")
+            .after(MOLTEN_GOLD)
+            .whenIconCollected()),
+
+    // Blaze Gold - Machinery
+
+    BLAZE_CASING = create("blaze_casing", b -> b.icon(BlazingBlocks.BLAZE_CASING)
+            .title("The Blaze Age")
+            .description("Obtain a Blaze Casing")
+            .after(BLAZE_GOLD)),
+
+    // Metal Food
+
+    METAL_CARROT = create("metal_carrot", b -> b.icon(BlazingItems.IRON_CARROT)
+            .title("Shiny Snacks")
+            .description("Obtain a new Metal Carrot")
+            .after(MOLTEN_GOLD)
+            .whenUsed(BlazingTags.Items.METAL_CARROTS.tag)),
+
+    METAL_APPLE = create("metal_apple", b -> b.icon(BlazingItems.IRON_APPLE)
+            .title("Rich Apples")
+            .description("Obtain any of the new Metal Apples")
+            .after(METAL_CARROT)
+            .whenUsed(BlazingTags.Items.METAL_APPLES.tag)),
+
+    STELLAR_METAL_APPLE = create("stellar_metal_apple", b -> b.icon(BlazingItems.STELLAR_IRON_APPLE)
+            .title("Fruits from the Stars")
+            .description("Obtain any Stellar Metal Apple")
+            .after(METAL_APPLE)
+            .whenUsed(BlazingTags.Items.STELLAR_METAL_APPLES.tag)),
+
+    ENCHANTED_METAL_APPLE = create("enchanted_metal_apple", b -> b.icon(BlazingItems.ENCHANTED_IRON_APPLE)
+            .title("Magic Food")
+            .description("Obtain any of the new Enchanted Metal Apples")
+            .after(STELLAR_METAL_APPLE)
+            .whenUsed(BlazingTags.Items.ENCHANTED_METAL_APPLES.tag)),
+
+    ALL_METAL_FOOD = create("all_metal_food", b -> b.icon(Items.ENCHANTED_GOLDEN_APPLE)
+            .title("A Heavy Diet")
+            .description("Eat every metal food")
+            .after(ENCHANTED_METAL_APPLE)
+            .special(CHALLENGE)
+            .whenAllUsed(BlazingItems.METAL_FOOD)),
 
     //
     END = null;

@@ -1,13 +1,9 @@
-package com.dudko.blazinghot.data.advancement.fabric;
+package com.dudko.blazinghot.data.advancement;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.google.gson.JsonObject;
 import com.simibubi.create.foundation.advancement.CriterionTriggerBase;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.advancements.CriterionTriggerInstance;
-import net.minecraft.advancements.critereon.DeserializationContext;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

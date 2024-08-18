@@ -1,7 +1,6 @@
-package com.dudko.blazinghot.data.advancement.fabric;
+package com.dudko.blazinghot.data.advancement;
 
 import com.google.gson.JsonObject;
-import com.simibubi.create.foundation.advancement.CriterionTriggerBase;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.DeserializationContext;

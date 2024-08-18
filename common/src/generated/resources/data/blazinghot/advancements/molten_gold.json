@@ -1,0 +1,39 @@
+{
+  "parent": "blazinghot:nether_essence",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blazinghot:molten_gold_bucket"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.blazinghot.molten_gold.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "blazinghot:molten_gold_bucket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.blazinghot.molten_gold"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -29,6 +30,15 @@ public class ListUtil {
             addIfAbsent(list, element);
         }
         return list;
+    }
+
+    public static <T> boolean containsAny(List<T> list, Collection<T> elements) {
+        return elements.stream().anyMatch(list::contains);
+    }
+
+    @SafeVarargs
+    public static <T> boolean containsAny(List<T> list, T... elements) {
+        return Arrays.stream(elements).anyMatch(list::contains);
     }
 
 }
