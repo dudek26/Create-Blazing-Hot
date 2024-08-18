@@ -6,8 +6,12 @@
   "client": [
   ],
   "mixins": [
+    "AdvancementBehaviourMixin",
+    "DeployerBlockEntityMixin",
     "ItemMixin",
+    "ManualApplicationRecipeMixin",
     "MechanicalMixerBlockEntityMixin",
+    "SmartBlockEntityMixin",
     "accessor.BasinOperatingBlockEntityAccessor"
   ],
   "injectors": {

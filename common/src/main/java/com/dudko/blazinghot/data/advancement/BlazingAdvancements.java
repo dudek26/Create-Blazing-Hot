@@ -71,6 +71,11 @@ public class BlazingAdvancements implements DataProvider {
             .description("Obtain a Blaze Casing")
             .after(BLAZE_GOLD)),
 
+    BLAZE_MIXING = create("blaze_mixing", b -> b.icon(BlazingBlocks.BLAZE_MIXER)
+            .title("A New Era of Mixing")
+            .description("Use the Blaze Mixer to process a recipe")
+            .after(BLAZE_CASING)),
+
     // Metal Food
 
     METAL_CARROT = create("metal_carrot", b -> b.icon(BlazingItems.IRON_CARROT)

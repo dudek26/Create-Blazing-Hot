@@ -1,6 +1,8 @@
 package com.dudko.blazinghot.content.kinetics.blaze_mixer;
 
 import com.dudko.blazinghot.config.BlazingConfigs;
+import com.dudko.blazinghot.data.advancement.BlazingAdvancement;
+import com.dudko.blazinghot.mixin_interfaces.ISmartBlockEntity;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
@@ -232,5 +234,13 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
         addStressImpactStats(tooltip, stressAtBase);
 
         return true;
+    }
+
+    public void awardIfNear(BlazingAdvancement advancement, int range) {
+        ((ISmartBlockEntity) this).blazinghot$awardIfNear(advancement, range);
+    }
+
+    public void award(BlazingAdvancement advancement) {
+        ((ISmartBlockEntity) this).blazinghot$award(advancement);
     }
 }

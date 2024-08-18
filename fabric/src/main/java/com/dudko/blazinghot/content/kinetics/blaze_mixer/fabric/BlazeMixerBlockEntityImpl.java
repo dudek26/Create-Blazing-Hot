@@ -3,6 +3,7 @@ package com.dudko.blazinghot.content.kinetics.blaze_mixer.fabric;
 import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
+import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.dudko.blazinghot.registry.BlazingTags;
@@ -187,6 +188,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
                         blazeMixing = false;
                         tank.getPrimaryTank().getTank().setFluid(getFluidStack().setAmount(fuelAmount() - fuelCost));
                         applyBasinRecipe();
+                        award(BlazingAdvancements.BLAZE_MIXING);
                         sendData();
                     }
                 }
