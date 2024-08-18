@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ManualApplicationRecipeMixin {
 
     @Inject(method = "awardAdvancements", at=@At(value = "RETURN", ordinal = 0))
-    private static void award(Player player, BlockState placed, CallbackInfo ci) {
+    private static void blazinghot$award(Player player, BlockState placed, CallbackInfo ci) {
 
         BlazingAdvancement advancement;
         if (BlazingBlocks.BLAZE_CASING.has(placed)) {

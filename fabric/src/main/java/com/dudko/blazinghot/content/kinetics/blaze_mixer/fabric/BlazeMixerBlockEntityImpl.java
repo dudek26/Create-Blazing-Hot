@@ -3,7 +3,6 @@ package com.dudko.blazinghot.content.kinetics.blaze_mixer.fabric;
 import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
-import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.dudko.blazinghot.registry.BlazingTags;
@@ -17,8 +16,6 @@ import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
-import com.simibubi.create.foundation.advancement.AllAdvancements;
-import com.simibubi.create.foundation.advancement.CreateAdvancement;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour.TankSegment;
@@ -190,7 +187,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
                         updatedFuel.shrink(fuelCost);
                         tank.getPrimaryHandler().setFluid(updatedFuel);
                         applyBasinRecipe();
-                        award(BlazingAdvancements.BLAZE_MIXER);
+                        getBlazingProcessedRecipeTrigger().ifPresent(this::award);
                         sendData();
                     }
                 }
@@ -198,11 +195,6 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
 
             if (runningTicks != 20) runningTicks++;
         }
-    }
-
-    @Override
-    protected Optional<CreateAdvancement> getProcessedRecipeTrigger() {
-        return Optional.of(AllAdvancements.MIXER);
     }
 
     public void renderFuelParticles() {

@@ -6,10 +6,15 @@
   "client": [
   ],
   "mixins": [
+    "BeltDeployerCallbacksMixin",
     "DeployerBlockEntityMixin",
     "ItemMixin",
+    "KineticBlockMixin",
     "ManualApplicationRecipeMixin",
-    "MechanicalMixerBlockEntityMixin"
+    "MechanicalMixerBlockEntityMixin",
+    "SmartBlockEntityMixin",
+    "SpoutBlockEntityMixin",
+    "SpoutBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

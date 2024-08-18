@@ -18,6 +18,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * from {@link com.simibubi.create.foundation.advancement.AdvancementBehaviour}
+ */
 public class BlazingAdvancementBehaviour extends BlockEntityBehaviour {
 
     public static final BehaviourType<BlazingAdvancementBehaviour> TYPE = new BehaviourType<>();

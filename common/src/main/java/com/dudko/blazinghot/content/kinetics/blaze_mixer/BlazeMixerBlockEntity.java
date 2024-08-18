@@ -1,7 +1,7 @@
 package com.dudko.blazinghot.content.kinetics.blaze_mixer;
 
 import com.dudko.blazinghot.config.BlazingConfigs;
-import com.dudko.blazinghot.content.kinetics.IAdvancementBehaviour;
+import com.dudko.blazinghot.mixin_interfaces.IAdvancementBehaviour;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancement;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancementBehaviour;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.Optional;
 
 @SuppressWarnings("UnstableApiUsage")
-public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements IHaveGoggleInformation, IAdvancementBehaviour {
+public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements IHaveGoggleInformation {
 
     protected static final Object shapelessOrMixingRecipesKey = new Object();
 
@@ -229,6 +229,10 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
         return Optional.of(AllAdvancements.MIXER);
     }
 
+    protected Optional<BlazingAdvancement> getBlazingProcessedRecipeTrigger() {
+        return Optional.of(BlazingAdvancements.BLAZE_MIXER);
+    }
+
     @Override
     public abstract boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking);
 
@@ -247,28 +251,15 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
     }
 
 
-    @Override
     public void registerAwardables(List<BlockEntityBehaviour> behaviours, BlazingAdvancement... advancements) {
-        for (BlockEntityBehaviour behaviour : behaviours) {
-            if (behaviour instanceof BlazingAdvancementBehaviour ab) {
-                ab.add(advancements);
-                return;
-            }
-        }
-        behaviours.add(new BlazingAdvancementBehaviour(this, advancements));
+        ((IAdvancementBehaviour) this).blazinghot$registerAwardables(behaviours, advancements);
     }
 
-    @Override
     public void award(BlazingAdvancement advancement) {
-        BlazingAdvancementBehaviour behaviour = getBehaviour(BlazingAdvancementBehaviour.TYPE);
-        if (behaviour != null)
-            behaviour.awardPlayer(advancement);
+        ((IAdvancementBehaviour) this).blazinghot$award(advancement);
     }
 
-    @Override
     public void awardPlayerIfNear(BlazingAdvancement advancement, int maxDistance) {
-        BlazingAdvancementBehaviour behaviour = getBehaviour(BlazingAdvancementBehaviour.TYPE);
-        if (behaviour != null)
-            behaviour.awardPlayerIfNear(advancement, maxDistance);
+        ((IAdvancementBehaviour) this).blazinghot$award(advancement);
     }
 }
