@@ -1,0 +1,180 @@
+{
+  "parent": "blazinghot:enchanted_metal_apple",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "item": {
+          "items": [
+            "minecraft:golden_carrot"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "1": {
+      "conditions": {
+        "item": {
+          "items": [
+            "minecraft:golden_apple"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "10": {
+      "conditions": {
+        "item": {
+          "items": [
+            "blazinghot:blaze_carrot"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "11": {
+      "conditions": {
+        "item": {
+          "items": [
+            "blazinghot:iron_apple"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "2": {
+      "conditions": {
+        "item": {
+          "items": [
+            "minecraft:enchanted_golden_apple"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "3": {
+      "conditions": {
+        "item": {
+          "items": [
+            "blazinghot:enchanted_iron_apple"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "4": {
+      "conditions": {
+        "item": {
+          "items": [
+            "blazinghot:iron_carrot"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "5": {
+      "conditions": {
+        "item": {
+          "items": [
+            "blazinghot:stellar_iron_apple"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "6": {
+      "conditions": {
+        "item": {
+          "items": [
+            "blazinghot:enchanted_blaze_apple"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "7": {
+      "conditions": {
+        "item": {
+          "items": [
+            "blazinghot:stellar_blaze_apple"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "8": {
+      "conditions": {
+        "item": {
+          "items": [
+            "blazinghot:stellar_golden_apple"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "9": {
+      "conditions": {
+        "item": {
+          "items": [
+            "blazinghot:blaze_apple"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.blazinghot.all_metal_food.desc"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:enchanted_golden_apple"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.blazinghot.all_metal_food"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ],
+    [
+      "1"
+    ],
+    [
+      "2"
+    ],
+    [
+      "3"
+    ],
+    [
+      "4"
+    ],
+    [
+      "5"
+    ],
+    [
+      "6"
+    ],
+    [
+      "7"
+    ],
+    [
+      "8"
+    ],
+    [
+      "9"
+    ],
+    [
+      "10"
+    ],
+    [
+      "11"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
