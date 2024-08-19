@@ -43,9 +43,6 @@ public class BlazingHot {
         BlazingRecipeTypes.register();
 
         finalizeRegistrate();
-
-        BlazingAdvancements.register();
-        BlazingTriggers.register();
     }
 
     public static ResourceLocation asResource(String path) {

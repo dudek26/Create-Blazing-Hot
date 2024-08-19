@@ -3,6 +3,7 @@ package com.dudko.blazinghot.data.advancement;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.fabricmc.fabric.api.entity.FakePlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -122,13 +123,9 @@ public class BlazingAdvancementBehaviour extends BlockEntityBehaviour {
             behaviour.awardPlayer(advancement);
     }
 
+    @ExpectPlatform
     public static void setPlacedBy(Level worldIn, BlockPos pos, LivingEntity placer) {
-        BlazingAdvancementBehaviour
-                behaviour = BlockEntityBehaviour.get(worldIn, pos, TYPE);
-        if (behaviour == null)
-            return;
-        if (placer instanceof ServerPlayer player && !(player instanceof FakePlayer))
-            behaviour.setPlayer(placer.getUUID());
+        throw new AssertionError();
     }
 
 }

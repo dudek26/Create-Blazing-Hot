@@ -1,8 +1,10 @@
 package com.dudko.blazinghot.content.kinetics.blaze_mixer;
 
 import com.dudko.blazinghot.config.BlazingConfigs;
+import com.dudko.blazinghot.multiloader.MultiFluids;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
@@ -12,6 +14,7 @@ import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.NonNullList;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.Mth;
@@ -48,7 +51,7 @@ public class BlazeMixingRecipe extends BasinRecipe {
      * @apiNote Already platformed.
      */
     public static long getFuelCost(Recipe<?> r) {
-        if (r instanceof BlazeMixingRecipe bm) return bm.getFuelFluid().getRequiredAmount();
+        if (r == null) return MultiFluids.Constants.BUCKET.platformed() + 1;
 
         if (r instanceof MixingRecipe && PotionMixingRecipes.ALL.contains(r))
             return BlazingConfigs.server().blazeBrewingFuelUsage.get();
@@ -93,6 +96,12 @@ public class BlazeMixingRecipe extends BasinRecipe {
     public void readAdditional(@NotNull JsonObject json) {
         if (GsonHelper.isValidNode(json, "blazinghot:fuel")) {
             fuelFluid = FluidIngredient.deserialize(json.get("blazinghot:fuel"));
+            platformFuel(fuelFluid);
         }
+    }
+
+    @ExpectPlatform
+    public static void platformFuel(FluidIngredient fuel) {
+        throw new AssertionError();
     }
 }

@@ -1,13 +1,10 @@
 package com.dudko.blazinghot.multiloader;
 
-import com.google.gson.JsonObject;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.material.Fluid;
-
-import java.util.Arrays;
 
 @SuppressWarnings("UnstableApiUsage")
 public class MultiFluids {
@@ -49,24 +46,10 @@ public class MultiFluids {
         }
 
         public long platformed() {
-            return convert(droplets);
+            if (Platform.FORGE.isCurrent()) return mb;
+            return droplets;
         }
 
-        public static Constants fromString(String name) {
-            for (Constants constant : Constants.values()) {
-                if (constant.name.equalsIgnoreCase(name)) {
-                    return constant;
-                }
-            }
-            throw new IllegalArgumentException(
-                    "Invalid fluidLocation constantAmount name: " + name + ". Must match any of these: " +
-                            Arrays.toString(Arrays.stream(Constants.values()).map(c -> c.name).toArray()));
-        }
-
-        @ExpectPlatform
-        public static long convert(long droplets) {
-            throw new AssertionError();
-        }
     }
 
     /**

@@ -66,7 +66,7 @@ allprojects {
     // Formats the mod version to include the loader and Minecraft version
     // example: 0.5+fabric-mc1.20.1
     String buildNumber = System.getenv("GITHUB_RUN_NUMBER")
-    version = "${mod_version}+${project.name}-mc${minecraft_version}" + (buildNumber != null && !isRelease ? "-${buildNumber}" : "")
+    version = "${mod_version}+${project.name}-mc${minecraft_version}" + (buildNumber != null && !isRelease ? "-build.${buildNumber}" : "")
 
     repositories {
         // Add repositories to retrieve artifacts from in here.

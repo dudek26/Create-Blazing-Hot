@@ -19,6 +19,7 @@ import com.simibubi.create.foundation.advancement.AllAdvancements;
 import com.simibubi.create.foundation.advancement.CreateAdvancement;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
+import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.VecHelper;
 import com.simibubi.create.infrastructure.config.AllConfigs;
@@ -28,6 +29,7 @@ import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
@@ -37,6 +39,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
@@ -141,6 +144,8 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
     }
 
     public static float multipliedRecipeSpeed(float speed, Recipe<?> r) {
+        if (r == null) return speed;
+
         if (r instanceof MixingRecipe && PotionMixingRecipes.ALL.contains(r)) {
             return speed / BlazingConfigs.server().blazeBrewingSpeedMultiplier.getF();
         }
@@ -177,14 +182,20 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
             }
 
             //noinspection ConstantValue
-            if (getSpeed() >= AllConfigs.server().kinetics.maxRotationSpeed.get() && getFuelAmount() >=
-                    MultiFluids.Constants.BUCKET.platformed()) {
+            if (Mth.abs(getSpeed()) >= AllConfigs.server().kinetics.maxRotationSpeed.get() &&
+                    hasFuel(MultiFluids.Constants.BUCKET.platformed())) {
                 award(BlazingAdvancements.BLAZE_MIXER_MAX);
             }
         }
     }
 
     public abstract long getFuelAmount();
+
+    public abstract boolean hasFuel(long amount);
+
+    public abstract boolean hasFuel(TagKey<Fluid> tag, long amount);
+
+    public abstract boolean hasFuel(FluidIngredient fluidIngredient);
 
     public abstract void updateFueled();
 

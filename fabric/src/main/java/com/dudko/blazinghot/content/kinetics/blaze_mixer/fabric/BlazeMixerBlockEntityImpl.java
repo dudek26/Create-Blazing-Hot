@@ -97,11 +97,11 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
         fueled = fluidState.is(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag) && getFuelAmount() > 0;
     }
 
-    public boolean hasFuel(double amount) {
+    public boolean hasFuel(long amount) {
         return hasFuel(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, amount);
     }
 
-    public boolean hasFuel(TagKey<Fluid> tag, double amount) {
+    public boolean hasFuel(TagKey<Fluid> tag, long amount) {
         return getFluidStack().getFluid().defaultFluidState().is(tag) && getFuelAmount() >= amount;
     }
 

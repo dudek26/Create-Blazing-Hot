@@ -2,6 +2,8 @@ package com.dudko.blazinghot.forge;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.config.forge.BlazingConfigsImpl;
+import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
+import com.dudko.blazinghot.data.advancement.BlazingTriggers;
 import com.dudko.blazinghot.multiloader.Env;
 import com.dudko.blazinghot.registry.forge.BlazingCreativeTabsImpl;
 import com.dudko.blazinghot.registry.forge.BlazingFluidsImpl;
@@ -31,6 +33,11 @@ public class BlazingHotImpl {
 
     public static void init(final FMLCommonSetupEvent event) {
         BlazingFluidsImpl.registerFluidInteractions();
+
+        event.enqueueWork(() -> {
+            BlazingAdvancements.register();
+            BlazingTriggers.register();
+        });
     }
 
     public static void finalizeRegistrate() {

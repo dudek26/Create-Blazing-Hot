@@ -3,9 +3,6 @@ package com.dudko.blazinghot.content.kinetics.blaze_mixer.forge;
 import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
-import com.dudko.blazinghot.content.metal.MoltenMetal;
-import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
-import com.dudko.blazinghot.multiloader.MultiFluids;
 import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.forge.BlazingRecipeTypesImpl;
@@ -59,7 +56,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe.getFuelCost;
-import static com.dudko.blazinghot.multiloader.MultiFluids.platformedAmount;
 
 @SuppressWarnings("UnstableApiUsage")
 public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
@@ -72,7 +68,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-        tank = SmartFluidTankBehaviour.single(this, (int) platformedAmount(Constants.BUCKET.platformed()));
+        tank = SmartFluidTankBehaviour.single(this, (int) Constants.BUCKET.platformed());
         tank.whenFluidUpdates(() -> {
             if (getBasin().isPresent()) getBasin().get().notifyChangeOfContents();
         });
@@ -92,12 +88,12 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
         fueled = fluidState.is(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag) && getFuelAmount() > 0;
     }
 
-    public boolean hasFuel(int amount) {
+    public boolean hasFuel(long amount) {
         return hasFuel(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, amount);
     }
 
-    public boolean hasFuel(TagKey<Fluid> tag, int amount) {
-        return hasFuel(FluidIngredient.fromTag(tag, amount));
+    public boolean hasFuel(TagKey<Fluid> tag, long amount) {
+        return hasFuel(FluidIngredient.fromTag(tag, (int) amount));
     }
 
     public boolean hasFuel(FluidIngredient fluidIngredient) {
@@ -179,7 +175,8 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
                         updateAdvancements(currentRecipe);
                         blazeMixing = false;
                         FluidStack updatedFuel = getFluidStack().copy();
-                        updatedFuel.shrink(fuelCost);
+                        if (updatedFuel.getAmount() != 0) // forge: check if empty to avoid crash
+                            updatedFuel.shrink(Math.min(fuelCost, updatedFuel.getAmount()));
                         tank.getPrimaryHandler().setFluid(updatedFuel);
                         applyBasinRecipe();
                         sendData();

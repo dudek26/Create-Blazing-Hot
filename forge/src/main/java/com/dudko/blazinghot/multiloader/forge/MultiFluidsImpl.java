@@ -20,6 +20,6 @@ public class MultiFluidsImpl {
 
     public static boolean recipeResultContains(ProcessingRecipe<?> r, TagKey<Fluid> fluid) {
         return r.getFluidResults().stream().anyMatch(fs -> fs.getFluid().defaultFluidState()
-                .is(MoltenMetal.GOLD.fluidTag()));
+                .is(fluid));
     }
 }
