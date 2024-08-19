@@ -15,7 +15,7 @@ public class BlazeArrowEntityImpl extends BlazeArrowEntity {
     }
 
     public BlazeArrowEntityImpl(EntityType<? extends AbstractArrow> entityType, LivingEntity shooter, Level level, Item referenceItem) {
-        super(entityType, shooter, level, referenceItem);
+        super(entityType, shooter, level);
     }
 
     public static BlazeArrowEntity create(EntityType<? extends AbstractArrow> entityType, LivingEntity shooter, Level level, Item referenceItem) {

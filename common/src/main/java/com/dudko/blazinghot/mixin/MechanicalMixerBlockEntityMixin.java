@@ -30,7 +30,9 @@ public abstract class MechanicalMixerBlockEntityMixin extends BasinOperatingBloc
 
     @Inject(method = "addBehaviours", at = @At("TAIL"), remap = false)
     private void blazinghot$addAdvancements(List<BlockEntityBehaviour> behaviours, CallbackInfo ci) {
-        blazinghot$registerAwardables(behaviours, BlazingAdvancements.MOLTEN_GOLD);
+        blazinghot$registerAwardables(behaviours,
+                BlazingAdvancements.MOLTEN_GOLD,
+                BlazingAdvancements.MOLTEN_BLAZE_GOLD);
     }
 
     @ModifyArg(method = "tick",
@@ -45,10 +47,14 @@ public abstract class MechanicalMixerBlockEntityMixin extends BasinOperatingBloc
     }
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/kinetics/mixer/MechanicalMixerBlockEntity;applyBasinRecipe()V"), remap = false)
-    private void blazinghot$meltingAdvancement(CallbackInfo ci) {
-        if (currentRecipe instanceof MixingRecipe recipe &&
-                MultiFluids.recipeResultContains(recipe, MoltenMetal.GOLD.fluidTag())) {
-            blazinghot$award(BlazingAdvancements.MOLTEN_GOLD);
+    private void blazinghot$meltingAdvancements(CallbackInfo ci) {
+        if (currentRecipe instanceof MixingRecipe recipe) {
+            if (MultiFluids.recipeResultContains(recipe, MoltenMetal.GOLD.fluidTag())) {
+                blazinghot$award(BlazingAdvancements.MOLTEN_GOLD);
+            }
+            if (MultiFluids.recipeResultContains(recipe, MoltenMetal.BLAZE_GOLD.fluidTag())) {
+                blazinghot$award(BlazingAdvancements.MOLTEN_BLAZE_GOLD);
+            }
         }
     }
 

@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = KineticBlock.class, remap = false)
+@Mixin(value = KineticBlock.class)
 public class KineticBlockMixin {
 
     @Inject(method = "setPlacedBy", at = @At("HEAD"))

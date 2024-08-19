@@ -14,7 +14,8 @@
     "MechanicalMixerBlockEntityMixin",
     "SmartBlockEntityMixin",
     "SpoutBlockEntityMixin",
-    "SpoutBlockMixin"
+    "SpoutBlockMixin",
+    "accessor.ProjectileAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

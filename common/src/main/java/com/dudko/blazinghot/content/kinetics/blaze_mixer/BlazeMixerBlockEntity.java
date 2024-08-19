@@ -1,9 +1,12 @@
 package com.dudko.blazinghot.content.kinetics.blaze_mixer;
 
+import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.config.BlazingConfigs;
-import com.dudko.blazinghot.mixin_interfaces.IAdvancementBehaviour;
+import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancement;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
+import com.dudko.blazinghot.mixin_interfaces.IAdvancementBehaviour;
+import com.dudko.blazinghot.multiloader.MultiFluids;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
@@ -52,6 +55,8 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
     public boolean fueled;
     public boolean blazeMixing;
 
+    private int ancientDebrisMelted;
+
     protected SmartFluidTankBehaviour tank;
 
     public BlazeMixerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
@@ -85,7 +90,12 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
         registerAwardables(behaviours, AllAdvancements.MIXER);
-        registerAwardables(behaviours, BlazingAdvancements.BLAZE_MIXER, BlazingAdvancements.MOLTEN_GOLD);
+        registerAwardables(behaviours,
+                BlazingAdvancements.BLAZE_MIXER,
+                BlazingAdvancements.MOLTEN_GOLD,
+                BlazingAdvancements.MOLTEN_BLAZE_GOLD,
+                BlazingAdvancements.BLAZE_MIXER_MAX,
+                BlazingAdvancements.ANCIENT_DEBRIS_MELTING);
     }
 
     public float getRenderedHeadRotationSpeed(float partialTicks) {
@@ -113,6 +123,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
         runningTicks = compound.getInt("Ticks");
         fueled = compound.getBoolean("Fueled");
         blazeMixing = compound.getBoolean("BlazeMixing");
+        ancientDebrisMelted = compound.getInt("AncientDebrisMelted");
         super.read(compound, clientPacket);
 
         if (clientPacket && hasLevel())
@@ -125,6 +136,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
         compound.putInt("Ticks", runningTicks);
         compound.putBoolean("Fueled", fueled);
         compound.putBoolean("BlazeMixing", blazeMixing);
+        compound.putInt("AncientDebrisMelted", ancientDebrisMelted);
         super.write(compound, clientPacket);
     }
 
@@ -144,6 +156,35 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
         }
         return speed;
     }
+
+    public void updateAdvancements(Recipe<?> r) {
+        award(BlazingAdvancements.BLAZE_MIXER);
+        if (r instanceof ProcessingRecipe<?> recipe) {
+            if (recipe.getId().equals(BlazingHot.asResource("blaze_mixing/melting/ancient_debris"))) {
+                ancientDebrisMelted++;
+                if (ancientDebrisMelted >= 15) {
+                    award(BlazingAdvancements.ANCIENT_DEBRIS_MELTING);
+                    ancientDebrisMelted = 0;
+                }
+            }
+
+            if (MultiFluids.recipeResultContains(recipe, MoltenMetal.GOLD.fluidTag())) {
+                award(BlazingAdvancements.MOLTEN_GOLD);
+            }
+
+            if (MultiFluids.recipeResultContains(recipe, MoltenMetal.BLAZE_GOLD.fluidTag())) {
+                award(BlazingAdvancements.MOLTEN_BLAZE_GOLD);
+            }
+
+            //noinspection ConstantValue
+            if (getSpeed() >= AllConfigs.server().kinetics.maxRotationSpeed.get() && getFuelAmount() >=
+                    MultiFluids.Constants.BUCKET.platformed()) {
+                award(BlazingAdvancements.BLAZE_MIXER_MAX);
+            }
+        }
+    }
+
+    public abstract long getFuelAmount();
 
     public abstract void updateFueled();
 

@@ -89,7 +89,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
     public void updateFueled() {
         FluidState fluidState = getFluidStack().getFluid().defaultFluidState();
 
-        fueled = fluidState.is(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag) && fuelAmount() > 0;
+        fueled = fluidState.is(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag) && getFuelAmount() > 0;
     }
 
     public boolean hasFuel(int amount) {
@@ -101,11 +101,11 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
     }
 
     public boolean hasFuel(FluidIngredient fluidIngredient) {
-        return (fluidIngredient.test(getFluidStack()) && fluidIngredient.getRequiredAmount() <= fuelAmount())
+        return (fluidIngredient.test(getFluidStack()) && fluidIngredient.getRequiredAmount() <= getFuelAmount())
                 || fluidIngredient.getRequiredAmount() == 0;
     }
 
-    public int fuelAmount() {
+    public long getFuelAmount() {
         return getFluidStack().getAmount();
     }
 
@@ -131,7 +131,6 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
         float speed = Math.abs(getSpeed());
         if (running && level != null) {
             if (level.isClientSide && runningTicks == 20) renderParticles();
-
 
             if ((!level.isClientSide || isVirtual()) && runningTicks == 20) {
                 if (processingTicks < 0) {
@@ -177,15 +176,11 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
                     if (processingTicks == 0) {
                         runningTicks++;
                         processingTicks = -1;
-                        award(BlazingAdvancements.BLAZE_MIXER);
+                        updateAdvancements(currentRecipe);
                         blazeMixing = false;
                         FluidStack updatedFuel = getFluidStack().copy();
                         updatedFuel.shrink(fuelCost);
                         tank.getPrimaryHandler().setFluid(updatedFuel);
-                        if (currentRecipe instanceof ProcessingRecipe<?> recipe &&
-                                MultiFluids.recipeResultContains(recipe, MoltenMetal.GOLD.fluidTag())) {
-                            award(BlazingAdvancements.MOLTEN_GOLD);
-                        }
                         applyBasinRecipe();
                         sendData();
                     }

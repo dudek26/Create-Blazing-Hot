@@ -9,6 +9,7 @@ import com.simibubi.create.content.kinetics.belt.behaviour.BeltProcessingBehavio
 import com.simibubi.create.content.kinetics.belt.behaviour.TransportedItemStackHandlerBehaviour;
 import com.simibubi.create.content.kinetics.belt.transport.TransportedItemStack;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
@@ -43,6 +44,16 @@ public abstract class SpoutBlockEntityMixin implements IAdvancementBehaviour {
                 blazinghot$goldenApplesCreated = 0;
             }
         }
+    }
+
+    @Inject(method="write", at = @At("TAIL"))
+    private void blazinghot$saveAppleData(CompoundTag compound, boolean clientPacket, CallbackInfo ci) {
+        compound.putInt("blazinghot.GoldenApplesCreated", blazinghot$goldenApplesCreated);
+    }
+
+    @Inject(method="read", at = @At("TAIL"))
+    private void blazinghot$readAppleData(CompoundTag compound, boolean clientPacket, CallbackInfo ci) {
+        blazinghot$goldenApplesCreated = compound.getInt("blazinghot.GoldenApplesCreated");
     }
 
 }

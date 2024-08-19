@@ -7,6 +7,7 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.EntityEntry;
 import com.tterrag.registrate.util.nullness.NonNullConsumer;
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.MobCategory;
 
 import java.util.function.Consumer;
@@ -21,6 +22,7 @@ public class BlazingEntities {
                     .<BlazeArrowEntity>entity("blaze_arrow", BlazeArrowEntity::create, MobCategory.MISC)
                     .renderer(() -> BlazeArrowRenderer::new)
                     .properties(configure(c -> c.size(0.25f, 0.25f)))
+                    .tag(EntityTypeTags.ARROWS)
                     .register();
 
 

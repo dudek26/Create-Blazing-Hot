@@ -157,6 +157,7 @@ public class BlazingTags {
         MODERN_LAMP_PANELS,
         NETHER_FLORA,
 
+        METAL_FOOD,
         METAL_CARROTS,
         METAL_APPLES,
         STELLAR_METAL_APPLES,

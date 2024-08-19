@@ -1,25 +1,25 @@
 {
+  "parent": "blazinghot:blaze_mixer",
   "criteria": {
     "0": {
       "conditions": {},
-      "trigger": "minecraft:inventory_changed"
+      "trigger": "blazinghot:modern_lamp_builtin"
     }
   },
   "display": {
     "announce_to_chat": false,
-    "background": "blazinghot:textures/gui/advancements.png",
     "description": {
       "color": "#DBA213",
-      "translate": "advancement.blazinghot.root.desc"
+      "translate": "advancement.blazinghot.modern_lamp.desc"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "blazinghot:blaze_whisk"
+      "item": "blazinghot:white_modern_lamp"
     },
-    "show_toast": false,
+    "show_toast": true,
     "title": {
-      "translate": "advancement.blazinghot.root"
+      "translate": "advancement.blazinghot.modern_lamp"
     }
   },
   "requirements": [

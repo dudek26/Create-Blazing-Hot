@@ -25,7 +25,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:enchanted_blaze_apple"
+            "blazinghot:stellar_blaze_apple"
           ]
         }
       },
@@ -35,7 +35,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:blaze_apple"
+            "blazinghot:blaze_carrot"
           ]
         }
       },
@@ -55,7 +55,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:stellar_golden_apple"
+            "blazinghot:blaze_apple"
           ]
         }
       },
@@ -85,7 +85,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:stellar_iron_apple"
+            "blazinghot:enchanted_blaze_apple"
           ]
         }
       },
@@ -95,7 +95,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:stellar_blaze_apple"
+            "blazinghot:stellar_golden_apple"
           ]
         }
       },
@@ -115,7 +115,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:blaze_carrot"
+            "blazinghot:stellar_iron_apple"
           ]
         }
       },
@@ -177,7 +177,7 @@
     ]
   ],
   "rewards": {
-    "experience": 10
+    "experience": 100
   },
   "sends_telemetry_event": true
 }

@@ -1,5 +1,5 @@
 {
-  "parent": "blazinghot:molten_gold",
+  "parent": "blazinghot:molten_blaze_gold",
   "criteria": {
     "0": {
       "conditions": {
@@ -18,7 +18,7 @@
     "announce_to_chat": false,
     "description": {
       "color": "#DBA213",
-      "translate": "advancement.blazinghot.blaze_gold_0.desc"
+      "translate": "advancement.blazinghot.blaze_gold.desc"
     },
     "frame": "task",
     "hidden": false,
@@ -27,7 +27,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.blazinghot.blaze_gold_0"
+      "translate": "advancement.blazinghot.blaze_gold"
     }
   },
   "requirements": [

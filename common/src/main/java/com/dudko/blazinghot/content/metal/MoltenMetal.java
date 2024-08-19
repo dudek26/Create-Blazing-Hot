@@ -35,50 +35,60 @@ public class MoltenMetal {
 
     public static final List<MoltenMetal> ALL_METALS = new ArrayList<>();
 
-    public static MoltenMetal
-            IRON = builder("iron").createForms().register(),
-            GOLD = builder("gold").createForms().register(),
-            COPPER = builder("copper").createForms().register(),
-            ANCIENT_DEBRIS = builder("ancient_debris")
-                    .customForm(VANILLA.asResource("netherite_scrap"),
-                            Constants.INGOT.droplets,
-                            Form.INGOT.processingTime * 2,
-                            Form.INGOT.fuelCost * 2,
-                            false)
-                    .customForm(VANILLA.asResource("ancient_debris"),
-                            Constants.NUGGET.droplets * 12,
-                            Form.INGOT.processingTime * 2,
-                            Form.INGOT.fuelCost * 2,
-                            false)
-                    .compactingOverride(VANILLA.asResource("netherite_scrap"), Constants.INGOT.droplets)
+    public static MoltenMetal IRON = builder("iron").createForms().register(),
+
+    GOLD = builder("gold").createForms().register(),
+
+    COPPER = builder("copper").createForms().register(),
+
+    ANCIENT_DEBRIS = builder("ancient_debris")
+            .customForm(VANILLA.asResource("netherite_scrap"),
+                    Constants.INGOT.droplets,
+                    Form.INGOT.processingTime * 2,
+                    Form.INGOT.fuelCost * 2,
+                    false)
+            .customForm(VANILLA.asResource("ancient_debris"),
+                    Constants.NUGGET.droplets * 12,
+                    Form.INGOT.processingTime * 2,
+                    Form.INGOT.fuelCost * 2,
+                    false)
+            .compactingOverride(VANILLA.asResource("netherite_scrap"), Constants.INGOT.droplets)
+            .addFluidInteraction(Fluids.WATER,
+                    () -> AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get())
+            .disableMechanicalMixing()
+            .ignoreTagDatagen()
+            .register(),
+
+    NETHERITE =
+            builder("netherite")
+                    .supportedForms(Form.INGOT)
+                    .disableMechanicalMixing()
                     .addFluidInteraction(Fluids.WATER,
                             () -> AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get())
-                    .disableMechanicalMixing()
-                    .ignoreTagDatagen()
                     .register(),
-            NETHERITE =
-                    builder("netherite").supportedForms(Form.INGOT)
-                            .disableMechanicalMixing()
-                            .addFluidInteraction(Fluids.WATER,
-                                    () -> AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get())
-                            .register(),
-            BLAZE_GOLD =
-                    builder("blaze_gold").mod(BLAZINGHOT)
-                            .basicAndPlateForms()
-                            .supportedForms(Form.ROD)
-                            .addFluidInteraction(Fluids.WATER, () -> Blocks.NETHERRACK)
-                            .register(),
-            ZINC = builder("zinc").mod(CREATE).basicForms().optionalForms(Form.PLATE).register(),
-            BRASS = builder("brass").mod(CREATE).createForms().register(),
-            ANDESITE = builder("andesite").mod(CREATE)
-                    .customForm(AllItems.ANDESITE_ALLOY.getId(),
-                            Form.INGOT.amount,
-                            Form.INGOT.processingTime,
-                            Form.INGOT.fuelCost,
-                            true)
-                    .compactingOverride(AllItems.ANDESITE_ALLOY.getId(), Constants.INGOT.droplets)
-                    .ignoreTagDatagen()
-                    .register();
+
+    BLAZE_GOLD =
+            builder("blaze_gold")
+                    .mod(BLAZINGHOT)
+                    .basicAndPlateForms()
+                    .supportedForms(Form.ROD)
+                    .addFluidInteraction(Fluids.WATER, () -> Blocks.NETHERRACK)
+                    .register(),
+
+    ZINC = builder("zinc").mod(CREATE).basicForms().optionalForms(Form.PLATE).register(),
+
+    BRASS = builder("brass").mod(CREATE).createForms().register(),
+
+    ANDESITE = builder("andesite")
+            .mod(CREATE)
+            .customForm(AllItems.ANDESITE_ALLOY.getId(),
+                    Form.INGOT.amount,
+                    Form.INGOT.processingTime,
+                    Form.INGOT.fuelCost,
+                    true)
+            .compactingOverride(AllItems.ANDESITE_ALLOY.getId(), Constants.INGOT.droplets)
+            .ignoreTagDatagen()
+            .register();
 
     public static void init() {
 
@@ -111,7 +121,7 @@ public class MoltenMetal {
     }
 
     /**
-     * Automatically registers fluid and adds this metal to the data generator
+     * Automatically registers fluid, fluid interactions and adds this metal to the data generator
      */
     public MoltenMetal register() {
         ALL_METALS.add(this);
@@ -211,11 +221,9 @@ public class MoltenMetal {
         }
 
         /**
-         * Defines the fluid interactions. If no interaction with water is specified, it will default to Cobblestone.
-         * <ul>
-         *      <li>Never add AllPaletteStoneTypes directly by {@code [...].getBaseBlock()}! You should always add them by <code>() -> [...].getBaseBlock().get()</code></li>
-         *      <li>Fabric: remember to update {@link com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl#fluidTags}</li>
-         * </ul>
+         * <p>Defines the fluid interactions. If no interaction with water is specified, it will default to Cobblestone.</p>
+         * <p>Never add AllPaletteStoneTypes directly by {@code [...].getBaseBlock()}! You should always add them by <code>() -> [...].getBaseBlock().get()</code></p>
+         * <p>Fabric: remember to update {@link com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl#fluidTags}</p>
          */
         public Builder addFluidInteraction(Fluid fluid, NonNullSupplier<Block> block) {
             this.fluidInteractions.put(fluid, block);
@@ -287,7 +295,7 @@ public class MoltenMetal {
         }
 
         /**
-         * Data generator will not automatically create tags for all supported forms (including the internal tag). Use when the metal doesn't have common tags (like Andesite Alloy)
+         * If called, the data generator will not automatically create tags for all supported forms (including the internal tag). Use when the metal doesn't have common tags (like Andesite Alloy)
          */
         public Builder ignoreTagDatagen() {
             this.ignoreTagDatagen = true;

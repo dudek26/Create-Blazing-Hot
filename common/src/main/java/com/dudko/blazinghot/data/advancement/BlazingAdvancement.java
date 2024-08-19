@@ -1,8 +1,6 @@
 package com.dudko.blazinghot.data.advancement;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.simibubi.create.Create;
-import com.simibubi.create.foundation.advancement.CreateAdvancement;
 import com.simibubi.create.foundation.utility.Components;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import net.minecraft.advancements.Advancement;
@@ -19,11 +17,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 /**
@@ -31,7 +29,7 @@ import java.util.function.UnaryOperator;
  */
 public class BlazingAdvancement {
 
-    static final ResourceLocation BACKGROUND = Create.asResource("textures/gui/advancements.png");
+    static final ResourceLocation BACKGROUND = BlazingHot.asResource("textures/gui/advancements.png");
     static final String LANG = "advancement." + BlazingHot.ID + ".";
     static final String SECRET_SUFFIX = "\n\u00A77(Hidden Advancement)";
 
@@ -58,7 +56,7 @@ public class BlazingAdvancement {
             builder.addCriterion("0", builtinTrigger.instance());
         }
 
-        if(t.rewardsBuilder != null) builder.rewards(t.rewardsBuilder);
+        if(t.rewards != null) builder.rewards(t.rewards);
 
         builder.display(t.icon, Components.translatable(titleKey()),
                 Components.translatable(descriptionKey()).withStyle(s -> s.withColor(0xDBA213)),
@@ -143,7 +141,7 @@ public class BlazingAdvancement {
         private boolean externalTrigger;
         private int keyIndex;
         private ItemStack icon;
-        private AdvancementRewards.Builder rewardsBuilder;
+        private AdvancementRewards rewards;
 
         Builder special(TaskType type) {
             this.type = type;
@@ -178,10 +176,9 @@ public class BlazingAdvancement {
             return this;
         }
 
-        Builder rewards(UnaryOperator<AdvancementRewards.Builder> b) {
+        Builder rewards(Function<AdvancementRewards.Builder, AdvancementRewards> b) {
             AdvancementRewards.Builder rewardsBuilder = new AdvancementRewards.Builder();
-            b.apply(rewardsBuilder);
-            this.rewardsBuilder = rewardsBuilder;
+            this.rewards = b.apply(rewardsBuilder);
             return this;
         }
 

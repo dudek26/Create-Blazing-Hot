@@ -1,7 +1,7 @@
 package com.dudko.blazinghot.data.fabric;
 
-import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.content.metal.Form;
+import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
@@ -94,6 +94,11 @@ public class BlazingTagGen {
         prov.addTag(BlazingTags.Items.METAL_CARROTS.tag).add(Items.GOLDEN_CARROT);
         prov.addTag(BlazingTags.Items.METAL_APPLES.tag).add(Items.GOLDEN_APPLE);
         prov.addTag(BlazingTags.Items.ENCHANTED_METAL_APPLES.tag).add(Items.ENCHANTED_GOLDEN_APPLE);
+
+        tagAppender(prov, BlazingTags.Items.METAL_FOOD).addTag(BlazingTags.Items.METAL_CARROTS.tag)
+                .addTag(BlazingTags.Items.METAL_APPLES.tag)
+                .addTag(BlazingTags.Items.STELLAR_METAL_APPLES.tag)
+                .addTag(BlazingTags.Items.ENCHANTED_METAL_APPLES.tag);
 
         for (BlazingTags.Items tag : BlazingTags.Items.values()) {
             if (tag.alwaysDatagen) tagAppender(prov, tag);

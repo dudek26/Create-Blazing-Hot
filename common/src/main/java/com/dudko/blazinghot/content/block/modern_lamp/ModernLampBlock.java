@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.content.block.modern_lamp;
 
+import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.simibubi.create.AllTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -45,6 +46,7 @@ public class ModernLampBlock extends Block {
 
         if (pPlayer.getItemInHand(pHand).isEmpty() && !locked) {
             float pitch = pState.getValue(LIT) ? 0.5F : 0.8F;
+            if (!pLevel.isClientSide) BlazingAdvancements.MODERN_LAMP.awardTo(pPlayer);
             pLevel.setBlockAndUpdate(pPos, pState.cycle(LIT));
             pLevel.playLocalSound(pPos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 1.0F, pitch, false);
             return InteractionResult.SUCCESS;

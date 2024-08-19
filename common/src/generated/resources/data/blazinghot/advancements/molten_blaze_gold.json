@@ -1,25 +1,25 @@
 {
+  "parent": "blazinghot:molten_gold",
   "criteria": {
     "0": {
       "conditions": {},
-      "trigger": "minecraft:inventory_changed"
+      "trigger": "blazinghot:molten_blaze_gold_builtin"
     }
   },
   "display": {
     "announce_to_chat": false,
-    "background": "blazinghot:textures/gui/advancements.png",
     "description": {
       "color": "#DBA213",
-      "translate": "advancement.blazinghot.root.desc"
+      "translate": "advancement.blazinghot.molten_blaze_gold.desc"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "blazinghot:blaze_whisk"
+      "item": "blazinghot:molten_blaze_gold_bucket"
     },
-    "show_toast": false,
+    "show_toast": true,
     "title": {
-      "translate": "advancement.blazinghot.root"
+      "translate": "advancement.blazinghot.molten_blaze_gold"
     }
   },
   "requirements": [

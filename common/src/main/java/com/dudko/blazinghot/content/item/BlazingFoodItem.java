@@ -3,6 +3,7 @@ package com.dudko.blazinghot.content.item;
 import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -10,13 +11,15 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 import static com.dudko.blazinghot.util.TooltipUtil.addEffectTooltip;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class BlazingFoodItem extends Item {
 
     private boolean foil;
@@ -39,12 +42,12 @@ public class BlazingFoodItem extends Item {
     }
 
     @Override
-    public boolean isFoil(@NotNull ItemStack stack) {
+    public boolean isFoil(ItemStack stack) {
         return foil || super.isFoil(stack);
     }
 
     @Override
-    public @NotNull ItemStack finishUsingItem(@NotNull ItemStack stack, @NotNull Level level, LivingEntity livingEntity) {
+    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
         if (extinguishing) {
             if (livingEntity instanceof Player player && !level.isClientSide() &&
                     livingEntity.getRemainingFireTicks() > 0 &&

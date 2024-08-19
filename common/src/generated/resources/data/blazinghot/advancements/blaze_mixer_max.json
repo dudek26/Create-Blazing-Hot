@@ -13,7 +13,7 @@
       "translate": "advancement.blazinghot.blaze_mixer_max.desc"
     },
     "frame": "goal",
-    "hidden": true,
+    "hidden": false,
     "icon": {
       "item": "blazinghot:blaze_mixer"
     },

@@ -4,13 +4,26 @@ Create: Blazing Hot 0.6
 
 ### Added:
 * New fluids: Molten Zinc, Copper, Brass, Ancient Debris, Netherite, Andesite
+* New melting in Blaze Mixer recipe for Ancient Debris, that gives Netherite at higher rates
+* New mixing recipe for Molten Andesite, that gives Andesite Alloy at higher rates
+* Mixing recipe for Molten Brass using Molten Copper and Zinc
+* Blaze Mixing recipe for Netherite using Molten Ancient Debris and Gold
 * Crafting recipe for Blaze Apple
+* 17 new Advancements, including 3 challenges and one secret advancement
+* New item tags:
+  * `blazinghot:metal_carrots`
+  * `blazinghot:metal_apples`
+  * `blazinghot:stellar_metal_apples`
+  * `blazinghot:enchanted_metal_apples`
+  * `blazinghot:metal_food`
 * [Forge] Information about Nether Lava in JEI
 
 ### Changed:
 * Modern Lamp Panels can now be waterlogged
 * Increased chance of getting Blaze Powder when crushing Blaze Gold Rods from 30% to 50%
-* Several recipes now use item tags instead of specific items
+* Several recipes now use tags instead of specific ingredients
+* Updated textures for existing Molten Metals
+* Blaze Arrow's damage is now multiplied when hitting the target rather than when being shot
 * [Fabric] Molten Blaze Gold source blocks now turn into Obsidian when touching water
 
 ### Removed:
@@ -19,6 +32,7 @@ Create: Blazing Hot 0.6
 ### Fixed:
 * Fixed mod .jar files using `blazinghot` name instead of `create_blazing_hot`
 * Modern Lamp Panels no longer get destroyed by fluids when facing up or down
+* Blaze Arrows are now in the `minecraft:arrows` entity type tag and grant the "Take Aim" advancement
 * [Forge] Fixed Iron Carrot crafting recipe using wrong tag for iron nuggets
 
 ------------------------------------------------------

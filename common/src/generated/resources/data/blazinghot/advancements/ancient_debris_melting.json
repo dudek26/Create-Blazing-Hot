@@ -1,25 +1,25 @@
 {
-  "parent": "blazinghot:all_metal_food",
+  "parent": "blazinghot:blaze_mixer_max",
   "criteria": {
     "0": {
       "conditions": {},
-      "trigger": "blazinghot:extinguishing_food_save_0_builtin"
+      "trigger": "blazinghot:ancient_debris_melting_builtin"
     }
   },
   "display": {
     "announce_to_chat": true,
     "description": {
       "color": "#DBA213",
-      "translate": "advancement.blazinghot.extinguishing_food_save_0.desc"
+      "translate": "advancement.blazinghot.ancient_debris_melting.desc"
     },
     "frame": "goal",
-    "hidden": true,
+    "hidden": false,
     "icon": {
-      "item": "blazinghot:blaze_carrot"
+      "item": "minecraft:ancient_debris"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.blazinghot.extinguishing_food_save_0"
+      "translate": "advancement.blazinghot.ancient_debris_melting"
     }
   },
   "requirements": [

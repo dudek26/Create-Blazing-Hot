@@ -5,6 +5,7 @@ import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
+import com.dudko.blazinghot.data.recipe.fabric.MixingRecipeGen;
 import com.dudko.blazinghot.multiloader.MultiFluids;
 import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
@@ -93,7 +94,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
     public void updateFueled() {
         FluidState fluidState = getFluidStack().getFluid().defaultFluidState();
 
-        fueled = fluidState.is(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag) && fuelAmount() > 0;
+        fueled = fluidState.is(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag) && getFuelAmount() > 0;
     }
 
     public boolean hasFuel(double amount) {
@@ -101,15 +102,15 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
     }
 
     public boolean hasFuel(TagKey<Fluid> tag, double amount) {
-        return getFluidStack().getFluid().defaultFluidState().is(tag) && fuelAmount() >= amount;
+        return getFluidStack().getFluid().defaultFluidState().is(tag) && getFuelAmount() >= amount;
     }
 
     public boolean hasFuel(FluidIngredient fluidIngredient) {
-        return (fluidIngredient.test(getFluidStack()) && fluidIngredient.getRequiredAmount() <= fuelAmount())
+        return (fluidIngredient.test(getFluidStack()) && fluidIngredient.getRequiredAmount() <= getFuelAmount())
                 || fluidIngredient.getRequiredAmount() == 0;
     }
 
-    public long fuelAmount() {
+    public long getFuelAmount() {
         return getFluidStack().getAmount();
     }
 
@@ -138,6 +139,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
 
 
             if ((!level.isClientSide || isVirtual()) && runningTicks == 20) {
+
                 if (processingTicks < 0) {
                     float recipeSpeed = 1;
                     fuelCost = 0;
@@ -185,15 +187,11 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
                     if (processingTicks == 0) {
                         runningTicks++;
                         processingTicks = -1;
-                        award(BlazingAdvancements.BLAZE_MIXER);
+                        updateAdvancements(currentRecipe);
                         blazeMixing = false;
                         FluidStack updatedFuel = getFluidStack();
                         updatedFuel.shrink(fuelCost);
                         tank.getPrimaryHandler().setFluid(updatedFuel);
-                        if (currentRecipe instanceof ProcessingRecipe<?> recipe &&
-                                MultiFluids.recipeResultContains(recipe, MoltenMetal.GOLD.fluidTag())) {
-                            award(BlazingAdvancements.MOLTEN_GOLD);
-                        }
                         applyBasinRecipe();
                         sendData();
                     }

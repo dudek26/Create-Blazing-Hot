@@ -1,5 +1,20 @@
 package com.dudko.blazinghot.data.advancement;
 
+import com.dudko.blazinghot.content.metal.MoltenMetal;
+import com.dudko.blazinghot.registry.BlazingBlocks;
+import com.dudko.blazinghot.registry.BlazingItems;
+import com.google.common.collect.Sets;
+import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.data.CachedOutput;
+import net.minecraft.data.DataProvider;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.PackOutput.PathProvider;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Items;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,22 +23,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
-
-import com.dudko.blazinghot.content.metal.MoltenMetal;
-import com.dudko.blazinghot.registry.BlazingBlocks;
-import com.dudko.blazinghot.registry.BlazingItems;
-import com.google.common.collect.Sets;
-
-import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.data.CachedOutput;
-import net.minecraft.data.DataProvider;
-import net.minecraft.data.PackOutput;
-import net.minecraft.data.PackOutput.PathProvider;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Items;
-
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import static com.dudko.blazinghot.content.metal.MoltenMetal.allBuckets;
 import static com.dudko.blazinghot.data.advancement.BlazingAdvancement.TaskType.*;
@@ -59,15 +58,17 @@ public class BlazingAdvancements implements DataProvider {
     MOLTEN_GOLD = create("molten_gold", b -> b.icon(MoltenMetal.GOLD.bucket().get())
             .title("Flowing Riches")
             .description("Melt Gold in Mixer")
+            .special(NOISY)
             .after(NETHER_ESSENCE)),
 
     // All Molten Metals
 
-    ALL_MOLTEN_METALS = create("all_molten_metals_00", b -> b.icon(MoltenMetal.NETHERITE.bucket().get())
+    ALL_MOLTEN_METALS = create("all_molten_metals", b -> b.icon(MoltenMetal.NETHERITE.bucket().get())
             .title("Tinkers' Construct")
-            .description("Have a bucket of every non-compat molten metal in your inventory at the same time.")
+            .description("Obtain a bucket of every non-compat molten metal.")
             .after(MOLTEN_GOLD)
             .special(CHALLENGE)
+            .rewards(r -> r.addExperience(100).build())
             .whenItemsCollected(allBuckets(false))),
 
     // Metal Food
@@ -88,24 +89,28 @@ public class BlazingAdvancements implements DataProvider {
             .description("Eat every Metal Apple and Carrot")
             .after(GOLDEN_APPLE_FACTORY)
             .special(CHALLENGE)
-            .rewards(r -> r.addExperience(10))
+            .rewards(r -> r.addExperience(100).build())
             .whenAllUsed(BlazingItems.METAL_FOOD)),
 
-    EXTINGUISHING_FOOD_SAVE = create("extinguishing_food_save_0", b -> b.icon(BlazingItems.BLAZE_CARROT)
+    EXTINGUISHING_FOOD_SAVE = create("extinguishing_food_save", b -> b.icon(BlazingItems.BLAZE_CARROT)
             .title("Last Resort")
-            .description("Save yourself from burning down by eating any extinguishing food when under 2 hearts of health.")
-            .after(METAL_APPLE_SPOUT)
+            .description(
+                    "Save yourself from burning down by eating any extinguishing food when under 2 hearts of health.")
+            .after(ALL_METAL_FOOD)
             .special(SECRET)),
 
     // Blaze Gold
 
-    BLAZE_GOLD = create("blaze_gold_0", b -> b.icon(BlazingItems.BLAZE_GOLD_INGOT)
-            .title("Hot Treasure")
-            .description("Mix Molten Gold and Nether Essence together, and then compact them")
-            .after(MOLTEN_GOLD)
-            .whenIconCollected()),
+    MOLTEN_BLAZE_GOLD = create("molten_blaze_gold_00", b -> b.icon(MoltenMetal.BLAZE_GOLD.bucket().get())
+            .title("Fake Alloys")
+            .description("Mix Molten Gold and Nether Essence together to obtain Molten Blaze Gold")
+            .after(MOLTEN_GOLD)),
 
-    // Blaze Gold - Machinery
+    BLAZE_GOLD = create("blaze_gold", b -> b.icon(BlazingItems.BLAZE_GOLD_INGOT)
+            .title("Hot Treasure")
+            .description("Compact Molten Blaze Gold in Basin to obtain a Blaze Gold Ingot")
+            .after(MOLTEN_BLAZE_GOLD)
+            .whenIconCollected()),
 
     BLAZE_CASING = create("blaze_casing", b -> b.icon(BlazingBlocks.BLAZE_CASING)
             .title("The Blaze Age")
@@ -115,15 +120,43 @@ public class BlazingAdvancements implements DataProvider {
 
     BLAZE_MIXER = create("blaze_mixer", b -> b.icon(BlazingBlocks.BLAZE_MIXER)
             .title("New Era of Mixing")
-            .description("Combine ingredients in a Blaze Mixer")
+            .description("Combine or melt ingredients in a Blaze Mixer")
             .after(BLAZE_CASING)),
+
+    // Blaze Gold - Combat
+
+    BLAZE_ARROW = create("blaze_arrow", b -> b.icon(BlazingItems.BLAZE_ARROW)
+            .title("Power of the Nether")
+            .description("Shoot something with a Blaze Arrow in the Nether")
+            .special(NOISY)
+            .after(BLAZE_MIXER)),
+
+    BLAZE_ARROW_INTERDIMENSIONAL = create("blaze_arrow_interdimensional", b -> b.icon(BlazingItems.BLAZE_ARROW)
+            .title("Interdimensional Sniper")
+            .description("Kill an enemy in the Nether with a Blaze Arrow shot in the Overworld")
+            .special(CHALLENGE)
+            .after(BLAZE_ARROW)),
+
+    // Blaze Gold - Machines
+
+    MODERN_LAMP = create("modern_lamp", b -> b.icon(BlazingBlocks.MODERN_LAMP_BLOCKS.get(DyeColor.WHITE))
+            .title("Modern Technology")
+            .description("Manually activate any Modern Lamp")
+            .after(BLAZE_MIXER)),
+
+    // Blaze Mixer - Expert
 
     BLAZE_MIXER_MAX = create("blaze_mixer_max", b -> b.icon(BlazingBlocks.BLAZE_MIXER)
             .title("Fast and Furious")
             .description("Run a fully fueled Blaze Mixer at max speed")
             .after(BLAZE_MIXER)
-            .special(SECRET)),
+            .special(EXPERT)),
 
+    ANCIENT_DEBRIS_MELTING = create("ancient_debris_melting", b -> b.icon(Items.ANCIENT_DEBRIS)
+            .title("Debris Utilisation")
+            .description("Melt 15 Ancient Debris in a single Blaze Mixer")
+            .after(BLAZE_MIXER_MAX)
+            .special(EXPERT)),
 
     //
     END = null;
@@ -171,6 +204,7 @@ public class BlazingAdvancements implements DataProvider {
             advancement.provideLang(consumer);
     }
 
-    public static void register() {}
+    public static void register() {
+    }
 
 }
