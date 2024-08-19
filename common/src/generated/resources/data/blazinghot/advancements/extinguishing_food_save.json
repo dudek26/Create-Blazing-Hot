@@ -3,14 +3,14 @@
   "criteria": {
     "0": {
       "conditions": {},
-      "trigger": "blazinghot:extinguishing_food_save_0_builtin"
+      "trigger": "blazinghot:extinguishing_food_save_builtin"
     }
   },
   "display": {
     "announce_to_chat": true,
     "description": {
       "color": "#DBA213",
-      "translate": "advancement.blazinghot.extinguishing_food_save_0.desc"
+      "translate": "advancement.blazinghot.extinguishing_food_save.desc"
     },
     "frame": "goal",
     "hidden": true,
@@ -19,7 +19,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.blazinghot.extinguishing_food_save_0"
+      "translate": "advancement.blazinghot.extinguishing_food_save"
     }
   },
   "requirements": [

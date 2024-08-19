@@ -14,6 +14,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.DyeColor;
 
 import java.util.function.Supplier;
 
@@ -32,7 +33,7 @@ public class BlazingCreativeTabsImpl {
                     register("create_blazing_hot_building",
                             () -> FabricItemGroup
                                     .builder()
-                                    .icon(() -> BlazingBlocks.BLAZE_GOLD_BLOCK.asItem().getDefaultInstance())
+                                    .icon(() -> BlazingBlocks.MODERN_LAMP_BLOCKS.get(DyeColor.WHITE).asStack())
                                     .title(Component.translatable("itemGroup.blazinghot.building"))
                                     .displayItems(new RegistrateDisplayItemsGenerator(false, Tabs.BUILDING))
                                     .build());

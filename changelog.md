@@ -24,6 +24,7 @@ Create: Blazing Hot 0.6
 * Several recipes now use tags instead of specific ingredients
 * Updated textures for existing Molten Metals
 * Blaze Arrow's damage is now multiplied when hitting the target rather than when being shot
+* Changed the icon of Blazing Building Blocks creative tab back to White Modern Lamp 
 * [Fabric] Molten Blaze Gold source blocks now turn into Obsidian when touching water
 
 ### Removed:
@@ -32,7 +33,7 @@ Create: Blazing Hot 0.6
 ### Fixed:
 * Fixed mod .jar files using `blazinghot` name instead of `create_blazing_hot`
 * Modern Lamp Panels no longer get destroyed by fluids when facing up or down
-* Blaze Arrows are now in the `minecraft:arrows` entity type tag and grant the "Take Aim" advancement
+* Blaze Arrow is now in the `minecraft:arrows` entity type tag and grants the "Take Aim" advancement
 * [Forge] Fixed Iron Carrot crafting recipe using wrong tag for iron nuggets
 
 ------------------------------------------------------

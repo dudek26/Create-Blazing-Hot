@@ -3,14 +3,14 @@
   "criteria": {
     "0": {
       "conditions": {},
-      "trigger": "blazinghot:molten_blaze_gold_builtin"
+      "trigger": "blazinghot:molten_blaze_gold_00_builtin"
     }
   },
   "display": {
     "announce_to_chat": false,
     "description": {
       "color": "#DBA213",
-      "translate": "advancement.blazinghot.molten_blaze_gold.desc"
+      "translate": "advancement.blazinghot.molten_blaze_gold_00.desc"
     },
     "frame": "task",
     "hidden": false,
@@ -19,7 +19,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.blazinghot.molten_blaze_gold"
+      "translate": "advancement.blazinghot.molten_blaze_gold_00"
     }
   },
   "requirements": [

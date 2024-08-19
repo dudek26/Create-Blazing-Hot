@@ -73,7 +73,7 @@ public class BlazingAdvancements implements DataProvider {
 
     // Metal Food
 
-    METAL_APPLE_SPOUT = create("metal_apple_spout", b -> b.icon(BlazingItems.IRON_APPLE)
+    METAL_APPLE_SPOUT = create("metal_apple_spout_0000", b -> b.icon(BlazingItems.IRON_APPLE)
             .title("Budget Snacks")
             .description("Obtain any Metal Apple by filling regular Apple in Spout")
             .after(MOLTEN_GOLD)),

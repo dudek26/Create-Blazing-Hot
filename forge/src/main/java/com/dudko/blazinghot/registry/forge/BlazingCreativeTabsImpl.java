@@ -10,6 +10,7 @@ import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.DyeColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
@@ -41,7 +42,7 @@ public class BlazingCreativeTabsImpl {
                             .builder()
                             .title(Components.translatable("itemGroup.blazinghot.building"))
                             .withTabsBefore(BlazingCreativeTabsImpl.BASE_TAB.getKey())
-                            .icon(BlazingBlocks.BLAZE_GOLD_BLOCK::asStack)
+                            .icon(() -> BlazingBlocks.MODERN_LAMP_BLOCKS.get(DyeColor.WHITE).asStack())
                             .displayItems(new RegistrateDisplayItemsGenerator(false, Tabs.BUILDING))
                             .build());
 
