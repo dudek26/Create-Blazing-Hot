@@ -29,8 +29,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.dudko.blazinghot.content.item.BlazingFoodItem.ExtraProperties.*;
-import static com.dudko.blazinghot.content.item.BlazingFoodItem.ExtraProperties.EXTINGUISHING;
-import static com.dudko.blazinghot.content.item.BlazingFoodItem.ExtraProperties.FOIL;
 import static com.dudko.blazinghot.registry.BlazingItems.FoodItemBuilder.tickMinutes;
 import static com.dudko.blazinghot.registry.BlazingItems.FoodItemBuilder.tickSeconds;
 
@@ -219,13 +217,20 @@ public class BlazingItems {
                             .addEffect(MobEffects.DOLPHINS_GRACE, tickSeconds(30))
                             .register(),
             ZINC_CARROT =
-                    new FoodItemBuilder<>("zinc_carrot", p -> new BlazingFoodItem(p, REMOVE_SLOWNESS_1))
+                    new FoodItemBuilder<>("zinc_carrot", p -> new BlazingFoodItem(p, REMOVE_SLOWNESS_0))
                             .nutrition(5)
                             .saturationMod(0.8f)
                             .tag(BlazingTags.Items.METAL_CARROTS.tag)
                             .register(),
             ZINC_APPLE =
-                    new FoodItemBuilder<>("zinc_apple", p -> new BlazingFoodItem(p, REMOVE_SLOWNESS_2))
+                    new FoodItemBuilder<>("zinc_apple", p -> new BlazingFoodItem(p, REMOVE_SLOWNESS_1))
+                            .metalApple()
+                            .tag(BlazingTags.Items.METAL_APPLES.tag)
+                            .addEffect(MobEffects.ABSORPTION, tickMinutes(1))
+                            .addEffect(MobEffects.MOVEMENT_SPEED, tickSeconds(30))
+                            .register(),
+            STELLAR_ZINC_APPLE =
+                    new FoodItemBuilder<>("stellar_zinc_apple", p -> new BlazingFoodItem(p, REMOVE_SLOWNESS_2))
                             .metalApple()
                             .tag(BlazingTags.Items.STELLAR_METAL_APPLES.tag)
                             .addEffect(MobEffects.ABSORPTION, tickMinutes(1), 1)
@@ -233,7 +238,8 @@ public class BlazingItems {
                             .addEffect(MobEffects.MOVEMENT_SPEED, tickMinutes(3), 1)
                             .register(),
             ENCHANTED_ZINC_APPLE =
-                    new FoodItemBuilder<>("enchanted_zinc_apple", p -> new BlazingFoodItem(p, REMOVE_SLOWNESS_ANY, FOIL))
+                    new FoodItemBuilder<>("enchanted_zinc_apple",
+                            p -> new BlazingFoodItem(p, REMOVE_SLOWNESS_ANY, FOIL))
                             .enchantedMetalApple()
                             .addEffect(MobEffects.ABSORPTION, tickMinutes(2), 2)
                             .addEffect(MobEffects.REGENERATION, tickSeconds(10), 1)
@@ -441,10 +447,10 @@ public class BlazingItems {
             if (tags.length > 0) builder.tag(tags);
 
             builder.onRegisterAfter(Registries.ITEM, c -> {
-                if (c instanceof BlazingFoodItem food && food.isExtinguishing())
-                    ItemDescription.useKey(c, ItemDescriptions.EXTINGUISHING_FOOD.getKey());
-                else if (c instanceof BlazingFoodItem food && food.getMaxRemovedSlowness() >= 0)
-                    ItemDescription.useKey(c, food.getRemovedSlownessDescription());
+                if (c instanceof BlazingFoodItem food) {
+                    if (food.isExtinguishing()) ItemDescription.useKey(c, ItemDescriptions.EXTINGUISHING_FOOD.getKey());
+                    if (food.getOxygen() >= 0) ItemDescription.useKey(c, food.getRemovedSlownessDescription());
+                }
             });
 
             if (description != null)
