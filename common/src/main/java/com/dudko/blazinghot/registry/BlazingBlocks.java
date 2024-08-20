@@ -4,6 +4,7 @@ import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelBlock;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlock;
+import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.multiloader.BlazingBuilderTransformers;
 import com.dudko.blazinghot.util.DyeUtil;
 import com.simibubi.create.AllTags;
@@ -52,7 +53,7 @@ public class BlazingBlocks {
                     .addLayer(() -> RenderType::cutoutMipped)
                     .transform(BlockStressDefaults.setImpact(4.0))
                     .item(AssemblyOperatorBlockItem::new)
-                    .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "item.blazinghot.blaze_mixer"))
+                    .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.BLAZE_MIXER.getKey()))
                     .transform(customItemModel())
                     .register();
 

@@ -7,6 +7,8 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
+import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.*;
+
 @SuppressWarnings("unused")
 public class DeployingRecipeGen extends BlazingProcessingRecipeGen {
 
@@ -15,9 +17,12 @@ public class DeployingRecipeGen extends BlazingProcessingRecipeGen {
     }
 
     GeneratedRecipe
-            STELLAR_GOLDEN_APPLE = stellarApple(Items.GOLDEN_APPLE, BlazingItems.STELLAR_GOLDEN_APPLE),
-            STELLAR_BLAZE_APPLE = stellarApple(BlazingItems.BLAZE_APPLE, BlazingItems.STELLAR_BLAZE_APPLE),
-            STELLAR_IRON_APPLE = stellarApple(BlazingItems.IRON_APPLE, BlazingItems.STELLAR_IRON_APPLE);
+            STELLAR_GOLDEN_APPLE = stellarApple(goldenApple(), BlazingItems.STELLAR_GOLDEN_APPLE),
+            STELLAR_BLAZE_APPLE = stellarApple(blazeApple(), BlazingItems.STELLAR_BLAZE_APPLE),
+            STELLAR_IRON_APPLE = stellarApple(ironApple(), BlazingItems.STELLAR_IRON_APPLE),
+            STELLAR_ZINC_APPLE = stellarApple(zincApple(), BlazingItems.STELLAR_ZINC_APPLE),
+            STELLAR_COPPER_APPLE = stellarApple(copperAppple(), BlazingItems.STELLAR_COPPER_APPLE),
+            STELLAR_BRASS_APPLE = stellarApple(brassApple(), BlazingItems.STELLAR_BRASS_APPLE);
 
     @Override
     protected IRecipeTypeInfo getRecipeType() {

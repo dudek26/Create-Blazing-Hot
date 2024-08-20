@@ -1,6 +1,6 @@
 package com.dudko.blazinghot.mixin;
 
-import com.dudko.blazinghot.content.metal.MoltenMetal;
+import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.mixin_interfaces.IAdvancementBehaviour;
 import com.dudko.blazinghot.multiloader.MultiFluids;
@@ -49,10 +49,10 @@ public abstract class MechanicalMixerBlockEntityMixin extends BasinOperatingBloc
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/kinetics/mixer/MechanicalMixerBlockEntity;applyBasinRecipe()V"), remap = false)
     private void blazinghot$meltingAdvancements(CallbackInfo ci) {
         if (currentRecipe instanceof MixingRecipe recipe) {
-            if (MultiFluids.recipeResultContains(recipe, MoltenMetal.GOLD.fluidTag())) {
+            if (MultiFluids.recipeResultContains(recipe, MoltenMetals.GOLD.fluidTag())) {
                 blazinghot$award(BlazingAdvancements.MOLTEN_GOLD);
             }
-            if (MultiFluids.recipeResultContains(recipe, MoltenMetal.BLAZE_GOLD.fluidTag())) {
+            if (MultiFluids.recipeResultContains(recipe, MoltenMetals.BLAZE_GOLD.fluidTag())) {
                 blazinghot$award(BlazingAdvancements.MOLTEN_BLAZE_GOLD);
             }
         }

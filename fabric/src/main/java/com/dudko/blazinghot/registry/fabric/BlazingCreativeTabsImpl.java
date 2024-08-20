@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.registry.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingCreativeTabs.RegistrateDisplayItemsGenerator;
 import com.dudko.blazinghot.registry.BlazingCreativeTabs.Tabs;
@@ -26,7 +27,7 @@ public class BlazingCreativeTabsImpl {
                     () -> FabricItemGroup
                             .builder()
                             .icon(() -> BlazingItems.BLAZE_GOLD_INGOT.asItem().getDefaultInstance())
-                            .title(Component.translatable("itemGroup.blazinghot"))
+                            .title(BlazingLang.TAB_BASE.get())
                             .displayItems(new RegistrateDisplayItemsGenerator(true, Tabs.BASE))
                             .build()),
             BUILDING_TAB =
@@ -34,7 +35,7 @@ public class BlazingCreativeTabsImpl {
                             () -> FabricItemGroup
                                     .builder()
                                     .icon(() -> BlazingBlocks.MODERN_LAMP_BLOCKS.get(DyeColor.WHITE).asStack())
-                                    .title(Component.translatable("itemGroup.blazinghot.building"))
+                                    .title(BlazingLang.TAB_BUILDING.get())
                                     .displayItems(new RegistrateDisplayItemsGenerator(false, Tabs.BUILDING))
                                     .build());
 

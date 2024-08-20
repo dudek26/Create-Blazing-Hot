@@ -25,6 +25,7 @@ Create: Blazing Hot 0.6
 * Updated textures for existing Molten Metals
 * Blaze Arrow's damage is now multiplied when hitting the target rather than when being shot
 * Changed the icon of Blazing Building Blocks creative tab back to White Modern Lamp 
+* [Fabric] Unified some translations between EMI and JEI
 * [Fabric] Molten Blaze Gold source blocks now turn into Obsidian when touching water
 
 ### Removed:

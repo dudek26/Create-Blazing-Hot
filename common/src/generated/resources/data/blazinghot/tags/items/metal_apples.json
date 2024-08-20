@@ -3,6 +3,9 @@
   "values": [
     "blazinghot:iron_apple",
     "blazinghot:blaze_apple",
+    "blazinghot:copper_apple",
+    "blazinghot:zinc_apple",
+    "blazinghot:brass_apple",
     "minecraft:golden_apple"
   ]
 }

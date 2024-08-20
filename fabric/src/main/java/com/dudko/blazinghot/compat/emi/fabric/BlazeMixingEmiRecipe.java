@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.compat.emi.fabric;
 
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
+import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.compat.emi.CreateEmiAnimations;
 import com.simibubi.create.compat.emi.CreateEmiPlugin;
@@ -12,7 +13,6 @@ import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.widget.WidgetHolder;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
@@ -33,8 +33,8 @@ public class BlazeMixingEmiRecipe extends BasinEmiRecipe {
             long calculatedCost = getFuelCost(recipe);
             fuelFluid =
                     calculatedCost > 0 ?
-                    FluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, calculatedCost) :
-                    FluidIngredient.EMPTY;
+                            FluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, calculatedCost) :
+                            FluidIngredient.EMPTY;
 
             ResourceLocation id = recipe.getId();
             this.id = new ResourceLocation("emi", "blazinghot/blaze_mixing/" + id.getNamespace() + "/" + id.getPath());
@@ -46,8 +46,10 @@ public class BlazeMixingEmiRecipe extends BasinEmiRecipe {
     @Override
     public void addWidgets(WidgetHolder widgets) {
         if (!fuels.isEmpty() && !fuels.get(0).isEmpty() && fuels.get(0) != null) {
-            addSlot(widgets, fuels.get(0), 35, 31).appendTooltip(Component
-                    .translatable("emi.blazinghot.tooltip.blaze_mixing.fuel")
+            addSlot(widgets,
+                    fuels.get(0),
+                    35,
+                    31).appendTooltip(BlazingLang.BLAZE_MIXER_FUEL.get()
                     .withStyle(ChatFormatting.DARK_GREEN));
         }
         super.addWidgets(widgets);

@@ -1,7 +1,7 @@
-// 1.20.1	2024-08-19T18:59:56.8634491	Create: Blazing Hot/Blazing Hot's Advancements
+// 1.20.1	2024-08-20T17:15:28.3807766	Create: Blazing Hot/Blazing Hot's Advancements
 2d72477325d5a877d6bb669558ecbad2ce3379c1 data\blazinghot\advancements\nether_essence.json
 e685d815a62b9994b1efa34ec0fc463fd6f708ae data\blazinghot\advancements\blaze_mixer.json
-ffc8cc03acb5fe6f066eb2f59905ad47feab4de3 data\blazinghot\advancements\all_molten_metals.json
+0711d5ed99744fcd10c8bca918fd6eedf4661ef4 data\blazinghot\advancements\all_molten_metals.json
 36dbc3c2dcfd739e9047b168779dd76e1f1d5438 data\blazinghot\advancements\molten_gold.json
 b09515505ad367a3753565329667dcb5d7554b69 data\blazinghot\advancements\blaze_mixer_max.json
 1c2bfc5f90990f291f5532f7cf0ab9ae88483869 data\blazinghot\advancements\metal_apple_spout_0000.json
@@ -14,6 +14,6 @@ daaa321fb97dd3690d0c511609012840f9e4b28f data\blazinghot\advancements\root.json
 e07a9d2ef6d0711f3ca394a0f18b82b4bb2d1105 data\blazinghot\advancements\extinguishing_food_save.json
 3600101b8df7051c5f6df4320e8ecd9607be0bf4 data\blazinghot\advancements\ancient_debris_melting.json
 95290d64cfddcedfab7100c13f4942016f33c7b5 data\blazinghot\advancements\golden_apple_factory.json
-514f3029f792ac63ca28aeb8b9709f2858b69e41 data\blazinghot\advancements\all_metal_food.json
-75d292bfa0f068fc649781c4d8af0a922dd14a48 data\blazinghot\advancements\modern_lamp.json
 821fc3d162e346d2d725efe4b4ddbe2fbf78cebe data\blazinghot\advancements\molten_blaze_gold_00.json
+75d292bfa0f068fc649781c4d8af0a922dd14a48 data\blazinghot\advancements\modern_lamp.json
+24e3bb0fad565fa14dd1b3fec880a86e5bf32cda data\blazinghot\advancements\all_metal_food.json

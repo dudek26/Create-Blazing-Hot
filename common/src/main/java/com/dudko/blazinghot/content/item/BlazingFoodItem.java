@@ -26,17 +26,20 @@ public class BlazingFoodItem extends Item {
     private boolean extinguishing;
     private boolean effectTooltip = true;
 
+    private int oxygen;
+
     public BlazingFoodItem(Properties properties) {
         super(properties);
     }
 
-    public BlazingFoodItem(Properties properties, BProperties... bProperties) {
+    public BlazingFoodItem(Properties properties, ExtraProperties... extraProperties) {
         super(properties);
-        for (BProperties property : bProperties) {
+        for (ExtraProperties property : extraProperties) {
             switch (property) {
                 case FOIL -> foil = true;
                 case EXTINGUISHING -> extinguishing = true;
                 case DISABLE_EFFECT_TOOLTIP -> effectTooltip = false;
+                case OXYGEN -> oxygen = property.value;
             }
         }
     }
@@ -44,6 +47,14 @@ public class BlazingFoodItem extends Item {
     @Override
     public boolean isFoil(ItemStack stack) {
         return foil || super.isFoil(stack);
+    }
+
+    public boolean isExtinguishing() {
+        return extinguishing;
+    }
+
+    public int getOxygen() {
+        return oxygen;
     }
 
     @Override
@@ -55,6 +66,9 @@ public class BlazingFoodItem extends Item {
                 BlazingAdvancements.EXTINGUISHING_FOOD_SAVE.awardTo(player);
             }
             livingEntity.extinguishFire();
+        }
+        if (oxygen > 0) {
+            livingEntity.setAirSupply(Math.min(livingEntity.getAirSupply() + oxygen, livingEntity.getMaxAirSupply()));
         }
         return super.finishUsingItem(stack, level, livingEntity);
     }
@@ -73,9 +87,20 @@ public class BlazingFoodItem extends Item {
         super.appendHoverText(stack, level, lines, isAdvanced);
     }
 
-    public enum BProperties {
+    public enum ExtraProperties {
         EXTINGUISHING,
         FOIL,
-        DISABLE_EFFECT_TOOLTIP
+        DISABLE_EFFECT_TOOLTIP,
+        OXYGEN(100);
+
+        private final int value;
+
+        ExtraProperties() {
+            this(0);
+        }
+
+        ExtraProperties(int value) {
+            this.value = value;
+        }
     }
 }

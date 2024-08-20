@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.compat.jei.fabric;
 
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
+import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.compat.jei.category.BasinCategory;
 import com.simibubi.create.compat.jei.category.animations.AnimatedBlazeBurner;
@@ -74,8 +75,7 @@ public class BlazeMixingCategory extends BasinCategory {
                 .setBackground(getRenderedSlot(), -1, -1)
                 .addIngredients(FabricTypes.FLUID_STACK, toJei(withImprovedVisibility(fuels)))
                 .addTooltipCallback(addFluidTooltip(fuelFluid.getRequiredAmount()))
-                .addTooltipCallback((v, t) -> t.add(Component
-                        .translatable("blazinghot.tooltip.blaze_mixing.fuel")
+                .addTooltipCallback((v, t) -> t.add(BlazingLang.BLAZE_MIXER_FUEL.get()
                         .withStyle(ChatFormatting.DARK_GREEN)));
     }
 

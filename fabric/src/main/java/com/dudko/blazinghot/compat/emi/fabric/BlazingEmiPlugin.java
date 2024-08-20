@@ -2,9 +2,11 @@ package com.dudko.blazinghot.compat.emi.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.config.BlazingConfigs;
-import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
+import com.dudko.blazinghot.content.metal.MoltenMetal;
+import com.dudko.blazinghot.content.metal.MoltenMetals;
+import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
@@ -44,7 +46,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-import static com.dudko.blazinghot.content.metal.MoltenMetal.ALL_METALS;
 import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe.getFuelCost;
 
 public class BlazingEmiPlugin implements EmiPlugin {
@@ -107,7 +108,7 @@ public class BlazingEmiPlugin implements EmiPlugin {
                     recipe));
         }
 
-        for (MoltenMetal metal : ALL_METALS) {
+        for (MoltenMetal metal : MoltenMetals.ALL) {
             addMoltenMetalCollisions(registry, metal);
         }
 
@@ -118,7 +119,7 @@ public class BlazingEmiPlugin implements EmiPlugin {
                 () -> Blocks.COBBLESTONE);
 
         addFluidInfo(registry,
-                Component.translatable("emi.blazinghot.info.nether_lava_cobblestone"),
+                BlazingLang.NETHER_LAVA_INFO.get(),
                 "nether_lava",
                 BlazingFluidsImpl.NETHER_LAVA.get());
     }

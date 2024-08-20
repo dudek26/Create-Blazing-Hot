@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.registry.forge;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingCreativeTabs.RegistrateDisplayItemsGenerator;
 import com.dudko.blazinghot.registry.BlazingCreativeTabs.Tabs;
@@ -29,7 +30,7 @@ public class BlazingCreativeTabsImpl {
             REGISTER.register("create_blazing_hot",
                     () -> CreativeModeTab
                             .builder()
-                            .title(Components.translatable("itemGroup.blazinghot"))
+                            .title(BlazingLang.TAB_BASE.get())
                             .withTabsBefore(AllCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
                             .icon(() -> BlazingItems.BLAZE_GOLD_INGOT.asItem().getDefaultInstance())
                             .displayItems(new RegistrateDisplayItemsGenerator(true, Tabs.BASE))
@@ -40,7 +41,7 @@ public class BlazingCreativeTabsImpl {
             REGISTER.register("create_blazing_hot_building",
                     () -> CreativeModeTab
                             .builder()
-                            .title(Components.translatable("itemGroup.blazinghot.building"))
+                            .title(BlazingLang.TAB_BUILDING.get())
                             .withTabsBefore(BlazingCreativeTabsImpl.BASE_TAB.getKey())
                             .icon(() -> BlazingBlocks.MODERN_LAMP_BLOCKS.get(DyeColor.WHITE).asStack())
                             .displayItems(new RegistrateDisplayItemsGenerator(false, Tabs.BUILDING))

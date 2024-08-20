@@ -2,6 +2,7 @@ package com.dudko.blazinghot.multiloader.fabric;
 
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelBlock;
+import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.foundation.data.ModelGen;
 import com.simibubi.create.foundation.item.ItemDescription;
@@ -31,7 +32,7 @@ public class BlazingBuilderTransformersImpl {
                         ))
                 .item()
                 .tag(BlazingTags.Items.MODERN_LAMPS.tag)
-                .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "item.blazinghot.modern_lamp"))
+                .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.MODERN_LAMP.getKey()))
                 .model((c, b) -> b.blockItem(c).texture("#all", b.modLoc("block/modern_lamp/" + color.getName())))
                 .build();
     }
@@ -58,7 +59,7 @@ public class BlazingBuilderTransformersImpl {
                 ))
                 .item()
                 .tag(BlazingTags.Items.MODERN_LAMP_PANELS.tag)
-                .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "item.blazinghot.modern_lamp"))
+                .onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.MODERN_LAMP.getKey()))
                 .transform(ModelGen.customItemModel("modern_lamp_panel", color.getName()));
     }
 
