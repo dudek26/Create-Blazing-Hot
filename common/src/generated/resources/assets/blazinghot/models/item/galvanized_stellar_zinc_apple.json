@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "blazinghot:item/galvanized_stellar_zinc_apple"
+  }
+}

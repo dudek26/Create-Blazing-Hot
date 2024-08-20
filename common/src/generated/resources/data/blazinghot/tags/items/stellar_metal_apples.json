@@ -3,6 +3,9 @@
   "values": [
     "blazinghot:stellar_golden_apple",
     "blazinghot:stellar_iron_apple",
-    "blazinghot:stellar_blaze_apple"
+    "blazinghot:stellar_blaze_apple",
+    "blazinghot:stellar_copper_apple",
+    "blazinghot:stellar_zinc_apple",
+    "blazinghot:stellar_brass_apple"
   ]
 }

@@ -2,6 +2,7 @@ package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.metal.MoltenMetal;
+import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.simibubi.create.foundation.utility.RegisteredObjects;
@@ -21,10 +22,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
-import static com.dudko.blazinghot.content.metal.MoltenMetal.BLAZE_GOLD;
-import static com.dudko.blazinghot.content.metal.Form.INGOT;
-import static com.dudko.blazinghot.content.metal.Form.NUGGET;
-import static com.dudko.blazinghot.content.metal.MoltenMetal.IRON;
+import static com.dudko.blazinghot.content.metal.Forms.INGOT;
+import static com.dudko.blazinghot.content.metal.Forms.NUGGET;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.*;
 import static com.dudko.blazinghot.registry.BlazingBlocks.BLAZE_GOLD_BLOCK;
 import static com.dudko.blazinghot.registry.BlazingItems.BLAZE_GOLD_INGOT;
@@ -74,10 +73,16 @@ public class CraftingRecipeGen extends BlazingRecipeProvider {
     }
 
     GeneratedRecipe
-            IRON_APPLE = metalApple(IRON, BlazingItems.IRON_APPLE),
-            IRON_CARROT = metalCarrot(IRON, BlazingItems.IRON_CARROT),
-            BLAZE_APPLE = metalApple(BLAZE_GOLD, BlazingItems.BLAZE_APPLE),
-            BLAZE_CARROT = metalCarrot(BLAZE_GOLD, BlazingItems.BLAZE_CARROT),
+            IRON_APPLE = metalApple(MoltenMetals.IRON, BlazingItems.IRON_APPLE),
+            IRON_CARROT = metalCarrot(MoltenMetals.IRON, BlazingItems.IRON_CARROT),
+            BLAZE_APPLE = metalApple(MoltenMetals.BLAZE_GOLD, BlazingItems.BLAZE_APPLE),
+            BLAZE_CARROT = metalCarrot(MoltenMetals.BLAZE_GOLD, BlazingItems.BLAZE_CARROT),
+            BRASS_APPLE = metalApple(MoltenMetals.BRASS, BlazingItems.BRASS_APPLE),
+            BRASS_CARROT = metalCarrot(MoltenMetals.BRASS, BlazingItems.BRASS_CARROT),
+            ZINC_APPLE = metalApple(MoltenMetals.ZINC, BlazingItems.ZINC_APPLE),
+            ZINC_CARROT = metalCarrot(MoltenMetals.ZINC, BlazingItems.ZINC_CARROT),
+            COPPER_APPLE = metalApple(MoltenMetals.COPPER, BlazingItems.COPPER_APPLE),
+            COPPER_CARROT = metalCarrot(MoltenMetals.COPPER, BlazingItems.COPPER_CARROT),
             WHITE_MODERN_LAMP =
                     create(BlazingBlocks.MODERN_LAMP_BLOCKS.get(DyeColor.WHITE))
                             .unlockedByTag(BlazingIngredients::blazeGoldRod)

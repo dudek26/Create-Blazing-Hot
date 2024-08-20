@@ -1,0 +1,64 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "blazinghot:stellar_copper_apple"
+  },
+  "loops": 6,
+  "results": [
+    {
+      "item": "blazinghot:enchanted_copper_apple"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "blazinghot:convertMeltable": true,
+      "ingredients": [
+        {
+          "item": "blazinghot:coated_stellar_copper_apple"
+        },
+        {
+          "amount": 54000,
+          "fluidTag": "blazinghot:molten_copper"
+        }
+      ],
+      "results": [
+        {
+          "item": "blazinghot:coated_stellar_copper_apple"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "blazinghot:coated_stellar_copper_apple"
+        },
+        {
+          "item": "minecraft:diamond"
+        }
+      ],
+      "results": [
+        {
+          "item": "blazinghot:coated_stellar_copper_apple"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "blazinghot:coated_stellar_copper_apple"
+        }
+      ],
+      "results": [
+        {
+          "item": "blazinghot:coated_stellar_copper_apple"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "blazinghot:coated_stellar_copper_apple"
+  }
+}

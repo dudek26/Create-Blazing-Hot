@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.content.metal.MoltenMetal;
+import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
@@ -8,7 +9,6 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
-import static com.dudko.blazinghot.content.metal.MoltenMetal.*;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.*;
 
 @SuppressWarnings("unused")
@@ -25,12 +25,18 @@ public class FillingRecipeGen extends BlazingProcessingRecipeGen {
                             .require(melon())
                             .require(moltenGold(), NUGGET_COVER)
                             .output(Items.GLISTERING_MELON_SLICE)),
-            GOLDEN_APPLE = metalApple(GOLD, Items.GOLDEN_APPLE),
-            GOLDEN_CARROT = metalCarrot(GOLD, Items.GOLDEN_CARROT),
-            BLAZE_CARROT = metalCarrot(BLAZE_GOLD, BlazingItems.BLAZE_CARROT),
-            BLAZE_APPLE = metalApple(BLAZE_GOLD, BlazingItems.BLAZE_APPLE),
-            IRON_CARROT = metalCarrot(IRON, BlazingItems.IRON_CARROT),
-            IRON_APPLE = metalApple(IRON, BlazingItems.IRON_APPLE);
+            GOLDEN_APPLE = metalApple(MoltenMetals.GOLD, Items.GOLDEN_APPLE),
+            GOLDEN_CARROT = metalCarrot(MoltenMetals.GOLD, Items.GOLDEN_CARROT),
+            BLAZE_CARROT = metalCarrot(MoltenMetals.BLAZE_GOLD, BlazingItems.BLAZE_CARROT),
+            BLAZE_APPLE = metalApple(MoltenMetals.BLAZE_GOLD, BlazingItems.BLAZE_APPLE),
+            IRON_CARROT = metalCarrot(MoltenMetals.IRON, BlazingItems.IRON_CARROT),
+            IRON_APPLE = metalApple(MoltenMetals.IRON, BlazingItems.IRON_APPLE),
+            BRASS_CARROT = metalCarrot(MoltenMetals.BRASS, BlazingItems.BRASS_CARROT),
+            BRASS_APPLE = metalApple(MoltenMetals.BRASS, BlazingItems.BRASS_APPLE),
+            COPPER_CARROT = metalCarrot(MoltenMetals.COPPER, BlazingItems.COPPER_CARROT),
+            COPPER_APPLE = metalApple(MoltenMetals.COPPER, BlazingItems.COPPER_APPLE),
+            ZINC_CARROT = metalCarrot(MoltenMetals.ZINC, BlazingItems.ZINC_CARROT),
+            ZINC_APPLE = metalApple(MoltenMetals.ZINC, BlazingItems.ZINC_APPLE);
 
     @Override
     protected IRecipeTypeInfo getRecipeType() {

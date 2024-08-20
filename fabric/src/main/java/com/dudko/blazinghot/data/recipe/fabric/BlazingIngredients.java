@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingTags;
@@ -12,11 +13,12 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
-import static com.dudko.blazinghot.content.metal.Form.*;
-import static com.dudko.blazinghot.content.metal.MoltenMetal.*;
+import static com.dudko.blazinghot.content.metal.Forms.*;
 import static com.dudko.blazinghot.registry.CommonTags.Namespace.INTERNAL;
 
 public class BlazingIngredients {
@@ -70,27 +72,31 @@ public class BlazingIngredients {
     //    Fluids
 
     public static TagKey<Fluid> moltenGold() {
-        return GOLD.fluidTag();
+        return MoltenMetals.GOLD.fluidTag();
     }
 
     public static TagKey<Fluid> moltenIron() {
-        return IRON.fluidTag();
+        return MoltenMetals.IRON.fluidTag();
     }
 
     public static TagKey<Fluid> moltenCopper() {
-        return COPPER.fluidTag();
+        return MoltenMetals.COPPER.fluidTag();
     }
 
     public static TagKey<Fluid> moltenZinc() {
-        return ZINC.fluidTag();
+        return MoltenMetals.ZINC.fluidTag();
     }
 
     public static TagKey<Fluid> moltenBlazeGold() {
-        return BLAZE_GOLD.fluidTag();
+        return MoltenMetals.BLAZE_GOLD.fluidTag();
     }
 
     public static TagKey<Fluid> moltenAncientDebris() {
-        return ANCIENT_DEBRIS.fluidTag();
+        return MoltenMetals.ANCIENT_DEBRIS.fluidTag();
+    }
+
+    public static TagKey<Fluid> moltenNetherite() {
+        return MoltenMetals.NETHERITE.fluidTag();
     }
 
     public static Fluid water() {
@@ -226,11 +232,11 @@ public class BlazingIngredients {
     }
 
     public static TagKey<Item> blazeGoldSheet() {
-        return PLATE.internalTag(BLAZE_GOLD);
+        return PLATE.internalTag(MoltenMetals.BLAZE_GOLD);
     }
 
     public static TagKey<Item> blazeGoldRod() {
-        return ROD.internalTag(BLAZE_GOLD);
+        return ROD.internalTag(MoltenMetals.BLAZE_GOLD);
     }
 
     //    Food
@@ -249,28 +255,56 @@ public class BlazingIngredients {
 
     //    Metal Food
 
-    public static Item goldenApple() {
+    public static ItemLike goldenApple() {
         return Items.GOLDEN_APPLE;
     }
 
-    public static Item stellarGoldenApple() {
+    public static ItemLike stellarGoldenApple() {
         return modStellarApple("golden");
     }
 
-    public static Item blazeApple() {
+    public static ItemLike blazeApple() {
         return modApple("blaze");
     }
 
-    public static Item stellarBlazeApple() {
+    public static ItemLike stellarBlazeApple() {
         return modStellarApple("blaze");
     }
 
-    public static Item ironApple() {
+    public static ItemLike ironApple() {
         return modApple("iron");
     }
 
-    public static Item stellarIronApple() {
+    public static ItemLike stellarIronApple() {
         return modStellarApple("iron");
+    }
+
+    public static ItemLike brassApple() {
+        return modApple("brass");
+    }
+
+    public static ItemLike stellarBrassApple() {
+        return modStellarApple("brass");
+    }
+
+    public static ItemLike copperAppple() {
+        return modApple("copper");
+    }
+
+    public static ItemLike stellarCopperApple() {
+        return modStellarApple("copper");
+    }
+
+    public static ItemLike zincApple() {
+        return modApple("zinc");
+    }
+
+    public static ItemLike stellarZincApple() {
+        return modStellarApple("zinc");
+    }
+
+    public static Ingredient netheriteAppleIngredients() {
+        return Ingredient.of(BlazingItems.ENCHANTED_BLAZE_APPLE, Items.ENCHANTED_GOLDEN_APPLE);
     }
 
 

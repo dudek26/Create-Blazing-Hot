@@ -2,6 +2,7 @@ package com.dudko.blazinghot.registry.forge;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.metal.MoltenMetal;
+import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.FluidEntry;
@@ -22,8 +23,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.function.Function;
-
-import static com.dudko.blazinghot.content.metal.MoltenMetal.*;
 
 public class BlazingFluidsImpl {
 
@@ -81,7 +80,7 @@ public class BlazingFluidsImpl {
 
         fluidInteraction(NETHER_LAVA, () -> Blocks.COBBLESTONE, Fluids.WATER);
 
-        for (MoltenMetal metal : ALL_METALS) {
+        for (MoltenMetal metal : MoltenMetals.ALL) {
             for (Map.Entry<Fluid, NonNullSupplier<Block>> entry : metal.getFluidInteractions().entrySet()) {
                 if (entry.getValue() == null) {
                     BlazingHot.LOGGER.error("Null fluid interaction for {}, {}", metal.moltenName(), ForgeRegistries.FLUIDS.getKey(entry.getKey()).toString());
@@ -111,16 +110,16 @@ public class BlazingFluidsImpl {
 
     public static class MoltenMetalsList<T extends ForgeFlowingFluid> implements Iterable<FluidEntry<T>> {
 
-        private static final int METAL_AMOUNT = ALL_METALS.size();
+        private static final int METAL_AMOUNT = MoltenMetals.ALL.size();
 
         private final FluidEntry<?>[] values = new FluidEntry<?>[METAL_AMOUNT];
 
         private static int metalOrdinal(MoltenMetal metal) {
-            return ALL_METALS.indexOf(metal);
+            return MoltenMetals.ALL.indexOf(metal);
         }
 
         public MoltenMetalsList(Function<MoltenMetal, FluidEntry<? extends T>> filler) {
-            for (MoltenMetal metal : ALL_METALS) {
+            for (MoltenMetal metal : MoltenMetals.ALL) {
                 values[metalOrdinal(metal)] = filler.apply(metal);
             }
         }

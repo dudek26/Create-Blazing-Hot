@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": {
+      "tag": "blazinghot:zinc_nuggets"
+    },
+    "Y": {
+      "item": "minecraft:carrot"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "XYX",
+    "XXX"
+  ],
+  "result": {
+    "item": "blazinghot:zinc_carrot"
+  },
+  "show_notification": true
+}

@@ -2,6 +2,7 @@ package com.dudko.blazinghot.registry.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.metal.MoltenMetal;
+import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.AllTags.AllFluidTags;
 import com.simibubi.create.foundation.data.CreateRegistrate;
@@ -138,7 +139,7 @@ public class BlazingFluidsImpl {
         Fluid fluid = fluidState.getType();
         Fluid metFluid = metFluidState.getType();
 
-        for (MoltenMetal metal : MoltenMetal.ALL_METALS) {
+        for (MoltenMetal metal : MoltenMetals.ALL) {
             for (Map.Entry<Fluid, NonNullSupplier<Block>> entry : metal.getFluidInteractions().entrySet()) {
 
                 TagKey<Fluid> fluidTag = fluidTags.get(entry.getKey());
@@ -189,16 +190,16 @@ public class BlazingFluidsImpl {
 
     public static class MoltenMetalsList<T extends SimpleFlowableFluid> implements Iterable<FluidEntry<T>> {
 
-        private static final int METAL_AMOUNT = MoltenMetal.ALL_METALS.size();
+        private static final int METAL_AMOUNT = MoltenMetals.ALL.size();
 
         private final FluidEntry<?>[] values = new FluidEntry<?>[METAL_AMOUNT];
 
         private static int metalOrdinal(MoltenMetal metal) {
-            return MoltenMetal.ALL_METALS.indexOf(metal);
+            return MoltenMetals.ALL.indexOf(metal);
         }
 
         public MoltenMetalsList(Function<MoltenMetal, FluidEntry<? extends T>> filler) {
-            for (MoltenMetal metal : MoltenMetal.ALL_METALS) {
+            for (MoltenMetal metal : MoltenMetals.ALL) {
                 values[metalOrdinal(metal)] = filler.apply(metal);
             }
         }

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": {
+      "tag": "blazinghot:copper_ingots"
+    },
+    "Y": {
+      "item": "minecraft:apple"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "XYX",
+    "XXX"
+  ],
+  "result": {
+    "item": "blazinghot:copper_apple"
+  },
+  "show_notification": true
+}

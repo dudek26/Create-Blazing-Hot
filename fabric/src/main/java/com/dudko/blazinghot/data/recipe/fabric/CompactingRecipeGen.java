@@ -6,7 +6,7 @@ import net.minecraft.data.PackOutput;
 
 import java.util.List;
 
-import static com.dudko.blazinghot.content.metal.MoltenMetal.ALL_METALS;
+import static com.dudko.blazinghot.content.metal.MoltenMetals.ALL;
 
 @SuppressWarnings("unused")
 public class CompactingRecipeGen extends BlazingProcessingRecipeGen {
@@ -15,7 +15,7 @@ public class CompactingRecipeGen extends BlazingProcessingRecipeGen {
         super(output);
     }
 
-    List<GeneratedRecipe> ALL_MOLTEN_COMPACTING_RECIPES = ALL_METALS.stream()
+    List<GeneratedRecipe> ALL_MOLTEN_COMPACTING_RECIPES = ALL.stream()
             .map(metal -> create(metal.moltenName(),
                     b -> b.convertMeltable()
                             .require(metal.fluidTag(), metal.compactingResult().getSecond())

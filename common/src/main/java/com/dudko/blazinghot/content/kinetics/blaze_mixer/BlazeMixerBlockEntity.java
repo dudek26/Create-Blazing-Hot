@@ -2,7 +2,7 @@ package com.dudko.blazinghot.content.kinetics.blaze_mixer;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.config.BlazingConfigs;
-import com.dudko.blazinghot.content.metal.MoltenMetal;
+import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancement;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.mixin_interfaces.IAdvancementBehaviour;
@@ -173,11 +173,11 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
                 }
             }
 
-            if (MultiFluids.recipeResultContains(recipe, MoltenMetal.GOLD.fluidTag())) {
+            if (MultiFluids.recipeResultContains(recipe, MoltenMetals.GOLD.fluidTag())) {
                 award(BlazingAdvancements.MOLTEN_GOLD);
             }
 
-            if (MultiFluids.recipeResultContains(recipe, MoltenMetal.BLAZE_GOLD.fluidTag())) {
+            if (MultiFluids.recipeResultContains(recipe, MoltenMetals.BLAZE_GOLD.fluidTag())) {
                 award(BlazingAdvancements.MOLTEN_BLAZE_GOLD);
             }
 

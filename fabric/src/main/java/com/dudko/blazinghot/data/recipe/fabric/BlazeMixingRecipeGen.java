@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.content.metal.MoltenMetal;
+import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.multiloader.MultiFluids;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
@@ -34,7 +35,7 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
     }
 
     List<GeneratedRecipe> ALL_MELTING_RECIPES =
-            compactLists(MoltenMetal.ALL_METALS.stream().map(this::melting).toList());
+            compactLists(MoltenMetals.ALL.stream().map(this::melting).toList());
 
     GeneratedRecipe
             NETHER_LAVA =
@@ -53,7 +54,7 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
                                             MultiFluids.Constants.INGOT.platformed())
                                     .requiresHeat(HeatCondition.SUPERHEATED)
                                     .duration(200)
-                                    .output(BlazingFluidsImpl.MOLTEN_METALS.getFluid(MoltenMetal.BLAZE_GOLD),
+                                    .output(BlazingFluidsImpl.MOLTEN_METALS.getFluid(MoltenMetals.BLAZE_GOLD),
                                             MultiFluids.Constants.INGOT.platformed()));
 
     private GeneratedRecipe melting(String name, Ingredient ingredient, Fluid result, long amount, int duration, long fuelCost) {

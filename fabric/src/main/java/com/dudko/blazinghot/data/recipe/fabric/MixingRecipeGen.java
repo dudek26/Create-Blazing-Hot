@@ -1,7 +1,8 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
-import com.dudko.blazinghot.content.metal.Form;
+import com.dudko.blazinghot.content.metal.Forms;
 import com.dudko.blazinghot.content.metal.MoltenMetal;
+import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.dudko.blazinghot.registry.BlazingItems;
@@ -19,7 +20,6 @@ import net.minecraft.world.level.material.Fluid;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.dudko.blazinghot.content.metal.MoltenMetal.*;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.*;
 import static com.dudko.blazinghot.util.ListUtil.compactLists;
 
@@ -31,7 +31,7 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
     }
 
     List<GeneratedRecipe> ALL_MELTING_RECIPES =
-            compactLists(MoltenMetal.ALL_METALS.stream()
+            compactLists(MoltenMetals.ALL.stream()
                     .filter(m -> m.mechanicalMixerMeltable)
                     .map(this::melting)
                     .toList());
@@ -60,28 +60,28 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
                                             Constants.ROD.platformed())
                                     .requiresHeat(HeatCondition.SUPERHEATED)
                                     .duration(200)
-                                    .output(BLAZE_GOLD.fluid().get(),
+                                    .output(MoltenMetals.BLAZE_GOLD.fluid().get(),
                                             Constants.ROD.platformed())),
             MOLTEN_NETHERITE = create("molten_netherite",
                     b -> b.convertMeltable()
-                            .require(moltenGold(), Form.INGOT.amount)
-                            .require(moltenAncientDebris(), Form.INGOT.amount)
+                            .require(moltenGold(), Forms.INGOT.amount)
+                            .require(moltenAncientDebris(), Forms.INGOT.amount)
                             .duration(200)
                             .requiresHeat(HeatCondition.SUPERHEATED)
-                            .output(BlazingFluidsImpl.MOLTEN_METALS.getFluid(NETHERITE), Form.INGOT.amount / 4)),
+                            .output(BlazingFluidsImpl.MOLTEN_METALS.getFluid(MoltenMetals.NETHERITE), Forms.INGOT.amount / 4)),
             MOLTEN_ANDESITE = create("molten_andesite",
                     b -> b.convertMeltable()
-                            .require(moltenIron(), Form.NUGGET.amount)
+                            .require(moltenIron(), Forms.NUGGET.amount)
                             .require(andesite())
                             .requiresHeat(HeatCondition.HEATED)
-                            .output(BlazingFluidsImpl.MOLTEN_METALS.getFluid(ANDESITE), Form.ROD.amount * 3)),
+                            .output(BlazingFluidsImpl.MOLTEN_METALS.getFluid(MoltenMetals.ANDESITE), Forms.ROD.amount * 3)),
             MOLTEN_BRASS =
                     create("molten_brass",
                             b -> b.convertMeltable()
-                                    .require(moltenCopper(), Form.INGOT.amount)
-                                    .require(moltenZinc(), Form.INGOT.amount)
+                                    .require(moltenCopper(), Forms.INGOT.amount)
+                                    .require(moltenZinc(), Forms.INGOT.amount)
                                     .requiresHeat(HeatCondition.HEATED)
-                                    .output(BlazingFluidsImpl.MOLTEN_METALS.getFluid(BRASS), Form.INGOT.amount * 2));
+                                    .output(BlazingFluidsImpl.MOLTEN_METALS.getFluid(MoltenMetals.BRASS), Forms.INGOT.amount * 2));
 
     @Override
     protected IRecipeTypeInfo getRecipeType() {

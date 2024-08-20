@@ -1,6 +1,6 @@
 package com.dudko.blazinghot.data.advancement;
 
-import com.dudko.blazinghot.content.metal.MoltenMetal;
+import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.google.common.collect.Sets;
@@ -55,7 +55,7 @@ public class BlazingAdvancements implements DataProvider {
             .after(NETHER_COMPOUND)
             .whenIconCollected()),
 
-    MOLTEN_GOLD = create("molten_gold", b -> b.icon(MoltenMetal.GOLD.bucket().get())
+    MOLTEN_GOLD = create("molten_gold", b -> b.icon(MoltenMetals.GOLD.bucket().get())
             .title("Flowing Riches")
             .description("Melt Gold in Mixer")
             .special(NOISY)
@@ -63,7 +63,7 @@ public class BlazingAdvancements implements DataProvider {
 
     // All Molten Metals
 
-    ALL_MOLTEN_METALS = create("all_molten_metals", b -> b.icon(MoltenMetal.NETHERITE.bucket().get())
+    ALL_MOLTEN_METALS = create("all_molten_metals", b -> b.icon(MoltenMetals.NETHERITE.bucket().get())
             .title("Tinkers' Construct")
             .description("Obtain a bucket of every non-compat molten metal.")
             .after(MOLTEN_GOLD)
@@ -101,7 +101,7 @@ public class BlazingAdvancements implements DataProvider {
 
     // Blaze Gold
 
-    MOLTEN_BLAZE_GOLD = create("molten_blaze_gold_00", b -> b.icon(MoltenMetal.BLAZE_GOLD.bucket().get())
+    MOLTEN_BLAZE_GOLD = create("molten_blaze_gold_00", b -> b.icon(MoltenMetals.BLAZE_GOLD.bucket().get())
             .title("Fake Alloys")
             .description("Mix Molten Gold and Nether Essence together to obtain Molten Blaze Gold")
             .after(MOLTEN_GOLD)),
@@ -199,7 +199,7 @@ public class BlazingAdvancements implements DataProvider {
         return "Blazing Hot's Advancements";
     }
 
-    public static void provideLang(BiConsumer<String, String> consumer) {
+    public static void provideLangEntries(BiConsumer<String, String> consumer) {
         for (BlazingAdvancement advancement : ENTRIES)
             advancement.provideLang(consumer);
     }

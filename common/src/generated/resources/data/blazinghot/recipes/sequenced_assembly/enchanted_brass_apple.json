@@ -1,0 +1,64 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "blazinghot:stellar_brass_apple"
+  },
+  "loops": 6,
+  "results": [
+    {
+      "item": "blazinghot:enchanted_brass_apple"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "blazinghot:convertMeltable": true,
+      "ingredients": [
+        {
+          "item": "blazinghot:brassy_stellar_brass_apple"
+        },
+        {
+          "amount": 54000,
+          "fluidTag": "blazinghot:molten_brass"
+        }
+      ],
+      "results": [
+        {
+          "item": "blazinghot:brassy_stellar_brass_apple"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "blazinghot:brassy_stellar_brass_apple"
+        },
+        {
+          "item": "minecraft:diamond"
+        }
+      ],
+      "results": [
+        {
+          "item": "blazinghot:brassy_stellar_brass_apple"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "blazinghot:brassy_stellar_brass_apple"
+        }
+      ],
+      "results": [
+        {
+          "item": "blazinghot:brassy_stellar_brass_apple"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "blazinghot:brassy_stellar_brass_apple"
+  }
+}

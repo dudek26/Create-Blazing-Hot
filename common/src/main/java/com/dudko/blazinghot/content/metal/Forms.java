@@ -10,13 +10,13 @@ import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecip
 import static com.dudko.blazinghot.registry.CommonTags.Namespace.INTERNAL;
 import static com.dudko.blazinghot.registry.CommonTags.itemTagOf;
 
-public class Form {
+public class Forms {
 
-    public static final Form
-            INGOT = Form.of("ingots", MultiFluids.Constants.INGOT, 400, true),
-            NUGGET = Form.of("nuggets", MultiFluids.Constants.NUGGET, 65, true),
-            PLATE = Form.of("plates", MultiFluids.Constants.PLATE, 400, true),
-            ROD = Form.of("rods", MultiFluids.Constants.ROD, 250, true);
+    public static final Forms
+            INGOT = Forms.of("ingots", MultiFluids.Constants.INGOT, 400, true),
+            NUGGET = Forms.of("nuggets", MultiFluids.Constants.NUGGET, 65, true),
+            PLATE = Forms.of("plates", MultiFluids.Constants.PLATE, 400, true),
+            ROD = Forms.of("rods", MultiFluids.Constants.ROD, 250, true);
 
     public String tagFolder = null;
     public final long amount;
@@ -25,7 +25,7 @@ public class Form {
     public final boolean mechanicalMixerMeltable;
     public ResourceLocation customLocation = null;
 
-    Form(ResourceLocation customLocation, long amount, int processingTime, long fuelCost, boolean mechanicalMixerMeltable) {
+    Forms(ResourceLocation customLocation, long amount, int processingTime, long fuelCost, boolean mechanicalMixerMeltable) {
         this.customLocation = customLocation;
         this.amount = amount;
         this.processingTime = processingTime;
@@ -33,7 +33,7 @@ public class Form {
         this.fuelCost = fuelCost;
     }
 
-    Form(String tagFolder, long amount, int processingTime, boolean mechanicalMixerMeltable) {
+    Forms(String tagFolder, long amount, int processingTime, boolean mechanicalMixerMeltable) {
         this.tagFolder = tagFolder;
         this.amount = amount;
         this.processingTime = processingTime;
@@ -41,7 +41,7 @@ public class Form {
         this.fuelCost = defaultDurationToFuelCost(processingTime);
     }
 
-    Form(String tagFolder, MultiFluids.Constants fluidConstant, int processingTime, boolean mechanicalMixerMeltable) {
+    Forms(String tagFolder, MultiFluids.Constants fluidConstant, int processingTime, boolean mechanicalMixerMeltable) {
         this(tagFolder, fluidConstant.platformed(), processingTime, mechanicalMixerMeltable);
     }
 
@@ -66,11 +66,11 @@ public class Form {
         return mod.asResource(simpleItemName(metal));
     }
 
-    public static Form of(String tagFolder, MultiFluids.Constants fluidConstant, int processingTime, boolean mechanicalMixerMeltable) {
-        return new Form(tagFolder, fluidConstant, processingTime, mechanicalMixerMeltable);
+    public static Forms of(String tagFolder, MultiFluids.Constants fluidConstant, int processingTime, boolean mechanicalMixerMeltable) {
+        return new Forms(tagFolder, fluidConstant, processingTime, mechanicalMixerMeltable);
     }
 
-    public static Form custom(ResourceLocation location, long amount, int processingTime, long fuelCost, boolean mechanicalMixerMeltable) {
-        return new Form(location, amount, processingTime, fuelCost, mechanicalMixerMeltable);
+    public static Forms custom(ResourceLocation location, long amount, int processingTime, long fuelCost, boolean mechanicalMixerMeltable) {
+        return new Forms(location, amount, processingTime, fuelCost, mechanicalMixerMeltable);
     }
 }

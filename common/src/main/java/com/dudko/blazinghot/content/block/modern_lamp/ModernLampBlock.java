@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.content.block.modern_lamp;
 
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
+import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.simibubi.create.AllTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -53,8 +54,8 @@ public class ModernLampBlock extends Block {
         }
 
         if (pPlayer.getItemInHand(pHand).is(AllTags.AllItemTags.WRENCH.tag) && !pPlayer.isCrouching()) {
-            String action = locked ? "unlock" : "lock";
-            pPlayer.displayClientMessage(Component.translatable("message.blazinghot.modern_lamp." + action), true);
+            Component action = locked ? BlazingLang.LAMP_UNLOCKED.get() : BlazingLang.LAMP_LOCKED.get();
+            pPlayer.displayClientMessage(action, true);
 
             SoundEvent sound = locked ? SoundEvents.STONE_BUTTON_CLICK_ON : SoundEvents.STONE_BUTTON_CLICK_OFF;
             pPlayer.playSound(sound, 1.0F, 1.0F);

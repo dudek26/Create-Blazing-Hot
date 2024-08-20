@@ -9,6 +9,19 @@
     "blazinghot:blaze_carrot",
     "blazinghot:blaze_apple",
     "blazinghot:stellar_blaze_apple",
-    "blazinghot:enchanted_blaze_apple"
+    "blazinghot:enchanted_blaze_apple",
+    "blazinghot:copper_carrot",
+    "blazinghot:copper_apple",
+    "blazinghot:stellar_copper_apple",
+    "blazinghot:enchanted_copper_apple",
+    "blazinghot:zinc_carrot",
+    "blazinghot:zinc_apple",
+    "blazinghot:stellar_zinc_apple",
+    "blazinghot:enchanted_zinc_apple",
+    "blazinghot:brass_carrot",
+    "blazinghot:brass_apple",
+    "blazinghot:stellar_brass_apple",
+    "blazinghot:enchanted_brass_apple",
+    "blazinghot:enchanted_netherite_apple"
   ]
 }

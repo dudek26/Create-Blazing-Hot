@@ -3,6 +3,9 @@
   "values": [
     "blazinghot:iron_carrot",
     "blazinghot:blaze_carrot",
+    "blazinghot:copper_carrot",
+    "blazinghot:zinc_carrot",
+    "blazinghot:brass_carrot",
     "minecraft:golden_carrot"
   ]
 }

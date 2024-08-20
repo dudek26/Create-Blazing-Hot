@@ -1,6 +1,7 @@
 package com.dudko.blazinghot;
 
 import com.dudko.blazinghot.content.metal.MoltenMetal;
+import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.advancement.BlazingTriggers;
 import com.dudko.blazinghot.registry.*;
@@ -30,7 +31,7 @@ public class BlazingHot {
     public static void init() {
         LOGGER.info("Create mod addon {} initializing! Create version: {}", NAME, Create.VERSION);
 
-        MoltenMetal.init();
+        MoltenMetals.init();
 
         BlazingTags.register();
         CommonTags.register();

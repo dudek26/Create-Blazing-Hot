@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "blazinghot:convertMeltable": true,
+  "ingredients": [
+    {
+      "item": "minecraft:apple"
+    },
+    {
+      "amount": 54000,
+      "fluidTag": "blazinghot:molten_brass"
+    }
+  ],
+  "results": [
+    {
+      "item": "blazinghot:brass_apple"
+    }
+  ]
+}
