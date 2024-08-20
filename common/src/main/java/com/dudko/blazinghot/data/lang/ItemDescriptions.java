@@ -9,9 +9,21 @@ public class ItemDescriptions {
 
     public static final BlazingItemDescription START = null,
 
-    EXTINGUISHING = BlazingItemDescription.builder("extinguishing_food")
+    EXTINGUISHING_FOOD = BlazingItemDescription.builder("extinguishing_food")
             .summary("_Extinguishes_ the consumer after being eaten")
             .register(),
+
+    OXYGEN_FOOD = BlazingItemDescription.builder("oxygen_food")
+            .summary("Restores some _oxygen_ allowing you to _survive underwater_ for a bit longer")
+            .register(),
+
+    SLOWNESS_REMOVING_FOOD_0 = slownessRemoved(0),
+
+    SLOWNESS_REMOVING_FOOD_1 = slownessRemoved(1),
+
+    SLOWNESS_REMOVING_FOOD_2 = slownessRemoved(2),
+
+    SLOWNESS_REMOVING_FOOD_ANY = slownessRemoved(255),
 
     BLAZE_ARROW = BlazingItemDescription.builder("blaze_arrow")
             .summary("Deals _extra damage_ when hitting a target in _The Nether_ dimension")
@@ -33,5 +45,15 @@ public class ItemDescriptions {
         for (BlazingItemDescription item : ALL) {
             item.provideLang(consumer);
         }
+    }
+
+    private static BlazingItemDescription slownessRemoved(int maxAmplitude) {
+        String summary;
+        if (maxAmplitude == 255) summary = "Removes _Slowness_ effect on consumption";
+        else summary = "Removes _Slowness_ effect with _maximum amplitude_ of _" + (maxAmplitude + 1) + "_ on consumption";
+
+        return BlazingItemDescription.builder("slowness_removed_"+maxAmplitude)
+                .summary(summary)
+                .register();
     }
 }

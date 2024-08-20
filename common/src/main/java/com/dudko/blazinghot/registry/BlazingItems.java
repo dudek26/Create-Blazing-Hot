@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.dudko.blazinghot.content.item.BlazingFoodItem.ExtraProperties.*;
 import static com.dudko.blazinghot.content.item.BlazingFoodItem.ExtraProperties.EXTINGUISHING;
 import static com.dudko.blazinghot.content.item.BlazingFoodItem.ExtraProperties.FOIL;
 import static com.dudko.blazinghot.registry.BlazingItems.FoodItemBuilder.tickMinutes;
@@ -164,7 +165,6 @@ public class BlazingItems {
                             .metalApple()
                             .tag(BlazingTags.Items.METAL_APPLES.tag)
                             .addEffect(MobEffects.ABSORPTION, tickMinutes(2))
-                            .addEffect(MobEffects.REGENERATION, tickSeconds(10), 1)
                             .addEffect(MobEffects.FIRE_RESISTANCE, tickMinutes(5))
                             .fireResistant()
                             .register(),
@@ -173,7 +173,7 @@ public class BlazingItems {
                             .metalApple()
                             .tag(BlazingTags.Items.STELLAR_METAL_APPLES.tag)
                             .addEffect(MobEffects.ABSORPTION, tickMinutes(1), 1)
-                            .addEffect(MobEffects.REGENERATION, tickSeconds(20), 1)
+                            .addEffect(MobEffects.REGENERATION, tickSeconds(10))
                             .addEffect(MobEffects.FIRE_RESISTANCE, tickMinutes(8))
                             .fireResistant()
                             .register(),
@@ -181,15 +181,18 @@ public class BlazingItems {
                     new FoodItemBuilder<>("enchanted_blaze_apple", p -> new BlazingFoodItem(p, EXTINGUISHING, FOIL))
                             .enchantedMetalApple()
                             .addEffect(MobEffects.ABSORPTION, tickMinutes(2), 2)
-                            .addEffect(MobEffects.REGENERATION, tickSeconds(20), 1)
+                            .addEffect(MobEffects.REGENERATION, tickSeconds(10), 1)
                             .addEffect(MobEffects.FIRE_RESISTANCE, tickMinutes(8))
                             .addEffect(MobEffects.DAMAGE_BOOST, tickMinutes(5))
                             .fireResistant()
                             .register(),
             COPPER_CARROT =
-                    new FoodItemBuilder<>("copper_carrot", BlazingFoodItem::new)
+                    new FoodItemBuilder<>("copper_carrot",
+                            p -> new BlazingFoodItem(p, OXYGEN))
                             .nutrition(3)
                             .saturationMod(1f)
+                            .alwaysEat()
+                            .description(ItemDescriptions.OXYGEN_FOOD)
                             .tag(BlazingTags.Items.METAL_CARROTS.tag)
                             .register(),
             COPPER_APPLE =
@@ -216,20 +219,13 @@ public class BlazingItems {
                             .addEffect(MobEffects.DOLPHINS_GRACE, tickSeconds(30))
                             .register(),
             ZINC_CARROT =
-                    new FoodItemBuilder<>("zinc_carrot", BlazingFoodItem::new)
+                    new FoodItemBuilder<>("zinc_carrot", p -> new BlazingFoodItem(p, REMOVE_SLOWNESS_1))
                             .nutrition(5)
                             .saturationMod(0.8f)
                             .tag(BlazingTags.Items.METAL_CARROTS.tag)
                             .register(),
             ZINC_APPLE =
-                    new FoodItemBuilder<>("zinc_apple", BlazingFoodItem::new)
-                            .metalApple()
-                            .tag(BlazingTags.Items.METAL_APPLES.tag)
-                            .addEffect(MobEffects.ABSORPTION, tickMinutes(1))
-                            .addEffect(MobEffects.MOVEMENT_SPEED, tickSeconds(30))
-                            .register(),
-            STELLAR_ZINC_APPLE =
-                    new FoodItemBuilder<>("stellar_zinc_apple", BlazingFoodItem::new)
+                    new FoodItemBuilder<>("zinc_apple", p -> new BlazingFoodItem(p, REMOVE_SLOWNESS_2))
                             .metalApple()
                             .tag(BlazingTags.Items.STELLAR_METAL_APPLES.tag)
                             .addEffect(MobEffects.ABSORPTION, tickMinutes(1), 1)
@@ -237,11 +233,11 @@ public class BlazingItems {
                             .addEffect(MobEffects.MOVEMENT_SPEED, tickMinutes(3), 1)
                             .register(),
             ENCHANTED_ZINC_APPLE =
-                    new FoodItemBuilder<>("enchanted_zinc_apple", p -> new BlazingFoodItem(p, FOIL))
+                    new FoodItemBuilder<>("enchanted_zinc_apple", p -> new BlazingFoodItem(p, REMOVE_SLOWNESS_ANY, FOIL))
                             .enchantedMetalApple()
                             .addEffect(MobEffects.ABSORPTION, tickMinutes(2), 2)
                             .addEffect(MobEffects.REGENERATION, tickSeconds(10), 1)
-                            .addEffect(MobEffects.DAMAGE_RESISTANCE, tickMinutes(2))
+                            .addEffect(MobEffects.SLOW_FALLING, tickMinutes(2))
                             .addEffect(MobEffects.MOVEMENT_SPEED, tickMinutes(5), 1)
                             .register(),
             BRASS_CARROT =
@@ -249,6 +245,8 @@ public class BlazingItems {
                             .nutrition(6)
                             .saturationMod(1f)
                             .tag(BlazingTags.Items.METAL_CARROTS.tag)
+                            .alwaysEat()
+                            .addEffect(MobEffects.DIG_SPEED, 10)
                             .register(),
             BRASS_APPLE =
                     new FoodItemBuilder<>("brass_apple", BlazingFoodItem::new)
@@ -279,7 +277,7 @@ public class BlazingItems {
                             .addEffect(MobEffects.ABSORPTION, tickMinutes(2), 3)
                             .addEffect(MobEffects.REGENERATION, tickSeconds(20), 1)
                             .addEffect(MobEffects.DAMAGE_RESISTANCE, tickMinutes(5), 1)
-                            .addEffect(MobEffects.DAMAGE_BOOST, tickMinutes(5), 1)
+                            .addEffect(MobEffects.DAMAGE_BOOST, tickMinutes(5))
                             .addEffect(MobEffects.FIRE_RESISTANCE, tickMinutes(8))
                             .fireResistant()
                             .register();
@@ -292,7 +290,6 @@ public class BlazingItems {
             GALVANIZED_STELLAR_ZINC_APPLE = sequencedIngredient("galvanized_stellar_zinc_apple", Rarity.RARE),
             BRASSY_STELLAR_BRASS_APPLE = sequencedIngredient("brassy_stellar_brass_apple", Rarity.RARE),
             ANCIENT_ENCHANTED_APPLE = sequencedIngredient("ancient_enchanted_apple", Rarity.EPIC);
-
 
     public static void register() {
         METAL_FOOD.addAll(List.of(Items.GOLDEN_CARROT,
@@ -445,7 +442,9 @@ public class BlazingItems {
 
             builder.onRegisterAfter(Registries.ITEM, c -> {
                 if (c instanceof BlazingFoodItem food && food.isExtinguishing())
-                    ItemDescription.useKey(c, ItemDescriptions.EXTINGUISHING.getKey());
+                    ItemDescription.useKey(c, ItemDescriptions.EXTINGUISHING_FOOD.getKey());
+                else if (c instanceof BlazingFoodItem food && food.getMaxRemovedSlowness() >= 0)
+                    ItemDescription.useKey(c, food.getRemovedSlownessDescription());
             });
 
             if (description != null)

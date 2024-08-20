@@ -2,9 +2,11 @@ package com.dudko.blazinghot.content.item;
 
 import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
+import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -16,6 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
+import static com.dudko.blazinghot.content.item.BlazingFoodItem.ExtraProperties.REMOVE_SLOWNESS_ANY;
 import static com.dudko.blazinghot.util.TooltipUtil.addEffectTooltip;
 
 @ParametersAreNonnullByDefault
@@ -27,6 +30,7 @@ public class BlazingFoodItem extends Item {
     private boolean effectTooltip = true;
 
     private int oxygen;
+    private int removeSlowness = -1;
 
     public BlazingFoodItem(Properties properties) {
         super(properties);
@@ -40,6 +44,8 @@ public class BlazingFoodItem extends Item {
                 case EXTINGUISHING -> extinguishing = true;
                 case DISABLE_EFFECT_TOOLTIP -> effectTooltip = false;
                 case OXYGEN -> oxygen = property.value;
+                case REMOVE_SLOWNESS_0, REMOVE_SLOWNESS_1, REMOVE_SLOWNESS_2, REMOVE_SLOWNESS_ANY ->
+                        removeSlowness = property.value;
             }
         }
     }
@@ -57,6 +63,19 @@ public class BlazingFoodItem extends Item {
         return oxygen;
     }
 
+    public int getMaxRemovedSlowness() {
+        return removeSlowness;
+    }
+
+    public String getRemovedSlownessDescription() {
+        return switch (removeSlowness) {
+            case 0 -> ItemDescriptions.SLOWNESS_REMOVING_FOOD_0.getKey();
+            case 1 -> ItemDescriptions.SLOWNESS_REMOVING_FOOD_1.getKey();
+            case 2 -> ItemDescriptions.SLOWNESS_REMOVING_FOOD_2.getKey();
+            default -> ItemDescriptions.SLOWNESS_REMOVING_FOOD_ANY.getKey();
+        };
+    }
+
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
         if (extinguishing) {
@@ -69,6 +88,11 @@ public class BlazingFoodItem extends Item {
         }
         if (oxygen > 0) {
             livingEntity.setAirSupply(Math.min(livingEntity.getAirSupply() + oxygen, livingEntity.getMaxAirSupply()));
+        }
+        if (removeSlowness == REMOVE_SLOWNESS_ANY.value ||
+                (removeSlowness >= 0 && livingEntity.hasEffect(MobEffects.MOVEMENT_SLOWDOWN) &&
+                        livingEntity.getEffect(MobEffects.MOVEMENT_SLOWDOWN).getAmplifier() <= removeSlowness)) {
+            livingEntity.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
         }
         return super.finishUsingItem(stack, level, livingEntity);
     }
@@ -91,7 +115,11 @@ public class BlazingFoodItem extends Item {
         EXTINGUISHING,
         FOIL,
         DISABLE_EFFECT_TOOLTIP,
-        OXYGEN(100);
+        OXYGEN(50),
+        REMOVE_SLOWNESS_0(0),
+        REMOVE_SLOWNESS_1(1),
+        REMOVE_SLOWNESS_2(2),
+        REMOVE_SLOWNESS_ANY(255);
 
         private final int value;
 

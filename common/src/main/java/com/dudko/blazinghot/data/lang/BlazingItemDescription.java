@@ -23,18 +23,19 @@ public class BlazingItemDescription {
     }
 
     public String getKey() {
-        return BlazingLang.Prefix.ITEM.key + "." + key + ".tooltip";
+        return BlazingLang.Prefix.ITEM.key + "." + key;
     }
 
     public void provideLang(BiConsumer<String, String> consumer) {
-        consumer.accept(getKey(), key.toUpperCase().replace('_', ' '));
-        consumer.accept(getKey() + ".summary", summary);
+        String prefix = getKey() + ".tooltip";
+        consumer.accept(prefix, key.toUpperCase().replace('_', ' '));
+        consumer.accept(prefix + ".summary", summary);
 
         int index = 0;
         for (Map.Entry<String, String> entry : behaviours.entrySet()) {
             index++;
-            consumer.accept(getKey() + ".condition" + index, entry.getKey());
-            consumer.accept(getKey() + ".behaviour" + index, entry.getValue());
+            consumer.accept(prefix + ".condition" + index, entry.getKey());
+            consumer.accept(prefix + ".behaviour" + index, entry.getValue());
         }
     }
 

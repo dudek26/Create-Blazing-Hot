@@ -16,6 +16,11 @@ Create: Blazing Hot 0.6
   * `blazinghot:stellar_metal_apples`
   * `blazinghot:enchanted_metal_apples`
   * `blazinghot:metal_food`
+* New Metal Carrots and Apples:
+  * Zinc - focused on movement (Speed, Slow Falling)
+  * Copper - focused on water (Water Breathing, Dolphin's Grace)
+  * Brass - focused on building (Haste, Jump Boost)
+  * Enchanted Netherite Apple - combines and enhances the power of Enchanted Blaze Apple and Enchanted Golden Apple
 * [Forge] Information about Nether Lava in JEI
 
 ### Changed:
@@ -25,6 +30,7 @@ Create: Blazing Hot 0.6
 * Updated textures for existing Molten Metals
 * Blaze Arrow's damage is now multiplied when hitting the target rather than when being shot
 * Changed the icon of Blazing Building Blocks creative tab back to White Modern Lamp 
+* Adjusted effects of existing Metal Apples
 * [Fabric] Unified some translations between EMI and JEI
 * [Fabric] Molten Blaze Gold source blocks now turn into Obsidian when touching water
 

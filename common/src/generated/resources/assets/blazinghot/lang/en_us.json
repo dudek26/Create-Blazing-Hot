@@ -152,6 +152,8 @@
   "item.blazinghot.nether_essence": "Nether Essence",
   "item.blazinghot.nether_lava_bucket": "Nether Lava Bucket",
   "item.blazinghot.netherrack_dust": "Netherrack Dust",
+  "item.blazinghot.oxygen_food.tooltip": "OXYGEN FOOD",
+  "item.blazinghot.oxygen_food.tooltip.summary": "Restores some _oxygen_ allowing you to _survive underwater_ for a bit longer",
   "item.blazinghot.soul_dust": "Soul Dust",
   "item.blazinghot.stellar_blaze_apple": "Stellar Blaze Apple",
   "item.blazinghot.stellar_brass_apple": "Stellar Brass Apple",
