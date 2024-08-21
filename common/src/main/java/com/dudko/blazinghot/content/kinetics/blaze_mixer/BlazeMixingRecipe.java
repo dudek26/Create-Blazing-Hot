@@ -16,6 +16,7 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.NonNullList;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.crafting.CraftingRecipe;
@@ -25,9 +26,12 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import static com.dudko.blazinghot.multiloader.MultiFluids.fromBucketFraction;
 
 @SuppressWarnings("UnstableApiUsage")
+@ParametersAreNonnullByDefault
 public class BlazeMixingRecipe extends BasinRecipe {
 
     @Nullable
@@ -93,11 +97,30 @@ public class BlazeMixingRecipe extends BasinRecipe {
     }
 
     @Override
-    public void readAdditional(@NotNull JsonObject json) {
+    public void readAdditional(JsonObject json) {
+        super.readAdditional(json);
         if (GsonHelper.isValidNode(json, "blazinghot:fuel")) {
             fuelFluid = FluidIngredient.deserialize(json.get("blazinghot:fuel"));
             platformFuel(fuelFluid);
         }
+    }
+
+    @Override
+    public void readAdditional(FriendlyByteBuf buffer) {
+        super.readAdditional(buffer);
+        fuelFluid = FluidIngredient.read(buffer);
+    }
+
+    @Override
+    public void writeAdditional(JsonObject json) {
+        super.writeAdditional(json);
+        json.add("blazinghot:fuel", getFuelFluid().serialize());
+    }
+
+    @Override
+    public void writeAdditional(FriendlyByteBuf buffer) {
+        super.writeAdditional(buffer);
+        getFuelFluid().write(buffer);
     }
 
     @ExpectPlatform

@@ -84,7 +84,6 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> exten
         @Override
         public void serializeRecipeData(JsonObject json) {
             if (convertMeltable) json.addProperty("blazinghot:convertMeltable", true);
-            if (fuel != null && fuel != FluidIngredient.EMPTY) json.add("blazinghot:fuel", fuel.serialize());
             super.serializeRecipeData(json);
         }
     }
