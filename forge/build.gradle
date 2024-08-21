@@ -74,6 +74,7 @@ repositories {
             includeGroup("com.simibubi.create")
         }
     }
+    maven { url = "https://api.modrinth.com/maven" }
 }
 
 dependencies {
@@ -95,6 +96,10 @@ dependencies {
     // if you would like to add integration with JEI, uncomment this line.
     modCompileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
     modCompileOnly("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
+
+    // Additional mods
+    // Compat
+    if (createaddition_forge) modLocalRuntime("maven.modrinth:createaddition:${createaddition_forge_version}")
 }
 
 processResources {

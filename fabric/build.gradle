@@ -75,7 +75,8 @@ repositories {
     // mavens for Fabric-exclusives
     maven { url = "https://api.modrinth.com/maven" } // LazyDFU
     maven { url = "https://maven.terraformersmc.com/releases/" } // Mod Menu
-    maven { url = "https://mvn.devos.one/snapshots/" } // Create Fabric, Porting Lib, Forge Tags, Milk Lib, Registrate Fabric
+    maven { url = "https://mvn.devos.one/snapshots/" }
+    // Create Fabric, Porting Lib, Forge Tags, Milk Lib, Registrate Fabric
     maven { url = "https://mvn.devos.one/releases/" } // Porting Lib Releases
     maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // Forge Config API Port
     maven { url = "https://maven.jamieswhiteshirt.com/libs-release" } // Reach Entity Attributes
@@ -103,13 +104,6 @@ dependencies {
     modLocalRuntime("maven.modrinth:lazydfu:${lazydfu_version}")
     modLocalRuntime("com.terraformersmc:modmenu:${modmenu_version}")
 
-    if (optimise_dev.equalsIgnoreCase("true")) {
-        modLocalRuntime("maven.modrinth:sodium:${sodium_version}")
-        modLocalRuntime("maven.modrinth:indium:${indium_version}")
-        modLocalRuntime("maven.modrinth:lithium:${lithium_version}")
-    }
-
-
     // Recipe Viewers - Create Fabric supports JEI, REI, and EMI.
     // See root gradle.properties to choose which to use at runtime.
     switch (fabric_recipe_viewer.toLowerCase(Locale.ROOT)) {
@@ -125,6 +119,20 @@ dependencies {
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${rei_version}")
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${rei_version}")
     modCompileOnly("dev.emi:emi-fabric:${emi_version}")
+
+    // Additional mods
+    // Compat
+    if (createaddition_fabric) {
+        modLocalRuntime("maven.modrinth:createaddition:${createaddition_fabric_version}")
+        modLocalRuntime("teamreborn:energy:${energy_api_fabric_version}")
+    }
+
+    // Optimisation
+//    if (sodium) {
+//        modLocalRuntime("maven.modrinth:sodium:${sodium_version}")
+//        modLocalRuntime("maven.modrinth:indium:${indium_version}")
+//    }
+//    if (lithium) modLocalRuntime("maven.modrinth:lithium:${lithium_version}")
 }
 
 processResources {
