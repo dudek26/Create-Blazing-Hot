@@ -22,7 +22,8 @@ import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import static com.dudko.blazinghot.compat.Mods.*;
+import static com.dudko.blazinghot.compat.Mods.CREATE_ADDITIONS;
+import static com.dudko.blazinghot.compat.Mods.VANILLA;
 import static com.dudko.blazinghot.registry.CommonTags.Namespace.INTERNAL;
 import static com.dudko.blazinghot.registry.CommonTags.itemTagOf;
 import static com.dudko.blazinghot.util.LangUtil.titleCaseConversion;

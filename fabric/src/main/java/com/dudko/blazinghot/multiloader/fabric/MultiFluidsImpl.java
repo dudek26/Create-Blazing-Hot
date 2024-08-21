@@ -1,6 +1,5 @@
 package com.dudko.blazinghot.multiloader.fabric;
 
-import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;

@@ -1,9 +1,6 @@
 package com.dudko.blazinghot;
 
-import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.content.metal.MoltenMetals;
-import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
-import com.dudko.blazinghot.data.advancement.BlazingTriggers;
 import com.dudko.blazinghot.registry.*;
 import com.simibubi.create.Create;
 import com.simibubi.create.foundation.data.CreateRegistrate;

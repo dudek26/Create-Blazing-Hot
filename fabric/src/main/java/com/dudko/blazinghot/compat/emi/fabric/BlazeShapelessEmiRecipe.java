@@ -8,8 +8,6 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
 
-import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe.getFuelCost;
-
 public class BlazeShapelessEmiRecipe extends BlazeMixingEmiRecipe {
 
     public BlazeShapelessEmiRecipe(EmiRecipeCategory category, BasinRecipe recipe, long fuelCost) {

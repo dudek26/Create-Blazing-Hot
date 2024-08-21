@@ -1,6 +1,5 @@
 package com.dudko.blazinghot.content.entity;
 
-import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.mixin.accessor.ProjectileAccessor;
 import com.dudko.blazinghot.registry.BlazingItems;

@@ -2,7 +2,6 @@ package com.dudko.blazinghot.content.item;
 
 import com.dudko.blazinghot.content.entity.BlazeArrowEntity;
 import com.dudko.blazinghot.registry.BlazingEntities;
-import com.dudko.blazinghot.registry.BlazingItems;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ArrowItem;

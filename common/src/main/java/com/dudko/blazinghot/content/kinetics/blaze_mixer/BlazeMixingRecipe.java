@@ -4,7 +4,6 @@ import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.multiloader.MultiFluids;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;

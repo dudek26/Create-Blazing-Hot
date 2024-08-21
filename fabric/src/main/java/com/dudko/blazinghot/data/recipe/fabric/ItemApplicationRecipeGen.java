@@ -5,7 +5,8 @@ import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.minecraft.data.PackOutput;
 
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.*;
+import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.blazeGoldSheet;
+import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.copperCasing;
 
 @SuppressWarnings("unused")
 public class ItemApplicationRecipeGen extends BlazingProcessingRecipeGen {

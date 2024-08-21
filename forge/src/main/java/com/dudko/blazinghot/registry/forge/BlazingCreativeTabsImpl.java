@@ -7,7 +7,6 @@ import com.dudko.blazinghot.registry.BlazingCreativeTabs.RegistrateDisplayItemsG
 import com.dudko.blazinghot.registry.BlazingCreativeTabs.Tabs;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.simibubi.create.AllCreativeModeTabs;
-import com.simibubi.create.foundation.utility.Components;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;

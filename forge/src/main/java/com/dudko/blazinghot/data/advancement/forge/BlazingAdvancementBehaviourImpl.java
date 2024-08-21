@@ -1,7 +1,6 @@
 package com.dudko.blazinghot.data.advancement.forge;
 
 import com.dudko.blazinghot.data.advancement.BlazingAdvancementBehaviour;
-import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
