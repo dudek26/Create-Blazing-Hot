@@ -99,7 +99,7 @@ dependencies {
 
     // Additional mods
     // Compat
-    if (createaddition_forge) modLocalRuntime("maven.modrinth:createaddition:${createaddition_forge_version}")
+    if (createaddition_forge == "true") modLocalRuntime("maven.modrinth:createaddition:${createaddition_forge_version}")
 }
 
 processResources {

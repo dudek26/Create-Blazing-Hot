@@ -17,6 +17,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -65,6 +66,15 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> exten
 
     public BlazingProcessingRecipeBuilder<T> requireMultiple(ItemLike item, int amount) {
         return requireMultiple(Ingredient.of(item), amount);
+    }
+
+    public BlazingProcessingRecipeBuilder<T> withConditions(ConditionJsonProvider... conditions) {
+        return withConditions(List.of(conditions));
+    }
+
+    public BlazingProcessingRecipeBuilder<T> withConditions(Collection<ConditionJsonProvider> conditions) {
+        for (ConditionJsonProvider c : conditions) withCondition(c);
+        return this;
     }
 
     @Override

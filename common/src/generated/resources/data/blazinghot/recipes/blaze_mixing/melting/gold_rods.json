@@ -1,0 +1,36 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:any_mod_loaded",
+      "values": [
+        "createaddition"
+      ]
+    }
+  ],
+  "type": "blazinghot:blaze_mixing",
+  "blazinghot:convertMeltable": true,
+  "blazinghot:fuel": {
+    "amount": 0,
+    "fluid": "minecraft:empty",
+    "nbt": {}
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "createaddition"
+    }
+  ],
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "blazinghot:gold_rods"
+    }
+  ],
+  "processingTime": 250,
+  "results": [
+    {
+      "amount": 4500,
+      "fluid": "blazinghot:molten_gold"
+    }
+  ]
+}

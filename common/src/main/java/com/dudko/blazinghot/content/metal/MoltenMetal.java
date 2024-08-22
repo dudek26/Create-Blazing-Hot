@@ -8,6 +8,8 @@ import com.dudko.blazinghot.registry.CommonTags;
 import com.dudko.blazinghot.util.ListUtil;
 import com.simibubi.create.foundation.utility.Pair;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
+import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
+import net.fabricmc.fabric.api.resource.conditions.v1.DefaultResourceConditions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -113,6 +115,7 @@ public class MoltenMetal {
         List<Forms> all = new ArrayList<>();
         ListUtil.addIfAbsent(all, supportedForms);
         ListUtil.addIfAbsent(all, compatForms.keySet());
+        ListUtil.addIfAbsent(all, optionalForms);
         return all;
     }
 
@@ -129,6 +132,18 @@ public class MoltenMetal {
         if (!interactions.containsKey(Fluids.WATER))
             interactions.put(Fluids.WATER, () -> Blocks.COBBLESTONE);
         return interactions;
+    }
+
+    public List<ConditionJsonProvider> getLoadConditions() {
+        List<ConditionJsonProvider> conditions = new ArrayList<>();
+        if (!mod.alwaysIncluded) conditions.add(mod.asLoadCondition());
+        return conditions;
+    }
+
+    public List<ConditionJsonProvider> getLoadConditions(Forms form, Mods formMod) {
+        List<ConditionJsonProvider> conditions = getLoadConditions();
+        conditions.add(DefaultResourceConditions.anyModLoaded(formMod.id));
+        return conditions;
     }
 
     public static class Builder {

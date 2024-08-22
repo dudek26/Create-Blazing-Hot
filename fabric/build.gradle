@@ -122,17 +122,17 @@ dependencies {
 
     // Additional mods
     // Compat
-    if (createaddition_fabric) {
+    if (createaddition_fabric == "true") {
         modLocalRuntime("maven.modrinth:createaddition:${createaddition_fabric_version}")
         modLocalRuntime("teamreborn:energy:${energy_api_fabric_version}")
     }
 
     // Optimisation
-//    if (sodium) {
-//        modLocalRuntime("maven.modrinth:sodium:${sodium_version}")
-//        modLocalRuntime("maven.modrinth:indium:${indium_version}")
-//    }
-//    if (lithium) modLocalRuntime("maven.modrinth:lithium:${lithium_version}")
+    if (sodium == "true") {
+        modLocalRuntime("maven.modrinth:sodium:${sodium_version}")
+        modLocalRuntime("maven.modrinth:indium:${indium_version}")
+    }
+    if (lithium == "true") modLocalRuntime("maven.modrinth:lithium:${lithium_version}")
 }
 
 processResources {

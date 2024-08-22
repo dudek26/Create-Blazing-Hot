@@ -1,0 +1,39 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "values": [
+        "blazinghot:zinc_plates"
+      ]
+    }
+  ],
+  "type": "blazinghot:blaze_mixing",
+  "blazinghot:convertMeltable": true,
+  "blazinghot:fuel": {
+    "amount": 0,
+    "fluid": "minecraft:empty",
+    "nbt": {}
+  },
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "blazinghot:zinc_plates"
+      }
+    }
+  ],
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "blazinghot:zinc_plates"
+    }
+  ],
+  "processingTime": 400,
+  "results": [
+    {
+      "amount": 9000,
+      "fluid": "blazinghot:molten_zinc"
+    }
+  ]
+}
