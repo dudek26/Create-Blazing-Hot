@@ -20,8 +20,6 @@ import net.minecraft.world.level.material.Fluid;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static com.dudko.blazinghot.multiloader.Platform.FORGE;
-
 public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> extends ProcessingRecipeBuilder<T> {
 
     private boolean convertMeltable;

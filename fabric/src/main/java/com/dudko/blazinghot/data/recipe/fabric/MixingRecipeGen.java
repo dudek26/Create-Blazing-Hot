@@ -10,8 +10,6 @@ import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
-import io.github.fabricators_of_create.porting_lib.tags.Tags;
-import net.fabricmc.fabric.api.resource.conditions.v1.DefaultResourceConditions;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;

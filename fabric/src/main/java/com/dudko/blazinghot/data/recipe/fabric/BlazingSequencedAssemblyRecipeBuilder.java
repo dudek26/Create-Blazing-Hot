@@ -7,8 +7,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
+import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
 import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
+import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -17,6 +19,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
@@ -84,9 +87,14 @@ public class BlazingSequencedAssemblyRecipeBuilder extends SequencedAssemblyReci
         return (BlazingSequencedAssemblyRecipeBuilder) super.addStep(factory, builder);
     }
 
-    public class BlazingDataGenResult<S extends ProcessingRecipe<?>> extends ProcessingRecipeBuilder.DataGenResult<S> {
+    @Override
+    public void build(Consumer<FinishedRecipe> consumer) {
+        consumer.accept(new BlazingDataGenResult(build(), recipeConditions));
+    }
 
-        public BlazingDataGenResult(S recipe, List<ConditionJsonProvider> recipeConditions) {
+    public class BlazingDataGenResult extends DataGenResult {
+
+        public BlazingDataGenResult(SequencedAssemblyRecipe recipe, List<ConditionJsonProvider> recipeConditions) {
             super(recipe, recipeConditions);
         }
 
