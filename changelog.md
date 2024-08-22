@@ -21,6 +21,7 @@ Create: Blazing Hot 0.6
   * Copper - focused on water (Water Breathing, Dolphin's Grace)
   * Brass - focused on building (Haste, Jump Boost)
   * Enchanted Netherite Apple - combines and enhances the power of Enchanted Blaze Apple and Enchanted Golden Apple
+* Compatibility recipes for melting Rods and Zinc Sheet from [Create: Crafts & Additions](https://modrinth.com/mod/createaddition)
 * [Forge] Information about Nether Lava in JEI
 
 ### Changed:
