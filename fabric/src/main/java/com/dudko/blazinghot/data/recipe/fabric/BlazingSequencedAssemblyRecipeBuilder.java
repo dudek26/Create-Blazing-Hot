@@ -2,9 +2,13 @@ package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.mixin.fabric.SequencedAssemblyRecipeBuilderAccessor;
 import com.dudko.blazinghot.multiloader.MultiFluids;
+import com.dudko.blazinghot.multiloader.fabric.MultiRecipeConditions;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
+import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -12,6 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 
+import java.util.List;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
@@ -77,6 +82,25 @@ public class BlazingSequencedAssemblyRecipeBuilder extends SequencedAssemblyReci
     @Override
     public <T extends ProcessingRecipe<?>> BlazingSequencedAssemblyRecipeBuilder addStep(ProcessingRecipeBuilder.ProcessingRecipeFactory<T> factory, UnaryOperator<ProcessingRecipeBuilder<T>> builder) {
         return (BlazingSequencedAssemblyRecipeBuilder) super.addStep(factory, builder);
+    }
+
+    public class BlazingDataGenResult<S extends ProcessingRecipe<?>> extends ProcessingRecipeBuilder.DataGenResult<S> {
+
+        public BlazingDataGenResult(S recipe, List<ConditionJsonProvider> recipeConditions) {
+            super(recipe, recipeConditions);
+        }
+
+        @Override
+        public void serializeRecipeData(JsonObject json) {
+
+            if (!recipeConditions.isEmpty()) {
+                JsonArray conditions = new JsonArray();
+                recipeConditions.forEach(c -> conditions.add(MultiRecipeConditions.toForgeCondition(c)));
+                json.add("conditions", conditions);
+            }
+
+            super.serializeRecipeData(json);
+        }
     }
 
 }
