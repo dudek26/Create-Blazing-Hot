@@ -26,7 +26,7 @@ import java.util.List;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.*;
 import static com.dudko.blazinghot.util.ListUtil.compactLists;
 
-@SuppressWarnings({"UnstableApiUsage", "unchecked"})
+@SuppressWarnings({"UnstableApiUsage", "unused"})
 public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 
     public BlazeMixingRecipeGen(PackOutput output) {
@@ -123,14 +123,12 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
                     optional.fuelCost,
                     conditions));
         }
-        metal.compatForms.forEach((form, mod) -> {
-            recipes.add(melting(form.internalTag(metal),
-                    metal.fluid().get(),
-                    form.amount,
-                    form.processingTime,
-                    form.fuelCost,
-                    metal.getLoadConditions(form, mod)));
-        });
+        metal.compatForms.forEach((form, mod) -> recipes.add(melting(form.internalTag(metal),
+                metal.fluid().get(),
+                form.amount,
+                form.processingTime,
+                form.fuelCost,
+                metal.getLoadConditions(form, mod))));
         return recipes;
     }
 

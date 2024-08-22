@@ -2,13 +2,9 @@ package com.dudko.blazinghot.content.metal;
 
 import com.dudko.blazinghot.compat.Mods;
 import com.dudko.blazinghot.multiloader.MultiFluids;
-import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe.defaultDurationToFuelCost;
 import static com.dudko.blazinghot.registry.CommonTags.Namespace.INTERNAL;
@@ -16,11 +12,13 @@ import static com.dudko.blazinghot.registry.CommonTags.itemTagOf;
 
 public class Forms {
 
-    public static final Forms
-            INGOT = Forms.of("ingots", MultiFluids.Constants.INGOT, 400, true),
-            NUGGET = Forms.of("nuggets", MultiFluids.Constants.NUGGET, 65, true),
-            PLATE = Forms.of("plates", MultiFluids.Constants.PLATE, 400, true),
-            ROD = Forms.of("rods", MultiFluids.Constants.ROD, 250, true);
+    public static final Forms INGOT = Forms.of("ingots", MultiFluids.Constants.INGOT, 400, true),
+            NUGGET =
+                    Forms.of("nuggets", MultiFluids.Constants.NUGGET, 65, true),
+            PLATE =
+                    Forms.of("plates", MultiFluids.Constants.PLATE, 400, true),
+            ROD =
+                    Forms.of("rods", MultiFluids.Constants.ROD, 250, true);
 
     public String tagFolder = null;
     public final long amount;
@@ -58,8 +56,9 @@ public class Forms {
     }
 
     public String simpleItemName(MoltenMetal metal) {
-        return metal.name + "_" + (this.tagFolder.endsWith("s") ? this.tagFolder.substring(0,
-                this.tagFolder.length() - 1) : this.tagFolder);
+        return metal.name + "_" + (this.tagFolder.endsWith("s") ?
+                                   this.tagFolder.substring(0, this.tagFolder.length() - 1) :
+                                   this.tagFolder);
     }
 
     public ResourceLocation resourceLocation(MoltenMetal metal) {

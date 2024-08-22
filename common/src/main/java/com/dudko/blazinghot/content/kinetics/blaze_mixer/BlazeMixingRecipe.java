@@ -29,7 +29,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import static com.dudko.blazinghot.multiloader.MultiFluids.fromBucketFraction;
 
-@SuppressWarnings("UnstableApiUsage")
 @ParametersAreNonnullByDefault
 public class BlazeMixingRecipe extends BasinRecipe {
 

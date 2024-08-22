@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 
+@SuppressWarnings("unused")
 public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> extends ProcessingRecipeBuilder<T> {
 
     private boolean convertMeltable;
