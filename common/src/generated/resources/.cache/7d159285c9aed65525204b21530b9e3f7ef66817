@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-22T14:16:05.7890385	Create: Blazing Hot/Registrate Provider for blazinghot [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2024-08-22T14:35:33.7035104	Create: Blazing Hot/Registrate Provider for blazinghot [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 b6aaaf3beb0db8f218ba11e0e3529980eab6a5c1 data\blazinghot\loot_tables\blocks\cyan_modern_lamp.json
 71b57e82146d21e6df58d3cbb2cd79640bf94ed2 assets\blazinghot\models\item\red_modern_lamp.json
 667af25e6fae3c794aea2df2857df074d24c5cc7 data\blazinghot\advancements\recipes\redstone\crafting\modern_lamp\red_modern_lamp_from_other_lamp.json
@@ -257,8 +257,8 @@ e9bb7588494d59079892e6a40a0d1fbc48cda171 data\blazinghot\tags\items\nether_flora
 73f6ffbb53b04ad134aecd51e304b8624ecf34ff assets\blazinghot\models\item\lime_modern_lamp_panel.json
 fd1adc68da026ae391d83ff7ae02c08510e78437 data\blazinghot\recipes\crafting\modern_lamp_panel\green_modern_lamp_panel_from_full_block.json
 3b4842e1e0698979c12c216eb7726a376c53eb6c data\blazinghot\loot_tables\blocks\white_modern_lamp.json
-2c1c204ce899f7d8afaae5f2ad8f80cd2ea53daf data\forge\tags\items\storage_blocks\blaze_gold.json
 2fef0966957f3aa17138b0b9a13674c471af33a6 data\blazinghot\advancements\recipes\redstone\crafting\modern_lamp_panel\gray_modern_lamp_panel_from_full_block.json
+2c1c204ce899f7d8afaae5f2ad8f80cd2ea53daf data\forge\tags\items\storage_blocks\blaze_gold.json
 ed577cd7d42b84d75e073d12c984c9fe21fdc6df assets\blazinghot\blockstates\molten_copper.json
 d8ced5788b3236e3d98fe4a3dd0e3626399f9b7d assets\blazinghot\models\item\light_blue_modern_lamp.json
 cb04f841b548586d0485eff5f692a8786dbffb64 assets\blazinghot\models\item\blaze_gold_sheet.json
@@ -493,8 +493,8 @@ a7cf642e7f5c1252129d338aad401b0141d58eca data\minecraft\tags\fluids\lava.json
 157d7f1b2bd994d57ffc9d1d806fac72a99ef1e2 data\blazinghot\advancements\recipes\redstone\crafting\modern_lamp\lime_modern_lamp_from_other_lamps.json
 b8942b9e362a81291b1829408ed3ebfa197aff89 data\blazinghot\tags\blocks\modern_lamps.json
 caa272ac932e94b411ce6f6aa579c568f715ab65 assets\blazinghot\models\item\nether_compound.json
-495983828f77abec2a268eceeb3639e3df45454c data\c\tags\items\foods.json
 ca9b25b0a25a683d8b31bc6e87eccce77585b218 data\blazinghot\tags\fluids\molten_copper.json
+495983828f77abec2a268eceeb3639e3df45454c data\c\tags\items\foods.json
 f934065b5efb5042b5fe978befa0d4644cdb41ee data\blazinghot\tags\blocks\storage_blocks.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\c\tags\items\brass_nuggets.json
 0eee2551425707feff08f76c9476f730cb9bc0c6 data\blazinghot\advancements\recipes\redstone\crafting\modern_lamp\white_modern_lamp_from_other_lamp.json

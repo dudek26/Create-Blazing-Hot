@@ -111,12 +111,6 @@ public class BlazeMixingRecipe extends BasinRecipe {
     }
 
     @Override
-    public void writeAdditional(JsonObject json) {
-        super.writeAdditional(json);
-        json.add("blazinghot:fuel", getFuelFluid().serialize());
-    }
-
-    @Override
     public void writeAdditional(FriendlyByteBuf buffer) {
         super.writeAdditional(buffer);
         getFuelFluid().write(buffer);

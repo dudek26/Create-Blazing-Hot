@@ -97,6 +97,8 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> exten
         public void serializeRecipeData(JsonObject json) {
             if (convertMeltable) json.addProperty("blazinghot:convertMeltable", true);
 
+            if (fuel != null && fuel != FluidIngredient.EMPTY) json.add("blazinghot:fuel", fuel.serialize());
+
             if (!recipeConditions.isEmpty()) {
                 JsonArray conditions = new JsonArray();
                 recipeConditions.forEach(c -> conditions.add(MultiRecipeConditions.toForgeCondition(c)));

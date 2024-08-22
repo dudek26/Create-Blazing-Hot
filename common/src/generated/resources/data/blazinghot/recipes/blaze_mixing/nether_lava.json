@@ -1,10 +1,5 @@
 {
   "type": "blazinghot:blaze_mixing",
-  "blazinghot:fuel": {
-    "amount": 0,
-    "fluid": "minecraft:empty",
-    "nbt": {}
-  },
   "heatRequirement": "superheated",
   "ingredients": [
     {

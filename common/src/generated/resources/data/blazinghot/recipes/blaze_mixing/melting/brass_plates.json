@@ -2,9 +2,8 @@
   "type": "blazinghot:blaze_mixing",
   "blazinghot:convertMeltable": true,
   "blazinghot:fuel": {
-    "amount": 0,
-    "fluid": "minecraft:empty",
-    "nbt": {}
+    "amount": 8100,
+    "fluidTag": "blazinghot:blaze_mixer_fuel"
   },
   "heatRequirement": "superheated",
   "ingredients": [
