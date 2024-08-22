@@ -55,6 +55,7 @@ public class CommonTags {
         }
 
         public String tagPath(String folder, String material) {
+            boolean useFolders = folder.equals("wires") || this.useFolders;
             return useFolders ? folderTag(folder, material) : plainTag(folder, material);
         }
     }

@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.content.metal;
 
+import com.dudko.blazinghot.compat.Mods;
 import com.dudko.blazinghot.multiloader.MultiFluids;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
@@ -15,11 +16,11 @@ public class MoltenMetals {
     public static final List<MoltenMetal> ALL = new ArrayList<>();
 
     public static MoltenMetal
-            IRON = MoltenMetal.builder("iron").createForms().register(),
+            IRON = MoltenMetal.builder("iron").createForms().compatForm(Forms.WIRE, CREATE_ADDITIONS).register(),
 
-    GOLD = MoltenMetal.builder("gold").createForms().register(),
+    GOLD = MoltenMetal.builder("gold").createForms().compatForm(Forms.WIRE, CREATE_ADDITIONS).register(),
 
-    COPPER = MoltenMetal.builder("copper").createForms().register(),
+    COPPER = MoltenMetal.builder("copper").createForms().compatForm(Forms.WIRE, CREATE_ADDITIONS).register(),
 
     ANCIENT_DEBRIS = MoltenMetal.builder("ancient_debris")
             .customForm(VANILLA.asResource("netherite_scrap"),

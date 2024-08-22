@@ -1,0 +1,35 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:any_mod_loaded",
+      "values": [
+        "createaddition"
+      ]
+    }
+  ],
+  "type": "blazinghot:blaze_mixing",
+  "blazinghot:convertMeltable": true,
+  "blazinghot:fuel": {
+    "amount": 5063,
+    "fluidTag": "blazinghot:blaze_mixer_fuel"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "createaddition"
+    }
+  ],
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "blazinghot:wires/gold"
+    }
+  ],
+  "processingTime": 250,
+  "results": [
+    {
+      "amount": 4500,
+      "fluid": "blazinghot:molten_gold"
+    }
+  ]
+}

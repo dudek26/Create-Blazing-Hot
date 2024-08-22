@@ -1,0 +1,31 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:any_mod_loaded",
+      "values": [
+        "createaddition"
+      ]
+    }
+  ],
+  "type": "create:mixing",
+  "blazinghot:convertMeltable": true,
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "createaddition"
+    }
+  ],
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "blazinghot:wires/iron"
+    }
+  ],
+  "processingTime": 250,
+  "results": [
+    {
+      "amount": 4500,
+      "fluid": "blazinghot:molten_iron"
+    }
+  ]
+}

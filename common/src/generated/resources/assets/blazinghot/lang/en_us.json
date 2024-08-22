@@ -251,6 +251,9 @@
   "tag.item.blazinghot.stellar_metal_apples": "Stellar Metal Apples",
   "tag.item.blazinghot.stone_dusts": "Stone Dusts",
   "tag.item.blazinghot.storage_blocks": "Storage Blocks",
+  "tag.item.blazinghot.wires.copper": "Copper Wires",
+  "tag.item.blazinghot.wires.gold": "Gold Wires",
+  "tag.item.blazinghot.wires.iron": "Iron Wires",
   "tag.item.blazinghot.zinc_ingots": "Zinc Ingots",
   "tag.item.blazinghot.zinc_nuggets": "Zinc Nuggets",
   "tag.item.blazinghot.zinc_plates": "Zinc Plates",
@@ -282,6 +285,9 @@
   "tag.item.c.soul_sand_dusts": "Soul Sand Dusts",
   "tag.item.c.stone_dusts": "Stone Dusts",
   "tag.item.c.storage_blocks": "Storage Blocks",
+  "tag.item.c.wires.copper": "Copper Wires",
+  "tag.item.c.wires.gold": "Gold Wires",
+  "tag.item.c.wires.iron": "Iron Wires",
   "tag.item.c.zinc_ingots": "Zinc Ingots",
   "tag.item.c.zinc_nuggets": "Zinc Nuggets",
   "tag.item.c.zinc_plates": "Zinc Plates",
@@ -315,5 +321,8 @@
   "tag.item.forge.rods.gold": "Gold Rods",
   "tag.item.forge.rods.iron": "Iron Rods",
   "tag.item.forge.storage_blocks": "Storage Blocks",
-  "tag.item.forge.storage_blocks.blaze_gold": "Blaze Gold Blocks"
+  "tag.item.forge.storage_blocks.blaze_gold": "Blaze Gold Blocks",
+  "tag.item.forge.wires.copper": "Copper Wires",
+  "tag.item.forge.wires.gold": "Gold Wires",
+  "tag.item.forge.wires.iron": "Iron Wires"
 }

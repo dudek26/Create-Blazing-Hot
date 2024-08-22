@@ -251,6 +251,9 @@
   "tag.item.blazinghot.stellar_metal_apples": "sǝןddⱯ ןɐʇǝW ɹɐןןǝʇS",
   "tag.item.blazinghot.stone_dusts": "sʇsnᗡ ǝuoʇS",
   "tag.item.blazinghot.storage_blocks": "sʞɔoןᗺ ǝbɐɹoʇS",
+  "tag.item.blazinghot.wires.copper": "sǝɹıM ɹǝddoƆ",
+  "tag.item.blazinghot.wires.gold": "sǝɹıM pןo⅁",
+  "tag.item.blazinghot.wires.iron": "sǝɹıM uoɹI",
   "tag.item.blazinghot.zinc_ingots": "sʇobuI ɔuıZ",
   "tag.item.blazinghot.zinc_nuggets": "sʇǝbbnN ɔuıZ",
   "tag.item.blazinghot.zinc_plates": "sǝʇɐןԀ ɔuıZ",
@@ -282,6 +285,9 @@
   "tag.item.c.soul_sand_dusts": "sʇsnᗡ puɐS ןnoS",
   "tag.item.c.stone_dusts": "sʇsnᗡ ǝuoʇS",
   "tag.item.c.storage_blocks": "sʞɔoןᗺ ǝbɐɹoʇS",
+  "tag.item.c.wires.copper": "sǝɹıM ɹǝddoƆ",
+  "tag.item.c.wires.gold": "sǝɹıM pןo⅁",
+  "tag.item.c.wires.iron": "sǝɹıM uoɹI",
   "tag.item.c.zinc_ingots": "sʇobuI ɔuıZ",
   "tag.item.c.zinc_nuggets": "sʇǝbbnN ɔuıZ",
   "tag.item.c.zinc_plates": "sǝʇɐןԀ ɔuıZ",
@@ -315,5 +321,8 @@
   "tag.item.forge.rods.gold": "spoᴚ pןo⅁",
   "tag.item.forge.rods.iron": "spoᴚ uoɹI",
   "tag.item.forge.storage_blocks": "sʞɔoןᗺ ǝbɐɹoʇS",
-  "tag.item.forge.storage_blocks.blaze_gold": "sʞɔoןᗺ pןo⅁ ǝzɐןᗺ"
+  "tag.item.forge.storage_blocks.blaze_gold": "sʞɔoןᗺ pןo⅁ ǝzɐןᗺ",
+  "tag.item.forge.wires.copper": "sǝɹıM ɹǝddoƆ",
+  "tag.item.forge.wires.gold": "sǝɹıM pןo⅁",
+  "tag.item.forge.wires.iron": "sǝɹıM uoɹI"
 }

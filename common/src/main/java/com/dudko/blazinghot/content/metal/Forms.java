@@ -18,7 +18,9 @@ public class Forms {
             PLATE =
                     Forms.of("plates", MultiFluids.Constants.PLATE, 400, true),
             ROD =
-                    Forms.of("rods", MultiFluids.Constants.ROD, 250, true);
+                    Forms.of("rods", MultiFluids.Constants.ROD, 250, true),
+            WIRE =
+                    Forms.of("wires", MultiFluids.Constants.ROD, 250, true);
 
     public String tagFolder = null;
     public final long amount;

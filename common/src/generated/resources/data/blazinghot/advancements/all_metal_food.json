@@ -25,7 +25,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:stellar_brass_apple"
+            "blazinghot:enchanted_blaze_apple"
           ]
         }
       },
@@ -35,7 +35,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:stellar_copper_apple"
+            "blazinghot:stellar_iron_apple"
           ]
         }
       },
@@ -45,7 +45,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:copper_apple"
+            "blazinghot:blaze_carrot"
           ]
         }
       },
@@ -55,7 +55,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:stellar_golden_apple"
+            "blazinghot:stellar_copper_apple"
           ]
         }
       },
@@ -65,7 +65,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:blaze_apple"
+            "blazinghot:enchanted_copper_apple"
           ]
         }
       },
@@ -75,7 +75,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:blaze_carrot"
+            "blazinghot:zinc_apple"
           ]
         }
       },
@@ -85,7 +85,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:copper_carrot"
+            "blazinghot:enchanted_zinc_apple"
           ]
         }
       },
@@ -95,7 +95,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:brass_apple"
+            "blazinghot:iron_carrot"
           ]
         }
       },
@@ -115,7 +115,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:iron_carrot"
+            "blazinghot:stellar_blaze_apple"
           ]
         }
       },
@@ -135,7 +135,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:enchanted_blaze_apple"
+            "blazinghot:iron_apple"
           ]
         }
       },
@@ -145,7 +145,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:stellar_zinc_apple"
+            "blazinghot:stellar_brass_apple"
           ]
         }
       },
@@ -155,7 +155,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:enchanted_iron_apple"
+            "blazinghot:blaze_apple"
           ]
         }
       },
@@ -165,7 +165,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:iron_apple"
+            "blazinghot:brass_apple"
           ]
         }
       },
@@ -175,7 +175,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:zinc_apple"
+            "blazinghot:enchanted_netherite_apple"
           ]
         }
       },
@@ -195,7 +195,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:enchanted_netherite_apple"
+            "blazinghot:enchanted_iron_apple"
           ]
         }
       },
@@ -205,7 +205,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:stellar_iron_apple"
+            "blazinghot:copper_carrot"
           ]
         }
       },
@@ -215,7 +215,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:enchanted_zinc_apple"
+            "blazinghot:stellar_zinc_apple"
           ]
         }
       },
@@ -225,7 +225,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:stellar_blaze_apple"
+            "blazinghot:stellar_golden_apple"
           ]
         }
       },
@@ -235,7 +235,7 @@
       "conditions": {
         "item": {
           "items": [
-            "blazinghot:enchanted_copper_apple"
+            "blazinghot:copper_apple"
           ]
         }
       },

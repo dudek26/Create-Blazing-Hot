@@ -120,19 +120,22 @@ dependencies {
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${rei_version}")
     modCompileOnly("dev.emi:emi-fabric:${emi_version}")
 
+    // use when using other mods' recipe generators
+    boolean isDatagen = System.getenv("DATAGEN")?.toBoolean() ?: false
+
     // Additional mods
     // Compat
-    if (createaddition_fabric == "true") {
+    if (createaddition_fabric.toBoolean()) {
         modLocalRuntime("maven.modrinth:createaddition:${createaddition_fabric_version}")
         modLocalRuntime("teamreborn:energy:${energy_api_fabric_version}")
     }
 
     // Optimisation
-    if (sodium == "true") {
+    if (sodium.toBoolean()) {
         modLocalRuntime("maven.modrinth:sodium:${sodium_version}")
         modLocalRuntime("maven.modrinth:indium:${indium_version}")
     }
-    if (lithium == "true") modLocalRuntime("maven.modrinth:lithium:${lithium_version}")
+    if (lithium.toBoolean()) modLocalRuntime("maven.modrinth:lithium:${lithium_version}")
 }
 
 processResources {
