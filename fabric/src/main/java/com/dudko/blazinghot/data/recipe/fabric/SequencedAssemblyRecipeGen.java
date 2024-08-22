@@ -81,7 +81,7 @@ public class SequencedAssemblyRecipeGen extends BlazingRecipeProvider {
                             .addStep(DeployerApplicationRecipe::new, r -> r.require(extensionPole())));
 
     private GeneratedRecipe enchantedMetalApple(MoltenMetal metal, ItemLike input, ItemLike transition, ItemLike output) {
-        return create("enchanted_" + foodMetalName(metal.name) + "_apple",
+        return create(output.asItem().toString(),
                 b -> b
                         .require(input)
                         .transitionTo(transition)

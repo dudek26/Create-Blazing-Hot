@@ -1,6 +1,8 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.multiloader.MultiFluids;
+import com.dudko.blazinghot.multiloader.fabric.MultiRecipeConditions;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
@@ -17,6 +19,8 @@ import net.minecraft.world.level.material.Fluid;
 
 import java.util.List;
 import java.util.function.Consumer;
+
+import static com.dudko.blazinghot.multiloader.Platform.FORGE;
 
 public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> extends ProcessingRecipeBuilder<T> {
 
@@ -70,7 +74,7 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> exten
         consumer.accept(new BlazingDataGenResult<>(build(), recipeConditions, convertMeltable, fuel));
     }
 
-    public static class BlazingDataGenResult<S extends ProcessingRecipe<?>> extends DataGenResult<S> {
+    public class BlazingDataGenResult<S extends ProcessingRecipe<?>> extends DataGenResult<S> {
 
         private final boolean convertMeltable;
         private final FluidIngredient fuel;
@@ -84,6 +88,13 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> exten
         @Override
         public void serializeRecipeData(JsonObject json) {
             if (convertMeltable) json.addProperty("blazinghot:convertMeltable", true);
+
+            if (!recipeConditions.isEmpty()) {
+                JsonArray conditions = new JsonArray();
+                recipeConditions.forEach(c -> conditions.add(MultiRecipeConditions.toForgeCondition(c)));
+                json.add("conditions", conditions);
+            }
+
             super.serializeRecipeData(json);
         }
     }

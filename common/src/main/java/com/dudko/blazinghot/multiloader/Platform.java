@@ -18,4 +18,8 @@ public enum Platform {
     public String toString() {
         return super.toString().toLowerCase();
     }
+
+    public String asResource(String path) {
+        return this + ":" + path;
+    }
 }
