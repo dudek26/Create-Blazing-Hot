@@ -27,51 +27,51 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class BlazeMixingCategory extends BasinCategory {
 
-    private final AnimatedBlazeMixer mixer = new AnimatedBlazeMixer();
-    private final AnimatedBlazeBurner heater = new AnimatedBlazeBurner();
-    MixingType type;
+	private final AnimatedBlazeMixer mixer = new AnimatedBlazeMixer();
+	private final AnimatedBlazeBurner heater = new AnimatedBlazeBurner();
+	MixingType type;
 
-    protected enum MixingType {
-        MIXING,
-        AUTO_SHAPELESS,
-        AUTO_BREWING
-    }
+	protected enum MixingType {
+		MIXING,
+		AUTO_SHAPELESS,
+		AUTO_BREWING
+	}
 
-    public static BlazeMixingCategory standard(Info<BasinRecipe> info) {
-        return new BlazeMixingCategory(info, MixingType.MIXING);
-    }
+	public static BlazeMixingCategory standard(Info<BasinRecipe> info) {
+		return new BlazeMixingCategory(info, MixingType.MIXING);
+	}
 
-    public static BlazeMixingCategory autoShapeless(Info<BasinRecipe> info) {
-        return new BlazeMixingCategory(info, MixingType.AUTO_SHAPELESS);
-    }
+	public static BlazeMixingCategory autoShapeless(Info<BasinRecipe> info) {
+		return new BlazeMixingCategory(info, MixingType.AUTO_SHAPELESS);
+	}
 
-    public static BlazeMixingCategory autoBrewing(Info<BasinRecipe> info) {
-        return new BlazeMixingCategory(info, MixingType.AUTO_BREWING);
-    }
+	public static BlazeMixingCategory autoBrewing(Info<BasinRecipe> info) {
+		return new BlazeMixingCategory(info, MixingType.AUTO_BREWING);
+	}
 
-    protected BlazeMixingCategory(Info<BasinRecipe> info, MixingType type) {
-        super(info, type != MixingType.AUTO_SHAPELESS);
-        this.type = type;
-    }
+	protected BlazeMixingCategory(Info<BasinRecipe> info, MixingType type) {
+		super(info, type != MixingType.AUTO_SHAPELESS);
+		this.type = type;
+	}
 
 	private FluidIngredient getFuelFromRecipe(BasinRecipe recipe) {
 		if (type == MixingType.AUTO_SHAPELESS) return FluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag,
 				BlazingConfigs.server().blazeShapelessFuelUsage.get());
 		if (recipe instanceof BlazeMixingRecipe bmRecipe) return bmRecipe.getFuelFluid();
-        else {
-            int calculatedCost = (int) BlazeMixingRecipe.getFuelCost(recipe);
+		else {
+			int calculatedCost = (int) BlazeMixingRecipe.getFuelCost(recipe);
 			return calculatedCost > 0 ?
 				   FluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, calculatedCost) :
 				   FluidIngredient.EMPTY;
-        }
+		}
 	}
 
 	private boolean includeFuel(BasinRecipe recipe) {
 		FluidIngredient fuelFluid = getFuelFromRecipe(recipe);
 
-        List<FluidStack> fuels;
-        if (fuelFluid == FluidIngredient.EMPTY) fuels = new ArrayList<>();
-        else fuels = new ArrayList<>(fuelFluid.getMatchingFluidStacks());
+		List<FluidStack> fuels;
+		if (fuelFluid == FluidIngredient.EMPTY) fuels = new ArrayList<>();
+		else fuels = new ArrayList<>(fuelFluid.getMatchingFluidStacks());
 		return (!fuels.isEmpty() && !fuels.get(0).isEmpty() && fuels.get(0) != null) || (type
 				== MixingType.AUTO_SHAPELESS && BlazingConfigs.server().blazeShapelessFuelUsage.get() != 0);
 	}
@@ -90,17 +90,18 @@ public class BlazeMixingCategory extends BasinCategory {
 
 		if (includeFuel(recipe)) builder
 				.addSlot(RecipeIngredientRole.INPUT, 142, 11 - (19 * (vRows - 1)))
-                .setBackground(getRenderedSlot(), -1, -1)
-                .addIngredients(ForgeTypes.FLUID_STACK, withImprovedVisibility(fuels))
-                .addTooltipCallback(addFluidTooltip(fuelFluid.getRequiredAmount()))
-				.addTooltipCallback((v, t) -> t.add(BlazingLang.BLAZE_MIXER_FUEL.get()
-                        .withStyle(ChatFormatting.DARK_GREEN)));
+				.setBackground(getRenderedSlot(), -1, -1)
+				.addIngredients(ForgeTypes.FLUID_STACK, withImprovedVisibility(fuels))
+				.addTooltipCallback(addFluidTooltip(fuelFluid.getRequiredAmount()))
+				.addTooltipCallback((v, t) -> t.add(BlazingLang.BLAZE_MIXER_FUEL
+						.get()
+						.withStyle(ChatFormatting.DARK_GREEN)));
 
 	}
 
-    @Override
-    public void draw(@NotNull BasinRecipe recipe, @NotNull IRecipeSlotsView iRecipeSlotsView, @NotNull GuiGraphics graphics, double mouseX, double mouseY) {
-        super.draw(recipe, iRecipeSlotsView, graphics, mouseX, mouseY);
+	@Override
+	public void draw(@NotNull BasinRecipe recipe, @NotNull IRecipeSlotsView iRecipeSlotsView, @NotNull GuiGraphics graphics, double mouseX, double mouseY) {
+		super.draw(recipe, iRecipeSlotsView, graphics, mouseX, mouseY);
 
 		if (includeFuel(recipe)) {
 			int vRows = (1 + recipe.getFluidResults().size() + recipe.getRollableResults().size()) / 2;
@@ -108,9 +109,9 @@ public class BlazeMixingCategory extends BasinCategory {
 		}
 
 		HeatCondition requiredHeat = recipe.getRequiredHeat();
-        if (requiredHeat != HeatCondition.NONE) heater
-                .withHeat(requiredHeat.visualizeAsBlazeBurner())
-                .draw(graphics, getBackground().getWidth() / 2 + 3, 55);
-        mixer.draw(graphics, getBackground().getWidth() / 2 + 3, 34);
-    }
+		if (requiredHeat != HeatCondition.NONE) heater
+				.withHeat(requiredHeat.visualizeAsBlazeBurner())
+				.draw(graphics, getBackground().getWidth() / 2 + 3, 55);
+		mixer.draw(graphics, getBackground().getWidth() / 2 + 3, 34);
+	}
 }

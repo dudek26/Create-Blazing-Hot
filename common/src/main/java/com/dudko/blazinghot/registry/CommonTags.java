@@ -1,6 +1,11 @@
 package com.dudko.blazinghot.registry;
 
+import static com.dudko.blazinghot.util.LangUtil.titleCaseConversion;
+
+import java.util.function.BiConsumer;
+
 import com.dudko.blazinghot.BlazingHot;
+
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -8,10 +13,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
-
-import java.util.function.BiConsumer;
-
-import static com.dudko.blazinghot.util.LangUtil.titleCaseConversion;
 
 /**
  * @apiNote Internal tags are used for recipes, advancements etc.

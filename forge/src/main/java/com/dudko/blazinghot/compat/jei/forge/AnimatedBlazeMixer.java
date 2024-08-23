@@ -8,6 +8,7 @@ import com.mojang.math.Axis;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.compat.jei.category.animations.AnimatedKinetics;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
+
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.util.Mth;
 
@@ -26,8 +27,11 @@ public class AnimatedBlazeMixer extends AnimatedKinetics {
         matrixStack.mulPose(Axis.YP.rotationDegrees(22.5f));
         int scale = 23;
 
-        blockElement(crimsonCogwheel()).rotateBlock(0, getCurrentAngle() * 2, 0).atLocal(0, 0, 0).scale(scale).render(
-                graphics);
+        blockElement(crimsonCogwheel())
+                .rotateBlock(0, getCurrentAngle() * 2, 0)
+                .atLocal(0, 0, 0)
+                .scale(scale)
+                .render(graphics);
 
         blockElement(BlazingBlocks.BLAZE_MIXER.getDefaultState()).atLocal(0, 0, 0).scale(scale).render(graphics);
 
@@ -35,9 +39,11 @@ public class AnimatedBlazeMixer extends AnimatedKinetics {
 
         blockElement(BlazingPartialModels.BLAZE_MIXER_POLE).atLocal(0, animation, 0).scale(scale).render(graphics);
 
-        blockElement(BlazingPartialModels.BLAZE_MIXER_HEAD).rotateBlock(0, getCurrentAngle() * 4, 0).atLocal(0,
-                animation,
-                0).scale(scale).render(graphics);
+        blockElement(BlazingPartialModels.BLAZE_MIXER_HEAD)
+                .rotateBlock(0, getCurrentAngle() * 4, 0)
+                .atLocal(0, animation, 0)
+                .scale(scale)
+                .render(graphics);
 
         blockElement(AllBlocks.BASIN.getDefaultState()).atLocal(0, 1.65, 0).scale(scale).render(graphics);
 

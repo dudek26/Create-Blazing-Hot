@@ -1,5 +1,19 @@
 package com.dudko.blazinghot.compat.jei.forge;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+
+import javax.annotation.Nonnull;
+
+import org.jetbrains.annotations.NotNull;
+
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
@@ -23,6 +37,7 @@ import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import com.simibubi.create.infrastructure.config.CRecipes;
+
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.forge.ForgeTypes;
@@ -44,14 +59,6 @@ import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.fluids.FluidStack;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-import java.util.*;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 @JeiPlugin
 @SuppressWarnings("SameParameterValue")
@@ -122,7 +129,8 @@ public class BlazingJEI implements IModPlugin {
     public void registerRecipes(@NotNull IRecipeRegistration registration) {
         allCategories.forEach(c -> c.registerRecipes(registration));
         registration.addIngredientInfo((new FluidStack(BlazingFluidsImpl.NETHER_LAVA.getSource(), 1000)),
-                ForgeTypes.FLUID_STACK, Component.translatable("emi.blazinghot.info.nether_lava_cobblestone"));
+                ForgeTypes.FLUID_STACK,
+                Component.translatable("emi.blazinghot.info.nether_lava_cobblestone"));
     }
 
     @Override

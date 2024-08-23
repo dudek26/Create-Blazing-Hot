@@ -1,12 +1,13 @@
 package com.dudko.blazinghot.compat.emi.fabric;
 
+import java.util.List;
+
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
+
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import net.minecraft.resources.ResourceLocation;
-
-import java.util.List;
 
 public class BlazeShapelessEmiRecipe extends BlazeMixingEmiRecipe {
 

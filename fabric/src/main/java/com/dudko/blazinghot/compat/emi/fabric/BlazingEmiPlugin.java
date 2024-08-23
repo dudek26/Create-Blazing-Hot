@@ -1,5 +1,13 @@
 package com.dudko.blazinghot.compat.emi.fabric;
 
+import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe.getFuelCost;
+
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.BiFunction;
+
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
@@ -20,6 +28,7 @@ import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
+
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiInfoRecipe;
@@ -34,169 +43,164 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.BiFunction;
-
-import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe.getFuelCost;
-
 public class BlazingEmiPlugin implements EmiPlugin {
 
-    public static final Map<ResourceLocation, EmiRecipeCategory> ALL = new LinkedHashMap<>();
+	public static final Map<ResourceLocation, EmiRecipeCategory> ALL = new LinkedHashMap<>();
 
-    public static final EmiRecipeCategory BLAZE_MIXING = register("blaze_mixing",
-            DoubleItemIcon.of(BlazingBlocks.BLAZE_MIXER.get(), AllBlocks.BASIN.get())), BLAZE_AUTOMATIC_SHAPELESS =
-            register("blaze_automatic_shapeless",
-                    DoubleItemIcon.of(BlazingBlocks.BLAZE_MIXER.get(), Items.CRAFTING_TABLE)), BLAZE_AUTOMATIC_BREWING =
-            register("blaze_automatic_brewing",
-                    DoubleItemIcon.of(BlazingBlocks.BLAZE_MIXER.get(), Items.BREWING_STAND));
+	public static final EmiRecipeCategory
+			BLAZE_MIXING =
+			register("blaze_mixing", DoubleItemIcon.of(BlazingBlocks.BLAZE_MIXER.get(), AllBlocks.BASIN.get())),
+			BLAZE_AUTOMATIC_SHAPELESS =
+					register("blaze_automatic_shapeless",
+							DoubleItemIcon.of(BlazingBlocks.BLAZE_MIXER.get(), Items.CRAFTING_TABLE)),
+			BLAZE_AUTOMATIC_BREWING =
+					register("blaze_automatic_brewing",
+							DoubleItemIcon.of(BlazingBlocks.BLAZE_MIXER.get(), Items.BREWING_STAND));
 
-    @Override
-    public void register(EmiRegistry registry) {
-        ALL.forEach((id, category) -> registry.addCategory(category));
+	@Override
+	public void register(EmiRegistry registry) {
+		ALL.forEach((id, category) -> registry.addCategory(category));
 
-        registry.addWorkstation(CreateEmiPlugin.MIXING, EmiStack.of(BlazingBlocks.BLAZE_MIXER));
-        registry.addWorkstation(CreateEmiPlugin.AUTOMATIC_SHAPELESS, EmiStack.of(BlazingBlocks.BLAZE_MIXER));
-        registry.addWorkstation(CreateEmiPlugin.AUTOMATIC_BREWING, EmiStack.of(BlazingBlocks.BLAZE_MIXER));
+		registry.addWorkstation(CreateEmiPlugin.MIXING, EmiStack.of(BlazingBlocks.BLAZE_MIXER));
+		registry.addWorkstation(CreateEmiPlugin.AUTOMATIC_SHAPELESS, EmiStack.of(BlazingBlocks.BLAZE_MIXER));
+		registry.addWorkstation(CreateEmiPlugin.AUTOMATIC_BREWING, EmiStack.of(BlazingBlocks.BLAZE_MIXER));
 
-        registry.addWorkstation(BLAZE_MIXING, EmiStack.of(BlazingBlocks.BLAZE_MIXER));
-        registry.addWorkstation(BLAZE_MIXING, EmiStack.of(AllBlocks.BASIN));
-        registry.addWorkstation(BLAZE_AUTOMATIC_SHAPELESS, EmiStack.of(BlazingBlocks.BLAZE_MIXER));
-        registry.addWorkstation(BLAZE_AUTOMATIC_SHAPELESS, EmiStack.of(AllBlocks.BASIN));
-        registry.addWorkstation(BLAZE_AUTOMATIC_BREWING, EmiStack.of(BlazingBlocks.BLAZE_MIXER));
-        registry.addWorkstation(BLAZE_AUTOMATIC_BREWING, EmiStack.of(AllBlocks.BASIN));
+		registry.addWorkstation(BLAZE_MIXING, EmiStack.of(BlazingBlocks.BLAZE_MIXER));
+		registry.addWorkstation(BLAZE_MIXING, EmiStack.of(AllBlocks.BASIN));
+		registry.addWorkstation(BLAZE_AUTOMATIC_SHAPELESS, EmiStack.of(BlazingBlocks.BLAZE_MIXER));
+		registry.addWorkstation(BLAZE_AUTOMATIC_SHAPELESS, EmiStack.of(AllBlocks.BASIN));
+		registry.addWorkstation(BLAZE_AUTOMATIC_BREWING, EmiStack.of(BlazingBlocks.BLAZE_MIXER));
+		registry.addWorkstation(BLAZE_AUTOMATIC_BREWING, EmiStack.of(AllBlocks.BASIN));
 
-        RecipeManager manager = registry.getRecipeManager();
+		RecipeManager manager = registry.getRecipeManager();
 
-        addAll(registry, BlazingRecipeTypesImpl.BLAZE_MIXING, BLAZE_MIXING, BlazeMixingEmiRecipe::new);
+		addAll(registry, BlazingRecipeTypesImpl.BLAZE_MIXING, BLAZE_MIXING, BlazeMixingEmiRecipe::new);
 
-        List<MixingRecipe> mixingRecipes = manager.getAllRecipesFor(AllRecipeTypes.MIXING.getType());
-        List<BlazeMixingRecipe> blazeMixingRecipes =
-                manager.getAllRecipesFor(BlazingRecipeTypesImpl.BLAZE_MIXING.getType());
-        outer:
-        for (MixingRecipe recipe : mixingRecipes) {
-            for (BlazeMixingRecipe blazeMix : blazeMixingRecipes) {
-                if (doInputsMatch(recipe, blazeMix)) {
-                    continue outer;
-                }
-            }
-            registry.addRecipe(new BlazeMixingEmiRecipe(BLAZE_MIXING, recipe));
-        }
+		List<MixingRecipe> mixingRecipes = manager.getAllRecipesFor(AllRecipeTypes.MIXING.getType());
+		List<BlazeMixingRecipe>
+				blazeMixingRecipes =
+				manager.getAllRecipesFor(BlazingRecipeTypesImpl.BLAZE_MIXING.getType());
+		outer:
+		for (MixingRecipe recipe : mixingRecipes) {
+			for (BlazeMixingRecipe blazeMix : blazeMixingRecipes) {
+				if (doInputsMatch(recipe, blazeMix)) {
+					continue outer;
+				}
+			}
+			registry.addRecipe(new BlazeMixingEmiRecipe(BLAZE_MIXING, recipe));
+		}
 
-        for (CraftingRecipe recipe : manager.getAllRecipesFor(RecipeType.CRAFTING)) {
-            if (recipe instanceof ShapelessRecipe
-                    && BlazingConfigs.server().allowShapelessInBlazeMixer.get()
-                    && !MechanicalPressBlockEntity.canCompress(recipe)
-                    && !AllRecipeTypes.shouldIgnoreInAutomation(recipe)
-                    && recipe.getIngredients().size() > 1) {
-                registry.addRecipe(new BlazeShapelessEmiRecipe(BLAZE_AUTOMATIC_SHAPELESS,
-                        BasinRecipe.convertShapeless(recipe), getFuelCost(recipe)));
-            }
-        }
+		for (CraftingRecipe recipe : manager.getAllRecipesFor(RecipeType.CRAFTING)) {
+			if (recipe instanceof ShapelessRecipe
+					&& BlazingConfigs.server().allowShapelessInBlazeMixer.get()
+					&& !MechanicalPressBlockEntity.canCompress(recipe)
+					&& !AllRecipeTypes.shouldIgnoreInAutomation(recipe)
+					&& recipe.getIngredients().size() > 1) {
+				registry.addRecipe(new BlazeShapelessEmiRecipe(BLAZE_AUTOMATIC_SHAPELESS,
+						BasinRecipe.convertShapeless(recipe),
+						getFuelCost(recipe)));
+			}
+		}
 
-        for (MixingRecipe recipe : PotionMixingRecipes.ALL) {
-            if (BlazingConfigs.server().allowBrewingInBlazeMixer.get()) registry.addRecipe(new BlazeMixingEmiRecipe(
-                    BLAZE_AUTOMATIC_BREWING,
-                    recipe));
-        }
+		for (MixingRecipe recipe : PotionMixingRecipes.ALL) {
+			if (BlazingConfigs.server().allowBrewingInBlazeMixer.get())
+				registry.addRecipe(new BlazeMixingEmiRecipe(BLAZE_AUTOMATIC_BREWING, recipe));
+		}
 
-        for (MoltenMetal metal : MoltenMetals.ALL) {
-            addMoltenMetalCollisions(registry, metal);
-        }
+		for (MoltenMetal metal : MoltenMetals.ALL) {
+			addMoltenMetalCollisions(registry, metal);
+		}
 
-        addFluidCollision(registry,
-                "nether_lava_and_water",
-                BlazingFluidsImpl.NETHER_LAVA.get(),
-                Fluids.WATER,
-                () -> Blocks.COBBLESTONE);
+		addFluidCollision(registry,
+				"nether_lava_and_water",
+				BlazingFluidsImpl.NETHER_LAVA.get(),
+				Fluids.WATER,
+				() -> Blocks.COBBLESTONE);
 
-        addFluidInfo(registry,
-                BlazingLang.NETHER_LAVA_INFO.get(),
-                "nether_lava",
-                BlazingFluidsImpl.NETHER_LAVA.get());
-    }
+		addFluidInfo(registry, BlazingLang.NETHER_LAVA_INFO.get(), "nether_lava", BlazingFluidsImpl.NETHER_LAVA.get());
+	}
 
-    private static EmiRecipeCategory register(String name, EmiRenderable icon) {
-        ResourceLocation id = BlazingHot.asResource(name);
-        EmiRecipeCategory category = new EmiRecipeCategory(id, icon);
-        ALL.put(id, category);
-        return category;
-    }
+	private static EmiRecipeCategory register(String name, EmiRenderable icon) {
+		ResourceLocation id = BlazingHot.asResource(name);
+		EmiRecipeCategory category = new EmiRecipeCategory(id, icon);
+		ALL.put(id, category);
+		return category;
+	}
 
-    public static boolean doInputsMatch(Recipe<?> a, Recipe<?> b) {
-        if (a instanceof MixingRecipe mixing && b instanceof BlazeMixingRecipe blazeMixing) {
-            return BlazeMixerBlockEntity.doInputsMatch(mixing, blazeMixing);
-        }
+	public static boolean doInputsMatch(Recipe<?> a, Recipe<?> b) {
+		if (a instanceof MixingRecipe mixing && b instanceof BlazeMixingRecipe blazeMixing) {
+			return BlazeMixerBlockEntity.doInputsMatch(mixing, blazeMixing);
+		}
 
-        if (!a.getIngredients().isEmpty() && !b.getIngredients().isEmpty()) {
-            ItemStack[] matchingStacks = a.getIngredients().get(0).getItems();
-            if (matchingStacks.length != 0) {
-                if (b.getIngredients().get(0).test(matchingStacks[0])) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+		if (!a.getIngredients().isEmpty() && !b.getIngredients().isEmpty()) {
+			ItemStack[] matchingStacks = a.getIngredients().get(0).getItems();
+			if (matchingStacks.length != 0) {
+				if (b.getIngredients().get(0).test(matchingStacks[0])) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
-    @SuppressWarnings("unchecked")
-    private <T extends Recipe<?>> void addAll(EmiRegistry registry, BlazingRecipeTypesImpl type, EmiRecipeCategory category, BiFunction<EmiRecipeCategory, T, EmiRecipe> constructor) {
-        for (T recipe : (List<T>) registry.getRecipeManager().getAllRecipesFor(type.getType())) {
-            registry.addRecipe(constructor.apply(category, recipe));
-        }
-    }
+	@SuppressWarnings("unchecked")
+	private <T extends Recipe<?>> void addAll(EmiRegistry registry, BlazingRecipeTypesImpl type, EmiRecipeCategory category, BiFunction<EmiRecipeCategory, T, EmiRecipe> constructor) {
+		for (T recipe : (List<T>) registry.getRecipeManager().getAllRecipesFor(type.getType())) {
+			registry.addRecipe(constructor.apply(category, recipe));
+		}
+	}
 
-    private void addMoltenMetalCollisions(EmiRegistry registry, MoltenMetal metal) {
+	private void addMoltenMetalCollisions(EmiRegistry registry, MoltenMetal metal) {
 
-        for (Map.Entry<Fluid, NonNullSupplier<Block>> entry : metal.getFluidInteractions().entrySet()) {
-            addFluidCollision(registry,
-                    metal.moltenName() + "_and_" + BuiltInRegistries.FLUID.getKey(entry.getKey()).getPath(),
-                    BlazingFluidsImpl.MOLTEN_METALS.getFluid(metal),
-                    entry.getKey(),
-                    entry.getValue());
-        }
+		for (Map.Entry<Fluid, NonNullSupplier<Block>> entry : metal.getFluidInteractions().entrySet()) {
+			addFluidCollision(registry,
+					metal.moltenName() + "_and_" + BuiltInRegistries.FLUID.getKey(entry.getKey()).getPath(),
+					BlazingFluidsImpl.MOLTEN_METALS.getFluid(metal),
+					entry.getKey(),
+					entry.getValue());
+		}
 
-    }
+	}
 
-    private void addFluidCollision(EmiRegistry registry, String name, Fluid fluid1, Fluid fluid2, NonNullSupplier<Block> result) {
-        EmiStack fluidStack1 = EmiStack.of(fluid1, Constants.BUCKET.platformed());
-        fluidStack1 = fluidStack1.setRemainder(fluidStack1);
+	private void addFluidCollision(EmiRegistry registry, String name, Fluid fluid1, Fluid fluid2, NonNullSupplier<Block> result) {
+		EmiStack fluidStack1 = EmiStack.of(fluid1, Constants.BUCKET.platformed());
+		fluidStack1 = fluidStack1.setRemainder(fluidStack1);
 
-        EmiStack fluidStack2 = EmiStack.of(fluid2, Constants.BUCKET.platformed());
-        fluidStack2 = fluidStack2.setRemainder(fluidStack2);
+		EmiStack fluidStack2 = EmiStack.of(fluid2, Constants.BUCKET.platformed());
+		fluidStack2 = fluidStack2.setRemainder(fluidStack2);
 
-        Block block = result.get();
-        EmiStack output = EmiStack.of(block);
+		Block block = result.get();
+		EmiStack output = EmiStack.of(block);
 
-        registry.addRecipe(
-                EmiWorldInteractionRecipe.builder()
-                        .id(synthetic("emi/fluid_interaction/" + name))
-                        .leftInput(fluidStack2)
-                        .rightInput(fluidStack1, false)
-                        .output(output)
-                        .build()
-        );
-    }
+		registry.addRecipe(EmiWorldInteractionRecipe
+				.builder()
+				.id(synthetic("emi/fluid_interaction/" + name))
+				.leftInput(fluidStack2)
+				.rightInput(fluidStack1, false)
+				.output(output)
+				.build());
+	}
 
-    private void addFluidInfo(EmiRegistry registry, Component info, String id, Fluid... fluids) {
-        List<EmiIngredient> ingredients = Arrays.stream(fluids).map(f -> ((EmiIngredient) EmiStack.of(f))).toList();
+	private void addFluidInfo(EmiRegistry registry, Component info, String id, Fluid... fluids) {
+		List<EmiIngredient> ingredients = Arrays.stream(fluids).map(f -> ((EmiIngredient) EmiStack.of(f))).toList();
 
-        registry.addRecipe(new EmiInfoRecipe(ingredients, List.of(info), synthetic("emi/info/" + id)));
-    }
+		registry.addRecipe(new EmiInfoRecipe(ingredients, List.of(info), synthetic("emi/info/" + id)));
+	}
 
-    private static ResourceLocation synthetic(String path) {
-        if (path.startsWith("/"))
-            throw new IllegalArgumentException("Starting slash is added automatically");
-        // EMI recommends starting synthetic IDs with a slash so that they can't possibly conflict with data packs.
-        return BlazingHot.asResource('/' + path);
-    }
+	private static ResourceLocation synthetic(String path) {
+		if (path.startsWith("/")) throw new IllegalArgumentException("Starting slash is added automatically");
+		// EMI recommends starting synthetic IDs with a slash so that they can't possibly conflict with data packs.
+		return BlazingHot.asResource('/' + path);
+	}
 
 }
