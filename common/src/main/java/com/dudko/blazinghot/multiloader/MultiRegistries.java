@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 
 public class MultiRegistries {
@@ -20,6 +21,12 @@ public class MultiRegistries {
 	@ExpectPlatform
 	@NotNull
 	public static Supplier<Fluid> getFluidFromRegistry(ResourceLocation resourceLocation) {
+		throw new AssertionError();
+	}
+
+	@ExpectPlatform
+	@NotNull
+	public static Supplier<Block> getBlockFromRegistry(ResourceLocation resourceLocation) {
 		throw new AssertionError();
 	}
 }

@@ -32,6 +32,8 @@ Create: Blazing Hot 0.6
 * Blaze Arrow's damage is now multiplied when hitting the target rather than when being shot
 * Changed the icon of Blazing Building Blocks creative tab back to White Modern Lamp
 * Adjusted effects of existing Metal Apples
+* Changed recipes for Modern Lamp Blocks:
+    * They require 1 Blaze Gold Rod, 1 Glowstone and 3 Glass blocks (or Stained Glass for colored lamps)
 * [Fabric] Unified some translations between EMI and JEI
 * [Fabric] Molten Blaze Gold source blocks now turn into Obsidian when touching water
 

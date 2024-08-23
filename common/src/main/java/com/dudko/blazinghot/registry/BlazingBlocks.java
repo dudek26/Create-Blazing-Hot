@@ -99,6 +99,20 @@ public class BlazingBlocks {
 				.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag, BlazingTags.Blocks.MODERN_LAMPS.tag)
 				.transform(BlazingBuilderTransformers.modernLampBlock(color))
 				.recipe((c, p) -> {
+					ShapedRecipeBuilder
+							.shaped(RecipeCategory.REDSTONE, c.get(), 2)
+							.pattern(" g ")
+							.pattern("glg")
+							.pattern(" r ")
+							.define('g', DyeUtil.getStainedGlass(color))
+							.define('l', Blocks.GLOWSTONE)
+							.define('r', BlazingItems.BLAZE_GOLD_ROD)
+							.unlockedBy("has_" + BlazingItems.BLAZE_GOLD_ROD.getId().getPath(),
+									RegistrateRecipeProvider.has(BlazingItems.BLAZE_GOLD_ROD))
+							.save(p,
+									BlazingHot.asResource("crafting/modern_lamp/"
+											+ c.getName()
+											+ "_from_stained_glass"));
 					DyeUtil
 							.dyeingMultiple(RecipeCategory.REDSTONE, BlazingTags.Items.MODERN_LAMPS.tag, c.get(), color)
 							.save(p,

@@ -1,21 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "category": "redstone",
   "key": {
-    "G": {
-      "item": "minecraft:glass"
+    "g": {
+      "item": "minecraft:white_stained_glass"
     },
-    "X": {
-      "tag": "blazinghot:blaze_gold_rods"
-    },
-    "Y": {
+    "l": {
       "item": "minecraft:glowstone"
+    },
+    "r": {
+      "item": "blazinghot:blaze_gold_rod"
     }
   },
   "pattern": [
-    " G ",
-    "GYG",
-    " X "
+    " g ",
+    "glg",
+    " r "
   ],
   "result": {
     "count": 2,

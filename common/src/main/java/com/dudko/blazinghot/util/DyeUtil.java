@@ -1,7 +1,10 @@
 package com.dudko.blazinghot.util;
 
 import java.util.Arrays;
+import java.util.function.Supplier;
 
+import com.dudko.blazinghot.compat.Mods;
+import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 
 import io.github.fabricators_of_create.porting_lib.tags.Tags;
@@ -13,6 +16,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 
 public class DyeUtil {
 
@@ -56,20 +60,36 @@ public class DyeUtil {
 		private final DyeColor color;
 		private final TagKey<Item> tag;
 		private final Item item;
+		private final Supplier<Block> stainedGlass;
 
 		Dyes(DyeColor color, TagKey<Item> tag, Item item) {
 			this.color = color;
 			this.tag = tag;
 			this.item = item;
+			this.stainedGlass =
+					MultiRegistries.getBlockFromRegistry(Mods.VANILLA.asResource(toString() + "_stained_glass"));
+		}
+
+		@Override
+		public String toString() {
+			return name().toLowerCase();
 		}
 	}
 
 	public static TagKey<Item> getDyeTag(DyeColor color) {
-		return Arrays.stream(Dyes.values()).filter(dye -> dye.color == color).findFirst().orElse(Dyes.WHITE).tag;
+		return get(color).tag;
 	}
 
 	public static Item getDyeItem(DyeColor color) {
-		return Arrays.stream(Dyes.values()).filter(dye -> dye.color == color).findFirst().orElse(Dyes.WHITE).item;
+		return get(color).item;
+	}
+
+	public static Block getStainedGlass(DyeColor color) {
+		return get(color).stainedGlass.get();
+	}
+
+	public static Dyes get(DyeColor color) {
+		return Arrays.stream(Dyes.values()).filter(dye -> dye.color == color).findFirst().orElse(Dyes.WHITE);
 	}
 
 }

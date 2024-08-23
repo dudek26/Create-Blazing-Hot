@@ -36,6 +36,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
 @SuppressWarnings({"UnusedReturnValue", "SameParameterValue", "unused"})
@@ -106,9 +107,7 @@ public class CraftingRecipeGen extends BlazingRecipeProvider {
 							.returns(2)
 							.viaShaped(b -> b
 									.define('X', blazeGoldRod())
-									.define('Y', glowstone())
-									.pattern(" X ")
-									.pattern("XYX")
+									.define('Y', glowstone()).define('G', Items.GLASS).pattern(" G ").pattern("GYG")
 									.pattern(" X ")),
 			BLAZE_ARROW =
 					create(BlazingItems.BLAZE_ARROW)
