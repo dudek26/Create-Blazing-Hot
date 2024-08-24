@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
+import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.dudko.blazinghot.mixin.forge.RecipeManagerAccessor;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
@@ -129,8 +130,7 @@ public class BlazingJEI implements IModPlugin {
     public void registerRecipes(@NotNull IRecipeRegistration registration) {
         allCategories.forEach(c -> c.registerRecipes(registration));
         registration.addIngredientInfo((new FluidStack(BlazingFluidsImpl.NETHER_LAVA.getSource(), 1000)),
-                ForgeTypes.FLUID_STACK,
-                Component.translatable("emi.blazinghot.info.nether_lava_cobblestone"));
+                ForgeTypes.FLUID_STACK, BlazingLang.NETHER_LAVA_INFO.get());
     }
 
     @Override

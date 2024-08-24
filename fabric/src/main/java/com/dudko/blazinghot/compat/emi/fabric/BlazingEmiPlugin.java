@@ -145,9 +145,7 @@ public class BlazingEmiPlugin implements EmiPlugin {
 		if (!a.getIngredients().isEmpty() && !b.getIngredients().isEmpty()) {
 			ItemStack[] matchingStacks = a.getIngredients().get(0).getItems();
 			if (matchingStacks.length != 0) {
-				if (b.getIngredients().get(0).test(matchingStacks[0])) {
-					return true;
-				}
+				return b.getIngredients().get(0).test(matchingStacks[0]);
 			}
 		}
 		return false;

@@ -1,5 +1,7 @@
 package com.dudko.blazinghot.compat.jei.fabric;
 
+import static com.simibubi.create.compat.jei.category.CreateRecipeCategory.toJei;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -17,8 +19,10 @@ import org.jetbrains.annotations.NotNull;
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
+import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
+import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
 import com.dudko.blazinghot.registry.fabric.BlazingRecipeTypesImpl;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllRecipeTypes;
@@ -36,8 +40,10 @@ import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import com.simibubi.create.infrastructure.config.CRecipes;
 
+import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
 import io.github.fabricators_of_create.porting_lib.mixin.accessors.common.accessor.RecipeManagerAccessor;
 import mezz.jei.api.IModPlugin;
+import mezz.jei.api.fabric.constants.FabricTypes;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
@@ -123,6 +129,9 @@ public class BlazingJEI implements IModPlugin {
 	@Override
 	public void registerRecipes(@NotNull IRecipeRegistration registration) {
 		allCategories.forEach(c -> c.registerRecipes(registration));
+		registration.addIngredientInfo(toJei(new FluidStack(BlazingFluidsImpl.NETHER_LAVA.get(), 81000)),
+				FabricTypes.FLUID_STACK,
+				BlazingLang.NETHER_LAVA_INFO.get());
 	}
 
 	@Override
