@@ -225,13 +225,14 @@ public class BlazingItems {
 			ZINC_CARROT =
 					new FoodItemBuilder<>("zinc_carrot", p -> new BlazingFoodItem(p, REMOVE_SLOWNESS_0))
 							.nutrition(5)
-							.saturationMod(0.8f)
+							.saturationMod(0.8f).alwaysEat().description(ItemDescriptions.SLOWNESS_REMOVING_FOOD_0)
 							.tag(BlazingTags.Items.METAL_CARROTS.tag)
 							.register(),
 			ZINC_APPLE =
 					new FoodItemBuilder<>("zinc_apple", p -> new BlazingFoodItem(p, REMOVE_SLOWNESS_1))
 							.metalApple()
 							.tag(BlazingTags.Items.METAL_APPLES.tag)
+							.description(ItemDescriptions.SLOWNESS_REMOVING_FOOD_1)
 							.addEffect(MobEffects.ABSORPTION, tickMinutes(1))
 							.addEffect(MobEffects.MOVEMENT_SPEED, tickSeconds(30))
 							.register(),
@@ -239,6 +240,7 @@ public class BlazingItems {
 					new FoodItemBuilder<>("stellar_zinc_apple", p -> new BlazingFoodItem(p, REMOVE_SLOWNESS_2))
 							.metalApple()
 							.tag(BlazingTags.Items.STELLAR_METAL_APPLES.tag)
+							.description(ItemDescriptions.SLOWNESS_REMOVING_FOOD_2)
 							.addEffect(MobEffects.ABSORPTION, tickMinutes(1), 1)
 							.addEffect(MobEffects.REGENERATION, tickSeconds(10))
 							.addEffect(MobEffects.MOVEMENT_SPEED, tickMinutes(3), 1)
@@ -246,7 +248,7 @@ public class BlazingItems {
 			ENCHANTED_ZINC_APPLE =
 					new FoodItemBuilder<>("enchanted_zinc_apple",
 							p -> new BlazingFoodItem(p, REMOVE_SLOWNESS_ANY, FOIL))
-							.enchantedMetalApple()
+							.enchantedMetalApple().description(ItemDescriptions.SLOWNESS_REMOVING_FOOD_ANY)
 							.addEffect(MobEffects.ABSORPTION, tickMinutes(2), 2)
 							.addEffect(MobEffects.REGENERATION, tickSeconds(10), 1)
 							.addEffect(MobEffects.SLOW_FALLING, tickMinutes(2))
