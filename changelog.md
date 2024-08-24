@@ -46,6 +46,8 @@ Create: Blazing Hot 0.6
 * Blaze Arrow is now in the `minecraft:arrows` entity type tag and grants the "Take Aim" advancement
 * Moved Blaze Mixer's fuel slot in recipe viewers to avoid being hidden by ingredients
 * [Forge] Fixed Iron Carrot crafting recipe using wrong tag for iron nuggets
+* [Forge] Fixed Blaze Mixer having incorrect fuel capacity
+* [Forge] Pumping fuel out of Blaze Mixer while processing a recipe no longer crashes the game
 
 ------------------------------------------------------
 Create: Blazing Hot 0.5
