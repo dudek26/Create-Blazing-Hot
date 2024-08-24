@@ -2,10 +2,10 @@
   "blazinghot:blaze_mixing": {
     "order": 500
   },
-  "blazinghot:blaze_auto_shapeless": {
+  "blazinghot:blaze_automatic_shapeless": {
     "order": 510
   },
-  "blazinghot:blaze_auto_brewing": {
+  "blazinghot:blaze_automatic_brewing": {
     "order": 520
   }
 }

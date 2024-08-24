@@ -35,6 +35,7 @@ Create: Blazing Hot 0.6
 * Adjusted effects of existing Metal Apples
 * Changed recipes for Modern Lamp Blocks:
     * They require 1 Blaze Gold Rod, 1 Glowstone and 3 Glass blocks (or Stained Glass for colored lamps)
+* [Fabric] Blaze Mixing recipes should no longer show before regular Mixing recipes in EMI
 * [Fabric] Unified some translations between EMI and JEI
 * [Fabric] Molten Blaze Gold source blocks now turn into Obsidian when touching water
 
