@@ -463,7 +463,9 @@ public class BlazingItems {
 			builder.onRegisterAfter(Registries.ITEM, c -> {
 				if (c instanceof BlazingFoodItem food) {
 					if (food.isExtinguishing()) ItemDescription.useKey(c, ItemDescriptions.EXTINGUISHING_FOOD.getKey());
-					if (food.getOxygen() >= 0) ItemDescription.useKey(c, food.getRemovedSlownessDescription());
+					if (food.getOxygen() > 0) ItemDescription.useKey(c, ItemDescriptions.OXYGEN_FOOD.getKey());
+					if (food.getMaxRemovedSlowness() >= 0)
+						ItemDescription.useKey(c, food.getRemovedSlownessDescription());
 				}
 			});
 

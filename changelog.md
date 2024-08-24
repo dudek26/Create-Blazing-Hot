@@ -30,6 +30,7 @@ Create: Blazing Hot 0.6
 * Increased chance of getting Blaze Powder when crushing Blaze Gold Rods from 30% to 50%
 * Several recipes now use tags instead of specific ingredients
 * Updated textures for existing Molten Metals
+* Updated textures for existing Metal Apples
 * Blaze Arrow's damage is now multiplied when hitting the target rather than when being shot
 * Changed the icon of Blazing Building Blocks creative tab back to White Modern Lamp
 * Adjusted effects of existing Metal Apples
