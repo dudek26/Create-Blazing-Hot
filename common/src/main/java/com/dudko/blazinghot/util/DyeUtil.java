@@ -102,7 +102,7 @@ public class DyeUtil {
 		for (Dyes dye : Dyes.values()) {
 			ResourceLocation loc = dye.internalTag.location();
 			consumer.accept("tag.item." + BlazingHot.ID + "." + loc.getPath().replace('/', '.'),
-					LangUtil.titleCaseConversion(dye.toString().replace('_', ' ')));
+					LangUtil.titleCaseConversion(dye.toString().replace('_', ' ')) + " Dyes");
 		}
 	}
 

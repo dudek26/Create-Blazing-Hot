@@ -10,6 +10,7 @@ Create: Blazing Hot 0.6
 * Blaze Mixing recipe for Netherite using Molten Ancient Debris and Gold
 * Crafting recipe for Blaze Apple
 * 17 new Advancements, including 3 challenges and one secret advancement
+    * You may need to replace your Mixers, Blaze Mixers and Spouts to get some of the advancements
 * New item tags:
   * `blazinghot:metal_carrots`
   * `blazinghot:metal_apples`
@@ -47,6 +48,7 @@ Create: Blazing Hot 0.6
 * Moved Blaze Mixer's fuel slot in recipe viewers to avoid being hidden by ingredients
 * [Forge] Fixed Iron Carrot crafting recipe using wrong tag for iron nuggets
 * [Forge] Fixed Blaze Mixer having incorrect fuel capacity
+* [Forge] Fixed Modern Lamp dyeing recipes using wrong tags for dyes
 * [Forge] Pumping fuel out of Blaze Mixer while processing a recipe no longer crashes the game
 
 ------------------------------------------------------

@@ -6,6 +6,7 @@ import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
+import com.dudko.blazinghot.util.DyeUtil;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 
 public class BlazingLangGen {
@@ -19,6 +20,7 @@ public class BlazingLangGen {
 		BlazingAdvancements.provideLangEntries(langConsumer);
 		BlazingLang.provideLangEntries(langConsumer);
 		ItemDescriptions.provideLangEntries(langConsumer);
+		DyeUtil.provideLangEntries(langConsumer);
 	}
 
 }
