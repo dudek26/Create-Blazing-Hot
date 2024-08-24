@@ -2,7 +2,7 @@ package com.dudko.blazinghot.data.recipe.fabric;
 
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.andesite;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.cinderFlour;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.clay;
+import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.clayBall;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.coal;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.moltenAncientDebris;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.moltenCopper;
@@ -56,8 +56,7 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
 			create("nether_compound",
 					b -> b
 							.require(netherFlora())
-							.require(coal())
-							.require(clay())
+							.require(coal()).require(clayBall())
 							.require(netherrackDust())
 							.require(soulDust())
 							.output(BlazingItems.NETHER_COMPOUND, 2)),

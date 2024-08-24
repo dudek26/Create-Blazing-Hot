@@ -129,8 +129,8 @@ public class BlazingIngredients {
 		return ItemTags.COALS;
 	}
 
-	public static Item clay() {
-		return Items.CLAY;
+	public static Item clayBall() {
+		return Items.CLAY_BALL;
 	}
 
 	public static TagKey<Item> netherFlora() {

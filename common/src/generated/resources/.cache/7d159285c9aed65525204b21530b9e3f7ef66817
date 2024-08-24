@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-24T17:47:46.6924618	Create: Blazing Hot/Registrate Provider for blazinghot [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2024-08-24T18:14:39.0693322	Create: Blazing Hot/Registrate Provider for blazinghot [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 b6aaaf3beb0db8f218ba11e0e3529980eab6a5c1 data\blazinghot\loot_tables\blocks\cyan_modern_lamp.json
 71b57e82146d21e6df58d3cbb2cd79640bf94ed2 assets\blazinghot\models\item\red_modern_lamp.json
 667af25e6fae3c794aea2df2857df074d24c5cc7 data\blazinghot\advancements\recipes\redstone\crafting\modern_lamp\red_modern_lamp_from_other_lamp.json
@@ -227,8 +227,8 @@ ce4e3599370a25660527f1cd3b2b7d328eb6a3fa data\blazinghot\advancements\recipes\re
 baa8ba0571c0235d0509144605def237a9d6fb07 data\blazinghot\recipes\crafting\modern_lamp\light_blue_modern_lamp_from_other_lamp.json
 0545e1f0141d464219600beb0c996595555f1b62 data\blazinghot\advancements\recipes\redstone\crafting\modern_lamp_panel\yellow_modern_lamp_panel_from_other_lamp.json
 b3d5f3c96bcc91b7db91a6d6605f62dac463334b data\blazinghot\advancements\recipes\redstone\crafting\modern_lamp_panel\brown_modern_lamp_panel_from_other_lamps.json
-96b8def5af8599991d9877548f78babcf14e5ac6 data\forge\tags\items\nuggets\blaze_gold.json
 428dcee40587baec51c4f2de84c0cd45deebedfc data\minecraft\tags\items\beacon_payment_items.json
+96b8def5af8599991d9877548f78babcf14e5ac6 data\forge\tags\items\nuggets\blaze_gold.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\c\tags\items\brass_plates.json
 974f7e31ca93a12e8d8f473494dd15d446826af3 data\blazinghot\tags\items\wires\iron.json
 c5213c2fcdc177ea8c694b095557d5aee1f65a19 data\blazinghot\advancements\recipes\redstone\crafting\modern_lamp\magenta_modern_lamp_from_other_lamps.json
@@ -439,8 +439,8 @@ b8942b9e362a81291b1829408ed3ebfa197aff89 data\blazinghot\tags\items\modern_lamps
 8bacef2e76349ab94268b762076f5643bee20a7c data\blazinghot\advancements\recipes\redstone\crafting\modern_lamp_panel\magenta_modern_lamp_panel_from_other_lamp.json
 97a652add0f4f03604d9a5503404604374004a3c data\c\tags\fluids\molten_gold.json
 71583b2480fd2c1394a5144f341b6dd0759cdcbc data\minecraft\tags\blocks\mineable\pickaxe.json
-82649cb5f20eaf6e1de2b61bbb8974fbca09f093 data\blazinghot\recipes\crafting\modern_lamp\magenta_modern_lamp_from_stained_glass.json
 386e89e235228d71a45e3d3faf38ab33c5bdaca0 data\blazinghot\advancements\recipes\redstone\crafting\modern_lamp\orange_modern_lamp_from_other_lamp.json
+82649cb5f20eaf6e1de2b61bbb8974fbca09f093 data\blazinghot\recipes\crafting\modern_lamp\magenta_modern_lamp_from_stained_glass.json
 cf3b7239a15b0abb68619b2442b2e75718742229 assets\blazinghot\models\block\white_modern_lamp.json
 8b9cc281a55a4717165da71942d0a882d82c1794 data\blazinghot\recipes\crafting\modern_lamp_panel\red_modern_lamp_panel_from_other_lamp.json
 7f1abd5a5bc935fdcd6b3dcd3687d3e82109530c data\blazinghot\tags\items\netherrack_dusts.json
@@ -576,9 +576,9 @@ a7cf642e7f5c1252129d338aad401b0141d58eca data\minecraft\tags\fluids\lava.json
 157d7f1b2bd994d57ffc9d1d806fac72a99ef1e2 data\blazinghot\advancements\recipes\redstone\crafting\modern_lamp\lime_modern_lamp_from_other_lamps.json
 b8942b9e362a81291b1829408ed3ebfa197aff89 data\blazinghot\tags\blocks\modern_lamps.json
 caa272ac932e94b411ce6f6aa579c568f715ab65 assets\blazinghot\models\item\nether_compound.json
-495983828f77abec2a268eceeb3639e3df45454c data\c\tags\items\foods.json
 ca9b25b0a25a683d8b31bc6e87eccce77585b218 data\blazinghot\tags\fluids\molten_copper.json
 f934065b5efb5042b5fe978befa0d4644cdb41ee data\blazinghot\tags\blocks\storage_blocks.json
+495983828f77abec2a268eceeb3639e3df45454c data\c\tags\items\foods.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\c\tags\items\brass_nuggets.json
 0eee2551425707feff08f76c9476f730cb9bc0c6 data\blazinghot\advancements\recipes\redstone\crafting\modern_lamp\white_modern_lamp_from_other_lamp.json
 4f7376831d2ad4e0b9c6c1cfe75720a524e96e80 assets\blazinghot\models\block\red_modern_lamp_powered.json
