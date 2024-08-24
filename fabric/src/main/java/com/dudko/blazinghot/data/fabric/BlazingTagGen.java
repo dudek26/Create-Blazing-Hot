@@ -18,6 +18,7 @@ import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
+import com.dudko.blazinghot.util.DyeUtil;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 
 import net.minecraft.data.tags.TagsProvider;
@@ -134,6 +135,12 @@ public class BlazingTagGen {
 			tagAppender(prov, tag.forge);
 			TagsProvider.TagAppender<Item> internalTagAppender = tagAppender(prov, tag.internal);
 			addTagsIfAbsent(internalTagAppender, tag.forge, tag.fabric);
+		}
+
+		for (DyeUtil.Dyes dye : DyeUtil.Dyes.values()) {
+			tagAppender(prov, dye.commonTag);
+			tagAppender(prov, dye.forgeTag);
+			tagAppender(prov, dye.internalTag).addTag(dye.commonTag).addTag(dye.forgeTag);
 		}
 
 	}
