@@ -3,6 +3,20 @@ Create: Blazing Hot 0.6
 ------------------------------------------------------
 
 ### Added:
+
+* Modern Lamp Quad Panel
+
+### Changed:
+
+* Removed Nether Flora and Coal from Nether Compound Recipe
+* Updated and reorganised textures of Modern Lamps
+* Optimised Modern Lamp Panels
+
+------------------------------------------------------
+Create: Blazing Hot 0.6
+------------------------------------------------------
+
+### Added:
 * New fluids: Molten Zinc, Copper, Brass, Ancient Debris, Netherite, Andesite
 * New melting in Blaze Mixer recipe for Ancient Debris, that gives Netherite at higher rates
 * New mixing recipe for Molten Andesite, that gives Andesite Alloy at higher rates

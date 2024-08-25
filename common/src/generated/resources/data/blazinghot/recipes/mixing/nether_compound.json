@@ -2,12 +2,6 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "tag": "blazinghot:nether_flora"
-    },
-    {
-      "tag": "minecraft:coals"
-    },
-    {
       "item": "minecraft:clay_ball"
     },
     {

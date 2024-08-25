@@ -3,14 +3,12 @@ package com.dudko.blazinghot.data.recipe.fabric;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.andesite;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.cinderFlour;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.clayBall;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.coal;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.moltenAncientDebris;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.moltenCopper;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.moltenGold;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.moltenIron;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.moltenZinc;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.netherEssence;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.netherFlora;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.netherrackDust;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.soulDust;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.stoneDust;
@@ -54,9 +52,7 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
 	GeneratedRecipe
 			NETHER_COMPOUND =
 			create("nether_compound",
-					b -> b
-							.require(netherFlora())
-							.require(coal()).require(clayBall())
+					b -> b.require(clayBall())
 							.require(netherrackDust())
 							.require(soulDust())
 							.output(BlazingItems.NETHER_COMPOUND, 2)),

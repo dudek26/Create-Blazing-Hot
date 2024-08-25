@@ -1,7 +1,7 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "minecraft:block/gray_concrete",
+    "0": "block/gray_concrete",
     "1": "blazinghot:block/modern_lamp_panel/{color}",
     "particle": "blazinghot:block/modern_lamp_panel/{color}"
   },
@@ -27,17 +27,6 @@
         ]
       },
       "faces": {
-        "north": {
-          "uv": [
-            16,
-            0,
-            0,
-            14
-          ],
-          "rotation": 180,
-          "texture": "#1",
-          "cullface": "down"
-        },
         "east": {
           "uv": [
             0,
