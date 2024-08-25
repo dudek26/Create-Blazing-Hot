@@ -11,6 +11,11 @@ import net.minecraft.world.item.DyeColor;
 public class BlazingBuilderTransformers {
 
 	@ExpectPlatform
+	public static <B extends ModernLampBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> anyModernLamp(DyeColor color) {
+		throw new AssertionError();
+	}
+
+	@ExpectPlatform
 	public static <B extends ModernLampBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampBlock(DyeColor color) {
 		throw new AssertionError();
 	}

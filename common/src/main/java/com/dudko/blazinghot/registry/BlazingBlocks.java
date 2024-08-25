@@ -10,7 +10,6 @@ import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlock;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.multiloader.BlazingBuilderTransformers;
 import com.dudko.blazinghot.util.DyeUtil;
-import com.simibubi.create.AllTags;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
@@ -94,9 +93,7 @@ public class BlazingBlocks {
 		String colorName = color.getSerializedName();
 		return REGISTRATE
 				.block(colorName + "_modern_lamp", p -> new ModernLampBlock(p, color))
-				.initialProperties(() -> Blocks.GLOWSTONE)
-				.properties(p -> p.mapColor(color).lightLevel(s -> s.getValue(ModernLampBlock.LIT) ? 15 : 0))
-				.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag, BlazingTags.Blocks.MODERN_LAMPS.tag)
+				.transform(BlazingBuilderTransformers.anyModernLamp(color))
 				.transform(BlazingBuilderTransformers.modernLampBlock(color))
 				.recipe((c, p) -> {
 					ShapedRecipeBuilder
@@ -128,12 +125,7 @@ public class BlazingBlocks {
 		String colorName = color.getSerializedName();
 		return REGISTRATE
 				.block(colorName + "_modern_lamp_panel", p -> new ModernLampPanelBlock(p, color))
-				.initialProperties(() -> Blocks.GLOWSTONE)
-				.properties(p -> p
-						.mapColor(color)
-						.lightLevel(s -> s.getValue(ModernLampPanelBlock.LIT) ? 15 : 0)
-						.forceSolidOn())
-				.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag, BlazingTags.Blocks.MODERN_LAMP_PANELS.tag)
+				.transform(BlazingBuilderTransformers.anyModernLamp(color))
 				.transform(BlazingBuilderTransformers.modernLampPanel(color))
 				.recipe((c, p) -> {
 					ShapedRecipeBuilder
@@ -162,6 +154,46 @@ public class BlazingBlocks {
 									color)
 							.save(p,
 									BlazingHot.asResource("crafting/modern_lamp_panel/"
+											+ c.getName()
+											+ "_from_other_lamp"));
+				})
+				.register();
+	});
+
+	public static final DyedBlockList<ModernLampPanelBlock> MODERN_LAMP_QUAD_PANELS = new DyedBlockList<>(color -> {
+		String colorName = color.getSerializedName();
+		return REGISTRATE
+				.block(colorName + "_modern_lamp_quad_panel", p -> new ModernLampPanelBlock(p, color))
+				.transform(BlazingBuilderTransformers.anyModernLamp(color))
+				.transform(BlazingBuilderTransformers.modernLampPanel(color))
+				.recipe((c, p) -> {
+					ShapedRecipeBuilder
+							.shaped(RecipeCategory.REDSTONE, c.get(), 4)
+							.pattern("ll")
+							.pattern("ll")
+							.define('l', MODERN_LAMP_PANELS.get(color))
+							.unlockedBy("has_modern_lamps",
+									RegistrateRecipeProvider.has(BlazingTags.Items.MODERN_LAMPS.tag))
+							.save(p,
+									BlazingHot.asResource("crafting/modern_lamp_quad_panel/"
+											+ c.getName()
+											+ "_from_panel"));
+					DyeUtil
+							.dyeingMultiple(RecipeCategory.REDSTONE,
+									BlazingTags.Items.MODERN_LAMP_QUAD_PANELS.tag,
+									c.get(),
+									color)
+							.save(p,
+									BlazingHot.asResource("crafting/modern_lamp_quad_panel/"
+											+ c.getName()
+											+ "_from_other_lamps"));
+					DyeUtil
+							.dyeingSingle(RecipeCategory.REDSTONE,
+									BlazingTags.Items.MODERN_LAMP_QUAD_PANELS.tag,
+									c.get(),
+									color)
+							.save(p,
+									BlazingHot.asResource("crafting/modern_lamp_quad_panel/"
 											+ c.getName()
 											+ "_from_other_lamp"));
 				})

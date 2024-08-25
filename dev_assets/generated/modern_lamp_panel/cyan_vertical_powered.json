@@ -1,9 +1,9 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "block/gray_concrete",
-    "1": "blazinghot:block/modern_lamp_panel/{color}_powered",
-    "particle": "block/gray_concrete"
+    "0": "minecraft:block/gray_concrete",
+    "1": "blazinghot:block/modern_lamp_panel/cyan_powered",
+    "particle": "blazinghot:block/modern_lamp_panel/cyan_powered"
   },
   "elements": [
     {

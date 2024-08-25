@@ -1,9 +1,9 @@
-// 1.20.1	2024-08-24T20:40:06.9240565	Create: Blazing Hot/Blazing Hot's Advancements
+// 1.20.1	2024-08-25T14:33:54.2697291	Create: Blazing Hot/Blazing Hot's Advancements
 daaa321fb97dd3690d0c511609012840f9e4b28f data\blazinghot\advancements\root.json
 75d292bfa0f068fc649781c4d8af0a922dd14a48 data\blazinghot\advancements\modern_lamp.json
-1c2bfc5f90990f291f5532f7cf0ab9ae88483869 data\blazinghot\advancements\metal_apple_spout_0000.json
 821fc3d162e346d2d725efe4b4ddbe2fbf78cebe data\blazinghot\advancements\molten_blaze_gold_00.json
-e44f5a043a45d070902412af30c480f18e6b0b96 data\blazinghot\advancements\all_molten_metals.json
+1c2bfc5f90990f291f5532f7cf0ab9ae88483869 data\blazinghot\advancements\metal_apple_spout_0000.json
+fd64811c63faaf65228893735239401c3f2fe64a data\blazinghot\advancements\all_molten_metals.json
 e07a9d2ef6d0711f3ca394a0f18b82b4bb2d1105 data\blazinghot\advancements\extinguishing_food_save.json
 786631ed41d9414388f29ceb0060dd9771f5c9e8 data\blazinghot\advancements\blaze_arrow_interdimensional.json
 95290d64cfddcedfab7100c13f4942016f33c7b5 data\blazinghot\advancements\golden_apple_factory.json
@@ -13,7 +13,7 @@ b09515505ad367a3753565329667dcb5d7554b69 data\blazinghot\advancements\blaze_mixe
 a9754be78458468d5f5daefb6698f36be6a2c135 data\blazinghot\advancements\blaze_casing.json
 e685d815a62b9994b1efa34ec0fc463fd6f708ae data\blazinghot\advancements\blaze_mixer.json
 15592cebc914a1507786362634fad2ae52a94ebf data\blazinghot\advancements\blaze_gold.json
-1d4989c6ce767b80fd6afa3b029be0c0d106839d data\blazinghot\advancements\all_metal_food.json
+5e1216f5f34018cfe226c2f00afcb9784370f4d6 data\blazinghot\advancements\all_metal_food.json
 07a210e9ad3c297297a988f346e73dffd1aa333d data\blazinghot\advancements\nether_compound.json
 36dbc3c2dcfd739e9047b168779dd76e1f1d5438 data\blazinghot\advancements\molten_gold.json
 a54e6cdc3c4911f92ae3709e2d571bc1418a52c7 data\blazinghot\advancements\blaze_arrow.json

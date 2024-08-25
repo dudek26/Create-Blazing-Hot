@@ -15,8 +15,8 @@ for entry in models.iterdir():
 
                 for color in colors:
                     model = json.loads(open(path).read())
-                    texture = model["textures"]["0"].replace("{color}", color)
-                    model["textures"]["0"] = texture
+                    texture = model["textures"]["1"].replace("{color}", color)
+                    model["textures"]["1"] = texture
                     model["textures"]["particle"] = texture
 
                     modelName = entry.name.replace(".json", "")

@@ -156,6 +156,7 @@ public class BlazingTags {
 	public enum Items {
 		MODERN_LAMPS,
 		MODERN_LAMP_PANELS,
+		MODERN_LAMP_QUAD_PANELS,
 		NETHER_FLORA,
 
 		METAL_FOOD,
