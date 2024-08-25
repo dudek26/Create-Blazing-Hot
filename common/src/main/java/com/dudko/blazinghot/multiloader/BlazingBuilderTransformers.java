@@ -21,8 +21,9 @@ public class BlazingBuilderTransformers {
 	}
 
 	@ExpectPlatform
-	public static <B extends ModernLampPanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampPanel(DyeColor color) {
+	public static <B extends ModernLampPanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampPanel(DyeColor color, String name) {
 		throw new AssertionError();
 	}
+
 
 }

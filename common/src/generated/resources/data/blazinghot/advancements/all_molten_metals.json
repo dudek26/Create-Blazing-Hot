@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "blazinghot:molten_iron_bucket"
+              "blazinghot:molten_brass_bucket"
             ]
           }
         ]
@@ -42,7 +42,7 @@
         "items": [
           {
             "items": [
-              "blazinghot:molten_zinc_bucket"
+              "blazinghot:molten_iron_bucket"
             ]
           }
         ]
@@ -54,7 +54,7 @@
         "items": [
           {
             "items": [
-              "blazinghot:molten_gold_bucket"
+              "blazinghot:molten_zinc_bucket"
             ]
           }
         ]
@@ -66,7 +66,7 @@
         "items": [
           {
             "items": [
-              "blazinghot:molten_ancient_debris_bucket"
+              "blazinghot:molten_gold_bucket"
             ]
           }
         ]
@@ -78,7 +78,7 @@
         "items": [
           {
             "items": [
-              "blazinghot:molten_netherite_bucket"
+              "blazinghot:molten_ancient_debris_bucket"
             ]
           }
         ]
@@ -90,7 +90,7 @@
         "items": [
           {
             "items": [
-              "blazinghot:molten_brass_bucket"
+              "blazinghot:molten_netherite_bucket"
             ]
           }
         ]

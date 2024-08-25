@@ -6,6 +6,7 @@ import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.ModernLampQuadPanelBlock;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlock;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.multiloader.BlazingBuilderTransformers;
@@ -126,7 +127,7 @@ public class BlazingBlocks {
 		return REGISTRATE
 				.block(colorName + "_modern_lamp_panel", p -> new ModernLampPanelBlock(p, color))
 				.transform(BlazingBuilderTransformers.anyModernLamp(color))
-				.transform(BlazingBuilderTransformers.modernLampPanel(color))
+				.transform(BlazingBuilderTransformers.modernLampPanel(color, "modern_lamp_panel"))
 				.recipe((c, p) -> {
 					ShapedRecipeBuilder
 							.shaped(RecipeCategory.REDSTONE, c.get(), 4)
@@ -160,12 +161,12 @@ public class BlazingBlocks {
 				.register();
 	});
 
-	public static final DyedBlockList<ModernLampPanelBlock> MODERN_LAMP_QUAD_PANELS = new DyedBlockList<>(color -> {
+	public static final DyedBlockList<ModernLampQuadPanelBlock> MODERN_LAMP_QUAD_PANELS = new DyedBlockList<>(color -> {
 		String colorName = color.getSerializedName();
 		return REGISTRATE
-				.block(colorName + "_modern_lamp_quad_panel", p -> new ModernLampPanelBlock(p, color))
+				.block(colorName + "_modern_lamp_quad_panel", p -> new ModernLampQuadPanelBlock(p, color))
 				.transform(BlazingBuilderTransformers.anyModernLamp(color))
-				.transform(BlazingBuilderTransformers.modernLampPanel(color))
+				.transform(BlazingBuilderTransformers.modernLampPanel(color, "modern_lamp_quad_panel"))
 				.recipe((c, p) -> {
 					ShapedRecipeBuilder
 							.shaped(RecipeCategory.REDSTONE, c.get(), 4)

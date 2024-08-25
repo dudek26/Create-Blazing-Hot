@@ -4,6 +4,7 @@ import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelBlock;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.registry.BlazingTags;
+import com.dudko.blazinghot.registry.CommonTags;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.data.ModelGen;
 import com.simibubi.create.foundation.item.ItemDescription;
@@ -43,10 +44,9 @@ public class BlazingBuilderTransformersImpl {
 				.build();
 	}
 
-	public static <B extends ModernLampPanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampPanel(DyeColor color) {
+	public static <B extends ModernLampPanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampPanel(DyeColor color, String name) {
 		return b -> b
-
-				.tag(BlazingTags.Blocks.MODERN_LAMP_PANELS.tag)
+				.tag(CommonTags.blockTagOf(name + "s", CommonTags.Namespace.INTERNAL))
 				.blockstate((c, p) -> p.getVariantBuilder(c.get()).forAllStates(state -> {
 							Direction facing = state.getValue(ModernLampPanelBlock.FACING);
 							int xRotation = facing == Direction.DOWN ? 180 : 0;
@@ -58,7 +58,7 @@ public class BlazingBuilderTransformersImpl {
 
 							return ConfiguredModel
 									.builder()
-									.modelFile(p.models().getExistingFile(p.modLoc("block/modern_lamp_panel/" + variant)))
+									.modelFile(p.models().getExistingFile(p.modLoc("block/" + name + "/" + variant)))
 									.rotationX((xRotation + 360) % 360)
 									.rotationY((yRotation + 360) % 360)
 									.build();
@@ -66,9 +66,9 @@ public class BlazingBuilderTransformersImpl {
 
 				))
 				.item()
-				.tag(BlazingTags.Items.MODERN_LAMP_PANELS.tag)
+				.tag(CommonTags.itemTagOf(name + "s", CommonTags.Namespace.INTERNAL))
 				.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.MODERN_LAMP.getKey()))
-				.transform(ModelGen.customItemModel("modern_lamp_panel", color.getName()));
+				.transform(ModelGen.customItemModel(name, color.getName()));
 	}
 
 	public static <B extends ModernLampBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> anyModernLamp(DyeColor color) {
