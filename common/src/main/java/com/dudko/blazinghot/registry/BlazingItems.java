@@ -225,7 +225,9 @@ public class BlazingItems {
 			ZINC_CARROT =
 					new FoodItemBuilder<>("zinc_carrot", p -> new BlazingFoodItem(p, REMOVE_SLOWNESS_0))
 							.nutrition(5)
-							.saturationMod(0.8f).alwaysEat().description(ItemDescriptions.SLOWNESS_REMOVING_FOOD_0)
+							.saturationMod(0.8f)
+							.alwaysEat()
+							.description(ItemDescriptions.SLOWNESS_REMOVING_FOOD_0)
 							.tag(BlazingTags.Items.METAL_CARROTS.tag)
 							.register(),
 			ZINC_APPLE =
@@ -259,8 +261,7 @@ public class BlazingItems {
 							.nutrition(6)
 							.saturationMod(1f)
 							.tag(BlazingTags.Items.METAL_CARROTS.tag)
-							.alwaysEat()
-							.addEffect(MobEffects.DIG_SPEED, 10)
+							.alwaysEat().addEffect(MobEffects.DIG_SPEED, tickSeconds(10))
 							.register(),
 			BRASS_APPLE =
 					new FoodItemBuilder<>("brass_apple", BlazingFoodItem::new)
