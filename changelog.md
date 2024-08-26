@@ -1,12 +1,5 @@
 ------------------------------------------------------
-Create: Blazing Hot 0.6.1
-------------------------------------------------------
-
-### Fixed:
-* Fixed Blaze Carrot's Haste effect duration
-
-------------------------------------------------------
-Create: Blazing Hot 0.6
+Create: Blazing Hot 0.6.2
 ------------------------------------------------------
 
 ### Added:
@@ -18,6 +11,13 @@ Create: Blazing Hot 0.6
 * Removed Nether Flora and Coal from Nether Compound Recipe
 * Updated and reorganised textures of Modern Lamps
 * Optimised Modern Lamp Panels
+
+------------------------------------------------------
+Create: Blazing Hot 0.6.1
+------------------------------------------------------
+
+### Fixed:
+* Fixed Blaze Carrot's Haste effect duration
 
 ------------------------------------------------------
 Create: Blazing Hot 0.6
