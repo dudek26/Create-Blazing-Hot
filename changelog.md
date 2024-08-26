@@ -17,7 +17,7 @@ Create: Blazing Hot 0.6.1
 ------------------------------------------------------
 
 ### Fixed:
-* Fixed Blaze Carrot's Haste effect duration
+* Fixed Brass Carrot's Haste effect duration
 
 ------------------------------------------------------
 Create: Blazing Hot 0.6
