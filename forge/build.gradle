@@ -45,8 +45,7 @@ publishMods {
         projectId = curseforge_id
         accessToken = System.getenv("CURSEFORGE_TOKEN")
 
-        requires("create-fabric")
-        optional("emi")
+        requires("create")
     }
 
 
