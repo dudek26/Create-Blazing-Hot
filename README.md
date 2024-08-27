@@ -1,4 +1,4 @@
-<p align="center" ><img src="https://i.imgur.com/0SOgU2D.png" alt="Logo" width="200"></p>
+<p align="center" ><img src=".idea/icon.png" alt="Logo" width="200"></p>
 <h1 align="center">Create: Blazing Hot</h1>
 
 ## 📝 About
