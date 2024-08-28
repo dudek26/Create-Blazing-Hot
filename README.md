@@ -1,5 +1,18 @@
 <p align="center" ><img src=".idea/icon.png" alt="Logo" width="200"></p>
-<h1 align="center">Create: Blazing Hot</h1>
+<h1 align="center">Create: Blazing Hot<br>
+<img alt="Modloader" src="https://img.shields.io/badge/Modloaders-Fabric_%7C_Quilt_%7C_Forge_%7C_NeoForge-blue?labelColor=%232c3e50&color=%232980b9">
+<a href="https://modrinth.com/mod/create-blazing-hot/versions">
+<img alt="Game Versions" src="https://img.shields.io/modrinth/game-versions/create-blazing-hot?label=%20%20%20Available%20for%20%20%20&labelColor=%2334495e&color=%2327ae60">
+</a>
+<a href="https://github.com/dudek26/Create-Blazing-Hot/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/badge/License-MIT-red?labelColor=%2334495e">
+</a>
+<a href="https://modrinth.com/mod/create-blazing-hot/">
+<img alt="Modrinth Downloads" src="https://img.shields.io/modrinth/dt/create-blazing-hot?style=flat&logo=modrinth&logoColor=%232d2d2d&label=%20&labelColor=%2327ae60&color=%232d2d2d">
+</a>
+<a href="https://www.curseforge.com/minecraft/mc-mods/create-blazing-hot">
+<img alt="CurseForge" src="https://cf.way2muchnoise.eu/1070455.svg">
+</a>
+</h1>
 
 ## 📝 About
 
