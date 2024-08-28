@@ -32,7 +32,7 @@ public class BlazingBuilderTransformersImpl {
 										.cubeAll(color.getName()
 														+ "_modern_lamp"
 														+ (state.getValue(ModernLampBlock.LIT) ? "_powered" : ""),
-												p.modLoc("block/modern_lamp/" + color.getName() + (state.getValue(
+												p.modLoc("block/modern_lamp/block/" + color.getName() + (state.getValue(
 														ModernLampBlock.LIT) ? "_powered" : ""))))
 								.build()
 
@@ -40,13 +40,14 @@ public class BlazingBuilderTransformersImpl {
 				.item()
 				.tag(BlazingTags.Items.MODERN_LAMPS.tag)
 				.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.MODERN_LAMP.getKey()))
-				.model((c, b) -> b.blockItem(c).texture("#all", b.modLoc("block/modern_lamp/" + color.getName())))
+				.model((c, b) -> b.blockItem(c).texture("#all", b.modLoc("block/modern_lamp/block/" + color.getName())))
 				.build();
 	}
 
 	public static <B extends ModernLampPanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampPanel(DyeColor color, String name) {
+		String tagName = name.replace('/', '_') + "s";
 		return b -> b
-				.tag(CommonTags.blockTagOf(name + "s", CommonTags.Namespace.INTERNAL))
+				.tag(CommonTags.blockTagOf(tagName, CommonTags.Namespace.INTERNAL))
 				.blockstate((c, p) -> p.getVariantBuilder(c.get()).forAllStates(state -> {
 							Direction facing = state.getValue(ModernLampPanelBlock.FACING);
 							int xRotation = facing == Direction.DOWN ? 180 : 0;
@@ -66,7 +67,7 @@ public class BlazingBuilderTransformersImpl {
 
 				))
 				.item()
-				.tag(CommonTags.itemTagOf(name + "s", CommonTags.Namespace.INTERNAL))
+				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.INTERNAL))
 				.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.MODERN_LAMP.getKey()))
 				.transform(ModelGen.customItemModel(name, color.getName()));
 	}

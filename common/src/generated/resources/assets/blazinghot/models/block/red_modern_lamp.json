@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "blazinghot:block/modern_lamp/red"
+    "all": "blazinghot:block/modern_lamp/block/red"
   }
 }

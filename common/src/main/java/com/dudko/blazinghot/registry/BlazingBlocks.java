@@ -127,7 +127,7 @@ public class BlazingBlocks {
 		return REGISTRATE
 				.block(colorName + "_modern_lamp_panel", p -> new ModernLampPanelBlock(p, color))
 				.transform(BlazingBuilderTransformers.anyModernLamp(color))
-				.transform(BlazingBuilderTransformers.modernLampPanel(color, "modern_lamp_panel"))
+				.transform(BlazingBuilderTransformers.modernLampPanel(color, "modern_lamp/panel"))
 				.recipe((c, p) -> {
 					ShapedRecipeBuilder
 							.shaped(RecipeCategory.REDSTONE, c.get(), 4)
@@ -136,7 +136,7 @@ public class BlazingBlocks {
 							.unlockedBy("has_modern_lamps",
 									RegistrateRecipeProvider.has(BlazingTags.Items.MODERN_LAMP_PANELS.tag))
 							.save(p,
-									BlazingHot.asResource("crafting/modern_lamp_panel/"
+									BlazingHot.asResource("crafting/modern_lamp/panel/"
 											+ c.getName()
 											+ "_from_full_block"));
 					DyeUtil
@@ -145,7 +145,7 @@ public class BlazingBlocks {
 									c.get(),
 									color)
 							.save(p,
-									BlazingHot.asResource("crafting/modern_lamp_panel/"
+									BlazingHot.asResource("crafting/modern_lamp/panel/"
 											+ c.getName()
 											+ "_from_other_lamps"));
 					DyeUtil
@@ -154,7 +154,7 @@ public class BlazingBlocks {
 									c.get(),
 									color)
 							.save(p,
-									BlazingHot.asResource("crafting/modern_lamp_panel/"
+									BlazingHot.asResource("crafting/modern_lamp/panel/"
 											+ c.getName()
 											+ "_from_other_lamp"));
 				})
@@ -166,7 +166,7 @@ public class BlazingBlocks {
 		return REGISTRATE
 				.block(colorName + "_modern_lamp_quad_panel", p -> new ModernLampQuadPanelBlock(p, color))
 				.transform(BlazingBuilderTransformers.anyModernLamp(color))
-				.transform(BlazingBuilderTransformers.modernLampPanel(color, "modern_lamp_quad_panel"))
+				.transform(BlazingBuilderTransformers.modernLampPanel(color, "modern_lamp/quad_panel"))
 				.recipe((c, p) -> {
 					ShapedRecipeBuilder
 							.shaped(RecipeCategory.REDSTONE, c.get(), 4)
@@ -176,7 +176,7 @@ public class BlazingBlocks {
 							.unlockedBy("has_modern_lamps",
 									RegistrateRecipeProvider.has(BlazingTags.Items.MODERN_LAMPS.tag))
 							.save(p,
-									BlazingHot.asResource("crafting/modern_lamp_quad_panel/"
+									BlazingHot.asResource("crafting/modern_lamp/quad_panel/"
 											+ c.getName()
 											+ "_from_panel"));
 					DyeUtil
@@ -185,7 +185,7 @@ public class BlazingBlocks {
 									c.get(),
 									color)
 							.save(p,
-									BlazingHot.asResource("crafting/modern_lamp_quad_panel/"
+									BlazingHot.asResource("crafting/modern_lamp/quad_panel/"
 											+ c.getName()
 											+ "_from_other_lamps"));
 					DyeUtil
@@ -194,7 +194,7 @@ public class BlazingBlocks {
 									c.get(),
 									color)
 							.save(p,
-									BlazingHot.asResource("crafting/modern_lamp_quad_panel/"
+									BlazingHot.asResource("crafting/modern_lamp/quad_panel/"
 											+ c.getName()
 											+ "_from_other_lamp"));
 				})

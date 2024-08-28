@@ -1,355 +1,355 @@
 {
   "variants": {
     "facing=down,lit=false,locked=false,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime",
+      "model": "blazinghot:block/modern_lamp/panel/lime",
       "x": 180
     },
     "facing=down,lit=false,locked=false,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime",
+      "model": "blazinghot:block/modern_lamp/panel/lime",
       "x": 180
     },
     "facing=down,lit=false,locked=false,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime",
+      "model": "blazinghot:block/modern_lamp/panel/lime",
       "x": 180
     },
     "facing=down,lit=false,locked=false,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime",
+      "model": "blazinghot:block/modern_lamp/panel/lime",
       "x": 180
     },
     "facing=down,lit=false,locked=true,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime",
+      "model": "blazinghot:block/modern_lamp/panel/lime",
       "x": 180
     },
     "facing=down,lit=false,locked=true,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime",
+      "model": "blazinghot:block/modern_lamp/panel/lime",
       "x": 180
     },
     "facing=down,lit=false,locked=true,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime",
+      "model": "blazinghot:block/modern_lamp/panel/lime",
       "x": 180
     },
     "facing=down,lit=false,locked=true,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime",
+      "model": "blazinghot:block/modern_lamp/panel/lime",
       "x": 180
     },
     "facing=down,lit=true,locked=false,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_powered",
       "x": 180
     },
     "facing=down,lit=true,locked=false,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_powered",
       "x": 180
     },
     "facing=down,lit=true,locked=false,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_powered",
       "x": 180
     },
     "facing=down,lit=true,locked=false,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_powered",
       "x": 180
     },
     "facing=down,lit=true,locked=true,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_powered",
       "x": 180
     },
     "facing=down,lit=true,locked=true,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_powered",
       "x": 180
     },
     "facing=down,lit=true,locked=true,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_powered",
       "x": 180
     },
     "facing=down,lit=true,locked=true,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_powered",
       "x": 180
     },
     "facing=east,lit=false,locked=false,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 270
     },
     "facing=east,lit=false,locked=false,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 270
     },
     "facing=east,lit=false,locked=false,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 270
     },
     "facing=east,lit=false,locked=false,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 270
     },
     "facing=east,lit=false,locked=true,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 270
     },
     "facing=east,lit=false,locked=true,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 270
     },
     "facing=east,lit=false,locked=true,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 270
     },
     "facing=east,lit=false,locked=true,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 270
     },
     "facing=east,lit=true,locked=false,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 270
     },
     "facing=east,lit=true,locked=false,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 270
     },
     "facing=east,lit=true,locked=false,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 270
     },
     "facing=east,lit=true,locked=false,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 270
     },
     "facing=east,lit=true,locked=true,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 270
     },
     "facing=east,lit=true,locked=true,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 270
     },
     "facing=east,lit=true,locked=true,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 270
     },
     "facing=east,lit=true,locked=true,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 270
     },
     "facing=north,lit=false,locked=false,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 180
     },
     "facing=north,lit=false,locked=false,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 180
     },
     "facing=north,lit=false,locked=false,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 180
     },
     "facing=north,lit=false,locked=false,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 180
     },
     "facing=north,lit=false,locked=true,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 180
     },
     "facing=north,lit=false,locked=true,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 180
     },
     "facing=north,lit=false,locked=true,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 180
     },
     "facing=north,lit=false,locked=true,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 180
     },
     "facing=north,lit=true,locked=false,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 180
     },
     "facing=north,lit=true,locked=false,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 180
     },
     "facing=north,lit=true,locked=false,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 180
     },
     "facing=north,lit=true,locked=false,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 180
     },
     "facing=north,lit=true,locked=true,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 180
     },
     "facing=north,lit=true,locked=true,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 180
     },
     "facing=north,lit=true,locked=true,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 180
     },
     "facing=north,lit=true,locked=true,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 180
     },
     "facing=south,lit=false,locked=false,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical"
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical"
     },
     "facing=south,lit=false,locked=false,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical"
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical"
     },
     "facing=south,lit=false,locked=false,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical"
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical"
     },
     "facing=south,lit=false,locked=false,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical"
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical"
     },
     "facing=south,lit=false,locked=true,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical"
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical"
     },
     "facing=south,lit=false,locked=true,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical"
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical"
     },
     "facing=south,lit=false,locked=true,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical"
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical"
     },
     "facing=south,lit=false,locked=true,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical"
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical"
     },
     "facing=south,lit=true,locked=false,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered"
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered"
     },
     "facing=south,lit=true,locked=false,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered"
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered"
     },
     "facing=south,lit=true,locked=false,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered"
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered"
     },
     "facing=south,lit=true,locked=false,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered"
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered"
     },
     "facing=south,lit=true,locked=true,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered"
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered"
     },
     "facing=south,lit=true,locked=true,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered"
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered"
     },
     "facing=south,lit=true,locked=true,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered"
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered"
     },
     "facing=south,lit=true,locked=true,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered"
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered"
     },
     "facing=up,lit=false,locked=false,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime"
+      "model": "blazinghot:block/modern_lamp/panel/lime"
     },
     "facing=up,lit=false,locked=false,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime"
+      "model": "blazinghot:block/modern_lamp/panel/lime"
     },
     "facing=up,lit=false,locked=false,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime"
+      "model": "blazinghot:block/modern_lamp/panel/lime"
     },
     "facing=up,lit=false,locked=false,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime"
+      "model": "blazinghot:block/modern_lamp/panel/lime"
     },
     "facing=up,lit=false,locked=true,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime"
+      "model": "blazinghot:block/modern_lamp/panel/lime"
     },
     "facing=up,lit=false,locked=true,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime"
+      "model": "blazinghot:block/modern_lamp/panel/lime"
     },
     "facing=up,lit=false,locked=true,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime"
+      "model": "blazinghot:block/modern_lamp/panel/lime"
     },
     "facing=up,lit=false,locked=true,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime"
+      "model": "blazinghot:block/modern_lamp/panel/lime"
     },
     "facing=up,lit=true,locked=false,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_powered"
+      "model": "blazinghot:block/modern_lamp/panel/lime_powered"
     },
     "facing=up,lit=true,locked=false,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_powered"
+      "model": "blazinghot:block/modern_lamp/panel/lime_powered"
     },
     "facing=up,lit=true,locked=false,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_powered"
+      "model": "blazinghot:block/modern_lamp/panel/lime_powered"
     },
     "facing=up,lit=true,locked=false,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_powered"
+      "model": "blazinghot:block/modern_lamp/panel/lime_powered"
     },
     "facing=up,lit=true,locked=true,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_powered"
+      "model": "blazinghot:block/modern_lamp/panel/lime_powered"
     },
     "facing=up,lit=true,locked=true,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_powered"
+      "model": "blazinghot:block/modern_lamp/panel/lime_powered"
     },
     "facing=up,lit=true,locked=true,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_powered"
+      "model": "blazinghot:block/modern_lamp/panel/lime_powered"
     },
     "facing=up,lit=true,locked=true,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_powered"
+      "model": "blazinghot:block/modern_lamp/panel/lime_powered"
     },
     "facing=west,lit=false,locked=false,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 90
     },
     "facing=west,lit=false,locked=false,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 90
     },
     "facing=west,lit=false,locked=false,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 90
     },
     "facing=west,lit=false,locked=false,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 90
     },
     "facing=west,lit=false,locked=true,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 90
     },
     "facing=west,lit=false,locked=true,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 90
     },
     "facing=west,lit=false,locked=true,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 90
     },
     "facing=west,lit=false,locked=true,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical",
       "y": 90
     },
     "facing=west,lit=true,locked=false,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 90
     },
     "facing=west,lit=true,locked=false,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 90
     },
     "facing=west,lit=true,locked=false,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 90
     },
     "facing=west,lit=true,locked=false,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 90
     },
     "facing=west,lit=true,locked=true,powered=false,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 90
     },
     "facing=west,lit=true,locked=true,powered=false,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 90
     },
     "facing=west,lit=true,locked=true,powered=true,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 90
     },
     "facing=west,lit=true,locked=true,powered=true,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp_panel/lime_vertical_powered",
+      "model": "blazinghot:block/modern_lamp/panel/lime_vertical_powered",
       "y": 90
     }
   }

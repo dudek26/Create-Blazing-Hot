@@ -1,6 +1,6 @@
 {
   "parent": "blazinghot:block/red_modern_lamp",
   "textures": {
-    "#all": "blazinghot:block/modern_lamp/red"
+    "#all": "blazinghot:block/modern_lamp/block/red"
   }
 }
