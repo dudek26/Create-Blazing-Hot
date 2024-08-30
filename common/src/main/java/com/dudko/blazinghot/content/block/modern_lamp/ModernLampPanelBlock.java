@@ -4,7 +4,7 @@ import static net.minecraft.world.level.block.state.properties.BlockStatePropert
 
 import org.jetbrains.annotations.NotNull;
 
-import com.dudko.blazinghot.content.block.Shapes;
+import com.dudko.blazinghot.content.block.shape.Shapes;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.multiloader.forge;
 
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.ModernLampDoublePanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelBlock;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.registry.BlazingTags;
@@ -65,6 +66,35 @@ public class BlazingBuilderTransformersImpl {
 									.build();
 						}
 
+				))
+				.item()
+				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.INTERNAL))
+				.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.MODERN_LAMP.getKey()))
+				.transform(ModelGen.customItemModel(name, color.getName()));
+	}
+
+	public static <B extends ModernLampDoublePanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampDirectionalPanel(DyeColor color, String name) {
+		String tagName = name.replace('/', '_') + "s";
+		return b -> b
+				.tag(CommonTags.blockTagOf(tagName, CommonTags.Namespace.INTERNAL))
+				.blockstate((c, p) -> p.getVariantBuilder(c.get()).forAllStates(state -> {
+							Direction facing = state.getValue(ModernLampPanelBlock.FACING);
+							int xRotation = facing == Direction.DOWN ? 180 : 0;
+
+							int yRotation = facing.getAxis().isVertical() ? 0 : (int) facing.toYRot();
+
+							String variant = color.getName();
+							if (state.getValue(ModernLampDoublePanelBlock.HORIZONTAL)) variant += "_h";
+							if (state.getValue(ModernLampPanelBlock.FACING).getAxis().isHorizontal()) variant += "_vertical";
+							if (state.getValue(ModernLampPanelBlock.LIT)) variant += "_powered";
+
+							return ConfiguredModel
+									.builder()
+									.modelFile(p.models().getExistingFile(p.modLoc("block/" + name + "/" + variant)))
+									.rotationX((xRotation + 360) % 360)
+									.rotationY((yRotation + 360) % 360)
+									.build();
+						}
 				))
 				.item()
 				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.INTERNAL))

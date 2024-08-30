@@ -5,6 +5,7 @@ import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.ModernLampDoublePanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampQuadPanelBlock;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlock;
@@ -160,6 +161,48 @@ public class BlazingBlocks {
 				})
 				.register();
 	});
+
+	public static final DyedBlockList<ModernLampDoublePanelBlock>
+			MODERN_LAMP_DOUBLE_PANELS =
+			new DyedBlockList<>(color -> {
+				String colorName = color.getSerializedName();
+				return REGISTRATE
+						.block(colorName + "_modern_lamp_double_panel", p -> new ModernLampDoublePanelBlock(p, color))
+						.transform(BlazingBuilderTransformers.anyModernLamp(color))
+						.transform(BlazingBuilderTransformers.modernLampDirectionalPanel(color,
+								"modern_lamp/double_panel"))
+						.recipe((c, p) -> {
+							ShapedRecipeBuilder
+									.shaped(RecipeCategory.REDSTONE, c.get(), 2)
+									.pattern("ll")
+									.define('l', MODERN_LAMP_PANELS.get(color))
+									.unlockedBy("has_modern_lamps",
+											RegistrateRecipeProvider.has(BlazingTags.Items.MODERN_LAMPS.tag))
+									.save(p,
+											BlazingHot.asResource("crafting/modern_lamp/double_panel/"
+													+ c.getName()
+													+ "_from_panel"));
+							DyeUtil
+									.dyeingMultiple(RecipeCategory.REDSTONE,
+											BlazingTags.Items.MODERN_LAMP_DOUBLE_PANELS.tag,
+											c.get(),
+											color)
+									.save(p,
+											BlazingHot.asResource("crafting/modern_lamp/double_panel/"
+													+ c.getName()
+													+ "_from_other_lamps"));
+							DyeUtil
+									.dyeingSingle(RecipeCategory.REDSTONE,
+											BlazingTags.Items.MODERN_LAMP_DOUBLE_PANELS.tag,
+											c.get(),
+											color)
+									.save(p,
+											BlazingHot.asResource("crafting/modern_lamp/double_panel/"
+													+ c.getName()
+													+ "_from_other_lamp"));
+						})
+						.register();
+			});
 
 	public static final DyedBlockList<ModernLampQuadPanelBlock> MODERN_LAMP_QUAD_PANELS = new DyedBlockList<>(color -> {
 		String colorName = color.getSerializedName();
