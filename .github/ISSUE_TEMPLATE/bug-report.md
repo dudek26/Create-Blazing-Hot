@@ -19,6 +19,9 @@ A clear and concise description of what you expected to happen.
 **Minecraft version**
 The version of Minecraft that you're running the mod on.
 
+**Mod version**
+The version of the mod that the bug occurs in.
+
 **Mod loader**
 The mod loader that you're running the mod on.
 
