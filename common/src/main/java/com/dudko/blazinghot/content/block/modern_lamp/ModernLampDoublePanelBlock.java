@@ -4,8 +4,8 @@ import java.util.function.Predicate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import com.dudko.blazinghot.content.block.shape.AbstractPoint2D;
-import com.dudko.blazinghot.content.block.shape.OffsetPoint;
+import com.dudko.blazinghot.content.block.shape.AbstractPoint;
+import com.dudko.blazinghot.content.block.shape.DirectionOffsetPoint;
 import com.dudko.blazinghot.content.block.shape.Shapes;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.util.DyeUtil;
@@ -74,9 +74,11 @@ public class ModernLampDoublePanelBlock extends ModernLampPanelBlock {
 		Direction facing = state.getValue(FACING);
 		Vec2
 				clickedPos =
-				AbstractPoint2D.flatten3D(context.getClickLocation().subtract(context.getClickedPos().getCenter()),
+				AbstractPoint.flatten3D(context.getClickLocation().subtract(context.getClickedPos().getCenter()),
 						facing.getAxis());
-		AbstractPoint2D.RelativeOffset offset = AbstractPoint2D.getNearest(OffsetPoint.fourPoints(), clickedPos).offset;
+		DirectionOffsetPoint.DirectionOffset
+				offset =
+				AbstractPoint.getNearest(DirectionOffsetPoint.fourPoints(), clickedPos).offset;
 		return state.setValue(HORIZONTAL, offset.horizontal);
 	}
 

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_modern_lamp_double_panels": {
+    "has_modern_lamp_half_panels": {
       "conditions": {
         "items": [
           {
-            "tag": "blazinghot:modern_lamp_double_panels"
+            "tag": "blazinghot:modern_lamp_half_panels"
           }
         ]
       },
@@ -20,7 +20,7 @@
   },
   "requirements": [
     [
-      "has_modern_lamp_double_panels",
+      "has_modern_lamp_half_panels",
       "has_the_recipe"
     ]
   ],

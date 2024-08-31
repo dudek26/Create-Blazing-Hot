@@ -7,10 +7,10 @@
     }
   },
   "pattern": [
-    "lll"
+    "ll"
   ],
   "result": {
-    "count": 6,
+    "count": 4,
     "item": "blazinghot:pink_modern_lamp_half_panel"
   },
   "show_notification": true

@@ -6,9 +6,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.dudko.blazinghot.content.block.shape.AbstractPoint2D;
-import com.dudko.blazinghot.content.block.shape.AbstractPoint2D.RelativeOffset;
-import com.dudko.blazinghot.content.block.shape.OffsetPoint;
+import com.dudko.blazinghot.content.block.shape.AbstractPoint;
+import com.dudko.blazinghot.content.block.shape.DirectionOffsetPoint;
+import com.dudko.blazinghot.content.block.shape.DirectionOffsetPoint.DirectionOffset;
 import com.dudko.blazinghot.content.block.shape.Shapes;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.util.DyeUtil;
@@ -44,13 +44,14 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 @MethodsReturnNonnullByDefault
 public class ModernLampHalfPanelBlock extends ModernLampPanelBlock implements SimpleWaterloggedBlock {
 
-	public static final EnumProperty<RelativeOffset> OFFSET = EnumProperty.create("offset", RelativeOffset.class);
+	public static final EnumProperty<DirectionOffset> OFFSET = EnumProperty.create("offset", DirectionOffset.class);
 
 	private static final int placementHelperId = PlacementHelpers.register(new PlacementHelper());
 
 	public ModernLampHalfPanelBlock(Properties properties, DyeColor color) {
 		super(properties, color);
-		registerDefaultState(defaultBlockState().setValue(OFFSET, RelativeOffset.CENTER_HORIZONTAL));
+		registerDefaultState(defaultBlockState().setValue(OFFSET,
+				DirectionOffsetPoint.DirectionOffset.CENTER_HORIZONTAL));
 	}
 
 	@Override
@@ -79,9 +80,9 @@ public class ModernLampHalfPanelBlock extends ModernLampPanelBlock implements Si
 		Direction facing = state.getValue(FACING);
 		Vec2
 				clickedPos =
-				AbstractPoint2D.flatten3D(context.getClickLocation().subtract(context.getClickedPos().getCenter()),
+				AbstractPoint.flatten3D(context.getClickLocation().subtract(context.getClickedPos().getCenter()),
 						facing.getAxis());
-		RelativeOffset offset = AbstractPoint2D.getNearest(OffsetPoint.eightPoints(), clickedPos).offset;
+		DirectionOffset offset = AbstractPoint.getNearest(DirectionOffsetPoint.eightPoints(), clickedPos).offset;
 		if (facing.getAxis() == Axis.X && !offset.horizontal) offset = offset.getOpposite();
 		if (facing.getAxis() == Axis.Y) {
 			if (offset.horizontal) offset = offset.getOpposite();
@@ -94,7 +95,7 @@ public class ModernLampHalfPanelBlock extends ModernLampPanelBlock implements Si
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-		RelativeOffset offset = state.getValue(OFFSET);
+		DirectionOffset offset = state.getValue(OFFSET);
 		VoxelShape panel = Shapes.halfPanel(offset.horizontal);
 		VoxelShape halfPanelBase = Shapes.halfPanelBase(offset.horizontal);
 		double offsetX = offset.horizontal ? 0 : offset.offset;
@@ -110,7 +111,7 @@ public class ModernLampHalfPanelBlock extends ModernLampPanelBlock implements Si
 
 		public PlacementHelper() {
 			super(state -> BlazingBlocks.MODERN_LAMP_HALF_PANELS.contains(state.getBlock()), state -> {
-				RelativeOffset offset = state.getValue(OFFSET);
+				DirectionOffset offset = state.getValue(OFFSET);
 				Direction facing = state.getValue(FACING);
 				if (facing.getAxis().isVertical()) return offset.horizontal ? Axis.X : Axis.Z;
 				return offset.horizontal ? facing.getCounterClockWise().getAxis() : Axis.Y;
