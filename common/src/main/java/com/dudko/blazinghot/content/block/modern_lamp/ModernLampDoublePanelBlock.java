@@ -4,8 +4,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.dudko.blazinghot.content.block.shape.AbstractPoint;
-import com.dudko.blazinghot.content.block.shape.DirectionPoint;
+import com.dudko.blazinghot.content.block.shape.AbstractPoint2D;
+import com.dudko.blazinghot.content.block.shape.OffsetPoint;
 import com.dudko.blazinghot.content.block.shape.Shapes;
 
 import net.minecraft.core.BlockPos;
@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -38,7 +38,7 @@ public class ModernLampDoublePanelBlock extends ModernLampPanelBlock {
 	@Override
 	public @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		boolean isHorizontal = state.getValue(HORIZONTAL);
-		VoxelShape panel = Shapes.halfPanel(isHorizontal);
+		VoxelShape panel = Shapes.halfDoublePanel(isHorizontal);
 		double offsetX = isHorizontal ? 0 : 7.5 / 16;
 		double offsetZ = isHorizontal ? 7.5 / 16 : 0;
 		return Shapes
@@ -54,11 +54,12 @@ public class ModernLampDoublePanelBlock extends ModernLampPanelBlock {
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		BlockState state = super.getStateForPlacement(context);
 		assert state != null;
-		Vec3 clickedPos = context.getClickLocation().subtract(context.getClickedPos().getCenter());
 		Direction facing = state.getValue(FACING);
-		return state.setValue(HORIZONTAL,
-				AbstractPoint
-						.getNearest(DirectionPoint.simplePoints(facing.getAxis()), clickedPos)
-						.isHorizontal(facing));
+		Vec2
+				clickedPos =
+				AbstractPoint2D.flatten3D(context.getClickLocation().subtract(context.getClickedPos().getCenter()),
+						facing.getAxis());
+		AbstractPoint2D.RelativeOffset offset = AbstractPoint2D.getNearest(OffsetPoint.fourPoints(), clickedPos).offset;
+		return state.setValue(HORIZONTAL, offset.horizontal);
 	}
 }

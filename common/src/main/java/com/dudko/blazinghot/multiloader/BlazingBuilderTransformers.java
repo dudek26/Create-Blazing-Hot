@@ -2,6 +2,7 @@ package com.dudko.blazinghot.multiloader;
 
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampDoublePanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.ModernLampHalfPanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelBlock;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
@@ -23,6 +24,11 @@ public class BlazingBuilderTransformers {
 
 	@ExpectPlatform
 	public static <B extends ModernLampPanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampPanel(DyeColor color, String name) {
+		throw new AssertionError();
+	}
+
+	@ExpectPlatform
+	public static <B extends ModernLampHalfPanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampHalfPanel(DyeColor color, String name) {
 		throw new AssertionError();
 	}
 
