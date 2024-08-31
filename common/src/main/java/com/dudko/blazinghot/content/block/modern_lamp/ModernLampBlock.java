@@ -1,11 +1,12 @@
 package com.dudko.blazinghot.content.block.modern_lamp;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.simibubi.create.AllTags;
 
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
@@ -24,6 +25,8 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
 @SuppressWarnings("deprecation")
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
 public class ModernLampBlock extends Block {
 
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
@@ -44,7 +47,7 @@ public class ModernLampBlock extends Block {
 	}
 
 	@Override
-	public @NotNull InteractionResult use(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
+	public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
 		boolean locked = pState.getValue(LOCKED);
 
 		if (pPlayer.getItemInHand(pHand).isEmpty() && !locked) {
@@ -70,7 +73,7 @@ public class ModernLampBlock extends Block {
 	}
 
 	@Override
-	public void neighborChanged(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos, @NotNull Block pBlock, @NotNull BlockPos pFromPos, boolean pIsMoving) {
+	public void neighborChanged(BlockState pState, Level pLevel, BlockPos pPos, Block pBlock, BlockPos pFromPos, boolean pIsMoving) {
 		if (pLevel.isClientSide) return;
 
 		boolean isPowered = pState.getValue(POWERED);

@@ -8,6 +8,7 @@ import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.compat.Mods;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.dudko.blazinghot.registry.CommonTags;
+import com.simibubi.create.foundation.block.DyedBlockList;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 
 import net.minecraft.data.recipes.RecipeCategory;
@@ -17,6 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -104,6 +106,10 @@ public class DyeUtil {
 			consumer.accept("tag.item." + BlazingHot.ID + "." + loc.getPath().replace('/', '.'),
 					LangUtil.titleCaseConversion(dye.toString().replace('_', ' ')) + " Dyes");
 		}
+	}
+
+	public static boolean isIn(DyedBlockList<?> list, ItemStack itemStack) {
+		return Arrays.stream(list.toArray()).anyMatch(block -> block.isIn(itemStack));
 	}
 
 }
