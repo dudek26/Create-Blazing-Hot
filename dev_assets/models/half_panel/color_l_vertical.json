@@ -19,7 +19,7 @@
           "uv": [8, 0, 0, 16],
           "rotation": 180,
           "texture": "#0",
-          "cullface": "down"
+          "cullface": "north"
         },
         "east": {
           "uv": [0, 0, 1, 16],
