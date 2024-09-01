@@ -24,6 +24,10 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
+/**
+ * <p>Extend this if you want the panels to inherit the placement helper.</p>
+ * <p>Otherwise, extend {@link AbstractModernLampPanel}</p>
+ */
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

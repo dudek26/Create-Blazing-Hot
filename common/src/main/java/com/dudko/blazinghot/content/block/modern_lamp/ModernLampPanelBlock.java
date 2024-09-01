@@ -7,8 +7,6 @@ import java.util.function.Predicate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.dudko.blazinghot.content.block.shape.Shapes;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.util.DyeUtil;
@@ -26,29 +24,17 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-@SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class ModernLampPanelBlock extends ModernLampBlock implements SimpleWaterloggedBlock {
-
-	public static final DirectionProperty FACING = BlockStateProperties.FACING;
+public class ModernLampPanelBlock extends AbstractModernLampPanel implements SimpleWaterloggedBlock {
 
 	private static final int placementHelperId = PlacementHelpers.register(new PlacementHelper());
 
@@ -71,39 +57,8 @@ public class ModernLampPanelBlock extends ModernLampBlock implements SimpleWater
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-		super.createBlockStateDefinition(pBuilder.add(FACING, WATERLOGGED));
-	}
-
-	@Override
-	public BlockState getStateForPlacement(@NotNull BlockPlaceContext pContext) {
-		BlockState stateForPlacement = super.getStateForPlacement(pContext);
-		assert stateForPlacement != null;
-		return stateForPlacement
-				.setValue(FACING, pContext.getClickedFace())
-				.setValue(WATERLOGGED,
-						pContext.getLevel().getFluidState(pContext.getClickedPos()).getType() == Fluids.WATER);
-	}
-
-	@Override
-	public FluidState getFluidState(BlockState state) {
-		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
-	}
-
-	@Override
-	public BlockState updateShape(BlockState state, Direction direction, BlockState neighbourState, LevelAccessor world, BlockPos pos, @NotNull BlockPos neighbourPos) {
-		if (state.getValue(WATERLOGGED)) world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
-		return state;
-	}
-
-	@Override
 	public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
 		return Shapes.shape(0, 0, 0, 16, 1, 16).add(1, 0, 1, 15, 2, 15).forDirectional().get(pState.getValue(FACING));
-	}
-
-	@Override
-	public boolean isPathfindable(BlockState pState, BlockGetter pLevel, BlockPos pPos, PathComputationType pType) {
-		return false;
 	}
 
 	private static class PlacementHelper implements IPlacementHelper {

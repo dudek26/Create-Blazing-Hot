@@ -42,7 +42,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ModernLampHalfPanelBlock extends ModernLampPanelBlock implements SimpleWaterloggedBlock {
+public class ModernLampHalfPanelBlock extends AbstractModernLampPanel implements SimpleWaterloggedBlock {
 
 	public static final EnumProperty<DirectionOffset> OFFSET = EnumProperty.create("offset", DirectionOffset.class);
 

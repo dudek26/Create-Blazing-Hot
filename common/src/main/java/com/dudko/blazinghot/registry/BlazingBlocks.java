@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.content.block.modern_lamp.AbstractModernLampPanel;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampDoublePanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampHalfPanelBlock;
@@ -244,11 +245,11 @@ public class BlazingBlocks {
 		return items.toArray(new ItemLike[]{});
 	}
 
-	private static <T extends ModernLampPanelBlock> void panelStoneCuttingRecipe(DataGenContext<Block, T> ctx, RegistrateRecipeProvider prov, DyeColor color) {
+	private static <T extends AbstractModernLampPanel> void panelStoneCuttingRecipe(DataGenContext<Block, T> ctx, RegistrateRecipeProvider prov, DyeColor color) {
 		panelStoneCuttingRecipe(ctx, prov, color, ctx.getName(), 1);
 	}
 
-	private static <T extends ModernLampPanelBlock> void panelStoneCuttingRecipe(DataGenContext<Block, T> ctx, RegistrateRecipeProvider prov, DyeColor color, String name, int count) {
+	private static <T extends AbstractModernLampPanel> void panelStoneCuttingRecipe(DataGenContext<Block, T> ctx, RegistrateRecipeProvider prov, DyeColor color, String name, int count) {
 		SingleItemRecipeBuilder
 				.stonecutting(Ingredient.of(lampPanels(color)), RecipeCategory.REDSTONE, ctx.get(), count)
 				.unlockedBy("has_modern_lamps", RegistrateRecipeProvider.has(BlazingTags.Items.MODERN_LAMPS.tag))
