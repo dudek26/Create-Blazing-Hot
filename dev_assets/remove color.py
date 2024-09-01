@@ -10,9 +10,9 @@ for entry in models.iterdir():
                 path = "models/" + entry.name + "/" + subentry.name
 
                 model = json.loads(open(path).read())
-                if ("black" not in model["textures"]["1"]):
+                if ("white" not in model["textures"]["1"]):
                     continue;
-                texture = model["textures"]["1"].replace("black", "{color}")
+                texture = model["textures"]["1"].replace("white", "{color}")
                 model["textures"]["1"] = texture
                 model["textures"]["particle"] = texture
 
