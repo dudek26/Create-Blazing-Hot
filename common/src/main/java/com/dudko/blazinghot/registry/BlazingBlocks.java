@@ -230,6 +230,26 @@ public class BlazingBlocks {
 						.lang(LangUtil.titleCaseConversion(colorName.replace('_', ' ')) + " Small Modern Lamp Panel")
 						.transform(BlazingBuilderTransformers.anyModernLamp(color))
 						.transform(BlazingBuilderTransformers.modernLampSmallPanel(color, "modern_lamp/small_panel"))
+						.recipe((c, p) -> {
+							BlockEntry<ModernLampQuadPanelBlock>
+									quadPanel =
+									BlazingBlocks.MODERN_LAMP_QUAD_PANELS.get(color);
+							ShapelessRecipeBuilder
+									.shapeless(RecipeCategory.REDSTONE, quadPanel)
+									.requires(c.get(), 4)
+									.unlockedBy("has_modern_lamps",
+											RegistrateRecipeProvider.has(BlazingTags.Items.MODERN_LAMPS.tag))
+									.save(p,
+											BlazingHot.asResource("crafting/modern_lamp/panel/" + quadPanel
+													.getId()
+													.getPath() + "_from_small_panels"));
+							modernLampDyeing(c,
+									p,
+									BlazingTags.Items.MODERN_LAMP_SMALL_PANELS.tag,
+									color,
+									"small_panel");
+							panelStoneCuttingRecipe(c, p, color, c.getName() + "_from_panel", 4);
+						})
 						.register();
 			});
 
