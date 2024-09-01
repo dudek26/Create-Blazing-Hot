@@ -4,7 +4,11 @@ Create: Blazing Hot 0.6.2
 
 ### Added:
 
-* Modern Lamp Quad Panel
+* New Modern Lamp variants:
+    * Quad Panel
+    * Double Panel
+    * Half Panel
+    * Small Panel
 
 ### Changed:
 
@@ -17,6 +21,7 @@ Create: Blazing Hot 0.6.1
 ------------------------------------------------------
 
 ### Fixed:
+
 * Fixed Brass Carrot's Haste effect duration
 
 ------------------------------------------------------
@@ -24,6 +29,7 @@ Create: Blazing Hot 0.6
 ------------------------------------------------------
 
 ### Added:
+
 * New fluids: Molten Zinc, Copper, Brass, Ancient Debris, Netherite, Andesite
 * New melting in Blaze Mixer recipe for Ancient Debris, that gives Netherite at higher rates
 * New mixing recipe for Molten Andesite, that gives Andesite Alloy at higher rates
@@ -33,20 +39,22 @@ Create: Blazing Hot 0.6
 * 17 new Advancements, including 3 challenges and one secret advancement
     * You may need to replace your Mixers, Blaze Mixers and Spouts to get some of the advancements
 * New item tags:
-  * `blazinghot:metal_carrots`
-  * `blazinghot:metal_apples`
-  * `blazinghot:stellar_metal_apples`
-  * `blazinghot:enchanted_metal_apples`
-  * `blazinghot:metal_food`
+    * `blazinghot:metal_carrots`
+    * `blazinghot:metal_apples`
+    * `blazinghot:stellar_metal_apples`
+    * `blazinghot:enchanted_metal_apples`
+    * `blazinghot:metal_food`
 * New Metal Carrots and Apples:
-  * Zinc - focused on movement (Speed, Slow Falling)
-  * Copper - focused on water (Water Breathing, Dolphin's Grace)
-  * Brass - focused on building (Haste, Jump Boost)
-  * Enchanted Netherite Apple - combines and enhances the power of Enchanted Blaze Apple and Enchanted Golden Apple
-* Compatibility recipes for melting Rods, Wires and Zinc Sheet from [Create: Crafts & Additions](https://modrinth.com/mod/createaddition)
+    * Zinc - focused on movement (Speed, Slow Falling)
+    * Copper - focused on water (Water Breathing, Dolphin's Grace)
+    * Brass - focused on building (Haste, Jump Boost)
+    * Enchanted Netherite Apple - combines and enhances the power of Enchanted Blaze Apple and Enchanted Golden Apple
+* Compatibility recipes for melting Rods, Wires and Zinc Sheet
+  from [Create: Crafts & Additions](https://modrinth.com/mod/createaddition)
 * [Forge] Information about Nether Lava in JEI
 
 ### Changed:
+
 * Modern Lamp Panels can now be waterlogged
 * Increased chance of getting Blaze Powder when crushing Blaze Gold Rods from 30% to 50%
 * Several recipes now use tags instead of specific ingredients
@@ -62,9 +70,11 @@ Create: Blazing Hot 0.6
 * [Fabric] Molten Blaze Gold source blocks now turn into Obsidian when touching water
 
 ### Removed:
+
 * Metal Block melting recipes
 
 ### Fixed:
+
 * Fixed mod .jar files using `blazinghot` name instead of `create_blazing_hot`
 * Modern Lamp Panels no longer get destroyed by fluids when facing up or down
 * Blaze Arrow is now in the `minecraft:arrows` entity type tag and grants the "Take Aim" advancement
@@ -100,14 +110,14 @@ Create: Blazing Hot 0.5
 * Reduced the amount of Nether Essence required to obtain Molten Blaze Gold from 4 to 2
 * Reduced the amount of fluid when filling Metal Carrots and Apples from 8 nuggets or ingots to 6
 * Adjusted sequenced assembly recipes for Enchanted Metal Apples:
-  * Increased the amount of loops from 4 to 6
-  * Reduced amount of fluid required per loop from 9 ingots to 6
+    * Increased the amount of loops from 4 to 6
+    * Reduced amount of fluid required per loop from 9 ingots to 6
 
 ### Fixed:
 
 * Blaze mixing recipes now consume the correct amount of fuel
 * Blaze mixing recipes' speed is no longer affected by the fuel
-  * This only applies to recipes exclusive to the Blaze Mixer
+    * This only applies to recipes exclusive to the Blaze Mixer
 * Melting time no longer caps at 512 ticks (25.6 seconds)
 
 ------------------------------------------------------
