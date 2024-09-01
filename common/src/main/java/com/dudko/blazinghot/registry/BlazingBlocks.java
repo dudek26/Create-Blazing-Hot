@@ -12,10 +12,12 @@ import com.dudko.blazinghot.content.block.modern_lamp.ModernLampDoublePanelBlock
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampHalfPanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampQuadPanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.SmallModernLampPanelBlock;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlock;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.multiloader.BlazingBuilderTransformers;
 import com.dudko.blazinghot.util.DyeUtil;
+import com.dudko.blazinghot.util.LangUtil;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
@@ -217,6 +219,18 @@ public class BlazingBlocks {
 				})
 				.register();
 	});
+
+	public static final DyedBlockList<SmallModernLampPanelBlock>
+			MODERN_LAMP_SMALL_PANELS =
+			new DyedBlockList<>(color -> {
+				String colorName = color.getSerializedName();
+				return REGISTRATE
+						.block(colorName + "_modern_lamp_small_panel", p -> new SmallModernLampPanelBlock(p, color))
+						.lang(LangUtil.titleCaseConversion(colorName.replace('_', ' ')) + " Small Modern Lamp Panel")
+						.transform(BlazingBuilderTransformers.anyModernLamp(color))
+						.transform(BlazingBuilderTransformers.modernLampSmallPanel(color, "modern_lamp/small_panel"))
+						.register();
+			});
 
 	public static void register() {
 	}

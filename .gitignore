@@ -34,5 +34,5 @@ run/
 
 # photoshop
 *.psd
-/scripts/generated/
+/dev_assets/generated/
 /common/src/main/resources/assets/blazinghot/textures/fluid/mcmeta_gen.py

@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import com.dudko.blazinghot.content.block.shape.Shapes;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.util.DyeUtil;
+import com.simibubi.create.foundation.block.DyedBlockList;
 import com.simibubi.create.foundation.placement.IPlacementHelper;
 import com.simibubi.create.foundation.placement.PlacementHelpers;
 import com.simibubi.create.foundation.placement.PlacementOffset;
@@ -108,12 +109,20 @@ public class ModernLampPanelBlock extends ModernLampBlock implements SimpleWater
 	private static class PlacementHelper implements IPlacementHelper {
 		@Override
 		public Predicate<ItemStack> getItemPredicate() {
-			return stack -> DyeUtil.isIn(BlazingBlocks.MODERN_LAMP_PANELS, stack);
+			return stack -> DyeUtil.isIn(BlazingBlocks.MODERN_LAMP_PANELS, stack)
+					|| DyeUtil.isIn(BlazingBlocks.MODERN_LAMP_QUAD_PANELS, stack);
 		}
+
 
 		@Override
 		public Predicate<BlockState> getStatePredicate() {
-			return state -> BlazingBlocks.MODERN_LAMP_PANELS.contains(state.getBlock());
+			List<DyedBlockList<?>>
+					panels =
+					List.of(BlazingBlocks.MODERN_LAMP_PANELS,
+							BlazingBlocks.MODERN_LAMP_QUAD_PANELS,
+							BlazingBlocks.MODERN_LAMP_DOUBLE_PANELS);
+
+			return state -> panels.stream().anyMatch(list -> list.contains(state.getBlock()));
 		}
 
 		@Override

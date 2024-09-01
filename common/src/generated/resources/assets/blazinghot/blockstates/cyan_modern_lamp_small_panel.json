@@ -1,0 +1,3172 @@
+{
+  "variants": {
+    "facing=down,lit=false,locked=false,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=false,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur",
+      "x": 180
+    },
+    "facing=down,lit=false,locked=true,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=false,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,locked=true,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_powered",
+      "x": 180
+    },
+    "facing=east,lit=false,locked=false,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=false,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,locked=true,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=false,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,locked=true,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 270
+    },
+    "facing=north,lit=false,locked=false,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=false,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,locked=true,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=false,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,locked=true,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 180
+    },
+    "facing=south,lit=false,locked=false,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical"
+    },
+    "facing=south,lit=false,locked=false,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical"
+    },
+    "facing=south,lit=false,locked=true,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical"
+    },
+    "facing=south,lit=true,locked=false,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered"
+    },
+    "facing=south,lit=true,locked=false,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered"
+    },
+    "facing=south,lit=true,locked=true,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered"
+    },
+    "facing=up,lit=false,locked=false,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c"
+    },
+    "facing=up,lit=false,locked=false,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c"
+    },
+    "facing=up,lit=false,locked=false,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c"
+    },
+    "facing=up,lit=false,locked=false,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c"
+    },
+    "facing=up,lit=false,locked=false,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d"
+    },
+    "facing=up,lit=false,locked=false,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d"
+    },
+    "facing=up,lit=false,locked=false,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d"
+    },
+    "facing=up,lit=false,locked=false,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d"
+    },
+    "facing=up,lit=false,locked=false,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl"
+    },
+    "facing=up,lit=false,locked=false,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl"
+    },
+    "facing=up,lit=false,locked=false,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl"
+    },
+    "facing=up,lit=false,locked=false,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl"
+    },
+    "facing=up,lit=false,locked=false,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr"
+    },
+    "facing=up,lit=false,locked=false,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr"
+    },
+    "facing=up,lit=false,locked=false,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr"
+    },
+    "facing=up,lit=false,locked=false,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr"
+    },
+    "facing=up,lit=false,locked=false,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l"
+    },
+    "facing=up,lit=false,locked=false,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l"
+    },
+    "facing=up,lit=false,locked=false,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l"
+    },
+    "facing=up,lit=false,locked=false,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l"
+    },
+    "facing=up,lit=false,locked=false,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r"
+    },
+    "facing=up,lit=false,locked=false,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r"
+    },
+    "facing=up,lit=false,locked=false,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r"
+    },
+    "facing=up,lit=false,locked=false,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r"
+    },
+    "facing=up,lit=false,locked=false,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u"
+    },
+    "facing=up,lit=false,locked=false,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u"
+    },
+    "facing=up,lit=false,locked=false,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u"
+    },
+    "facing=up,lit=false,locked=false,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u"
+    },
+    "facing=up,lit=false,locked=false,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul"
+    },
+    "facing=up,lit=false,locked=false,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul"
+    },
+    "facing=up,lit=false,locked=false,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul"
+    },
+    "facing=up,lit=false,locked=false,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul"
+    },
+    "facing=up,lit=false,locked=false,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur"
+    },
+    "facing=up,lit=false,locked=false,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur"
+    },
+    "facing=up,lit=false,locked=false,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur"
+    },
+    "facing=up,lit=false,locked=false,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur"
+    },
+    "facing=up,lit=false,locked=true,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c"
+    },
+    "facing=up,lit=false,locked=true,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c"
+    },
+    "facing=up,lit=false,locked=true,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c"
+    },
+    "facing=up,lit=false,locked=true,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c"
+    },
+    "facing=up,lit=false,locked=true,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d"
+    },
+    "facing=up,lit=false,locked=true,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d"
+    },
+    "facing=up,lit=false,locked=true,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d"
+    },
+    "facing=up,lit=false,locked=true,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d"
+    },
+    "facing=up,lit=false,locked=true,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl"
+    },
+    "facing=up,lit=false,locked=true,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl"
+    },
+    "facing=up,lit=false,locked=true,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl"
+    },
+    "facing=up,lit=false,locked=true,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl"
+    },
+    "facing=up,lit=false,locked=true,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr"
+    },
+    "facing=up,lit=false,locked=true,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr"
+    },
+    "facing=up,lit=false,locked=true,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr"
+    },
+    "facing=up,lit=false,locked=true,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr"
+    },
+    "facing=up,lit=false,locked=true,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l"
+    },
+    "facing=up,lit=false,locked=true,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l"
+    },
+    "facing=up,lit=false,locked=true,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l"
+    },
+    "facing=up,lit=false,locked=true,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l"
+    },
+    "facing=up,lit=false,locked=true,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r"
+    },
+    "facing=up,lit=false,locked=true,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r"
+    },
+    "facing=up,lit=false,locked=true,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r"
+    },
+    "facing=up,lit=false,locked=true,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r"
+    },
+    "facing=up,lit=false,locked=true,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u"
+    },
+    "facing=up,lit=false,locked=true,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u"
+    },
+    "facing=up,lit=false,locked=true,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u"
+    },
+    "facing=up,lit=false,locked=true,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u"
+    },
+    "facing=up,lit=false,locked=true,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul"
+    },
+    "facing=up,lit=false,locked=true,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul"
+    },
+    "facing=up,lit=false,locked=true,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul"
+    },
+    "facing=up,lit=false,locked=true,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul"
+    },
+    "facing=up,lit=false,locked=true,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur"
+    },
+    "facing=up,lit=false,locked=true,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur"
+    },
+    "facing=up,lit=false,locked=true,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur"
+    },
+    "facing=up,lit=false,locked=true,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur"
+    },
+    "facing=up,lit=true,locked=false,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_powered"
+    },
+    "facing=up,lit=true,locked=false,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_powered"
+    },
+    "facing=up,lit=true,locked=true,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_powered"
+    },
+    "facing=west,lit=false,locked=false,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=false,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,locked=true,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=false,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=center,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=center,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=center,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=center,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_c_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=down,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=down,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=down,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=down,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_d_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=down_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=down_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=down_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=down_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dl_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=down_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=down_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=down_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=down_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_dr_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_l_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_r_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=up,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=up,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=up,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=up,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_u_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=up_left,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=up_left,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=up_left,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=up_left,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ul_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=up_right,powered=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=up_right,powered=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=up_right,powered=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,locked=true,offset=up_right,powered=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/cyan_ur_vertical_powered",
+      "y": 90
+    }
+  }
+}

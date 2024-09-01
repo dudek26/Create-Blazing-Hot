@@ -31,4 +31,12 @@ public class Shapes {
 		return horizontal ? cuboid(0, 0, 0, 16, 1, 8) : cuboid(0, 0, 0, 8, 1, 16);
 	}
 
+	public static VoxelShape smallPanelBase() {
+		return cuboid(0, 0, 0, 8, 1, 8);
+	}
+
+	public static VoxelShape smallPanel() {
+		return cuboid(1, 1, 1, 7, 2, 7);
+	}
+
 }
