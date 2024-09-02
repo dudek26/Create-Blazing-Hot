@@ -42,7 +42,7 @@ public class BlazeMixingRecipe extends BasinRecipe {
 
     @NotNull
     public FluidIngredient getFuelFluid() {
-        if (fuelFluid == null) return FluidIngredient.EMPTY;
+        if (fuelFluid == null || MultiFluids.getFluidAmount(fuelFluid) <= 0) return FluidIngredient.EMPTY;
         return fuelFluid;
     }
 
@@ -104,19 +104,19 @@ public class BlazeMixingRecipe extends BasinRecipe {
         }
     }
 
-    private static final FluidIngredient PLACEHOLDER_FUEL = MultiFluids.fluidIngredientFromFluid(Fluids.LAVA, 82154);
+    private static final FluidIngredient PLACEHOLDER_FUEL = MultiFluids.fluidIngredientFromFluid(Fluids.LAVA, 0);
 
     @Override
     public void readAdditional(FriendlyByteBuf buffer) {
         super.readAdditional(buffer);
         FluidIngredient fuel = FluidIngredient.read(buffer);
-        fuelFluid = fuel.equals(PLACEHOLDER_FUEL) ? FluidIngredient.EMPTY : fuel;
+        fuelFluid = MultiFluids.getFluidAmount(fuel) == 0 ? FluidIngredient.EMPTY : fuel;
     }
 
     @Override
     public void writeAdditional(FriendlyByteBuf buffer) {
         super.writeAdditional(buffer);
-        FluidIngredient fuel = getFuelFluid().equals(PLACEHOLDER_FUEL) ? FluidIngredient.EMPTY : getFuelFluid();
+        FluidIngredient fuel = getFuelFluid().equals(FluidIngredient.EMPTY) ? PLACEHOLDER_FUEL : getFuelFluid();
         fuel.write(buffer);
     }
 

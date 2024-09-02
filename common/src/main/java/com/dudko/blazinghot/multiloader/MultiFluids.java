@@ -92,4 +92,9 @@ public class MultiFluids {
 	public static FluidIngredient fluidIngredientFromFluid(Fluid fluid, long amount) {
 		throw new AssertionError();
 	}
+
+	@ExpectPlatform
+	public static long getFluidAmount(FluidIngredient ingredient) {
+		return 1;
+	}
 }

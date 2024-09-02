@@ -26,4 +26,8 @@ public class MultiFluidsImpl {
 	public static FluidIngredient fluidIngredientFromFluid(Fluid fluid, long amount) {
 		return FluidIngredient.fromFluid(fluid, (int) platformedAmount(amount));
 	}
+
+	public static long getFluidAmount(FluidIngredient ingredient) {
+		return ingredient.getRequiredAmount();
+	}
 }
