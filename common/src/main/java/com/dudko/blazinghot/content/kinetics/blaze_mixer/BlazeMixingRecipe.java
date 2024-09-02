@@ -114,7 +114,7 @@ public class BlazeMixingRecipe extends BasinRecipe {
 	@Override
 	public void writeAdditional(FriendlyByteBuf buffer) {
 		super.writeAdditional(buffer);
-		if (getFuelFluid() != FluidIngredient.EMPTY) getFuelFluid().write(buffer);
+		getFuelFluid().write(buffer);
 	}
 
 	@ExpectPlatform
