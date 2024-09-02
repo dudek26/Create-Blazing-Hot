@@ -47,4 +47,5 @@ jobs:
           CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
           PLATFORM: ${{ inputs.platform }}
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
         run: ./gradlew blazinghotPublish

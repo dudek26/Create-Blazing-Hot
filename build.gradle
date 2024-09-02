@@ -112,7 +112,7 @@ publishMods {
     github {
         accessToken = System.getenv("GITHUB_TOKEN")
         repository = "dudek26/Create-Blazing-Hot"
-        commitish = "${minecraft_version}/multiloader"
+        commitish = System.getenv("BRANCH_NAME")
         tagName = "v${mod_version}"
 
         // Allow the release to be initially created without any files.
