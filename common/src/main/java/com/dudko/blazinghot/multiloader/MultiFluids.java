@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.multiloader;
 
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
+import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.tags.TagKey;
@@ -85,5 +86,10 @@ public class MultiFluids {
 	@ExpectPlatform
 	public static boolean recipeResultContains(ProcessingRecipe<?> r, TagKey<Fluid> fluid) {
 		return true;
+	}
+
+	@ExpectPlatform
+	public static FluidIngredient fluidIngredientFromFluid(Fluid fluid, long amount) {
+		throw new AssertionError();
 	}
 }

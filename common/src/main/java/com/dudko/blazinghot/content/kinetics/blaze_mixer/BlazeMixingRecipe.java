@@ -104,7 +104,7 @@ public class BlazeMixingRecipe extends BasinRecipe {
         }
     }
 
-    private static final FluidIngredient PLACEHOLDER_FUEL = FluidIngredient.fromFluid(Fluids.LAVA, 82154);
+    private static final FluidIngredient PLACEHOLDER_FUEL = MultiFluids.fluidIngredientFromFluid(Fluids.LAVA, 82154);
 
     @Override
     public void readAdditional(FriendlyByteBuf buffer) {
