@@ -17,6 +17,9 @@ Create: Blazing Hot 0.6.2
 * Updated and reorganised textures of Modern Lamps
 * Optimised Modern Lamp Panels
 
+### Fixed:
+* [Forge] Fixed clients being unable to connect to servers (#3)
+
 ------------------------------------------------------
 Create: Blazing Hot 0.6.1
 ------------------------------------------------------
