@@ -205,15 +205,17 @@ public class BlazingBlocks {
 									BlazingHot.asResource("crafting/modern_lamp/half_panel/"
 											+ c.getName()
 											+ "_from_panel"));
-					BlockEntry<ModernLampPanelBlock> fullPanel = BlazingBlocks.MODERN_LAMP_PANELS.get(color);
+					BlockEntry<ModernLampDoublePanelBlock>
+							doublePanel =
+							BlazingBlocks.MODERN_LAMP_DOUBLE_PANELS.get(color);
 					ShapelessRecipeBuilder
-							.shapeless(RecipeCategory.REDSTONE, fullPanel)
+							.shapeless(RecipeCategory.REDSTONE, doublePanel)
 							.requires(c.get(), 2)
 							.unlockedBy("has_modern_lamps",
 									RegistrateRecipeProvider.has(BlazingTags.Items.MODERN_LAMPS.tag))
 							.save(p,
 									BlazingHot.asResource("crafting/modern_lamp/panel/"
-											+ fullPanel.getId().getPath()
+											+ doublePanel.getId().getPath()
 											+ "_from_half_panels"));
 					panelStoneCuttingRecipe(c, p, color, c.getName() + "_from_panel", 2);
 					modernLampDyeing(c, p, BlazingTags.Items.MODERN_LAMP_HALF_PANELS.tag, color, "half_panel");
