@@ -12,6 +12,7 @@ Create: Blazing Hot 0.6.2
 
 ### Changed:
 
+* **[Forge] Updated to Create 0.5.1.h**
 * Removed Nether Flora and Coal from Nether Compound Recipe
 * Updated and reorganised textures of Modern Lamps
 * Optimised Modern Lamp Panels
