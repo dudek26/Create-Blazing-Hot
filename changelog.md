@@ -1,4 +1,12 @@
 ------------------------------------------------------
+Create: Blazing Hot 0.6.3
+------------------------------------------------------
+
+### Fixed:
+
+* Fixed missing texture for Red Small Modern Lamp Panel
+
+------------------------------------------------------
 Create: Blazing Hot 0.6.2
 ------------------------------------------------------
 
@@ -18,6 +26,7 @@ Create: Blazing Hot 0.6.2
 * Optimised Modern Lamp Panels
 
 ### Fixed:
+
 * [Forge] Fixed clients being unable to connect to servers (#3)
 
 ------------------------------------------------------
