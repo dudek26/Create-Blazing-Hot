@@ -48,7 +48,7 @@ public class ItemDescriptions {
 			BlazingItemDescription
 					.builder("blaze_mixer")
 					.summary(
-							"A _Blaze_ variant of the _Mechanical Mixer_ that works _twice as fast_ when _fueled_, and has some _special_ recipes.")
+							"A _Blaze_ variant of the _Mechanical Mixer_ that works _faster_ when _fueled_, and has some _special_ recipes.")
 					.register(),
 
 	END = null;
