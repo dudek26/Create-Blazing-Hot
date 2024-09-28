@@ -150,6 +150,10 @@ public class BlazingIngredients {
 		return Items.FEATHER;
 	}
 
+	public static ItemLike netherDough() {
+		return BlazingItems.NETHER_DOUGH;
+	}
+
 	//    Dusts
 
 	public static TagKey<Item> stoneDust() {
