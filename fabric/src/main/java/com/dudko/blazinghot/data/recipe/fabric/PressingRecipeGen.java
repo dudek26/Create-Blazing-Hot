@@ -3,6 +3,7 @@ package com.dudko.blazinghot.data.recipe.fabric;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.blazeGoldIngot;
 
 import com.dudko.blazinghot.registry.BlazingItems;
+import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
@@ -17,7 +18,9 @@ public class PressingRecipeGen extends BlazingProcessingRecipeGen {
 
 	GeneratedRecipe
 			BLAZE_GOLD =
-			create("blaze_gold_ingot", b -> b.require(blazeGoldIngot()).output(BlazingItems.BLAZE_GOLD_SHEET.get()));
+			create("blaze_gold_ingot", b -> b.require(blazeGoldIngot()).output(BlazingItems.BLAZE_GOLD_SHEET.get())),
+			STURDY_ALLOY =
+					create("sturdy_alloy", b -> b.require(BlazingItems.STURDY_ALLOY).output(AllItems.STURDY_SHEET));
 
 	@Override
 	protected IRecipeTypeInfo getRecipeType() {

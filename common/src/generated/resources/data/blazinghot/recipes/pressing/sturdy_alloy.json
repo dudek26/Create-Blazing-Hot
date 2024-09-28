@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "item": "blazinghot:sturdy_alloy"
+    }
+  ],
+  "results": [
+    {
+      "item": "create:sturdy_sheet"
+    }
+  ]
+}

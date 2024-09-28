@@ -88,6 +88,8 @@ public class BlazingItems {
 							.model((c, p) -> p.handheld(c))
 							.register();
 
+	public static final ItemEntry<Item> STURDY_ALLOY = ingredient("sturdy_alloy");
+
 	public static final ItemEntry<Item> BLAZE_WHISK = ingredient("blaze_whisk");
 
 	public static final ItemEntry<SequencedAssemblyItem>
@@ -250,7 +252,8 @@ public class BlazingItems {
 			ENCHANTED_ZINC_APPLE =
 					new FoodItemBuilder<>("enchanted_zinc_apple",
 							p -> new BlazingFoodItem(p, REMOVE_SLOWNESS_ANY, FOIL))
-							.enchantedMetalApple().description(ItemDescriptions.SLOWNESS_REMOVING_FOOD_ANY)
+							.enchantedMetalApple()
+							.description(ItemDescriptions.SLOWNESS_REMOVING_FOOD_ANY)
 							.addEffect(MobEffects.ABSORPTION, tickMinutes(2), 2)
 							.addEffect(MobEffects.REGENERATION, tickSeconds(10), 1)
 							.addEffect(MobEffects.SLOW_FALLING, tickMinutes(2))
@@ -261,7 +264,8 @@ public class BlazingItems {
 							.nutrition(6)
 							.saturationMod(1f)
 							.tag(BlazingTags.Items.METAL_CARROTS.tag)
-							.alwaysEat().addEffect(MobEffects.DIG_SPEED, tickSeconds(10))
+							.alwaysEat()
+							.addEffect(MobEffects.DIG_SPEED, tickSeconds(10))
 							.register(),
 			BRASS_APPLE =
 					new FoodItemBuilder<>("brass_apple", BlazingFoodItem::new)

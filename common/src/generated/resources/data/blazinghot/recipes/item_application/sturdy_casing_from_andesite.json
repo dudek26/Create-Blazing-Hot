@@ -1,0 +1,16 @@
+{
+  "type": "create:item_application",
+  "ingredients": [
+    {
+      "item": "create:andesite_casing"
+    },
+    {
+      "item": "blazinghot:sturdy_alloy"
+    }
+  ],
+  "results": [
+    {
+      "item": "blazinghot:sturdy_casing"
+    }
+  ]
+}

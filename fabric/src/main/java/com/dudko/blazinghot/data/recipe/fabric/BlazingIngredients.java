@@ -4,7 +4,6 @@ import static com.dudko.blazinghot.content.metal.Forms.INGOT;
 import static com.dudko.blazinghot.content.metal.Forms.NUGGET;
 import static com.dudko.blazinghot.content.metal.Forms.PLATE;
 import static com.dudko.blazinghot.content.metal.Forms.ROD;
-import static com.dudko.blazinghot.registry.CommonTags.Namespace.INTERNAL;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.metal.MoltenMetals;
@@ -65,12 +64,16 @@ public class BlazingIngredients {
 
 	//    Casings
 
-	public static Item copperCasing() {
-		return AllBlocks.COPPER_CASING.asItem();
+	public static ItemLike copperCasing() {
+		return AllBlocks.COPPER_CASING;
 	}
 
-	public static Item blazeCasing() {
-		return BlazingBlocks.BLAZE_CASING.asItem();
+	public static ItemLike blazeCasing() {
+		return BlazingBlocks.BLAZE_CASING;
+	}
+
+	public static ItemLike andesiteCasing() {
+		return AllBlocks.ANDESITE_CASING;
 	}
 
 	//    Fluids
@@ -152,15 +155,19 @@ public class BlazingIngredients {
 	//    Dusts
 
 	public static TagKey<Item> stoneDust() {
-		return CommonTags.itemTagOf(INTERNAL.tagPath("dusts", "stone"), INTERNAL);
+		return CommonTags.Items.STONE_DUSTS.internal;
 	}
 
 	public static TagKey<Item> netherrackDust() {
-		return CommonTags.itemTagOf(INTERNAL.tagPath("dusts", "netherrack"), INTERNAL);
+		return CommonTags.Items.NETHERRACK_DUSTS.internal;
 	}
 
 	public static TagKey<Item> soulDust() {
-		return CommonTags.itemTagOf(INTERNAL.tagPath("dusts", "soul_sand"), INTERNAL);
+		return CommonTags.Items.SOUL_SAND_DUSTS.internal;
+	}
+
+	public static ItemLike powderedObsidian() {
+		return AllItems.POWDERED_OBSIDIAN;
 	}
 
 	//    Blocks
@@ -237,6 +244,10 @@ public class BlazingIngredients {
 
 	public static TagKey<Item> blazeGoldSheet() {
 		return PLATE.internalTag(MoltenMetals.BLAZE_GOLD);
+	}
+
+	public static ItemLike sturdyAlloy() {
+		return BlazingItems.STURDY_ALLOY;
 	}
 
 	public static TagKey<Item> blazeGoldRod() {

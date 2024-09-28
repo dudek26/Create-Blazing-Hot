@@ -10,6 +10,7 @@ import com.simibubi.create.foundation.block.connected.CTType;
 public class BlazingSpriteShifts {
 
 	public static final CTSpriteShiftEntry BLAZE_CASING = omni("blaze_casing");
+	public static final CTSpriteShiftEntry STURDY_CASING = omni("sturdy_casing");
 
 	private static CTSpriteShiftEntry omni(String name) {
 		return getCT(AllCTTypes.OMNIDIRECTIONAL, name);

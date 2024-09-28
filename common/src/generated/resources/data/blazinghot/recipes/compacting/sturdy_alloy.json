@@ -1,0 +1,23 @@
+{
+  "type": "create:compacting",
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "item": "blazinghot:nether_compound"
+    },
+    {
+      "item": "blazinghot:nether_compound"
+    },
+    {
+      "item": "create:powdered_obsidian"
+    },
+    {
+      "tag": "blazinghot:iron_ingots"
+    }
+  ],
+  "results": [
+    {
+      "item": "blazinghot:sturdy_alloy"
+    }
+  ]
+}

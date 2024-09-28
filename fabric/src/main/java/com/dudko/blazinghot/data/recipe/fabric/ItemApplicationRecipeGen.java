@@ -1,7 +1,9 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
+import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.andesiteCasing;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.blazeGoldSheet;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.copperCasing;
+import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.sturdyAlloy;
 
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.simibubi.create.AllRecipeTypes;
@@ -18,8 +20,14 @@ public class ItemApplicationRecipeGen extends BlazingProcessingRecipeGen {
 
 	GeneratedRecipe
 			BLAZE_CASING =
-			create("blaze_casing_from_log",
-					b -> b.require(copperCasing()).require(blazeGoldSheet()).output(BlazingBlocks.BLAZE_CASING));
+			create("blaze_casing_from_copper",
+					b -> b.require(copperCasing()).require(blazeGoldSheet()).output(BlazingBlocks.BLAZE_CASING)),
+			STURDY_CASING =
+					create("sturdy_casing_from_andesite",
+							b -> b
+									.require(andesiteCasing())
+									.require(sturdyAlloy())
+									.output(BlazingBlocks.STURDY_CASING));
 
 
 	@Override

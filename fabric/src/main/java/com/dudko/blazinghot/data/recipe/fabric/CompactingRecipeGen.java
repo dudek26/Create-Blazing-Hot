@@ -1,10 +1,15 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
 import static com.dudko.blazinghot.content.metal.MoltenMetals.ALL;
+import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.ironIngot;
+import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.netherCompound;
+import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.powderedObsidian;
 
 import java.util.List;
 
+import com.dudko.blazinghot.registry.BlazingItems;
 import com.simibubi.create.AllRecipeTypes;
+import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
 import net.minecraft.data.PackOutput;
@@ -26,6 +31,16 @@ public class CompactingRecipeGen extends BlazingProcessingRecipeGen {
 									.require(metal.fluidTag(), metal.compactingResult().getSecond())
 									.output(metal.compactingResult().getFirst())))
 					.toList();
+
+	GeneratedRecipe
+			STURDY_ALLOY =
+			create("sturdy_alloy",
+					b -> b
+							.requireMultiple(netherCompound(), 2)
+							.require(powderedObsidian())
+							.require(ironIngot())
+							.output(BlazingItems.STURDY_ALLOY)
+							.requiresHeat(HeatCondition.SUPERHEATED));
 
 	@Override
 	protected IRecipeTypeInfo getRecipeType() {

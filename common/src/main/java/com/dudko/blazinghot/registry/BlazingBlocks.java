@@ -15,6 +15,7 @@ import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampQuadPanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.SmallModernLampPanelBlock;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlock;
+import com.dudko.blazinghot.content.processing.casting_depot.CastingDepotBlock;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.multiloader.BlazingBuilderTransformers;
 import com.dudko.blazinghot.util.DyeUtil;
@@ -75,12 +76,28 @@ public class BlazingBlocks {
 					.transform(customItemModel())
 					.register();
 
+	public static final BlockEntry<CastingDepotBlock>
+			CASTING_DEPOT =
+			REGISTRATE
+					.block("casting_depot", CastingDepotBlock::new)
+					.blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
+					.simpleItem()
+					.register();
+
 	public static final BlockEntry<CasingBlock>
 			BLAZE_CASING =
 			REGISTRATE
 					.block("blaze_casing", CasingBlock::new)
 					.transform(BuilderTransformers.casing(() -> BlazingSpriteShifts.BLAZE_CASING))
 					.properties(p -> p.mapColor(MapColor.CRIMSON_NYLIUM).sound(SoundType.NETHER_WOOD))
+					.register();
+
+	public static final BlockEntry<CasingBlock>
+			STURDY_CASING =
+			REGISTRATE
+					.block("sturdy_casing", CasingBlock::new)
+					.transform(BuilderTransformers.casing(() -> BlazingSpriteShifts.STURDY_CASING))
+					.properties(p -> p.mapColor(MapColor.COLOR_BLACK).sound(SoundType.NETHERITE_BLOCK))
 					.register();
 
 	// BUILDING BLOCKS
