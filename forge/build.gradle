@@ -96,6 +96,8 @@ dependencies {
     modCompileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
     modCompileOnly("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
 
+    include(implementation("com.moulberry:mixinconstraints:1.0.1"))
+
     // Additional mods
     // Compat
     if (createaddition_forge == "true") modLocalRuntime("maven.modrinth:createaddition:${createaddition_forge_version}")
