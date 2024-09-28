@@ -8,6 +8,8 @@
   "mixins": [
     "DatagenModLoaderForgeMixin",
     "EntityMixin",
+    "JEIBasinCategoryMixin",
+    "ProcessingRecipeSerializerMixin",
     "RecipeManagerAccessor"
   ],
   "injectors": {
