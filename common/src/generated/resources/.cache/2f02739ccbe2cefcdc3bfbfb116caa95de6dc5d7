@@ -1,4 +1,4 @@
-// 1.20.1	2024-09-03T20:17:35.0999344	Create: Blazing Hot/Blazing Hot Crafting Recipes
+// 1.20.1	2024-09-28T16:44:29.0590036	Create: Blazing Hot/Blazing Hot Crafting Recipes
 b2423d3311ad680557caf5fe5ddb3023a2f3c703 data\blazinghot\advancements\recipes\misc\crafting\blaze_apple.json
 27bdae54affb8b0f1be42643e0fbe3e4c72f90f3 data\blazinghot\recipes\crafting\zinc_apple.json
 54a1fa0c2803bfd5027756f5db10b1c98bd0aa64 data\blazinghot\recipes\crafting\blaze_gold_block_from_blaze_gold_ingot.json
@@ -20,8 +20,8 @@ a3cbcf507276afb7b7d6df0c144c017cead430de data\blazinghot\advancements\recipes\mi
 8fdc17003ac3d49757fb545e9fa94e1ec93da899 data\blazinghot\recipes\crafting\blaze_gold_nugget_from_blaze_gold_ingot.json
 570a16d9413b0768345ac9faec912ae49622b0a4 data\blazinghot\advancements\recipes\misc\crafting\copper_carrot.json
 b823e954d2643b0f44020e8a6f6e1c371e81ee1c data\blazinghot\advancements\recipes\misc\crafting\blaze_gold_ingot_from_blaze_gold_nugget.json
-6410129102cf1c8d55e4a9bdcb64a528188124d0 data\blazinghot\advancements\recipes\misc\crafting\blaze_carrot.json
 40d7af67505884d96b674dab153c6ce082a8a3a7 data\blazinghot\recipes\crafting\brass_apple.json
+6410129102cf1c8d55e4a9bdcb64a528188124d0 data\blazinghot\advancements\recipes\misc\crafting\blaze_carrot.json
 9becd499dff6a593e9482ceb539448d440211780 data\blazinghot\advancements\recipes\misc\crafting\blaze_gold_ingot_from_blaze_gold_block.json
 2b4e7e58267d6568d560055cc8156e7a07a3a617 data\blazinghot\advancements\recipes\misc\crafting\copper_apple.json
 c1f03696f61ba2e9c9c0bbab06a1510f8b4909e0 data\blazinghot\recipes\crafting\blaze_arrow.json

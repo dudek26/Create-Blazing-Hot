@@ -8,7 +8,9 @@ import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.moltenC
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.moltenGold;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.moltenIron;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.moltenZinc;
+import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.netherCompound;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.netherEssence;
+import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.netherFlora;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.netherrackDust;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.soulDust;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.stoneDust;
@@ -52,10 +54,14 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
 	GeneratedRecipe
 			NETHER_COMPOUND =
 			create("nether_compound",
-					b -> b.require(clayBall())
+					b -> b
+							.require(clayBall())
 							.require(netherrackDust())
 							.require(soulDust())
 							.output(BlazingItems.NETHER_COMPOUND, 2)),
+			NETHER_DOUGH =
+					create("nether_dough",
+							b -> b.require(netherCompound()).require(netherFlora()).output(BlazingItems.NETHER_DOUGH)),
 			NETHERRACK_DUST =
 					create("netherrack_dust",
 							b -> b.require(cinderFlour()).require(stoneDust()).output(BlazingItems.NETHERRACK_DUST)),
@@ -135,7 +141,8 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
 				.filter(f -> f.mechanicalMixerMeltable)
 				.forEach(form -> recipes.add(melting(form.internalTag(metal),
 						metal.fluid().get(),
-						form.amount, form.processingTime * 3,
+						form.amount,
+						form.processingTime * 3,
 						metal.getLoadConditions())));
 		metal
 				.customForms()
@@ -143,7 +150,8 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
 				.filter(f -> f.mechanicalMixerMeltable)
 				.forEach(form -> recipes.add(melting(form.customLocation,
 						metal.fluid().get(),
-						form.amount, form.processingTime * 3,
+						form.amount,
+						form.processingTime * 3,
 						metal.getLoadConditions())));
 		for (Forms optional : metal.optionalForms) {
 			if (!optional.mechanicalMixerMeltable) continue;
@@ -151,14 +159,16 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
 			conditions.add(DefaultResourceConditions.tagsPopulated(optional.internalTag(metal)));
 			recipes.add(melting(optional.internalTag(metal),
 					metal.fluid().get(),
-					optional.amount, optional.processingTime * 3,
+					optional.amount,
+					optional.processingTime * 3,
 					conditions));
 		}
 		metal.compatForms.forEach((form, mod) -> {
 			if (!form.mechanicalMixerMeltable) return;
 			recipes.add(melting(form.internalTag(metal),
 					metal.fluid().get(),
-					form.amount, form.processingTime * 3,
+					form.amount,
+					form.processingTime * 3,
 					metal.getLoadConditions(form, mod)));
 		});
 		return recipes;

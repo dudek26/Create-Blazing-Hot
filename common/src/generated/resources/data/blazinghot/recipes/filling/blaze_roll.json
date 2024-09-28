@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "blazinghot:nether_dough"
+    },
+    {
+      "amount": 27000,
+      "fluid": "minecraft:lava",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "blazinghot:blaze_roll"
+    }
+  ]
+}

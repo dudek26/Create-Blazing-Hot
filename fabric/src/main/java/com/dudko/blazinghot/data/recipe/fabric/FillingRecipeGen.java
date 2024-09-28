@@ -2,11 +2,14 @@ package com.dudko.blazinghot.data.recipe.fabric;
 
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.apple;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.carrot;
+import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.lava;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.melon;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.moltenGold;
+import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.netherDough;
 
 import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.content.metal.MoltenMetals;
+import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
@@ -53,7 +56,13 @@ public class FillingRecipeGen extends BlazingProcessingRecipeGen {
 			ZINC_CARROT =
 					metalCarrot(MoltenMetals.ZINC, BlazingItems.ZINC_CARROT),
 			ZINC_APPLE =
-					metalApple(MoltenMetals.ZINC, BlazingItems.ZINC_APPLE);
+					metalApple(MoltenMetals.ZINC, BlazingItems.ZINC_APPLE),
+			BLAZE_ROLL =
+					create("blaze_roll",
+							b -> b
+									.require(netherDough())
+									.require(lava(), Constants.BOTTLE.platformed())
+									.output(BlazingItems.BLAZE_ROLL));
 
 	@Override
 	protected IRecipeTypeInfo getRecipeType() {

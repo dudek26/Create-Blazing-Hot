@@ -1,4 +1,4 @@
-// 1.20.1	2024-09-03T20:17:35.0999344	Create: Blazing Hot/Blazing Hot Processing Recipes
+// 1.20.1	2024-09-28T16:44:29.0600048	Create: Blazing Hot/Blazing Hot Processing Recipes
 96c10b23612289b1d7a689935efdaf532ad6aea7 data\blazinghot\recipes\deploying\stellar_golden_apple.json
 abebbb9a2485403272795cd4eafe896ac5e1ec68 data\blazinghot\recipes\deploying\stellar_copper_apple.json
 65cc71eeea67b46826f30af1848b694baa0fcf38 data\blazinghot\recipes\mixing\melting\blaze_gold_nuggets.json
@@ -9,6 +9,7 @@ a3547e6c7d31007f045d87033626c280fa6ec1c0 data\blazinghot\recipes\crushing\blaze_
 f6c7058f50b6f4ca687b316ecce36747fa886c9b data\blazinghot\recipes\blaze_mixing\melting\zinc_plates.json
 3c5fd98e48ee26e37b4c50784c41f4fe8bb7f289 data\blazinghot\recipes\mixing\melting\iron_rods.json
 da22ba2a79c42cd226083060a1c3c91c3417d81f data\blazinghot\recipes\mixing\melting\andesite_alloy.json
+5e4d063a807918f33cd9213dd8c4ddbcd3e113e1 data\blazinghot\recipes\mixing\nether_dough.json
 9d79e53de368587cca6151f072f2520b85b76bf7 data\blazinghot\recipes\pressing\blaze_gold_ingot.json
 d87f38a3f0d735ade0206318369f425d1f4fd1ae data\blazinghot\recipes\mixing\molten_netherite.json
 b9181c64fabdd5dde2a9e22f3648ffbad452275c data\blazinghot\recipes\blaze_mixing\nether_lava.json
@@ -95,6 +96,7 @@ f79b1c32ea57736a65268f8341bd7a27049797f4 data\blazinghot\recipes\mixing\melting\
 020c2ad483304ad55fa8b98bfceaed2b67c0c392 data\blazinghot\recipes\deploying\stellar_zinc_apple.json
 b7edb41d05961b9261eaef2b088dd535c49f9eb4 data\blazinghot\recipes\blaze_mixing\melting\andesite_alloy.json
 03fd8bd9e51852653e484db65d7022d7e758c19d data\blazinghot\recipes\mixing\molten_andesite.json
+ca7b67b89ef5a81fe1d537927ea8470cb6bcdd98 data\blazinghot\recipes\filling\blaze_roll.json
 317d54b6c823b04e32967f56ee05cca7ffb7bd2c data\blazinghot\recipes\filling\zinc_carrot.json
 8582565279016a89d186018f1ac8d6ec1400b2da data\blazinghot\recipes\blaze_mixing\melting\blaze_gold_nuggets.json
 e6271e51eedeeb3240dd0ae59e96ae51565a28b6 data\blazinghot\recipes\milling\stone.json
