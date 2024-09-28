@@ -20,8 +20,10 @@ import com.dudko.blazinghot.content.item.BlazingFoodItem;
 import com.dudko.blazinghot.data.lang.BlazingItemDescription;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.util.ListUtil;
+import com.simibubi.create.AllTags.AllItemTags;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.simibubi.create.foundation.item.CombustibleItem;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.util.entry.ItemEntry;
@@ -91,6 +93,19 @@ public class BlazingItems {
 	public static final ItemEntry<Item> STURDY_ALLOY = ingredient("sturdy_alloy");
 
 	public static final ItemEntry<Item> BLAZE_WHISK = ingredient("blaze_whisk");
+
+	public static final ItemEntry<Item>
+			NETHER_DOUGH =
+			taggedIngredient("nether_dough", AllItemTags.UPRIGHT_ON_BELT.tag);
+
+	public static final ItemEntry<CombustibleItem>
+			BLAZE_ROLL =
+			REGISTRATE
+					.item("blaze_roll", CombustibleItem::new)
+					.tag(AllItemTags.BLAZE_BURNER_FUEL_SPECIAL.tag, AllItemTags.UPRIGHT_ON_BELT.tag)
+					.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "item.create.blaze_cake"))
+					.onRegister(i -> i.setBurnTime(4800))
+					.register();
 
 	public static final ItemEntry<SequencedAssemblyItem>
 			INCOMPLETE_BLAZE_MIXER =
