@@ -1,0 +1,31 @@
+{
+  "parent": "blazinghot:sturdy_alloy",
+  "criteria": {
+    "0": {
+      "conditions": {},
+      "trigger": "blazinghot:sturdy_casing_builtin"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.blazinghot.sturdy_casing.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "blazinghot:sturdy_casing"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.blazinghot.sturdy_casing"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

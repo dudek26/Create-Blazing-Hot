@@ -23,6 +23,9 @@ public abstract class ManualApplicationRecipeMixin {
 		if (BlazingBlocks.BLAZE_CASING.has(placed)) {
 			advancement = BlazingAdvancements.BLAZE_CASING;
 		}
+		else if (BlazingBlocks.STURDY_CASING.has(placed)) {
+			advancement = BlazingAdvancements.STURDY_CASING;
+		}
 		else return;
 
 		advancement.awardTo(player);

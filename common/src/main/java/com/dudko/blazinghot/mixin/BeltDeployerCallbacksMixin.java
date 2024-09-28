@@ -24,6 +24,9 @@ public abstract class BeltDeployerCallbacksMixin {
 		if (BlazingBlocks.BLAZE_CASING.isIn(created)) {
 			advancement = BlazingAdvancements.BLAZE_CASING;
 		}
+		else if (BlazingBlocks.STURDY_CASING.isIn(created)) {
+			advancement = BlazingAdvancements.STURDY_CASING;
+		}
 		else return;
 
 		((IAdvancementBehaviour) blockEntity).blazinghot$award(advancement);

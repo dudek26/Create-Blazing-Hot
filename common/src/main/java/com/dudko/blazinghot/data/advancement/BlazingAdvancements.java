@@ -61,6 +61,39 @@ public class BlazingAdvancements implements DataProvider {
 							.after(ROOT)
 							.whenIconCollected()),
 
+	// Blaze Roll
+
+	BLAZE_ROLL =
+			create("blaze_roll",
+					b -> b
+							.icon(BlazingItems.BLAZE_ROLL)
+							.title("Forbidden Sweets")
+							.description("\"Bake\" a Blaze Roll")
+							.after(NETHER_COMPOUND)
+							.whenIconCollected()),
+
+	// Sturdy Alloy - Casting branch
+
+	STURDY_ALLOY =
+			create("sturdy_alloy",
+					b -> b
+							.icon(BlazingItems.STURDY_ALLOY)
+							.title("Tough Alloys")
+							.description("Obtain a Sturdy Alloy")
+							.after(NETHER_COMPOUND)
+							.whenIconCollected()),
+
+	STURDY_CASING =
+			create("sturdy_casing",
+					b -> b
+							.icon(BlazingBlocks.STURDY_CASING)
+							.title("The Heavy Age")
+							.description("Use your Sturdy Alloys to make some Andesite Casings sturdy")
+							.special(NOISY)
+							.after(STURDY_ALLOY)),
+
+	// Nether Essence - Molten Metal branch
+
 	NETHER_ESSENCE =
 			create("nether_essence",
 					b -> b

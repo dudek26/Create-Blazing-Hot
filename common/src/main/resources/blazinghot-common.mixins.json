@@ -15,6 +15,7 @@
     "SmartBlockEntityMixin",
     "SpoutBlockEntityMixin",
     "SpoutBlockMixin",
+    "accessor.DepotBehaviourAccessor",
     "accessor.ProjectileAccessor"
   ],
   "plugin": "com.moulberry.mixinconstraints.ConstraintsMixinPlugin",
