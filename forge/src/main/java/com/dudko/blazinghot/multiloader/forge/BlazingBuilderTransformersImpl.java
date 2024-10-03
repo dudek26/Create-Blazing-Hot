@@ -1,11 +1,13 @@
 package com.dudko.blazinghot.multiloader.forge;
 
+import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.block.modern_lamp.AbstractModernLamp;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampDoublePanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampHalfPanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.SmallModernLampPanelBlock;
+import com.dudko.blazinghot.content.casting.Molds;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
@@ -169,6 +171,13 @@ public class BlazingBuilderTransformersImpl {
 						.forceSolidOn())
 				.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.MODERN_LAMP.getKey()))
 				.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag);
+	}
+
+	public static <T extends Item, P> NonNullUnaryOperator<ItemBuilder<T, P>> mold(String name, Molds.MoldType type) {
+		return b -> b
+				.tag(BlazingTags.Items.MOLDS.tag, BlazingTags.Items.STURDY_MOLDS.tag)
+				.properties(Item.Properties::fireResistant)
+				.model((c, p) -> p.generated(c::get, BlazingHot.asResource("item/sturdy_mold/" + name)));
 	}
 
 	public static <B extends Block, P> NonNullUnaryOperator<BlockBuilder<B, P>> simpleBlockState() {

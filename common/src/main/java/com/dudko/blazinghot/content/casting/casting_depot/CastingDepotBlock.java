@@ -1,11 +1,14 @@
-package com.dudko.blazinghot.content.processing.casting_depot;
+package com.dudko.blazinghot.content.casting.casting_depot;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import org.jetbrains.annotations.Nullable;
+
 import com.dudko.blazinghot.content.block.shape.Shapes;
+import com.dudko.blazinghot.data.advancement.BlazingAdvancementBehaviour;
 import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
-import com.simibubi.create.content.logistics.depot.SharedDepotBlockMethods;
+import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
 import com.simibubi.create.foundation.block.IBE;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
@@ -14,12 +17,17 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -29,9 +37,26 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 @SuppressWarnings("deprecation")
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class CastingDepotBlock extends Block implements IWrenchable, IBE<CastingDepotBlockEntity> {
+public class CastingDepotBlock extends HorizontalDirectionalBlock implements IWrenchable, IBE<CastingDepotBlockEntity> {
+
 	public CastingDepotBlock(Properties properties) {
 		super(properties);
+	}
+
+	@Override
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+		builder.add(FACING);
+		super.createBlockStateDefinition(builder);
+	}
+
+	@Override
+	public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
+		Direction
+				direction =
+				context.getPlayer() != null && context.getPlayer().isCrouching() ?
+				context.getHorizontalDirection() :
+				context.getHorizontalDirection().getOpposite();
+		return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
 	}
 
 	@Override
@@ -60,12 +85,18 @@ public class CastingDepotBlock extends Block implements IWrenchable, IBE<Casting
 
 	@Override
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult ray) {
-		return SharedDepotBlockMethods.onUse(state, world, pos, player, hand, ray);
+		return CastingDepotBlockMethods.onUse(state, world, pos, player, hand, ray);
 	}
 
 	@Override
 	public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		IBE.onRemove(state, worldIn, pos, newState);
+	}
+
+	@Override
+	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+		AdvancementBehaviour.setPlacedBy(level, pos, placer);
+		BlazingAdvancementBehaviour.setPlacedBy(level, pos, placer);
 	}
 
 	@Override
