@@ -56,7 +56,7 @@ public class CastingDepotBlock extends HorizontalDirectionalBlock implements IWr
 				context.getPlayer() != null && context.getPlayer().isCrouching() ?
 				context.getHorizontalDirection() :
 				context.getHorizontalDirection().getOpposite();
-		return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+		return defaultBlockState().setValue(FACING, direction);
 	}
 
 	@Override
