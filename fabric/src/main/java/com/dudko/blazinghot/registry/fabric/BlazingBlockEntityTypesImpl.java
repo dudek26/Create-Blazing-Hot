@@ -1,11 +1,11 @@
 package com.dudko.blazinghot.registry.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotRenderer;
+import com.dudko.blazinghot.content.casting.casting_depot.fabric.CastingDepotBlockEntityImpl;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerInstance;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerRenderer;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.fabric.BlazeMixerBlockEntityImpl;
-import com.dudko.blazinghot.content.processing.casting_depot.CastingDepotRenderer;
-import com.dudko.blazinghot.content.processing.casting_depot.fabric.CastingDepotBlockEntityImpl;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;

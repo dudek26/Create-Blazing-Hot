@@ -1,7 +1,7 @@
-package com.dudko.blazinghot.content.processing.casting_depot.forge;
+package com.dudko.blazinghot.content.casting.casting_depot.fabric;
 
-import com.dudko.blazinghot.content.processing.casting_depot.CastingDepotBlockEntity;
-import com.dudko.blazinghot.registry.forge.BlazingBlockEntityTypesImpl;
+import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
+import com.dudko.blazinghot.registry.fabric.BlazingBlockEntityTypesImpl;
 
 import net.minecraft.world.level.block.entity.BlockEntityType;
 

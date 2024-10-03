@@ -14,7 +14,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.content.casting.Molds;
 import com.dudko.blazinghot.content.item.BlazeArrowItem;
 import com.dudko.blazinghot.content.item.BlazingFoodItem;
 import com.dudko.blazinghot.data.lang.BlazingItemDescription;
@@ -42,6 +45,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.ItemLike;
 
 @SuppressWarnings({"SameParameterValue", "unused"})
+@ParametersAreNonnullByDefault
 public class BlazingItems {
 
 	private static final CreateRegistrate REGISTRATE = BlazingHot.registrate();
@@ -50,6 +54,8 @@ public class BlazingItems {
 
 	static {
 		BlazingCreativeTabs.useBaseTab();
+
+		Molds.register();
 	}
 
 	private static ItemEntry<Item> ingredient(String name) {
@@ -90,19 +96,17 @@ public class BlazingItems {
 							.model((c, p) -> p.handheld(c))
 							.register();
 
-	public static final ItemEntry<Item> STURDY_ALLOY = ingredient("sturdy_alloy");
+	public static final ItemEntry<Item> BLAZE_WHISK = ingredient("blaze_whisk"),
+			STURDY_ALLOY =
+					ingredient("sturdy_alloy");
 
-	public static final ItemEntry<Item> BLAZE_WHISK = ingredient("blaze_whisk");
-
-	public static final ItemEntry<Item>
-			NETHER_DOUGH =
-			taggedIngredient("nether_dough", AllItemTags.UPRIGHT_ON_BELT.tag);
+	public static final ItemEntry<Item> NETHER_DOUGH = ingredient("nether_dough");
 
 	public static final ItemEntry<CombustibleItem>
 			BLAZE_ROLL =
 			REGISTRATE
 					.item("blaze_roll", CombustibleItem::new)
-					.tag(AllItemTags.BLAZE_BURNER_FUEL_SPECIAL.tag, AllItemTags.UPRIGHT_ON_BELT.tag)
+					.tag(AllItemTags.BLAZE_BURNER_FUEL_SPECIAL.tag)
 					.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "item.create.blaze_cake"))
 					.onRegister(i -> i.setBurnTime(4800))
 					.register();

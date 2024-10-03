@@ -1,10 +1,12 @@
 package com.dudko.blazinghot.multiloader.fabric;
 
+import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampDoublePanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampHalfPanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.SmallModernLampPanelBlock;
+import com.dudko.blazinghot.content.casting.Molds;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
@@ -12,12 +14,14 @@ import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.data.ModelGen;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.tterrag.registrate.builders.BlockBuilder;
+import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 
 import io.github.fabricators_of_create.porting_lib.models.generators.ConfiguredModel;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Blocks;
 
 public class BlazingBuilderTransformersImpl {
@@ -167,5 +171,12 @@ public class BlazingBuilderTransformersImpl {
 						.lightLevel(s -> s.getValue(ModernLampPanelBlock.LIT) ? 15 : 0)
 						.forceSolidOn())
 				.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag);
+	}
+
+	public static <T extends Item, P> NonNullUnaryOperator<ItemBuilder<T, P>> mold(String name, Molds.MoldType type) {
+		return b -> b.tag(BlazingTags.Items.MOLDS.tag, type.tag).properties(p -> {
+			if (type.fireResistant) p.fireResistant();
+			return p;
+		}).model((c, p) -> p.generated(c::get, BlazingHot.asResource("item/" + type.name + "_mold/" + name)));
 	}
 }

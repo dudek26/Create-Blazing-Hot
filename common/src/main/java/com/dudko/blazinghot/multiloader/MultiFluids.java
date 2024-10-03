@@ -17,7 +17,7 @@ public class MultiFluids {
 		BUCKET("bucket", 81000),
 		BOTTLE("bottle", 27000),
 		BLOCK("block", 81000, 1296, 810),
-		INGOT("compactingResult", 9000, 144, 90),
+		INGOT("ingot", 9000, 144, 90),
 		PLATE("plate", 9000, 144, 90),
 		ROD("rod", 4500, 72, 45),
 		NUGGET("nugget", 1000, 16, 10),

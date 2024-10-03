@@ -1,8 +1,8 @@
-package com.dudko.blazinghot.content.processing.casting_depot.forge;
+package com.dudko.blazinghot.content.casting.casting_depot.forge;
 
 import java.util.List;
 
-import com.dudko.blazinghot.content.processing.casting_depot.CastingDepotBlockEntity;
+import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 
 import net.minecraft.core.BlockPos;

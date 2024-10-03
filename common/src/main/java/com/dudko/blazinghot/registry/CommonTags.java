@@ -98,6 +98,10 @@ public class CommonTags {
 
 	public enum Items {
 		STORAGE_BLOCKS("storage_blocks"),
+		INGOTS("ingots"),
+		NUGGETS("nuggets"),
+		PLATES("plates"),
+		RODS("rods"),
 
 		BLAZE_GOLD_BLOCKS("storage_blocks/blaze_gold", "blaze_gold_blocks"),
 		BLAZE_GOLD_INGOTS("ingots/blaze_gold", "blaze_gold_ingots"),
@@ -105,7 +109,6 @@ public class CommonTags {
 		BLAZE_GOLD_PLATES("plates/blaze_gold", "blaze_gold_plates"),
 		BLAZE_GOLD_RODS("rods/blaze_gold", "blaze_gold_rods"),
 
-		PLATES("plates"),
 		FOODS("foods"),
 
 		NETHERRACK_DUSTS("dusts/netherrack", "netherrack_dusts"),
