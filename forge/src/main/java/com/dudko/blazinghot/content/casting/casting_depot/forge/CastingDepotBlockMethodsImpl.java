@@ -11,5 +11,6 @@ import net.minecraft.world.phys.BlockHitResult;
 public class CastingDepotBlockMethodsImpl {
 
 	public static InteractionResult onUse(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult ray) {
+		return InteractionResult.PASS;
 	}
 }
