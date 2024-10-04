@@ -28,6 +28,8 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -39,13 +41,15 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 @MethodsReturnNonnullByDefault
 public class CastingDepotBlock extends HorizontalDirectionalBlock implements IWrenchable, IBE<CastingDepotBlockEntity> {
 
+	public static BooleanProperty POWERED = BlockStateProperties.POWERED;
+
 	public CastingDepotBlock(Properties properties) {
 		super(properties);
 	}
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(FACING);
+		builder.add(FACING, POWERED);
 		super.createBlockStateDefinition(builder);
 	}
 
@@ -56,7 +60,7 @@ public class CastingDepotBlock extends HorizontalDirectionalBlock implements IWr
 				context.getPlayer() != null && context.getPlayer().isCrouching() ?
 				context.getHorizontalDirection() :
 				context.getHorizontalDirection().getOpposite();
-		return defaultBlockState().setValue(FACING, direction);
+		return defaultBlockState().setValue(FACING, direction).setValue(POWERED, false);
 	}
 
 	@Override
@@ -102,5 +106,24 @@ public class CastingDepotBlock extends HorizontalDirectionalBlock implements IWr
 	@Override
 	public boolean isPathfindable(BlockState state, BlockGetter reader, BlockPos pos, PathComputationType type) {
 		return false;
+	}
+
+	@Override
+	public void neighborChanged(BlockState pState, Level pLevel, BlockPos pPos, Block pBlock, BlockPos pFromPos, boolean pIsMoving) {
+		if (pLevel.isClientSide) return;
+
+		boolean isPowered = pState.getValue(POWERED);
+		if (isPowered == pLevel.hasNeighborSignal(pPos)) return;
+		if (isPowered) {
+			pLevel.setBlock(pPos, pState.setValue(POWERED, false), 2);
+			return;
+		}
+
+		pLevel.setBlock(pPos, pState.setValue(POWERED, true), 2);
+		scheduleActivation(pLevel, pPos);
+	}
+
+	private void scheduleActivation(Level pLevel, BlockPos pPos) {
+		if (!pLevel.getBlockTicks().hasScheduledTick(pPos, this)) pLevel.scheduleTick(pPos, this, 1);
 	}
 }

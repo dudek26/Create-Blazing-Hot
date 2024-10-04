@@ -29,4 +29,6 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity {
 	public abstract long getCapacity();
 
 	public abstract ItemStack getHeldItem();
+
+	public abstract long getFluidAmount();
 }

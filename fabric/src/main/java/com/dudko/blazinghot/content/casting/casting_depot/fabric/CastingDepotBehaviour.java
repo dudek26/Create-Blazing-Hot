@@ -8,6 +8,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.kinetics.belt.BeltHelper;
 import com.simibubi.create.content.kinetics.belt.behaviour.BeltProcessingBehaviour;
@@ -15,7 +16,6 @@ import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehavi
 import com.simibubi.create.content.kinetics.belt.behaviour.TransportedItemStackHandlerBehaviour;
 import com.simibubi.create.content.kinetics.belt.transport.TransportedItemStack;
 import com.simibubi.create.content.logistics.funnel.AbstractFunnelBlock;
-import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.item.ItemHelper;
@@ -40,6 +40,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
 
 @SuppressWarnings("UnstableApiUsage")
@@ -81,11 +82,11 @@ public class CastingDepotBehaviour extends BlockEntityBehaviour {
 	record Data(List<TransportedItemStack> incoming, TransportedItemStack held) {
 	}
 
-	public CastingDepotBehaviour(SmartBlockEntity be) {
+	public CastingDepotBehaviour(CastingDepotBlockEntity be) {
 		super(be);
 		maxStackSize = () -> 1;
-		canAcceptItems = () -> true;
-		canFunnelsPullFrom = $ -> true;
+		canAcceptItems = () -> be.getFluidAmount() <= 0;
+		canFunnelsPullFrom = $ -> be.getBlockState().getValue(BlockStateProperties.POWERED);
 		acceptedItems = $ -> true;
 		onHeldInserted = $ -> {
 		};
