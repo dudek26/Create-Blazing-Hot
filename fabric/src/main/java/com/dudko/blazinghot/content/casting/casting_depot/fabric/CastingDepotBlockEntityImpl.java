@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
 import com.dudko.blazinghot.multiloader.MultiFluids;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
@@ -35,7 +34,6 @@ public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity impleme
 
 	@Override
 	public void onMoldUpdate() {
-		BlazingHot.LOGGER.info("onMoldUpdate");
 		ItemStack stack = depotBehaviour.heldItem == null ? ItemStack.EMPTY : depotBehaviour.heldItem.stack;
 		long newCapacity = getMoldCapacity(stack);
 		if (getCapacity() != newCapacity) updateCapacity(newCapacity);
@@ -67,6 +65,11 @@ public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity impleme
 
 		behaviours.add(depotBehaviour = new CastingDepotBehaviour(this));
 		depotBehaviour.addSubBehaviours(behaviours);
+	}
+
+	@Override
+	public long getFluidAmount() {
+		return tank.getPrimaryTank().getTank().getFluidAmount();
 	}
 
 	@Override
