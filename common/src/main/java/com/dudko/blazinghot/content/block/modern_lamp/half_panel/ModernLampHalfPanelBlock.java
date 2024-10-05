@@ -1,4 +1,4 @@
-package com.dudko.blazinghot.content.block.modern_lamp;
+package com.dudko.blazinghot.content.block.modern_lamp.half_panel;
 
 import java.util.function.Predicate;
 
@@ -6,6 +6,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.dudko.blazinghot.content.block.modern_lamp.AbstractModernLampPanel;
 import com.dudko.blazinghot.content.block.shape.AbstractPoint;
 import com.dudko.blazinghot.content.block.shape.DirectionOffsetPoint;
 import com.dudko.blazinghot.content.block.shape.DirectionOffsetPoint.DirectionOffset;
@@ -65,6 +66,26 @@ public class ModernLampHalfPanelBlock extends AbstractModernLampPanel implements
 		}
 
 		return super.use(state, level, pos, player, hand, hit);
+	}
+
+	@Override
+	public boolean isLocked(Level level, BlockPos pos) {
+		return false;
+	}
+
+	@Override
+	public boolean isPowered(Level level, BlockPos pos) {
+		return false;
+	}
+
+	@Override
+	public void setLocked(Level level, BlockPos pos, boolean locked) {
+
+	}
+
+	@Override
+	public void setPowered(Level level, BlockPos pos, boolean powered) {
+
 	}
 
 	@Override

@@ -1,10 +1,11 @@
-package com.dudko.blazinghot.content.block.modern_lamp;
+package com.dudko.blazinghot.content.block.modern_lamp.small_panel;
 
 import static com.dudko.blazinghot.content.block.shape.Shapes.smallPanel;
 import static com.dudko.blazinghot.content.block.shape.Shapes.smallPanelBase;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.dudko.blazinghot.content.block.modern_lamp.AbstractModernLampPanel;
 import com.dudko.blazinghot.content.block.shape.AbstractPoint;
 import com.dudko.blazinghot.content.block.shape.OffsetPoint;
 import com.dudko.blazinghot.content.block.shape.OffsetPoint.Offset;
@@ -75,4 +76,5 @@ public class SmallModernLampPanelBlock extends AbstractModernLampPanel {
 				.forDirectional()
 				.get(state.getValue(FACING));
 	}
+
 }

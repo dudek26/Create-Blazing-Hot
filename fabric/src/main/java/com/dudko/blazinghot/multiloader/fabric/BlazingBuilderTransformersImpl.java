@@ -1,10 +1,11 @@
 package com.dudko.blazinghot.multiloader.fabric;
 
-import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.ModernLampDoublePanelBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.ModernLampHalfPanelBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.SmallModernLampPanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.AbstractModernLamp;
+import com.dudko.blazinghot.content.block.modern_lamp.block.ModernLampBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.double_panel.ModernLampDoublePanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.half_panel.ModernLampHalfPanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.panel.ModernLampPanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.small_panel.SmallModernLampPanelBlock;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
@@ -154,7 +155,7 @@ public class BlazingBuilderTransformersImpl {
 				.transform(ModelGen.customItemModel(name, color.getName() + "_c"));
 	}
 
-	public static <B extends ModernLampBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> anyModernLamp(DyeColor color) {
+	public static <B extends AbstractModernLamp, P> NonNullUnaryOperator<BlockBuilder<B, P>> anyModernLamp(DyeColor color) {
 		return b -> b
 				.initialProperties(() -> Blocks.GLOWSTONE)
 				.properties(p -> p

@@ -1,4 +1,4 @@
-package com.dudko.blazinghot.content.block.modern_lamp;
+package com.dudko.blazinghot.content.block.modern_lamp.panel;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED;
 
@@ -7,7 +7,11 @@ import java.util.function.Predicate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.dudko.blazinghot.content.block.modern_lamp.AbstractModernLampPanel;
+import com.dudko.blazinghot.content.block.modern_lamp.IModernLampBE;
+import com.dudko.blazinghot.content.block.modern_lamp.block.ModernLampBlockEntity;
 import com.dudko.blazinghot.content.block.shape.Shapes;
+import com.dudko.blazinghot.registry.BlazingBlockEntityTypes;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.util.DyeUtil;
 import com.simibubi.create.foundation.block.DyedBlockList;
@@ -27,6 +31,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -38,7 +43,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
  */
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class ModernLampPanelBlock extends AbstractModernLampPanel implements SimpleWaterloggedBlock {
+public class ModernLampPanelBlock extends AbstractModernLampPanel implements SimpleWaterloggedBlock, IModernLampBE {
 
 	private static final int placementHelperId = PlacementHelpers.register(new PlacementHelper());
 
@@ -61,6 +66,31 @@ public class ModernLampPanelBlock extends AbstractModernLampPanel implements Sim
 	}
 
 	@Override
+	public boolean isLocked(Level level, BlockPos pos) {
+		return IModernLampBE.super.iIsLocked(level, pos);
+	}
+
+	@Override
+	public boolean isPowered(Level level, BlockPos pos) {
+		return IModernLampBE.super.iIsPowered(level, pos);
+	}
+
+	@Override
+	public void setLocked(Level level, BlockPos pos, boolean locked) {
+		IModernLampBE.super.iSetLocked(level, pos, locked);
+	}
+
+	@Override
+	public void setPowered(Level level, BlockPos pos, boolean powered) {
+		IModernLampBE.super.iSetPowered(level, pos, powered);
+	}
+
+	@Override
+	public BlockEntityType<? extends ModernLampBlockEntity> getBlockEntityType() {
+		return BlazingBlockEntityTypes.MODERN_LAMP_PANEL.get();
+	}
+
+	@Override
 	public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
 		return Shapes.shape(0, 0, 0, 16, 1, 16).add(1, 0, 1, 15, 2, 15).forDirectional().get(pState.getValue(FACING));
 	}
@@ -71,7 +101,6 @@ public class ModernLampPanelBlock extends AbstractModernLampPanel implements Sim
 			return stack -> DyeUtil.isIn(BlazingBlocks.MODERN_LAMP_PANELS, stack)
 					|| DyeUtil.isIn(BlazingBlocks.MODERN_LAMP_QUAD_PANELS, stack);
 		}
-
 
 		@Override
 		public Predicate<BlockState> getStatePredicate() {

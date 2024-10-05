@@ -27,7 +27,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 @SuppressWarnings("deprecation")
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public abstract class AbstractModernLampPanel extends ModernLampBlock {
+public abstract class AbstractModernLampPanel extends AbstractModernLamp {
 
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;
 

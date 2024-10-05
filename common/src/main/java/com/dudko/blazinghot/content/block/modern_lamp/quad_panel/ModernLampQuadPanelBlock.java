@@ -1,8 +1,11 @@
-package com.dudko.blazinghot.content.block.modern_lamp;
+package com.dudko.blazinghot.content.block.modern_lamp.quad_panel;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.dudko.blazinghot.content.block.modern_lamp.block.ModernLampBlockEntity;
+import com.dudko.blazinghot.content.block.modern_lamp.panel.ModernLampPanelBlock;
 import com.dudko.blazinghot.content.block.shape.Shapes;
+import com.dudko.blazinghot.registry.BlazingBlockEntityTypes;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
@@ -12,6 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -41,4 +45,8 @@ public class ModernLampQuadPanelBlock extends ModernLampPanelBlock {
 		return super.use(state, level, pos, player, hand, hit);
 	}
 
+	@Override
+	public BlockEntityType<? extends ModernLampBlockEntity> getBlockEntityType() {
+		return BlazingBlockEntityTypes.MODERN_LAMP_QUAD_PANEL.get();
+	}
 }

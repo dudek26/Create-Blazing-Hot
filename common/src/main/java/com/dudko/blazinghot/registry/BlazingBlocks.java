@@ -7,13 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.content.block.modern_lamp.AbstractModernLamp;
 import com.dudko.blazinghot.content.block.modern_lamp.AbstractModernLampPanel;
-import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.ModernLampDoublePanelBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.ModernLampHalfPanelBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.ModernLampQuadPanelBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.SmallModernLampPanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.block.ModernLampBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.double_panel.ModernLampDoublePanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.half_panel.ModernLampHalfPanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.panel.ModernLampPanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.quad_panel.ModernLampQuadPanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.small_panel.SmallModernLampPanelBlock;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlock;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.multiloader.BlazingBuilderTransformers;
@@ -272,24 +273,6 @@ public class BlazingBlocks {
 		return items.toArray(new ItemLike[]{});
 	}
 
-	public static BlockEntry<? extends ModernLampBlock>[] modernLamps() {
-		List<DyedBlockList<? extends ModernLampBlock>>
-				lampLists =
-				List.of(MODERN_LAMP_BLOCKS,
-						MODERN_LAMP_PANELS,
-						MODERN_LAMP_DOUBLE_PANELS,
-						MODERN_LAMP_QUAD_PANELS,
-						MODERN_LAMP_HALF_PANELS,
-						MODERN_LAMP_SMALL_PANELS);
-
-		List<BlockEntry<? extends ModernLampBlock>> entries = new ArrayList<>();
-		for (DyedBlockList<? extends ModernLampBlock> list : lampLists) {
-			list.forEach(entries::add);
-		}
-		//noinspection unchecked
-		return entries.toArray(new BlockEntry[]{});
-	}
-
 	private static <T extends AbstractModernLampPanel> void panelStoneCuttingRecipe(DataGenContext<Block, T> ctx, RegistrateRecipeProvider prov, DyeColor color) {
 		panelStoneCuttingRecipe(ctx, prov, color, ctx.getName(), 1);
 	}
@@ -301,14 +284,14 @@ public class BlazingBlocks {
 				.save(prov, BlazingHot.asResource("stonecutting/modern_lamp_panel/" + name));
 	}
 
-	private static <T extends ModernLampBlock> void lampStoneCuttingRecipe(DataGenContext<Block, T> ctx, RegistrateRecipeProvider prov, DyeColor color, int count) {
+	private static <T extends AbstractModernLamp> void lampStoneCuttingRecipe(DataGenContext<Block, T> ctx, RegistrateRecipeProvider prov, DyeColor color, int count) {
 		SingleItemRecipeBuilder
 				.stonecutting(Ingredient.of(MODERN_LAMP_BLOCKS.get(color)), RecipeCategory.REDSTONE, ctx.get(), count)
 				.unlockedBy("has_modern_lamps", RegistrateRecipeProvider.has(BlazingTags.Items.MODERN_LAMPS.tag))
 				.save(prov, BlazingHot.asResource("stonecutting/modern_lamp/" + ctx.getName() + "_from_block"));
 	}
 
-	private static <T extends ModernLampBlock> void modernLampDyeing(DataGenContext<Block, T> ctx, RegistrateRecipeProvider prov, TagKey<Item> tag, DyeColor color, String name) {
+	private static <T extends AbstractModernLamp> void modernLampDyeing(DataGenContext<Block, T> ctx, RegistrateRecipeProvider prov, TagKey<Item> tag, DyeColor color, String name) {
 		DyeUtil
 				.dyeingMultiple(RecipeCategory.REDSTONE, tag, ctx.get(), color)
 				.save(prov,

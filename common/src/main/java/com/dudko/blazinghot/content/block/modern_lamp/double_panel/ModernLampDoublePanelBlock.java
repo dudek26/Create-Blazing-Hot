@@ -1,14 +1,16 @@
-package com.dudko.blazinghot.content.block.modern_lamp;
+package com.dudko.blazinghot.content.block.modern_lamp.double_panel;
 
 import java.util.function.Predicate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.dudko.blazinghot.content.block.modern_lamp.AbstractModernLampPanel;
 import com.dudko.blazinghot.content.block.shape.AbstractPoint;
 import com.dudko.blazinghot.content.block.shape.DirectionOffsetPoint;
 import com.dudko.blazinghot.content.block.shape.Shapes;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.util.DyeUtil;
+import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.placement.IPlacementHelper;
 import com.simibubi.create.foundation.placement.PlacementHelpers;
 import com.simibubi.create.foundation.placement.PlacementOffset;
@@ -28,6 +30,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -38,7 +41,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ModernLampDoublePanelBlock extends ModernLampPanelBlock {
+public class ModernLampDoublePanelBlock extends AbstractModernLampPanel implements IBE<ModernLampDoublePanelBlockEntity> {
 	public static final BooleanProperty HORIZONTAL = BooleanProperty.create("horizontal");
 
 	private static final int placementHelperId = PlacementHelpers.register(new PlacementHelper());
@@ -93,6 +96,40 @@ public class ModernLampDoublePanelBlock extends ModernLampPanelBlock {
 		}
 
 		return super.use(state, level, pos, player, hand, hit);
+	}
+
+	@Override
+	public boolean isLocked(Level level, BlockPos pos) {
+		ModernLampDoublePanelBlockEntity be = getBlockEntity(level, pos);
+		return be != null && be.locked;
+	}
+
+	@Override
+	public boolean isPowered(Level level, BlockPos pos) {
+		ModernLampDoublePanelBlockEntity be = getBlockEntity(level, pos);
+		return be != null && be.powered;
+	}
+
+	@Override
+	public void setLocked(Level level, BlockPos pos, boolean locked) {
+		ModernLampDoublePanelBlockEntity be = getBlockEntity(level, pos);
+		if (be != null) be.locked = locked;
+	}
+
+	@Override
+	public void setPowered(Level level, BlockPos pos, boolean powered) {
+		ModernLampDoublePanelBlockEntity be = getBlockEntity(level, pos);
+		if (be != null) be.powered = powered;
+	}
+
+	@Override
+	public Class<ModernLampDoublePanelBlockEntity> getBlockEntityClass() {
+		return ModernLampDoublePanelBlockEntity.class;
+	}
+
+	@Override
+	public BlockEntityType<? extends ModernLampDoublePanelBlockEntity> getBlockEntityType() {
+		return null;
 	}
 
 	private static class PlacementHelper extends PoleHelper<Direction> {
