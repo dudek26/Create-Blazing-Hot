@@ -2,8 +2,6 @@ package com.dudko.blazinghot.content.block.modern_lamp;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import org.jetbrains.annotations.Nullable;
-
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.simibubi.create.foundation.block.IBE;
 
@@ -16,7 +14,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -26,29 +23,24 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
-/**
- * <p>Extend this if you want the panels to inherit the placement helper.</p>
- * <p>Otherwise, extend {@link AbstractModernLampPanel}</p>
- */
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class ModernLampBlock extends Block implements IBE<ModernLampBlockEntity> {
 
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
-	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
 	private final DyeColor color;
 
 	public ModernLampBlock(Properties properties, DyeColor color) {
 		super(properties);
 		this.color = color;
-		registerDefaultState(defaultBlockState().setValue(LIT, false).setValue(POWERED, false));
+		registerDefaultState(defaultBlockState().setValue(LIT, false));
 	}
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-		super.createBlockStateDefinition(pBuilder.add(LIT, POWERED));
+		super.createBlockStateDefinition(pBuilder.add(LIT));
 	}
 
 	@Override
@@ -66,18 +58,20 @@ public class ModernLampBlock extends Block implements IBE<ModernLampBlockEntity>
 	}
 
 	@Override
-	public void neighborChanged(BlockState pState, Level pLevel, BlockPos pPos, Block pBlock, BlockPos pFromPos, boolean pIsMoving) {
-		if (pLevel.isClientSide) return;
+	public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
+		if (level.isClientSide) return;
 
-		boolean isPowered = pState.getValue(POWERED);
-		if (isPowered == pLevel.hasNeighborSignal(pPos)) return;
+		boolean isPowered = isPowered(level, pos);
+		if (isPowered == level.hasNeighborSignal(pos)) return;
 		if (isPowered) {
-			pLevel.setBlock(pPos, pState.setValue(POWERED, false).setValue(LIT, false), 2);
+			level.setBlock(pos, state.setValue(LIT, false), 2);
+			setPowered(level, pos, false);
 			return;
 		}
 
-		pLevel.setBlock(pPos, pState.setValue(POWERED, true).setValue(LIT, true), 2);
-		scheduleActivation(pLevel, pPos);
+		level.setBlock(pos, state.setValue(LIT, true), 2);
+		setPowered(level, pos, true);
+		scheduleActivation(level, pos);
 	}
 
 	private void scheduleActivation(Level pLevel, BlockPos pPos) {
@@ -86,6 +80,26 @@ public class ModernLampBlock extends Block implements IBE<ModernLampBlockEntity>
 
 	public DyeColor getColor() {
 		return color;
+	}
+
+	public boolean isLocked(Level level, BlockPos pos) {
+		ModernLampBlockEntity be = getBlockEntity(level, pos);
+		return be != null && be.locked;
+	}
+
+	public boolean isPowered(Level level, BlockPos pos) {
+		ModernLampBlockEntity be = getBlockEntity(level, pos);
+		return be != null && be.powered;
+	}
+
+	public void setLocked(Level level, BlockPos pos, boolean locked) {
+		ModernLampBlockEntity be = getBlockEntity(level, pos);
+		if (be != null) be.locked = locked;
+	}
+
+	public void setPowered(Level level, BlockPos pos, boolean powered) {
+		ModernLampBlockEntity be = getBlockEntity(level, pos);
+		if (be != null) be.powered = powered;
 	}
 
 	@Override
@@ -103,8 +117,4 @@ public class ModernLampBlock extends Block implements IBE<ModernLampBlockEntity>
 		throw new AssertionError();
 	}
 
-	@Override
-	public @Nullable ModernLampBlockEntity getBlockEntity(BlockGetter worldIn, BlockPos pos) {
-		return IBE.super.getBlockEntity(worldIn, pos);
-	}
 }
