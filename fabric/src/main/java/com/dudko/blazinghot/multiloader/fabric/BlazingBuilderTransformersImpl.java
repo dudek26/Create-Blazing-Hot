@@ -42,7 +42,6 @@ public class BlazingBuilderTransformersImpl {
 						))
 				.item()
 				.tag(BlazingTags.Items.MODERN_LAMPS.tag)
-				.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.MODERN_LAMP.getKey()))
 				.model((c, b) -> b.blockItem(c).texture("#all", b.modLoc("block/modern_lamp/block/" + color.getName())))
 				.build();
 	}
@@ -71,7 +70,6 @@ public class BlazingBuilderTransformersImpl {
 				))
 				.item()
 				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.INTERNAL))
-				.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.MODERN_LAMP.getKey()))
 				.transform(ModelGen.customItemModel(name, color.getName()));
 	}
 
@@ -99,7 +97,6 @@ public class BlazingBuilderTransformersImpl {
 				}))
 				.item()
 				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.INTERNAL))
-				.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.MODERN_LAMP.getKey()))
 				.transform(ModelGen.customItemModel(name, color.getName() + "_h"));
 	}
 
@@ -126,7 +123,6 @@ public class BlazingBuilderTransformersImpl {
 				}))
 				.item()
 				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.INTERNAL))
-				.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.MODERN_LAMP.getKey()))
 				.transform(ModelGen.customItemModel(name, color.getName() + "_h"));
 	}
 
@@ -155,7 +151,6 @@ public class BlazingBuilderTransformersImpl {
 				}))
 				.item()
 				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.INTERNAL))
-				.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.MODERN_LAMP.getKey()))
 				.transform(ModelGen.customItemModel(name, color.getName() + "_c"));
 	}
 
@@ -166,6 +161,7 @@ public class BlazingBuilderTransformersImpl {
 						.mapColor(color)
 						.lightLevel(s -> s.getValue(ModernLampPanelBlock.LIT) ? 15 : 0)
 						.forceSolidOn())
+				.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.MODERN_LAMP.getKey()))
 				.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag);
 	}
 }

@@ -2,22 +2,24 @@ package com.dudko.blazinghot.content.block.modern_lamp;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
-import com.dudko.blazinghot.data.lang.BlazingLang;
-import com.simibubi.create.AllTags;
+import org.jetbrains.annotations.Nullable;
 
+import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
+import com.simibubi.create.foundation.block.IBE;
+
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -31,10 +33,9 @@ import net.minecraft.world.phys.BlockHitResult;
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class ModernLampBlock extends Block {
+public class ModernLampBlock extends Block implements IBE<ModernLampBlockEntity> {
 
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
-	public static final BooleanProperty LOCKED = BooleanProperty.create("locked");
 	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
 	private final DyeColor color;
@@ -42,34 +43,22 @@ public class ModernLampBlock extends Block {
 	public ModernLampBlock(Properties properties, DyeColor color) {
 		super(properties);
 		this.color = color;
-		registerDefaultState(defaultBlockState().setValue(LIT, false).setValue(LOCKED, false).setValue(POWERED, false));
+		registerDefaultState(defaultBlockState().setValue(LIT, false).setValue(POWERED, false));
 	}
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-		super.createBlockStateDefinition(pBuilder.add(LIT, LOCKED, POWERED));
+		super.createBlockStateDefinition(pBuilder.add(LIT, POWERED));
 	}
 
 	@Override
 	public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-		boolean locked = pState.getValue(LOCKED);
 
-		if (pPlayer.getItemInHand(pHand).isEmpty() && !locked) {
+		if (pPlayer.getItemInHand(pHand).isEmpty()) {
 			float pitch = pState.getValue(LIT) ? 0.5F : 0.8F;
 			if (!pLevel.isClientSide) BlazingAdvancements.MODERN_LAMP.awardTo(pPlayer);
 			pLevel.setBlockAndUpdate(pPos, pState.cycle(LIT));
 			pLevel.playLocalSound(pPos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 1.0F, pitch, false);
-			return InteractionResult.SUCCESS;
-		}
-
-		if (pPlayer.getItemInHand(pHand).is(AllTags.AllItemTags.WRENCH.tag) && !pPlayer.isCrouching()) {
-			Component action = locked ? BlazingLang.LAMP_UNLOCKED.get() : BlazingLang.LAMP_LOCKED.get();
-			pPlayer.displayClientMessage(action, true);
-
-			SoundEvent sound = locked ? SoundEvents.STONE_BUTTON_CLICK_ON : SoundEvents.STONE_BUTTON_CLICK_OFF;
-			pPlayer.playSound(sound, 1.0F, 1.0F);
-
-			pLevel.setBlockAndUpdate(pPos, pState.cycle(LOCKED));
 			return InteractionResult.SUCCESS;
 		}
 
@@ -97,5 +86,25 @@ public class ModernLampBlock extends Block {
 
 	public DyeColor getColor() {
 		return color;
+	}
+
+	@Override
+	public Class<ModernLampBlockEntity> getBlockEntityClass() {
+		return ModernLampBlockEntity.class;
+	}
+
+	@Override
+	public BlockEntityType<? extends ModernLampBlockEntity> getBlockEntityType() {
+		return platformedBlockEntity();
+	}
+
+	@ExpectPlatform
+	public static BlockEntityType<? extends ModernLampBlockEntity> platformedBlockEntity() {
+		throw new AssertionError();
+	}
+
+	@Override
+	public @Nullable ModernLampBlockEntity getBlockEntity(BlockGetter worldIn, BlockPos pos) {
+		return IBE.super.getBlockEntity(worldIn, pos);
 	}
 }

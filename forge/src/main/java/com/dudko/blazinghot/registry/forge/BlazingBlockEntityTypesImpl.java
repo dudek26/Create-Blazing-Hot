@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.registry.forge;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerInstance;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerRenderer;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.forge.BlazeMixerBlockEntityImpl;
@@ -19,6 +20,13 @@ public class BlazingBlockEntityTypesImpl {
 					.instance(() -> BlazeMixerInstance::new)
 					.validBlocks(BlazingBlocks.BLAZE_MIXER)
 					.renderer(() -> BlazeMixerRenderer::new)
+					.register();
+
+	public static final BlockEntityEntry<ModernLampBlockEntity>
+			MODERN_LAMP =
+			REGISTRATE
+					.blockEntity("modern_lamp", ModernLampBlockEntity::new)
+					.validBlocks(BlazingBlocks.modernLamps())
 					.register();
 
 	public static void platformRegister() {

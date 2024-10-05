@@ -272,6 +272,24 @@ public class BlazingBlocks {
 		return items.toArray(new ItemLike[]{});
 	}
 
+	public static BlockEntry<? extends ModernLampBlock>[] modernLamps() {
+		List<DyedBlockList<? extends ModernLampBlock>>
+				lampLists =
+				List.of(MODERN_LAMP_BLOCKS,
+						MODERN_LAMP_PANELS,
+						MODERN_LAMP_DOUBLE_PANELS,
+						MODERN_LAMP_QUAD_PANELS,
+						MODERN_LAMP_HALF_PANELS,
+						MODERN_LAMP_SMALL_PANELS);
+
+		List<BlockEntry<? extends ModernLampBlock>> entries = new ArrayList<>();
+		for (DyedBlockList<? extends ModernLampBlock> list : lampLists) {
+			list.forEach(entries::add);
+		}
+		//noinspection unchecked
+		return entries.toArray(new BlockEntry[]{});
+	}
+
 	private static <T extends AbstractModernLampPanel> void panelStoneCuttingRecipe(DataGenContext<Block, T> ctx, RegistrateRecipeProvider prov, DyeColor color) {
 		panelStoneCuttingRecipe(ctx, prov, color, ctx.getName(), 1);
 	}
