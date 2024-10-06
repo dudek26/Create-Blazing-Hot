@@ -1,4 +1,24 @@
 ------------------------------------------------------
+Create: Blazing Hot 0.6.3
+------------------------------------------------------
+
+### This update breaks offsets of existing Modern Lamp Half Panels and Small Panels
+
+### Added:
+
+* Configurable goggle tooltips to Modern Lamps (by default they show up when the player is sneaking)
+
+### Changed:
+
+* Removed offsets from Small Modern Lamp Panels and Modern Lamp Half Panels
+* Modern Lamps are now block entities and can no longer be moved by regular pistons
+
+### Fixed:
+
+* Drastically reduced world loading times
+* Added missing Small Red Modern Lamp Panel texture
+
+------------------------------------------------------
 Create: Blazing Hot 0.6.2
 ------------------------------------------------------
 
@@ -18,6 +38,7 @@ Create: Blazing Hot 0.6.2
 * Optimised Modern Lamp Panels
 
 ### Fixed:
+
 * [Forge] Fixed clients being unable to connect to servers (#3)
 
 ------------------------------------------------------
