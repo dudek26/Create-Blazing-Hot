@@ -38,7 +38,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ModernLampDoublePanelBlock extends AbstractModernLampPanel {
+public class ModernLampDoublePanelBlock extends ModernLampPanelBlock {
 	public static final BooleanProperty HORIZONTAL = BooleanProperty.create("horizontal");
 
 	private static final int placementHelperId = PlacementHelpers.register(new PlacementHelper());

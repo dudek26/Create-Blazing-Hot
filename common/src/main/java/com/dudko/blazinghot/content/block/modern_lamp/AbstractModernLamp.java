@@ -50,7 +50,9 @@ public abstract class AbstractModernLamp extends Block implements IBE<ModernLamp
 	@Override
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 
-		if (player.getItemInHand(hand).isEmpty()) {
+		boolean locked = isLocked(level, pos);
+
+		if (player.getItemInHand(hand).isEmpty() && !locked) {
 			float pitch = state.getValue(LIT) ? 0.5F : 0.8F;
 			if (!level.isClientSide) BlazingAdvancements.MODERN_LAMP.awardTo(player);
 			level.setBlockAndUpdate(pos, state.cycle(LIT));
@@ -59,8 +61,7 @@ public abstract class AbstractModernLamp extends Block implements IBE<ModernLamp
 		}
 
 		if (player.getItemInHand(hand).is(AllTags.AllItemTags.WRENCH.tag) && !player.isCrouching()) {
-			boolean locked = isLocked(level, pos);
-			Component action = locked ? BlazingLang.LAMP_UNLOCKED.get() : BlazingLang.LAMP_LOCKED.get();
+			Component action = locked ? BlazingLang.LAMP_UNLOCKED_MESSAGE.get() : BlazingLang.LAMP_LOCKED_MESSAGE.get();
 			player.displayClientMessage(action, true);
 
 			SoundEvent sound = locked ? SoundEvents.STONE_BUTTON_CLICK_ON : SoundEvents.STONE_BUTTON_CLICK_OFF;
@@ -70,7 +71,7 @@ public abstract class AbstractModernLamp extends Block implements IBE<ModernLamp
 			return InteractionResult.SUCCESS;
 		}
 
-		return InteractionResult.PASS;
+		return InteractionResult.FAIL;
 	}
 
 	@Override
@@ -110,12 +111,18 @@ public abstract class AbstractModernLamp extends Block implements IBE<ModernLamp
 
 	public void setLocked(Level level, BlockPos pos, boolean locked) {
 		ModernLampBlockEntity be = getBlockEntity(level, pos);
-		if (be != null) be.locked = locked;
+		if (be != null) {
+			be.locked = locked;
+			be.setChanged();
+		}
 	}
 
 	public void setPowered(Level level, BlockPos pos, boolean powered) {
 		ModernLampBlockEntity be = getBlockEntity(level, pos);
-		if (be != null) be.powered = powered;
+		if (be != null) {
+			be.powered = powered;
+			be.setChanged();
+		}
 	}
 
 	@Override

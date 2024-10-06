@@ -24,11 +24,11 @@ public class Shapes {
 	}
 
 	public static VoxelShape halfPanel(boolean horizontal) {
-		return horizontal ? cuboid(1, 1, 1, 15, 2, 7) : cuboid(1, 1, 1, 7, 2, 15);
+		return horizontal ? cuboid(1, 1, 5, 15, 2, 11) : cuboid(5, 1, 1, 11, 2, 15);
 	}
 
 	public static VoxelShape halfPanelBase(boolean horizontal) {
-		return horizontal ? cuboid(0, 0, 0, 16, 1, 8) : cuboid(0, 0, 0, 8, 1, 16);
+		return horizontal ? cuboid(0, 0, 4, 16, 1, 12) : cuboid(4, 0, 0, 12, 1, 16);
 	}
 
 	public static VoxelShape smallPanelBase() {

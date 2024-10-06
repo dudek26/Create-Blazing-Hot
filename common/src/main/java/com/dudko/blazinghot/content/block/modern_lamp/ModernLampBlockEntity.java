@@ -1,16 +1,29 @@
 package com.dudko.blazinghot.content.block.modern_lamp;
 
+import static net.minecraft.ChatFormatting.GRAY;
+
 import java.util.List;
 
-import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
+import org.jetbrains.annotations.Nullable;
 
+import com.dudko.blazinghot.config.BlazingConfigs;
+import com.dudko.blazinghot.data.lang.BlazingLang;
+import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.foundation.utility.LangBuilder;
+
+import net.minecraft.ChatFormatting;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
+@MethodsReturnNonnullByDefault
 public class ModernLampBlockEntity extends BlockEntity implements IHaveGoggleInformation {
 
 	public boolean powered;
@@ -35,7 +48,29 @@ public class ModernLampBlockEntity extends BlockEntity implements IHaveGoggleInf
 	}
 
 	@Override
+	public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
+		return ClientboundBlockEntityDataPacket.create(this);
+	}
+
+	@Override
+	public CompoundTag getUpdateTag() {
+		return saveWithFullMetadata();
+	}
+
+	@Override
 	public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-		return IHaveGoggleInformation.super.addToGoggleTooltip(tooltip, isPlayerSneaking);
+		if (BlazingConfigs.client().modernLampGoggleTooltip.get().shouldRender(isPlayerSneaking)) {
+			BlazingLang.LAMP_GOGGLE_TITLE.translate().forGoggles(tooltip);
+			BlazingLang.LAMP_GOGGLE_STATE.translate().style(GRAY).forGoggles(tooltip);
+
+			LangBuilder
+					lockTranslation =
+					locked ? BlazingLang.LAMP_GOGGLE_LOCKED.translate() : BlazingLang.LAMP_GOGGLE_UNLOCKED.translate();
+			ChatFormatting lockStyle = locked ? ChatFormatting.RED : ChatFormatting.GREEN;
+
+			lockTranslation.style(lockStyle).forGoggles(tooltip, 1);
+		}
+
+		return false;
 	}
 }
