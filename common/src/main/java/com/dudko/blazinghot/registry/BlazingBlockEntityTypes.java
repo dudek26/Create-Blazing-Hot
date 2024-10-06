@@ -1,7 +1,7 @@
 package com.dudko.blazinghot.registry;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.content.block.modern_lamp.block.ModernLampBlockEntity;
+import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlockEntity;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 
@@ -15,18 +15,8 @@ public class BlazingBlockEntityTypes {
 			MODERN_LAMP =
 			REGISTRATE
 					.blockEntity("modern_lamp", ModernLampBlockEntity::new)
-					.validBlocks(BlazingBlocks.MODERN_LAMP_BLOCKS.toArray())
-					.register(),
-			MODERN_LAMP_PANEL =
-					REGISTRATE
-							.blockEntity("modern_lamp_panel", ModernLampBlockEntity::new)
-							.validBlocks(BlazingBlocks.MODERN_LAMP_PANELS.toArray())
-							.register(),
-			MODERN_LAMP_QUAD_PANEL =
-					REGISTRATE
-							.blockEntity("modern_lamp_quad_panel", ModernLampBlockEntity::new)
-							.validBlocks(BlazingBlocks.MODERN_LAMP_QUAD_PANELS.toArray())
-							.register();
+					.validBlocks(BlazingBlocks.modernLamps())
+					.register();
 
 	public static void register() {
 		platformRegister();

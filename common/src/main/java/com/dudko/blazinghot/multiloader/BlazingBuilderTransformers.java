@@ -1,11 +1,11 @@
 package com.dudko.blazinghot.multiloader;
 
 import com.dudko.blazinghot.content.block.modern_lamp.AbstractModernLamp;
-import com.dudko.blazinghot.content.block.modern_lamp.block.ModernLampBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.double_panel.ModernLampDoublePanelBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.half_panel.ModernLampHalfPanelBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.panel.ModernLampPanelBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.small_panel.SmallModernLampPanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.ModernLampDoublePanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.ModernLampHalfPanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.SmallModernLampPanelBlock;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 

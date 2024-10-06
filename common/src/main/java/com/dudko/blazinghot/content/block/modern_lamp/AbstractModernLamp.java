@@ -4,7 +4,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.lang.BlazingLang;
+import com.dudko.blazinghot.registry.BlazingBlockEntityTypes;
 import com.simibubi.create.AllTags;
+import com.simibubi.create.foundation.block.IBE;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
@@ -18,6 +20,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -27,7 +30,7 @@ import net.minecraft.world.phys.BlockHitResult;
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public abstract class AbstractModernLamp extends Block {
+public abstract class AbstractModernLamp extends Block implements IBE<ModernLampBlockEntity> {
 
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
@@ -95,12 +98,33 @@ public abstract class AbstractModernLamp extends Block {
 		return color;
 	}
 
-	public abstract boolean isLocked(Level level, BlockPos pos);
+	public boolean isLocked(Level level, BlockPos pos) {
+		ModernLampBlockEntity be = getBlockEntity(level, pos);
+		return be != null && be.locked;
+	}
 
-	public abstract boolean isPowered(Level level, BlockPos pos);
+	public boolean isPowered(Level level, BlockPos pos) {
+		ModernLampBlockEntity be = getBlockEntity(level, pos);
+		return be != null && be.powered;
+	}
 
-	public abstract void setLocked(Level level, BlockPos pos, boolean locked);
+	public void setLocked(Level level, BlockPos pos, boolean locked) {
+		ModernLampBlockEntity be = getBlockEntity(level, pos);
+		if (be != null) be.locked = locked;
+	}
 
-	public abstract void setPowered(Level level, BlockPos pos, boolean powered);
+	public void setPowered(Level level, BlockPos pos, boolean powered) {
+		ModernLampBlockEntity be = getBlockEntity(level, pos);
+		if (be != null) be.powered = powered;
+	}
 
+	@Override
+	public Class<ModernLampBlockEntity> getBlockEntityClass() {
+		return ModernLampBlockEntity.class;
+	}
+
+	@Override
+	public BlockEntityType<? extends ModernLampBlockEntity> getBlockEntityType() {
+		return BlazingBlockEntityTypes.MODERN_LAMP.get();
+	}
 }

@@ -9,12 +9,12 @@ import java.util.List;
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.block.modern_lamp.AbstractModernLamp;
 import com.dudko.blazinghot.content.block.modern_lamp.AbstractModernLampPanel;
-import com.dudko.blazinghot.content.block.modern_lamp.block.ModernLampBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.double_panel.ModernLampDoublePanelBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.half_panel.ModernLampHalfPanelBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.panel.ModernLampPanelBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.quad_panel.ModernLampQuadPanelBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.small_panel.SmallModernLampPanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.ModernLampDoublePanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.ModernLampHalfPanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.ModernLampQuadPanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.SmallModernLampPanelBlock;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlock;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.multiloader.BlazingBuilderTransformers;
@@ -262,6 +262,23 @@ public class BlazingBlocks {
 			});
 
 	public static void register() {
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T extends AbstractModernLamp> BlockEntry<T>[] modernLamps() {
+		List<BlockEntry<T>> entries = new ArrayList<>();
+		List<DyedBlockList<? extends AbstractModernLamp>>
+				lists =
+				List.of(MODERN_LAMP_BLOCKS,
+						MODERN_LAMP_PANELS,
+						MODERN_LAMP_DOUBLE_PANELS,
+						MODERN_LAMP_QUAD_PANELS,
+						MODERN_LAMP_HALF_PANELS,
+						MODERN_LAMP_SMALL_PANELS);
+		for (DyeColor color : DyeColor.values()) {
+			lists.forEach(list -> entries.add((BlockEntry<T>) list.get(color)));
+		}
+		return entries.toArray(new BlockEntry[]{});
 	}
 
 	private static ItemLike[] lampPanels(DyeColor color) {

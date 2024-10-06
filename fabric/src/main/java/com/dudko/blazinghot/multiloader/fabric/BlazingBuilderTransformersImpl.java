@@ -1,11 +1,11 @@
 package com.dudko.blazinghot.multiloader.fabric;
 
 import com.dudko.blazinghot.content.block.modern_lamp.AbstractModernLamp;
-import com.dudko.blazinghot.content.block.modern_lamp.block.ModernLampBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.double_panel.ModernLampDoublePanelBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.half_panel.ModernLampHalfPanelBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.panel.ModernLampPanelBlock;
-import com.dudko.blazinghot.content.block.modern_lamp.small_panel.SmallModernLampPanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.ModernLampDoublePanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.ModernLampHalfPanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelBlock;
+import com.dudko.blazinghot.content.block.modern_lamp.SmallModernLampPanelBlock;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
@@ -111,7 +111,9 @@ public class BlazingBuilderTransformersImpl {
 
 					int yRotation = facing.getAxis().isVertical() ? 0 : (int) facing.toYRot();
 
-					String variant = color.getName() + "_" + state.getValue(ModernLampHalfPanelBlock.OFFSET).shortName;
+					String dir = state.getValue(ModernLampHalfPanelBlock.HORIZONTAL) ? "h" : "v";
+
+					String variant = color.getName() + "_" + dir;
 					if (state.getValue(ModernLampPanelBlock.FACING).getAxis().isHorizontal()) variant += "_vertical";
 					if (state.getValue(ModernLampPanelBlock.LIT)) variant += "_powered";
 
@@ -137,9 +139,7 @@ public class BlazingBuilderTransformersImpl {
 
 					int yRotation = facing.getAxis().isVertical() ? 0 : (int) facing.toYRot();
 
-					String
-							variant =
-							color.getName() + "_" + state.getValue(SmallModernLampPanelBlock.OFFSET).getShortName();
+					String variant = color.getName();
 					if (state.getValue(ModernLampPanelBlock.FACING).getAxis().isHorizontal()) variant += "_vertical";
 					if (state.getValue(ModernLampPanelBlock.LIT)) variant += "_powered";
 
@@ -152,7 +152,7 @@ public class BlazingBuilderTransformersImpl {
 				}))
 				.item()
 				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.INTERNAL))
-				.transform(ModelGen.customItemModel(name, color.getName() + "_c"));
+				.transform(ModelGen.customItemModel(name, color.getName()));
 	}
 
 	public static <B extends AbstractModernLamp, P> NonNullUnaryOperator<BlockBuilder<B, P>> anyModernLamp(DyeColor color) {

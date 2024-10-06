@@ -1,795 +1,91 @@
 {
   "variants": {
-    "facing=down,lit=false,offset=center,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c",
+    "facing=down,lit=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue",
       "x": 180
     },
-    "facing=down,lit=false,offset=center,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c",
+    "facing=down,lit=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue",
       "x": 180
     },
-    "facing=down,lit=false,offset=down,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d",
+    "facing=down,lit=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue_powered",
       "x": 180
     },
-    "facing=down,lit=false,offset=down,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d",
+    "facing=down,lit=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue_powered",
       "x": 180
     },
-    "facing=down,lit=false,offset=down_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl",
-      "x": 180
-    },
-    "facing=down,lit=false,offset=down_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl",
-      "x": 180
-    },
-    "facing=down,lit=false,offset=down_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr",
-      "x": 180
-    },
-    "facing=down,lit=false,offset=down_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr",
-      "x": 180
-    },
-    "facing=down,lit=false,offset=left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l",
-      "x": 180
-    },
-    "facing=down,lit=false,offset=left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l",
-      "x": 180
-    },
-    "facing=down,lit=false,offset=right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r",
-      "x": 180
-    },
-    "facing=down,lit=false,offset=right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r",
-      "x": 180
-    },
-    "facing=down,lit=false,offset=up,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u",
-      "x": 180
-    },
-    "facing=down,lit=false,offset=up,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u",
-      "x": 180
-    },
-    "facing=down,lit=false,offset=up_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul",
-      "x": 180
-    },
-    "facing=down,lit=false,offset=up_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul",
-      "x": 180
-    },
-    "facing=down,lit=false,offset=up_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur",
-      "x": 180
-    },
-    "facing=down,lit=false,offset=up_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur",
-      "x": 180
-    },
-    "facing=down,lit=true,offset=center,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c_powered",
-      "x": 180
-    },
-    "facing=down,lit=true,offset=center,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c_powered",
-      "x": 180
-    },
-    "facing=down,lit=true,offset=down,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d_powered",
-      "x": 180
-    },
-    "facing=down,lit=true,offset=down,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d_powered",
-      "x": 180
-    },
-    "facing=down,lit=true,offset=down_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl_powered",
-      "x": 180
-    },
-    "facing=down,lit=true,offset=down_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl_powered",
-      "x": 180
-    },
-    "facing=down,lit=true,offset=down_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr_powered",
-      "x": 180
-    },
-    "facing=down,lit=true,offset=down_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr_powered",
-      "x": 180
-    },
-    "facing=down,lit=true,offset=left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l_powered",
-      "x": 180
-    },
-    "facing=down,lit=true,offset=left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l_powered",
-      "x": 180
-    },
-    "facing=down,lit=true,offset=right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r_powered",
-      "x": 180
-    },
-    "facing=down,lit=true,offset=right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r_powered",
-      "x": 180
-    },
-    "facing=down,lit=true,offset=up,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u_powered",
-      "x": 180
-    },
-    "facing=down,lit=true,offset=up,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u_powered",
-      "x": 180
-    },
-    "facing=down,lit=true,offset=up_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul_powered",
-      "x": 180
-    },
-    "facing=down,lit=true,offset=up_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul_powered",
-      "x": 180
-    },
-    "facing=down,lit=true,offset=up_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur_powered",
-      "x": 180
-    },
-    "facing=down,lit=true,offset=up_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur_powered",
-      "x": 180
-    },
-    "facing=east,lit=false,offset=center,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c_vertical",
+    "facing=east,lit=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue_vertical",
       "y": 270
     },
-    "facing=east,lit=false,offset=center,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c_vertical",
+    "facing=east,lit=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue_vertical",
       "y": 270
     },
-    "facing=east,lit=false,offset=down,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d_vertical",
+    "facing=east,lit=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue_vertical_powered",
       "y": 270
     },
-    "facing=east,lit=false,offset=down,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d_vertical",
+    "facing=east,lit=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue_vertical_powered",
       "y": 270
     },
-    "facing=east,lit=false,offset=down_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl_vertical",
-      "y": 270
-    },
-    "facing=east,lit=false,offset=down_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl_vertical",
-      "y": 270
-    },
-    "facing=east,lit=false,offset=down_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr_vertical",
-      "y": 270
-    },
-    "facing=east,lit=false,offset=down_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr_vertical",
-      "y": 270
-    },
-    "facing=east,lit=false,offset=left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l_vertical",
-      "y": 270
-    },
-    "facing=east,lit=false,offset=left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l_vertical",
-      "y": 270
-    },
-    "facing=east,lit=false,offset=right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r_vertical",
-      "y": 270
-    },
-    "facing=east,lit=false,offset=right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r_vertical",
-      "y": 270
-    },
-    "facing=east,lit=false,offset=up,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u_vertical",
-      "y": 270
-    },
-    "facing=east,lit=false,offset=up,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u_vertical",
-      "y": 270
-    },
-    "facing=east,lit=false,offset=up_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul_vertical",
-      "y": 270
-    },
-    "facing=east,lit=false,offset=up_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul_vertical",
-      "y": 270
-    },
-    "facing=east,lit=false,offset=up_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur_vertical",
-      "y": 270
-    },
-    "facing=east,lit=false,offset=up_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur_vertical",
-      "y": 270
-    },
-    "facing=east,lit=true,offset=center,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c_vertical_powered",
-      "y": 270
-    },
-    "facing=east,lit=true,offset=center,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c_vertical_powered",
-      "y": 270
-    },
-    "facing=east,lit=true,offset=down,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d_vertical_powered",
-      "y": 270
-    },
-    "facing=east,lit=true,offset=down,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d_vertical_powered",
-      "y": 270
-    },
-    "facing=east,lit=true,offset=down_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl_vertical_powered",
-      "y": 270
-    },
-    "facing=east,lit=true,offset=down_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl_vertical_powered",
-      "y": 270
-    },
-    "facing=east,lit=true,offset=down_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr_vertical_powered",
-      "y": 270
-    },
-    "facing=east,lit=true,offset=down_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr_vertical_powered",
-      "y": 270
-    },
-    "facing=east,lit=true,offset=left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l_vertical_powered",
-      "y": 270
-    },
-    "facing=east,lit=true,offset=left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l_vertical_powered",
-      "y": 270
-    },
-    "facing=east,lit=true,offset=right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r_vertical_powered",
-      "y": 270
-    },
-    "facing=east,lit=true,offset=right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r_vertical_powered",
-      "y": 270
-    },
-    "facing=east,lit=true,offset=up,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u_vertical_powered",
-      "y": 270
-    },
-    "facing=east,lit=true,offset=up,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u_vertical_powered",
-      "y": 270
-    },
-    "facing=east,lit=true,offset=up_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul_vertical_powered",
-      "y": 270
-    },
-    "facing=east,lit=true,offset=up_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul_vertical_powered",
-      "y": 270
-    },
-    "facing=east,lit=true,offset=up_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur_vertical_powered",
-      "y": 270
-    },
-    "facing=east,lit=true,offset=up_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur_vertical_powered",
-      "y": 270
-    },
-    "facing=north,lit=false,offset=center,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c_vertical",
+    "facing=north,lit=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue_vertical",
       "y": 180
     },
-    "facing=north,lit=false,offset=center,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c_vertical",
+    "facing=north,lit=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue_vertical",
       "y": 180
     },
-    "facing=north,lit=false,offset=down,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d_vertical",
+    "facing=north,lit=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue_vertical_powered",
       "y": 180
     },
-    "facing=north,lit=false,offset=down,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d_vertical",
+    "facing=north,lit=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue_vertical_powered",
       "y": 180
     },
-    "facing=north,lit=false,offset=down_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl_vertical",
-      "y": 180
+    "facing=south,lit=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue_vertical"
     },
-    "facing=north,lit=false,offset=down_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl_vertical",
-      "y": 180
+    "facing=south,lit=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue_vertical"
     },
-    "facing=north,lit=false,offset=down_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr_vertical",
-      "y": 180
+    "facing=south,lit=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue_vertical_powered"
     },
-    "facing=north,lit=false,offset=down_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr_vertical",
-      "y": 180
+    "facing=south,lit=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue_vertical_powered"
     },
-    "facing=north,lit=false,offset=left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l_vertical",
-      "y": 180
+    "facing=up,lit=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue"
     },
-    "facing=north,lit=false,offset=left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l_vertical",
-      "y": 180
+    "facing=up,lit=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue"
     },
-    "facing=north,lit=false,offset=right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r_vertical",
-      "y": 180
+    "facing=up,lit=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue_powered"
     },
-    "facing=north,lit=false,offset=right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r_vertical",
-      "y": 180
+    "facing=up,lit=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue_powered"
     },
-    "facing=north,lit=false,offset=up,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u_vertical",
-      "y": 180
-    },
-    "facing=north,lit=false,offset=up,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u_vertical",
-      "y": 180
-    },
-    "facing=north,lit=false,offset=up_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul_vertical",
-      "y": 180
-    },
-    "facing=north,lit=false,offset=up_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul_vertical",
-      "y": 180
-    },
-    "facing=north,lit=false,offset=up_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur_vertical",
-      "y": 180
-    },
-    "facing=north,lit=false,offset=up_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur_vertical",
-      "y": 180
-    },
-    "facing=north,lit=true,offset=center,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c_vertical_powered",
-      "y": 180
-    },
-    "facing=north,lit=true,offset=center,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c_vertical_powered",
-      "y": 180
-    },
-    "facing=north,lit=true,offset=down,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d_vertical_powered",
-      "y": 180
-    },
-    "facing=north,lit=true,offset=down,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d_vertical_powered",
-      "y": 180
-    },
-    "facing=north,lit=true,offset=down_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl_vertical_powered",
-      "y": 180
-    },
-    "facing=north,lit=true,offset=down_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl_vertical_powered",
-      "y": 180
-    },
-    "facing=north,lit=true,offset=down_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr_vertical_powered",
-      "y": 180
-    },
-    "facing=north,lit=true,offset=down_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr_vertical_powered",
-      "y": 180
-    },
-    "facing=north,lit=true,offset=left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l_vertical_powered",
-      "y": 180
-    },
-    "facing=north,lit=true,offset=left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l_vertical_powered",
-      "y": 180
-    },
-    "facing=north,lit=true,offset=right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r_vertical_powered",
-      "y": 180
-    },
-    "facing=north,lit=true,offset=right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r_vertical_powered",
-      "y": 180
-    },
-    "facing=north,lit=true,offset=up,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u_vertical_powered",
-      "y": 180
-    },
-    "facing=north,lit=true,offset=up,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u_vertical_powered",
-      "y": 180
-    },
-    "facing=north,lit=true,offset=up_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul_vertical_powered",
-      "y": 180
-    },
-    "facing=north,lit=true,offset=up_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul_vertical_powered",
-      "y": 180
-    },
-    "facing=north,lit=true,offset=up_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur_vertical_powered",
-      "y": 180
-    },
-    "facing=north,lit=true,offset=up_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur_vertical_powered",
-      "y": 180
-    },
-    "facing=south,lit=false,offset=center,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c_vertical"
-    },
-    "facing=south,lit=false,offset=center,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c_vertical"
-    },
-    "facing=south,lit=false,offset=down,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d_vertical"
-    },
-    "facing=south,lit=false,offset=down,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d_vertical"
-    },
-    "facing=south,lit=false,offset=down_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl_vertical"
-    },
-    "facing=south,lit=false,offset=down_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl_vertical"
-    },
-    "facing=south,lit=false,offset=down_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr_vertical"
-    },
-    "facing=south,lit=false,offset=down_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr_vertical"
-    },
-    "facing=south,lit=false,offset=left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l_vertical"
-    },
-    "facing=south,lit=false,offset=left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l_vertical"
-    },
-    "facing=south,lit=false,offset=right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r_vertical"
-    },
-    "facing=south,lit=false,offset=right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r_vertical"
-    },
-    "facing=south,lit=false,offset=up,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u_vertical"
-    },
-    "facing=south,lit=false,offset=up,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u_vertical"
-    },
-    "facing=south,lit=false,offset=up_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul_vertical"
-    },
-    "facing=south,lit=false,offset=up_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul_vertical"
-    },
-    "facing=south,lit=false,offset=up_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur_vertical"
-    },
-    "facing=south,lit=false,offset=up_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur_vertical"
-    },
-    "facing=south,lit=true,offset=center,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c_vertical_powered"
-    },
-    "facing=south,lit=true,offset=center,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c_vertical_powered"
-    },
-    "facing=south,lit=true,offset=down,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d_vertical_powered"
-    },
-    "facing=south,lit=true,offset=down,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d_vertical_powered"
-    },
-    "facing=south,lit=true,offset=down_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl_vertical_powered"
-    },
-    "facing=south,lit=true,offset=down_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl_vertical_powered"
-    },
-    "facing=south,lit=true,offset=down_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr_vertical_powered"
-    },
-    "facing=south,lit=true,offset=down_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr_vertical_powered"
-    },
-    "facing=south,lit=true,offset=left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l_vertical_powered"
-    },
-    "facing=south,lit=true,offset=left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l_vertical_powered"
-    },
-    "facing=south,lit=true,offset=right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r_vertical_powered"
-    },
-    "facing=south,lit=true,offset=right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r_vertical_powered"
-    },
-    "facing=south,lit=true,offset=up,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u_vertical_powered"
-    },
-    "facing=south,lit=true,offset=up,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u_vertical_powered"
-    },
-    "facing=south,lit=true,offset=up_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul_vertical_powered"
-    },
-    "facing=south,lit=true,offset=up_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul_vertical_powered"
-    },
-    "facing=south,lit=true,offset=up_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur_vertical_powered"
-    },
-    "facing=south,lit=true,offset=up_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur_vertical_powered"
-    },
-    "facing=up,lit=false,offset=center,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c"
-    },
-    "facing=up,lit=false,offset=center,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c"
-    },
-    "facing=up,lit=false,offset=down,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d"
-    },
-    "facing=up,lit=false,offset=down,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d"
-    },
-    "facing=up,lit=false,offset=down_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl"
-    },
-    "facing=up,lit=false,offset=down_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl"
-    },
-    "facing=up,lit=false,offset=down_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr"
-    },
-    "facing=up,lit=false,offset=down_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr"
-    },
-    "facing=up,lit=false,offset=left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l"
-    },
-    "facing=up,lit=false,offset=left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l"
-    },
-    "facing=up,lit=false,offset=right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r"
-    },
-    "facing=up,lit=false,offset=right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r"
-    },
-    "facing=up,lit=false,offset=up,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u"
-    },
-    "facing=up,lit=false,offset=up,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u"
-    },
-    "facing=up,lit=false,offset=up_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul"
-    },
-    "facing=up,lit=false,offset=up_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul"
-    },
-    "facing=up,lit=false,offset=up_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur"
-    },
-    "facing=up,lit=false,offset=up_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur"
-    },
-    "facing=up,lit=true,offset=center,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c_powered"
-    },
-    "facing=up,lit=true,offset=center,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c_powered"
-    },
-    "facing=up,lit=true,offset=down,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d_powered"
-    },
-    "facing=up,lit=true,offset=down,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d_powered"
-    },
-    "facing=up,lit=true,offset=down_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl_powered"
-    },
-    "facing=up,lit=true,offset=down_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl_powered"
-    },
-    "facing=up,lit=true,offset=down_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr_powered"
-    },
-    "facing=up,lit=true,offset=down_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr_powered"
-    },
-    "facing=up,lit=true,offset=left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l_powered"
-    },
-    "facing=up,lit=true,offset=left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l_powered"
-    },
-    "facing=up,lit=true,offset=right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r_powered"
-    },
-    "facing=up,lit=true,offset=right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r_powered"
-    },
-    "facing=up,lit=true,offset=up,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u_powered"
-    },
-    "facing=up,lit=true,offset=up,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u_powered"
-    },
-    "facing=up,lit=true,offset=up_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul_powered"
-    },
-    "facing=up,lit=true,offset=up_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul_powered"
-    },
-    "facing=up,lit=true,offset=up_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur_powered"
-    },
-    "facing=up,lit=true,offset=up_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur_powered"
-    },
-    "facing=west,lit=false,offset=center,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c_vertical",
+    "facing=west,lit=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue_vertical",
       "y": 90
     },
-    "facing=west,lit=false,offset=center,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c_vertical",
+    "facing=west,lit=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue_vertical",
       "y": 90
     },
-    "facing=west,lit=false,offset=down,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d_vertical",
+    "facing=west,lit=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue_vertical_powered",
       "y": 90
     },
-    "facing=west,lit=false,offset=down,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d_vertical",
-      "y": 90
-    },
-    "facing=west,lit=false,offset=down_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl_vertical",
-      "y": 90
-    },
-    "facing=west,lit=false,offset=down_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl_vertical",
-      "y": 90
-    },
-    "facing=west,lit=false,offset=down_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr_vertical",
-      "y": 90
-    },
-    "facing=west,lit=false,offset=down_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr_vertical",
-      "y": 90
-    },
-    "facing=west,lit=false,offset=left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l_vertical",
-      "y": 90
-    },
-    "facing=west,lit=false,offset=left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l_vertical",
-      "y": 90
-    },
-    "facing=west,lit=false,offset=right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r_vertical",
-      "y": 90
-    },
-    "facing=west,lit=false,offset=right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r_vertical",
-      "y": 90
-    },
-    "facing=west,lit=false,offset=up,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u_vertical",
-      "y": 90
-    },
-    "facing=west,lit=false,offset=up,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u_vertical",
-      "y": 90
-    },
-    "facing=west,lit=false,offset=up_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul_vertical",
-      "y": 90
-    },
-    "facing=west,lit=false,offset=up_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul_vertical",
-      "y": 90
-    },
-    "facing=west,lit=false,offset=up_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur_vertical",
-      "y": 90
-    },
-    "facing=west,lit=false,offset=up_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur_vertical",
-      "y": 90
-    },
-    "facing=west,lit=true,offset=center,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c_vertical_powered",
-      "y": 90
-    },
-    "facing=west,lit=true,offset=center,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_c_vertical_powered",
-      "y": 90
-    },
-    "facing=west,lit=true,offset=down,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d_vertical_powered",
-      "y": 90
-    },
-    "facing=west,lit=true,offset=down,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_d_vertical_powered",
-      "y": 90
-    },
-    "facing=west,lit=true,offset=down_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl_vertical_powered",
-      "y": 90
-    },
-    "facing=west,lit=true,offset=down_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dl_vertical_powered",
-      "y": 90
-    },
-    "facing=west,lit=true,offset=down_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr_vertical_powered",
-      "y": 90
-    },
-    "facing=west,lit=true,offset=down_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_dr_vertical_powered",
-      "y": 90
-    },
-    "facing=west,lit=true,offset=left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l_vertical_powered",
-      "y": 90
-    },
-    "facing=west,lit=true,offset=left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_l_vertical_powered",
-      "y": 90
-    },
-    "facing=west,lit=true,offset=right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r_vertical_powered",
-      "y": 90
-    },
-    "facing=west,lit=true,offset=right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_r_vertical_powered",
-      "y": 90
-    },
-    "facing=west,lit=true,offset=up,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u_vertical_powered",
-      "y": 90
-    },
-    "facing=west,lit=true,offset=up,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_u_vertical_powered",
-      "y": 90
-    },
-    "facing=west,lit=true,offset=up_left,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul_vertical_powered",
-      "y": 90
-    },
-    "facing=west,lit=true,offset=up_left,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ul_vertical_powered",
-      "y": 90
-    },
-    "facing=west,lit=true,offset=up_right,waterlogged=false": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur_vertical_powered",
-      "y": 90
-    },
-    "facing=west,lit=true,offset=up_right,waterlogged=true": {
-      "model": "blazinghot:block/modern_lamp/small_panel/blue_ur_vertical_powered",
+    "facing=west,lit=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/small_panel/blue_vertical_powered",
       "y": 90
     }
   }
