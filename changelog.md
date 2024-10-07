@@ -15,7 +15,7 @@ Create: Blazing Hot 0.6.3
 
 ### Fixed:
 
-* Drastically reduced world loading times
+* Drastically reduced world loading times (#6)
 * Added missing Small Red Modern Lamp Panel texture
 
 ------------------------------------------------------
