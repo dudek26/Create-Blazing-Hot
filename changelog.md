@@ -2,7 +2,7 @@
 Create: Blazing Hot 0.6.3
 ------------------------------------------------------
 
-### This update breaks offsets of existing Modern Lamp Half Panels and Small Panels
+### This update breaks offsets of existing Modern Lamp Half Panels and Small Panels, and resets the locked status of all Modern Lamps
 
 ### Added:
 
