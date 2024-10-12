@@ -34,7 +34,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -44,14 +44,13 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 @MethodsReturnNonnullByDefault
 public class ModernLampHalfPanelBlock extends AbstractModernLampPanel implements SimpleWaterloggedBlock {
 
-	public static final EnumProperty<DirectionOffset> OFFSET = EnumProperty.create("offset", DirectionOffset.class);
+	public static final BooleanProperty HORIZONTAL = BooleanProperty.create("horizontal");
 
 	private static final int placementHelperId = PlacementHelpers.register(new PlacementHelper());
 
 	public ModernLampHalfPanelBlock(Properties properties, DyeColor color) {
 		super(properties, color);
-		registerDefaultState(defaultBlockState().setValue(OFFSET,
-				DirectionOffsetPoint.DirectionOffset.CENTER_HORIZONTAL));
+		registerDefaultState(defaultBlockState().setValue(HORIZONTAL, true));
 	}
 
 	@Override
@@ -69,10 +68,9 @@ public class ModernLampHalfPanelBlock extends AbstractModernLampPanel implements
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-		super.createBlockStateDefinition(pBuilder.add(OFFSET));
+		super.createBlockStateDefinition(pBuilder.add(HORIZONTAL));
 	}
 
-	// TODO: clean this up
 	@Override
 	public BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
 		BlockState state = super.getStateForPlacement(context);
@@ -82,39 +80,26 @@ public class ModernLampHalfPanelBlock extends AbstractModernLampPanel implements
 				clickedPos =
 				AbstractPoint.flatten3D(context.getClickLocation().subtract(context.getClickedPos().getCenter()),
 						facing.getAxis());
-		DirectionOffset offset = AbstractPoint.getNearest(DirectionOffsetPoint.eightPoints(), clickedPos).offset;
-		if (facing.getAxis() == Axis.X && !offset.horizontal) offset = offset.getOpposite();
-		if (facing.getAxis() == Axis.Y) {
-			if (offset.horizontal) offset = offset.getOpposite();
-			if (facing.getAxisDirection() == Direction.AxisDirection.NEGATIVE) offset = offset.getOpposite();
-		}
-		if (facing.getAxisDirection() == Direction.AxisDirection.NEGATIVE && !offset.horizontal)
-			offset = offset.getOpposite();
-		return state.setValue(OFFSET, offset);
+		DirectionOffset offset = AbstractPoint.getNearest(DirectionOffsetPoint.fourPoints(), clickedPos).offset;
+		return state.setValue(HORIZONTAL, offset.horizontal);
 	}
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-		DirectionOffset offset = state.getValue(OFFSET);
-		VoxelShape panel = Shapes.halfPanel(offset.horizontal);
-		VoxelShape halfPanelBase = Shapes.halfPanelBase(offset.horizontal);
-		double offsetX = offset.horizontal ? 0 : offset.offset;
-		double offsetZ = offset.horizontal ? offset.offset : 0;
-		return Shapes
-				.shape(halfPanelBase.move(offsetX, 0, offsetZ))
-				.add(panel.move(offsetX, 0, offsetZ))
-				.forDirectional()
-				.get(state.getValue(FACING));
+		boolean horizontal = state.getValue(HORIZONTAL);
+		VoxelShape panel = Shapes.halfPanel(horizontal);
+		VoxelShape halfPanelBase = Shapes.halfPanelBase(horizontal);
+		return Shapes.shape(halfPanelBase).add(panel).forDirectional().get(state.getValue(FACING));
 	}
 
 	private static class PlacementHelper extends PoleHelper<Direction> {
 
 		public PlacementHelper() {
 			super(state -> BlazingBlocks.MODERN_LAMP_HALF_PANELS.contains(state.getBlock()), state -> {
-				DirectionOffset offset = state.getValue(OFFSET);
+				boolean horizontal = state.getValue(HORIZONTAL);
 				Direction facing = state.getValue(FACING);
-				if (facing.getAxis().isVertical()) return offset.horizontal ? Axis.X : Axis.Z;
-				return offset.horizontal ? facing.getCounterClockWise().getAxis() : Axis.Y;
+				if (facing.getAxis().isVertical()) return horizontal ? Axis.X : Axis.Z;
+				return horizontal ? facing.getCounterClockWise().getAxis() : Axis.Y;
 			}, FACING);
 		}
 
@@ -124,7 +109,7 @@ public class ModernLampHalfPanelBlock extends AbstractModernLampPanel implements
 			if (placementOffset.equals(PlacementOffset.fail())) return placementOffset;
 
 			return placementOffset.withTransform(newState -> newState
-					.setValue(OFFSET, state.getValue(OFFSET))
+					.setValue(HORIZONTAL, state.getValue(HORIZONTAL))
 					.setValue(FACING, state.getValue(FACING)));
 		}
 

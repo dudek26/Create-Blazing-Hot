@@ -8,6 +8,9 @@ public class CClient extends ConfigBase {
 
 	public final ConfigBool vanillaAppleTooltips = b(true, "vanillaAppleTooltips", Comments.vanillaAppleTooltips);
 	public final ConfigBool foodTooltips = b(true, "modFoodTooltips", Comments.foodEffectTooltips);
+	public final ConfigEnum<ModernLampTooltip>
+			modernLampGoggleTooltip =
+			e(ModernLampTooltip.CROUCH, "modernLampGoggleTooltip", Comments.modernLampGoggleTooltip);
 
 	@Override
 	public String getName() {
@@ -20,6 +23,20 @@ public class CClient extends ConfigBase {
 				"Client-only settings - If you're looking for general settings, look inside your worlds serverconfig folder!";
 		static String foodEffectTooltips = "Show effects of food added by the mod in their tooltips.";
 		static String vanillaAppleTooltips = "Show effects of vanilla Golden Apples in their tooltips.";
+		static String modernLampGoggleTooltip = "Show goggle tooltips when looking at Modern Lamps.";
+	}
 
+	public enum ModernLampTooltip {
+		ALWAYS,
+		CROUCH,
+		NEVER;
+
+		ModernLampTooltip() {
+
+		}
+
+		public boolean shouldRender(boolean isPlayerSneaking) {
+			return (this == ALWAYS) || (this == CROUCH && isPlayerSneaking);
+		}
 	}
 }

@@ -32,6 +32,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+/**
+ * <p>Extend this if you want the panels to inherit the placement helper.</p>
+ * <p>Otherwise, extend {@link AbstractModernLampPanel}</p>
+ */
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class ModernLampPanelBlock extends AbstractModernLampPanel implements SimpleWaterloggedBlock {
@@ -67,7 +71,6 @@ public class ModernLampPanelBlock extends AbstractModernLampPanel implements Sim
 			return stack -> DyeUtil.isIn(BlazingBlocks.MODERN_LAMP_PANELS, stack)
 					|| DyeUtil.isIn(BlazingBlocks.MODERN_LAMP_QUAD_PANELS, stack);
 		}
-
 
 		@Override
 		public Predicate<BlockState> getStatePredicate() {

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.content.block.modern_lamp.AbstractModernLamp;
 import com.dudko.blazinghot.content.block.modern_lamp.AbstractModernLampPanel;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampDoublePanelBlock;
@@ -280,6 +281,23 @@ public class BlazingBlocks {
 	public static void register() {
 	}
 
+	@SuppressWarnings("unchecked")
+	public static <T extends AbstractModernLamp> BlockEntry<T>[] modernLamps() {
+		List<BlockEntry<T>> entries = new ArrayList<>();
+		List<DyedBlockList<? extends AbstractModernLamp>>
+				lists =
+				List.of(MODERN_LAMP_BLOCKS,
+						MODERN_LAMP_PANELS,
+						MODERN_LAMP_DOUBLE_PANELS,
+						MODERN_LAMP_QUAD_PANELS,
+						MODERN_LAMP_HALF_PANELS,
+						MODERN_LAMP_SMALL_PANELS);
+		for (DyeColor color : DyeColor.values()) {
+			lists.forEach(list -> entries.add((BlockEntry<T>) list.get(color)));
+		}
+		return entries.toArray(new BlockEntry[]{});
+	}
+
 	private static ItemLike[] lampPanels(DyeColor color) {
 		List<ItemLike> items = new ArrayList<>();
 		List<DyedBlockList<?>>
@@ -300,14 +318,14 @@ public class BlazingBlocks {
 				.save(prov, BlazingHot.asResource("stonecutting/modern_lamp_panel/" + name));
 	}
 
-	private static <T extends ModernLampBlock> void lampStoneCuttingRecipe(DataGenContext<Block, T> ctx, RegistrateRecipeProvider prov, DyeColor color, int count) {
+	private static <T extends AbstractModernLamp> void lampStoneCuttingRecipe(DataGenContext<Block, T> ctx, RegistrateRecipeProvider prov, DyeColor color, int count) {
 		SingleItemRecipeBuilder
 				.stonecutting(Ingredient.of(MODERN_LAMP_BLOCKS.get(color)), RecipeCategory.REDSTONE, ctx.get(), count)
 				.unlockedBy("has_modern_lamps", RegistrateRecipeProvider.has(BlazingTags.Items.MODERN_LAMPS.tag))
 				.save(prov, BlazingHot.asResource("stonecutting/modern_lamp/" + ctx.getName() + "_from_block"));
 	}
 
-	private static <T extends ModernLampBlock> void modernLampDyeing(DataGenContext<Block, T> ctx, RegistrateRecipeProvider prov, TagKey<Item> tag, DyeColor color, String name) {
+	private static <T extends AbstractModernLamp> void modernLampDyeing(DataGenContext<Block, T> ctx, RegistrateRecipeProvider prov, TagKey<Item> tag, DyeColor color, String name) {
 		DyeUtil
 				.dyeingMultiple(RecipeCategory.REDSTONE, tag, ctx.get(), color)
 				.save(prov,

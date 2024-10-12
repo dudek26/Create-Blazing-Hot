@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.data.lang;
 
 import static com.dudko.blazinghot.data.lang.BlazingLang.Prefix.EMI_RECIPE;
+import static com.dudko.blazinghot.data.lang.BlazingLang.Prefix.GOGGLES;
 import static com.dudko.blazinghot.data.lang.BlazingLang.Prefix.INFO;
 import static com.dudko.blazinghot.data.lang.BlazingLang.Prefix.ITEM_GROUP;
 import static com.dudko.blazinghot.data.lang.BlazingLang.Prefix.MESSAGE;
@@ -8,6 +9,10 @@ import static com.dudko.blazinghot.data.lang.BlazingLang.Prefix.RECIPE;
 import static com.dudko.blazinghot.data.lang.BlazingLang.Prefix.RECIPE_TOOLTIP;
 
 import java.util.function.BiConsumer;
+
+import com.dudko.blazinghot.BlazingHot;
+import com.simibubi.create.foundation.utility.Lang;
+import com.simibubi.create.foundation.utility.LangBuilder;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -17,8 +22,13 @@ public enum BlazingLang {
 	TAB_BASE(ITEM_GROUP, "Create: Blazing Hot"),
 	TAB_BUILDING(ITEM_GROUP, "building", "Blazing Building Blocks"),
 
-	LAMP_LOCKED(MESSAGE, "modern_lamp.lock", "Lamp locked"),
-	LAMP_UNLOCKED(MESSAGE, "modern_lamp.unlock", "Lamp unlocked"),
+	LAMP_LOCKED_MESSAGE(MESSAGE, "modern_lamp.lock", "Lamp locked"),
+	LAMP_UNLOCKED_MESSAGE(MESSAGE, "modern_lamp.unlock", "Lamp unlocked"),
+
+	LAMP_GOGGLE_TITLE(GOGGLES, "modern_lamp", "Modern Lamp"),
+	LAMP_GOGGLE_STATE(GOGGLES, "modern_lamp.state", "Current state:"),
+	LAMP_GOGGLE_LOCKED(GOGGLES, "modern_lamp.locked", "Locked"),
+	LAMP_GOGGLE_UNLOCKED(GOGGLES, "modern_lamp.unlocked", "Unlocked"),
 
 	NETHER_LAVA_INFO(INFO,
 			"nether_lava_cobblestone",
@@ -34,7 +44,7 @@ public enum BlazingLang {
 	;
 
 	public final String key;
-	public final String translation;
+	private final String translation;
 
 	BlazingLang(String key, String translation) {
 		this.key = key;
@@ -55,6 +65,13 @@ public enum BlazingLang {
 		return Component.translatable(key);
 	}
 
+	public LangBuilder translate() {
+		String
+				key =
+				this.key.startsWith(BlazingHot.ID + ".") ? this.key.replaceFirst(BlazingHot.ID + ".", "") : this.key;
+		return Lang.builder(BlazingHot.ID).translate(key);
+	}
+
 	public static void provideLangEntries(BiConsumer<String, String> consumer) {
 		for (BlazingLang lang : values()) {
 			consumer.accept(lang.key, lang.translation);
@@ -68,7 +85,8 @@ public enum BlazingLang {
 		EMI_RECIPE("emi.category.blazinghot"),
 		ITEM_GROUP("itemGroup.blazinghot"),
 		MESSAGE("message.blazinghot"),
-		ITEM("item.blazinghot");
+		ITEM("item.blazinghot"),
+		GOGGLES("blazinghot.gui.goggles");
 
 		public final String key;
 

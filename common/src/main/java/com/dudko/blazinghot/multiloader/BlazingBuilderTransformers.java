@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.multiloader;
 
+import com.dudko.blazinghot.content.block.modern_lamp.AbstractModernLamp;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampDoublePanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampHalfPanelBlock;
@@ -17,7 +18,7 @@ import net.minecraft.world.item.Item;
 public class BlazingBuilderTransformers {
 
 	@ExpectPlatform
-	public static <B extends ModernLampBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> anyModernLamp(DyeColor color) {
+	public static <B extends AbstractModernLamp, P> NonNullUnaryOperator<BlockBuilder<B, P>> anyModernLamp(DyeColor color) {
 		throw new AssertionError();
 	}
 

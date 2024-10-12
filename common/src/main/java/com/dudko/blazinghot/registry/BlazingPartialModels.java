@@ -14,7 +14,6 @@ public class BlazingPartialModels {
 	}
 
 	public static void init() {
-
 	}
 
 }

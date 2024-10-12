@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.multiloader.forge;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.content.block.modern_lamp.AbstractModernLamp;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampDoublePanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampHalfPanelBlock;
@@ -46,7 +47,6 @@ public class BlazingBuilderTransformersImpl {
 						))
 				.item()
 				.tag(BlazingTags.Items.MODERN_LAMPS.tag)
-				.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.MODERN_LAMP.getKey()))
 				.model((c, b) -> b.blockItem(c).texture("#all", b.modLoc("block/modern_lamp/block/" + color.getName())))
 				.build();
 	}
@@ -75,7 +75,6 @@ public class BlazingBuilderTransformersImpl {
 				))
 				.item()
 				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.INTERNAL))
-				.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.MODERN_LAMP.getKey()))
 				.transform(ModelGen.customItemModel(name, color.getName()));
 	}
 
@@ -103,7 +102,6 @@ public class BlazingBuilderTransformersImpl {
 				}))
 				.item()
 				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.INTERNAL))
-				.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.MODERN_LAMP.getKey()))
 				.transform(ModelGen.customItemModel(name, color.getName() + "_h"));
 	}
 
@@ -117,7 +115,9 @@ public class BlazingBuilderTransformersImpl {
 
 					int yRotation = facing.getAxis().isVertical() ? 0 : (int) facing.toYRot();
 
-					String variant = color.getName() + "_" + state.getValue(ModernLampHalfPanelBlock.OFFSET).shortName;
+					String dir = state.getValue(ModernLampHalfPanelBlock.HORIZONTAL) ? "h" : "v";
+
+					String variant = color.getName() + "_" + dir;
 					if (state.getValue(ModernLampPanelBlock.FACING).getAxis().isHorizontal()) variant += "_vertical";
 					if (state.getValue(ModernLampPanelBlock.LIT)) variant += "_powered";
 
@@ -130,7 +130,6 @@ public class BlazingBuilderTransformersImpl {
 				}))
 				.item()
 				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.INTERNAL))
-				.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.MODERN_LAMP.getKey()))
 				.transform(ModelGen.customItemModel(name, color.getName() + "_h"));
 	}
 
@@ -144,9 +143,7 @@ public class BlazingBuilderTransformersImpl {
 
 					int yRotation = facing.getAxis().isVertical() ? 0 : (int) facing.toYRot();
 
-					String
-							variant =
-							color.getName() + "_" + state.getValue(SmallModernLampPanelBlock.OFFSET).getShortName();
+					String variant = color.getName();
 					if (state.getValue(ModernLampPanelBlock.FACING).getAxis().isHorizontal()) variant += "_vertical";
 					if (state.getValue(ModernLampPanelBlock.LIT)) variant += "_powered";
 
@@ -159,17 +156,17 @@ public class BlazingBuilderTransformersImpl {
 				}))
 				.item()
 				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.INTERNAL))
-				.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.MODERN_LAMP.getKey()))
-				.transform(ModelGen.customItemModel(name, color.getName() + "_c"));
+				.transform(ModelGen.customItemModel(name, color.getName()));
 	}
 
-	public static <B extends ModernLampBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> anyModernLamp(DyeColor color) {
+	public static <B extends AbstractModernLamp, P> NonNullUnaryOperator<BlockBuilder<B, P>> anyModernLamp(DyeColor color) {
 		return b -> b
 				.initialProperties(() -> Blocks.GLOWSTONE)
 				.properties(p -> p
 						.mapColor(color)
 						.lightLevel(s -> s.getValue(ModernLampPanelBlock.LIT) ? 15 : 0)
 						.forceSolidOn())
+				.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.MODERN_LAMP.getKey()))
 				.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag);
 	}
 
