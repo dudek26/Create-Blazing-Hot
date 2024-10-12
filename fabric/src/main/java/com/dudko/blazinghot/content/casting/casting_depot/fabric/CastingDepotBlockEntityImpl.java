@@ -7,7 +7,7 @@ import java.util.List;
 import org.jetbrains.annotations.Nullable;
 
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
-import com.dudko.blazinghot.multiloader.MultiFluids;
+import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
@@ -26,7 +26,7 @@ import net.minecraft.world.level.block.state.BlockState;
 @SuppressWarnings("UnstableApiUsage")
 public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity implements SidedStorageBlockEntity, IHaveGoggleInformation {
 
-	CastingDepotBehaviour depotBehaviour;
+	CastingDepotBehaviour inputBehaviour;
 
 	public CastingDepotBlockEntityImpl(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -34,7 +34,7 @@ public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity impleme
 
 	@Override
 	public void onMoldUpdate() {
-		ItemStack stack = depotBehaviour.heldItem == null ? ItemStack.EMPTY : depotBehaviour.heldItem.stack;
+		ItemStack stack = inputBehaviour.heldItem == null ? ItemStack.EMPTY : inputBehaviour.heldItem.stack;
 		long newCapacity = getMoldCapacity(stack);
 		if (getCapacity() != newCapacity) updateCapacity(newCapacity);
 	}
@@ -52,19 +52,19 @@ public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity impleme
 
 	@Override
 	public ItemStack getHeldItem() {
-		return depotBehaviour.heldItem == null ? ItemStack.EMPTY : depotBehaviour.heldItem.stack;
+		return inputBehaviour.heldItem == null ? ItemStack.EMPTY : inputBehaviour.heldItem.stack;
 	}
 
 	@Override
 	public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-		tank = SmartFluidTankBehaviour.single(this, MultiFluids.Constants.INGOT.platformed() * 2);
+		tank = SmartFluidTankBehaviour.single(this, Constants.INGOT.platformed() * 2);
 		tank.whenFluidUpdates(() -> {
 
 		});
 		behaviours.add(tank);
 
-		behaviours.add(depotBehaviour = new CastingDepotBehaviour(this));
-		depotBehaviour.addSubBehaviours(behaviours);
+		behaviours.add(inputBehaviour = new CastingDepotBehaviour(this, CastingDepotBehaviour.INPUT));
+		inputBehaviour.addSubBehaviours(behaviours);
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity impleme
 	@Nullable
 	@Override
 	public Storage<ItemVariant> getItemStorage(@Nullable Direction direction) {
-		return depotBehaviour.itemHandler;
+		return inputBehaviour.itemHandler;
 	}
 
 	@Override

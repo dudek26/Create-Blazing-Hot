@@ -29,7 +29,7 @@ import net.minecraft.world.phys.BlockHitResult;
 public class CastingDepotBlockMethodsImpl {
 
 	protected static CastingDepotBehaviour get(BlockGetter worldIn, BlockPos pos) {
-		return BlockEntityBehaviour.get(worldIn, pos, CastingDepotBehaviour.TYPE);
+		return BlockEntityBehaviour.get(worldIn, pos, CastingDepotBehaviour.INPUT);
 	}
 
 	public static InteractionResult onUse(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult ray) {
