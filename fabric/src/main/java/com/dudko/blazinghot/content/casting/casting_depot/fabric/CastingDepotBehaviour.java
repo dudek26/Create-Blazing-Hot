@@ -46,7 +46,9 @@ import net.minecraft.world.phys.Vec3;
 @SuppressWarnings("UnstableApiUsage")
 public class CastingDepotBehaviour extends BlockEntityBehaviour {
 
-	public static final BehaviourType<CastingDepotBehaviour> TYPE = new BehaviourType<>();
+	public static final BehaviourType<CastingDepotBehaviour> INPUT = new BehaviourType<>("Input"),
+			OUTPUT =
+					new BehaviourType<>("Output");
 
 	TransportedItemStack heldItem;
 	List<TransportedItemStack> incoming;
@@ -59,6 +61,8 @@ public class CastingDepotBehaviour extends BlockEntityBehaviour {
 	Consumer<ItemStack> onHeldInserted;
 	Predicate<ItemStack> acceptedItems;
 	boolean allowMerge;
+
+	private BehaviourType<CastingDepotBehaviour> behaviourType;
 
 	SnapshotParticipant<Data> snapshotParticipant = new SnapshotParticipant<>() {
 		@Override
@@ -82,7 +86,7 @@ public class CastingDepotBehaviour extends BlockEntityBehaviour {
 	record Data(List<TransportedItemStack> incoming, TransportedItemStack held) {
 	}
 
-	public CastingDepotBehaviour(CastingDepotBlockEntity be) {
+	public CastingDepotBehaviour(CastingDepotBlockEntity be, BehaviourType<CastingDepotBehaviour> type) {
 		super(be);
 		maxStackSize = () -> 1;
 		canAcceptItems = () -> be.getFluidAmount() <= 0;
@@ -97,6 +101,7 @@ public class CastingDepotBehaviour extends BlockEntityBehaviour {
 				be.notifyUpdate();
 			}
 		};
+		behaviourType = type;
 	}
 
 	public CastingDepotBehaviour withCallback(Consumer<ItemStack> changeListener) {
@@ -433,7 +438,7 @@ public class CastingDepotBehaviour extends BlockEntityBehaviour {
 
 	@Override
 	public BehaviourType<?> getType() {
-		return TYPE;
+		return INPUT;
 	}
 
 	public boolean isItemValid(ItemStack stack) {
