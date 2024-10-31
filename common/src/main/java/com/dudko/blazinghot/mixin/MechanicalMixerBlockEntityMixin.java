@@ -39,6 +39,7 @@ public abstract class MechanicalMixerBlockEntityMixin extends BasinOperatingBloc
 
 	@ModifyArg(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(III)I"), index = 2)
 	protected int blazinghot$extendDuration(int max) {
+		if (currentRecipe == null) return max;
 		ResourceLocation blazinghot$id = currentRecipe.getId();
 		if (blazinghot$id.getPath().startsWith("mixing/melting")) {
 			return max * 16;
