@@ -47,6 +47,15 @@ Create: Blazing Hot 0.6.4
 * [Forge] Fixed incorrect melting time for some metal forms
 
 ------------------------------------------------------
+Create: Blazing Hot 0.6.4
+------------------------------------------------------
+
+### Fixed:
+
+* Fixed a crash when joining a world with a working Mixer
+* [Forge] Fixed incorrect melting time for some metal forms
+
+------------------------------------------------------
 Create: Blazing Hot 0.6.3
 ------------------------------------------------------
 
