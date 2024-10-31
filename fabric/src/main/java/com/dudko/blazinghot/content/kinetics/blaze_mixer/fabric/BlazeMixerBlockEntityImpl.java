@@ -161,7 +161,12 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
 						fuelCost = calculatedCost;
 					}
 
-					int maxMultiplier = currentRecipe.getId().getPath().startsWith("blaze_mixing/melting") ? 16 : 1;
+					int
+							maxMultiplier =
+							currentRecipe != null && currentRecipe
+									.getId()
+									.getPath()
+									.startsWith("blaze_mixing/melting") ? 16 : 1;
 
 					processingTicks =
 							Mth.clamp((Mth.log2((int) (512 / speed))) * Mth.ceil(recipeSpeed * 15) + 1,
