@@ -8,6 +8,9 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
 public class BlazeArrowEntityImpl extends BlazeArrowEntity {
 
 	public BlazeArrowEntityImpl(EntityType<? extends AbstractArrow> entityType, Level level) {
