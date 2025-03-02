@@ -3,6 +3,8 @@ package com.dudko.blazinghot.registry.forge;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+import net.createmod.catnip.lang.Lang;
+
 import org.jetbrains.annotations.Nullable;
 
 import com.dudko.blazinghot.BlazingHot;
