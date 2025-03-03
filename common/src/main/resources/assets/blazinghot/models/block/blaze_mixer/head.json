@@ -5,6 +5,7 @@
 	"textures": {
 		"6": "blazinghot:block/blaze_mixer_head"
 	},
+  "render_type": "minecraft:cutout",
 	"elements": [
 		{
 			"name": "MixerCenter",
