@@ -71,7 +71,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
 
 	public long fuelCost;
 
-	public BlazeMixerBlockEntityImpl(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+	protected BlazeMixerBlockEntityImpl(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 	}
 
@@ -361,5 +361,9 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
 			return true;
 		}
 		else return !a.getIngredients().isEmpty() && !b.getIngredients().isEmpty();
+	}
+
+	public static BlazeMixerBlockEntity of(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+		return new BlazeMixerBlockEntityImpl(type, pos, state);
 	}
 }
