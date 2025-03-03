@@ -21,9 +21,9 @@ import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.dudko.blazinghot.util.ListUtil;
-import com.simibubi.create.foundation.utility.Pair;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 
+import net.createmod.catnip.data.Pair;
 import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
 import net.fabricmc.fabric.api.resource.conditions.v1.DefaultResourceConditions;
 import net.minecraft.resources.ResourceLocation;
@@ -151,6 +151,7 @@ public class MoltenMetal {
 		return conditions;
 	}
 
+	@SuppressWarnings("JavadocReference")
 	public static class Builder {
 
 		private final String name;

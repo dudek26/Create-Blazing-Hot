@@ -1,5 +1,7 @@
 package com.dudko.blazinghot.content.entity.forge;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import com.dudko.blazinghot.content.entity.BlazeArrowEntity;
 
 import net.minecraft.world.entity.EntityType;
@@ -7,8 +9,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
-
-import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class BlazeArrowEntityImpl extends BlazeArrowEntity {

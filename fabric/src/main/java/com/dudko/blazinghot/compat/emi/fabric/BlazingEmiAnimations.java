@@ -2,13 +2,13 @@ package com.dudko.blazinghot.compat.emi.fabric;
 
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingPartialModels;
-import com.jozufozu.flywheel.core.PartialModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.compat.emi.CreateEmiAnimations;
-import com.simibubi.create.foundation.utility.AnimationTickHolder;
 
 import dev.emi.emi.api.widget.WidgetHolder;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
+import net.createmod.catnip.animation.AnimationTickHolder;
 import net.minecraft.util.Mth;
 
 public class BlazingEmiAnimations extends CreateEmiAnimations {

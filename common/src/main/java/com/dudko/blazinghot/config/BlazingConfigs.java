@@ -7,7 +7,6 @@ import java.util.function.Supplier;
 import org.apache.commons.lang3.tuple.Pair;
 
 import net.createmod.catnip.config.ConfigBase;
-
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.config.ModConfig;
 

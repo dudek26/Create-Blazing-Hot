@@ -22,9 +22,9 @@ import org.jetbrains.annotations.NotNull;
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.content.metal.MoltenMetals;
+import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
-import com.simibubi.create.foundation.utility.RegisteredObjects;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -107,7 +107,10 @@ public class CraftingRecipeGen extends BlazingRecipeProvider {
 							.returns(2)
 							.viaShaped(b -> b
 									.define('X', blazeGoldRod())
-									.define('Y', glowstone()).define('G', Items.GLASS).pattern(" G ").pattern("GYG")
+									.define('Y', glowstone())
+									.define('G', Items.GLASS)
+									.pattern(" G ")
+									.pattern("GYG")
 									.pattern(" X ")),
 			BLAZE_ARROW =
 					create(BlazingItems.BLAZE_ARROW)
@@ -237,7 +240,7 @@ public class CraftingRecipeGen extends BlazingRecipeProvider {
 
 		private ResourceLocation getRegistryName() {
 			return compatDatagenOutput == null ?
-				   RegisteredObjects.getKeyOrThrow(result.get().asItem()) :
+				   MultiRegistries.getRegisteredObjectsHelper().getKeyOrThrow(result.get().asItem()) :
 				   compatDatagenOutput;
 		}
 

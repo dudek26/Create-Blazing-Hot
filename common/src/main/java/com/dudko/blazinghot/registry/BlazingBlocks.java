@@ -21,7 +21,6 @@ import com.dudko.blazinghot.multiloader.BlazingBuilderTransformers;
 import com.dudko.blazinghot.util.DyeUtil;
 import com.dudko.blazinghot.util.LangUtil;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
-import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
 import com.simibubi.create.foundation.block.DyedBlockList;
 import com.simibubi.create.foundation.data.AssetLookup;
@@ -29,6 +28,7 @@ import com.simibubi.create.foundation.data.BuilderTransformers;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.simibubi.create.foundation.item.ItemDescription;
+import com.simibubi.create.infrastructure.config.CStress;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
@@ -69,7 +69,7 @@ public class BlazingBlocks {
 					.transform(axeOrPickaxe())
 					.blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
 					.addLayer(() -> RenderType::cutoutMipped)
-					.transform(BlockStressDefaults.setImpact(4.0))
+					.transform(CStress.setImpact(4.0))
 					.item(AssemblyOperatorBlockItem::new)
 					.onRegisterAfter(Registries.ITEM,
 							v -> ItemDescription.useKey(v, ItemDescriptions.BLAZE_MIXER.getKey()))

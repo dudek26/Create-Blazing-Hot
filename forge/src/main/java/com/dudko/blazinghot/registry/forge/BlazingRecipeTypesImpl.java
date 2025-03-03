@@ -3,8 +3,6 @@ package com.dudko.blazinghot.registry.forge;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-import net.createmod.catnip.lang.Lang;
-
 import org.jetbrains.annotations.Nullable;
 
 import com.dudko.blazinghot.BlazingHot;
@@ -14,6 +12,7 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
+import net.createmod.catnip.lang.Lang;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
