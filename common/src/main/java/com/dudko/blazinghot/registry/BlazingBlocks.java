@@ -70,7 +70,7 @@ public class BlazingBlocks {
 					.transform(axeOrPickaxe())
 					.blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
 					.addLayer(() -> RenderType::cutoutMipped)
-					.transform(CStress.setImpact(4.0))
+//					.transform(CStress.setImpact(4.0)) TODO: can't use Create's config
 					.item(AssemblyOperatorBlockItem::new)
 					.onRegisterAfter(Registries.ITEM,
 							v -> ItemDescription.useKey(v, ItemDescriptions.BLAZE_MIXER.getKey()))
