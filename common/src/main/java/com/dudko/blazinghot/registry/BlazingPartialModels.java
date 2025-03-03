@@ -1,7 +1,8 @@
 package com.dudko.blazinghot.registry;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.jozufozu.flywheel.core.PartialModel;
+
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 
 public class BlazingPartialModels {
 
@@ -10,7 +11,7 @@ public class BlazingPartialModels {
 	public static final PartialModel SHAFTLESS_CRIMSON_COGWHEEL = block("crimson_cogwheel_shaftless");
 
 	private static PartialModel block(String path) {
-		return new PartialModel(BlazingHot.asResource("block/" + path));
+		return PartialModel.of(BlazingHot.asResource("block/" + path));
 	}
 
 	public static void init() {

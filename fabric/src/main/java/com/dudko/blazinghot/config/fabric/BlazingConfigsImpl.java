@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.config.BlazingConfigs;
-import com.simibubi.create.foundation.config.ConfigBase;
+import net.createmod.catnip.config.ConfigBase;
 
 import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
 import fuzs.forgeconfigapiport.api.config.v2.ModConfigEvents;
