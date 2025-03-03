@@ -1,7 +1,7 @@
 package com.dudko.blazinghot.config;
 
 import com.dudko.blazinghot.multiloader.MultiFluids;
-import com.simibubi.create.foundation.config.ConfigBase;
+import net.createmod.catnip.config.ConfigBase;
 
 public class CServer extends ConfigBase {
 

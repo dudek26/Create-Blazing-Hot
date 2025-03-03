@@ -1,6 +1,6 @@
 package com.dudko.blazinghot.config;
 
-import com.simibubi.create.foundation.config.ConfigBase;
+import net.createmod.catnip.config.ConfigBase;
 
 public class CClient extends ConfigBase {
 

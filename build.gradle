@@ -1,8 +1,8 @@
 import dev.ithundxr.silk.ChangelogText
 
 plugins {
-    id "architectury-plugin" version "3.4-SNAPSHOT"
-    id "dev.architectury.loom" version "1.6-SNAPSHOT" apply false
+    id "architectury-plugin" version "3.4.+"
+    id "dev.architectury.loom" version "1.9.+" apply false
     id "io.github.p03w.machete" version "1.+" // automatic jar compressing on build
     id "dev.ithundxr.silk" version "0.11.16"
     id "me.modmuss50.mod-publish-plugin" version "0.6.3"
@@ -38,6 +38,7 @@ subprojects {
                 includeGroup("com.jozufozu.flywheel")
             }
         }
+        maven { url = "https://maven.createmod.net" } // Create Forge, Ponder Forge, Flywheel
     }
 
     dependencies {
