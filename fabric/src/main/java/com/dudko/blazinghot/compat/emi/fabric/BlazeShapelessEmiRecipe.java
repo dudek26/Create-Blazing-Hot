@@ -11,12 +11,12 @@ import net.minecraft.resources.ResourceLocation;
 
 public class BlazeShapelessEmiRecipe extends BlazeMixingEmiRecipe {
 
-    public BlazeShapelessEmiRecipe(EmiRecipeCategory category, BasinRecipe recipe, long fuelCost) {
-        super(category, recipe);
-        ResourceLocation id = recipe.getId();
-        this.id = new ResourceLocation("emi", "blazinghot/blaze_shapeless/" + id.getNamespace() + "/" + id.getPath());
-        FluidIngredient fuel = FluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, fuelCost);
-        this.fuels = List.of(firstFluidOrEmpty(fuel.getMatchingFluidStacks()));
-    }
+	public BlazeShapelessEmiRecipe(EmiRecipeCategory category, BasinRecipe recipe, long fuelCost) {
+		super(category, recipe);
+		ResourceLocation id = recipe.getId();
+		this.id = new ResourceLocation("emi", "blazinghot/blaze_shapeless/" + id.getNamespace() + "/" + id.getPath());
+		FluidIngredient fuel = FluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, fuelCost);
+		this.fuels = List.of(firstFluidOrEmpty(fuel.getMatchingFluidStacks()));
+	}
 
 }

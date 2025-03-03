@@ -4,6 +4,8 @@ import java.util.function.Supplier;
 
 import org.jetbrains.annotations.NotNull;
 
+import net.createmod.catnip.platform.FabricRegisteredObjectsHelper;
+import net.createmod.catnip.platform.services.RegisteredObjectsHelper;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -23,5 +25,10 @@ public class MultiRegistriesImpl {
 	@NotNull
 	public static Supplier<Block> getBlockFromRegistry(ResourceLocation resourceLocation) {
 		return () -> BuiltInRegistries.BLOCK.get(resourceLocation);
+	}
+
+	@NotNull
+	public static RegisteredObjectsHelper<?> getRegisteredObjectsHelper() {
+		return new FabricRegisteredObjectsHelper();
 	}
 }

@@ -11,7 +11,8 @@ import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.mixin_interfaces.IAdvancementBehaviour;
 import com.dudko.blazinghot.multiloader.MultiFluids;
 import com.simibubi.create.AllRecipeTypes;
-import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.Create;
+import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
@@ -23,11 +24,11 @@ import com.simibubi.create.foundation.advancement.CreateAdvancement;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
-import com.simibubi.create.foundation.utility.Lang;
-import com.simibubi.create.foundation.utility.VecHelper;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.createmod.catnip.lang.Lang;
+import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.particles.ParticleOptions;
@@ -63,8 +64,13 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 
 	protected SmartFluidTankBehaviour tank;
 
-	public BlazeMixerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+	protected BlazeMixerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
+	}
+
+	@ExpectPlatform
+	public static BlazeMixerBlockEntity of(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+		throw new AssertionError();
 	}
 
 	public float getRenderedHeadOffset(float partialTicks) {
@@ -291,7 +297,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 		float stressAtBase = calculateStressApplied();
 		if (Mth.equal(stressAtBase, 0)) return added;
 
-		Lang.translate("gui.goggles.kinetic_stats").forGoggles(tooltip);
+		Lang.builder(Create.ID).translate("gui.goggles.kinetic_stats").forGoggles(tooltip);
 
 		addStressImpactStats(tooltip, stressAtBase);
 

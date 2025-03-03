@@ -92,8 +92,8 @@ public class BlazeMixingCategory extends BasinCategory {
 				.addSlot(RecipeIngredientRole.INPUT, 142, 11 - (19 * (vRows - 1)))
 				.setBackground(getRenderedSlot(), -1, -1)
 				.addIngredients(ForgeTypes.FLUID_STACK, withImprovedVisibility(fuels))
-				.addTooltipCallback(addFluidTooltip(fuelFluid.getRequiredAmount()))
-				.addTooltipCallback((v, t) -> t.add(BlazingLang.BLAZE_MIXER_FUEL
+				.addRichTooltipCallback(addFluidTooltip(fuelFluid.getRequiredAmount()))
+				.addRichTooltipCallback((v, t) -> t.add(BlazingLang.BLAZE_MIXER_FUEL
 						.get()
 						.withStyle(ChatFormatting.DARK_GREEN)));
 

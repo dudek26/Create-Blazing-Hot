@@ -2,13 +2,13 @@ package com.dudko.blazinghot.content.kinetics.blaze_mixer;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.dudko.blazinghot.registry.BlazingBlockEntityTypes;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.kinetics.base.KineticBlock;
 import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel;
 import com.simibubi.create.foundation.block.IBE;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -70,12 +70,7 @@ public class BlazeMixerBlock extends KineticBlock implements IBE<BlazeMixerBlock
 
 	@Override
 	public BlockEntityType<? extends BlazeMixerBlockEntity> getBlockEntityType() {
-		return platformedBlockEntity();
-	}
-
-	@ExpectPlatform
-	public static <T extends BlazeMixerBlockEntity> BlockEntityType<T> platformedBlockEntity() {
-		throw new AssertionError();
+		return BlazingBlockEntityTypes.BLAZE_MIXER.get();
 	}
 
 	@Override

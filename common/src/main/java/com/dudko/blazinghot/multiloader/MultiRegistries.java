@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 import org.jetbrains.annotations.NotNull;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.createmod.catnip.platform.services.RegisteredObjectsHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -27,6 +28,12 @@ public class MultiRegistries {
 	@ExpectPlatform
 	@NotNull
 	public static Supplier<Block> getBlockFromRegistry(ResourceLocation resourceLocation) {
+		throw new AssertionError();
+	}
+
+	@ExpectPlatform
+	@NotNull
+	public static RegisteredObjectsHelper<?> getRegisteredObjectsHelper() {
 		throw new AssertionError();
 	}
 }

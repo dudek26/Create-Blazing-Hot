@@ -13,5 +13,5 @@ public class ModernLampBlock extends AbstractModernLamp {
 	public ModernLampBlock(Properties properties, DyeColor color) {
 		super(properties, color);
 	}
-	
+
 }
