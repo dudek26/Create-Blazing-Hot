@@ -18,6 +18,14 @@ Create: Blazing Hot 0.7
 * Fixed missing texture for Red Small Modern Lamp Panel
 
 ------------------------------------------------------
+Create: Blazing Hot 0.6.5
+------------------------------------------------------
+
+### Changed:
+
+* [Forge] Updated to Create 6.0.1
+
+------------------------------------------------------
 Create: Blazing Hot 0.6.4
 ------------------------------------------------------
 
