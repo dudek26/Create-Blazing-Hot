@@ -47,6 +47,14 @@ Create: Blazing Hot 0.6.4
 * [Forge] Fixed incorrect melting time for some metal forms
 
 ------------------------------------------------------
+Create: Blazing Hot 0.6.5
+------------------------------------------------------
+
+### Changed:
+
+* [Forge] Updated to Create 6.0.1
+
+------------------------------------------------------
 Create: Blazing Hot 0.6.4
 ------------------------------------------------------
 
