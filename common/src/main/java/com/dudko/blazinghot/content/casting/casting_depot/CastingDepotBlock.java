@@ -6,12 +6,12 @@ import org.jetbrains.annotations.Nullable;
 
 import com.dudko.blazinghot.content.block.shape.Shapes;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancementBehaviour;
+import com.dudko.blazinghot.registry.BlazingBlockEntityTypes;
 import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
 import com.simibubi.create.foundation.block.IBE;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -70,7 +70,7 @@ public class CastingDepotBlock extends HorizontalDirectionalBlock implements IWr
 
 	@Override
 	public BlockEntityType<? extends CastingDepotBlockEntity> getBlockEntityType() {
-		return platformedBlockEntity();
+		return BlazingBlockEntityTypes.CASTING_DEPOT.get();
 	}
 
 	@Override
@@ -80,11 +80,6 @@ public class CastingDepotBlock extends HorizontalDirectionalBlock implements IWr
 			return AllShapes.CASING_12PX.get(Direction.UP);
 
 		return Shapes.CASTING_DEPOT_SHAPE;
-	}
-
-	@ExpectPlatform
-	public static <T extends CastingDepotBlockEntity> BlockEntityType<T> platformedBlockEntity() {
-		throw new AssertionError();
 	}
 
 	@Override
