@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 
-import com.dudko.blazinghot.multiloader.MultiFluids;
+import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
 import com.dudko.blazinghot.multiloader.fabric.MultiRecipeConditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

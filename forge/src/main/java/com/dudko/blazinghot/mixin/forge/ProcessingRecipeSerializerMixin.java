@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.multiloader.MultiFluids;
+import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;

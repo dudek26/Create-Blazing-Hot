@@ -5,7 +5,7 @@ import static com.dudko.blazinghot.registry.CommonTags.Namespace.INTERNAL;
 import static com.dudko.blazinghot.registry.CommonTags.itemTagOf;
 
 import com.dudko.blazinghot.compat.Mods;
-import com.dudko.blazinghot.multiloader.MultiFluids;
+import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;

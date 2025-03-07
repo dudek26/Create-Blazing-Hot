@@ -1,6 +1,6 @@
 package com.dudko.blazinghot.content.kinetics.blaze_mixer;
 
-import static com.dudko.blazinghot.multiloader.MultiFluids.fromBucketFraction;
+import static com.dudko.blazinghot.multiloader.fluid.MultiFluids.fromBucketFraction;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.dudko.blazinghot.config.BlazingConfigs;
-import com.dudko.blazinghot.multiloader.MultiFluids;
+import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.google.gson.JsonObject;
 import com.simibubi.create.AllRecipeTypes;

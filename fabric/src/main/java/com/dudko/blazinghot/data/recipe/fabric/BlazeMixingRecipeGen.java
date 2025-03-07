@@ -13,7 +13,7 @@ import java.util.List;
 import com.dudko.blazinghot.content.metal.Forms;
 import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.content.metal.MoltenMetals;
-import com.dudko.blazinghot.multiloader.MultiFluids;
+import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
