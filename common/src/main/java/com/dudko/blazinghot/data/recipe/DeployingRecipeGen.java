@@ -1,11 +1,11 @@
-package com.dudko.blazinghot.data.recipe.fabric;
+package com.dudko.blazinghot.data.recipe;
 
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.blazeApple;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.brassApple;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.copperAppple;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.goldenApple;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.ironApple;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.zincApple;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.blazeApple;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.brassApple;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.copperAppple;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.goldenApple;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.ironApple;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.zincApple;
 
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.simibubi.create.AllRecipeTypes;

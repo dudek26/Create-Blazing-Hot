@@ -4,6 +4,8 @@ import static com.dudko.blazinghot.multiloader.fluid.MultiFluids.fromBucketFract
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.dudko.blazinghot.BlazingHot;
+
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -120,6 +122,12 @@ public class BlazeMixingRecipe extends BasinRecipe {
 		super.writeAdditional(buffer);
 		FluidIngredient fuel = getFuelFluid().equals(FluidIngredient.EMPTY) ? PLACEHOLDER_FUEL : getFuelFluid();
 		fuel.write(buffer);
+	}
+
+	@Override
+	public void writeAdditional(JsonObject json) {
+		if (!getFuelFluid().equals(FluidIngredient.EMPTY))
+			json.add("blazinghot:fuel", getFuelFluid().serialize());
 	}
 
 	@ExpectPlatform

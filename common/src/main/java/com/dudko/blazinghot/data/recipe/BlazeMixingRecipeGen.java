@@ -1,22 +1,23 @@
-package com.dudko.blazinghot.data.recipe.fabric;
+package com.dudko.blazinghot.data.recipe;
 
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.fuel;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.lava;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.moltenGold;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.netherEssence;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.fuel;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.lava;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.moltenGold;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherEssence;
 import static com.dudko.blazinghot.util.ListUtil.compactLists;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.metal.Forms;
 import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.content.metal.MoltenMetals;
-import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
-import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
@@ -51,29 +52,25 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 							.requireMultiple(netherEssence(), 2)
 							.require(lava(), FluidConstants.BLOCK / 10)
 							.requiresHeat(HeatCondition.SUPERHEATED)
-							.output(BlazingFluidsImpl.NETHER_LAVA.get(), FluidConstants.BLOCK / 10)),
+							.output(MultiRegistries.getFluidFromRegistry(BlazingHot.asResource("nether_lava")).get(),
+									MultiAmount.BUCKET)),
 			MOLTEN_BLAZE_GOLD =
 					create("molten_blaze_gold",
 							b -> b
 									.requireMultiple(netherEssence(), 2)
 									.requireFuel(fuel(), MultiFluids.fromBucketFraction(1, 20))
-									.convertMeltable()
-									.require(moltenGold(), MultiFluids.Constants.INGOT.platformed())
+									.require(moltenGold(), MultiAmount.INGOT)
 									.requiresHeat(HeatCondition.SUPERHEATED)
 									.duration(200)
-									.output(BlazingFluidsImpl.MOLTEN_METALS.getFluid(MoltenMetals.BLAZE_GOLD),
-											MultiFluids.Constants.INGOT.platformed()));
+									.output(MoltenMetals.BLAZE_GOLD.fluid().get(), MultiAmount.INGOT));
 
 	private GeneratedRecipe melting(String name, Ingredient ingredient, Fluid result, long amount, int duration, long fuelCost, Collection<ConditionJsonProvider> conditions) {
-		return create("melting/" + name,
-				(b) -> b
-						.requireFuel(fuel(), fuelCost)
-						.convertMeltable()
-						.withConditions(conditions)
-						.require(ingredient)
-						.duration(duration)
-						.requiresHeat(HeatCondition.SUPERHEATED)
-						.output(result, amount));
+		return create("melting/" + name, (b) -> b.requireFuel(fuel(), fuelCost)
+//						.withConditions(conditions)
+												 .require(ingredient)
+												 .duration(duration)
+												 .requiresHeat(HeatCondition.SUPERHEATED)
+												 .output(result, amount));
 	}
 
 	private GeneratedRecipe melting(ResourceLocation itemLocation, Fluid result, long amount, int duration, long fuelCost, Collection<ConditionJsonProvider> conditions) {

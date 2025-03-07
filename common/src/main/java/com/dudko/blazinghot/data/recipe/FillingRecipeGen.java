@@ -1,12 +1,13 @@
-package com.dudko.blazinghot.data.recipe.fabric;
+package com.dudko.blazinghot.data.recipe;
 
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.apple;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.carrot;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.melon;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.moltenGold;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.apple;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.carrot;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.melon;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.moltenGold;
 
 import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.content.metal.MoltenMetals;
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
@@ -25,11 +26,7 @@ public class FillingRecipeGen extends BlazingProcessingRecipeGen {
 	GeneratedRecipe
 			GLISTERING_MELON =
 			create("glistering_melon",
-					b -> b
-							.convertMeltable()
-							.require(melon())
-							.require(moltenGold(), NUGGET_COVER)
-							.output(Items.GLISTERING_MELON_SLICE)),
+					b -> b.require(melon()).require(moltenGold(), NUGGET_COVER).output(Items.GLISTERING_MELON_SLICE)),
 			GOLDEN_APPLE =
 					metalApple(MoltenMetals.GOLD, Items.GOLDEN_APPLE),
 			GOLDEN_CARROT =
@@ -62,11 +59,11 @@ public class FillingRecipeGen extends BlazingProcessingRecipeGen {
 
 	private GeneratedRecipe metalApple(MoltenMetal metal, ItemLike result) {
 		return create(result.asItem().toString(),
-				b -> b.convertMeltable().require(apple()).require(metal.fluidTag(), INGOT_COVER).output(result));
+				b -> b.require(apple()).require(metal.fluidTag(), MultiAmount.INGOT_COVER).output(result));
 	}
 
 	private GeneratedRecipe metalCarrot(MoltenMetal metal, ItemLike result) {
 		return create(result.asItem().toString(),
-				b -> b.convertMeltable().require(carrot()).require(metal.fluidTag(), NUGGET_COVER).output(result));
+				b -> b.require(carrot()).require(metal.fluidTag(), MultiAmount.NUGGET_COVER).output(result));
 	}
 }

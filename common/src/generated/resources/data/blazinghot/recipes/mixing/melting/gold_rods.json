@@ -1,20 +1,5 @@
 {
-  "fabric:load_conditions": [
-    {
-      "condition": "fabric:any_mod_loaded",
-      "values": [
-        "createaddition"
-      ]
-    }
-  ],
   "type": "create:mixing",
-  "blazinghot:convertMeltable": true,
-  "conditions": [
-    {
-      "type": "forge:mod_loaded",
-      "modid": "createaddition"
-    }
-  ],
   "heatRequirement": "superheated",
   "ingredients": [
     {

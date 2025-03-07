@@ -1,4 +1,4 @@
-package com.dudko.blazinghot.data.recipe.fabric;
+package com.dudko.blazinghot.data.recipe;
 
 import static com.dudko.blazinghot.content.metal.Forms.INGOT;
 import static com.dudko.blazinghot.content.metal.Forms.NUGGET;

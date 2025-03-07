@@ -1,4 +1,4 @@
-package com.dudko.blazinghot.data.recipe.fabric;
+package com.dudko.blazinghot.data.recipe;
 
 import static com.dudko.blazinghot.content.metal.MoltenMetals.ALL;
 
@@ -22,7 +22,6 @@ public class CompactingRecipeGen extends BlazingProcessingRecipeGen {
 					.stream()
 					.map(metal -> create(metal.moltenName(),
 							b -> b
-									.convertMeltable()
 									.require(metal.fluidTag(), metal.compactingResult().getSecond())
 									.output(metal.compactingResult().getFirst())))
 					.toList();

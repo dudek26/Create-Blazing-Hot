@@ -1,15 +1,15 @@
-package com.dudko.blazinghot.data.recipe.fabric;
+package com.dudko.blazinghot.data.recipe;
 
 import static com.dudko.blazinghot.content.metal.Forms.INGOT;
 import static com.dudko.blazinghot.content.metal.Forms.NUGGET;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.apple;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.blazeGoldRod;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.blazeGoldSheet;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.brassIngot;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.carrot;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.coal;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.feather;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.glowstone;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.apple;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.blazeGoldRod;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.blazeGoldSheet;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.brassIngot;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.carrot;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.coal;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.feather;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.glowstone;
 import static com.dudko.blazinghot.registry.BlazingBlocks.BLAZE_GOLD_BLOCK;
 import static com.dudko.blazinghot.registry.BlazingItems.BLAZE_GOLD_INGOT;
 import static com.dudko.blazinghot.registry.BlazingItems.BLAZE_GOLD_NUGGET;

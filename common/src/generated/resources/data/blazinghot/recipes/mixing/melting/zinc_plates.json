@@ -1,23 +1,5 @@
 {
-  "fabric:load_conditions": [
-    {
-      "condition": "fabric:tags_populated",
-      "values": [
-        "blazinghot:zinc_plates"
-      ]
-    }
-  ],
   "type": "create:mixing",
-  "blazinghot:convertMeltable": true,
-  "conditions": [
-    {
-      "type": "forge:not",
-      "value": {
-        "type": "forge:tag_empty",
-        "tag": "blazinghot:zinc_plates"
-      }
-    }
-  ],
   "heatRequirement": "superheated",
   "ingredients": [
     {
