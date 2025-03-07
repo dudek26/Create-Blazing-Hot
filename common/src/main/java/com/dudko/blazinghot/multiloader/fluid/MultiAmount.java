@@ -5,10 +5,14 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 public class MultiAmount {
 
 	public static final MultiAmount EMPTY = standard(0);
+	public static final MultiAmount BOTTLE = standard(20250);
+	public static final MultiAmount BUCKET = standard(81000);
 	public static final MultiAmount INGOT = metal(9000);
 	public static final MultiAmount NUGGET = metal(1000);
 	public static final MultiAmount BLOCK = metal(81000);
 	public static final MultiAmount ROD = metal(4500);
+	public static final MultiAmount INGOT_COVER = INGOT.multiply(6);
+	public static final MultiAmount NUGGET_COVER = NUGGET.multiply(6);
 
 	public final long droplets;
 	public final int millibuckets;
@@ -23,6 +27,20 @@ public class MultiAmount {
 	 */
 	public long get() {
 		return get(this);
+	}
+
+	public MultiAmount multiply(long multiplier) {
+		if (multiplier == 0) {
+			return EMPTY;
+		}
+		return new MultiAmount(droplets * multiplier, (int) (millibuckets * multiplier));
+	}
+
+	public MultiAmount divide(long divider) {
+		if (divider == 0) {
+			return EMPTY;
+		}
+		return new MultiAmount(droplets / divider, (int) (millibuckets / divider));
 	}
 
 	/**

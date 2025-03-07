@@ -1,7 +1,7 @@
-package com.dudko.blazinghot.data.recipe.fabric;
+package com.dudko.blazinghot.data.recipe;
 
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.blazeGoldSheet;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.copperCasing;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.blazeGoldSheet;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.copperCasing;
 
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.simibubi.create.AllRecipeTypes;

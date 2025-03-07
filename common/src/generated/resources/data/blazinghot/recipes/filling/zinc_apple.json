@@ -1,6 +1,5 @@
 {
   "type": "create:filling",
-  "blazinghot:convertMeltable": true,
   "ingredients": [
     {
       "item": "minecraft:apple"

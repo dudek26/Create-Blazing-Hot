@@ -1,17 +1,17 @@
-package com.dudko.blazinghot.data.recipe.fabric;
+package com.dudko.blazinghot.data.recipe;
 
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.andesite;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.cinderFlour;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.clayBall;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.moltenAncientDebris;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.moltenCopper;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.moltenGold;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.moltenIron;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.moltenZinc;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.netherEssence;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.netherrackDust;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.soulDust;
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.stoneDust;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.andesite;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.cinderFlour;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.clayBall;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.moltenAncientDebris;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.moltenCopper;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.moltenGold;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.moltenIron;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.moltenZinc;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherEssence;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherrackDust;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.soulDust;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.stoneDust;
 import static com.dudko.blazinghot.util.ListUtil.compactLists;
 
 import java.util.ArrayList;
@@ -21,10 +21,9 @@ import java.util.List;
 import com.dudko.blazinghot.content.metal.Forms;
 import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.content.metal.MoltenMetals;
-import com.dudko.blazinghot.multiloader.fluid.MultiFluids.Constants;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.BlazingItems;
-import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
@@ -64,39 +63,32 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
 					create("molten_blaze_gold",
 							b -> b
 									.requireMultiple(netherEssence(), 2)
-									.convertMeltable()
-									.require(moltenGold(), Constants.ROD.platformed())
+									.require(moltenGold(), MultiAmount.ROD)
 									.requiresHeat(HeatCondition.SUPERHEATED)
 									.duration(200)
-									.output(MoltenMetals.BLAZE_GOLD.fluid().get(), Constants.ROD.platformed())),
+									.output(MoltenMetals.BLAZE_GOLD.fluid().get(), MultiAmount.ROD)),
 			MOLTEN_NETHERITE =
 					create("molten_netherite",
 							b -> b
-									.convertMeltable()
-									.require(moltenGold(), Forms.INGOT.amount)
-									.require(moltenAncientDebris(), Forms.INGOT.amount)
+									.require(moltenGold(), MultiAmount.INGOT)
+									.require(moltenAncientDebris(), MultiAmount.INGOT)
 									.duration(200)
 									.requiresHeat(HeatCondition.SUPERHEATED)
-									.output(BlazingFluidsImpl.MOLTEN_METALS.getFluid(MoltenMetals.NETHERITE),
-											Forms.INGOT.amount / 4)),
+									.output(MoltenMetals.NETHERITE.fluid().get(), MultiAmount.INGOT.divide(4))),
 			MOLTEN_ANDESITE =
 					create("molten_andesite",
 							b -> b
-									.convertMeltable()
-									.require(moltenIron(), Forms.NUGGET.amount)
+									.require(moltenIron(), MultiAmount.NUGGET)
 									.require(andesite())
 									.requiresHeat(HeatCondition.HEATED)
-									.output(BlazingFluidsImpl.MOLTEN_METALS.getFluid(MoltenMetals.ANDESITE),
-											Forms.ROD.amount * 3)),
+									.output(MoltenMetals.ANDESITE.fluid().get(), MultiAmount.ROD.multiply(3))),
 			MOLTEN_BRASS =
 					create("molten_brass",
 							b -> b
-									.convertMeltable()
-									.require(moltenCopper(), Forms.INGOT.amount)
-									.require(moltenZinc(), Forms.INGOT.amount)
+									.require(moltenCopper(), MultiAmount.INGOT)
+									.require(moltenZinc(), MultiAmount.INGOT)
 									.requiresHeat(HeatCondition.HEATED)
-									.output(BlazingFluidsImpl.MOLTEN_METALS.getFluid(MoltenMetals.BRASS),
-											Forms.INGOT.amount * 2));
+									.output(MoltenMetals.BRASS.fluid().get(), MultiAmount.INGOT.multiply(2)));
 
 	@Override
 	protected IRecipeTypeInfo getRecipeType() {
@@ -104,18 +96,13 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
 
 	}
 
-	private GeneratedRecipe melting(String name, Ingredient ingredient, Fluid result, long amount, int duration, Collection<ConditionJsonProvider> conditions) {
-		return create("melting/" + name,
-				(b) -> b
-						.convertMeltable()
-						.withConditions(conditions)
-						.require(ingredient)
-						.duration(duration)
-						.requiresHeat(HeatCondition.SUPERHEATED)
-						.output(result, amount));
+	private GeneratedRecipe melting(String name, Ingredient ingredient, Fluid result, MultiAmount amount, int duration, Collection<ConditionJsonProvider> conditions) {
+		return create("melting/" + name, (b) -> b
+				//.withConditions(conditions) TODO
+				.require(ingredient).duration(duration).requiresHeat(HeatCondition.SUPERHEATED).output(result, amount));
 	}
 
-	private GeneratedRecipe melting(ResourceLocation itemLocation, Fluid result, long amount, int duration, Collection<ConditionJsonProvider> conditions) {
+	private GeneratedRecipe melting(ResourceLocation itemLocation, Fluid result, MultiAmount amount, int duration, Collection<ConditionJsonProvider> conditions) {
 		return melting(itemLocation.getPath(),
 				Ingredient.of(MultiRegistries.getItemFromRegistry(itemLocation).get()),
 				result,
@@ -124,7 +111,7 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
 				conditions);
 	}
 
-	private GeneratedRecipe melting(TagKey<Item> tag, Fluid result, long amount, int duration, Collection<ConditionJsonProvider> conditions) {
+	private GeneratedRecipe melting(TagKey<Item> tag, Fluid result, MultiAmount amount, int duration, Collection<ConditionJsonProvider> conditions) {
 		return melting(tag.location().getPath(), Ingredient.of(tag), result, amount, duration, conditions);
 	}
 
@@ -136,7 +123,7 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
 				.filter(f -> f.mechanicalMixerMeltable)
 				.forEach(form -> recipes.add(melting(form.internalTag(metal),
 						metal.fluid().get(),
-						form.amount,
+						MultiAmount.metal(form.amount),
 						form.processingTime * 3,
 						metal.getLoadConditions())));
 		metal
@@ -145,7 +132,7 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
 				.filter(f -> f.mechanicalMixerMeltable)
 				.forEach(form -> recipes.add(melting(form.customLocation,
 						metal.fluid().get(),
-						form.amount,
+						MultiAmount.metal(form.amount),
 						form.processingTime * 3,
 						metal.getLoadConditions())));
 		for (Forms optional : metal.optionalForms) {
@@ -154,7 +141,7 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
 			conditions.add(DefaultResourceConditions.tagsPopulated(optional.internalTag(metal)));
 			recipes.add(melting(optional.internalTag(metal),
 					metal.fluid().get(),
-					optional.amount,
+					MultiAmount.metal(optional.amount),
 					optional.processingTime * 3,
 					conditions));
 		}
@@ -162,7 +149,7 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
 			if (!form.mechanicalMixerMeltable) return;
 			recipes.add(melting(form.internalTag(metal),
 					metal.fluid().get(),
-					form.amount,
+					MultiAmount.metal(form.amount),
 					form.processingTime * 3,
 					metal.getLoadConditions(form, mod)));
 		});

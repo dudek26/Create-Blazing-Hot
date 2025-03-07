@@ -1,11 +1,11 @@
-package com.dudko.blazinghot.data.recipe.fabric;
+package com.dudko.blazinghot.data.recipe.forge;
 
 import com.dudko.blazinghot.data.recipe.BlazingProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 
-import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
 import net.minecraft.core.NonNullList;
+import net.minecraftforge.fluids.FluidStack;
 
 public class BlazingProcessingRecipeBuilderImpl {
 
@@ -19,7 +19,7 @@ public class BlazingProcessingRecipeBuilderImpl {
 				fluidStacks =
 				b.params.fluidResults
 						.stream()
-						.map(stack -> new FluidStack(stack.getFluid(), stack.getAmount().get(), stack.getTag()))
+						.map(stack -> new FluidStack(stack.getFluid(), (int) stack.getAmount().get(), stack.getTag()))
 						.collect(NonNullList::create, NonNullList::add, NonNullList::addAll);
 
 		builder.withFluidOutputs(fluidStacks);

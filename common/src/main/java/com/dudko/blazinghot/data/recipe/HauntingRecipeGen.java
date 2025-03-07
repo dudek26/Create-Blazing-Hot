@@ -1,6 +1,6 @@
-package com.dudko.blazinghot.data.recipe.fabric;
+package com.dudko.blazinghot.data.recipe;
 
-import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.netherCompound;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherCompound;
 
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.simibubi.create.AllRecipeTypes;

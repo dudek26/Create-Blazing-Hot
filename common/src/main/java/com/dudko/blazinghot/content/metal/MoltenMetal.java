@@ -19,6 +19,7 @@ import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.compat.Mods;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.dudko.blazinghot.util.ListUtil;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
@@ -49,9 +50,9 @@ public class MoltenMetal {
 	public final Map<Fluid, NonNullSupplier<Block>> fluidInteractions;
 
 	public final Forms[] customForms;
-	public final Pair<ResourceLocation, Long> compactingOverride;
+	public final Pair<ResourceLocation, MultiAmount> compactingOverride;
 
-	MoltenMetal(String name, Mods mod, Forms[] supportedForms, Forms[] optionalForms, Map<Forms, Mods> compatForms, boolean ignoreTagGen, boolean mechanicalMixerMeltable, Map<Fluid, NonNullSupplier<Block>> fluidInteractions, Forms[] customForms, Pair<ResourceLocation, Long> compactingOverride) {
+	MoltenMetal(String name, Mods mod, Forms[] supportedForms, Forms[] optionalForms, Map<Forms, Mods> compatForms, boolean ignoreTagGen, boolean mechanicalMixerMeltable, Map<Fluid, NonNullSupplier<Block>> fluidInteractions, Forms[] customForms, Pair<ResourceLocation, MultiAmount> compactingOverride) {
 		this.name = name;
 		this.mod = mod;
 		this.optionalForms = optionalForms;
@@ -81,9 +82,9 @@ public class MoltenMetal {
 		return Forms.INGOT.resourceLocation(this);
 	}
 
-	public Pair<ItemLike, Long> compactingResult() {
+	public Pair<ItemLike, MultiAmount> compactingResult() {
 		return Pair.of(MultiRegistries.getItemFromRegistry(ingotLocation()).get(),
-				(compactingOverride != null ? compactingOverride.getSecond() : Forms.INGOT.amount));
+				(compactingOverride != null ? compactingOverride.getSecond() : MultiAmount.INGOT));
 	}
 
 	public ResourceLocation fluidLocation() {
@@ -164,7 +165,7 @@ public class MoltenMetal {
 		private boolean mechanicalMixerMeltable = true;
 		private final HashMap<Fluid, NonNullSupplier<Block>> fluidInteractions = new HashMap<>();
 
-		private Pair<ResourceLocation, Long> compactingOverride;
+		private Pair<ResourceLocation, MultiAmount> compactingOverride;
 
 		protected Builder(String name) {
 			this.name = name;
@@ -245,10 +246,10 @@ public class MoltenMetal {
 		 * If compacting the molten metal should return something else than an item that starts with the metal's name and ends with <code>_ingot</code>
 		 *
 		 * @param item     Resource location of the item to return
-		 * @param droplets Amount of droplets required to compact one item
+		 * @param amount Amount of fluid required to compact one item
 		 */
-		public Builder compactingOverride(ResourceLocation item, long droplets) {
-			this.compactingOverride = Pair.of(item, droplets);
+		public Builder compactingOverride(ResourceLocation item, MultiAmount amount) {
+			this.compactingOverride = Pair.of(item, amount);
 			return this;
 		}
 
