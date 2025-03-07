@@ -28,8 +28,8 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.blazinghot]]
-modId="create"
-mandatory=true
-versionRange="[${create_version},)"
-ordering="NONE"
-side="BOTH"
+modId = "create"
+mandatory = true
+versionRange = "[${create_version},)"
+ordering = "NONE"
+side = "BOTH"

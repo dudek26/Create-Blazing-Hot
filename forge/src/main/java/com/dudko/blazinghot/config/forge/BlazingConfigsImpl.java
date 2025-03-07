@@ -3,8 +3,8 @@ package com.dudko.blazinghot.config.forge;
 import java.util.Map;
 
 import com.dudko.blazinghot.config.BlazingConfigs;
-import com.simibubi.create.foundation.config.ConfigBase;
 
+import net.createmod.catnip.config.ConfigBase;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;

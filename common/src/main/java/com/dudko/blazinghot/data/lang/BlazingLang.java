@@ -11,9 +11,9 @@ import static com.dudko.blazinghot.data.lang.BlazingLang.Prefix.RECIPE_TOOLTIP;
 import java.util.function.BiConsumer;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.simibubi.create.foundation.utility.Lang;
-import com.simibubi.create.foundation.utility.LangBuilder;
 
+import net.createmod.catnip.lang.Lang;
+import net.createmod.catnip.lang.LangBuilder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 

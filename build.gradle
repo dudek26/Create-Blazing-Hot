@@ -1,8 +1,8 @@
 import dev.ithundxr.silk.ChangelogText
 
 plugins {
-    id "architectury-plugin" version "3.4-SNAPSHOT"
-    id "dev.architectury.loom" version "1.6-SNAPSHOT" apply false
+    id "architectury-plugin" version "3.4.+"
+    id "dev.architectury.loom" version "1.9.+" apply false
     id "io.github.p03w.machete" version "1.+" // automatic jar compressing on build
     id "dev.ithundxr.silk" version "0.11.16"
     id "me.modmuss50.mod-publish-plugin" version "0.6.3"
@@ -19,6 +19,9 @@ subprojects {
         silentMojangMappingsLicense()
 
         runs.configureEach {
+            vmArg("-XX:+AllowEnhancedClassRedefinition")
+            vmArg("-XX:+IgnoreUnrecognizedVMOptions")
+            vmArg("-Dmixin.debug.export=true")
             vmArg("-Dmixin.env.remapRefMap=true")
             vmArg("-Dmixin.env.refMapRemappingFile=${projectDir}/build/createSrgToMcp/output.srg")
         }
@@ -30,23 +33,15 @@ subprojects {
         maven { url = "https://maven.shedaniel.me/" } // Cloth Config, REI
         maven { url = "https://maven.blamejared.com/" } // JEI
         maven { url = "https://maven.parchmentmc.org" } // Parchment mappings
-        maven { url = "https://maven.quiltmc.org/repository/release" } // Quilt Mappings
-        maven { // Flywheel
-            url = "https://maven.tterrag.com/"
-            content {
-                // need to be specific here due to version overlaps
-                includeGroup("com.jozufozu.flywheel")
-            }
-        }
+        maven { url = "https://maven.createmod.net" } // Create Forge, Ponder Forge, Flywheel
     }
 
     dependencies {
         minecraft "com.mojang:minecraft:${minecraft_version}"
-        // layered mappings - Mojmap names, parchment and QM docs and parameters
+        // layered mappings - Mojmap names, parchment
         mappings(loom.layered {
-            it.mappings("org.quiltmc:quilt-mappings:${minecraft_version}+build.${qm_version}:intermediary-v2")
-            it.parchment("org.parchmentmc.data:parchment-${minecraft_version}:${parchment_version}@zip")
             it.officialMojangMappings { nameSyntheticMembers = false }
+            it.parchment("org.parchmentmc.data:parchment-${minecraft_version}:${parchment_version}@zip")
         })
 
         // see each subproject for dependencies.

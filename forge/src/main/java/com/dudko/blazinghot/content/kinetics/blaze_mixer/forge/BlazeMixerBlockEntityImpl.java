@@ -5,6 +5,11 @@ import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecip
 import java.util.List;
 import java.util.Optional;
 
+import net.createmod.catnip.animation.AnimationTickHolder;
+import net.createmod.catnip.data.Couple;
+
+import net.createmod.catnip.math.VecHelper;
+
 import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.config.BlazingConfigs;
@@ -27,9 +32,6 @@ import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTank
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour.TankSegment;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.item.SmartInventory;
-import com.simibubi.create.foundation.utility.AnimationTickHolder;
-import com.simibubi.create.foundation.utility.Couple;
-import com.simibubi.create.foundation.utility.VecHelper;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -64,7 +66,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 
 	public int fuelCost;
 
-	public BlazeMixerBlockEntityImpl(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+	protected BlazeMixerBlockEntityImpl(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 	}
 
@@ -154,8 +156,17 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 						fuelCost = calculatedCost;
 					}
 
+					int
+							maxMultiplier =
+							currentRecipe != null && currentRecipe
+									.getId()
+									.getPath()
+									.startsWith("blaze_mixing/melting") ? 16 : 1;
+
 					processingTicks =
-							Mth.clamp((Mth.log2((int) (512 / speed))) * Mth.ceil(recipeSpeed * 15) + 1, 1, 512);
+							Mth.clamp((Mth.log2((int) (512 / speed))) * Mth.ceil(recipeSpeed * 15) + 1,
+									1,
+									512 * maxMultiplier);
 
 					Optional<BasinBlockEntity> basin = getBasin();
 					if (basin.isPresent()) {
@@ -345,5 +356,9 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 			return true;
 		}
 		else return !a.getIngredients().isEmpty() && !b.getIngredients().isEmpty();
+	}
+
+	public static BlazeMixerBlockEntity of(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+		return new BlazeMixerBlockEntityImpl(type, pos, state);
 	}
 }

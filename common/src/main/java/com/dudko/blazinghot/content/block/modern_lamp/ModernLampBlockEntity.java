@@ -8,9 +8,9 @@ import org.jetbrains.annotations.Nullable;
 
 import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.data.lang.BlazingLang;
-import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
-import com.simibubi.create.foundation.utility.LangBuilder;
+import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 
+import net.createmod.catnip.lang.LangBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;

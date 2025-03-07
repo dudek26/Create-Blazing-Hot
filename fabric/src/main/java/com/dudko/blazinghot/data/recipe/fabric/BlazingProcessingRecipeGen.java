@@ -10,11 +10,11 @@ import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
+import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
-import com.simibubi.create.foundation.utility.RegisteredObjects;
 
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
@@ -71,8 +71,10 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 			transform
 					.apply((BlazingProcessingRecipeBuilder<T>) new BlazingProcessingRecipeBuilder<>(serializer.getFactory(),
 							new ResourceLocation(namespace,
-									RegisteredObjects.getKeyOrThrow(itemLike.asItem()).getPath())).withItemIngredients(
-							Ingredient.of(itemLike)))
+									MultiRegistries
+											.getRegisteredObjectsHelper()
+											.getKeyOrThrow(itemLike.asItem())
+											.getPath())).withItemIngredients(Ingredient.of(itemLike)))
 					.build(c);
 		};
 		all.add(generatedRecipe);
@@ -122,7 +124,9 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 
 	protected Supplier<ResourceLocation> idWithSuffix(Supplier<ItemLike> item, String suffix) {
 		return () -> {
-			ResourceLocation registryName = RegisteredObjects.getKeyOrThrow(item.get().asItem());
+			ResourceLocation
+					registryName =
+					MultiRegistries.getRegisteredObjectsHelper().getKeyOrThrow(item.get().asItem());
 			return BlazingHot.asResource(registryName.getPath() + suffix);
 		};
 	}

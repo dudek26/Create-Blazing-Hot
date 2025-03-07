@@ -6,8 +6,8 @@ import java.util.function.BiConsumer;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.util.LangUtil;
-import com.simibubi.create.foundation.utility.Lang;
 
+import net.createmod.catnip.lang.Lang;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;

@@ -35,7 +35,19 @@ public class CastingDepotRendererImpl {
 			float units = tankSegment.getTotalUnits(partialTicks);
 			if (units < 1) continue;
 
-			FluidRenderer.renderFluidBox(renderedFluid, xMin, yMin, zMin, xMax, yMax, zMax, buffer, ms, light, false);
+			FluidRenderer.renderFluidBox(renderedFluid.getFluid(),
+					renderedFluid.getAmount(),
+					xMin,
+					yMin,
+					zMin,
+					xMax,
+					yMax,
+					zMax,
+					buffer,
+					ms,
+					light,
+					false,
+					false);
 
 			xMin = xMax;
 		}

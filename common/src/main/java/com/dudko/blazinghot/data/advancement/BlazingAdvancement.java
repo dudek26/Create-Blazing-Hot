@@ -8,7 +8,6 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.simibubi.create.foundation.utility.Components;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 
 import net.minecraft.advancements.Advancement;
@@ -22,6 +21,7 @@ import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.ItemUsedOnLocationTrigger;
 import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.advancements.critereon.NbtPredicate;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
@@ -65,8 +65,8 @@ public class BlazingAdvancement {
 		if (t.rewards != null) builder.rewards(t.rewards);
 
 		builder.display(t.icon,
-				Components.translatable(titleKey()),
-				Components.translatable(descriptionKey()).withStyle(s -> s.withColor(0xDBA213)),
+				Component.translatable(titleKey()),
+				Component.translatable(descriptionKey()).withStyle(s -> s.withColor(0xDBA213)),
 				id.equals("root") ? BACKGROUND : null,
 				t.type.frame,
 				t.type.toast,
