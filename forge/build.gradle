@@ -108,6 +108,9 @@ dependencies {
     modCompileOnly("dev.engine-room.flywheel:flywheel-forge-api-${flywheel_forge_minecraft_version}:${flywheel_forge_version}")
     modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-${flywheel_forge_minecraft_version}:${flywheel_forge_version}")
 
+    // Architectury API
+    modImplementation "dev.architectury:architectury-forge:$architectury_api_version"
+
     // Development QOL
     modLocalRuntime("mezz.jei:jei-${minecraft_version}-forge:${jei_version}") { transitive = false }
 

@@ -1,32 +1,18 @@
 package com.dudko.blazinghot.data.recipe;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.function.Consumer;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import org.jetbrains.annotations.NotNull;
-
-import com.dudko.blazinghot.data.conditions.LoadCondition;
-import com.dudko.blazinghot.data.conditions.LoadConditionHelper;
 import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.multiloader.fluid.MultiFluidIngredient;
 import com.dudko.blazinghot.multiloader.fluid.MultiFluidStack;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder.ProcessingRecipeFactory;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.data.SimpleDatagenIngredient;
 import com.simibubi.create.foundation.data.recipe.Mods;
 import com.simibubi.create.foundation.fluid.FluidHelper;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
-import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.tterrag.registrate.util.DataIngredient;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
@@ -38,7 +24,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 
@@ -47,11 +32,11 @@ import net.minecraft.world.level.material.Fluid;
  */
 public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 
-	public final ResourceLocation recipeId;
-	public final ProcessingRecipeFactory<T> factory;
-	public final BlazingProcessingRecipeParams params;
+	protected ResourceLocation recipeId;
+	protected BlazingProcessingRecipeFactory<T> factory;
+	protected BlazingProcessingRecipeParams params;
 
-	public BlazingProcessingRecipeBuilder(ProcessingRecipeFactory<T> factory, ResourceLocation recipeId) {
+	public BlazingProcessingRecipeBuilder(BlazingProcessingRecipeFactory<T> factory, ResourceLocation recipeId) {
 		this.factory = factory;
 		this.recipeId = recipeId;
 		params = new BlazingProcessingRecipeParams(recipeId);
@@ -111,30 +96,16 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 		return this;
 	}
 
-	public BlazingProcessingRecipeBuilder<T> withCondition(LoadCondition<?> condition) {
-		params.conditions.add(condition);
-		return this;
-	}
-
-	public BlazingProcessingRecipeBuilder<T> withConditions(LoadCondition<?>... conditions) {
-		return withConditions(List.of(conditions));
-	}
-
-	public BlazingProcessingRecipeBuilder<T> withConditions(Collection<LoadCondition<?>> conditions) {
-		params.conditions.addAll(conditions);
-		return this;
-	}
-
 	public T build() {
-		return platformBuild(this);
+		return factory.create(params);
 	}
 
 	public void build(Consumer<FinishedRecipe> consumer) {
-		consumer.accept(new BlazingDataGenResult<>(build(), params.fuel, params.conditions));
+
 	}
 
 	@ExpectPlatform
-	public static <T extends ProcessingRecipe<?>> T platformBuild(BlazingProcessingRecipeBuilder<T> builder) {
+	public static <T extends ProcessingRecipe<?>> void build(BlazingProcessingRecipeBuilder<T> builder, Consumer<FinishedRecipe> consumer) {
 		throw new AssertionError();
 	}
 
@@ -182,42 +153,6 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 	public BlazingProcessingRecipeBuilder<T> require(FluidIngredient ingredient) {
 		params.fluidIngredients.add(ingredient);
 		return this;
-	}
-
-	public BlazingProcessingRecipeBuilder<T> requireMultiple(Ingredient ingredient, int amount) {
-		for (int i = 0; i < amount; i++) {
-			require(ingredient);
-		}
-		return this;
-	}
-
-	public BlazingProcessingRecipeBuilder<T> requireMultiple(TagKey<Item> tag, int amount) {
-		return requireMultiple(Ingredient.of(tag), amount);
-	}
-
-	public BlazingProcessingRecipeBuilder<T> requireMultiple(ItemLike item, int amount) {
-		return requireMultiple(Ingredient.of(item), amount);
-	}
-
-	public BlazingProcessingRecipeBuilder<T> requireFuel(FluidIngredient fuel) {
-		params.fuel = fuel;
-		return this;
-	}
-
-	public BlazingProcessingRecipeBuilder<T> requireFuel(Fluid fluid, long amount) {
-		return requireFuel(fluid, MultiAmount.standard(amount));
-	}
-
-	public BlazingProcessingRecipeBuilder<T> requireFuel(Fluid fluid, MultiAmount amount) {
-		return requireFuel(MultiFluidIngredient.fromFluid(fluid, amount));
-	}
-
-	public BlazingProcessingRecipeBuilder<T> requireFuel(TagKey<Fluid> tag, long amount) {
-		return requireFuel(tag, MultiAmount.standard(amount));
-	}
-
-	public BlazingProcessingRecipeBuilder<T> requireFuel(TagKey<Fluid> tag, MultiAmount amount) {
-		return requireFuel(MultiFluidIngredient.fromTag(tag, amount));
 	}
 
 	public BlazingProcessingRecipeBuilder<T> output(ItemLike item) {
@@ -284,18 +219,20 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 		return this;
 	}
 
+	@FunctionalInterface
+	public interface BlazingProcessingRecipeFactory<T extends ProcessingRecipe<?>> {
+		T create(BlazingProcessingRecipeParams params);
+	}
+
 	public static class BlazingProcessingRecipeParams {
 
-		public ResourceLocation id;
-		public NonNullList<Ingredient> ingredients;
-		public NonNullList<ProcessingOutput> results;
-		public NonNullList<FluidIngredient> fluidIngredients;
-		public NonNullList<MultiFluidStack> fluidResults;
-		public int processingDuration;
-		public HeatCondition requiredHeat;
-
-		public FluidIngredient fuel;
-		public NonNullList<LoadCondition<?>> conditions;
+		protected ResourceLocation id;
+		protected NonNullList<Ingredient> ingredients;
+		protected NonNullList<ProcessingOutput> results;
+		protected NonNullList<FluidIngredient> fluidIngredients;
+		protected NonNullList<MultiFluidStack> fluidResults;
+		protected int processingDuration;
+		protected HeatCondition requiredHeat;
 
 		public boolean keepHeldItem;
 
@@ -308,70 +245,8 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 			processingDuration = 0;
 			requiredHeat = HeatCondition.NONE;
 			keepHeldItem = false;
-			fuel = FluidIngredient.EMPTY;
-			conditions = NonNullList.create();
 		}
 
-	}
-
-	@ParametersAreNonnullByDefault
-	public static class BlazingDataGenResult<S extends ProcessingRecipe<?>> implements FinishedRecipe {
-
-		private final List<LoadCondition<?>> recipeConditions = new ArrayList<>();
-		private final ProcessingRecipeSerializer<S> serializer;
-		private final ResourceLocation id;
-		private final S recipe;
-		private final FluidIngredient fuel;
-
-		@SuppressWarnings("unchecked")
-		public BlazingDataGenResult(S recipe, FluidIngredient fuel, List<LoadCondition<?>> conditions) {
-			this.recipe = recipe;
-			this.recipeConditions.addAll(conditions);
-			IRecipeTypeInfo recipeType = this.recipe.getTypeInfo();
-			ResourceLocation typeId = recipeType.getId();
-
-			if (!(recipeType.getSerializer() instanceof ProcessingRecipeSerializer))
-				throw new IllegalStateException("Cannot datagen ProcessingRecipe of type: " + typeId);
-
-			this.id =
-					new ResourceLocation(recipe.getId().getNamespace(),
-							typeId.getPath() + "/" + recipe.getId().getPath());
-			this.serializer = (ProcessingRecipeSerializer<S>) recipe.getSerializer();
-
-			this.fuel = fuel;
-		}
-
-		@Override
-		public void serializeRecipeData(JsonObject json) {
-			if (fuel != null && fuel != FluidIngredient.EMPTY) json.add("blazinghot:fuel", fuel.serialize());
-
-			serializer.write(json, recipe);
-
-			if (recipeConditions.isEmpty()) return;
-			JsonArray conds = new JsonArray();
-			recipeConditions.forEach(c -> conds.add(c.toJson()));
-			json.add(LoadConditionHelper.conditionsKey(), conds);
-		}
-
-		@Override
-		public @NotNull ResourceLocation getId() {
-			return id;
-		}
-
-		@Override
-		public @NotNull RecipeSerializer<?> getType() {
-			return serializer;
-		}
-
-		@Override
-		public JsonObject serializeAdvancement() {
-			return null;
-		}
-
-		@Override
-		public ResourceLocation getAdvancementId() {
-			return null;
-		}
 	}
 
 }
