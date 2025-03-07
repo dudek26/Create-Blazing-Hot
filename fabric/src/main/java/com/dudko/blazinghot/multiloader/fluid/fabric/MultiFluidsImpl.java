@@ -1,4 +1,4 @@
-package com.dudko.blazinghot.multiloader.forge;
+package com.dudko.blazinghot.multiloader.fluid.fabric;
 
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
@@ -8,15 +8,15 @@ import net.minecraft.world.level.material.Fluid;
 
 public class MultiFluidsImpl {
 	public static long platformedAmount(long droplets) {
-		return droplets / 81;
+		return droplets;
 	}
 
 	public static String platformedName() {
-		return "milibuckets";
+		return "droplets";
 	}
 
 	public static String conversionNote() {
-		return "";
+		return "(1 milibucket = 81 droplets)";
 	}
 
 	public static boolean recipeResultContains(ProcessingRecipe<?> r, TagKey<Fluid> fluid) {
@@ -24,7 +24,7 @@ public class MultiFluidsImpl {
 	}
 
 	public static FluidIngredient fluidIngredientFromFluid(Fluid fluid, long amount) {
-		return FluidIngredient.fromFluid(fluid, (int) platformedAmount(amount));
+		return FluidIngredient.fromFluid(fluid, amount);
 	}
 
 	public static long getFluidAmount(FluidIngredient ingredient) {

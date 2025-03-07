@@ -1,4 +1,4 @@
-package com.dudko.blazinghot.data.recipe.fabric;
+package com.dudko.blazinghot.data.recipe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,8 @@ import java.util.function.Supplier;
 import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.multiloader.fluid.MultiFluids.Constants;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
+import com.dudko.blazinghot.multiloader.fluid.MultiFluids.Constants;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
@@ -35,17 +35,17 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 	}
 
 	public static DataProvider registerAll(PackOutput output) {
-		GENERATORS.add(new PressingRecipeGen(output));
-		GENERATORS.add(new CompactingRecipeGen(output));
-		GENERATORS.add(new CrushingRecipeGen(output));
-		GENERATORS.add(new CuttingRecipeGen(output));
-		GENERATORS.add(new DeployingRecipeGen(output));
-		GENERATORS.add(new MillingRecipeGen(output));
-		GENERATORS.add(new MixingRecipeGen(output));
-		GENERATORS.add(new FillingRecipeGen(output));
-		GENERATORS.add(new HauntingRecipeGen(output));
-		GENERATORS.add(new ItemApplicationRecipeGen(output));
-		GENERATORS.add(new BlazeMixingRecipeGen(output));
+//		GENERATORS.add(new PressingRecipeGen(output));
+//		GENERATORS.add(new CompactingRecipeGen(output));
+//		GENERATORS.add(new CrushingRecipeGen(output));
+//		GENERATORS.add(new CuttingRecipeGen(output));
+//		GENERATORS.add(new DeployingRecipeGen(output));
+//		GENERATORS.add(new MillingRecipeGen(output));
+//		GENERATORS.add(new MixingRecipeGen(output));
+//		GENERATORS.add(new FillingRecipeGen(output));
+//		GENERATORS.add(new HauntingRecipeGen(output));
+//		GENERATORS.add(new ItemApplicationRecipeGen(output));
+//		GENERATORS.add(new BlazeMixingRecipeGen(output));
 
 		return new DataProvider() {
 
@@ -69,7 +69,7 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 		GeneratedRecipe generatedRecipe = c -> {
 			ItemLike itemLike = singleIngredient.get();
 			transform
-					.apply((BlazingProcessingRecipeBuilder<T>) new BlazingProcessingRecipeBuilder<>(serializer.getFactory(),
+					.apply(new BlazingProcessingRecipeBuilder<>(serializer.getFactory(),
 							new ResourceLocation(namespace,
 									MultiRegistries
 											.getRegisteredObjectsHelper()

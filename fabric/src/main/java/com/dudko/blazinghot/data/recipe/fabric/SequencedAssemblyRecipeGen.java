@@ -14,7 +14,7 @@ import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.stellar
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.stellarIronApple;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingIngredients.stellarZincApple;
 import static com.dudko.blazinghot.data.recipe.fabric.BlazingProcessingRecipeGen.INGOT_COVER;
-import static com.dudko.blazinghot.multiloader.MultiFluids.Constants.INGOT;
+import static com.dudko.blazinghot.multiloader.fluid.MultiFluids.Constants.INGOT;
 import static com.dudko.blazinghot.registry.BlazingItems.ANCIENT_ENCHANTED_APPLE;
 import static com.dudko.blazinghot.registry.BlazingItems.BRASSY_STELLAR_BRASS_APPLE;
 import static com.dudko.blazinghot.registry.BlazingItems.BURNING_STELLAR_BLAZE_APPLE;

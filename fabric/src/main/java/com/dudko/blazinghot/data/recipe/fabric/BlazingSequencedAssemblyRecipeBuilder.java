@@ -6,7 +6,7 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 import com.dudko.blazinghot.mixin.fabric.SequencedAssemblyRecipeBuilderAccessor;
-import com.dudko.blazinghot.multiloader.MultiFluids;
+import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
 import com.dudko.blazinghot.multiloader.fabric.MultiRecipeConditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
