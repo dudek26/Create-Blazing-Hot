@@ -4,6 +4,8 @@ import static com.dudko.blazinghot.multiloader.fluid.MultiFluids.fromBucketFract
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.dudko.blazinghot.BlazingHot;
+
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

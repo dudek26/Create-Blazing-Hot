@@ -3,8 +3,8 @@ package com.dudko.blazinghot.data.recipe;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -16,7 +16,6 @@ import com.dudko.blazinghot.multiloader.fluid.MultiFluids.Constants;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.dudko.blazinghot.multiloader.fluid.MultiFluids.Constants;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
@@ -39,17 +38,17 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 	}
 
 	public static DataProvider registerAll(PackOutput output) {
-//		GENERATORS.add(new PressingRecipeGen(output));
-//		GENERATORS.add(new CompactingRecipeGen(output));
-//		GENERATORS.add(new CrushingRecipeGen(output));
-//		GENERATORS.add(new CuttingRecipeGen(output));
-//		GENERATORS.add(new DeployingRecipeGen(output));
-//		GENERATORS.add(new MillingRecipeGen(output));
-//		GENERATORS.add(new MixingRecipeGen(output));
-//		GENERATORS.add(new FillingRecipeGen(output));
-//		GENERATORS.add(new HauntingRecipeGen(output));
-//		GENERATORS.add(new ItemApplicationRecipeGen(output));
-//		GENERATORS.add(new BlazeMixingRecipeGen(output));
+		GENERATORS.add(new PressingRecipeGen(output));
+		GENERATORS.add(new CompactingRecipeGen(output));
+		GENERATORS.add(new CrushingRecipeGen(output));
+		GENERATORS.add(new CuttingRecipeGen(output));
+		GENERATORS.add(new DeployingRecipeGen(output));
+		GENERATORS.add(new MillingRecipeGen(output));
+		GENERATORS.add(new MixingRecipeGen(output));
+		GENERATORS.add(new FillingRecipeGen(output));
+		GENERATORS.add(new HauntingRecipeGen(output));
+		GENERATORS.add(new ItemApplicationRecipeGen(output));
+		GENERATORS.add(new BlazeMixingRecipeGen(output));
 
 		return new DataProvider() {
 
@@ -68,7 +67,7 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 		};
 	}
 
-	protected <T extends ProcessingRecipe<?>> GeneratedRecipe create(String namespace, Supplier<ItemLike> singleIngredient, Function<BlazingProcessingRecipeBuilder<T>, ProcessingRecipeBuilder<T>> transform) {
+	protected <T extends ProcessingRecipe<?>> GeneratedRecipe create(String namespace, Supplier<ItemLike> singleIngredient, UnaryOperator<BlazingProcessingRecipeBuilder<T>> transform) {
 		ProcessingRecipeSerializer<T> serializer = getSerializer();
 		GeneratedRecipe generatedRecipe = c -> {
 			ItemLike itemLike = singleIngredient.get();
@@ -89,11 +88,11 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 	 * Create a processing recipe with a single itemstack ingredient, using its id
 	 * as the name of the recipe
 	 */
-	<T extends ProcessingRecipe<?>> GeneratedRecipe create(Supplier<ItemLike> singleIngredient, Function<BlazingProcessingRecipeBuilder<T>, ProcessingRecipeBuilder<T>> transform) {
+	<T extends ProcessingRecipe<?>> GeneratedRecipe create(Supplier<ItemLike> singleIngredient, UnaryOperator<BlazingProcessingRecipeBuilder<T>> transform) {
 		return create(BlazingHot.ID, singleIngredient, transform);
 	}
 
-	protected <T extends ProcessingRecipe<?>> GeneratedRecipe createWithDeferredId(Supplier<ResourceLocation> name, Function<BlazingProcessingRecipeBuilder<T>, ProcessingRecipeBuilder<T>> transform) {
+	protected <T extends ProcessingRecipe<?>> GeneratedRecipe createWithDeferredId(Supplier<ResourceLocation> name, UnaryOperator<BlazingProcessingRecipeBuilder<T>> transform) {
 		ProcessingRecipeSerializer<T> serializer = getSerializer();
 		GeneratedRecipe
 				generatedRecipe =
@@ -108,7 +107,7 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 	 * Create a new processing recipe, with recipe definitions provided by the
 	 * function
 	 */
-	protected <T extends ProcessingRecipe<?>> GeneratedRecipe create(ResourceLocation name, Function<BlazingProcessingRecipeBuilder<T>, ProcessingRecipeBuilder<T>> transform) {
+	protected <T extends ProcessingRecipe<?>> GeneratedRecipe create(ResourceLocation name, UnaryOperator<BlazingProcessingRecipeBuilder<T>> transform) {
 		return createWithDeferredId(() -> name, transform);
 	}
 
@@ -116,7 +115,7 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 	 * Create a new processing recipe, with recipe definitions provided by the
 	 * function
 	 */
-	<T extends ProcessingRecipe<?>> GeneratedRecipe create(String name, Function<BlazingProcessingRecipeBuilder<T>, ProcessingRecipeBuilder<T>> transform) {
+	<T extends ProcessingRecipe<?>> GeneratedRecipe create(String name, UnaryOperator<BlazingProcessingRecipeBuilder<T>> transform) {
 		return create(BlazingHot.asResource(name), transform);
 	}
 

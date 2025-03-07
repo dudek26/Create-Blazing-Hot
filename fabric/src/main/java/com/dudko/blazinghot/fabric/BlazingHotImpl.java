@@ -46,7 +46,7 @@ public class BlazingHotImpl implements ModInitializer {
 		REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, BlazingTagGen::generateFluidTags);
 		REGISTRATE.addDataGenerator(ProviderType.LANG, BlazingLangGen::generate);
 
-		pack.addProvider(SequencedAssemblyRecipeGen::new);
+//		pack.addProvider(SequencedAssemblyRecipeGen::new);
 		pack.addProvider(CraftingRecipeGen::new);
 		pack.addProvider(BlazingProcessingRecipeGen::registerAll);
 		pack.addProvider(BlazingAdvancements::new);
