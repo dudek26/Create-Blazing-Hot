@@ -10,6 +10,15 @@ architectury {
     forge()
 }
 
+def generatedResources = file("forge/src/generated/resources")
+def existingResources = file("common/src/main/resources")
+
+sourceSets {
+    main {
+        resources.srcDir generatedResources
+    }
+}
+
 loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath
 
@@ -20,6 +29,16 @@ loom {
 
     runs.configureEach {
         programArg "-mixin.config=create.mixins.json"
+    }
+
+    //    Runs only on Forge
+    runs {
+        data {
+            data()
+            programArgs "--all", "--mod", "blazinghot"
+            programArgs "--output", generatedResources.absolutePath
+            programArgs "--existing", existingResources.absolutePath
+        }
     }
 }
 
