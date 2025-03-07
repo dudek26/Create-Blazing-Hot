@@ -104,7 +104,6 @@ public class BlazeMixingRecipe extends BasinRecipe {
 		super.readAdditional(json);
 		if (GsonHelper.isValidNode(json, "blazinghot:fuel")) {
 			fuelFluid = FluidIngredient.deserialize(json.get("blazinghot:fuel"));
-			platformFuel(fuelFluid);
 		}
 	}
 
@@ -128,10 +127,5 @@ public class BlazeMixingRecipe extends BasinRecipe {
 	public void writeAdditional(JsonObject json) {
 		if (!getFuelFluid().equals(FluidIngredient.EMPTY))
 			json.add("blazinghot:fuel", getFuelFluid().serialize());
-	}
-
-	@ExpectPlatform
-	public static void platformFuel(FluidIngredient fuel) {
-		throw new AssertionError();
 	}
 }
