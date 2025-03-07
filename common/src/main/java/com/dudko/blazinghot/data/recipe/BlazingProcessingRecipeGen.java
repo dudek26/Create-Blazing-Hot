@@ -9,6 +9,10 @@ import java.util.function.UnaryOperator;
 import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.BlazingHot;
+<<<<<<<< HEAD:common/src/main/java/com/dudko/blazinghot/data/recipe/BlazingProcessingRecipeGen.java
+========
+import com.dudko.blazinghot.multiloader.fluid.MultiFluids.Constants;
+>>>>>>>> 9fe0e00 (wip recipe datagen rework):fabric/src/main/java/com/dudko/blazinghot/data/recipe/fabric/BlazingProcessingRecipeGen.java
 import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.dudko.blazinghot.multiloader.fluid.MultiFluids.Constants;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
