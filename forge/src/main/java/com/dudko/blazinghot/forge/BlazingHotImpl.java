@@ -9,6 +9,7 @@ import com.dudko.blazinghot.registry.forge.BlazingCreativeTabsImpl;
 import com.dudko.blazinghot.registry.forge.BlazingFluidsImpl;
 import com.dudko.blazinghot.registry.forge.BlazingRecipeTypesImpl;
 
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -26,6 +27,8 @@ public class BlazingHotImpl {
 
 		BlazingCreativeTabsImpl.register(modEventBus);
 		BlazingHot.init();
+
+		modEventBus.addListener(EventPriority.LOWEST, BlazingHotDataForge::gatherData);
 		BlazingConfigsImpl.register(ModLoadingContext.get());
 		Env.CLIENT.runIfCurrent(() -> () -> BlazingHotClientImpl.initClient(modEventBus));
 	}

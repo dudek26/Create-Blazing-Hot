@@ -1,27 +1,28 @@
-package com.dudko.blazinghot.data.fabric;
+package com.dudko.blazinghot.data.forge;
 
+import static com.dudko.blazinghot.data.BlazingTagGen.OPTIONAL_TAGS;
+import static com.dudko.blazinghot.data.BlazingTagGen.addTagsIfAbsent;
+import static com.dudko.blazinghot.data.BlazingTagGen.tagAppender;
 import static com.dudko.blazinghot.registry.CommonTags.Namespace.COMMON;
 import static com.dudko.blazinghot.registry.CommonTags.Namespace.FORGE;
 import static com.dudko.blazinghot.registry.CommonTags.Namespace.INTERNAL;
 import static com.dudko.blazinghot.registry.CommonTags.itemTagOf;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import com.dudko.blazinghot.data.BlazingTagGen;
+
+import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.content.metal.Forms;
 import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
-import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
+import com.dudko.blazinghot.registry.forge.BlazingFluidsImpl;
 import com.dudko.blazinghot.util.DyeUtil;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 
 import net.minecraft.data.tags.TagsProvider;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -29,22 +30,14 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.registries.ForgeRegistries;
 
-public class BlazingTagGen {
-
-	private static final Map<TagKey<Block>, List<ResourceLocation>> OPTIONAL_TAGS = new HashMap<>();
-
-	@SafeVarargs
-	public static void addOptionalTag(ResourceLocation id, TagKey<Block>... tags) {
-		for (TagKey<Block> tag : tags) {
-			OPTIONAL_TAGS.computeIfAbsent(tag, (e) -> new ArrayList<>()).add(id);
-		}
-	}
+public class BlazingTagGenImpl {
 
 	public static void generateBlockTags(RegistrateTagsProvider<Block> prov) {
 		for (BlazingTags.Blocks tag : BlazingTags.Blocks.values()) {
 			if (tag.alwaysDatagen) {
-				tagAppender(prov, tag);
+				BlazingTagGen.tagAppender(prov, tag);
 			}
 		}
 		for (TagKey<Block> tag : OPTIONAL_TAGS.keySet()) {
@@ -62,12 +55,12 @@ public class BlazingTagGen {
 	public static void generateFluidTags(RegistrateTagsProvider<Fluid> prov) {
 		prov
 				.addTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag)
-				.add(Fluids.LAVA)
-				.add(BlazingFluidsImpl.NETHER_LAVA.getSource());
+				.add(ForgeRegistries.FLUIDS.getResourceKey(Fluids.LAVA).get())
+				.add(ForgeRegistries.FLUIDS.getResourceKey(BlazingFluidsImpl.NETHER_LAVA.get()).get());
 
 		for (BlazingTags.Fluids tag : BlazingTags.Fluids.values()) {
 			if (tag.alwaysDatagen) {
-				tagAppender(prov, tag);
+				BlazingTagGen.tagAppender(prov, tag);
 			}
 		}
 
@@ -88,31 +81,29 @@ public class BlazingTagGen {
 		}
 	}
 
-	private static final Set<TagKey<Item>> ALL_INTERNAL_ITEM_TAGS = new HashSet<>();
-
 	public static void generateItemTags(RegistrateTagsProvider<Item> prov) {
 		prov
 				.addTag(BlazingTags.Items.NETHER_FLORA.tag)
-				.add(Items.WARPED_FUNGUS,
-						Items.CRIMSON_FUNGUS,
-						Items.WARPED_ROOTS,
-						Items.CRIMSON_ROOTS,
-						Items.WEEPING_VINES,
-						Items.TWISTING_VINES,
-						Items.NETHER_SPROUTS);
+				.add(itemKey(Items.WARPED_FUNGUS),
+						itemKey(Items.CRIMSON_FUNGUS),
+						itemKey(Items.WARPED_ROOTS),
+						itemKey(Items.CRIMSON_ROOTS),
+						itemKey(Items.WEEPING_VINES),
+						itemKey(Items.TWISTING_VINES),
+						itemKey(Items.NETHER_SPROUTS));
 
-		prov.addTag(BlazingTags.Items.METAL_CARROTS.tag).add(Items.GOLDEN_CARROT);
-		prov.addTag(BlazingTags.Items.METAL_APPLES.tag).add(Items.GOLDEN_APPLE);
-		prov.addTag(BlazingTags.Items.ENCHANTED_METAL_APPLES.tag).add(Items.ENCHANTED_GOLDEN_APPLE);
+		prov.addTag(BlazingTags.Items.METAL_CARROTS.tag).add(itemKey(Items.GOLDEN_CARROT));
+		prov.addTag(BlazingTags.Items.METAL_APPLES.tag).add(itemKey(Items.GOLDEN_APPLE));
+		prov.addTag(BlazingTags.Items.ENCHANTED_METAL_APPLES.tag).add(itemKey(Items.ENCHANTED_GOLDEN_APPLE));
 
-		tagAppender(prov, BlazingTags.Items.METAL_FOOD)
+		BlazingTagGen.tagAppender(prov, BlazingTags.Items.METAL_FOOD)
 				.addTag(BlazingTags.Items.METAL_CARROTS.tag)
 				.addTag(BlazingTags.Items.METAL_APPLES.tag)
 				.addTag(BlazingTags.Items.STELLAR_METAL_APPLES.tag)
 				.addTag(BlazingTags.Items.ENCHANTED_METAL_APPLES.tag);
 
 		for (BlazingTags.Items tag : BlazingTags.Items.values()) {
-			if (tag.alwaysDatagen) tagAppender(prov, tag);
+			if (tag.alwaysDatagen) BlazingTagGen.tagAppender(prov, tag);
 		}
 
 		for (MoltenMetal metal : MoltenMetals.ALL) {
@@ -142,30 +133,14 @@ public class BlazingTagGen {
 			tagAppender(prov, dye.forgeTag);
 			tagAppender(prov, dye.internalTag).addTag(dye.commonTag).addTag(dye.forgeTag);
 		}
-
 	}
 
-	public static TagsProvider.TagAppender<Item> tagAppender(RegistrateTagsProvider<Item> prov, BlazingTags.Items tag) {
-		return tagAppender(prov, tag.tag);
-	}
-
-	public static TagsProvider.TagAppender<Block> tagAppender(RegistrateTagsProvider<Block> prov, BlazingTags.Blocks tag) {
-		return tagAppender(prov, tag.tag);
-	}
-
-	public static TagsProvider.TagAppender<Fluid> tagAppender(RegistrateTagsProvider<Fluid> prov, BlazingTags.Fluids tag) {
-		return tagAppender(prov, tag.tag);
+	private static @NotNull ResourceKey<Item> itemKey(Item item) {
+		return ForgeRegistries.ITEMS.getResourceKey(item).get();
 	}
 
 	public static <T> TagsProvider.TagAppender<T> tagAppender(RegistrateTagsProvider<T> prov, TagKey<T> tag) {
 		return prov.addTag(tag);
 	}
 
-	@SafeVarargs
-	public static void addTagsIfAbsent(TagsProvider.TagAppender<Item> appender, TagKey<Item>... tags) {
-		for (TagKey<Item> tag : tags) {
-			boolean absent = ALL_INTERNAL_ITEM_TAGS.add(tag);
-			if (absent) appender.addTag(tag);
-		}
-	}
 }
