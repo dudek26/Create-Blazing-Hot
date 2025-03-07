@@ -4,11 +4,12 @@ import static com.dudko.blazinghot.content.casting.Molds.getMoldCapacity;
 
 import java.util.List;
 
+import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
+
 import org.jetbrains.annotations.Nullable;
 
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
 import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
-import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 
@@ -28,7 +29,7 @@ public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity impleme
 
 	CastingDepotBehaviour inputBehaviour;
 
-	public CastingDepotBlockEntityImpl(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+	protected CastingDepotBlockEntityImpl(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 	}
 
@@ -89,5 +90,9 @@ public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity impleme
 	@Override
 	public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
 		return containedFluidTooltip(tooltip, isPlayerSneaking, getFluidStorage(null));
+	}
+
+	public static CastingDepotBlockEntity of(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+		return new CastingDepotBlockEntityImpl(type, pos, state);
 	}
 }

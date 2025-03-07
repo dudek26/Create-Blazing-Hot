@@ -2,11 +2,12 @@ package com.dudko.blazinghot.content.casting.casting_depot;
 
 import static com.dudko.blazinghot.util.DirectionUtil.HORIZONTAL_ANGLES;
 
-import com.jozufozu.flywheel.util.transform.TransformStack;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import dev.engine_room.flywheel.lib.transform.PoseTransformStack;
+import dev.engine_room.flywheel.lib.transform.TransformStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -41,7 +42,7 @@ public class CastingDepotRenderer extends SafeBlockEntityRenderer<CastingDepotBl
 
 	public static void renderItem(Level level, PoseStack ms, MultiBufferSource buffer, int light, int overlay, ItemStack itemStack, Direction direction) {
 		ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-		TransformStack msr = TransformStack.cast(ms);
+		PoseTransformStack msr = TransformStack.of(ms);
 
 		ms.translate(0.5, 23 / 32d, 0.5);
 		ms.scale(14 / 16f, 1, 14 / 16f);

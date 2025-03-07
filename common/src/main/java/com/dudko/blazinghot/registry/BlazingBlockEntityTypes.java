@@ -2,6 +2,8 @@ package com.dudko.blazinghot.registry;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlockEntity;
+import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
+import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotRenderer;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerRenderer;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerVisual;
@@ -26,6 +28,14 @@ public class BlazingBlockEntityTypes {
 					.visual(() -> BlazeMixerVisual::new)
 					.validBlocks(BlazingBlocks.BLAZE_MIXER)
 					.renderer(() -> BlazeMixerRenderer::new)
+					.register();
+
+	public static final BlockEntityEntry<CastingDepotBlockEntity>
+			CASTING_DEPOT =
+			REGISTRATE
+					.blockEntity("casting_depot", CastingDepotBlockEntity::of)
+					.validBlocks(BlazingBlocks.CASTING_DEPOT)
+					.renderer(() -> CastingDepotRenderer::new)
 					.register();
 
 	public static void register() {

@@ -3,6 +3,7 @@ package com.dudko.blazinghot.content.casting.casting_depot;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -12,9 +13,15 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity {
 
 	protected SmartFluidTankBehaviour tank;
 
-	public CastingDepotBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+	protected CastingDepotBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 	}
+
+	@ExpectPlatform
+	public static CastingDepotBlockEntity  of(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+		throw new AssertionError();
+	}
+
 
 	public abstract void onMoldUpdate();
 
