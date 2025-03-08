@@ -27,7 +27,7 @@ public class BlazingHotImpl {
 		BlazingCreativeTabsImpl.register(modEventBus);
 		BlazingHot.init();
 		BlazingConfigsImpl.register(ModLoadingContext.get());
-		Env.CLIENT.runIfCurrent(() -> BlazingHotClientImpl::init);
+		Env.CLIENT.runIfCurrent(() -> () -> BlazingHotClientImpl.initClient(modEventBus));
 	}
 
 	public static void init(final FMLCommonSetupEvent event) {
