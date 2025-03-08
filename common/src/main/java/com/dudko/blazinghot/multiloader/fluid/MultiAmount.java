@@ -2,7 +2,7 @@ package com.dudko.blazinghot.multiloader.fluid;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 
-public class MultiAmount {
+public record MultiAmount(long droplets, int millibuckets) {
 
 	public static final MultiAmount EMPTY = standard(0);
 	public static final MultiAmount BOTTLE = standard(20250);
@@ -13,14 +13,6 @@ public class MultiAmount {
 	public static final MultiAmount ROD = metal(4500);
 	public static final MultiAmount INGOT_COVER = INGOT.multiply(6);
 	public static final MultiAmount NUGGET_COVER = NUGGET.multiply(6);
-
-	public final long droplets;
-	public final int millibuckets;
-
-	public MultiAmount(long droplets, int millibuckets) {
-		this.droplets = droplets;
-		this.millibuckets = millibuckets;
-	}
 
 	/**
 	 * Gets the platformed amount.
@@ -63,6 +55,16 @@ public class MultiAmount {
 
 	public static MultiAmount metalMb(int millibuckets) {
 		return new MultiAmount((long) (millibuckets * MultiFluids.MELTABLE_CONVERSION), millibuckets);
+	}
+
+	public static MultiAmount fromBucketFraction(long numerator, long denominator) {
+		long total = numerator * MultiAmount.BUCKET.droplets();
+
+		if (total % denominator != 0) {
+			throw new IllegalArgumentException("Not a valid number of droplets!");
+		}
+
+		return standard(total / denominator);
 	}
 
 	@ExpectPlatform

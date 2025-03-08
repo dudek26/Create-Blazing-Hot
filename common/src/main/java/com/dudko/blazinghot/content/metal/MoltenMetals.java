@@ -31,12 +31,12 @@ public class MoltenMetals {
 			MoltenMetal
 					.builder("ancient_debris")
 					.customForm(VANILLA.asResource("netherite_scrap"),
-							MultiFluids.Constants.INGOT.droplets,
+							MultiAmount.INGOT,
 							Forms.INGOT.processingTime * 2,
 							Forms.INGOT.fuelCost * 2,
 							false)
 					.customForm(VANILLA.asResource("ancient_debris"),
-							MultiFluids.Constants.NUGGET.droplets * 12,
+							MultiAmount.NUGGET.multiply(12),
 							Forms.INGOT.processingTime * 2,
 							Forms.INGOT.fuelCost * 2,
 							false)

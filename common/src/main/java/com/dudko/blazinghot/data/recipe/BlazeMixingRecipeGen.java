@@ -18,12 +18,10 @@ import com.dudko.blazinghot.data.conditions.DefaultLoadConditions;
 import com.dudko.blazinghot.data.conditions.LoadCondition;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
-import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -31,7 +29,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.Fluid;
 
-@SuppressWarnings({"UnstableApiUsage", "unused"})
+@SuppressWarnings({"unused"})
 public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 
 	public BlazeMixingRecipeGen(PackOutput output) {
@@ -50,7 +48,7 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 			create("nether_lava",
 					b -> b
 							.requireMultiple(netherEssence(), 2)
-							.require(lava(), FluidConstants.BLOCK / 10)
+							.require(lava(), MultiAmount.fromBucketFraction(1, 10))
 							.requiresHeat(HeatCondition.SUPERHEATED)
 							.output(MultiRegistries.getFluidFromRegistry(BlazingHot.asResource("nether_lava")).get(),
 									MultiAmount.BUCKET)),
@@ -58,13 +56,13 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 					create("molten_blaze_gold",
 							b -> b
 									.requireMultiple(netherEssence(), 2)
-									.requireFuel(fuel(), MultiFluids.fromBucketFraction(1, 20))
+									.requireFuel(fuel(), MultiAmount.fromBucketFraction(1, 20))
 									.require(moltenGold(), MultiAmount.INGOT)
 									.requiresHeat(HeatCondition.SUPERHEATED)
 									.duration(200)
 									.output(MoltenMetals.BLAZE_GOLD.fluid().get(), MultiAmount.INGOT));
 
-	private GeneratedRecipe melting(String name, Ingredient ingredient, Fluid result, long amount, int duration, long fuelCost, Collection<LoadCondition<?>> conditions) {
+	private GeneratedRecipe melting(String name, Ingredient ingredient, Fluid result, MultiAmount amount, int duration, long fuelCost, Collection<LoadCondition<?>> conditions) {
 		return create("melting/" + name,
 				(b) -> b
 						.requireFuel(fuel(), fuelCost)
@@ -75,7 +73,7 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 						.output(result, amount));
 	}
 
-	private GeneratedRecipe melting(ResourceLocation itemLocation, Fluid result, long amount, int duration, long fuelCost, Collection<LoadCondition<?>> conditions) {
+	private GeneratedRecipe melting(ResourceLocation itemLocation, Fluid result, MultiAmount amount, int duration, long fuelCost, Collection<LoadCondition<?>> conditions) {
 		return melting(itemLocation.getPath(),
 				Ingredient.of(MultiRegistries.getItemFromRegistry(itemLocation).get()),
 				result,
@@ -85,7 +83,7 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 				conditions);
 	}
 
-	private GeneratedRecipe melting(TagKey<Item> tag, Fluid result, long amount, int duration, long fuelCost, Collection<LoadCondition<?>> conditions) {
+	private GeneratedRecipe melting(TagKey<Item> tag, Fluid result, MultiAmount amount, int duration, long fuelCost, Collection<LoadCondition<?>> conditions) {
 		return melting(tag.location().getPath(), Ingredient.of(tag), result, amount, duration, fuelCost, conditions);
 	}
 

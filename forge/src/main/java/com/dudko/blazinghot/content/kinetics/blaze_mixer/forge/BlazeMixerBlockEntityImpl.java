@@ -5,6 +5,8 @@ import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecip
 import java.util.List;
 import java.util.Optional;
 
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
+
 import net.createmod.catnip.animation.AnimationTickHolder;
 import net.createmod.catnip.data.Couple;
 
@@ -72,7 +74,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 
 	@Override
 	public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-		tank = SmartFluidTankBehaviour.single(this, (int) Constants.BUCKET.platformed());
+		tank = SmartFluidTankBehaviour.single(this, (int) MultiAmount.BUCKET.get());
 		tank.whenFluidUpdates(() -> {
 			if (getBasin().isPresent()) getBasin().get().notifyChangeOfContents();
 		});
