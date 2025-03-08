@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.registry;
 
+import static com.dudko.blazinghot.multiloader.BlazingBuilderTransformers.simpleBlockState;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 
@@ -66,7 +67,7 @@ public class BlazingBlocks {
 					.initialProperties(SharedProperties::stone)
 					.properties(p -> p.noOcclusion().mapColor(MapColor.STONE))
 					.transform(axeOrPickaxe())
-					.blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
+					.transform(simpleBlockState())
 					.addLayer(() -> RenderType::cutoutMipped)
 //					.transform(CStress.setImpact(4.0)) TODO: can't use Create's config
 					.item(AssemblyOperatorBlockItem::new)

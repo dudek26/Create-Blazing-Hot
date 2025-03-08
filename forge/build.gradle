@@ -10,8 +10,8 @@ architectury {
     forge()
 }
 
-def generatedResources = file("forge/src/generated/resources")
-def existingResources = file("common/src/main/resources")
+def generatedResources = file("src/generated/resources")
+def existingResources = project.rootProject.file("common/src/main/resources")
 
 sourceSets {
     main {
