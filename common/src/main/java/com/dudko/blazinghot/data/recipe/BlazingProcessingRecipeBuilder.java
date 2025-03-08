@@ -1,5 +1,15 @@
 package com.dudko.blazinghot.data.recipe;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.function.Consumer;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import org.jetbrains.annotations.NotNull;
+
+import com.dudko.blazinghot.data.conditions.LoadCondition;
+import com.dudko.blazinghot.data.conditions.LoadConditionHelper;
 import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.multiloader.fluid.MultiFluidIngredient;
 import com.dudko.blazinghot.multiloader.fluid.MultiFluidStack;
@@ -9,18 +19,18 @@ import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder.DataGenResult;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder.ProcessingRecipeFactory;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.data.SimpleDatagenIngredient;
 import com.simibubi.create.foundation.data.recipe.Mods;
 import com.simibubi.create.foundation.fluid.FluidHelper;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
+import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.tterrag.registrate.util.DataIngredient;
 
 import dev.architectury.fluid.FluidStack;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.createmod.catnip.data.Pair;
-import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
@@ -28,20 +38,18 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
-
-import java.util.List;
-import java.util.function.Consumer;
 
 /**
  * From {@link ProcessingRecipeBuilder}
  */
 public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 
-	public ResourceLocation recipeId;
-	public ProcessingRecipeFactory<T> factory;
-	public BlazingProcessingRecipeParams params;
+	public final ResourceLocation recipeId;
+	public final ProcessingRecipeFactory<T> factory;
+	public final BlazingProcessingRecipeParams params;
 
 	public BlazingProcessingRecipeBuilder(ProcessingRecipeFactory<T> factory, ResourceLocation recipeId) {
 		this.factory = factory;
@@ -103,12 +111,26 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 		return this;
 	}
 
+	public BlazingProcessingRecipeBuilder<T> withCondition(LoadCondition<?> condition) {
+		params.conditions.add(condition);
+		return this;
+	}
+
+	public BlazingProcessingRecipeBuilder<T> withConditions(LoadCondition<?>... conditions) {
+		return withConditions(List.of(conditions));
+	}
+
+	public BlazingProcessingRecipeBuilder<T> withConditions(Collection<LoadCondition<?>> conditions) {
+		params.conditions.addAll(conditions);
+		return this;
+	}
+
 	public T build() {
 		return platformBuild(this);
 	}
 
 	public void build(Consumer<FinishedRecipe> consumer) {
-		consumer.accept(new BlazingDataGenResult<>(build(), params.fuel));
+		consumer.accept(new BlazingDataGenResult<>(build(), params.fuel, params.conditions));
 	}
 
 	@ExpectPlatform
@@ -267,7 +289,9 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 		public NonNullList<MultiFluidStack> fluidResults;
 		public int processingDuration;
 		public HeatCondition requiredHeat;
+
 		public FluidIngredient fuel;
+		public List<LoadCondition<?>> conditions;
 
 		public boolean keepHeldItem;
 
@@ -284,13 +308,30 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 
 	}
 
-	public static class BlazingDataGenResult<S extends ProcessingRecipe<?>> extends DataGenResult<S> {
+	@ParametersAreNonnullByDefault
+	public static class BlazingDataGenResult<S extends ProcessingRecipe<?>> implements FinishedRecipe {
 
+		private final List<LoadCondition<?>> recipeConditions;
+		private final ProcessingRecipeSerializer<S> serializer;
+		private final ResourceLocation id;
+		private final S recipe;
 		private final FluidIngredient fuel;
 
-		// TODO: add conditions
-		public BlazingDataGenResult(S recipe, FluidIngredient fuel) {
-			super(recipe, List.of());
+		@SuppressWarnings("unchecked")
+		public BlazingDataGenResult(S recipe, FluidIngredient fuel, List<LoadCondition<?>> conditions) {
+			this.recipe = recipe;
+			this.recipeConditions = conditions;
+			IRecipeTypeInfo recipeType = this.recipe.getTypeInfo();
+			ResourceLocation typeId = recipeType.getId();
+
+			if (!(recipeType.getSerializer() instanceof ProcessingRecipeSerializer))
+				throw new IllegalStateException("Cannot datagen ProcessingRecipe of type: " + typeId);
+
+			this.id =
+					new ResourceLocation(recipe.getId().getNamespace(),
+							typeId.getPath() + "/" + recipe.getId().getPath());
+			this.serializer = (ProcessingRecipeSerializer<S>) recipe.getSerializer();
+
 			this.fuel = fuel;
 		}
 
@@ -298,7 +339,32 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 		public void serializeRecipeData(JsonObject json) {
 			if (fuel != null && fuel != FluidIngredient.EMPTY) json.add("blazinghot:fuel", fuel.serialize());
 
-			super.serializeRecipeData(json);
+			serializer.write(json, recipe);
+
+			if (recipeConditions.isEmpty()) return;
+			JsonArray conds = new JsonArray();
+			recipeConditions.forEach(c -> conds.add(c.toJson()));
+			json.add(LoadConditionHelper.conditionsKey(), conds);
+		}
+
+		@Override
+		public @NotNull ResourceLocation getId() {
+			return id;
+		}
+
+		@Override
+		public @NotNull RecipeSerializer<?> getType() {
+			return serializer;
+		}
+
+		@Override
+		public JsonObject serializeAdvancement() {
+			return null;
+		}
+
+		@Override
+		public ResourceLocation getAdvancementId() {
+			return null;
 		}
 	}
 
