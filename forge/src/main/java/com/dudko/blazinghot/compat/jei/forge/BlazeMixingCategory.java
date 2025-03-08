@@ -16,11 +16,9 @@ import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 
-import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
-import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraftforge.fluids.FluidStack;
