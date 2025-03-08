@@ -23,6 +23,8 @@ import mezz.jei.api.recipe.IFocusGroup;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 
+import static com.simibubi.create.compat.rei.category.CreateRecipeCategory.addFluidTooltip;
+
 public class BlazeMixingCategory extends BasinCategory {
 
 	private final AnimatedBlazeMixer mixer = new AnimatedBlazeMixer();
