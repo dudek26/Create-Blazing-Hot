@@ -1,14 +1,14 @@
 package com.dudko.blazinghot.data.recipe;
 
-import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeProvider;
-
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+
+import org.jetbrains.annotations.NotNull;
+
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeProvider;
 
 public abstract class BlazingRecipeProvider extends RecipeProvider {
 

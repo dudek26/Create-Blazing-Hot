@@ -4,8 +4,6 @@ import static com.dudko.blazinghot.multiloader.fluid.MultiFluids.fromBucketFract
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import com.dudko.blazinghot.BlazingHot;
-
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -24,7 +22,6 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
@@ -125,7 +122,6 @@ public class BlazeMixingRecipe extends BasinRecipe {
 
 	@Override
 	public void writeAdditional(JsonObject json) {
-		if (!getFuelFluid().equals(FluidIngredient.EMPTY))
-			json.add("blazinghot:fuel", getFuelFluid().serialize());
+		if (!getFuelFluid().equals(FluidIngredient.EMPTY)) json.add("blazinghot:fuel", getFuelFluid().serialize());
 	}
 }

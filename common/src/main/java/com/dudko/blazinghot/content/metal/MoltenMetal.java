@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.compat.Mods;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
+import com.dudko.blazinghot.data.conditions.DefaultLoadConditions;
+import com.dudko.blazinghot.data.conditions.LoadCondition;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.CommonTags;
@@ -25,8 +27,6 @@ import com.dudko.blazinghot.util.ListUtil;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 
 import net.createmod.catnip.data.Pair;
-import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
-import net.fabricmc.fabric.api.resource.conditions.v1.DefaultResourceConditions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -140,15 +140,15 @@ public class MoltenMetal {
 		return interactions;
 	}
 
-	public List<ConditionJsonProvider> getLoadConditions() {
-		List<ConditionJsonProvider> conditions = new ArrayList<>();
+	public List<LoadCondition<?>> getLoadConditions() {
+		List<LoadCondition<?>> conditions = new ArrayList<>();
 		if (!mod.alwaysIncluded) conditions.add(mod.asLoadCondition());
 		return conditions;
 	}
 
-	public List<ConditionJsonProvider> getLoadConditions(Forms form, Mods formMod) {
-		List<ConditionJsonProvider> conditions = getLoadConditions();
-		conditions.add(DefaultResourceConditions.anyModLoaded(formMod.id));
+	public List<LoadCondition<?>> getLoadConditions(Forms form, Mods formMod) {
+		List<LoadCondition<?>> conditions = getLoadConditions();
+		conditions.add(DefaultLoadConditions.anyModLoaded(formMod.id));
 		return conditions;
 	}
 
@@ -245,7 +245,7 @@ public class MoltenMetal {
 		/**
 		 * If compacting the molten metal should return something else than an item that starts with the metal's name and ends with <code>_ingot</code>
 		 *
-		 * @param item     Resource location of the item to return
+		 * @param item   Resource location of the item to return
 		 * @param amount Amount of fluid required to compact one item
 		 */
 		public Builder compactingOverride(ResourceLocation item, MultiAmount amount) {
