@@ -8,6 +8,7 @@ Create: Blazing Hot 0.6.6
 
 * Updated to Create 6.0.2
 * Made mod config accessible in Mods menu
+* Added mod title translation in config
 * Added config for Blaze Mixer stress impact
 
 ### Fixed:
