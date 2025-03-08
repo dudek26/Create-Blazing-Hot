@@ -1,0 +1,16 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/copper"
+    }
+  ],
+  "processingTime": 1200,
+  "results": [
+    {
+      "amount": 2,
+      "fluid": "blazinghot:molten_copper"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "create:cutting",
+  "ingredients": [
+    {
+      "tag": "forge:plates/blaze_gold"
+    }
+  ],
+  "results": [
+    {
+      "count": 2,
+      "item": "blazinghot:blaze_gold_rod"
+    }
+  ]
+}

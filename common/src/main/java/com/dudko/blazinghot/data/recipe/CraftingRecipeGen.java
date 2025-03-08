@@ -146,11 +146,11 @@ public class CraftingRecipeGen extends BlazingRecipeProvider {
 	}
 
 	private GeneratedRecipe metalApple(MoltenMetal metal, ItemLike result) {
-		return covering(apple(), INGOT.internalTag(metal), result, INGOT.internalTag(metal));
+		return covering(apple(), INGOT.tag(metal), result, INGOT.tag(metal));
 	}
 
 	private GeneratedRecipe metalCarrot(MoltenMetal metal, ItemLike result) {
-		return covering(carrot(), NUGGET.internalTag(metal), result, INGOT.internalTag(metal));
+		return covering(carrot(), NUGGET.tag(metal), result, INGOT.tag(metal));
 	}
 
 	@Override

@@ -2,7 +2,6 @@ package com.dudko.blazinghot.content.metal;
 
 import static com.dudko.blazinghot.compat.Mods.CREATE_ADDITIONS;
 import static com.dudko.blazinghot.compat.Mods.VANILLA;
-import static com.dudko.blazinghot.registry.CommonTags.Namespace.INTERNAL;
 import static com.dudko.blazinghot.registry.CommonTags.itemTagOf;
 import static com.dudko.blazinghot.util.LangUtil.titleCaseConversion;
 
@@ -111,7 +110,7 @@ public class MoltenMetal {
 	}
 
 	public TagKey<Fluid> fluidTag() {
-		return CommonTags.fluidTagOf(moltenName(), INTERNAL);
+		return CommonTags.fluidTagOf(moltenName(), CommonTags.Namespace.platform());
 	}
 
 	public String moltenName() {
@@ -299,7 +298,7 @@ public class MoltenMetal {
 						titleCaseConversion(metal.fluidLocation().getPath().replace('_', ' ')));
 
 				for (Forms form : metal.nonCustomForms()) {
-					TagKey<Item> tag = itemTagOf(namespace.tagPath(form.tagFolder, metal.name), namespace);
+					TagKey<Item> tag = itemTagOf(form.tagFolder, metal.name, namespace);
 					ResourceLocation loc = tag.location();
 					consumer.accept("tag.item." + namespace.namespace + "." + loc.getPath().replace('/', '.'),
 							titleCaseConversion((metal.name + ' ' + form.tagFolder).replace('_', ' ')));

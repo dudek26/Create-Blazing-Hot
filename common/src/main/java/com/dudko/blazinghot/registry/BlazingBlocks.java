@@ -97,12 +97,12 @@ public class BlazingBlocks {
 					.initialProperties(() -> net.minecraft.world.level.block.Blocks.GOLD_BLOCK)
 					.tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.tag(BlockTags.NEEDS_IRON_TOOL)
-					.tag(CommonTags.Blocks.STORAGE_BLOCKS.bothTags())
+					.tag(CommonTags.Blocks.STORAGE_BLOCKS.tag())
 					.tag(BlockTags.BEACON_BASE_BLOCKS)
-					.tag(CommonTags.Blocks.BLAZE_GOLD_BLOCKS.bothTags())
+					.tag(CommonTags.Blocks.BLAZE_GOLD_BLOCKS.tag())
 					.item()
-					.tag(CommonTags.Items.STORAGE_BLOCKS.bothTags())
-					.tag(CommonTags.Items.BLAZE_GOLD_BLOCKS.bothTags())
+					.tag(CommonTags.Items.STORAGE_BLOCKS.tag())
+					.tag(CommonTags.Items.BLAZE_GOLD_BLOCKS.tag())
 					.build()
 					.register();
 

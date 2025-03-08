@@ -1,0 +1,20 @@
+{
+  "type": "blazinghot:blaze_mixing",
+  "blazinghot:fuel": {
+    "amount": 0,
+    "fluidTag": "blazinghot:blaze_mixer_fuel"
+  },
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "forge:nuggets/blaze_gold"
+    }
+  ],
+  "processingTime": 65,
+  "results": [
+    {
+      "amount": 0,
+      "fluid": "minecraft:empty"
+    }
+  ]
+}

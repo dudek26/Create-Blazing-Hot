@@ -1,0 +1,23 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "minecraft:soul_sand"
+    }
+  ],
+  "processingTime": 200,
+  "results": [
+    {
+      "count": 2,
+      "item": "blazinghot:soul_dust"
+    },
+    {
+      "chance": 0.6,
+      "item": "blazinghot:soul_dust"
+    },
+    {
+      "chance": 0.4,
+      "item": "blazinghot:soul_dust"
+    }
+  ]
+}

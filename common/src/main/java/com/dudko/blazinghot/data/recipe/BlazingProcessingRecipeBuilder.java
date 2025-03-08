@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.data.recipe;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
@@ -291,7 +292,7 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 		public HeatCondition requiredHeat;
 
 		public FluidIngredient fuel;
-		public List<LoadCondition<?>> conditions;
+		public NonNullList<LoadCondition<?>> conditions;
 
 		public boolean keepHeldItem;
 
@@ -304,6 +305,8 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 			processingDuration = 0;
 			requiredHeat = HeatCondition.NONE;
 			keepHeldItem = false;
+			fuel = FluidIngredient.EMPTY;
+			conditions = NonNullList.create();
 		}
 
 	}
@@ -311,7 +314,7 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 	@ParametersAreNonnullByDefault
 	public static class BlazingDataGenResult<S extends ProcessingRecipe<?>> implements FinishedRecipe {
 
-		private final List<LoadCondition<?>> recipeConditions;
+		private final List<LoadCondition<?>> recipeConditions = new ArrayList<>();
 		private final ProcessingRecipeSerializer<S> serializer;
 		private final ResourceLocation id;
 		private final S recipe;
@@ -320,7 +323,7 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 		@SuppressWarnings("unchecked")
 		public BlazingDataGenResult(S recipe, FluidIngredient fuel, List<LoadCondition<?>> conditions) {
 			this.recipe = recipe;
-			this.recipeConditions = conditions;
+			this.recipeConditions.addAll(conditions);
 			IRecipeTypeInfo recipeType = this.recipe.getTypeInfo();
 			ResourceLocation typeId = recipeType.getId();
 

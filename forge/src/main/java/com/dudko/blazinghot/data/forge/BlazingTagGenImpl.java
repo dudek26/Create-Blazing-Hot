@@ -1,20 +1,14 @@
 package com.dudko.blazinghot.data.forge;
 
 import static com.dudko.blazinghot.data.BlazingTagGen.OPTIONAL_TAGS;
-import static com.dudko.blazinghot.data.BlazingTagGen.addTagsIfAbsent;
-import static com.dudko.blazinghot.data.BlazingTagGen.tagAppender;
-import static com.dudko.blazinghot.registry.CommonTags.Namespace.COMMON;
-import static com.dudko.blazinghot.registry.CommonTags.Namespace.FORGE;
-import static com.dudko.blazinghot.registry.CommonTags.Namespace.INTERNAL;
 import static com.dudko.blazinghot.registry.CommonTags.itemTagOf;
-
-import com.dudko.blazinghot.data.BlazingTagGen;
 
 import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.content.metal.Forms;
 import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.content.metal.MoltenMetals;
+import com.dudko.blazinghot.data.BlazingTagGen;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.dudko.blazinghot.registry.forge.BlazingFluidsImpl;
@@ -46,9 +40,7 @@ public class BlazingTagGenImpl {
 				appender.addOptional(loc);
 		}
 		for (CommonTags.Blocks tag : CommonTags.Blocks.values()) {
-			tagAppender(prov, tag.fabric);
-			tagAppender(prov, tag.forge);
-			tagAppender(prov, tag.internal).addTag(tag.forge).addTag(tag.fabric);
+			tagAppender(prov, tag.tag());
 		}
 	}
 
@@ -65,19 +57,12 @@ public class BlazingTagGenImpl {
 		}
 
 		for (MoltenMetal metal : MoltenMetals.ALL) {
-			TagKey<Fluid> forgeTag = CommonTags.fluidTagOf(metal.moltenName(), FORGE);
-			TagKey<Fluid> commonTag = CommonTags.fluidTagOf(metal.moltenName(), COMMON);
-			TagKey<Fluid> internalTag = CommonTags.fluidTagOf(metal.moltenName(), INTERNAL);
-
-			tagAppender(prov, forgeTag);
-			tagAppender(prov, commonTag);
-			tagAppender(prov, internalTag).addTag(forgeTag).addTag(commonTag);
+			TagKey<Fluid> tag = CommonTags.fluidTagOf(metal.moltenName(), CommonTags.Namespace.platform());
+			tagAppender(prov, tag);
 		}
 
 		for (CommonTags.Fluids tag : CommonTags.Fluids.values()) {
-			tagAppender(prov, tag.fabric);
-			tagAppender(prov, tag.forge);
-			tagAppender(prov, tag.internal).addTag(tag.forge).addTag(tag.fabric);
+			tagAppender(prov, tag.tag());
 		}
 	}
 
@@ -96,7 +81,8 @@ public class BlazingTagGenImpl {
 		prov.addTag(BlazingTags.Items.METAL_APPLES.tag).add(itemKey(Items.GOLDEN_APPLE));
 		prov.addTag(BlazingTags.Items.ENCHANTED_METAL_APPLES.tag).add(itemKey(Items.ENCHANTED_GOLDEN_APPLE));
 
-		BlazingTagGen.tagAppender(prov, BlazingTags.Items.METAL_FOOD)
+		BlazingTagGen
+				.tagAppender(prov, BlazingTags.Items.METAL_FOOD)
 				.addTag(BlazingTags.Items.METAL_CARROTS.tag)
 				.addTag(BlazingTags.Items.METAL_APPLES.tag)
 				.addTag(BlazingTags.Items.STELLAR_METAL_APPLES.tag)
@@ -109,29 +95,18 @@ public class BlazingTagGenImpl {
 		for (MoltenMetal metal : MoltenMetals.ALL) {
 			if (metal.ignoreTagGen) continue;
 			for (Forms form : metal.nonCustomForms()) {
-				TagKey<Item> forgeTag = itemTagOf(FORGE.tagPath(form.tagFolder, metal.name), FORGE);
-				TagKey<Item> commonTag = itemTagOf(COMMON.tagPath(form.tagFolder, metal.name), COMMON);
-				TagKey<Item> internalTag = itemTagOf(INTERNAL.tagPath(form.tagFolder, metal.name), INTERNAL);
+				TagKey<Item> tag = itemTagOf(form.tagFolder, metal.name, CommonTags.Namespace.platform());
+				tagAppender(prov, tag);
 
-				tagAppender(prov, forgeTag);
-				tagAppender(prov, commonTag);
-
-				TagsProvider.TagAppender<Item> internalTagAppender = tagAppender(prov, internalTag);
-				addTagsIfAbsent(internalTagAppender, commonTag, forgeTag);
 			}
 		}
 
 		for (CommonTags.Items tag : CommonTags.Items.values()) {
-			tagAppender(prov, tag.fabric);
-			tagAppender(prov, tag.forge);
-			TagsProvider.TagAppender<Item> internalTagAppender = tagAppender(prov, tag.internal);
-			addTagsIfAbsent(internalTagAppender, tag.forge, tag.fabric);
+			tagAppender(prov, tag.tag());
 		}
 
 		for (DyeUtil.Dyes dye : DyeUtil.Dyes.values()) {
-			tagAppender(prov, dye.commonTag);
-			tagAppender(prov, dye.forgeTag);
-			tagAppender(prov, dye.internalTag).addTag(dye.commonTag).addTag(dye.forgeTag);
+			tagAppender(prov, dye.tag);
 		}
 	}
 
