@@ -9,11 +9,14 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.material.Fluid;
 
-@SuppressWarnings("UnstableApiUsage")
 public class MultiFluids {
 
 	public static final float MELTABLE_CONVERSION = 62.5f;
 
+	/**
+	 * @deprecated Use {@link MultiAmount} instead.
+	 */
+	@Deprecated
 	public enum Constants {
 		BUCKET("bucket", 81000),
 		BOTTLE("bottle", 27000),

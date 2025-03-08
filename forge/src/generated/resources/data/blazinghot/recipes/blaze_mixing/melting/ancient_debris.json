@@ -1,7 +1,7 @@
 {
   "type": "blazinghot:blaze_mixing",
   "blazinghot:fuel": {
-    "amount": 2,
+    "amount": 200,
     "fluidTag": "blazinghot:blaze_mixer_fuel"
   },
   "heatRequirement": "superheated",
@@ -13,7 +13,7 @@
   "processingTime": 800,
   "results": [
     {
-      "amount": 148,
+      "amount": 192,
       "fluid": "blazinghot:molten_ancient_debris"
     }
   ]

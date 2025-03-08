@@ -22,13 +22,13 @@ public class Forms {
 					Forms.of("rods", MultiAmount.ROD, 250, true), WIRE = Forms.of("wires", MultiAmount.ROD, 250, true);
 
 	public String tagFolder = null;
-	public final long amount;
+	public final MultiAmount amount;
 	public final int processingTime;
 	public final long fuelCost;
 	public final boolean mechanicalMixerMeltable;
 	public ResourceLocation customLocation = null;
 
-	Forms(ResourceLocation customLocation, long amount, int processingTime, long fuelCost, boolean mechanicalMixerMeltable) {
+	Forms(ResourceLocation customLocation, MultiAmount amount, int processingTime, long fuelCost, boolean mechanicalMixerMeltable) {
 		this.customLocation = customLocation;
 		this.amount = amount;
 		this.processingTime = processingTime;
@@ -36,16 +36,12 @@ public class Forms {
 		this.fuelCost = fuelCost;
 	}
 
-	Forms(String tagFolder, long amount, int processingTime, boolean mechanicalMixerMeltable) {
+	Forms(String tagFolder, MultiAmount amount, int processingTime, boolean mechanicalMixerMeltable) {
 		this.tagFolder = tagFolder;
 		this.amount = amount;
 		this.processingTime = processingTime;
 		this.mechanicalMixerMeltable = mechanicalMixerMeltable;
 		this.fuelCost = defaultDurationToFuelCost(processingTime);
-	}
-
-	Forms(String tagFolder, MultiAmount amount, int processingTime, boolean mechanicalMixerMeltable) {
-		this(tagFolder, amount.get(), processingTime, mechanicalMixerMeltable);
 	}
 
 	public TagKey<Item> tag(String material) {
@@ -74,7 +70,7 @@ public class Forms {
 		return new Forms(tagFolder, amount, processingTime, mechanicalMixerMeltable);
 	}
 
-	public static Forms custom(ResourceLocation location, long amount, int processingTime, long fuelCost, boolean mechanicalMixerMeltable) {
+	public static Forms custom(ResourceLocation location, MultiAmount amount, int processingTime, long fuelCost, boolean mechanicalMixerMeltable) {
 		return new Forms(location, amount, processingTime, fuelCost, mechanicalMixerMeltable);
 	}
 }

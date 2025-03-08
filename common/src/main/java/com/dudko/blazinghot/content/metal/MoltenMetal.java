@@ -213,7 +213,7 @@ public class MoltenMetal {
 			return this;
 		}
 
-		public Builder customForm(ResourceLocation item, long amount, int processingTime, long fuelCost, boolean mechanicalMixerMeltable) {
+		public Builder customForm(ResourceLocation item, MultiAmount amount, int processingTime, long fuelCost, boolean mechanicalMixerMeltable) {
 			this.customForms.add(Forms.custom(item, amount, processingTime, fuelCost, mechanicalMixerMeltable));
 			return this;
 		}

@@ -1,12 +1,13 @@
 package com.dudko.blazinghot.config;
 
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
 
 import net.createmod.catnip.config.ConfigBase;
 
 public class CServer extends ConfigBase {
 
-	private static final int DEFAULT_FUEL_USAGE = (int) MultiFluids.fromBucketFraction(1, 40);
+	private static final int DEFAULT_FUEL_USAGE = (int) MultiAmount.fromBucketFraction(1, 40).get();
 
 	public final ConfigBase.ConfigGroup recipes = group(0, "recipes", Comments.recipes);
 	public final ConfigBool
