@@ -6,6 +6,7 @@ import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.lang.BlazingLangGen;
 import com.dudko.blazinghot.data.recipe.BlazingProcessingRecipeGen;
 import com.dudko.blazinghot.data.recipe.CraftingRecipeGen;
+import com.dudko.blazinghot.data.recipe.SequencedAssemblyRecipeGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.providers.ProviderType;
 
@@ -23,10 +24,11 @@ public class BlazingHotDataForge {
 		DataGenerator generator = event.getGenerator();
 		PackOutput output = generator.getPackOutput();
 
-		// TODO: add sequenced assembly
 		generator.addProvider(event.includeServer(), new BlazingAdvancements(output));
 		generator.addProvider(event.includeServer(), new CraftingRecipeGen(output));
 		generator.addProvider(event.includeServer(), BlazingProcessingRecipeGen.registerAll(output));
+		generator.addProvider(event.includeServer(), new SequencedAssemblyRecipeGen(output));
+
 	}
 
 	private static void addExtraRegistrateData() {
