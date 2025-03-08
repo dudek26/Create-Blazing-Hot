@@ -33,10 +33,3 @@ mandatory = true
 versionRange = "[${create_version},)"
 ordering = "NONE"
 side = "BOTH"
-
-[[dependencies.blazinghot]]
-modId = "architectury"
-mandatory = true
-versionRange = "[${architectury_api_version},)"
-ordering = "NONE"
-side = "BOTH"

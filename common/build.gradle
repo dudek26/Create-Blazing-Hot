@@ -28,15 +28,6 @@ dependencies {
     // Flywheel and Registrate must also be used carefully due to differences.
     modCompileOnly("com.simibubi.create:create-fabric-${minecraft_version}:${create_fabric_version}")
 
-    // Architectury API
-    modImplementation "dev.architectury:architectury:$architectury_api_version"
-}
-
-sourceSets.main {
-    resources {
-        srcDir("src/generated/resources")
-        exclude(".cache/**")
-    }
 }
 
 publishing {
