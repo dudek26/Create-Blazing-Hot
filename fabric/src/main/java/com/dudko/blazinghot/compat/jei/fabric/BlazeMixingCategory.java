@@ -17,11 +17,9 @@ import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
-import mezz.jei.api.fabric.constants.FabricTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
-import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 
@@ -81,20 +79,11 @@ public class BlazeMixingCategory extends BasinCategory {
 		super.setRecipe(builder, recipe, focuses);
 		FluidIngredient fuelFluid = getFuelFromRecipe(recipe);
 
-		List<FluidStack> fuels;
-		if (fuelFluid == FluidIngredient.EMPTY) fuels = new ArrayList<>();
-		else fuels = new ArrayList<>(fuelFluid.getMatchingFluidStacks());
-
 		int vRows = (1 + recipe.getFluidResults().size() + recipe.getRollableResults().size()) / 2;
 
-		if (includeFuel(recipe)) builder
-				.addSlot(RecipeIngredientRole.INPUT, 142, 11 - (19 * (vRows - 1)))
-				.setBackground(getRenderedSlot(), -1, -1)
-				.addIngredients(FabricTypes.FLUID_STACK, toJei(withImprovedVisibility(fuels)))
-				.addRichTooltipCallback(addFluidTooltip(fuelFluid.getRequiredAmount()))
-				.addRichTooltipCallback((v, t) -> t.add(BlazingLang.BLAZE_MIXER_FUEL
-						.get()
-						.withStyle(ChatFormatting.DARK_GREEN)));
+		if (includeFuel(recipe))
+			addFluidSlot(builder, 142, 11 - (19 * (vRows - 1)), fuelFluid).addRichTooltipCallback((v, t) -> t.add(
+					BlazingLang.BLAZE_MIXER_FUEL.get().withStyle(ChatFormatting.DARK_GREEN)));
 	}
 
 	@Override
