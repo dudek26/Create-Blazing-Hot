@@ -66,12 +66,16 @@ public class BlazingIngredients {
 
 	//    Casings
 
-	public static Item copperCasing() {
-		return AllBlocks.COPPER_CASING.asItem();
+	public static ItemLike copperCasing() {
+		return AllBlocks.COPPER_CASING;
 	}
 
-	public static Item blazeCasing() {
-		return BlazingBlocks.BLAZE_CASING.asItem();
+	public static ItemLike blazeCasing() {
+		return BlazingBlocks.BLAZE_CASING;
+	}
+
+	public static ItemLike andesiteCasing() {
+		return AllBlocks.ANDESITE_CASING;
 	}
 
 	//    Fluids
@@ -242,6 +246,10 @@ public class BlazingIngredients {
 
 	public static TagKey<Item> blazeGoldSheet() {
 		return PLATE.tag(MoltenMetals.BLAZE_GOLD);
+	}
+
+	public static ItemLike sturdyAlloy() {
+		return BlazingItems.STURDY_ALLOY;
 	}
 
 	public static TagKey<Item> blazeGoldRod() {

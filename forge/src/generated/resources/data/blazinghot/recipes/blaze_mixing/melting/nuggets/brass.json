@@ -1,7 +1,7 @@
 {
   "type": "blazinghot:blaze_mixing",
   "blazinghot:fuel": {
-    "amount": 16,
+    "amount": 0,
     "fluidTag": "blazinghot:blaze_mixer_fuel"
   },
   "heatRequirement": "superheated",
@@ -13,8 +13,8 @@
   "processingTime": 65,
   "results": [
     {
-      "amount": 16,
-      "fluid": "blazinghot:molten_brass"
+      "amount": 0,
+      "fluid": "minecraft:empty"
     }
   ]
 }

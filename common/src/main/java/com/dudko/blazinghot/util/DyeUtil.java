@@ -11,6 +11,7 @@ import com.dudko.blazinghot.registry.CommonTags;
 import com.simibubi.create.foundation.block.DyedBlockList;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 
+import dev.architectury.platform.Platform;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
