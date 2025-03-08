@@ -16,11 +16,9 @@ import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 
-import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
-import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraftforge.fluids.FluidStack;
@@ -82,19 +80,11 @@ public class BlazeMixingCategory extends BasinCategory {
 
 		FluidIngredient fuelFluid = getFuelFromRecipe(recipe);
 
-		List<FluidStack> fuels;
-		if (fuelFluid == FluidIngredient.EMPTY) fuels = new ArrayList<>();
-		else fuels = new ArrayList<>(fuelFluid.getMatchingFluidStacks());
-
 		int vRows = (1 + recipe.getFluidResults().size() + recipe.getRollableResults().size()) / 2;
 
-		if (includeFuel(recipe)) builder
-				.addSlot(RecipeIngredientRole.INPUT, 142, 11 - (19 * (vRows - 1)))
-				.setBackground(getRenderedSlot(), -1, -1)
-				.addIngredients(ForgeTypes.FLUID_STACK, fuels)
-				.addRichTooltipCallback((v, t) -> t.add(BlazingLang.BLAZE_MIXER_FUEL
-						.get()
-						.withStyle(ChatFormatting.DARK_GREEN)));
+		if (includeFuel(recipe))
+			addFluidSlot(builder, 142, 11 - (19 * (vRows - 1)), fuelFluid).addRichTooltipCallback((v, t) -> t.add(
+					BlazingLang.BLAZE_MIXER_FUEL.get().withStyle(ChatFormatting.DARK_GREEN)));
 
 	}
 
