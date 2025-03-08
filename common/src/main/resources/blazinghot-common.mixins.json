@@ -15,7 +15,8 @@
     "SmartBlockEntityMixin",
     "SpoutBlockEntityMixin",
     "SpoutBlockMixin",
-    "accessor.ProjectileAccessor"
+    "accessor.ProjectileAccessor",
+    "accessor.SequencedAssemblyRecipeBuilderAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

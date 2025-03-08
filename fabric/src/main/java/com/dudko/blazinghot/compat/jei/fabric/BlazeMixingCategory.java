@@ -25,6 +25,8 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 
+import static com.simibubi.create.compat.rei.category.CreateRecipeCategory.addFluidTooltip;
+
 public class BlazeMixingCategory extends BasinCategory {
 
 	private final AnimatedBlazeMixer mixer = new AnimatedBlazeMixer();
@@ -90,8 +92,7 @@ public class BlazeMixingCategory extends BasinCategory {
 		if (includeFuel(recipe)) builder
 				.addSlot(RecipeIngredientRole.INPUT, 142, 11 - (19 * (vRows - 1)))
 				.setBackground(getRenderedSlot(), -1, -1)
-				.addIngredients(FabricTypes.FLUID_STACK, toJei(withImprovedVisibility(fuels)))
-				.addRichTooltipCallback(addFluidTooltip(fuelFluid.getRequiredAmount()))
+				.addIngredients(FabricTypes.FLUID_STACK, toJei(fuels))
 				.addRichTooltipCallback((v, t) -> t.add(BlazingLang.BLAZE_MIXER_FUEL
 						.get()
 						.withStyle(ChatFormatting.DARK_GREEN)));
