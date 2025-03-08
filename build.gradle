@@ -86,6 +86,12 @@ allprojects {
 
 }
 
+tasks.register("datagen") {
+    group = 'build'
+    description = "Generate data on both platforms"
+    dependsOn(":fabric:runDatagen", ":forge:runData")
+}
+
 String platform = System.getenv("PLATFORM")
 tasks.register("blazinghotPublish") {
     if (platform == "both") {

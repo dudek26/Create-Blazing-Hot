@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": {
+      "tag": "c:brass_ingots"
+    },
+    "Y": {
+      "tag": "c:blaze_gold_plates"
+    }
+  },
+  "pattern": [
+    " X ",
+    "YXY",
+    "YYY"
+  ],
+  "result": {
+    "item": "blazinghot:blaze_whisk"
+  },
+  "show_notification": true
+}

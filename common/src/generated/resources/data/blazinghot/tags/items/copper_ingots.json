@@ -1,7 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "#c:copper_ingots",
-    "#forge:ingots/copper"
-  ]
-}

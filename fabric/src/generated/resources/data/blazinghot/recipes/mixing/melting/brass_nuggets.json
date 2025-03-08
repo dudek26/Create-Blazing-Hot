@@ -1,0 +1,16 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "c:brass_nuggets"
+    }
+  ],
+  "processingTime": 195,
+  "results": [
+    {
+      "amount": 1000,
+      "fluid": "blazinghot:molten_brass"
+    }
+  ]
+}
