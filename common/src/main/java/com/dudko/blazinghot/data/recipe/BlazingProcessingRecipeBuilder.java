@@ -29,7 +29,6 @@ import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.tterrag.registrate.util.DataIngredient;
 
-import dev.architectury.fluid.FluidStack;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.createmod.catnip.data.Pair;
 import net.minecraft.core.NonNullList;
@@ -205,16 +204,20 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 		return this;
 	}
 
-	public BlazingProcessingRecipeBuilder<T> requireFuel(FluidStack stack) {
-		return requireFuel(MultiFluidIngredient.fromStack(stack));
+	public BlazingProcessingRecipeBuilder<T> requireFuel(Fluid fluid, long amount) {
+		return requireFuel(fluid, MultiAmount.standard(amount));
 	}
 
-	public BlazingProcessingRecipeBuilder<T> requireFuel(Fluid fluid, long amount) {
-		return requireFuel(MultiFluidIngredient.fromFluid(fluid, MultiAmount.standard(amount)));
+	public BlazingProcessingRecipeBuilder<T> requireFuel(Fluid fluid, MultiAmount amount) {
+		return requireFuel(MultiFluidIngredient.fromFluid(fluid, amount));
 	}
 
 	public BlazingProcessingRecipeBuilder<T> requireFuel(TagKey<Fluid> tag, long amount) {
-		return requireFuel(MultiFluidIngredient.fromTag(tag, MultiAmount.standard(amount)));
+		return requireFuel(tag, MultiAmount.standard(amount));
+	}
+
+	public BlazingProcessingRecipeBuilder<T> requireFuel(TagKey<Fluid> tag, MultiAmount amount) {
+		return requireFuel(MultiFluidIngredient.fromTag(tag, amount));
 	}
 
 	public BlazingProcessingRecipeBuilder<T> output(ItemLike item) {

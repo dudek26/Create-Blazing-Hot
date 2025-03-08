@@ -14,14 +14,6 @@ public record MultiAmount(long droplets, int millibuckets) {
 	public static final MultiAmount INGOT_COVER = INGOT.multiply(6);
 	public static final MultiAmount NUGGET_COVER = NUGGET.multiply(6);
 
-	public final long droplets;
-	public final int millibuckets;
-
-	public MultiAmount(long droplets, int millibuckets) {
-		this.droplets = droplets;
-		this.millibuckets = millibuckets;
-	}
-
 	/**
 	 * Gets the platformed amount.
 	 */
