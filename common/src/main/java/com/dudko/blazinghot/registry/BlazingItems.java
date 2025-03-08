@@ -7,6 +7,8 @@ import static com.dudko.blazinghot.content.item.BlazingFoodItem.ExtraProperties.
 import static com.dudko.blazinghot.content.item.BlazingFoodItem.ExtraProperties.REMOVE_SLOWNESS_1;
 import static com.dudko.blazinghot.content.item.BlazingFoodItem.ExtraProperties.REMOVE_SLOWNESS_2;
 import static com.dudko.blazinghot.content.item.BlazingFoodItem.ExtraProperties.REMOVE_SLOWNESS_ANY;
+import static com.dudko.blazinghot.multiloader.BlazingBuilderTransformers.existingParent;
+import static com.dudko.blazinghot.multiloader.BlazingBuilderTransformers.handheld;
 import static com.dudko.blazinghot.registry.BlazingItems.FoodItemBuilder.tickMinutes;
 import static com.dudko.blazinghot.registry.BlazingItems.FoodItemBuilder.tickSeconds;
 
@@ -85,7 +87,7 @@ public class BlazingItems {
 					REGISTRATE
 							.item("blaze_gold_rod", Item::new)
 							.tag(CommonTags.Items.BLAZE_GOLD_RODS.fabric)
-							.model((c, p) -> p.handheld(c))
+							.transform(handheld())
 							.register();
 
 	public static final ItemEntry<Item> BLAZE_WHISK = ingredient("blaze_whisk");
@@ -94,8 +96,7 @@ public class BlazingItems {
 			INCOMPLETE_BLAZE_MIXER =
 			REGISTRATE
 					.item("incomplete_blaze_mixer", SequencedAssemblyItem::new)
-					.model((c, p) -> p.withExistingParent(c.getName(),
-							BlazingHot.asResource("block/blaze_mixer/block")))
+					.transform(existingParent(BlazingHot.asResource("block/blaze_mixer/block")))
 					.register();
 
 	public static final ItemEntry<Item>

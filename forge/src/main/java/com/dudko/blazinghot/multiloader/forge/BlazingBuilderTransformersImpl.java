@@ -10,14 +10,19 @@ import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.simibubi.create.AllTags;
+import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.ModelGen;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.tterrag.registrate.builders.BlockBuilder;
+import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 
@@ -164,5 +169,17 @@ public class BlazingBuilderTransformersImpl {
 						.forceSolidOn())
 				.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.MODERN_LAMP.getKey()))
 				.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag);
+	}
+
+	public static <B extends Block, P> NonNullUnaryOperator<BlockBuilder<B, P>> simpleBlockState() {
+		return b -> b.blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)));
+	}
+
+	public static <I extends Item, P> NonNullUnaryOperator<ItemBuilder<I, P>> handheld() {
+		return b -> b.model((c, p) -> p.handheld(c));
+	}
+
+	public static <I extends Item, P> NonNullUnaryOperator<ItemBuilder<I, P>> existingParent(ResourceLocation parent) {
+		return b -> b.model((c, p) -> p.withExistingParent(c.getName(), parent));
 	}
 }
