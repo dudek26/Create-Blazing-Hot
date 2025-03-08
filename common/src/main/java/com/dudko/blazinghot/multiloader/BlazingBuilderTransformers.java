@@ -50,7 +50,17 @@ public class BlazingBuilderTransformers {
 	}
 
 	@ExpectPlatform
-	public static <T extends Item, P> NonNullUnaryOperator<ItemBuilder<T, P>> mold(String name, Molds.MoldType type) {
+	public static <B extends Block, P> NonNullUnaryOperator<BlockBuilder<B, P>> simpleBlockState() {
+		throw new AssertionError();
+	}
+
+	@ExpectPlatform
+	public static <I extends Item, P> NonNullUnaryOperator<ItemBuilder<I, P>> handheld() {
+		throw new AssertionError();
+	}
+
+	@ExpectPlatform
+	public static <I extends Item, P> NonNullUnaryOperator<ItemBuilder<I, P>> existingParent(ResourceLocation parent) {
 		throw new AssertionError();
 	}
 
