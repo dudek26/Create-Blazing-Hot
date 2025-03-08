@@ -67,8 +67,8 @@ public class BlazeMixerVisual extends SingleAxisRotatingVisual<BlazeMixerBlockEn
 
 	public void updateLight(float partialTick) {
 		super.updateLight(partialTick);
-		this.relight(this.pos.below(), new FlatLit[]{this.mixerHead});
-		this.relight(new FlatLit[]{this.mixerPole});
+		this.relight(this.pos.below(), this.mixerHead);
+		this.relight(this.mixerPole);
 	}
 
 	protected void _delete() {

@@ -14,6 +14,8 @@ import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.metal.Forms;
 import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.content.metal.MoltenMetals;
+import com.dudko.blazinghot.data.conditions.DefaultLoadConditions;
+import com.dudko.blazinghot.data.conditions.LoadCondition;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
@@ -21,8 +23,6 @@ import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
-import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
-import net.fabricmc.fabric.api.resource.conditions.v1.DefaultResourceConditions;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -64,16 +64,18 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 									.duration(200)
 									.output(MoltenMetals.BLAZE_GOLD.fluid().get(), MultiAmount.INGOT));
 
-	private GeneratedRecipe melting(String name, Ingredient ingredient, Fluid result, long amount, int duration, long fuelCost, Collection<ConditionJsonProvider> conditions) {
-		return create("melting/" + name, (b) -> b.requireFuel(fuel(), fuelCost)
-//						.withConditions(conditions)
-												 .require(ingredient)
-												 .duration(duration)
-												 .requiresHeat(HeatCondition.SUPERHEATED)
-												 .output(result, amount));
+	private GeneratedRecipe melting(String name, Ingredient ingredient, Fluid result, long amount, int duration, long fuelCost, Collection<LoadCondition<?>> conditions) {
+		return create("melting/" + name,
+				(b) -> b
+						.requireFuel(fuel(), fuelCost)
+						.withConditions(conditions)
+						.require(ingredient)
+						.duration(duration)
+						.requiresHeat(HeatCondition.SUPERHEATED)
+						.output(result, amount));
 	}
 
-	private GeneratedRecipe melting(ResourceLocation itemLocation, Fluid result, long amount, int duration, long fuelCost, Collection<ConditionJsonProvider> conditions) {
+	private GeneratedRecipe melting(ResourceLocation itemLocation, Fluid result, long amount, int duration, long fuelCost, Collection<LoadCondition<?>> conditions) {
 		return melting(itemLocation.getPath(),
 				Ingredient.of(MultiRegistries.getItemFromRegistry(itemLocation).get()),
 				result,
@@ -83,7 +85,7 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 				conditions);
 	}
 
-	private GeneratedRecipe melting(TagKey<Item> tag, Fluid result, long amount, int duration, long fuelCost, Collection<ConditionJsonProvider> conditions) {
+	private GeneratedRecipe melting(TagKey<Item> tag, Fluid result, long amount, int duration, long fuelCost, Collection<LoadCondition<?>> conditions) {
 		return melting(tag.location().getPath(), Ingredient.of(tag), result, amount, duration, fuelCost, conditions);
 	}
 
@@ -106,8 +108,8 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 						form.fuelCost,
 						metal.getLoadConditions())));
 		for (Forms optional : metal.optionalForms) {
-			List<ConditionJsonProvider> conditions = new ArrayList<>(metal.getLoadConditions());
-			conditions.add(DefaultResourceConditions.tagsPopulated(optional.internalTag(metal)));
+			List<LoadCondition<?>> conditions = new ArrayList<>(metal.getLoadConditions());
+			conditions.add(DefaultLoadConditions.tagsPopulated(optional.internalTag(metal)));
 			recipes.add(melting(optional.internalTag(metal),
 					metal.fluid().get(),
 					optional.amount,
