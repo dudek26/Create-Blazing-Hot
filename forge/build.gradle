@@ -13,9 +13,10 @@ architectury {
 def generatedResources = file("src/generated/resources")
 def existingResources = project.rootProject.file("common/src/main/resources")
 
-sourceSets {
-    main {
-        resources.srcDir generatedResources
+sourceSets.main {
+    resources {
+        srcDir("src/generated/resources")
+        exclude(".cache/**")
     }
 }
 
@@ -105,9 +106,6 @@ dependencies {
     modCompileOnly("dev.engine-room.flywheel:flywheel-forge-api-${flywheel_forge_minecraft_version}:${flywheel_forge_version}")
     modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-${flywheel_forge_minecraft_version}:${flywheel_forge_version}")
 
-    // Architectury API
-    modImplementation "dev.architectury:architectury-forge:$architectury_api_version"
-
     // Development QOL
     modLocalRuntime("mezz.jei:jei-${minecraft_version}-forge:${jei_version}") { transitive = false }
 
@@ -129,8 +127,7 @@ processResources {
             "version", version as String,
             "forge_version", forge_version.split("\\.")[0], // only specify major version of forge
             "minecraft_version", minecraft_version,
-            "create_version", create_forge_version.split("-")[0], // cut off build number
-            "architectury_api_version", architectury_api_version
+            "create_version", create_forge_version.split("-")[0] // cut off build number
     )
     properties.forEach((k, v) -> inputs.property(k, v))
 

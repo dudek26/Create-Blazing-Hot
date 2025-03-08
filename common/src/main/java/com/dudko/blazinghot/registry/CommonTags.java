@@ -6,7 +6,8 @@ import java.util.function.BiConsumer;
 
 import com.dudko.blazinghot.BlazingHot;
 
-import dev.architectury.platform.Platform;
+import com.dudko.blazinghot.multiloader.Platform;
+
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -73,8 +74,8 @@ public class CommonTags {
 		}
 
 		public static Namespace platform() {
-			if (Platform.isFabric()) return COMMON;
-			if (Platform.isForge()) return FORGE;
+			if (Platform.FABRIC.isCurrent()) return COMMON;
+			if (Platform.FORGE.isCurrent()) return FORGE;
 			return INTERNAL;
 		}
 
@@ -106,8 +107,8 @@ public class CommonTags {
 		}
 
 		public TagKey<Block> tag() {
-			if (Platform.isForge()) return forge;
-			if (Platform.isFabric()) return fabric;
+			if (Platform.FORGE.isCurrent()) return forge;
+			if (Platform.FABRIC.isCurrent()) return fabric;
 			return internal;
 		}
 
@@ -161,8 +162,8 @@ public class CommonTags {
 		}
 
 		public TagKey<Item> tag() {
-			if (Platform.isForge()) return forge;
-			if (Platform.isFabric()) return fabric;
+			if (Platform.FORGE.isCurrent()) return forge;
+			if (Platform.FABRIC.isCurrent()) return fabric;
 			return internal;
 		}
 
@@ -194,8 +195,8 @@ public class CommonTags {
 		}
 
 		public TagKey<Fluid> tag() {
-			if (Platform.isForge()) return forge;
-			if (Platform.isFabric()) return fabric;
+			if (Platform.FORGE.isCurrent()) return forge;
+			if (Platform.FABRIC.isCurrent()) return fabric;
 			return internal;
 		}
 
