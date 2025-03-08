@@ -261,7 +261,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
 	protected List<Recipe<?>> getMatchingRecipes() {
 		List<Recipe<?>> matchingRecipes = super.getMatchingRecipes();
 
-		if (!BlazingConfigs.server().allowBrewingInBlazeMixer.get()) return matchingRecipes;
+		if (!BlazingConfigs.server().recipes.allowBrewingInBlazeMixer.get()) return matchingRecipes;
 
 		Optional<BasinBlockEntity> basin = getBasin();
 		if (basin.isEmpty()) return matchingRecipes;
@@ -288,11 +288,11 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
 	protected <C extends Container> boolean matchStaticFilters(Recipe<C> r) {
 		return ((r instanceof CraftingRecipe
 				&& !(r instanceof ShapedRecipe)
-				&& BlazingConfigs.server().allowShapelessInBlazeMixer.get()
+				&& BlazingConfigs.server().recipes.allowShapelessInBlazeMixer.get()
 				&& r.getIngredients().size() > 1
 				&& !MechanicalPressBlockEntity.canCompress(r)) && !AllRecipeTypes.shouldIgnoreInAutomation(r)
 				|| (r.getType() == AllRecipeTypes.MIXING.getType()
-				&& BlazingConfigs.server().allowMixingInBlazeMixer.get()))
+				&& BlazingConfigs.server().recipes.allowMixingInBlazeMixer.get()))
 				|| r.getType() == BlazingRecipeTypesImpl.BLAZE_MIXING.getType();
 	}
 

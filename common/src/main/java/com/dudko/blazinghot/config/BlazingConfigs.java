@@ -4,6 +4,8 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import com.simibubi.create.api.stress.BlockStressValues;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import net.createmod.catnip.config.ConfigBase;
@@ -45,6 +47,10 @@ public class BlazingConfigs {
 	public static void registerCommon() {
 		client = register(CClient::new, ModConfig.Type.CLIENT);
 		server = register(CServer::new, ModConfig.Type.SERVER);
+
+		CStress stress = server().stressValues;
+		BlockStressValues.IMPACTS.registerProvider(stress::getImpact);
+		BlockStressValues.CAPACITIES.registerProvider(stress::getCapacity);
 	}
 
 	public static void onLoad(ModConfig modConfig) {

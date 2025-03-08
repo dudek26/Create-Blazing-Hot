@@ -154,17 +154,17 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 		if (r == null) return speed;
 
 		if (r instanceof MixingRecipe && PotionMixingRecipes.ALL.contains(r)) {
-			return speed / BlazingConfigs.server().blazeBrewingSpeedMultiplier.getF();
+			return speed / BlazingConfigs.server().recipes.blazeBrewingSpeedMultiplier.getF();
 		}
 		else if (r.getType() == AllRecipeTypes.MIXING.getType()) {
-			return speed / BlazingConfigs.server().blazeMixingSpeedMultiplier.getF();
+			return speed / BlazingConfigs.server().recipes.blazeMixingSpeedMultiplier.getF();
 		}
 		else if ((r instanceof CraftingRecipe
 				&& !(r instanceof ShapedRecipe)
 				&& AllConfigs.server().recipes.allowShapelessInMixer.get()
 				&& r.getIngredients().size() > 1
 				&& !MechanicalPressBlockEntity.canCompress(r)) && !AllRecipeTypes.shouldIgnoreInAutomation(r)) {
-			return speed / BlazingConfigs.server().blazeShapelessSpeedMultiplier.getF();
+			return speed / BlazingConfigs.server().recipes.blazeShapelessSpeedMultiplier.getF();
 		}
 		return speed;
 	}

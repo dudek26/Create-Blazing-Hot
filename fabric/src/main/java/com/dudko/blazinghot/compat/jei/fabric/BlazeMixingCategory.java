@@ -56,7 +56,7 @@ public class BlazeMixingCategory extends BasinCategory {
 
 	private FluidIngredient getFuelFromRecipe(BasinRecipe recipe) {
 		if (type == MixingType.AUTO_SHAPELESS) return FluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag,
-				BlazingConfigs.server().blazeShapelessFuelUsage.get());
+				BlazingConfigs.server().recipes.blazeShapelessFuelUsage.get());
 		if (recipe instanceof BlazeMixingRecipe bmRecipe) return bmRecipe.getFuelFluid();
 		else {
 			int calculatedCost = (int) BlazeMixingRecipe.getFuelCost(recipe);
@@ -73,7 +73,7 @@ public class BlazeMixingCategory extends BasinCategory {
 		if (fuelFluid == FluidIngredient.EMPTY) fuels = new ArrayList<>();
 		else fuels = new ArrayList<>(fuelFluid.getMatchingFluidStacks());
 		return (!fuels.isEmpty() && !fuels.get(0).isEmpty() && fuels.get(0) != null) || (type
-				== MixingType.AUTO_SHAPELESS && BlazingConfigs.server().blazeShapelessFuelUsage.get() != 0);
+				== MixingType.AUTO_SHAPELESS && BlazingConfigs.server().recipes.blazeShapelessFuelUsage.get() != 0);
 	}
 
 	@Override

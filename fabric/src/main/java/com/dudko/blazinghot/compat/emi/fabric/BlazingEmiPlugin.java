@@ -102,7 +102,7 @@ public class BlazingEmiPlugin implements EmiPlugin {
 
 		for (CraftingRecipe recipe : manager.getAllRecipesFor(RecipeType.CRAFTING)) {
 			if (recipe instanceof ShapelessRecipe
-					&& BlazingConfigs.server().allowShapelessInBlazeMixer.get()
+					&& BlazingConfigs.server().recipes.allowShapelessInBlazeMixer.get()
 					&& !MechanicalPressBlockEntity.canCompress(recipe)
 					&& !AllRecipeTypes.shouldIgnoreInAutomation(recipe)
 					&& recipe.getIngredients().size() > 1) {
@@ -113,7 +113,7 @@ public class BlazingEmiPlugin implements EmiPlugin {
 		}
 
 		for (MixingRecipe recipe : PotionMixingRecipes.ALL) {
-			if (BlazingConfigs.server().allowBrewingInBlazeMixer.get())
+			if (BlazingConfigs.server().recipes.allowBrewingInBlazeMixer.get())
 				registry.addRecipe(new BlazeMixingEmiRecipe(BLAZE_AUTOMATIC_BREWING, recipe));
 		}
 

@@ -59,17 +59,17 @@ public class BlazeMixingRecipe extends BasinRecipe {
 		if (r == null) return MultiFluids.Constants.BUCKET.platformed() + 1;
 
 		if (r instanceof MixingRecipe && PotionMixingRecipes.ALL.contains(r))
-			return BlazingConfigs.server().blazeBrewingFuelUsage.get();
+			return BlazingConfigs.server().recipes.blazeBrewingFuelUsage.get();
 
 		else if (r.getType() == AllRecipeTypes.MIXING.getType())
 			return durationToFuelCost(((ProcessingRecipe<?>) r).getProcessingDuration());
 
 		else if ((r instanceof CraftingRecipe
 				&& !(r instanceof ShapedRecipe)
-				&& BlazingConfigs.server().allowShapelessInBlazeMixer.get()
+				&& BlazingConfigs.server().recipes.allowShapelessInBlazeMixer.get()
 				&& r.getIngredients().size() > 1
 				&& !MechanicalPressBlockEntity.canCompress(r)) && !AllRecipeTypes.shouldIgnoreInAutomation(r))
-			return BlazingConfigs.server().blazeShapelessFuelUsage.get();
+			return BlazingConfigs.server().recipes.blazeShapelessFuelUsage.get();
 
 		return 0;
 	}
@@ -82,7 +82,7 @@ public class BlazeMixingRecipe extends BasinRecipe {
 		if (duration != 0) {
 			recipeSpeed = duration / 100f;
 		}
-		return Mth.ceil(recipeSpeed * BlazingConfigs.server().blazeMixingFuelUsage.get());
+		return Mth.ceil(recipeSpeed * BlazingConfigs.server().recipes.blazeMixingFuelUsage.get());
 	}
 
 	/**
