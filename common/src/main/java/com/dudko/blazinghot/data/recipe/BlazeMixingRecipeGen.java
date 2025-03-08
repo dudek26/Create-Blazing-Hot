@@ -93,7 +93,7 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 		List<GeneratedRecipe> recipes = new ArrayList<>();
 		metal
 				.supportedForms()
-				.forEach(form -> recipes.add(melting(form.internalTag(metal),
+				.forEach(form -> recipes.add(melting(form.tag(metal),
 						metal.fluid().get(),
 						form.amount,
 						form.processingTime,
@@ -109,15 +109,15 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 						metal.getLoadConditions())));
 		for (Forms optional : metal.optionalForms) {
 			List<LoadCondition<?>> conditions = new ArrayList<>(metal.getLoadConditions());
-			conditions.add(DefaultLoadConditions.tagsPopulated(optional.internalTag(metal)));
-			recipes.add(melting(optional.internalTag(metal),
+			conditions.add(DefaultLoadConditions.tagsPopulated(optional.tag(metal)));
+			recipes.add(melting(optional.tag(metal),
 					metal.fluid().get(),
 					optional.amount,
 					optional.processingTime,
 					optional.fuelCost,
 					conditions));
 		}
-		metal.compatForms.forEach((form, mod) -> recipes.add(melting(form.internalTag(metal),
+		metal.compatForms.forEach((form, mod) -> recipes.add(melting(form.tag(metal),
 				metal.fluid().get(),
 				form.amount,
 				form.processingTime,

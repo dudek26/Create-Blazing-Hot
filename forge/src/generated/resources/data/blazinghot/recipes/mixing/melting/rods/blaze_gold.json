@@ -1,0 +1,16 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "forge:rods/blaze_gold"
+    }
+  ],
+  "processingTime": 750,
+  "results": [
+    {
+      "amount": 1,
+      "fluid": "blazinghot:molten_blaze_gold"
+    }
+  ]
+}

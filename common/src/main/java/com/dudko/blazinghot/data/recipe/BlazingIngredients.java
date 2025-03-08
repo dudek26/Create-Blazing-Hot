@@ -4,7 +4,6 @@ import static com.dudko.blazinghot.content.metal.Forms.INGOT;
 import static com.dudko.blazinghot.content.metal.Forms.NUGGET;
 import static com.dudko.blazinghot.content.metal.Forms.PLATE;
 import static com.dudko.blazinghot.content.metal.Forms.ROD;
-import static com.dudko.blazinghot.registry.CommonTags.Namespace.INTERNAL;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.metal.MoltenMetals;
@@ -27,14 +26,16 @@ import net.minecraft.world.level.material.Fluids;
 
 public class BlazingIngredients {
 
+	private static final CommonTags.Namespace TAG_NAMESPACE = CommonTags.Namespace.platform();
+
 	//    Shortcuts
 
 	public static TagKey<Item> ingotTag(String material) {
-		return INGOT.internalTag(material);
+		return INGOT.tag(material);
 	}
 
 	public static TagKey<Item> nuggetTag(String material) {
-		return NUGGET.internalTag(material);
+		return NUGGET.tag(material);
 	}
 
 	public static Item modApple(String material) {
@@ -152,15 +153,15 @@ public class BlazingIngredients {
 	//    Dusts
 
 	public static TagKey<Item> stoneDust() {
-		return CommonTags.itemTagOf(INTERNAL.tagPath("dusts", "stone"), INTERNAL);
+		return CommonTags.itemTagOf(TAG_NAMESPACE.tagPath("dusts", "stone"), TAG_NAMESPACE);
 	}
 
 	public static TagKey<Item> netherrackDust() {
-		return CommonTags.itemTagOf(INTERNAL.tagPath("dusts", "netherrack"), INTERNAL);
+		return CommonTags.itemTagOf(TAG_NAMESPACE.tagPath("dusts", "netherrack"), TAG_NAMESPACE);
 	}
 
 	public static TagKey<Item> soulDust() {
-		return CommonTags.itemTagOf(INTERNAL.tagPath("dusts", "soul_sand"), INTERNAL);
+		return CommonTags.itemTagOf(TAG_NAMESPACE.tagPath("dusts", "soul_sand"), TAG_NAMESPACE);
 	}
 
 	//    Blocks
@@ -236,11 +237,11 @@ public class BlazingIngredients {
 	}
 
 	public static TagKey<Item> blazeGoldSheet() {
-		return PLATE.internalTag(MoltenMetals.BLAZE_GOLD);
+		return PLATE.tag(MoltenMetals.BLAZE_GOLD);
 	}
 
 	public static TagKey<Item> blazeGoldRod() {
-		return ROD.internalTag(MoltenMetals.BLAZE_GOLD);
+		return ROD.tag(MoltenMetals.BLAZE_GOLD);
 	}
 
 	//    Food

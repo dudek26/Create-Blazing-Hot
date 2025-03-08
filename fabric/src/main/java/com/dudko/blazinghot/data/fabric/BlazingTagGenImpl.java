@@ -1,10 +1,6 @@
 package com.dudko.blazinghot.data.fabric;
 
 import static com.dudko.blazinghot.data.BlazingTagGen.OPTIONAL_TAGS;
-import static com.dudko.blazinghot.data.BlazingTagGen.addTagsIfAbsent;
-import static com.dudko.blazinghot.registry.CommonTags.Namespace.COMMON;
-import static com.dudko.blazinghot.registry.CommonTags.Namespace.FORGE;
-import static com.dudko.blazinghot.registry.CommonTags.Namespace.INTERNAL;
 import static com.dudko.blazinghot.registry.CommonTags.itemTagOf;
 
 import com.dudko.blazinghot.content.metal.Forms;
@@ -31,7 +27,7 @@ public class BlazingTagGenImpl {
 	public static void generateBlockTags(RegistrateTagsProvider<Block> prov) {
 		for (BlazingTags.Blocks tag : BlazingTags.Blocks.values()) {
 			if (tag.alwaysDatagen) {
-				tagAppender(prov, tag);
+				BlazingTagGen.tagAppender(prov, tag);
 			}
 		}
 		for (TagKey<Block> tag : OPTIONAL_TAGS.keySet()) {
@@ -40,9 +36,7 @@ public class BlazingTagGenImpl {
 				appender.addOptional(loc);
 		}
 		for (CommonTags.Blocks tag : CommonTags.Blocks.values()) {
-			tagAppender(prov, tag.fabric);
-			tagAppender(prov, tag.forge);
-			tagAppender(prov, tag.internal).addTag(tag.forge).addTag(tag.fabric);
+			tagAppender(prov, tag.tag());
 		}
 	}
 
@@ -59,19 +53,13 @@ public class BlazingTagGenImpl {
 		}
 
 		for (MoltenMetal metal : MoltenMetals.ALL) {
-			TagKey<Fluid> forgeTag = CommonTags.fluidTagOf(metal.moltenName(), FORGE);
-			TagKey<Fluid> commonTag = CommonTags.fluidTagOf(metal.moltenName(), COMMON);
-			TagKey<Fluid> internalTag = CommonTags.fluidTagOf(metal.moltenName(), INTERNAL);
+			TagKey<Fluid> tag = CommonTags.fluidTagOf(metal.moltenName(), CommonTags.Namespace.platform());
 
-			tagAppender(prov, forgeTag);
-			tagAppender(prov, commonTag);
-			tagAppender(prov, internalTag).addTag(forgeTag).addTag(commonTag);
+			tagAppender(prov, tag);
 		}
 
 		for (CommonTags.Fluids tag : CommonTags.Fluids.values()) {
-			tagAppender(prov, tag.fabric);
-			tagAppender(prov, tag.forge);
-			tagAppender(prov, tag.internal).addTag(tag.forge).addTag(tag.fabric);
+			tagAppender(prov, tag.tag());
 		}
 	}
 
@@ -104,29 +92,20 @@ public class BlazingTagGenImpl {
 		for (MoltenMetal metal : MoltenMetals.ALL) {
 			if (metal.ignoreTagGen) continue;
 			for (Forms form : metal.nonCustomForms()) {
-				TagKey<Item> forgeTag = itemTagOf(FORGE.tagPath(form.tagFolder, metal.name), FORGE);
-				TagKey<Item> commonTag = itemTagOf(COMMON.tagPath(form.tagFolder, metal.name), COMMON);
-				TagKey<Item> internalTag = itemTagOf(INTERNAL.tagPath(form.tagFolder, metal.name), INTERNAL);
-
-				tagAppender(prov, forgeTag);
-				tagAppender(prov, commonTag);
-
-				TagsProvider.TagAppender<Item> internalTagAppender = tagAppender(prov, internalTag);
-				addTagsIfAbsent(internalTagAppender, commonTag, forgeTag);
+				TagKey<Item>
+						tag =
+						itemTagOf(CommonTags.Namespace.platform().tagPath(form.tagFolder, metal.name),
+								CommonTags.Namespace.platform());
+				tagAppender(prov, tag);
 			}
 		}
 
 		for (CommonTags.Items tag : CommonTags.Items.values()) {
-			tagAppender(prov, tag.fabric);
-			tagAppender(prov, tag.forge);
-			TagsProvider.TagAppender<Item> internalTagAppender = tagAppender(prov, tag.internal);
-			addTagsIfAbsent(internalTagAppender, tag.forge, tag.fabric);
+			tagAppender(prov, tag.tag());
 		}
 
 		for (DyeUtil.Dyes dye : DyeUtil.Dyes.values()) {
-			tagAppender(prov, dye.commonTag);
-			tagAppender(prov, dye.forgeTag);
-			tagAppender(prov, dye.internalTag).addTag(dye.commonTag).addTag(dye.forgeTag);
+			tagAppender(prov, dye.tag);
 		}
 	}
 

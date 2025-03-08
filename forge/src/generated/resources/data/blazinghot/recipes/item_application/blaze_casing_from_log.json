@@ -1,0 +1,16 @@
+{
+  "type": "create:item_application",
+  "ingredients": [
+    {
+      "item": "create:copper_casing"
+    },
+    {
+      "tag": "forge:plates/blaze_gold"
+    }
+  ],
+  "results": [
+    {
+      "item": "blazinghot:blaze_casing"
+    }
+  ]
+}

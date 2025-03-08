@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "createaddition"
+    }
+  ],
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "forge:rods/brass"
+    }
+  ],
+  "processingTime": 750,
+  "results": [
+    {
+      "amount": 1,
+      "fluid": "blazinghot:molten_brass"
+    }
+  ]
+}

@@ -1,11 +1,11 @@
 package com.dudko.blazinghot.content.metal;
 
 import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe.defaultDurationToFuelCost;
-import static com.dudko.blazinghot.registry.CommonTags.Namespace.INTERNAL;
 import static com.dudko.blazinghot.registry.CommonTags.itemTagOf;
 
 import com.dudko.blazinghot.compat.Mods;
-import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.registry.CommonTags.Namespace;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -13,15 +13,13 @@ import net.minecraft.world.item.Item;
 
 public class Forms {
 
-	public static final Forms INGOT = Forms.of("ingots", MultiFluids.Constants.INGOT, 400, true),
+	public static final Forms INGOT = Forms.of("ingots", MultiAmount.INGOT, 400, true),
 			NUGGET =
-					Forms.of("nuggets", MultiFluids.Constants.NUGGET, 65, true),
+					Forms.of("nuggets", MultiAmount.NUGGET, 65, true),
 			PLATE =
-					Forms.of("plates", MultiFluids.Constants.PLATE, 400, true),
+					Forms.of("plates", MultiAmount.INGOT, 400, true),
 			ROD =
-					Forms.of("rods", MultiFluids.Constants.ROD, 250, true),
-			WIRE =
-					Forms.of("wires", MultiFluids.Constants.ROD, 250, true);
+					Forms.of("rods", MultiAmount.ROD, 250, true), WIRE = Forms.of("wires", MultiAmount.ROD, 250, true);
 
 	public String tagFolder = null;
 	public final long amount;
@@ -46,16 +44,16 @@ public class Forms {
 		this.fuelCost = defaultDurationToFuelCost(processingTime);
 	}
 
-	Forms(String tagFolder, MultiFluids.Constants fluidConstant, int processingTime, boolean mechanicalMixerMeltable) {
-		this(tagFolder, fluidConstant.platformed(), processingTime, mechanicalMixerMeltable);
+	Forms(String tagFolder, MultiAmount amount, int processingTime, boolean mechanicalMixerMeltable) {
+		this(tagFolder, amount.get(), processingTime, mechanicalMixerMeltable);
 	}
 
-	public TagKey<Item> internalTag(String material) {
-		return itemTagOf(INTERNAL.tagPath(tagFolder, material), INTERNAL);
+	public TagKey<Item> tag(String material) {
+		return itemTagOf(Namespace.platform().tagPath(tagFolder, material), Namespace.platform());
 	}
 
-	public TagKey<Item> internalTag(MoltenMetal metal) {
-		return internalTag(metal.name);
+	public TagKey<Item> tag(MoltenMetal metal) {
+		return tag(metal.name);
 	}
 
 	public String simpleItemName(MoltenMetal metal) {
@@ -72,8 +70,8 @@ public class Forms {
 		return mod.asResource(simpleItemName(metal));
 	}
 
-	public static Forms of(String tagFolder, MultiFluids.Constants fluidConstant, int processingTime, boolean mechanicalMixerMeltable) {
-		return new Forms(tagFolder, fluidConstant, processingTime, mechanicalMixerMeltable);
+	public static Forms of(String tagFolder, MultiAmount amount, int processingTime, boolean mechanicalMixerMeltable) {
+		return new Forms(tagFolder, amount, processingTime, mechanicalMixerMeltable);
 	}
 
 	public static Forms custom(ResourceLocation location, long amount, int processingTime, long fuelCost, boolean mechanicalMixerMeltable) {

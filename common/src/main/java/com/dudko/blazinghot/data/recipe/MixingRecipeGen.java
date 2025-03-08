@@ -125,7 +125,7 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
 				.supportedForms()
 				.stream()
 				.filter(f -> f.mechanicalMixerMeltable)
-				.forEach(form -> recipes.add(melting(form.internalTag(metal),
+				.forEach(form -> recipes.add(melting(form.tag(metal),
 						metal.fluid().get(),
 						MultiAmount.metal(form.amount),
 						form.processingTime * 3,
@@ -142,8 +142,8 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
 		for (Forms optional : metal.optionalForms) {
 			if (!optional.mechanicalMixerMeltable) continue;
 			List<LoadCondition<?>> conditions = new ArrayList<>(metal.getLoadConditions());
-			conditions.add(DefaultLoadConditions.tagsPopulated(optional.internalTag(metal)));
-			recipes.add(melting(optional.internalTag(metal),
+			conditions.add(DefaultLoadConditions.tagsPopulated(optional.tag(metal)));
+			recipes.add(melting(optional.tag(metal),
 					metal.fluid().get(),
 					MultiAmount.metal(optional.amount),
 					optional.processingTime * 3,
@@ -151,7 +151,7 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
 		}
 		metal.compatForms.forEach((form, mod) -> {
 			if (!form.mechanicalMixerMeltable) return;
-			recipes.add(melting(form.internalTag(metal),
+			recipes.add(melting(form.tag(metal),
 					metal.fluid().get(),
 					MultiAmount.metal(form.amount),
 					form.processingTime * 3,

@@ -1,0 +1,26 @@
+{
+  "type": "blazinghot:blaze_mixing",
+  "blazinghot:fuel": {
+    "amount": 0,
+    "fluidTag": "blazinghot:blaze_mixer_fuel"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "createaddition"
+    }
+  ],
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "forge:rods/gold"
+    }
+  ],
+  "processingTime": 250,
+  "results": [
+    {
+      "amount": 0,
+      "fluid": "minecraft:empty"
+    }
+  ]
+}

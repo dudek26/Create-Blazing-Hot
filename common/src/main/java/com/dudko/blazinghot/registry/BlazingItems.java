@@ -72,21 +72,18 @@ public class BlazingItems {
 	public static final ItemEntry<Item>
 			BLAZE_GOLD_INGOT =
 			taggedIngredient("blaze_gold_ingot",
-					CommonTags.Items.BLAZE_GOLD_INGOTS.forge,
-					CommonTags.Items.BLAZE_GOLD_INGOTS.fabric,
+					CommonTags.Items.BLAZE_GOLD_INGOTS.tag(),
 					ItemTags.BEACON_PAYMENT_ITEMS),
 			BLAZE_GOLD_NUGGET =
-					taggedIngredient("blaze_gold_nugget", CommonTags.Items.BLAZE_GOLD_NUGGETS.bothTags()),
+					taggedIngredient("blaze_gold_nugget", CommonTags.Items.BLAZE_GOLD_NUGGETS.tag()),
 			BLAZE_GOLD_SHEET =
 					taggedIngredient("blaze_gold_sheet",
-							CommonTags.Items.BLAZE_GOLD_PLATES.fabric,
-							CommonTags.Items.BLAZE_GOLD_PLATES.forge,
-							CommonTags.Items.PLATES.forge,
-							CommonTags.Items.PLATES.fabric),
+							CommonTags.Items.BLAZE_GOLD_PLATES.tag(),
+							CommonTags.Items.PLATES.tag()),
 			BLAZE_GOLD_ROD =
 					REGISTRATE
 							.item("blaze_gold_rod", Item::new)
-							.tag(CommonTags.Items.BLAZE_GOLD_RODS.fabric)
+							.tag(CommonTags.Items.BLAZE_GOLD_RODS.tag())
 							.transform(handheld())
 							.register();
 
@@ -101,11 +98,11 @@ public class BlazingItems {
 
 	public static final ItemEntry<Item>
 			NETHERRACK_DUST =
-			taggedIngredient("netherrack_dust", CommonTags.Items.NETHERRACK_DUSTS.bothTags()),
+			taggedIngredient("netherrack_dust", CommonTags.Items.NETHERRACK_DUSTS.tag()),
 			STONE_DUST =
-					taggedIngredient("stone_dust", CommonTags.Items.STONE_DUSTS.bothTags()),
+					taggedIngredient("stone_dust", CommonTags.Items.STONE_DUSTS.tag()),
 			SOUL_DUST =
-					taggedIngredient("soul_dust", CommonTags.Items.SOUL_SAND_DUSTS.bothTags());
+					taggedIngredient("soul_dust", CommonTags.Items.SOUL_SAND_DUSTS.tag());
 
 	public static final ItemEntry<Item> NETHER_COMPOUND = ingredient("nether_compound"),
 			NETHER_ESSENCE =
@@ -342,7 +339,7 @@ public class BlazingItems {
 		protected FoodItemBuilder(String name, NonNullFunction<Item.Properties, T> factory) {
 			this.name = name;
 			this.factory = factory;
-			this.tags = List.of(CommonTags.Items.FOODS.bothTags()).toArray(new TagKey[1]);
+			this.tags = List.of(CommonTags.Items.FOODS.tag()).toArray(new TagKey[1]);
 		}
 
 		protected FoodItemBuilder<T> maxStackSize(int maxStackSize) {
@@ -461,7 +458,7 @@ public class BlazingItems {
 					REGISTRATE
 							.item(name, factory)
 							.properties(p -> finishProperties())
-							.tag(CommonTags.Items.FOODS.bothTags());
+							.tag(CommonTags.Items.FOODS.tag());
 			if (tags.length > 0) builder.tag(tags);
 
 			builder.onRegisterAfter(Registries.ITEM, c -> {

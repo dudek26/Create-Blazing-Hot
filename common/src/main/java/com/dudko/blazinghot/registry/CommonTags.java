@@ -6,6 +6,7 @@ import java.util.function.BiConsumer;
 
 import com.dudko.blazinghot.BlazingHot;
 
+import dev.architectury.platform.Platform;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -33,12 +34,24 @@ public class CommonTags {
 		return tagOf(BuiltInRegistries.BLOCK, path, namespace);
 	}
 
+	public static TagKey<Block> blockTagOf(String folder, String path, Namespace namespace) {
+		return blockTagOf(namespace.tagPath(folder, path), namespace);
+	}
+
 	public static TagKey<Item> itemTagOf(String path, Namespace namespace) {
 		return tagOf(BuiltInRegistries.ITEM, path, namespace);
 	}
 
+	public static TagKey<Item> itemTagOf(String folder, String path, Namespace namespace) {
+		return itemTagOf(namespace.tagPath(folder, path), namespace);
+	}
+
 	public static TagKey<Fluid> fluidTagOf(String path, Namespace namespace) {
 		return tagOf(BuiltInRegistries.FLUID, path, namespace);
+	}
+
+	public static TagKey<Fluid> fluidTagOf(String folder, String path, Namespace namespace) {
+		return fluidTagOf(namespace.tagPath(folder, path), namespace);
 	}
 
 
@@ -59,15 +72,25 @@ public class CommonTags {
 			boolean useFolders = folder.equals("wires") || this.useFolders;
 			return useFolders ? folderTag(folder, material) : plainTag(folder, material);
 		}
+
+		public static Namespace platform() {
+			if (Platform.isFabric()) return COMMON;
+			if (Platform.isForge()) return FORGE;
+			return INTERNAL;
+		}
+
+		public ResourceLocation asResource(String path) {
+			return new ResourceLocation(namespace, path);
+		}
 	}
 
 	public enum Blocks {
 		STORAGE_BLOCKS("storage_blocks"),
 		BLAZE_GOLD_BLOCKS("storage_blocks/blaze_gold", "blaze_gold_blocks");
 
-		public final TagKey<Block> internal;
-		public final TagKey<Block> forge;
-		public final TagKey<Block> fabric;
+		private final TagKey<Block> internal;
+		private final TagKey<Block> forge;
+		private final TagKey<Block> fabric;
 
 		Blocks(String common) {
 			this(common, common, common);
@@ -83,12 +106,10 @@ public class CommonTags {
 			this.fabric = TagKey.create(BuiltInRegistries.BLOCK.key(), new ResourceLocation("c", fabric));
 		}
 
-		public TagKey<Block>[] bothTags() {
-			return (TagKey<Block>[]) new TagKey[]{forge, fabric};
-		}
-
-		public TagKey<Block>[] allTags() {
-			return (TagKey<Block>[]) new TagKey[]{internal, forge, fabric};
+		public TagKey<Block> tag() {
+			if (Platform.isForge()) return forge;
+			if (Platform.isFabric()) return fabric;
+			return internal;
 		}
 
 		public static void register() {
@@ -100,10 +121,10 @@ public class CommonTags {
 		STORAGE_BLOCKS("storage_blocks"),
 
 		BLAZE_GOLD_BLOCKS("storage_blocks/blaze_gold", "blaze_gold_blocks"),
-		BLAZE_GOLD_INGOTS("ingots/blaze_gold", "blaze_gold_ingots"),
-		BLAZE_GOLD_NUGGETS("nuggets/blaze_gold", "blaze_gold_nuggets"),
-		BLAZE_GOLD_PLATES("plates/blaze_gold", "blaze_gold_plates"),
-		BLAZE_GOLD_RODS("rods/blaze_gold", "blaze_gold_rods"),
+		BLAZE_GOLD_INGOTS("ingots/blaze_gold", "blaze_gold_ingots", false),
+		BLAZE_GOLD_NUGGETS("nuggets/blaze_gold", "blaze_gold_nuggets", false),
+		BLAZE_GOLD_PLATES("plates/blaze_gold", "blaze_gold_plates", false),
+		BLAZE_GOLD_RODS("rods/blaze_gold", "blaze_gold_rods", false),
 
 		PLATES("plates"),
 		FOODS("foods"),
@@ -112,30 +133,38 @@ public class CommonTags {
 		STONE_DUSTS("dusts/stone", "stone_dusts"),
 		SOUL_SAND_DUSTS("dusts/soul_sand", "soul_sand_dusts");
 
-		public final TagKey<Item> internal;
-		public final TagKey<Item> forge;
-		public final TagKey<Item> fabric;
+		private final TagKey<Item> internal;
+		private final TagKey<Item> forge;
+		private final TagKey<Item> fabric;
+		public final boolean alwaysDatagen;
 
 		Items(String common) {
-			this(common, common, common);
+			this(common, common, common, true);
 		}
 
 		Items(String forge, String fabric) {
-			this(forge, fabric, fabric);
+			this(forge, fabric, fabric, true);
 		}
 
-		Items(String forge, String fabric, String internal) {
+		Items(String common, boolean alwaysDatagen) {
+			this(common, common, common, alwaysDatagen);
+		}
+
+		Items(String forge, String fabric, boolean alwaysDatagen) {
+			this(forge, fabric, fabric, alwaysDatagen);
+		}
+
+		Items(String forge, String fabric, String internal, boolean alwaysDatagen) {
 			this.internal = TagKey.create(BuiltInRegistries.ITEM.key(), BlazingHot.asResource(internal));
 			this.forge = TagKey.create(BuiltInRegistries.ITEM.key(), new ResourceLocation("forge", forge));
 			this.fabric = TagKey.create(BuiltInRegistries.ITEM.key(), new ResourceLocation("c", fabric));
+			this.alwaysDatagen = alwaysDatagen;
 		}
 
-		public TagKey<Item>[] bothTags() {
-			return (TagKey<Item>[]) new TagKey[]{forge, fabric};
-		}
-
-		public TagKey<Item>[] allTags() {
-			return (TagKey<Item>[]) new TagKey[]{internal, forge, fabric};
+		public TagKey<Item> tag() {
+			if (Platform.isForge()) return forge;
+			if (Platform.isFabric()) return fabric;
+			return internal;
 		}
 
 		public static void register() {
@@ -144,11 +173,11 @@ public class CommonTags {
 	}
 
 	public enum Fluids {
-		NETHER_LAVA("nether_lava");
+		;
 
-		public final TagKey<Fluid> internal;
-		public final TagKey<Fluid> forge;
-		public final TagKey<Fluid> fabric;
+		private final TagKey<Fluid> internal;
+		private final TagKey<Fluid> forge;
+		private final TagKey<Fluid> fabric;
 
 		Fluids(String common) {
 			this(common, common, common);
@@ -165,12 +194,10 @@ public class CommonTags {
 
 		}
 
-		public TagKey<Fluid>[] bothTags() {
-			return (TagKey<Fluid>[]) new TagKey[]{forge, fabric};
-		}
-
-		public TagKey<Fluid>[] allTags() {
-			return (TagKey<Fluid>[]) new TagKey[]{internal, forge, fabric};
+		public TagKey<Fluid> tag() {
+			if (Platform.isForge()) return forge;
+			if (Platform.isFabric()) return fabric;
+			return internal;
 		}
 
 		public static void register() {
@@ -186,25 +213,23 @@ public class CommonTags {
 
 	public static void provideLangEntries(BiConsumer<String, String> consumer) {
 		for (Blocks blockTag : Blocks.values()) {
-			for (TagKey<Block> tag : blockTag.allTags()) {
-				ResourceLocation loc = tag.location();
-				consumer.accept("tag.block." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
-						titleCaseConversion(blockTag.name()).replace('_', ' '));
-			}
+			ResourceLocation loc = blockTag.tag().location();
+			consumer.accept("tag.block." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
+					titleCaseConversion(blockTag.name()).replace('_', ' '));
+
 		}
 		for (Items itemTag : Items.values()) {
-			for (TagKey<Item> tag : itemTag.allTags()) {
-				ResourceLocation loc = tag.location();
-				consumer.accept("tag.item." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
-						titleCaseConversion(itemTag.name().replace('_', ' ')));
-			}
+			if (!itemTag.alwaysDatagen) continue;
+			ResourceLocation loc = itemTag.tag().location();
+			consumer.accept("tag.item." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
+					titleCaseConversion(itemTag.name().replace('_', ' ')));
+
 		}
 		for (Fluids fluidTag : Fluids.values()) {
-			for (TagKey<Fluid> tag : fluidTag.allTags()) {
-				ResourceLocation loc = tag.location();
-				consumer.accept("tag.fluid." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
-						titleCaseConversion(fluidTag.name().replace('_', ' ')));
-			}
+			ResourceLocation loc = fluidTag.tag().location();
+			consumer.accept("tag.fluid." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
+					titleCaseConversion(fluidTag.name().replace('_', ' ')));
+
 		}
 	}
 

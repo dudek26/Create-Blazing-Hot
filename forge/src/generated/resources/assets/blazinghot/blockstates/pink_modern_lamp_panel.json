@@ -1,0 +1,92 @@
+{
+  "variants": {
+    "facing=down,lit=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/panel/pink",
+      "x": 180
+    },
+    "facing=down,lit=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/panel/pink",
+      "x": 180
+    },
+    "facing=down,lit=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/panel/pink_powered",
+      "x": 180
+    },
+    "facing=down,lit=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/panel/pink_powered",
+      "x": 180
+    },
+    "facing=east,lit=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/panel/pink_vertical",
+      "y": 270
+    },
+    "facing=east,lit=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/panel/pink_vertical",
+      "y": 270
+    },
+    "facing=east,lit=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/panel/pink_vertical_powered",
+      "y": 270
+    },
+    "facing=east,lit=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/panel/pink_vertical_powered",
+      "y": 270
+    },
+    "facing=north,lit=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/panel/pink_vertical",
+      "y": 180
+    },
+    "facing=north,lit=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/panel/pink_vertical",
+      "y": 180
+    },
+    "facing=north,lit=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/panel/pink_vertical_powered",
+      "y": 180
+    },
+    "facing=north,lit=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/panel/pink_vertical_powered",
+      "y": 180
+    },
+    "facing=south,lit=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/panel/pink_vertical"
+    },
+    "facing=south,lit=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/panel/pink_vertical"
+    },
+    "facing=south,lit=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/panel/pink_vertical_powered"
+    },
+    "facing=south,lit=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/panel/pink_vertical_powered"
+    },
+    "facing=up,lit=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/panel/pink"
+    },
+    "facing=up,lit=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/panel/pink"
+    },
+    "facing=up,lit=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/panel/pink_powered"
+    },
+    "facing=up,lit=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/panel/pink_powered"
+    },
+    "facing=west,lit=false,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/panel/pink_vertical",
+      "y": 90
+    },
+    "facing=west,lit=false,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/panel/pink_vertical",
+      "y": 90
+    },
+    "facing=west,lit=true,waterlogged=false": {
+      "model": "blazinghot:block/modern_lamp/panel/pink_vertical_powered",
+      "y": 90
+    },
+    "facing=west,lit=true,waterlogged=true": {
+      "model": "blazinghot:block/modern_lamp/panel/pink_vertical_powered",
+      "y": 90
+    }
+  }
+}
