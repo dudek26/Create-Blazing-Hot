@@ -1,4 +1,19 @@
 ------------------------------------------------------
+Create: Blazing Hot 0.6.6
+------------------------------------------------------
+
+#### Forge-only update. Fabric version will release when Create Fabric updates to v6.
+
+### Changed:
+
+* Updated to Create 6.0.2
+* Made mod config accessible in Mods menu
+* Added config for Blaze Mixer stress impact
+
+### Fixed:
+* Fixed Blaze Mixer not having any stress impact
+
+------------------------------------------------------
 Create: Blazing Hot 0.6.5
 ------------------------------------------------------
 
