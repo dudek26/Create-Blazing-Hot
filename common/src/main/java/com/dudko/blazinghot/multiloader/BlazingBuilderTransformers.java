@@ -79,4 +79,9 @@ public class BlazingBuilderTransformers {
 		throw new AssertionError();
 	}
 
+	@ExpectPlatform
+	public static <T extends Item, P> NonNullUnaryOperator<ItemBuilder<T, P>> mold(String name, Molds.MoldType type) {
+		throw new AssertionError();
+	}
+
 }

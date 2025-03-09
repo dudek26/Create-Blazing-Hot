@@ -1,11 +1,13 @@
 package com.dudko.blazinghot.multiloader.fabric;
 
+import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.block.modern_lamp.AbstractModernLamp;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampDoublePanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampHalfPanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.SmallModernLampPanelBlock;
+import com.dudko.blazinghot.content.casting.Molds;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
@@ -194,4 +196,12 @@ public class BlazingBuilderTransformersImpl {
 	public static <I extends Item, P> NonNullUnaryOperator<ItemBuilder<I, P>> existingParent(ResourceLocation parent) {
 		return b -> b.model((c, p) -> p.withExistingParent(c.getName(), parent));
 	}
+
+	public static <T extends Item, P> NonNullUnaryOperator<ItemBuilder<T, P>> mold(String name, Molds.MoldType type) {
+		return b -> b.tag(BlazingTags.Items.MOLDS.tag, type.tag).properties(p -> {
+			if (type.fireResistant) p.fireResistant();
+			return p;
+		}).model((c, p) -> p.generated(c::get, BlazingHot.asResource("item/" + type.name + "_mold/" + name)));
+	}
+
 }

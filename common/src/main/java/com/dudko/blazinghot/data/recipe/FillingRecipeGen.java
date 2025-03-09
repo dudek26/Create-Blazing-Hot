@@ -2,8 +2,10 @@ package com.dudko.blazinghot.data.recipe;
 
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.apple;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.carrot;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.lava;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.melon;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.moltenGold;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherDough;
 
 import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.content.metal.MoltenMetals;
@@ -50,7 +52,13 @@ public class FillingRecipeGen extends BlazingProcessingRecipeGen {
 			ZINC_CARROT =
 					metalCarrot(MoltenMetals.ZINC, BlazingItems.ZINC_CARROT),
 			ZINC_APPLE =
-					metalApple(MoltenMetals.ZINC, BlazingItems.ZINC_APPLE);
+					metalApple(MoltenMetals.ZINC, BlazingItems.ZINC_APPLE),
+			BLAZE_ROLL =
+					create("blaze_roll",
+							b -> b
+									.requireMultiple(netherDough(), 2)
+									.require(lava(), MultiAmount.BOTTLE.get())
+									.output(BlazingItems.BLAZE_ROLL));
 
 	@Override
 	protected IRecipeTypeInfo getRecipeType() {

@@ -4,12 +4,12 @@ import static com.dudko.blazinghot.content.casting.Molds.getMoldCapacity;
 
 import java.util.List;
 
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 
 import org.jetbrains.annotations.Nullable;
 
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
-import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 
@@ -58,7 +58,7 @@ public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity impleme
 
 	@Override
 	public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-		tank = SmartFluidTankBehaviour.single(this, Constants.INGOT.platformed() * 2);
+		tank = SmartFluidTankBehaviour.single(this, MultiAmount.INGOT.get() * 2);
 		tank.whenFluidUpdates(() -> {
 
 		});

@@ -172,6 +172,10 @@ public class BlazingIngredients {
 		return CommonTags.itemTagOf(TAG_NAMESPACE.tagPath("dusts", "soul_sand"), TAG_NAMESPACE);
 	}
 
+	public static TagKey<Item> powderedObsidian() {
+		return CommonTags.itemTagOf(TAG_NAMESPACE.tagPath("dusts", "obsidian"), TAG_NAMESPACE);
+	}
+
 	//    Blocks
 
 	public static Item stone() {

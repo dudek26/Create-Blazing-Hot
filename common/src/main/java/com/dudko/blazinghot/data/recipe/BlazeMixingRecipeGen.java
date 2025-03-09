@@ -14,6 +14,8 @@ import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.metal.Forms;
 import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.content.metal.MoltenMetals;
+import com.dudko.blazinghot.data.conditions.DefaultLoadConditions;
+import com.dudko.blazinghot.data.conditions.LoadCondition;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
