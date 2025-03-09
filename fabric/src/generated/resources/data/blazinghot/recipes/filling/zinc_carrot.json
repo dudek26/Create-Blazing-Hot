@@ -1,0 +1,17 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "amount": 6000,
+      "fluidTag": "c:molten_zinc"
+    }
+  ],
+  "results": [
+    {
+      "item": "blazinghot:zinc_carrot"
+    }
+  ]
+}

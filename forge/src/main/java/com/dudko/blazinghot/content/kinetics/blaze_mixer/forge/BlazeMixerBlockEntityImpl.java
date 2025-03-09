@@ -5,6 +5,8 @@ import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecip
 import java.util.List;
 import java.util.Optional;
 
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
+
 import net.createmod.catnip.animation.AnimationTickHolder;
 import net.createmod.catnip.data.Couple;
 
@@ -15,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
-import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
+import com.dudko.blazinghot.multiloader.fluid.MultiFluids.Constants;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.forge.BlazingRecipeTypesImpl;
 import com.simibubi.create.AllRecipeTypes;
@@ -72,7 +74,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 
 	@Override
 	public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-		tank = SmartFluidTankBehaviour.single(this, (int) Constants.BUCKET.platformed());
+		tank = SmartFluidTankBehaviour.single(this, (int) MultiAmount.BUCKET.get());
 		tank.whenFluidUpdates(() -> {
 			if (getBasin().isPresent()) getBasin().get().notifyChangeOfContents();
 		});
@@ -255,7 +257,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 	protected List<Recipe<?>> getMatchingRecipes() {
 		List<Recipe<?>> matchingRecipes = super.getMatchingRecipes();
 
-		if (!BlazingConfigs.server().allowBrewingInBlazeMixer.get()) return matchingRecipes;
+		if (!BlazingConfigs.server().recipes.allowBrewingInBlazeMixer.get()) return matchingRecipes;
 
 		Optional<BasinBlockEntity> basin = getBasin();
 		if (!basin.isPresent()) return matchingRecipes;
@@ -304,11 +306,11 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 	protected <C extends Container> boolean matchStaticFilters(Recipe<C> r) {
 		return ((r instanceof CraftingRecipe
 				&& !(r instanceof ShapedRecipe)
-				&& BlazingConfigs.server().allowShapelessInBlazeMixer.get()
+				&& BlazingConfigs.server().recipes.allowShapelessInBlazeMixer.get()
 				&& r.getIngredients().size() > 1
 				&& !MechanicalPressBlockEntity.canCompress(r)) && !AllRecipeTypes.shouldIgnoreInAutomation(r)
 				|| (r.getType() == AllRecipeTypes.MIXING.getType()
-				&& BlazingConfigs.server().allowMixingInBlazeMixer.get()))
+				&& BlazingConfigs.server().recipes.allowMixingInBlazeMixer.get()))
 				|| r.getType() == BlazingRecipeTypesImpl.BLAZE_MIXING.getType();
 	}
 

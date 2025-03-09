@@ -10,6 +10,13 @@ architectury {
     fabric()
 }
 
+sourceSets.main {
+    resources {
+        srcDir("src/generated/resources")
+        exclude(".cache/**")
+    }
+}
+
 loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath
 
@@ -20,7 +27,7 @@ loom {
 
             name "Generate Data"
             vmArg("-Dfabric-api.datagen")
-            vmArg("-Dfabric-api.datagen.output-dir=${project.rootProject.file("common/src/generated/resources")}")
+            vmArg("-Dfabric-api.datagen.output-dir=${file("src/generated/resources")}")
             vmArg("-Dfabric-api.datagen.modid=blazinghot")
             vmArg("-Dporting_lib.datagen.existing_resources=${project.rootProject.file("common/src/main/resources")}")
         }

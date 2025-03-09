@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "blazinghot:lime_modern_lamp"
+  },
+  "result": "blazinghot:lime_modern_lamp_quad_panel"
+}

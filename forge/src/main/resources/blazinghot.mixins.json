@@ -6,10 +6,9 @@
   "client": [
   ],
   "mixins": [
+    "DatagenModLoaderForgeMixin",
     "EntityMixin",
-    "FluidIngredientAccessor",
     "JEIBasinCategoryMixin",
-    "ProcessingRecipeSerializerMixin",
     "RecipeManagerAccessor"
   ],
   "plugin": "com.moulberry.mixinconstraints.ConstraintsMixinPlugin",

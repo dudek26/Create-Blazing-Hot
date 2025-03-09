@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.registry;
 
+import static com.dudko.blazinghot.multiloader.BlazingBuilderTransformers.simpleBlockState;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 
@@ -24,12 +25,10 @@ import com.dudko.blazinghot.util.LangUtil;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
 import com.simibubi.create.foundation.block.DyedBlockList;
-import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.BuilderTransformers;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.simibubi.create.foundation.item.ItemDescription;
-import com.simibubi.create.infrastructure.config.CStress;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
@@ -68,7 +67,7 @@ public class BlazingBlocks {
 					.initialProperties(SharedProperties::stone)
 					.properties(p -> p.noOcclusion().mapColor(MapColor.STONE))
 					.transform(axeOrPickaxe())
-					.blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
+					.transform(simpleBlockState())
 					.addLayer(() -> RenderType::cutoutMipped)
 //					.transform(CStress.setImpact(4.0)) TODO: can't use Create's config
 					.item(AssemblyOperatorBlockItem::new)
@@ -81,7 +80,7 @@ public class BlazingBlocks {
 			CASTING_DEPOT =
 			REGISTRATE
 					.block("casting_depot", CastingDepotBlock::new)
-					.blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
+					.transform(simpleBlockState())
 					.simpleItem()
 					.register();
 
@@ -114,12 +113,12 @@ public class BlazingBlocks {
 					.initialProperties(() -> net.minecraft.world.level.block.Blocks.GOLD_BLOCK)
 					.tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.tag(BlockTags.NEEDS_IRON_TOOL)
-					.tag(CommonTags.Blocks.STORAGE_BLOCKS.bothTags())
+					.tag(CommonTags.Blocks.STORAGE_BLOCKS.tag())
 					.tag(BlockTags.BEACON_BASE_BLOCKS)
-					.tag(CommonTags.Blocks.BLAZE_GOLD_BLOCKS.bothTags())
+					.tag(CommonTags.Blocks.BLAZE_GOLD_BLOCKS.tag())
 					.item()
-					.tag(CommonTags.Items.STORAGE_BLOCKS.bothTags())
-					.tag(CommonTags.Items.BLAZE_GOLD_BLOCKS.bothTags())
+					.tag(CommonTags.Items.STORAGE_BLOCKS.tag())
+					.tag(CommonTags.Items.BLAZE_GOLD_BLOCKS.tag())
 					.build()
 					.register();
 

@@ -1,10 +1,10 @@
 package com.dudko.blazinghot.compat;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.data.conditions.DefaultLoadConditions;
+import com.dudko.blazinghot.data.conditions.LoadCondition;
 import com.simibubi.create.Create;
 
-import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
-import net.fabricmc.fabric.api.resource.conditions.v1.DefaultResourceConditions;
 import net.minecraft.resources.ResourceLocation;
 
 public enum Mods {
@@ -38,8 +38,8 @@ public enum Mods {
 		return new ResourceLocation(id, path);
 	}
 
-	public ConditionJsonProvider asLoadCondition() {
-		return DefaultResourceConditions.anyModLoaded(id);
+	public LoadCondition<String> asLoadCondition() {
+		return DefaultLoadConditions.anyModLoaded(this);
 	}
 
 }

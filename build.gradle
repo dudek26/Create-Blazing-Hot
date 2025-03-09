@@ -86,6 +86,12 @@ allprojects {
 
 }
 
+tasks.register("datagen") {
+    group = 'build'
+    description = "Generate data on both platforms"
+    dependsOn(":fabric:runDatagen", ":forge:runData")
+}
+
 String platform = System.getenv("PLATFORM")
 tasks.register("blazinghotPublish") {
     if (platform == "both") {
@@ -108,7 +114,7 @@ publishMods {
         accessToken = System.getenv("GITHUB_TOKEN")
         repository = "dudek26/Create-Blazing-Hot"
         commitish = System.getenv("BRANCH_NAME")
-        tagName = "v${mod_version}"
+        tagName = "mc${minecraft_version}/v${mod_version}"
 
         // Allow the release to be initially created without any files.
         allowEmptyFiles = true

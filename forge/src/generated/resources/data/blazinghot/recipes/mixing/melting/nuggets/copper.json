@@ -1,0 +1,16 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "forge:nuggets/copper"
+    }
+  ],
+  "processingTime": 195,
+  "results": [
+    {
+      "amount": 16,
+      "fluid": "blazinghot:molten_copper"
+    }
+  ]
+}

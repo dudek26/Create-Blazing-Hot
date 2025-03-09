@@ -9,7 +9,7 @@ import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancement;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.mixin_interfaces.IAdvancementBehaviour;
-import com.dudko.blazinghot.multiloader.MultiFluids;
+import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.Create;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
@@ -154,17 +154,17 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 		if (r == null) return speed;
 
 		if (r instanceof MixingRecipe && PotionMixingRecipes.ALL.contains(r)) {
-			return speed / BlazingConfigs.server().blazeBrewingSpeedMultiplier.getF();
+			return speed / BlazingConfigs.server().recipes.blazeBrewingSpeedMultiplier.getF();
 		}
 		else if (r.getType() == AllRecipeTypes.MIXING.getType()) {
-			return speed / BlazingConfigs.server().blazeMixingSpeedMultiplier.getF();
+			return speed / BlazingConfigs.server().recipes.blazeMixingSpeedMultiplier.getF();
 		}
 		else if ((r instanceof CraftingRecipe
 				&& !(r instanceof ShapedRecipe)
 				&& AllConfigs.server().recipes.allowShapelessInMixer.get()
 				&& r.getIngredients().size() > 1
 				&& !MechanicalPressBlockEntity.canCompress(r)) && !AllRecipeTypes.shouldIgnoreInAutomation(r)) {
-			return speed / BlazingConfigs.server().blazeShapelessSpeedMultiplier.getF();
+			return speed / BlazingConfigs.server().recipes.blazeShapelessSpeedMultiplier.getF();
 		}
 		return speed;
 	}

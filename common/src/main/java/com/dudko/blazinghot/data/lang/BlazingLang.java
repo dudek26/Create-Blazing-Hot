@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.data.lang;
 
+import static com.dudko.blazinghot.data.lang.BlazingLang.Prefix.CATNIP;
 import static com.dudko.blazinghot.data.lang.BlazingLang.Prefix.EMI_RECIPE;
 import static com.dudko.blazinghot.data.lang.BlazingLang.Prefix.GOGGLES;
 import static com.dudko.blazinghot.data.lang.BlazingLang.Prefix.INFO;
@@ -18,6 +19,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
 public enum BlazingLang {
+
+	DISPLAY_NAME(CATNIP, "display_name", BlazingHot.NAME),
 
 	TAB_BASE(ITEM_GROUP, "Create: Blazing Hot"),
 	TAB_BUILDING(ITEM_GROUP, "building", "Blazing Building Blocks"),
@@ -86,7 +89,8 @@ public enum BlazingLang {
 		ITEM_GROUP("itemGroup.blazinghot"),
 		MESSAGE("message.blazinghot"),
 		ITEM("item.blazinghot"),
-		GOGGLES("blazinghot.gui.goggles");
+		GOGGLES("blazinghot.gui.goggles"),
+		CATNIP("catnip." + BlazingHot.ID);
 
 		public final String key;
 

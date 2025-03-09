@@ -8,7 +8,8 @@ import static com.dudko.blazinghot.compat.Mods.VANILLA;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.dudko.blazinghot.multiloader.MultiFluids;
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 
@@ -30,16 +31,16 @@ public class MoltenMetals {
 			MoltenMetal
 					.builder("ancient_debris")
 					.customForm(VANILLA.asResource("netherite_scrap"),
-							MultiFluids.Constants.INGOT.droplets,
+							MultiAmount.INGOT,
 							Forms.INGOT.processingTime * 2,
 							Forms.INGOT.fuelCost * 2,
 							false)
 					.customForm(VANILLA.asResource("ancient_debris"),
-							MultiFluids.Constants.NUGGET.droplets * 12,
+							MultiAmount.NUGGET.multiply(12),
 							Forms.INGOT.processingTime * 2,
 							Forms.INGOT.fuelCost * 2,
 							false)
-					.compactingOverride(VANILLA.asResource("netherite_scrap"), MultiFluids.Constants.INGOT.droplets)
+					.compactingOverride(VANILLA.asResource("netherite_scrap"), MultiAmount.INGOT)
 					.addFluidInteraction(Fluids.WATER, () -> AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get())
 					.disableMechanicalMixing()
 					.ignoreTagDatagen()
@@ -75,7 +76,7 @@ public class MoltenMetals {
 							Forms.INGOT.processingTime,
 							Forms.INGOT.fuelCost,
 							true)
-					.compactingOverride(AllItems.ANDESITE_ALLOY.getId(), MultiFluids.Constants.INGOT.droplets)
+					.compactingOverride(AllItems.ANDESITE_ALLOY.getId(), MultiAmount.INGOT)
 					.ignoreTagDatagen()
 					.register();
 

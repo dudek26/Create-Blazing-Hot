@@ -1,7 +1,6 @@
 package com.dudko.blazinghot.registry.fabric;
 
 import static com.dudko.blazinghot.registry.CommonTags.Namespace.COMMON;
-import static com.dudko.blazinghot.registry.CommonTags.Namespace.FORGE;
 import static com.dudko.blazinghot.registry.CommonTags.fluidTagOf;
 import static net.minecraft.world.item.Items.BUCKET;
 
@@ -72,9 +71,8 @@ public class BlazingFluidsImpl {
 	private static FluidEntry<SimpleFlowableFluid.Flowing> createFromLava(String name, int tickRate, int decreaseRate) {
 		return REGISTRATE
 				.standardFluid(name)
-				.tag(fluidTagOf(name, COMMON),
-						fluidTagOf(name,
-								FORGE)) // replace this with something else if the datagen fails to generate these tags
+				.tag(fluidTagOf(name,
+						COMMON)) // replace this with something else if the datagen fails to generate these tags
 				.tag(FluidTags.LAVA) // fabric: lava tag controls physics
 				.fluidProperties(p -> p
 						.levelDecreasePerBlock(decreaseRate)
@@ -208,8 +206,9 @@ public class BlazingFluidsImpl {
 			return (FluidEntry<T>) values[metalOrdinal(metal)];
 		}
 
+		@SuppressWarnings("unchecked")
 		public T getFluid(MoltenMetal metal) {
-			return get(metal).getSource();
+			return (T) get(metal).getSource();
 		}
 
 		public boolean contains(Fluid fluid) {

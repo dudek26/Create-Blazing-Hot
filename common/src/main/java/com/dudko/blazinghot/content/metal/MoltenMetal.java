@@ -2,7 +2,6 @@ package com.dudko.blazinghot.content.metal;
 
 import static com.dudko.blazinghot.compat.Mods.CREATE_ADDITIONS;
 import static com.dudko.blazinghot.compat.Mods.VANILLA;
-import static com.dudko.blazinghot.registry.CommonTags.Namespace.INTERNAL;
 import static com.dudko.blazinghot.registry.CommonTags.itemTagOf;
 import static com.dudko.blazinghot.util.LangUtil.titleCaseConversion;
 
@@ -18,14 +17,15 @@ import java.util.stream.Collectors;
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.compat.Mods;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
+import com.dudko.blazinghot.data.conditions.DefaultLoadConditions;
+import com.dudko.blazinghot.data.conditions.LoadCondition;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.dudko.blazinghot.util.ListUtil;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 
 import net.createmod.catnip.data.Pair;
-import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
-import net.fabricmc.fabric.api.resource.conditions.v1.DefaultResourceConditions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -49,9 +49,9 @@ public class MoltenMetal {
 	public final Map<Fluid, NonNullSupplier<Block>> fluidInteractions;
 
 	public final Forms[] customForms;
-	public final Pair<ResourceLocation, Long> compactingOverride;
+	public final Pair<ResourceLocation, MultiAmount> compactingOverride;
 
-	MoltenMetal(String name, Mods mod, Forms[] supportedForms, Forms[] optionalForms, Map<Forms, Mods> compatForms, boolean ignoreTagGen, boolean mechanicalMixerMeltable, Map<Fluid, NonNullSupplier<Block>> fluidInteractions, Forms[] customForms, Pair<ResourceLocation, Long> compactingOverride) {
+	MoltenMetal(String name, Mods mod, Forms[] supportedForms, Forms[] optionalForms, Map<Forms, Mods> compatForms, boolean ignoreTagGen, boolean mechanicalMixerMeltable, Map<Fluid, NonNullSupplier<Block>> fluidInteractions, Forms[] customForms, Pair<ResourceLocation, MultiAmount> compactingOverride) {
 		this.name = name;
 		this.mod = mod;
 		this.optionalForms = optionalForms;
@@ -81,9 +81,9 @@ public class MoltenMetal {
 		return Forms.INGOT.resourceLocation(this);
 	}
 
-	public Pair<ItemLike, Long> compactingResult() {
+	public Pair<ItemLike, MultiAmount> compactingResult() {
 		return Pair.of(MultiRegistries.getItemFromRegistry(ingotLocation()).get(),
-				(compactingOverride != null ? compactingOverride.getSecond() : Forms.INGOT.amount));
+				(compactingOverride != null ? compactingOverride.getSecond() : MultiAmount.INGOT));
 	}
 
 	public ResourceLocation fluidLocation() {
@@ -110,7 +110,7 @@ public class MoltenMetal {
 	}
 
 	public TagKey<Fluid> fluidTag() {
-		return CommonTags.fluidTagOf(moltenName(), INTERNAL);
+		return CommonTags.fluidTagOf(moltenName(), CommonTags.Namespace.platform());
 	}
 
 	public String moltenName() {
@@ -139,15 +139,15 @@ public class MoltenMetal {
 		return interactions;
 	}
 
-	public List<ConditionJsonProvider> getLoadConditions() {
-		List<ConditionJsonProvider> conditions = new ArrayList<>();
+	public List<LoadCondition<?>> getLoadConditions() {
+		List<LoadCondition<?>> conditions = new ArrayList<>();
 		if (!mod.alwaysIncluded) conditions.add(mod.asLoadCondition());
 		return conditions;
 	}
 
-	public List<ConditionJsonProvider> getLoadConditions(Forms form, Mods formMod) {
-		List<ConditionJsonProvider> conditions = getLoadConditions();
-		conditions.add(DefaultResourceConditions.anyModLoaded(formMod.id));
+	public List<LoadCondition<?>> getLoadConditions(Forms form, Mods formMod) {
+		List<LoadCondition<?>> conditions = getLoadConditions();
+		conditions.add(DefaultLoadConditions.anyModLoaded(formMod.id));
 		return conditions;
 	}
 
@@ -164,7 +164,7 @@ public class MoltenMetal {
 		private boolean mechanicalMixerMeltable = true;
 		private final HashMap<Fluid, NonNullSupplier<Block>> fluidInteractions = new HashMap<>();
 
-		private Pair<ResourceLocation, Long> compactingOverride;
+		private Pair<ResourceLocation, MultiAmount> compactingOverride;
 
 		protected Builder(String name) {
 			this.name = name;
@@ -213,7 +213,7 @@ public class MoltenMetal {
 			return this;
 		}
 
-		public Builder customForm(ResourceLocation item, long amount, int processingTime, long fuelCost, boolean mechanicalMixerMeltable) {
+		public Builder customForm(ResourceLocation item, MultiAmount amount, int processingTime, long fuelCost, boolean mechanicalMixerMeltable) {
 			this.customForms.add(Forms.custom(item, amount, processingTime, fuelCost, mechanicalMixerMeltable));
 			return this;
 		}
@@ -244,11 +244,11 @@ public class MoltenMetal {
 		/**
 		 * If compacting the molten metal should return something else than an item that starts with the metal's name and ends with <code>_ingot</code>
 		 *
-		 * @param item     Resource location of the item to return
-		 * @param droplets Amount of droplets required to compact one item
+		 * @param item   Resource location of the item to return
+		 * @param amount Amount of fluid required to compact one item
 		 */
-		public Builder compactingOverride(ResourceLocation item, long droplets) {
-			this.compactingOverride = Pair.of(item, droplets);
+		public Builder compactingOverride(ResourceLocation item, MultiAmount amount) {
+			this.compactingOverride = Pair.of(item, amount);
 			return this;
 		}
 
@@ -298,7 +298,7 @@ public class MoltenMetal {
 						titleCaseConversion(metal.fluidLocation().getPath().replace('_', ' ')));
 
 				for (Forms form : metal.nonCustomForms()) {
-					TagKey<Item> tag = itemTagOf(namespace.tagPath(form.tagFolder, metal.name), namespace);
+					TagKey<Item> tag = itemTagOf(form.tagFolder, metal.name, namespace);
 					ResourceLocation loc = tag.location();
 					consumer.accept("tag.item." + namespace.namespace + "." + loc.getPath().replace('/', '.'),
 							titleCaseConversion((metal.name + ' ' + form.tagFolder).replace('_', ' ')));

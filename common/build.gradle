@@ -27,13 +27,9 @@ dependencies {
     // All dependencies except Flywheel and Registrate are NOT safe to use!
     // Flywheel and Registrate must also be used carefully due to differences.
     modCompileOnly("com.simibubi.create:create-fabric-${minecraft_version}:${create_fabric_version}")
-}
 
-sourceSets.main {
-    resources {
-        srcDir("src/generated/resources")
-        exclude(".cache/**")
-    }
+    include(implementation("com.moulberry:mixinconstraints:1.0.1"))
+
 }
 
 publishing {

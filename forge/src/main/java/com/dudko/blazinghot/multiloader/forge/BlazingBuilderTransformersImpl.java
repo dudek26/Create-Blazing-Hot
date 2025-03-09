@@ -12,6 +12,7 @@ import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.simibubi.create.AllTags;
+import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.ModelGen;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.tterrag.registrate.builders.BlockBuilder;
@@ -20,8 +21,10 @@ import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 
@@ -54,7 +57,7 @@ public class BlazingBuilderTransformersImpl {
 	public static <B extends ModernLampPanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampPanel(DyeColor color, String name) {
 		String tagName = name.replace('/', '_') + "s";
 		return b -> b
-				.tag(CommonTags.blockTagOf(tagName, CommonTags.Namespace.INTERNAL))
+				.tag(CommonTags.blockTagOf(tagName, CommonTags.Namespace.platform()))
 				.blockstate((c, p) -> p.getVariantBuilder(c.get()).forAllStates(state -> {
 							Direction facing = state.getValue(ModernLampPanelBlock.FACING);
 							int xRotation = facing == Direction.DOWN ? 180 : 0;
@@ -74,14 +77,14 @@ public class BlazingBuilderTransformersImpl {
 
 				))
 				.item()
-				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.INTERNAL))
+				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.platform()))
 				.transform(ModelGen.customItemModel(name, color.getName()));
 	}
 
 	public static <B extends ModernLampDoublePanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampDirectionalPanel(DyeColor color, String name) {
 		String tagName = name.replace('/', '_') + "s";
 		return b -> b
-				.tag(CommonTags.blockTagOf(tagName, CommonTags.Namespace.INTERNAL))
+				.tag(CommonTags.blockTagOf(tagName, CommonTags.Namespace.platform()))
 				.blockstate((c, p) -> p.getVariantBuilder(c.get()).forAllStates(state -> {
 					Direction facing = state.getValue(ModernLampPanelBlock.FACING);
 					int xRotation = facing == Direction.DOWN ? 180 : 0;
@@ -101,14 +104,14 @@ public class BlazingBuilderTransformersImpl {
 							.build();
 				}))
 				.item()
-				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.INTERNAL))
+				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.platform()))
 				.transform(ModelGen.customItemModel(name, color.getName() + "_h"));
 	}
 
 	public static <B extends ModernLampHalfPanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampHalfPanel(DyeColor color, String name) {
 		String tagName = name.replace('/', '_') + "s";
 		return b -> b
-				.tag(CommonTags.blockTagOf(tagName, CommonTags.Namespace.INTERNAL))
+				.tag(CommonTags.blockTagOf(tagName, CommonTags.Namespace.platform()))
 				.blockstate((c, p) -> p.getVariantBuilder(c.get()).forAllStates(state -> {
 					Direction facing = state.getValue(ModernLampPanelBlock.FACING);
 					int xRotation = facing == Direction.DOWN ? 180 : 0;
@@ -129,14 +132,14 @@ public class BlazingBuilderTransformersImpl {
 							.build();
 				}))
 				.item()
-				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.INTERNAL))
+				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.platform()))
 				.transform(ModelGen.customItemModel(name, color.getName() + "_h"));
 	}
 
 	public static <B extends SmallModernLampPanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampSmallPanel(DyeColor color, String name) {
 		String tagName = name.replace('/', '_') + "s";
 		return b -> b
-				.tag(CommonTags.blockTagOf(tagName, CommonTags.Namespace.INTERNAL))
+				.tag(CommonTags.blockTagOf(tagName, CommonTags.Namespace.platform()))
 				.blockstate((c, p) -> p.getVariantBuilder(c.get()).forAllStates(state -> {
 					Direction facing = state.getValue(ModernLampPanelBlock.FACING);
 					int xRotation = facing == Direction.DOWN ? 180 : 0;
@@ -155,7 +158,7 @@ public class BlazingBuilderTransformersImpl {
 							.build();
 				}))
 				.item()
-				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.INTERNAL))
+				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.platform()))
 				.transform(ModelGen.customItemModel(name, color.getName()));
 	}
 
@@ -170,10 +173,23 @@ public class BlazingBuilderTransformersImpl {
 				.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag);
 	}
 
-	public static <T extends Item, P> NonNullUnaryOperator<ItemBuilder<T, P>> mold(String name, Molds.MoldType type) {
-		return b -> b
-				.tag(BlazingTags.Items.MOLDS.tag, BlazingTags.Items.STURDY_MOLDS.tag)
-				.properties(Item.Properties::fireResistant)
-				.model((c, p) -> p.generated(c::get, BlazingHot.asResource("item/sturdy_mold/" + name)));
+	public static <B extends Block, P> NonNullUnaryOperator<BlockBuilder<B, P>> simpleBlockState() {
+		return b -> b.blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)));
 	}
+
+	public static <I extends Item, P> NonNullUnaryOperator<ItemBuilder<I, P>> handheld() {
+		return b -> b.model((c, p) -> p.handheld(c));
+	}
+
+	public static <I extends Item, P> NonNullUnaryOperator<ItemBuilder<I, P>> existingParent(ResourceLocation parent) {
+		return b -> b.model((c, p) -> p.withExistingParent(c.getName(), parent));
+	}
+
+	public static <T extends Item, P> NonNullUnaryOperator<ItemBuilder<T, P>> mold(String name, Molds.MoldType type) {
+		return b -> b.tag(BlazingTags.Items.MOLDS.tag, type.tag).properties(p -> {
+			if (type.fireResistant) p.fireResistant();
+			return p;
+		}).model((c, p) -> p.generated(c::get, BlazingHot.asResource("item/" + type.name + "_mold/" + name)));
+	}
+
 }

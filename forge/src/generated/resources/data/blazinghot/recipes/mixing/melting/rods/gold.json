@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "createaddition"
+    }
+  ],
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "forge:rods/gold"
+    }
+  ],
+  "processingTime": 750,
+  "results": [
+    {
+      "amount": 72,
+      "fluid": "blazinghot:molten_gold"
+    }
+  ]
+}

@@ -12,8 +12,10 @@ import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 public class BlazingBuilderTransformers {
 
@@ -44,6 +46,21 @@ public class BlazingBuilderTransformers {
 
 	@ExpectPlatform
 	public static <B extends SmallModernLampPanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampSmallPanel(DyeColor color, String name) {
+		throw new AssertionError();
+	}
+
+	@ExpectPlatform
+	public static <B extends Block, P> NonNullUnaryOperator<BlockBuilder<B, P>> simpleBlockState() {
+		throw new AssertionError();
+	}
+
+	@ExpectPlatform
+	public static <I extends Item, P> NonNullUnaryOperator<ItemBuilder<I, P>> handheld() {
+		throw new AssertionError();
+	}
+
+	@ExpectPlatform
+	public static <I extends Item, P> NonNullUnaryOperator<ItemBuilder<I, P>> existingParent(ResourceLocation parent) {
 		throw new AssertionError();
 	}
 

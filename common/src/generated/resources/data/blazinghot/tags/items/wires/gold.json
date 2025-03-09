@@ -1,7 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "#c:wires/gold",
-    "#forge:wires/gold"
-  ]
-}

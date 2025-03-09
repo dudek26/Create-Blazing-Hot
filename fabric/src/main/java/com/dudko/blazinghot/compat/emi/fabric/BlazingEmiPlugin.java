@@ -15,7 +15,7 @@ import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.data.lang.BlazingLang;
-import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
+import com.dudko.blazinghot.multiloader.fluid.MultiFluids.Constants;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
 import com.dudko.blazinghot.registry.fabric.BlazingRecipeTypesImpl;
@@ -102,7 +102,7 @@ public class BlazingEmiPlugin implements EmiPlugin {
 
 		for (CraftingRecipe recipe : manager.getAllRecipesFor(RecipeType.CRAFTING)) {
 			if (recipe instanceof ShapelessRecipe
-					&& BlazingConfigs.server().allowShapelessInBlazeMixer.get()
+					&& BlazingConfigs.server().recipes.allowShapelessInBlazeMixer.get()
 					&& !MechanicalPressBlockEntity.canCompress(recipe)
 					&& !AllRecipeTypes.shouldIgnoreInAutomation(recipe)
 					&& recipe.getIngredients().size() > 1) {
@@ -113,7 +113,7 @@ public class BlazingEmiPlugin implements EmiPlugin {
 		}
 
 		for (MixingRecipe recipe : PotionMixingRecipes.ALL) {
-			if (BlazingConfigs.server().allowBrewingInBlazeMixer.get())
+			if (BlazingConfigs.server().recipes.allowBrewingInBlazeMixer.get())
 				registry.addRecipe(new BlazeMixingEmiRecipe(BLAZE_AUTOMATIC_BREWING, recipe));
 		}
 

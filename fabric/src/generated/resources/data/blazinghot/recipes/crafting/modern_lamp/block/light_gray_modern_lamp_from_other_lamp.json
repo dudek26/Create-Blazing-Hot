@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "tag": "blazinghot:modern_lamps"
+    },
+    {
+      "tag": "c:light_gray_dyes"
+    }
+  ],
+  "result": {
+    "item": "blazinghot:light_gray_modern_lamp"
+  }
+}
