@@ -87,6 +87,8 @@ public class BlazingItems {
 							.transform(handheld())
 							.register();
 
+	public static final ItemEntry<Item> STURDY_ALLOY = ingredient("sturdy_alloy");
+
 	public static final ItemEntry<Item> BLAZE_WHISK = ingredient("blaze_whisk");
 
 	public static final ItemEntry<SequencedAssemblyItem>
