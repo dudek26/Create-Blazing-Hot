@@ -36,18 +36,19 @@ public class CastingDepotRenderer extends SafeBlockEntityRenderer<CastingDepotBl
 				light,
 				overlay,
 				be.getHeldItem(),
-				be.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING));
+				be.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING), -0.05);
 		ms.popPose();
 	}
 
-	public static void renderItem(Level level, PoseStack ms, MultiBufferSource buffer, int light, int overlay, ItemStack itemStack, Direction direction) {
+	public static void renderItem(Level level, PoseStack ms, MultiBufferSource buffer, int light, int overlay, ItemStack itemStack, Direction direction, double yOffset) {
+		if (itemStack == null || itemStack.isEmpty()) return;
 		ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 		PoseTransformStack msr = TransformStack.of(ms);
 
-		ms.translate(0.5, 23 / 32d, 0.5);
+		ms.translate(0.5, 23 / 32d + yOffset, 0.5);
 		ms.scale(14 / 16f, 1, 14 / 16f);
-		if (!(itemStack.getItem() instanceof BlockItem)) msr.rotateX(90);
-		msr.rotate(HORIZONTAL_ANGLES.get(direction), Direction.Axis.Z);
+		if (!(itemStack.getItem() instanceof BlockItem)) msr.rotateX((float) Math.toRadians(90));
+		msr.rotate(HORIZONTAL_ANGLES.get(direction).floatValue(), Direction.Axis.Z);
 
 		itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, light, overlay, ms, buffer, level, 0);
 	}
