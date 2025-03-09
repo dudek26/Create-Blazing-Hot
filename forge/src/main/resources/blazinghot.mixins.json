@@ -9,7 +9,6 @@
     "DatagenModLoaderForgeMixin",
     "EntityMixin",
     "JEIBasinCategoryMixin",
-    "ProcessingRecipeSerializerMixin",
     "RecipeManagerAccessor"
   ],
   "plugin": "com.moulberry.mixinconstraints.ConstraintsMixinPlugin",
