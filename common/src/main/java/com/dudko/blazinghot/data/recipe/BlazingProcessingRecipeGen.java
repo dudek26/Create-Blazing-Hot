@@ -9,12 +9,8 @@ import java.util.function.UnaryOperator;
 import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.BlazingHot;
-<<<<<<<< HEAD:common/src/main/java/com/dudko/blazinghot/data/recipe/BlazingProcessingRecipeGen.java
-========
-import com.dudko.blazinghot.multiloader.fluid.MultiFluids.Constants;
->>>>>>>> 9fe0e00 (wip recipe datagen rework):fabric/src/main/java/com/dudko/blazinghot/data/recipe/fabric/BlazingProcessingRecipeGen.java
 import com.dudko.blazinghot.multiloader.MultiRegistries;
-import com.dudko.blazinghot.multiloader.fluid.MultiFluids.Constants;
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
@@ -30,8 +26,8 @@ import net.minecraft.world.level.ItemLike;
 public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 
 	protected static final List<BlazingProcessingRecipeGen> GENERATORS = new ArrayList<>();
-	protected static final long INGOT_COVER = Constants.INGOT.platformed() * 6;
-	protected static final long NUGGET_COVER = Constants.NUGGET.platformed() * 6;
+	protected static final long INGOT_COVER = MultiAmount.INGOT.get() * 6;
+	protected static final long NUGGET_COVER = MultiAmount.NUGGET.get() * 6;
 
 	public BlazingProcessingRecipeGen(PackOutput output) {
 		super(output);

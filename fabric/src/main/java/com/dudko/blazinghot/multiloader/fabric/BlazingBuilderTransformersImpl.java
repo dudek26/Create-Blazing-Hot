@@ -185,18 +185,6 @@ public class BlazingBuilderTransformersImpl {
 		return b -> b.model((c, p) -> p.withExistingParent(c.getName(), parent));
 	}
 
-	public static <B extends Block, P> NonNullUnaryOperator<BlockBuilder<B, P>> simpleBlockState() {
-		return b -> b.blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)));
-	}
-
-	public static <I extends Item, P> NonNullUnaryOperator<ItemBuilder<I, P>> handheld() {
-		return b -> b.model((c, p) -> p.handheld(c));
-	}
-
-	public static <I extends Item, P> NonNullUnaryOperator<ItemBuilder<I, P>> existingParent(ResourceLocation parent) {
-		return b -> b.model((c, p) -> p.withExistingParent(c.getName(), parent));
-	}
-
 	public static <T extends Item, P> NonNullUnaryOperator<ItemBuilder<T, P>> mold(String name, Molds.MoldType type) {
 		return b -> b.tag(BlazingTags.Items.MOLDS.tag, type.tag).properties(p -> {
 			if (type.fireResistant) p.fireResistant();
