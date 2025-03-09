@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.config.CStress;
 import com.dudko.blazinghot.content.block.modern_lamp.AbstractModernLamp;
 import com.dudko.blazinghot.content.block.modern_lamp.AbstractModernLampPanel;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampBlock;
@@ -69,7 +70,7 @@ public class BlazingBlocks {
 					.transform(axeOrPickaxe())
 					.transform(simpleBlockState())
 					.addLayer(() -> RenderType::cutoutMipped)
-//					.transform(CStress.setImpact(4.0)) TODO: can't use Create's config
+					.transform(CStress.setImpact(4.0))
 					.item(AssemblyOperatorBlockItem::new)
 					.onRegisterAfter(Registries.ITEM,
 							v -> ItemDescription.useKey(v, ItemDescriptions.BLAZE_MIXER.getKey()))

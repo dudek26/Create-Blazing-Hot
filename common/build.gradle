@@ -28,7 +28,7 @@ dependencies {
     // Flywheel and Registrate must also be used carefully due to differences.
     modCompileOnly("com.simibubi.create:create-fabric-${minecraft_version}:${create_fabric_version}")
 
-    include(implementation("com.moulberry:mixinconstraints:1.0.1"))
+    include(implementation("com.moulberry:mixinconstraints:${mixinconstraints_version}"))
 
 }
 
