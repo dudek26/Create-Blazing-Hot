@@ -4,7 +4,7 @@ Create: Blazing Hot 0.6.4a
 
 ### Fixed:
 
-* Fixed Milling Recipes processing infinitely
+* Fixed Milling Recipes processing infinitely (#14)
 
 ------------------------------------------------------
 Create: Blazing Hot 0.6.4
