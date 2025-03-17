@@ -1,10 +1,11 @@
 ------------------------------------------------------
-Create: Blazing Hot 0.6.4a
+Create: Blazing Hot 0.6.4b
 ------------------------------------------------------
 
 ### Fixed:
 
-* Fixed Milling Recipes processing infinitely (#14)
+* **0.6.4a:** Fixed Milling Recipes processing infinitely (#14)
+* **0.6.4b** Fixed crash on startup
 
 ------------------------------------------------------
 Create: Blazing Hot 0.6.4
