@@ -19,11 +19,16 @@ public class MillingRecipeGen extends BlazingProcessingRecipeGen {
 	GeneratedRecipe
 			SOUL_SAND =
 			create("soul_sand",
-					b -> b.require(soulSand()).output(BlazingItems.SOUL_DUST).output(0.5F, BlazingItems.SOUL_DUST)),
+					b -> b
+							.require(soulSand())
+							.averageProcessingDuration()
+							.output(BlazingItems.SOUL_DUST)
+							.output(0.5F, BlazingItems.SOUL_DUST)),
 			STONE =
 					create("stone",
 							b -> b
 									.require(stone())
+									.averageProcessingDuration()
 									.output(BlazingItems.STONE_DUST)
 									.output(0.5F, BlazingItems.STONE_DUST));
 

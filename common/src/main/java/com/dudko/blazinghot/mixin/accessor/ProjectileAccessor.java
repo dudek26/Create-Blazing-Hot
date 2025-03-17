@@ -10,7 +10,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 @Mixin(Projectile.class)
 public interface ProjectileAccessor {
 
-	@Accessor
+	@Accessor(remap = false)
 	UUID getOwnerUUID();
 
 }
