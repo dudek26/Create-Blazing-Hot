@@ -37,7 +37,10 @@ public abstract class MechanicalMixerBlockEntityMixin extends BasinOperatingBloc
 				BlazingAdvancements.MOLTEN_BLAZE_GOLD);
 	}
 
-	@ModifyArg(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(III)I"), index = 2, remap = false)
+	@ModifyArg(method = "tick",
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(III)I", remap = true),
+			index = 2,
+			remap = false)
 	protected int blazinghot$extendDuration(int max) {
 		if (currentRecipe == null) return max;
 		ResourceLocation blazinghot$id = currentRecipe.getId();
