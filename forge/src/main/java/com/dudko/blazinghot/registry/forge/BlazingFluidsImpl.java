@@ -28,6 +28,8 @@ import net.minecraftforge.fluids.FluidInteractionRegistry.InteractionInformation
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import org.jetbrains.annotations.NotNull;
+
 public class BlazingFluidsImpl {
 
 	private static final CreateRegistrate REGISTRATE = BlazingHot.registrate();
@@ -172,7 +174,7 @@ public class BlazingFluidsImpl {
 		}
 
 		@Override
-		public Iterator<FluidEntry<T>> iterator() {
+		public @NotNull Iterator<FluidEntry<T>> iterator() {
 			return new Iterator<>() {
 				private int index = 0;
 

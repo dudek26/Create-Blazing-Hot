@@ -9,6 +9,7 @@ import com.dudko.blazinghot.data.lang.BlazingLangGen;
 import com.dudko.blazinghot.data.recipe.fabric.BlazingProcessingRecipeGen;
 import com.dudko.blazinghot.data.recipe.fabric.CraftingRecipeGen;
 import com.dudko.blazinghot.data.recipe.fabric.SequencedAssemblyRecipeGen;
+import com.dudko.blazinghot.events.fabric.BlazingEventsImpl;
 import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
 import com.dudko.blazinghot.registry.fabric.BlazingRecipeTypesImpl;
 import com.simibubi.create.foundation.data.CreateRegistrate;
@@ -38,6 +39,8 @@ public class BlazingHotImpl implements ModInitializer {
 
 		BlazingAdvancements.register();
 		BlazingTriggers.register();
+
+		BlazingEventsImpl.register();
 	}
 
 	public static void gatherData(DataGenerator.PackGenerator pack) {
