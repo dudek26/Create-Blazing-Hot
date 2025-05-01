@@ -9,7 +9,6 @@ import java.util.function.Function;
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.content.metal.MoltenMetals;
-import com.dudko.blazinghot.util.DirectionUtil;
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
@@ -17,7 +16,6 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 
-import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -85,15 +83,15 @@ public class BlazingFluidsImpl {
 
 	public static void registerFluidInteractions() {
 
-		directionalFluidInteraction(Fluids.WATER, () -> Blocks.STONE, NETHER_LAVA.get(), Direction.UP);
-		directionalFluidInteraction(Fluids.WATER,
-				() -> Blocks.COBBLESTONE,
-				NETHER_LAVA.get(),
-				DirectionUtil.allBut(Direction.UP));
-		fluidInteraction(NETHER_LAVA, () -> AllPaletteStoneTypes.LIMESTONE.getBaseBlock().get(), AllFluids.HONEY.get());
+		fluidInteraction(NETHER_LAVA, () -> Blocks.COBBLESTONE, Fluids.WATER, Fluids.WATER.getSource());
+		fluidInteraction(NETHER_LAVA,
+				() -> AllPaletteStoneTypes.LIMESTONE.getBaseBlock().get(),
+				AllFluids.HONEY.get(),
+				AllFluids.HONEY.get().getSource());
 		fluidInteraction(NETHER_LAVA,
 				() -> AllPaletteStoneTypes.SCORIA.getBaseBlock().get(),
-				AllFluids.CHOCOLATE.get());
+				AllFluids.CHOCOLATE.get(),
+				AllFluids.CHOCOLATE.get().getSource());
 
 		for (MoltenMetal metal : MoltenMetals.ALL) {
 			for (Map.Entry<Fluid, NonNullSupplier<Block>> entry : metal.getFluidInteractions().entrySet()) {
@@ -107,28 +105,28 @@ public class BlazingFluidsImpl {
 			}
 		}
 
+		FluidInteractionRegistry.addInteraction(NETHER_LAVA.getType(),
+				new InteractionInformation((level, currentPos, relativePos, fluidState) -> level
+						.getBlockState(relativePos)
+						.getBlock() == Blocks.BLUE_ICE
+						&& level.getBlockState(currentPos.below()).getBlock() == Blocks.SOUL_SOIL,
+						Blocks.BASALT.defaultBlockState()));
+
 	}
 
-	private static void fluidInteraction(FluidEntry<ForgeFlowingFluid.Flowing> entry, NonNullSupplier<Block> result, Fluid fluid) {
-		directionalFluidInteraction(entry.get(), result, fluid, Direction.values());
-	}
-
-	private static void directionalFluidInteraction(Fluid target, NonNullSupplier<Block> result, Fluid flowing, Direction... directions) {
+	private static void fluidInteraction(FluidEntry<ForgeFlowingFluid.Flowing> entry, NonNullSupplier<Block> result, Fluid... fluids) {
 		Block block = result.get();
-		FluidInteractionRegistry.addInteraction(target.getFluidType(),
-				new InteractionInformation((level, currentPos, relativePos, currentState) -> level
-						.getFluidState(relativePos)
-						.getFluidType() == flowing.getFluidType() && Arrays
-						.stream(directions)
-						.anyMatch((dir) -> DirectionUtil.getNeighbouringDirection(currentPos, relativePos) == dir),
-						fluidState -> {
-							if (fluidState.isSource()) {
-								return Blocks.OBSIDIAN.defaultBlockState();
-							}
-							else {
-								return block.defaultBlockState();
-							}
-						}));
+		for (Fluid fluid : fluids) {
+			FluidInteractionRegistry.addInteraction(entry.getType(),
+					new InteractionInformation(fluid.getFluidType(), fluidState -> {
+						if (fluidState.isSource()) {
+							return Blocks.OBSIDIAN.defaultBlockState();
+						}
+						else {
+							return block.defaultBlockState();
+						}
+					}));
+		}
 	}
 
 	public static void platformRegister() {

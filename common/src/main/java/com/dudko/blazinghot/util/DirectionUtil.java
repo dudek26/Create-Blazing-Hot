@@ -12,7 +12,6 @@ public class DirectionUtil {
 	public static Direction getNeighbouringDirection(BlockPos pos1, BlockPos pos2) {
 		for (Direction direction : Direction.values()) {
 			if (pos1.relative(direction).equals(pos2)) {
-				if (direction.getAxis() == Direction.Axis.Y) BlazingHot.LOGGER.info("Direction: {}", direction);
 				return direction;
 			}
 		}
