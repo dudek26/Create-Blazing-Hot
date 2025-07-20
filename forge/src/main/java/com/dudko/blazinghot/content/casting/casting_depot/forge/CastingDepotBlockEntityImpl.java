@@ -1,30 +1,25 @@
 package com.dudko.blazinghot.content.casting.casting_depot.forge;
 
-import static com.dudko.blazinghot.content.casting.Molds.getMoldCapacity;
-
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBehaviour;
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
-import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
-import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 
-public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity implements IHaveGoggleInformation {
+public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity {
 
-	CastingDepotBehaviour inputBehaviour;
+	CastingDepotBehaviourImpl inputBehaviour;
 
 	protected CastingDepotBlockEntityImpl(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -32,20 +27,7 @@ public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity impleme
 
 	@Override
 	public void onMoldUpdate() {
-		ItemStack stack = inputBehaviour.heldItem == null ? ItemStack.EMPTY : inputBehaviour.heldItem.stack;
-		long newCapacity = getMoldCapacity(stack);
-		if (getCapacity() != newCapacity) updateCapacity(newCapacity);
-	}
 
-	@Override
-	public void updateCapacity(long capacity) {
-		tank.getPrimaryHandler().setCapacity((int) capacity);
-		tank.sendDataImmediately();
-	}
-
-	@Override
-	public long getCapacity() {
-		return tank.getPrimaryHandler().getCapacity();
 	}
 
 	@Override
@@ -54,20 +36,14 @@ public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity impleme
 	}
 
 	@Override
-	public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-		tank = SmartFluidTankBehaviour.single(this, (int) MultiAmount.INGOT.get() * 2);
-		tank.whenFluidUpdates(() -> {
-
-		});
-		behaviours.add(tank);
-
-		behaviours.add(inputBehaviour = new CastingDepotBehaviour(this, CastingDepotBehaviour.INPUT));
-		inputBehaviour.addSubBehaviours(behaviours);
+	public float getCoolingSpeed() {
+		return 1 + inputBehaviour.coolingSpeedModifier;
 	}
 
 	@Override
-	public long getFluidAmount() {
-		return tank.getPrimaryHandler().getFluidAmount();
+	public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+		behaviours.add(inputBehaviour = new CastingDepotBehaviourImpl(this, CastingDepotBehaviour.INPUT));
+		inputBehaviour.addSubBehaviours(behaviours);
 	}
 
 	@Override
@@ -75,14 +51,7 @@ public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity impleme
 		if (isItemHandlerCap(cap)) {
 			return this.inputBehaviour.getItemCapability(cap, side);
 		}
-		return side != Direction.UP && this.isFluidHandlerCap(cap) ?
-			   this.tank.getCapability().cast() :
-			   super.getCapability(cap, side);
-	}
-
-	@Override
-	public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-		return containedFluidTooltip(tooltip, isPlayerSneaking, this.tank.getCapability().cast());
+		return super.getCapability(cap, side);
 	}
 
 	public static CastingDepotBlockEntity of(BlockEntityType<?> type, BlockPos pos, BlockState state) {

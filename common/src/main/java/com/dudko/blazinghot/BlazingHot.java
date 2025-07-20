@@ -20,12 +20,17 @@ import com.simibubi.create.foundation.item.TooltipModifier;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.createmod.catnip.lang.FontHelper;
+import net.createmod.catnip.lang.LangBuilder;
 import net.minecraft.resources.ResourceLocation;
 
 public class BlazingHot {
 	public static final String ID = "blazinghot";
 	public static final String NAME = "Create: Blazing Hot";
 	public static final Logger LOGGER = LoggerFactory.getLogger(NAME);
+
+	public static LangBuilder lang() {
+		return new LangBuilder(ID);
+	}
 
 	private static final CreateRegistrate REGISTRATE = CreateRegistrate.create(BlazingHot.ID);
 

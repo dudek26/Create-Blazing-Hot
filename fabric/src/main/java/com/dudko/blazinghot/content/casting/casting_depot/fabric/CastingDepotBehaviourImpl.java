@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
+import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBehaviour;
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.kinetics.belt.BeltHelper;
@@ -40,29 +40,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
 
 @SuppressWarnings("UnstableApiUsage")
-public class CastingDepotBehaviour extends BlockEntityBehaviour {
-
-	public static final BehaviourType<CastingDepotBehaviour> INPUT = new BehaviourType<>("Input"),
-			OUTPUT =
-					new BehaviourType<>("Output");
+public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 
 	TransportedItemStack heldItem;
 	List<TransportedItemStack> incoming;
 	ItemStackHandler processingOutputBuffer;
 	public CastingDepotItemHandler itemHandler;
-	TransportedItemStackHandlerBehaviour transportedHandler;
-	Supplier<Integer> maxStackSize;
-	Supplier<Boolean> canAcceptItems;
-	Predicate<Direction> canFunnelsPullFrom;
-	Consumer<ItemStack> onHeldInserted;
-	Predicate<ItemStack> acceptedItems;
-	boolean allowMerge;
-
-	private BehaviourType<CastingDepotBehaviour> behaviourType;
 
 	SnapshotParticipant<Data> snapshotParticipant = new SnapshotParticipant<>() {
 		@Override
@@ -86,14 +72,9 @@ public class CastingDepotBehaviour extends BlockEntityBehaviour {
 	record Data(List<TransportedItemStack> incoming, TransportedItemStack held) {
 	}
 
-	public CastingDepotBehaviour(CastingDepotBlockEntity be, BehaviourType<CastingDepotBehaviour> type) {
-		super(be);
-		maxStackSize = () -> 1;
-		canAcceptItems = () -> be.getFluidAmount() <= 0;
-		canFunnelsPullFrom = $ -> be.getBlockState().getValue(BlockStateProperties.POWERED);
-		acceptedItems = $ -> true;
-		onHeldInserted = $ -> {
-		};
+	public CastingDepotBehaviourImpl(CastingDepotBlockEntity be, BehaviourType<CastingDepotBehaviour> type) {
+		super(be, type);
+
 		incoming = new ArrayList<>();
 		itemHandler = new CastingDepotItemHandler(this);
 		processingOutputBuffer = new ItemStackHandler(8) {
@@ -101,15 +82,15 @@ public class CastingDepotBehaviour extends BlockEntityBehaviour {
 				be.notifyUpdate();
 			}
 		};
-		behaviourType = type;
+
 	}
 
-	public CastingDepotBehaviour withCallback(Consumer<ItemStack> changeListener) {
+	public CastingDepotBehaviourImpl withCallback(Consumer<ItemStack> changeListener) {
 		onHeldInserted = changeListener;
 		return this;
 	}
 
-	public CastingDepotBehaviour onlyAccepts(Predicate<ItemStack> filter) {
+	public CastingDepotBehaviourImpl onlyAccepts(Predicate<ItemStack> filter) {
 		acceptedItems = filter;
 		return this;
 	}

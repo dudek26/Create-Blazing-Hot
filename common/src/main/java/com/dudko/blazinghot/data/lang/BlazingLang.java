@@ -32,6 +32,9 @@ public enum BlazingLang {
 	LAMP_GOGGLE_STATE(GOGGLES, "modern_lamp.state", "Current state:"),
 	LAMP_GOGGLE_LOCKED(GOGGLES, "modern_lamp.locked", "Locked"),
 	LAMP_GOGGLE_UNLOCKED(GOGGLES, "modern_lamp.unlocked", "Unlocked"),
+	CASTING_GOGGLE_TITLE(GOGGLES, "casting_depot", "Casting Depot Info:"),
+	CASTING_GOGGLE_NO_MOLD(GOGGLES, "casting_depot.no_mold", "Empty"),
+	CASTING_GOGGLE_COOLING(GOGGLES, "casting_depot.cooling", "Cooling speed:"),
 
 	NETHER_LAVA_INFO(INFO,
 			"nether_lava_cobblestone",

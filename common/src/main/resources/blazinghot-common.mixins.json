@@ -6,6 +6,7 @@
   "client": [
   ],
   "mixins": [
+    "AirCurrentMixin",
     "BeltDeployerCallbacksMixin",
     "DeployerBlockEntityMixin",
     "ItemMixin",

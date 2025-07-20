@@ -1,27 +1,33 @@
 package com.dudko.blazinghot.content.casting.casting_depot;
 
+import java.util.List;
+
+import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.data.lang.BlazingLang;
+import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
-import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.createmod.catnip.lang.LangBuilder;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public abstract class CastingDepotBlockEntity extends SmartBlockEntity {
-
-	protected SmartFluidTankBehaviour tank;
+public abstract class CastingDepotBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
 	protected CastingDepotBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 	}
 
 	@ExpectPlatform
-	public static CastingDepotBlockEntity  of(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+	public static CastingDepotBlockEntity of(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		throw new AssertionError();
 	}
-
 
 	public abstract void onMoldUpdate();
 
@@ -31,11 +37,44 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity {
 		onMoldUpdate();
 	}
 
-	public abstract void updateCapacity(long newCapacity);
+	@Override
+	public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+		return moldTooltip(tooltip, isPlayerSneaking);
+	}
 
-	public abstract long getCapacity();
+	@SuppressWarnings("SameReturnValue")
+	private boolean moldTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+
+		BlazingLang.CASTING_GOGGLE_TITLE.translate().forGoggles(tooltip);
+
+		if (getHeldItem().isEmpty()) {
+			BlazingLang.CASTING_GOGGLE_NO_MOLD.translate().style(ChatFormatting.GRAY).forGoggles(tooltip);
+			return true;
+		}
+
+		Style style = Style.EMPTY.withColor(ChatFormatting.GRAY);
+		Component name = getHeldItem().getHoverName().copy().setStyle(style);
+		BlazingHot.lang().add(name).forGoggles(tooltip);
+
+		LangBuilder cooling = BlazingLang.CASTING_GOGGLE_COOLING.translate().style(ChatFormatting.GRAY);
+		cooling.add(Component.literal(" "));
+
+		MutableComponent
+				speedComponent =
+				Component.literal("x" + getCoolingSpeed()).setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN));
+
+		if (getCoolingSpeed() > 1) {
+			speedComponent.setStyle(Style.EMPTY.withColor(ChatFormatting.AQUA));
+		}
+		else if (getCoolingSpeed() < 1) {
+			speedComponent.setStyle(Style.EMPTY.withColor(ChatFormatting.GOLD));
+		}
+
+		cooling.add(speedComponent).forGoggles(tooltip);
+		return true;
+	}
 
 	public abstract ItemStack getHeldItem();
 
-	public abstract long getFluidAmount();
+	public abstract float getCoolingSpeed();
 }

@@ -18,9 +18,9 @@ import net.minecraft.world.item.ItemStack;
 public class CastingDepotItemHandler extends SnapshotParticipant<Unit> implements Storage<ItemVariant> {
 
 	private static final int MAIN_SLOT = 0;
-	private final CastingDepotBehaviour behaviour;
+	private final CastingDepotBehaviourImpl behaviour;
 
-	public CastingDepotItemHandler(CastingDepotBehaviour behaviour) {
+	public CastingDepotItemHandler(CastingDepotBehaviourImpl behaviour) {
 		this.behaviour = behaviour;
 	}
 

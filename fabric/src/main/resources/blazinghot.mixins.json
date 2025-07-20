@@ -9,7 +9,6 @@
     "BasinEmiRecipeMixin",
     "JEIBasinCategoryMixin"
   ],
-  "plugin": "com.moulberry.mixinconstraints.ConstraintsMixinPlugin",
   "injectors": {
     "defaultRequire": 1
   }

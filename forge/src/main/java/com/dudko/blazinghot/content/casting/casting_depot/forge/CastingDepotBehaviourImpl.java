@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
+import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBehaviour;
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.kinetics.belt.BeltHelper;
@@ -32,7 +32,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -41,55 +40,35 @@ import net.minecraftforge.items.ItemStackHandler;
 
 @SuppressWarnings("UnstableApiUsage")
 @MethodsReturnNonnullByDefault
-public class CastingDepotBehaviour extends BlockEntityBehaviour {
+public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 
-	public static final BehaviourType<CastingDepotBehaviour> INPUT = new BehaviourType<>("Input"),
-			OUTPUT =
-					new BehaviourType<>("Output");
 	TransportedItemStack heldItem;
 	List<TransportedItemStack> incoming;
 	ItemStackHandler processingOutputBuffer;
 	CastingDepotItemHandler itemHandler;
 	LazyOptional<CastingDepotItemHandler> lazyItemHandler;
-	TransportedItemStackHandlerBehaviour transportedHandler;
-	Supplier<Integer> maxStackSize;
-	Supplier<Boolean> canAcceptItems;
-	Predicate<Direction> canFunnelsPullFrom;
-	Consumer<ItemStack> onHeldInserted;
-	Predicate<ItemStack> acceptedItems;
-	boolean allowMerge;
 
-	private BehaviourType<CastingDepotBehaviour> behaviourType;
-
-	public CastingDepotBehaviour(final CastingDepotBlockEntity be, BehaviourType<CastingDepotBehaviour> type) {
-		super(be);
+	public CastingDepotBehaviourImpl(final CastingDepotBlockEntity be, BehaviourType<CastingDepotBehaviour> type) {
+		super(be, type);
 		this.processingOutputBuffer = new ItemStackHandler(8) {
 			protected void onContentsChanged(int slot) {
 				be.notifyUpdate();
 			}
 		};
-		canAcceptItems = () -> be.getFluidAmount() <= 0;
 		incoming = new ArrayList<>();
 		itemHandler = new CastingDepotItemHandler(this);
-		maxStackSize = () -> 1;
-		lazyItemHandler = LazyOptional.of(() -> this.itemHandler);
-		canFunnelsPullFrom = $ -> be.getBlockState().getValue(BlockStateProperties.POWERED);
-		onHeldInserted = ($) -> {
-		};
-		acceptedItems = ($) -> true;
-		behaviourType = type;
 	}
 
 	public void enableMerging() {
 		this.allowMerge = true;
 	}
 
-	public CastingDepotBehaviour withCallback(Consumer<ItemStack> changeListener) {
+	public CastingDepotBehaviourImpl withCallback(Consumer<ItemStack> changeListener) {
 		this.onHeldInserted = changeListener;
 		return this;
 	}
 
-	public CastingDepotBehaviour onlyAccepts(Predicate<ItemStack> filter) {
+	public CastingDepotBehaviourImpl onlyAccepts(Predicate<ItemStack> filter) {
 		this.acceptedItems = filter;
 		return this;
 	}

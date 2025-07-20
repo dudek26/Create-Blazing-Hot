@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.content.casting.casting_depot.fabric;
 
+import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBehaviour;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.kinetics.belt.transport.TransportedItemStack;
@@ -28,8 +29,8 @@ import net.minecraft.world.phys.BlockHitResult;
 @SuppressWarnings("UnstableApiUsage")
 public class CastingDepotBlockMethodsImpl {
 
-	protected static CastingDepotBehaviour get(BlockGetter worldIn, BlockPos pos) {
-		return BlockEntityBehaviour.get(worldIn, pos, CastingDepotBehaviour.INPUT);
+	protected static CastingDepotBehaviourImpl get(BlockGetter worldIn, BlockPos pos) {
+		return (CastingDepotBehaviourImpl) BlockEntityBehaviour.get(worldIn, pos, CastingDepotBehaviour.INPUT);
 	}
 
 	public static InteractionResult onUse(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult ray) {
@@ -37,7 +38,7 @@ public class CastingDepotBlockMethodsImpl {
 		if (world.isClientSide) return InteractionResult.SUCCESS;
 		if (AdventureUtil.isAdventure(player)) return InteractionResult.PASS;
 
-		CastingDepotBehaviour behaviour = get(world, pos);
+		CastingDepotBehaviourImpl behaviour = get(world, pos);
 		if (behaviour == null) return InteractionResult.PASS;
 		if (!behaviour.canAcceptItems.get()) return InteractionResult.SUCCESS;
 

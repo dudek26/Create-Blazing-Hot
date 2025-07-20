@@ -44,6 +44,8 @@ subprojects {
             it.parchment("org.parchmentmc.data:parchment-${minecraft_version}:${parchment_version}@zip")
         })
 
+        include(implementation("com.moulberry:mixinconstraints:${mixinconstraints_version}"))
+
         // see each subproject for dependencies.
     }
 }

@@ -1,4 +1,4 @@
-// 1.20.1	2025-03-09T11:27:37.9858256	Blazing Hot Processing Recipes
+// 1.20.1	2025-07-20T21:10:50.4417017	Blazing Hot Processing Recipes
 b9e5f299083602737b54144d23718d1bcfd78fb1 data/blazinghot/recipes/blaze_mixing/melting/ancient_debris.json
 02b3da64c783d3d20ef87090bd8bde0b7ab3afef data/blazinghot/recipes/blaze_mixing/melting/andesite_alloy.json
 b107c90aa161fd241705bfcce574ec0f444f231c data/blazinghot/recipes/blaze_mixing/melting/ingots/blaze_gold.json
@@ -67,8 +67,8 @@ c635fc838df50288fcd77e1b4341baaafd572a42 data/blazinghot/recipes/filling/zinc_ap
 26282254b67581ba6fcdef863319dce96fb66a5e data/blazinghot/recipes/filling/zinc_carrot.json
 7c44cef22d6962f81b9b0d1bad75da317f7e6bc9 data/blazinghot/recipes/haunting/nether_compound.json
 1c0f2b74129e1a18b4cc9236669b5585786df22f data/blazinghot/recipes/item_application/blaze_casing_from_log.json
-f7b406d5d60e852d7a2181076250ec32476ea20a data/blazinghot/recipes/milling/soul_sand.json
-e6271e51eedeeb3240dd0ae59e96ae51565a28b6 data/blazinghot/recipes/milling/stone.json
+f84771c9c627caf0ebe23ccb5b72bf875f17a981 data/blazinghot/recipes/milling/soul_sand.json
+10d9e8a861f81fba81d3a34ffef252d35c9a2ea3 data/blazinghot/recipes/milling/stone.json
 b254c18c4a5521312d1977d010aeece233cfe05e data/blazinghot/recipes/mixing/melting/andesite_alloy.json
 d2ff52b4864d2032eac1ef5d60be7677b8fadf42 data/blazinghot/recipes/mixing/melting/ingots/blaze_gold.json
 3c053b7d8a5d2e061f812df69054bd7d431a0d52 data/blazinghot/recipes/mixing/melting/ingots/brass.json

@@ -4,11 +4,9 @@ import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntit
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour.TankSegment;
-import com.simibubi.create.foundation.fluid.FluidRenderer;
 
 import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.util.Mth;
 
 @SuppressWarnings("UnstableApiUsage")
 public class CastingDepotRendererImpl {
@@ -18,7 +16,8 @@ public class CastingDepotRendererImpl {
 		float totalUnits = behaviour.getPrimaryTank().getTotalUnits(partialTicks);
 		if (totalUnits < 1) return;
 
-		float fluidLevel = Mth.clamp(totalUnits / be.getCapacity(), 0, 1);
+//		float fluidLevel = Mth.clamp(totalUnits / be.getCapacity(), 0, 1);
+		float fluidLevel = 0;
 
 		fluidLevel = 1 - ((1 - fluidLevel) * (1 - fluidLevel));
 
@@ -35,19 +34,19 @@ public class CastingDepotRendererImpl {
 			float units = tankSegment.getTotalUnits(partialTicks);
 			if (units < 1) continue;
 
-			FluidRenderer.renderFluidBox(renderedFluid.getFluid(),
-					renderedFluid.getAmount(),
-					xMin,
-					yMin,
-					zMin,
-					xMax,
-					yMax,
-					zMax,
-					buffer,
-					ms,
-					light,
-					false,
-					false);
+//			FluidRenderer.renderFluidBox(renderedFluid.getFluid(),
+//					renderedFluid.getAmount(),
+//					xMin,
+//					yMin,
+//					zMin,
+//					xMax,
+//					yMax,
+//					zMax,
+//					buffer,
+//					ms,
+//					light,
+//					false,
+//					false);
 
 			xMin = xMax;
 		}
