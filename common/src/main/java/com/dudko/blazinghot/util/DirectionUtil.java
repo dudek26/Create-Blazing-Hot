@@ -1,11 +1,9 @@
 package com.dudko.blazinghot.util;
 
-import com.dudko.blazinghot.BlazingHot;
+import java.util.Arrays;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-
-import java.util.Arrays;
 
 public class DirectionUtil {
 

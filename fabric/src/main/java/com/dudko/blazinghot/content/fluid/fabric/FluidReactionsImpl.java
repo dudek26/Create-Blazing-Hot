@@ -26,16 +26,22 @@ public class FluidReactionsImpl {
 
 		if (f1 == Fluids.WATER && f2 == netherLava || f2 == Fluids.WATER && f1 == netherLava) {
 			event.setState(Blocks.COBBLESTONE.defaultBlockState());
-		} else if (f1 == netherLava && FluidHelper.hasBlockState(f2)) {
+		}
+		else if (f1 == netherLava && FluidHelper.hasBlockState(f2)) {
 			lavaInteraction(event, f2);
-		} else if (f2 == netherLava && FluidHelper.hasBlockState(f1)) {
+		}
+		else if (f2 == netherLava && FluidHelper.hasBlockState(f1)) {
 			lavaInteraction(event, f1);
 		}
 
-		else if (BlazingFluidsImpl.MOLTEN_METALS.contains(f1) && FluidHelper.convertToFlowing(f2).defaultFluidState().is(FluidTags.WATER))
-			metalInteraction(event, f1, f2);
-		else if (BlazingFluidsImpl.MOLTEN_METALS.contains(f2) && FluidHelper.convertToFlowing(f1).defaultFluidState().is(FluidTags.WATER))
-			metalInteraction(event, f2, f1);
+		else if (BlazingFluidsImpl.MOLTEN_METALS.contains(f1) && FluidHelper
+				.convertToFlowing(f2)
+				.defaultFluidState()
+				.is(FluidTags.WATER)) metalInteraction(event, f1, f2);
+		else if (BlazingFluidsImpl.MOLTEN_METALS.contains(f2) && FluidHelper
+				.convertToFlowing(f1)
+				.defaultFluidState()
+				.is(FluidTags.WATER)) metalInteraction(event, f2, f1);
 	}
 
 	public static void handlePipeSpillCollisionFallback(PipeCollisionEvent.Spill event) {
