@@ -2,6 +2,7 @@ package com.dudko.blazinghot.config;
 
 import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
+
 import net.createmod.catnip.config.ConfigBase;
 
 public class CRecipes extends ConfigBase {

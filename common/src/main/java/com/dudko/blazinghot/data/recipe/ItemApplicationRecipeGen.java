@@ -1,9 +1,7 @@
 package com.dudko.blazinghot.data.recipe;
 
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.andesiteCasing;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.blazeGoldSheet;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.copperCasing;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.sturdyAlloy;
 
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.simibubi.create.AllRecipeTypes;

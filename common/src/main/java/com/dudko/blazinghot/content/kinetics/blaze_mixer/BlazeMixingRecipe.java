@@ -54,7 +54,7 @@ public class BlazeMixingRecipe extends BasinRecipe {
 	 * @apiNote Already platformed.
 	 */
 	public static long getFuelCost(Recipe<?> r) {
-		if (r == null) return MultiFluids.Constants.BUCKET.platformed() + 1;
+		if (r == null) return MultiAmount.BUCKET.get() + 1;
 
 		if (r instanceof MixingRecipe && PotionMixingRecipes.ALL.contains(r))
 			return BlazingConfigs.server().recipes.blazeBrewingFuelUsage.get();

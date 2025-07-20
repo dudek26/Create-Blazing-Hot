@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
-import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 

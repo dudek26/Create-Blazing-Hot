@@ -5,7 +5,6 @@ import static com.dudko.blazinghot.util.LangUtil.titleCaseConversion;
 import java.util.function.BiConsumer;
 
 import com.dudko.blazinghot.BlazingHot;
-
 import com.dudko.blazinghot.multiloader.Platform;
 
 import net.minecraft.core.Registry;

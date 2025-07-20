@@ -4,12 +4,11 @@ import static com.dudko.blazinghot.content.casting.Molds.getMoldCapacity;
 
 import java.util.List;
 
-import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
-import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
-
 import org.jetbrains.annotations.Nullable;
 
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
+import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 

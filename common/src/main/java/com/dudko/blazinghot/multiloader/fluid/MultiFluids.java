@@ -62,7 +62,7 @@ public class MultiFluids {
 	 * @return Platformed amount
 	 */
 	public static long fromBucketFraction(long numerator, long denominator) {
-		long total = numerator * Constants.BUCKET.droplets;
+		long total = numerator * MultiAmount.BUCKET.droplets();
 
 		if (total % denominator != 0) {
 			throw new IllegalArgumentException("Not a valid number of droplets!");

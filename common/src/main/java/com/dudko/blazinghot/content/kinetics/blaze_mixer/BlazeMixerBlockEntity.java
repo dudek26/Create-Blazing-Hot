@@ -9,6 +9,7 @@ import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancement;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.mixin_interfaces.IAdvancementBehaviour;
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.Create;
@@ -190,7 +191,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 
 			//noinspection ConstantValue
 			if (Mth.abs(getSpeed()) >= AllConfigs.server().kinetics.maxRotationSpeed.get()
-					&& hasFuel(MultiFluids.Constants.BUCKET.platformed())) {
+					&& hasFuel(MultiAmount.BUCKET.get())) {
 				award(BlazingAdvancements.BLAZE_MIXER_MAX);
 			}
 		}

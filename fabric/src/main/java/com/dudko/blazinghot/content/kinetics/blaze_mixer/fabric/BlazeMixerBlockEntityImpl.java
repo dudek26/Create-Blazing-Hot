@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
-import com.dudko.blazinghot.multiloader.fluid.MultiFluids.Constants;
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.fabric.BlazingRecipeTypesImpl;
@@ -75,7 +75,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
 
 	@Override
 	public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-		tank = SmartFluidTankBehaviour.single(this, Constants.BUCKET.platformed());
+		tank = SmartFluidTankBehaviour.single(this, MultiAmount.BUCKET.get());
 		tank.whenFluidUpdates(() -> {
 			if (getBasin().isPresent()) getBasin().get().notifyChangeOfContents();
 		});

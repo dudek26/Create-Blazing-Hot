@@ -15,7 +15,7 @@ import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.data.lang.BlazingLang;
-import com.dudko.blazinghot.multiloader.fluid.MultiFluids.Constants;
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
 import com.dudko.blazinghot.registry.fabric.BlazingRecipeTypesImpl;
@@ -171,10 +171,10 @@ public class BlazingEmiPlugin implements EmiPlugin {
 	}
 
 	private void addFluidCollision(EmiRegistry registry, String name, Fluid fluid1, Fluid fluid2, NonNullSupplier<Block> result) {
-		EmiStack fluidStack1 = EmiStack.of(fluid1, Constants.BUCKET.platformed());
+		EmiStack fluidStack1 = EmiStack.of(fluid1, MultiAmount.BUCKET.get());
 		fluidStack1 = fluidStack1.setRemainder(fluidStack1);
 
-		EmiStack fluidStack2 = EmiStack.of(fluid2, Constants.BUCKET.platformed());
+		EmiStack fluidStack2 = EmiStack.of(fluid2, MultiAmount.BUCKET.get());
 		fluidStack2 = fluidStack2.setRemainder(fluidStack2);
 
 		Block block = result.get();

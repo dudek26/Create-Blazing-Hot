@@ -1,12 +1,16 @@
 package com.dudko.blazinghot.content.casting.casting_depot.forge;
 
+import static com.dudko.blazinghot.content.casting.Molds.getMoldCapacity;
+
 import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
 import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 
 import net.minecraft.core.BlockPos;
@@ -15,15 +19,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import static com.dudko.blazinghot.content.casting.Molds.getMoldCapacity;
 
 public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity implements IHaveGoggleInformation {
 
@@ -78,7 +75,9 @@ public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity impleme
 		if (isItemHandlerCap(cap)) {
 			return this.inputBehaviour.getItemCapability(cap, side);
 		}
-		return side != Direction.UP && this.isFluidHandlerCap(cap) ? this.tank.getCapability().cast() : super.getCapability(cap, side);
+		return side != Direction.UP && this.isFluidHandlerCap(cap) ?
+			   this.tank.getCapability().cast() :
+			   super.getCapability(cap, side);
 	}
 
 	@Override

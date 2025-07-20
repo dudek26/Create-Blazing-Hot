@@ -7,11 +7,10 @@ import java.util.function.UnaryOperator;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import com.dudko.blazinghot.data.conditions.LoadConditionHelper;
-
 import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.data.conditions.LoadCondition;
+import com.dudko.blazinghot.data.conditions.LoadConditionHelper;
 import com.dudko.blazinghot.mixin.accessor.SequencedAssemblyRecipeBuilderAccessor;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

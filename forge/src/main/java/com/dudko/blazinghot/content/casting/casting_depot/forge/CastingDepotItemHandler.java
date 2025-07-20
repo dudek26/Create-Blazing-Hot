@@ -1,12 +1,12 @@
 package com.dudko.blazinghot.content.casting.casting_depot.forge;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import com.simibubi.create.content.kinetics.belt.transport.TransportedItemStack;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
-
-import javax.annotation.ParametersAreNonnullByDefault;
 
 @SuppressWarnings("UnstableApiUsage")
 @MethodsReturnNonnullByDefault
