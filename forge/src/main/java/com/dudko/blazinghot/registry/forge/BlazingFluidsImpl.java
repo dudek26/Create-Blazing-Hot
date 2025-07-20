@@ -6,6 +6,10 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.function.Function;
 
+import javax.annotation.Nullable;
+
+import org.jetbrains.annotations.NotNull;
+
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.content.metal.MoltenMetals;
@@ -19,7 +23,9 @@ import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraftforge.common.SoundActions;
@@ -27,8 +33,6 @@ import net.minecraftforge.fluids.FluidInteractionRegistry;
 import net.minecraftforge.fluids.FluidInteractionRegistry.InteractionInformation;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import org.jetbrains.annotations.NotNull;
 
 public class BlazingFluidsImpl {
 
@@ -129,6 +133,27 @@ public class BlazingFluidsImpl {
 						}
 					}));
 		}
+	}
+
+	@Nullable
+	public static BlockState getFluidInteraction(FluidState fluidState, FluidState metFluidState) {
+		for (MoltenMetal metal : MoltenMetals.ALL) {
+			for (Map.Entry<Fluid, NonNullSupplier<Block>> entry : metal.getFluidInteractions().entrySet()) {
+				if (entry.getValue() == null) {
+					BlazingHot.LOGGER.debug("Null fluid interaction for {}, {}",
+							metal.moltenName(),
+							ForgeRegistries.FLUIDS.getKey(entry.getKey()));
+					continue;
+				}
+				if (fluidState.getType().isSame(MOLTEN_METALS.getFluid(metal)) && metFluidState
+						.getType()
+						.isSame(entry.getKey())) {
+					return entry.getValue().get().defaultBlockState();
+				}
+			}
+		}
+
+		return null;
 	}
 
 	public static void platformRegister() {

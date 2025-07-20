@@ -22,13 +22,13 @@ public class FluidReactionsImpl {
 		Fluid f1 = event.getFirstFluid();
 		Fluid f2 = event.getSecondFluid();
 
-		FlowingFluid flowingLava = (FlowingFluid) BlazingFluidsImpl.NETHER_LAVA.get().getSource();
+		FlowingFluid netherLava = BlazingFluidsImpl.NETHER_LAVA.getSource();
 
-		if (f1 == Fluids.WATER && f2 == flowingLava || f2 == Fluids.WATER && f1 == flowingLava) {
+		if (f1 == Fluids.WATER && f2 == netherLava || f2 == Fluids.WATER && f1 == netherLava) {
 			event.setState(Blocks.COBBLESTONE.defaultBlockState());
-		} else if (f1 == flowingLava && FluidHelper.hasBlockState(f2)) {
+		} else if (f1 == netherLava && FluidHelper.hasBlockState(f2)) {
 			lavaInteraction(event, f2);
-		} else if (f2 == flowingLava && FluidHelper.hasBlockState(f1)) {
+		} else if (f2 == netherLava && FluidHelper.hasBlockState(f1)) {
 			lavaInteraction(event, f1);
 		}
 
