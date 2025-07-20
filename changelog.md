@@ -13,6 +13,11 @@ Create: Blazing Hot 0.7
 * Updated Blaze Mixer's item description
 * Updated texture for Nether Compound
 
+### Fixed:
+
+* Nether Lava now can create other stone variants (basalt, limestone etc.) (#17)
+* All fluids now behave correctly on pipe collisions / spilling (#16)
+
 ------------------------------------------------------
 Create: Blazing Hot 0.6.6
 ------------------------------------------------------
@@ -27,6 +32,7 @@ Create: Blazing Hot 0.6.6
 * Added config for Blaze Mixer stress impact
 
 ### Fixed:
+
 * Fixed Blaze Mixer not having any stress impact
 
 ------------------------------------------------------
@@ -59,6 +65,7 @@ Create: Blazing Hot 0.6.6
 * Added config for Blaze Mixer stress impact
 
 ### Fixed:
+
 * Fixed Blaze Mixer not having any stress impact
 
 ------------------------------------------------------
