@@ -116,7 +116,7 @@ public class BlazingFluidsImpl {
 					metFluidState =
 					fluidState.isSource() ? fluidState : world.getFluidState(pos.relative(direction));
 			if (!metFluidState.is(FluidTags.WATER)) continue;
-			BlockState lavaInteraction = getLavaInteraction(fluidState, metFluidState);
+			BlockState lavaInteraction = getFluidInteraction(fluidState, metFluidState);
 			if (lavaInteraction == null) continue;
 			return lavaInteraction;
 		}
@@ -132,7 +132,7 @@ public class BlazingFluidsImpl {
 			Map.of(Fluids.WATER, FluidTags.WATER, AllFluids.HONEY.get(), AllFluidTags.HONEY.tag);
 
 	@Nullable
-	public static BlockState getLavaInteraction(FluidState fluidState, FluidState metFluidState) {
+	public static BlockState getFluidInteraction(FluidState fluidState, FluidState metFluidState) {
 		Fluid fluid = fluidState.getType();
 		Fluid metFluid = metFluidState.getType();
 

@@ -5,6 +5,7 @@
       "item": "minecraft:stone"
     }
   ],
+  "processingTime": 100,
   "results": [
     {
       "item": "blazinghot:stone_dust"

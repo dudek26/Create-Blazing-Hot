@@ -1,7 +1,5 @@
 package com.dudko.blazinghot.registry;
 
-import java.util.function.Consumer;
-
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.entity.BlazeArrowEntity;
 import com.dudko.blazinghot.content.entity.renderer.BlazeArrowRenderer;
@@ -12,6 +10,8 @@ import com.tterrag.registrate.util.nullness.NonNullConsumer;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.MobCategory;
+
+import java.util.function.Consumer;
 
 public class BlazingEntities {
 
