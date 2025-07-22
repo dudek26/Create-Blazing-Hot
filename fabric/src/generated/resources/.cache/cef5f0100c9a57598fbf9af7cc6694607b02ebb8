@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-21T00:33:55.2224351	Create: Blazing Hot/Blazing Hot Processing Recipes
+// 1.20.1	2025-07-21T20:18:52.6276787	Create: Blazing Hot/Blazing Hot Processing Recipes
 fe4540d212dbbe3beac2b49d04fc172825c335c4 data\blazinghot\recipes\blaze_mixing\melting\copper_plates.json
 1bf50b0afa7704c76d8c4fe78618089fe4d9f502 data\blazinghot\recipes\compacting\molten_brass.json
 71920abad5da1549342ae207050e78a7d2c39a64 data\blazinghot\recipes\mixing\melting\zinc_plates.json
@@ -27,13 +27,15 @@ ffa48206a4a1cdf54da92cb7459d6eab0819024e data\blazinghot\recipes\blaze_mixing\me
 e6f3322e54a53c3791214329c774f38dcd65a2bd data\blazinghot\recipes\blaze_mixing\melting\blaze_gold_nuggets.json
 e5d5afbcfb14f73ccb33fc38f869ee42d98e14f4 data\blazinghot\recipes\filling\blaze_roll.json
 b77701dd85e71e2c58a520df995ad176db127a8f data\blazinghot\recipes\filling\blaze_carrot.json
+9d75bb7b1740b4b33a796814d5670a9415ccef5f data\blazinghot\recipes\item_application\blaze_casing_from_copper.json
 7d35bf19d4009169d74314e1a84d3f3585af8d72 data\blazinghot\recipes\mixing\melting\iron_rods.json
 51242469f8c185805343e3b09e3b5846aec270df data\blazinghot\recipes\compacting\molten_blaze_gold.json
 a78c902b558458b62a70bacb1b4ec4a481836c47 data\blazinghot\recipes\mixing\melting\andesite_alloy.json
-f57505538f9f4951c99166bf5dfe2d6ffe1c8805 data\blazinghot\recipes\blaze_mixing\nether_lava.json
+b9181c64fabdd5dde2a9e22f3648ffbad452275c data\blazinghot\recipes\blaze_mixing\nether_lava.json
 996ce9c753519cecad9d2f20b82be0c2d725334c data\blazinghot\recipes\mixing\melting\gold_plates.json
 72de99188b03a62867015c9757875ebef2326d90 data\blazinghot\recipes\blaze_mixing\melting\copper_nuggets.json
 f9bc11f2457184acc984cb3efde65f30c8227b85 data\blazinghot\recipes\blaze_mixing\melting\wires\copper.json
+6a579d596ec7abc9002ab5679875500c9a83e2b1 data\blazinghot\recipes\item_application\sturdy_casing_from_andesite.json
 0a9b212717c2f840a116a3702f3e19c2aa83575f data\blazinghot\recipes\blaze_mixing\melting\iron_plates.json
 ab01eb0a4b0f8320f8c6bf3c41b7cb73ee1bd644 data\blazinghot\recipes\mixing\melting\blaze_gold_rods.json
 bb517588858034b2474fbe41960d04b3bb3918d5 data\blazinghot\recipes\pressing\sturdy_alloy.json
@@ -88,7 +90,6 @@ f84771c9c627caf0ebe23ccb5b72bf875f17a981 data\blazinghot\recipes\milling\soul_sa
 7c5dc580758e8fc37021c078c85edafd86cabe62 data\blazinghot\recipes\filling\zinc_apple.json
 42cfd4e3a4549552da0952d60581d33e6b617941 data\blazinghot\recipes\blaze_mixing\melting\blaze_gold_rods.json
 9f575fffedc1d5928da60b468a7d8fc5b9dbbf48 data\blazinghot\recipes\mixing\nether_compound.json
-9d75bb7b1740b4b33a796814d5670a9415ccef5f data\blazinghot\recipes\item_application\blaze_casing_from_log.json
 a937a81e90cc2c02832a966ba270d68373e9dce8 data\blazinghot\recipes\filling\zinc_carrot.json
 0a4b07d9a0e611ea6df494cdbae8ed3d3fc50b03 data\blazinghot\recipes\crushing\soul_sand.json
 1cbaa6f36fd7ec1af7b1790d3256b4a3facfd917 data\blazinghot\recipes\blaze_mixing\melting\copper_rods.json

@@ -11,7 +11,6 @@ import com.dudko.blazinghot.data.recipe.BlazingProcessingRecipeGen;
 import com.dudko.blazinghot.data.recipe.CraftingRecipeGen;
 import com.dudko.blazinghot.data.recipe.SequencedAssemblyRecipeGen;
 import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
-import com.dudko.blazinghot.registry.fabric.BlazingRecipeTypesImpl;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.providers.ProviderType;
 
@@ -32,7 +31,6 @@ public class BlazingHotImpl implements ModInitializer {
 	}
 
 	public static void finalizeRegistrate() {
-		BlazingRecipeTypesImpl.platformRegister();
 		BlazingHot.registrate().register();
 
 		BlazingFluidsImpl.registerFluidInteractions();

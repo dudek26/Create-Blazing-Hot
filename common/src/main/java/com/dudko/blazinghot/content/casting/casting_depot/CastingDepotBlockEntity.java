@@ -49,26 +49,35 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 
 		if (getHeldItem().isEmpty()) {
 			BlazingLang.CASTING_GOGGLE_NO_MOLD.translate().style(ChatFormatting.GRAY).forGoggles(tooltip);
-			return true;
+		}
+		else {
+			Style style = Style.EMPTY.withColor(ChatFormatting.GRAY);
+			Component name = getHeldItem().getHoverName().copy().setStyle(style);
+			BlazingHot.lang().add(name).forGoggles(tooltip);
 		}
 
-		Style style = Style.EMPTY.withColor(ChatFormatting.GRAY);
-		Component name = getHeldItem().getHoverName().copy().setStyle(style);
-		BlazingHot.lang().add(name).forGoggles(tooltip);
 
 		LangBuilder cooling = BlazingLang.CASTING_GOGGLE_COOLING.translate().style(ChatFormatting.GRAY);
 		cooling.add(Component.literal(" "));
 
-		MutableComponent
-				speedComponent =
-				Component.literal("x" + getCoolingSpeed()).setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN));
+		ChatFormatting color = ChatFormatting.AQUA;
 
-		if (getCoolingSpeed() > 1) {
-			speedComponent.setStyle(Style.EMPTY.withColor(ChatFormatting.AQUA));
+		if (getCoolingSpeed() < 0) {
+			color = ChatFormatting.DARK_RED;
+		}
+		else if (getCoolingSpeed() == 0) {
+			color = ChatFormatting.RED;
 		}
 		else if (getCoolingSpeed() < 1) {
-			speedComponent.setStyle(Style.EMPTY.withColor(ChatFormatting.GOLD));
+			color = ChatFormatting.GOLD;
 		}
+		else if (getCoolingSpeed() == 1) {
+			color = ChatFormatting.GREEN;
+		}
+
+		MutableComponent
+				speedComponent =
+				Component.literal("x" + getCoolingSpeed()).setStyle(Style.EMPTY.withColor(color));
 
 		cooling.add(speedComponent).forGoggles(tooltip);
 		return true;

@@ -54,17 +54,17 @@ public class CastingDepotItemHandler implements IItemHandler {
 			return this.behaviour.processingOutputBuffer.extractItem(slot - 1, amount, simulate);
 		}
 		else {
-			TransportedItemStack held = this.behaviour.heldItem;
+			ItemStack held = this.behaviour.heldStack;
 			if (held == null) {
 				return ItemStack.EMPTY;
 			}
 			else {
-				ItemStack stack = held.stack.copy();
+				ItemStack stack = held.copy();
 				ItemStack extracted = stack.split(amount);
 				if (!simulate) {
-					this.behaviour.heldItem.stack = stack;
+					this.behaviour.heldStack = stack;
 					if (stack.isEmpty()) {
-						this.behaviour.heldItem = null;
+						this.behaviour.heldStack = null;
 					}
 
 					this.behaviour.blockEntity.notifyUpdate();

@@ -46,7 +46,9 @@ public class CastingDepotBehaviour extends BlockEntityBehaviour {
 		return behaviourType;
 	}
 
+
+	// TODO: config for these
 	public static final Map<FanProcessingType, Float>
 			COOLING_SPEEDS =
-			Map.of(AllFanProcessingTypes.BLASTING, -0.5f, AllFanProcessingTypes.SPLASHING, 0.5f);
+			Map.of(AllFanProcessingTypes.BLASTING, -0.25f, AllFanProcessingTypes.SPLASHING, 0.5f);
 }

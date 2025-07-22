@@ -51,7 +51,7 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 							.require(lava(), MultiAmount.fromBucketFraction(1, 10))
 							.requiresHeat(HeatCondition.SUPERHEATED)
 							.output(MultiRegistries.getFluidFromRegistry(BlazingHot.asResource("nether_lava")).get(),
-									MultiAmount.BUCKET)),
+									MultiAmount.fromBucketFraction(1, 10))),
 			MOLTEN_BLAZE_GOLD =
 					create("molten_blaze_gold",
 							b -> b

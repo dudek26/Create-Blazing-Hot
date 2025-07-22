@@ -57,7 +57,7 @@ public class FillingRecipeGen extends BlazingProcessingRecipeGen {
 					create("blaze_roll",
 							b -> b
 									.requireMultiple(netherDough(), 2)
-									.require(lava(), MultiAmount.BOTTLE.get())
+									.require(lava(), MultiAmount.BOTTLE)
 									.output(BlazingItems.BLAZE_ROLL));
 
 	@Override

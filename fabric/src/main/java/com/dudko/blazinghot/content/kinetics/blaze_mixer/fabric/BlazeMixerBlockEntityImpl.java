@@ -14,7 +14,6 @@ import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.dudko.blazinghot.registry.BlazingTags;
-import com.dudko.blazinghot.registry.fabric.BlazingRecipeTypesImpl;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.fluids.FluidFX;
@@ -291,7 +290,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
 				&& !MechanicalPressBlockEntity.canCompress(r)) && !AllRecipeTypes.shouldIgnoreInAutomation(r)
 				|| (r.getType() == AllRecipeTypes.MIXING.getType()
 				&& BlazingConfigs.server().recipes.allowMixingInBlazeMixer.get()))
-				|| r.getType() == BlazingRecipeTypesImpl.BLAZE_MIXING.getType();
+				|| r.getType() == BlazingRecipeTypes.BLAZE_MIXING.getType();
 	}
 
 	@Override

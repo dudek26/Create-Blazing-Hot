@@ -329,6 +329,10 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 		this.heldItem = heldItem;
 	}
 
+	public void setHeldStack(ItemStack heldItem) {
+		throw new UnsupportedOperationException();
+	}
+
 	public void removeHeldItem() {
 		this.heldItem = null;
 	}

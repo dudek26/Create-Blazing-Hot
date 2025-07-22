@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-20T21:10:50.4417017	Blazing Hot Processing Recipes
+// 1.20.1	2025-07-21T20:19:08.1648365	Blazing Hot Processing Recipes
 b9e5f299083602737b54144d23718d1bcfd78fb1 data/blazinghot/recipes/blaze_mixing/melting/ancient_debris.json
 02b3da64c783d3d20ef87090bd8bde0b7ab3afef data/blazinghot/recipes/blaze_mixing/melting/andesite_alloy.json
 b107c90aa161fd241705bfcce574ec0f444f231c data/blazinghot/recipes/blaze_mixing/melting/ingots/blaze_gold.json
@@ -30,7 +30,7 @@ dea7e55070fb64995582bb83e33d53d2073903bd data/blazinghot/recipes/blaze_mixing/me
 9ea8d608ec50b327ebda52809f365e09609de244 data/blazinghot/recipes/blaze_mixing/melting/wires/gold.json
 17f688cd68586b0b6f2b9fbfcfd2c55c12e5a7b5 data/blazinghot/recipes/blaze_mixing/melting/wires/iron.json
 0bdbe83a6bc0d79efc4e3d9a31e1cf49373a99d8 data/blazinghot/recipes/blaze_mixing/molten_blaze_gold.json
-baf604b3bf50d1b070f1d8dd3f6d0fff3f90d9a4 data/blazinghot/recipes/blaze_mixing/nether_lava.json
+5a6987f71eb185cc59a39213a4e83c3ec9f33aad data/blazinghot/recipes/blaze_mixing/nether_lava.json
 80b2e9e497d9b92d6f86207468dbc4ebf06bd196 data/blazinghot/recipes/compacting/molten_ancient_debris.json
 5ab1515eb992c5c15de77049c3c520938f62eb8c data/blazinghot/recipes/compacting/molten_andesite.json
 2a25164909bb2c74869a12cb33ee075f20c24acd data/blazinghot/recipes/compacting/molten_blaze_gold.json
@@ -53,7 +53,7 @@ abebbb9a2485403272795cd4eafe896ac5e1ec68 data/blazinghot/recipes/deploying/stell
 020c2ad483304ad55fa8b98bfceaed2b67c0c392 data/blazinghot/recipes/deploying/stellar_zinc_apple.json
 64ad85a5720e14923ce65bcc1ba2d3825b6ce120 data/blazinghot/recipes/filling/blaze_apple.json
 d5615a32182914d4cd2d4be0eb3b0286893cb613 data/blazinghot/recipes/filling/blaze_carrot.json
-50ad0129ffb93af68de1f3c73d9c319a83514285 data/blazinghot/recipes/filling/blaze_roll.json
+2ee7cf179aa07e49d0a4e92adfbf072a05664301 data/blazinghot/recipes/filling/blaze_roll.json
 5afc26132b8d379f5de111e3af737d0b2417cadd data/blazinghot/recipes/filling/brass_apple.json
 3566e198a6fc6d4e9aa09fb36dec9c614963b2ac data/blazinghot/recipes/filling/brass_carrot.json
 6f91ad01e49dd1b8ac247c224dd622955eeb28b0 data/blazinghot/recipes/filling/copper_apple.json
@@ -66,7 +66,8 @@ d3d7e27862f5fdfddf9f143990ee3183398a6293 data/blazinghot/recipes/filling/iron_ap
 c635fc838df50288fcd77e1b4341baaafd572a42 data/blazinghot/recipes/filling/zinc_apple.json
 26282254b67581ba6fcdef863319dce96fb66a5e data/blazinghot/recipes/filling/zinc_carrot.json
 7c44cef22d6962f81b9b0d1bad75da317f7e6bc9 data/blazinghot/recipes/haunting/nether_compound.json
-1c0f2b74129e1a18b4cc9236669b5585786df22f data/blazinghot/recipes/item_application/blaze_casing_from_log.json
+1c0f2b74129e1a18b4cc9236669b5585786df22f data/blazinghot/recipes/item_application/blaze_casing_from_copper.json
+6a579d596ec7abc9002ab5679875500c9a83e2b1 data/blazinghot/recipes/item_application/sturdy_casing_from_andesite.json
 f84771c9c627caf0ebe23ccb5b72bf875f17a981 data/blazinghot/recipes/milling/soul_sand.json
 10d9e8a861f81fba81d3a34ffef252d35c9a2ea3 data/blazinghot/recipes/milling/stone.json
 b254c18c4a5521312d1977d010aeece233cfe05e data/blazinghot/recipes/mixing/melting/andesite_alloy.json

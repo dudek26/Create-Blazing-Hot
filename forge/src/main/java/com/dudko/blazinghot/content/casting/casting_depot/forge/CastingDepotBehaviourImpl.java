@@ -4,16 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBehaviour;
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
 import com.simibubi.create.AllSoundEvents;
-import com.simibubi.create.content.kinetics.belt.BeltHelper;
-import com.simibubi.create.content.kinetics.belt.behaviour.BeltProcessingBehaviour;
 import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
-import com.simibubi.create.content.kinetics.belt.behaviour.TransportedItemStackHandlerBehaviour;
 import com.simibubi.create.content.kinetics.belt.transport.TransportedItemStack;
 import com.simibubi.create.content.logistics.funnel.AbstractFunnelBlock;
 import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
@@ -38,11 +34,10 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
-@SuppressWarnings("UnstableApiUsage")
 @MethodsReturnNonnullByDefault
 public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 
-	TransportedItemStack heldItem;
+	ItemStack heldStack;
 	List<TransportedItemStack> incoming;
 	ItemStackHandler processingOutputBuffer;
 	CastingDepotItemHandler itemHandler;
@@ -57,6 +52,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 		};
 		incoming = new ArrayList<>();
 		itemHandler = new CastingDepotItemHandler(this);
+		lazyItemHandler = LazyOptional.of(() -> itemHandler);
 	}
 
 	public void enableMerging() {
@@ -81,11 +77,11 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 
 		while (iterator.hasNext()) {
 			TransportedItemStack ts = (TransportedItemStack) iterator.next();
-			if (this.tick(ts) && (!world.isClientSide || this.blockEntity.isVirtual())) {
-				if (this.heldItem == null) {
-					this.heldItem = ts;
+			if (!world.isClientSide || this.blockEntity.isVirtual()) {
+				if (this.heldStack == null) {
+					this.heldStack = ts.stack;
 				}
-				else if (!ItemHelper.canItemStackAmountsStack(this.heldItem.stack, ts.stack)) {
+				else if (!ItemHelper.canItemStackAmountsStack(this.heldStack, ts.stack)) {
 					Vec3 vec = VecHelper.getCenterOf(this.blockEntity.getBlockPos());
 					Containers.dropItemStack(this.blockEntity.getLevel(),
 							vec.x,
@@ -94,7 +90,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 							ts.stack);
 				}
 				else {
-					this.heldItem.stack.grow(ts.stack.getCount());
+					this.heldStack.grow(ts.stack.getCount());
 				}
 
 				iterator.remove();
@@ -102,111 +98,49 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 			}
 		}
 
-		if (this.heldItem != null) {
-			if (this.tick(this.heldItem)) {
-				BlockPos pos = this.blockEntity.getBlockPos();
-				if (!world.isClientSide) {
-					if (!this.handleBeltFunnelOutput()) {
-						BeltProcessingBehaviour
-								processingBehaviour =
-								BlockEntityBehaviour.get(world, pos.above(2), BeltProcessingBehaviour.TYPE);
-						if (processingBehaviour != null) {
-							if (this.heldItem.locked || !BeltProcessingBehaviour.isBlocked(world, pos)) {
-								ItemStack previousItem = this.heldItem.stack;
-								boolean wasLocked = this.heldItem.locked;
-								BeltProcessingBehaviour.ProcessingResult
-										result =
-										wasLocked ?
-										processingBehaviour.handleHeldItem(this.heldItem, this.transportedHandler) :
-										processingBehaviour.handleReceivedItem(this.heldItem, this.transportedHandler);
-								if (result == BeltProcessingBehaviour.ProcessingResult.REMOVE) {
-									this.heldItem = null;
-									this.blockEntity.sendData();
-								}
-								else {
-									this.heldItem.locked = result == BeltProcessingBehaviour.ProcessingResult.HOLD;
-									if (this.heldItem.locked != wasLocked || !previousItem.equals(this.heldItem.stack,
-											false)) {
-										this.blockEntity.sendData();
-									}
-
-								}
-							}
-						}
-					}
-				}
+		if (this.heldStack != null) {
+			if (!world.isClientSide) {
+				this.handleBeltFunnelOutput();
 			}
 		}
-	}
-
-	protected boolean tick(TransportedItemStack heldItem) {
-		heldItem.prevBeltPosition = heldItem.beltPosition;
-		heldItem.prevSideOffset = heldItem.sideOffset;
-		float diff = 0.5F - heldItem.beltPosition;
-		if (diff > 0.001953125F) {
-			if (diff > 0.03125F && !BeltHelper.isItemUpright(heldItem.stack)) {
-				++heldItem.angle;
-			}
-
-			heldItem.beltPosition += diff / 4.0F;
-		}
-
-		return diff < 0.0625F;
 	}
 
 	private boolean handleBeltFunnelOutput() {
-		BlockState funnel = this.getWorld().getBlockState(this.getPos().above());
+		BlockState funnel = getWorld().getBlockState(getPos().above());
 		Direction funnelFacing = AbstractFunnelBlock.getFunnelFacing(funnel);
-		if (funnelFacing != null && this.canFunnelsPullFrom.test(funnelFacing.getOpposite())) {
-			for (int slot = 0; slot < this.processingOutputBuffer.getSlots(); ++slot) {
-				ItemStack previousItem = this.processingOutputBuffer.getStackInSlot(slot);
-				if (!previousItem.isEmpty()) {
-					ItemStack
-							afterInsert =
-							((DirectBeltInputBehaviour) this.blockEntity.getBehaviour(DirectBeltInputBehaviour.TYPE)).tryExportingToBeltFunnel(
-									previousItem,
-									(Direction) null,
-									false);
-					if (afterInsert == null) {
-						return false;
-					}
+		if (funnelFacing == null || !canFunnelsPullFrom.test(funnelFacing.getOpposite())) return false;
 
-					if (previousItem.getCount() != afterInsert.getCount()) {
-						this.processingOutputBuffer.setStackInSlot(slot, afterInsert);
-						this.blockEntity.notifyUpdate();
-						return true;
-					}
-				}
-			}
-
-			ItemStack previousItem = this.heldItem.stack;
+		for (int slot = 0; slot < processingOutputBuffer.getSlots(); slot++) {
+			ItemStack previousItem = processingOutputBuffer.getStackInSlot(slot);
+			if (previousItem.isEmpty()) continue;
 			ItemStack
 					afterInsert =
-					((DirectBeltInputBehaviour) this.blockEntity.getBehaviour(DirectBeltInputBehaviour.TYPE)).tryExportingToBeltFunnel(
-							previousItem,
-							(Direction) null,
-							false);
-			if (afterInsert == null) {
-				return false;
-			}
-			else if (previousItem.getCount() != afterInsert.getCount()) {
-				if (afterInsert.isEmpty()) {
-					this.heldItem = null;
-				}
-				else {
-					this.heldItem.stack = afterInsert;
-				}
-
-				this.blockEntity.notifyUpdate();
+					blockEntity
+							.getBehaviour(DirectBeltInputBehaviour.TYPE)
+							.tryExportingToBeltFunnel(previousItem, null, false);
+			if (afterInsert == null) return false;
+			if (previousItem.getCount() != afterInsert.getCount()) {
+				processingOutputBuffer.setStackInSlot(slot, afterInsert);
+				blockEntity.notifyUpdate();
 				return true;
 			}
-			else {
-				return false;
-			}
 		}
-		else {
-			return false;
+
+		ItemStack previousItem = heldStack;
+		ItemStack
+				afterInsert =
+				blockEntity
+						.getBehaviour(DirectBeltInputBehaviour.TYPE)
+						.tryExportingToBeltFunnel(previousItem, null, false);
+		if (afterInsert == null) return false;
+		if (previousItem.getCount() != afterInsert.getCount()) {
+			if (afterInsert.isEmpty()) heldStack = null;
+			else heldStack = afterInsert;
+			blockEntity.notifyUpdate();
+			return true;
 		}
+
+		return false;
 	}
 
 	public void destroy() {
@@ -233,8 +167,8 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 	}
 
 	public void write(CompoundTag compound, boolean clientPacket) {
-		if (this.heldItem != null) {
-			compound.put("HeldItem", this.heldItem.serializeNBT());
+		if (this.heldStack != null) {
+			compound.put("HeldStack", this.heldStack.serializeNBT());
 		}
 
 		compound.put("OutputBuffer", this.processingOutputBuffer.serializeNBT());
@@ -245,9 +179,9 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 	}
 
 	public void read(CompoundTag compound, boolean clientPacket) {
-		this.heldItem = null;
-		if (compound.contains("HeldItem")) {
-			this.heldItem = TransportedItemStack.read(compound.getCompound("HeldItem"));
+		this.heldStack = null;
+		if (compound.contains("HeldStack")) {
+			this.heldStack = ItemStack.of(compound.getCompound("HeldStack"));
 		}
 
 		this.processingOutputBuffer.deserializeNBT(compound.getCompound("OutputBuffer"));
@@ -263,14 +197,10 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 				.allowingBeltFunnels()
 				.setInsertionHandler(this::tryInsertingFromSide)
 				.considerOccupiedWhen(this::isOccupied));
-		this.transportedHandler =
-				(new TransportedItemStackHandlerBehaviour(this.blockEntity, this::applyToAllItems)).withStackPlacement(
-						this::getWorldPositionOf);
-		behaviours.add(this.transportedHandler);
 	}
 
 	public ItemStack getHeldItemStack() {
-		return this.heldItem == null ? ItemStack.EMPTY : this.heldItem.stack;
+		return this.heldStack == null ? ItemStack.EMPTY : this.heldStack;
 	}
 
 	public boolean canMergeItems() {
@@ -315,7 +245,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 			if (remainingSpace <= 0) {
 				return inserted;
 			}
-			else if (this.heldItem != null && !ItemHelper.canItemStackAmountsStack(this.heldItem.stack, inserted)) {
+			else if (this.heldStack != null && !ItemHelper.canItemStackAmountsStack(this.heldStack, inserted)) {
 				return inserted;
 			}
 			else {
@@ -326,20 +256,20 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 					if (!simulate) {
 						TransportedItemStack copy = heldItem.copy();
 						copy.stack.setCount(remainingSpace);
-						if (this.heldItem != null) {
+						if (this.heldStack != null) {
 							this.incoming.add(copy);
 						}
 						else {
-							this.heldItem = copy;
+							this.heldStack = copy.stack;
 						}
 					}
 				}
 				else if (!simulate) {
-					if (this.heldItem != null) {
+					if (this.heldStack != null) {
 						this.incoming.add(heldItem);
 					}
 					else {
-						this.heldItem = heldItem;
+						this.heldStack = heldItem.stack;
 					}
 				}
 
@@ -348,7 +278,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 		}
 		else {
 			ItemStack returned = ItemStack.EMPTY;
-			int maxCount = heldItem.stack.getMaxStackSize();
+			int maxCount = 1;
 			boolean stackTooLarge = maxCount < heldItem.stack.getCount();
 			if (stackTooLarge) {
 				returned = ItemHandlerHelper.copyStackWithSize(heldItem.stack, heldItem.stack.getCount() - maxCount);
@@ -372,25 +302,19 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 					heldItem.stack.setCount(maxCount);
 				}
 
-				this.heldItem = heldItem;
+				this.heldStack = heldItem.stack;
 				this.onHeldInserted.accept(heldItem.stack);
 				return returned;
 			}
 		}
 	}
 
-	public void setHeldItem(TransportedItemStack heldItem) {
-		this.heldItem = heldItem;
+	public void setHeldStack(ItemStack heldStack) {
+		this.heldStack = heldStack;
 	}
 
-	public void removeHeldItem() {
-		this.heldItem = null;
-	}
-
-	public void setCenteredHeldItem(TransportedItemStack heldItem) {
-		this.heldItem = heldItem;
-		this.heldItem.beltPosition = 0.5F;
-		this.heldItem.prevBeltPosition = 0.5F;
+	public void removeHeldStack() {
+		this.heldStack = null;
 	}
 
 	public <T> LazyOptional<T> getItemCapability(Capability<T> cap, Direction side) {
@@ -430,53 +354,8 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 		}
 	}
 
-	private void applyToAllItems(float maxDistanceFromCentre, Function<TransportedItemStack, TransportedItemStackHandlerBehaviour.TransportedResult> processFunction) {
-		if (this.heldItem != null) {
-			if (!(0.5F - this.heldItem.beltPosition > maxDistanceFromCentre)) {
-				boolean dirty = false;
-				TransportedItemStack transportedItemStack = this.heldItem;
-				ItemStack stackBefore = transportedItemStack.stack.copy();
-				TransportedItemStackHandlerBehaviour.TransportedResult
-						result =
-						(TransportedItemStackHandlerBehaviour.TransportedResult) processFunction.apply(
-								transportedItemStack);
-				if (result != null && !result.didntChangeFrom(stackBefore)) {
-					dirty = true;
-					this.heldItem = null;
-					if (result.hasHeldOutput()) {
-						this.setCenteredHeldItem(result.getHeldOutput());
-					}
-
-					for (TransportedItemStack added : result.getOutputs()) {
-						if (this.getHeldItemStack().isEmpty()) {
-							this.setCenteredHeldItem(added);
-						}
-						else {
-							ItemStack
-									remainder =
-									ItemHandlerHelper.insertItemStacked(this.processingOutputBuffer,
-											added.stack,
-											false);
-							Vec3 vec = VecHelper.getCenterOf(this.blockEntity.getBlockPos());
-							Containers.dropItemStack(this.blockEntity.getLevel(),
-									vec.x,
-									vec.y + (double) 0.5F,
-									vec.z,
-									remainder);
-						}
-					}
-
-					if (dirty) {
-						this.blockEntity.notifyUpdate();
-					}
-
-				}
-			}
-		}
-	}
-
 	public boolean isEmpty() {
-		return this.heldItem == null && this.isOutputEmpty();
+		return this.heldStack == null && this.isOutputEmpty();
 	}
 
 	public boolean isOutputEmpty() {

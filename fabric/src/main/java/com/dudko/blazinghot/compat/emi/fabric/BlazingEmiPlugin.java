@@ -17,8 +17,8 @@ import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.BlazingBlocks;
+import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
-import com.dudko.blazinghot.registry.fabric.BlazingRecipeTypesImpl;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.compat.emi.CreateEmiPlugin;
@@ -84,12 +84,12 @@ public class BlazingEmiPlugin implements EmiPlugin {
 
 		RecipeManager manager = registry.getRecipeManager();
 
-		addAll(registry, BlazingRecipeTypesImpl.BLAZE_MIXING, BLAZE_MIXING, BlazeMixingEmiRecipe::new);
+		addAll(registry, BlazingRecipeTypes.BLAZE_MIXING, BLAZE_MIXING, BlazeMixingEmiRecipe::new);
 
 		List<MixingRecipe> mixingRecipes = manager.getAllRecipesFor(AllRecipeTypes.MIXING.getType());
 		List<BlazeMixingRecipe>
 				blazeMixingRecipes =
-				manager.getAllRecipesFor(BlazingRecipeTypesImpl.BLAZE_MIXING.getType());
+				manager.getAllRecipesFor(BlazingRecipeTypes.BLAZE_MIXING.getType());
 		outer:
 		for (MixingRecipe recipe : mixingRecipes) {
 			for (BlazeMixingRecipe blazeMix : blazeMixingRecipes) {
@@ -152,7 +152,7 @@ public class BlazingEmiPlugin implements EmiPlugin {
 	}
 
 	@SuppressWarnings("unchecked")
-	private <T extends Recipe<?>> void addAll(EmiRegistry registry, BlazingRecipeTypesImpl type, EmiRecipeCategory category, BiFunction<EmiRecipeCategory, T, EmiRecipe> constructor) {
+	private <T extends Recipe<?>> void addAll(EmiRegistry registry, BlazingRecipeTypes type, EmiRecipeCategory category, BiFunction<EmiRecipeCategory, T, EmiRecipe> constructor) {
 		for (T recipe : (List<T>) registry.getRecipeManager().getAllRecipesFor(type.getType())) {
 			registry.addRecipe(constructor.apply(category, recipe));
 		}

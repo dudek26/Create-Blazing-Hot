@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 import org.jetbrains.annotations.Nullable;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.content.casting.casting_depot.forge.CastingRecipe;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
@@ -27,7 +28,8 @@ import net.minecraftforge.registries.RegistryObject;
 
 public enum BlazingRecipeTypesImpl implements IRecipeTypeInfo {
 
-	BLAZE_MIXING(BlazeMixingRecipe::new);
+	BLAZE_MIXING(BlazeMixingRecipe::new),
+	CASTING(CastingRecipe::new);
 
 	public static void platformRegister(IEventBus modEventBus) {
 		Registers.SERIALIZER_REGISTER.register(modEventBus);
@@ -86,12 +88,14 @@ public enum BlazingRecipeTypesImpl implements IRecipeTypeInfo {
 	public static <T extends RecipeType<?>> T getType(BlazingRecipeTypes recipe) {
 		return switch (recipe) {
 			case BLAZE_MIXING -> BLAZE_MIXING.getType();
+			case CASTING -> CASTING.getType();
 		};
 	}
 
 	public static IRecipeTypeInfo get(BlazingRecipeTypes recipe) {
 		return switch (recipe) {
 			case BLAZE_MIXING -> BLAZE_MIXING;
+			case CASTING -> CASTING;
 		};
 	}
 
