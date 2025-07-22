@@ -18,6 +18,15 @@ import net.minecraftforge.items.wrapper.RecipeWrapper;
 public class CastingRecipe extends ProcessingRecipe<RecipeWrapper> {
 
 	protected int coolingDuration;
+
+	public boolean isKeepItem() {
+		return keepItem;
+	}
+
+	public int getCoolingDuration() {
+		return coolingDuration;
+	}
+
 	protected boolean keepItem;
 
 	@Override
@@ -73,8 +82,8 @@ public class CastingRecipe extends ProcessingRecipe<RecipeWrapper> {
 	@Override
 	public void readAdditional(JsonObject json) {
 		super.readAdditional(json);
-		if (!json.has("coolingDuration")) coolingDuration = json.get("coolingDuration").getAsInt();
-		else coolingDuration = 0;
+		if (json.has("coolingDuration")) coolingDuration = json.get("coolingDuration").getAsInt();
+		if (json.has("keepItem")) keepItem = json.get("keepItem").getAsBoolean();
 	}
 
 	@Override

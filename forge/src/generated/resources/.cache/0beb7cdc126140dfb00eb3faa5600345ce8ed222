@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-22T16:05:48.021619	Blazing Hot Processing Recipes
+// 1.20.1	2025-07-22T20:37:55.5029222	Blazing Hot Processing Recipes
 dadde300f60ec6610688d80a7a0facf336df225d data/blazinghot/recipes/blaze_mixing/melting/ancient_debris.json
 5443cf03eab7c3541524f2853a62e8e6e38f6892 data/blazinghot/recipes/blaze_mixing/melting/andesite_alloy.json
 b413f1049b33a5941ed597e1828ca07b50fb3303 data/blazinghot/recipes/blaze_mixing/melting/ingots/blaze_gold.json
@@ -31,7 +31,7 @@ e3db993c83bb42b19beb21a427073015be402dab data/blazinghot/recipes/blaze_mixing/me
 42bbd799819400f847c6fe9856826f38a96796e2 data/blazinghot/recipes/blaze_mixing/melting/wires/iron.json
 9d41c2d957412bcfaccd2564cef863e17a03b1c5 data/blazinghot/recipes/blaze_mixing/molten_blaze_gold.json
 5a6987f71eb185cc59a39213a4e83c3ec9f33aad data/blazinghot/recipes/blaze_mixing/nether_lava.json
-6e6a0d7f426ba42abc4eea57124bb001c7f8d617 data/blazinghot/recipes/casting/blaze_gold_ingot.json
+9e7c46759dd45aab420bb1570798ab804a91a278 data/blazinghot/recipes/casting/blaze_gold_ingot.json
 80b2e9e497d9b92d6f86207468dbc4ebf06bd196 data/blazinghot/recipes/compacting/molten_ancient_debris.json
 5ab1515eb992c5c15de77049c3c520938f62eb8c data/blazinghot/recipes/compacting/molten_andesite.json
 2a25164909bb2c74869a12cb33ee075f20c24acd data/blazinghot/recipes/compacting/molten_blaze_gold.json

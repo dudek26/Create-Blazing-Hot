@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBehaviour;
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 
@@ -17,24 +16,27 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 
 @SuppressWarnings("UnstableApiUsage")
 public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity implements SidedStorageBlockEntity {
-
-	CastingDepotBehaviourImpl inputBehaviour;
 
 	protected CastingDepotBlockEntityImpl(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 	}
 
-	@Override
-	public void onMoldUpdate() {
-
+	private CastingDepotBehaviourImpl getInputBehaviour() {
+		return (CastingDepotBehaviourImpl) inputBehaviour;
 	}
 
 	@Override
 	public ItemStack getHeldItem() {
-		return inputBehaviour.heldItem == null ? ItemStack.EMPTY : inputBehaviour.heldItem.stack;
+		return getInputBehaviour().heldItem == null ? ItemStack.EMPTY : getInputBehaviour().heldItem.stack;
+	}
+
+	@Override
+	public ItemStack getOutputItem() {
+		return null;
 	}
 
 	@Override
@@ -43,15 +45,25 @@ public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity impleme
 	}
 
 	@Override
+	public void setFluid(Fluid fluid, long amount) {
+
+	}
+
+	@Override
+	public void resetFluid() {
+
+	}
+
+	@Override
 	public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-		behaviours.add(inputBehaviour = new CastingDepotBehaviourImpl(this, CastingDepotBehaviour.INPUT));
-		inputBehaviour.addSubBehaviours(behaviours);
+		super.addBehaviours(behaviours);
+
 	}
 
 	@Nullable
 	@Override
 	public Storage<ItemVariant> getItemStorage(@Nullable Direction direction) {
-		return inputBehaviour.itemHandler;
+		return getInputBehaviour().itemHandler;
 	}
 
 	@Override

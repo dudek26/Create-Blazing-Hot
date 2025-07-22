@@ -1,6 +1,6 @@
 {
   "type": "blazinghot:casting",
-  "coolingDuration": 300,
+  "coolingDuration": 100,
   "ingredients": [
     {
       "item": "blazinghot:sturdy_ingot_mold"
@@ -11,7 +11,7 @@
     }
   ],
   "keepItem": true,
-  "processingTime": 200,
+  "processingTime": 50,
   "results": [
     {
       "item": "blazinghot:blaze_gold_ingot"

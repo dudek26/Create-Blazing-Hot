@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
@@ -53,15 +54,21 @@ public class CastingBySpout {
 		return castingRecipe;
 	}
 
+	public static CastingRecipe findRecipe(Level world, ResourceLocation id) {
+		Recipe<?> recipe = world.getRecipeManager().byKey(id).orElse(null);
+		if (!(recipe instanceof CastingRecipe)) return null;
+		return (CastingRecipe) recipe;
+
+	}
+
 	public static ItemStack getCastingResult(@Nullable CastingRecipe recipe) {
 		if (recipe == null) return null;
 		List<ItemStack> results = recipe.rollResults();
 		return results.isEmpty() ? ItemStack.EMPTY : results.get(0);
 	}
 
-	public static void finishCasting(CastingRecipe recipe, ItemStack stack, FluidStack availableFluid) {
-		availableFluid.shrink(recipe.getRequiredFluid().getRequiredAmount());
-		// TODO: add mold consuming
+	public static void finishCasting(CastingRecipe recipe, ItemStack stack) {
+		if (recipe.isKeepItem()) return;
 		stack.shrink(1);
 	}
 }

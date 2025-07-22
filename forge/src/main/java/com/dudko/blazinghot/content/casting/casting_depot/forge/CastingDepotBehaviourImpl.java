@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBehaviour;
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
 import com.simibubi.create.AllSoundEvents;
@@ -29,15 +31,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
+@ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 
-	ItemStack heldStack;
 	List<TransportedItemStack> incoming;
 	ItemStackHandler processingOutputBuffer;
 	CastingDepotItemHandler itemHandler;
@@ -55,6 +56,10 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 		lazyItemHandler = LazyOptional.of(() -> itemHandler);
 	}
 
+	public static CastingDepotBehaviour of(CastingDepotBlockEntity be, BehaviourType<CastingDepotBehaviour> type) {
+		return new CastingDepotBehaviourImpl(be, type);
+	}
+
 	public void enableMerging() {
 		this.allowMerge = true;
 	}
@@ -69,6 +74,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 		return this;
 	}
 
+	@Override
 	public void tick() {
 		super.tick();
 		Level world = this.blockEntity.getLevel();
@@ -105,10 +111,11 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 		}
 	}
 
-	private boolean handleBeltFunnelOutput() {
+	@Override
+	protected void handleBeltFunnelOutput() {
 		BlockState funnel = getWorld().getBlockState(getPos().above());
 		Direction funnelFacing = AbstractFunnelBlock.getFunnelFacing(funnel);
-		if (funnelFacing == null || !canFunnelsPullFrom.test(funnelFacing.getOpposite())) return false;
+		if (funnelFacing == null || !canFunnelsPullFrom.test(funnelFacing.getOpposite())) return;
 
 		for (int slot = 0; slot < processingOutputBuffer.getSlots(); slot++) {
 			ItemStack previousItem = processingOutputBuffer.getStackInSlot(slot);
@@ -118,11 +125,11 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 					blockEntity
 							.getBehaviour(DirectBeltInputBehaviour.TYPE)
 							.tryExportingToBeltFunnel(previousItem, null, false);
-			if (afterInsert == null) return false;
+			if (afterInsert == null) return;
 			if (previousItem.getCount() != afterInsert.getCount()) {
 				processingOutputBuffer.setStackInSlot(slot, afterInsert);
 				blockEntity.notifyUpdate();
-				return true;
+				return;
 			}
 		}
 
@@ -132,17 +139,16 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 				blockEntity
 						.getBehaviour(DirectBeltInputBehaviour.TYPE)
 						.tryExportingToBeltFunnel(previousItem, null, false);
-		if (afterInsert == null) return false;
+		if (afterInsert == null) return;
 		if (previousItem.getCount() != afterInsert.getCount()) {
 			if (afterInsert.isEmpty()) heldStack = null;
 			else heldStack = afterInsert;
 			blockEntity.notifyUpdate();
-			return true;
 		}
 
-		return false;
 	}
 
+	@Override
 	public void destroy() {
 		super.destroy();
 		Level level = this.getWorld();
@@ -166,6 +172,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 
 	}
 
+	@Override
 	public void write(CompoundTag compound, boolean clientPacket) {
 		if (this.heldStack != null) {
 			compound.put("HeldStack", this.heldStack.serializeNBT());
@@ -178,6 +185,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 
 	}
 
+	@Override
 	public void read(CompoundTag compound, boolean clientPacket) {
 		this.heldStack = null;
 		if (compound.contains("HeldStack")) {
@@ -192,6 +200,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 
 	}
 
+	@Override
 	public void addSubBehaviours(List<BlockEntityBehaviour> behaviours) {
 		behaviours.add((new DirectBeltInputBehaviour(this.blockEntity))
 				.allowingBeltFunnels()
@@ -317,7 +326,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 		this.heldStack = null;
 	}
 
-	public <T> LazyOptional<T> getItemCapability(Capability<T> cap, Direction side) {
+	public <T> LazyOptional<T> getItemCapability() {
 		return this.lazyItemHandler.cast();
 	}
 

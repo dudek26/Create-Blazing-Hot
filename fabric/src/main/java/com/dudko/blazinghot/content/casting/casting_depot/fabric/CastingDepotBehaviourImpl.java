@@ -7,6 +7,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBehaviour;
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
 import com.simibubi.create.AllSoundEvents;
@@ -30,6 +32,7 @@ import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.fabricmc.fabric.api.transfer.v1.transaction.base.SnapshotParticipant;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -43,6 +46,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 @SuppressWarnings("UnstableApiUsage")
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
 public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 
 	TransportedItemStack heldItem;
@@ -128,7 +133,6 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 		BlockPos pos = blockEntity.getBlockPos();
 
 		if (world.isClientSide) return;
-		if (handleBeltFunnelOutput()) return;
 
 		BeltProcessingBehaviour
 				processingBehaviour =
@@ -170,10 +174,11 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 		return diff < 1 / 16f;
 	}
 
-	private boolean handleBeltFunnelOutput() {
+	@Override
+	protected void handleBeltFunnelOutput() {
 		BlockState funnel = getWorld().getBlockState(getPos().above());
 		Direction funnelFacing = AbstractFunnelBlock.getFunnelFacing(funnel);
-		if (funnelFacing == null || !canFunnelsPullFrom.test(funnelFacing.getOpposite())) return false;
+		if (funnelFacing == null || !canFunnelsPullFrom.test(funnelFacing.getOpposite())) return;
 
 		for (int slot = 0; slot < processingOutputBuffer.getSlotCount(); slot++) {
 			ItemStack previousItem = processingOutputBuffer.getStackInSlot(slot);
@@ -183,32 +188,32 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 					blockEntity
 							.getBehaviour(DirectBeltInputBehaviour.TYPE)
 							.tryExportingToBeltFunnel(previousItem, null, false);
-			if (afterInsert == null) return false;
+			if (afterInsert == null) return;
 			if (previousItem.getCount() != afterInsert.getCount()) {
 				processingOutputBuffer.setStackInSlot(slot, afterInsert);
 				blockEntity.notifyUpdate();
-				return true;
+				return;
 			}
 		}
 
 		ItemStack previousItem = heldItem.stack;
 		if (previousItem.isEmpty()) { // fabric: this is not allowed
-			return false;
+			return;
 		}
 		ItemStack
 				afterInsert =
 				blockEntity
 						.getBehaviour(DirectBeltInputBehaviour.TYPE)
 						.tryExportingToBeltFunnel(previousItem, null, false);
-		if (afterInsert == null) return false;
+		if (afterInsert == null) return;
 		if (previousItem.getCount() != afterInsert.getCount()) {
 			if (afterInsert.isEmpty()) heldItem = null;
 			else heldItem.stack = afterInsert;
 			blockEntity.notifyUpdate();
-			return true;
+			return;
 		}
 
-		return false;
+		return;
 	}
 
 	@Override
@@ -246,6 +251,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 		}
 	}
 
+	@Override
 	public void addSubBehaviours(List<BlockEntityBehaviour> behaviours) {
 		behaviours.add(new DirectBeltInputBehaviour(blockEntity)
 				.allowingBeltFunnels()
@@ -428,6 +434,10 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 
 	public boolean isItemValid(ItemStack stack) {
 		return acceptedItems.test(stack);
+	}
+
+	public static CastingDepotBehaviour of(CastingDepotBlockEntity be, BehaviourType<CastingDepotBehaviour> type) {
+		return new CastingDepotBehaviourImpl(be, type);
 	}
 
 

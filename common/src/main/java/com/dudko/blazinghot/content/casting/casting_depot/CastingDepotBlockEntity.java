@@ -6,6 +6,8 @@ import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.createmod.catnip.lang.LangBuilder;
@@ -17,8 +19,12 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 
 public abstract class CastingDepotBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
+
+	protected SmartFluidTankBehaviour tank;
+	protected CastingDepotBehaviour inputBehaviour;
 
 	protected CastingDepotBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -29,17 +35,22 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 		throw new AssertionError();
 	}
 
-	public abstract void onMoldUpdate();
-
 	@Override
 	public void sendData() {
 		super.sendData();
-		onMoldUpdate();
 	}
 
 	@Override
 	public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
 		return moldTooltip(tooltip, isPlayerSneaking);
+	}
+
+	@Override
+	public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+		behaviours.add(inputBehaviour = CastingDepotBehaviour.of(this, CastingDepotBehaviour.INPUT));
+		inputBehaviour.addSubBehaviours(behaviours);
+
+		behaviours.add(SpoutCastingBehaviour.of(this));
 	}
 
 	@SuppressWarnings("SameReturnValue")
@@ -85,5 +96,15 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 
 	public abstract ItemStack getHeldItem();
 
+	public abstract ItemStack getOutputItem();
+
 	public abstract float getCoolingSpeed();
+
+	public abstract void setFluid(Fluid fluid, long amount);
+
+	public abstract void resetFluid();
+
+	public SmartFluidTankBehaviour getTank() {
+		return tank;
+	}
 }

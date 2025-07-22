@@ -1,9 +1,12 @@
 package com.dudko.blazinghot.content.casting.casting_depot;
 
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.simibubi.create.content.kinetics.belt.behaviour.TransportedItemStackHandlerBehaviour;
 import com.simibubi.create.content.kinetics.fan.processing.AllFanProcessingTypes;
@@ -11,11 +14,15 @@ import com.simibubi.create.content.kinetics.fan.processing.FanProcessingType;
 import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 
+import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
-public class CastingDepotBehaviour extends BlockEntityBehaviour {
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+public abstract class CastingDepotBehaviour extends BlockEntityBehaviour {
 
 	public static final BehaviourType<CastingDepotBehaviour> INPUT = new BehaviourType<>("Input");
 	public static final BehaviourType<CastingDepotBehaviour> OUTPUT = new BehaviourType<>("Output");
@@ -30,6 +37,8 @@ public class CastingDepotBehaviour extends BlockEntityBehaviour {
 
 	protected BehaviourType<CastingDepotBehaviour> behaviourType;
 
+	public ItemStack heldStack;
+
 	public CastingDepotBehaviour(CastingDepotBlockEntity be, BehaviourType<CastingDepotBehaviour> type) {
 		super(be);
 		maxStackSize = () -> 1;
@@ -42,10 +51,19 @@ public class CastingDepotBehaviour extends BlockEntityBehaviour {
 		allowMerge = false;
 	}
 
+	@ExpectPlatform
+	public static CastingDepotBehaviour of(CastingDepotBlockEntity be, BehaviourType<CastingDepotBehaviour> type) {
+		throw new AssertionError();
+	}
+
+	public abstract void addSubBehaviours(List<BlockEntityBehaviour> behaviours);
+
 	@Override
 	public BehaviourType<?> getType() {
 		return behaviourType;
 	}
+
+	protected abstract void handleBeltFunnelOutput();
 
 
 	// TODO: config for these

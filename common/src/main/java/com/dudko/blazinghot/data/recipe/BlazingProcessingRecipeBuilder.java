@@ -113,8 +113,8 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 
 	public BlazingProcessingRecipeBuilder<T> castingDuration(long fluidAmount) {
 		// TODO: config for these
-		float coolingFactor = 1.5f;
-		int baseDuration = 200;
+		float coolingFactor = 2f;
+		int baseDuration = 50;
 		int duration = (int) (fluidAmount / MultiAmount.INGOT.get()) * baseDuration;
 		return duration(duration).coolingDuration((int) (duration * coolingFactor));
 	}
