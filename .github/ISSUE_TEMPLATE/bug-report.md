@@ -7,29 +7,38 @@ assignees: ''
 
 ---
 
-**Describe the bug**
+#### Describe the bug
+
 A clear and concise description of what the bug is.
 
-**To Reproduce**
+#### To Reproduce
+
 Steps to reproduce the behavior:
 
-**Expected behavior**
+#### Expected behavior
+
 A clear and concise description of what you expected to happen.
 
-**Minecraft version**
+#### Minecraft version
+
 The version of Minecraft that you're running the mod on.
 
-**Mod version**
+#### Mod version
+
 The version of the mod that the bug occurs in.
 
-**Mod loader**
+#### Mod loader
+
 The mod loader that you're running the mod on.
 
-**Environment**
+#### Environment
+
 The environment the bug occurs in (Singleplayer, Multiplayer)
 
-**Screenshots**
+#### Screenshots
+
 If applicable, add screenshots to help explain your problem.
 
-**Additional context**
+#### Additional context
+
 Add any other context about the problem here, e.g. logs and crash report if your game has crashed.
