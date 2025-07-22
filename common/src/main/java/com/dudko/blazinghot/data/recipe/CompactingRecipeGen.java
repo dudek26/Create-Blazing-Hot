@@ -21,6 +21,7 @@ public class CompactingRecipeGen extends BlazingProcessingRecipeGen {
 		super(output);
 	}
 
+	// TODO: remove after implementing casting
 	List<GeneratedRecipe>
 			ALL_MOLTEN_COMPACTING_RECIPES =
 			ALL

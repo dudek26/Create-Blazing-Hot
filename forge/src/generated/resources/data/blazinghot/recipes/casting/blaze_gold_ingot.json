@@ -1,6 +1,6 @@
 {
   "type": "blazinghot:casting",
-  "coolingDuration": 0,
+  "coolingDuration": 300,
   "ingredients": [
     {
       "item": "blazinghot:sturdy_ingot_mold"
@@ -10,6 +10,7 @@
       "fluidTag": "forge:molten_blaze_gold"
     }
   ],
+  "keepItem": true,
   "processingTime": 200,
   "results": [
     {

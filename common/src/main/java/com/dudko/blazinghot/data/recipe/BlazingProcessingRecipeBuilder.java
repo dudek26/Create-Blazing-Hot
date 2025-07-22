@@ -147,7 +147,11 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 	}
 
 	public void build(Consumer<FinishedRecipe> consumer) {
-		consumer.accept(new BlazingDataGenResult<>(build(), params.fuel, params.coolingDuration, params.conditions));
+		consumer.accept(new BlazingDataGenResult<>(build(),
+				params.fuel,
+				params.coolingDuration,
+				params.keepHeldItem,
+				params.conditions));
 	}
 
 	@ExpectPlatform
@@ -346,9 +350,10 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 		private final S recipe;
 		private final FluidIngredient fuel;
 		private final int coolingDuration;
+		private final boolean keepItem;
 
 		@SuppressWarnings("unchecked")
-		public BlazingDataGenResult(S recipe, FluidIngredient fuel, int coolingDuration, List<LoadCondition<?>> conditions) {
+		public BlazingDataGenResult(S recipe, FluidIngredient fuel, int coolingDuration, boolean keepItem, List<LoadCondition<?>> conditions) {
 			this.recipe = recipe;
 			this.recipeConditions.addAll(conditions);
 			IRecipeTypeInfo recipeType = this.recipe.getTypeInfo();
@@ -364,12 +369,14 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 
 			this.fuel = fuel;
 			this.coolingDuration = coolingDuration;
+			this.keepItem = keepItem;
 		}
 
 		@Override
 		public void serializeRecipeData(JsonObject json) {
 			if (fuel != null && fuel != FluidIngredient.EMPTY) json.add("mixerFuel", fuel.serialize());
 			if (coolingDuration > 0) json.addProperty("coolingDuration", coolingDuration);
+			if (keepItem) json.addProperty("keepItem", true);
 
 			serializer.write(json, recipe);
 

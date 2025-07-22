@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-22T15:10:22.5546184	Create: Blazing Hot/Blazing Hot Processing Recipes
+// 1.20.1	2025-07-22T16:05:31.3562731	Create: Blazing Hot/Blazing Hot Processing Recipes
 62108726c3709936746a7f1d3e8a8cd2d99d8114 data\blazinghot\recipes\blaze_mixing\melting\copper_plates.json
 1bf50b0afa7704c76d8c4fe78618089fe4d9f502 data\blazinghot\recipes\compacting\molten_brass.json
 71920abad5da1549342ae207050e78a7d2c39a64 data\blazinghot\recipes\mixing\melting\zinc_plates.json
@@ -79,7 +79,7 @@ abebbb9a2485403272795cd4eafe896ac5e1ec68 data\blazinghot\recipes\deploying\stell
 ac2f83a42b0445ab93b8d61bebef5f4f494793c7 data\blazinghot\recipes\blaze_mixing\melting\iron_rods.json
 e1a28f62bbf63ac1e04171a12542a9152ae00a57 data\blazinghot\recipes\filling\brass_carrot.json
 10d9e8a861f81fba81d3a34ffef252d35c9a2ea3 data\blazinghot\recipes\milling\stone.json
-dcb71a8cf963d63b3431f5ddfb52b05f734a8c08 data\blazinghot\recipes\casting\blaze_gold_ingot.json
+01e0b5b68229f9662db090e4fc19a41553d831a9 data\blazinghot\recipes\casting\blaze_gold_ingot.json
 bfbf229fd5f14cae4d3640a113e54bc306ea25ca data\blazinghot\recipes\deploying\stellar_blaze_apple.json
 ecefadb5b150d20f6bb5502648f282f2c68913d2 data\blazinghot\recipes\mixing\molten_blaze_gold.json
 8acf998f8c951189eaa376ccdbdbda4fa8408061 data\blazinghot\recipes\mixing\melting\iron_nuggets.json

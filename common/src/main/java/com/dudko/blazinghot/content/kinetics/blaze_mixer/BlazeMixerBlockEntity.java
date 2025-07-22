@@ -49,7 +49,6 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
-@SuppressWarnings("UnstableApiUsage")
 public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements IHaveGoggleInformation {
 
 	protected static final Object shapelessOrMixingRecipesKey = new Object();

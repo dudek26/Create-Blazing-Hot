@@ -10,6 +10,7 @@
       "fluidTag": "c:molten_blaze_gold"
     }
   ],
+  "keepItem": true,
   "processingTime": 200,
   "results": [
     {

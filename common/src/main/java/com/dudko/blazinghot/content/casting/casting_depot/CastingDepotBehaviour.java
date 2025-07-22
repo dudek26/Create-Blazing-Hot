@@ -39,6 +39,7 @@ public class CastingDepotBehaviour extends BlockEntityBehaviour {
 		onHeldInserted = $ -> {
 		};
 		behaviourType = type;
+		allowMerge = false;
 	}
 
 	@Override

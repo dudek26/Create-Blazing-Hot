@@ -18,6 +18,7 @@ import net.minecraftforge.items.wrapper.RecipeWrapper;
 public class CastingRecipe extends ProcessingRecipe<RecipeWrapper> {
 
 	protected int coolingDuration;
+	protected boolean keepItem;
 
 	@Override
 	public boolean matches(RecipeWrapper container, Level level) {
@@ -52,29 +53,34 @@ public class CastingRecipe extends ProcessingRecipe<RecipeWrapper> {
 
 	public CastingRecipe(ProcessingRecipeParams params) {
 		super(BlazingRecipeTypes.CASTING.get(), params);
+		coolingDuration = 0;
+		keepItem = false;
 	}
 
 	@Override
 	public void writeAdditional(JsonObject json) {
-		json.addProperty("coolingDuration", coolingDuration);
+		if (coolingDuration > 0) json.addProperty("coolingDuration", coolingDuration);
+		if (keepItem) json.addProperty("keepItem", true);
 	}
 
 	@Override
 	public void writeAdditional(FriendlyByteBuf buffer) {
 		super.writeAdditional(buffer);
 		buffer.writeVarInt(coolingDuration);
+		buffer.writeBoolean(keepItem);
 	}
 
 	@Override
 	public void readAdditional(JsonObject json) {
+		super.readAdditional(json);
 		if (!json.has("coolingDuration")) coolingDuration = json.get("coolingDuration").getAsInt();
 		else coolingDuration = 0;
-		super.readAdditional(json);
 	}
 
 	@Override
 	public void readAdditional(FriendlyByteBuf buffer) {
 		super.readAdditional(buffer);
 		coolingDuration = buffer.readVarInt();
+		keepItem = buffer.readBoolean();
 	}
 }
