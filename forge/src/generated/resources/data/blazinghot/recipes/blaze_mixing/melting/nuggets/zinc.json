@@ -1,15 +1,15 @@
 {
   "type": "blazinghot:blaze_mixing",
-  "blazinghot:fuel": {
-    "amount": 16,
-    "fluidTag": "blazinghot:blaze_mixer_fuel"
-  },
   "heatRequirement": "superheated",
   "ingredients": [
     {
       "tag": "forge:nuggets/zinc"
     }
   ],
+  "mixerFuel": {
+    "amount": 16,
+    "fluidTag": "blazinghot:blaze_mixer_fuel"
+  },
   "processingTime": 65,
   "results": [
     {

@@ -1,9 +1,5 @@
 {
   "type": "blazinghot:blaze_mixing",
-  "blazinghot:fuel": {
-    "amount": 50,
-    "fluidTag": "blazinghot:blaze_mixer_fuel"
-  },
   "heatRequirement": "superheated",
   "ingredients": [
     {
@@ -17,6 +13,10 @@
       "fluidTag": "forge:molten_gold"
     }
   ],
+  "mixerFuel": {
+    "amount": 50,
+    "fluidTag": "blazinghot:blaze_mixer_fuel"
+  },
   "processingTime": 200,
   "results": [
     {

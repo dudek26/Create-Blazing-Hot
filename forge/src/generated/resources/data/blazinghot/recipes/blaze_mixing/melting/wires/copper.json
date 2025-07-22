@@ -1,9 +1,5 @@
 {
   "type": "blazinghot:blaze_mixing",
-  "blazinghot:fuel": {
-    "amount": 62,
-    "fluidTag": "blazinghot:blaze_mixer_fuel"
-  },
   "conditions": [
     {
       "type": "forge:mod_loaded",
@@ -16,6 +12,10 @@
       "tag": "forge:wires/copper"
     }
   ],
+  "mixerFuel": {
+    "amount": 62,
+    "fluidTag": "blazinghot:blaze_mixer_fuel"
+  },
   "processingTime": 250,
   "results": [
     {

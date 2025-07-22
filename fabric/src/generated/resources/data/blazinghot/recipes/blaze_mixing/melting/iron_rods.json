@@ -8,16 +8,16 @@
     }
   ],
   "type": "blazinghot:blaze_mixing",
-  "blazinghot:fuel": {
-    "amount": 5063,
-    "fluidTag": "blazinghot:blaze_mixer_fuel"
-  },
   "heatRequirement": "superheated",
   "ingredients": [
     {
       "tag": "c:iron_rods"
     }
   ],
+  "mixerFuel": {
+    "amount": 5063,
+    "fluidTag": "blazinghot:blaze_mixer_fuel"
+  },
   "processingTime": 250,
   "results": [
     {

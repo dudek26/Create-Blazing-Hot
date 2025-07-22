@@ -4,14 +4,17 @@ Create: Blazing Hot 0.7
 
 ### Added:
 
+* Casting Depot and casting mechanics
+* Sturdy Alloy and Sturdy Casing
 * Nether Dough
 * Blaze Roll - a new superheating fuel for Blaze Burners
-* Sturdy Alloy and Sturdy Casing
 
 ### Changed:
 
 * Updated Blaze Mixer's item description
 * Updated texture for Nether Compound
+* Fluids in recipes now use amounts appropriate for their platform (Forge - mb, Fabric - droplets)
+* Renamed `blazinghot:fuel` to `mixerFuel` in Blaze Mixing recipes
 
 ### Fixed:
 

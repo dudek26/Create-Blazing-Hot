@@ -2,7 +2,8 @@ package com.dudko.blazinghot.content.casting.casting_depot.forge;
 
 import java.util.List;
 
-import com.dudko.blazinghot.content.item.MoldItem;
+import javax.annotation.Nullable;
+
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 
@@ -34,8 +35,8 @@ public class CastingBySpout {
 		}
 		return -1;
 	}
-	
-	public static ItemStack getCastingResult(Level world, int requiredAmount, ItemStack stack, FluidStack availableFluid) {
+
+	public static CastingRecipe findRecipe(Level world, int requiredAmount, ItemStack stack, FluidStack availableFluid) {
 		FluidStack toCast = availableFluid.copy();
 		toCast.setAmount(requiredAmount);
 
@@ -49,14 +50,18 @@ public class CastingBySpout {
 			FluidIngredient requiredFluid = cr.getRequiredFluid();
 			if (requiredFluid.test(toCast)) castingRecipe = cr;
 		}
-		if (castingRecipe == null) return null;
-		List<ItemStack> results = castingRecipe.rollResults();
+		return castingRecipe;
+	}
+
+	public static ItemStack getCastingResult(@Nullable CastingRecipe recipe) {
+		if (recipe == null) return null;
+		List<ItemStack> results = recipe.rollResults();
 		return results.isEmpty() ? ItemStack.EMPTY : results.get(0);
 	}
 
-	public static void finishCasting(int requiredAmount, ItemStack stack, FluidStack availableFluid) {
-		availableFluid.shrink(requiredAmount);
-		if (stack.getItem() instanceof MoldItem mold && mold.reusable) return;
+	public static void finishCasting(CastingRecipe recipe, ItemStack stack, FluidStack availableFluid) {
+		availableFluid.shrink(recipe.getRequiredFluid().getRequiredAmount());
+		// TODO: add mold consuming
 		stack.shrink(1);
 	}
 }

@@ -45,6 +45,7 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 		GENERATORS.add(new HauntingRecipeGen(output));
 		GENERATORS.add(new ItemApplicationRecipeGen(output));
 		GENERATORS.add(new BlazeMixingRecipeGen(output));
+		GENERATORS.add(new CastingRecipeGen(output));
 
 		return new DataProvider() {
 

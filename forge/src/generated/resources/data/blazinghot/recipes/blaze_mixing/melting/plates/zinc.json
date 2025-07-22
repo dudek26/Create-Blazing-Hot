@@ -1,9 +1,5 @@
 {
   "type": "blazinghot:blaze_mixing",
-  "blazinghot:fuel": {
-    "amount": 100,
-    "fluidTag": "blazinghot:blaze_mixer_fuel"
-  },
   "conditions": [
     {
       "type": "forge:not",
@@ -19,6 +15,10 @@
       "tag": "forge:plates/zinc"
     }
   ],
+  "mixerFuel": {
+    "amount": 100,
+    "fluidTag": "blazinghot:blaze_mixer_fuel"
+  },
   "processingTime": 400,
   "results": [
     {

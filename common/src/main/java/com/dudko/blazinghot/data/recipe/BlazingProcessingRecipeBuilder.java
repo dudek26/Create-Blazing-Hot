@@ -102,8 +102,25 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 		return this;
 	}
 
+	public BlazingProcessingRecipeBuilder<T> coolingDuration(int ticks) {
+		params.coolingDuration = ticks;
+		return this;
+	}
+
 	public BlazingProcessingRecipeBuilder<T> averageProcessingDuration() {
 		return duration(100);
+	}
+
+	public BlazingProcessingRecipeBuilder<T> castingDuration(long fluidAmount) {
+		// TODO: config for these
+		float coolingFactor = 1.5f;
+		int baseDuration = 200;
+		int duration = (int) (fluidAmount / MultiAmount.INGOT.get()) * baseDuration;
+		return duration(duration).coolingDuration((int) (duration * coolingFactor));
+	}
+
+	public BlazingProcessingRecipeBuilder<T> castingDuration(MultiAmount amount) {
+		return castingDuration(amount.get());
 	}
 
 	public BlazingProcessingRecipeBuilder<T> requiresHeat(HeatCondition condition) {
@@ -130,7 +147,7 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 	}
 
 	public void build(Consumer<FinishedRecipe> consumer) {
-		consumer.accept(new BlazingDataGenResult<>(build(), params.fuel, params.conditions));
+		consumer.accept(new BlazingDataGenResult<>(build(), params.fuel, params.coolingDuration, params.conditions));
 	}
 
 	@ExpectPlatform
@@ -279,9 +296,13 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 		return this;
 	}
 
-	public BlazingProcessingRecipeBuilder<T> toolNotConsumed() {
-		params.keepHeldItem = true;
+	public BlazingProcessingRecipeBuilder<T> toolNotConsumed(boolean bool) {
+		params.keepHeldItem = bool;
 		return this;
+	}
+
+	public BlazingProcessingRecipeBuilder<T> toolNotConsumed() {
+		return toolNotConsumed(true);
 	}
 
 	public static class BlazingProcessingRecipeParams {
@@ -292,6 +313,7 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 		public NonNullList<FluidIngredient> fluidIngredients;
 		public NonNullList<MultiFluidStack> fluidResults;
 		public int processingDuration;
+		public int coolingDuration;
 		public HeatCondition requiredHeat;
 
 		public FluidIngredient fuel;
@@ -306,6 +328,7 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 			fluidIngredients = NonNullList.create();
 			fluidResults = NonNullList.create();
 			processingDuration = 0;
+			coolingDuration = 0;
 			requiredHeat = HeatCondition.NONE;
 			keepHeldItem = false;
 			fuel = FluidIngredient.EMPTY;
@@ -322,9 +345,10 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 		private final ResourceLocation id;
 		private final S recipe;
 		private final FluidIngredient fuel;
+		private final int coolingDuration;
 
 		@SuppressWarnings("unchecked")
-		public BlazingDataGenResult(S recipe, FluidIngredient fuel, List<LoadCondition<?>> conditions) {
+		public BlazingDataGenResult(S recipe, FluidIngredient fuel, int coolingDuration, List<LoadCondition<?>> conditions) {
 			this.recipe = recipe;
 			this.recipeConditions.addAll(conditions);
 			IRecipeTypeInfo recipeType = this.recipe.getTypeInfo();
@@ -339,11 +363,13 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 			this.serializer = (ProcessingRecipeSerializer<S>) recipe.getSerializer();
 
 			this.fuel = fuel;
+			this.coolingDuration = coolingDuration;
 		}
 
 		@Override
 		public void serializeRecipeData(JsonObject json) {
-			if (fuel != null && fuel != FluidIngredient.EMPTY) json.add("blazinghot:fuel", fuel.serialize());
+			if (fuel != null && fuel != FluidIngredient.EMPTY) json.add("mixerFuel", fuel.serialize());
+			if (coolingDuration > 0) json.addProperty("coolingDuration", coolingDuration);
 
 			serializer.write(json, recipe);
 

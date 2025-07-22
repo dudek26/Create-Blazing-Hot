@@ -1,15 +1,15 @@
 {
   "type": "blazinghot:blaze_mixing",
-  "blazinghot:fuel": {
-    "amount": 16200,
-    "fluidTag": "blazinghot:blaze_mixer_fuel"
-  },
   "heatRequirement": "superheated",
   "ingredients": [
     {
       "item": "minecraft:netherite_scrap"
     }
   ],
+  "mixerFuel": {
+    "amount": 16200,
+    "fluidTag": "blazinghot:blaze_mixer_fuel"
+  },
   "processingTime": 800,
   "results": [
     {

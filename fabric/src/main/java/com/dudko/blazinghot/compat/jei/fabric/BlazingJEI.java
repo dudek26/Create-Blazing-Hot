@@ -75,7 +75,7 @@ public class BlazingJEI implements IModPlugin {
 		CreateRecipeCategory<?>
 				blazeMixing =
 				builder(BasinRecipe.class)
-						.addTypedRecipes(BlazingRecipeTypes.BLAZE_MIXING)
+						.addTypedRecipes(BlazingRecipeTypes.BLAZE_MIXING.get())
 						.addTypedRecipesExcluding(AllRecipeTypes.MIXING::getType,
 								BlazingRecipeTypes.BLAZE_MIXING::getType)
 						.catalyst(BlazingBlocks.BLAZE_MIXER::get)
