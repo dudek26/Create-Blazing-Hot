@@ -24,7 +24,8 @@ import net.minecraft.world.level.material.Fluid;
 public abstract class CastingDepotBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
 	protected SmartFluidTankBehaviour tank;
-	protected CastingDepotBehaviour inputBehaviour;
+	protected CastingDepotBehaviour depotBehaviour;
+	protected CastingDepotBehaviour outputBehaviour;
 
 	protected CastingDepotBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -47,8 +48,8 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 
 	@Override
 	public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-		behaviours.add(inputBehaviour = CastingDepotBehaviour.of(this, CastingDepotBehaviour.INPUT));
-		inputBehaviour.addSubBehaviours(behaviours);
+		behaviours.add(depotBehaviour = CastingDepotBehaviour.of(this, CastingDepotBehaviour.TYPE));
+		depotBehaviour.addSubBehaviours(behaviours);
 
 		behaviours.add(SpoutCastingBehaviour.of(this));
 	}
@@ -97,6 +98,8 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 	public abstract ItemStack getHeldItem();
 
 	public abstract ItemStack getOutputItem();
+
+	public abstract void setOutputItem(ItemStack stack);
 
 	public abstract float getCoolingSpeed();
 

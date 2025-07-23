@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.content.casting.casting_depot.forge;
 
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBehaviour;
+import com.dudko.blazinghot.content.casting.casting_depot.SpoutCastingBehaviour;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.logistics.box.PackageEntity;
@@ -27,27 +28,47 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class CastingDepotBlockMethodsImpl {
 
-	protected static CastingDepotBehaviourImpl get(BlockGetter worldIn, BlockPos pos) {
-		return (CastingDepotBehaviourImpl) BlockEntityBehaviour.get(worldIn, pos, CastingDepotBehaviour.INPUT);
+	protected static CastingDepotBehaviourImpl getDepotBehaviour(BlockGetter worldIn, BlockPos pos) {
+		return (CastingDepotBehaviourImpl) BlockEntityBehaviour.get(worldIn, pos, CastingDepotBehaviour.TYPE);
+	}
+
+	protected static SpoutCastingBehaviour getSpoutingBehaviour(BlockGetter worldIn, BlockPos pos) {
+		return BlockEntityBehaviour.get(worldIn, pos, SpoutCastingBehaviour.TYPE);
 	}
 
 	public static InteractionResult onUse(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult ray) {
 		if (ray.getDirection() != Direction.UP) return InteractionResult.PASS;
 		if (world.isClientSide) return InteractionResult.SUCCESS;
 
-		CastingDepotBehaviourImpl behaviour = get(world, pos);
-		if (behaviour == null) return InteractionResult.PASS;
+		CastingDepotBehaviourImpl behaviour = getDepotBehaviour(world, pos);
+		SpoutCastingBehaviour castingBehaviour = getSpoutingBehaviour(world, pos);
+		if (behaviour == null || castingBehaviour == null) return InteractionResult.PASS;
 		if (!behaviour.canAcceptItems.get()) return InteractionResult.SUCCESS;
 
 		ItemStack heldItem = player.getItemInHand(hand);
 		boolean wasEmptyHanded = heldItem.isEmpty();
 		boolean shouldntPlaceItem = AllBlocks.MECHANICAL_ARM.isIn(heldItem);
+		boolean isCooling = castingBehaviour.getState() == SpoutCastingBehaviour.State.COOLING;
+		boolean extracted = false;
+
+		ItemStackHandler outputs = behaviour.processingOutputBuffer;
+		for (int i = 0; i < outputs.getSlots(); i++) {
+			ItemStack outputStack = outputs.extractItem(i, 64, false);
+			if (!outputStack.isEmpty()) extracted = true;
+			player.getInventory().placeItemBackInInventory(outputStack);
+		}
+
+		if (isCooling) return InteractionResult.PASS;
 
 		ItemStack mainItemStack = behaviour.getHeldItemStack();
-		if (!mainItemStack.isEmpty()) {
+		if (!mainItemStack.isEmpty() && !extracted) {
 			if (!player.getItemInHand(hand).isEmpty()) return InteractionResult.SUCCESS;
 			player.getInventory().placeItemBackInInventory(mainItemStack);
 			behaviour.removeHeldStack();
+			extracted = true;
+		}
+
+		if (extracted) {
 			world.playSound(null,
 					pos,
 					SoundEvents.ITEM_PICKUP,
@@ -55,9 +76,6 @@ public class CastingDepotBlockMethodsImpl {
 					.2f,
 					1f + world.getRandom().nextFloat());
 		}
-		ItemStackHandler outputs = behaviour.processingOutputBuffer;
-		for (int i = 0; i < outputs.getSlots(); i++)
-			player.getInventory().placeItemBackInInventory(outputs.extractItem(i, 64, false));
 
 		if (!wasEmptyHanded && !shouldntPlaceItem) {
 			behaviour.setHeldStack(heldItem.copyWithCount(1));
@@ -76,8 +94,10 @@ public class CastingDepotBlockMethodsImpl {
 		if (entityIn.level().isClientSide) return;
 
 		BlockPos pos = entityIn.blockPosition();
-		CastingDepotBehaviourImpl behaviour = get(worldIn, pos);
-		if (behaviour == null) return;
+		CastingDepotBehaviourImpl behaviour = getDepotBehaviour(worldIn, pos);
+		SpoutCastingBehaviour castingBehaviour = getSpoutingBehaviour(worldIn, pos);
+		if (behaviour == null || castingBehaviour == null) return;
+		if (castingBehaviour.getState() != SpoutCastingBehaviour.State.NONE) return;
 
 		if (behaviour.getHeldItemStack() != ItemStack.EMPTY) return;
 

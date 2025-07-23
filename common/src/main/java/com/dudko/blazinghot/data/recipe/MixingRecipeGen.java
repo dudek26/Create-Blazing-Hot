@@ -139,7 +139,7 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
 						form.amount,
 						form.processingTime * 3,
 						metal.getLoadConditions())));
-		for (Forms optional : metal.optionalForms) {
+		for (Forms optional : metal.optionalForms.keySet()) {
 			if (!optional.mechanicalMixerMeltable) continue;
 			List<LoadCondition<?>> conditions = new ArrayList<>(metal.getLoadConditions());
 			conditions.add(DefaultLoadConditions.tagsPopulated(optional.tag(metal)));

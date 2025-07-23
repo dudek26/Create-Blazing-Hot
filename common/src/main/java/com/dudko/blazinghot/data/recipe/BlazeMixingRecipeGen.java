@@ -105,7 +105,7 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 						form.processingTime,
 						form.fuelCost,
 						metal.getLoadConditions())));
-		for (Forms optional : metal.optionalForms) {
+		for (Forms optional : metal.optionalForms.keySet()) {
 			List<LoadCondition<?>> conditions = new ArrayList<>(metal.getLoadConditions());
 			conditions.add(DefaultLoadConditions.tagsPopulated(optional.tag(metal)));
 			recipes.add(melting(optional.tag(metal),

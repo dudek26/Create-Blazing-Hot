@@ -29,4 +29,9 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 		return 0;
 	}
 
+	@Override
+	public void reset() {
+
+	}
+
 }

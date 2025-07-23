@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-22T21:17:05.1906405	Create: Blazing Hot/Registrate Provider for blazinghot [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2025-07-23T23:34:22.6014213	Create: Blazing Hot/Registrate Provider for blazinghot [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 35582f6a39b31bd602ad24eee06054776b007cff data\blazinghot\advancements\recipes\redstone\stonecutting\modern_lamp_panel\black_modern_lamp_quad_panel.json
 a590a23b122c283991ff608a5b63fd42a560c2ba assets\blazinghot\models\block\molten_iron.json
 9d9ca79d0346d4828cb340467d0fd622fcdeca3f data\blazinghot\recipes\crafting\modern_lamp\block\orange_modern_lamp_from_other_lamps.json
@@ -579,8 +579,8 @@ c1767b8a04e6ffe0c445c730aeb00f68c42a4936 assets\blazinghot\blockstates\black_mod
 6a973e2ff7c1e0496fce712719f798d9ba56cbab assets\blazinghot\models\item\sturdy_sheet_mold.json
 0efd1a201c58961b78bb80cd2de9047463307d69 data\blazinghot\recipes\crafting\modern_lamp\green_modern_lamp_from_stained_glass.json
 c38c004e91865e57eb5577dbcfa0b93124d29b57 assets\blazinghot\blockstates\brown_modern_lamp.json
-c545dbe118faf899f63128869b5f5be18a98d43c data\blazinghot\recipes\stonecutting\modern_lamp_panel\brown_modern_lamp_quad_panel.json
 f17b3058162f84630f66f6bcb0d25923b445eff7 data\blazinghot\recipes\stonecutting\modern_lamp_panel\black_modern_lamp_quad_panel.json
+c545dbe118faf899f63128869b5f5be18a98d43c data\blazinghot\recipes\stonecutting\modern_lamp_panel\brown_modern_lamp_quad_panel.json
 a3c4fe93317f698018e7c8643383cbea83cf5b03 data\blazinghot\recipes\stonecutting\modern_lamp\green_modern_lamp_panel_from_block.json
 8a5925948554f1b091d32cc39bd3c4a67f22289a data\blazinghot\advancements\recipes\redstone\crafting\modern_lamp\block\white_modern_lamp_from_other_lamp.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\c\tags\items\cyan_dyes.json

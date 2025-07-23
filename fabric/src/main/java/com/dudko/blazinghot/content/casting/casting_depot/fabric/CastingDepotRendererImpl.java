@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 @SuppressWarnings("UnstableApiUsage")
 public class CastingDepotRendererImpl {
 
-	public static void renderFluid(CastingDepotBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
+	public static void renderFluid(CastingDepotBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light) {
 		SmartFluidTankBehaviour behaviour = be.getBehaviour(SmartFluidTankBehaviour.TYPE);
 		float totalUnits = behaviour.getPrimaryTank().getTotalUnits(partialTicks);
 		if (totalUnits < 1) return;

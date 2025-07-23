@@ -1,6 +1,6 @@
 {
   "type": "blazinghot:casting",
-  "coolingDuration": 100,
+  "coolingDuration": 150,
   "ingredients": [
     {
       "item": "blazinghot:sturdy_ingot_mold"

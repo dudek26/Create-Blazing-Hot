@@ -5,9 +5,6 @@
       "item": "blazinghot:nether_dough"
     },
     {
-      "item": "blazinghot:nether_dough"
-    },
-    {
       "amount": 250,
       "fluid": "minecraft:lava",
       "nbt": {}

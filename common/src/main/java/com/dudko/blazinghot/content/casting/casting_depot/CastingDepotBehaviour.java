@@ -24,8 +24,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 @ParametersAreNonnullByDefault
 public abstract class CastingDepotBehaviour extends BlockEntityBehaviour {
 
-	public static final BehaviourType<CastingDepotBehaviour> INPUT = new BehaviourType<>("Input");
-	public static final BehaviourType<CastingDepotBehaviour> OUTPUT = new BehaviourType<>("Output");
+	public static final BehaviourType<CastingDepotBehaviour> TYPE = new BehaviourType<>();
 	public TransportedItemStackHandlerBehaviour transportedHandler;
 	public Supplier<Integer> maxStackSize;
 	public Supplier<Boolean> canAcceptItems;

@@ -46,7 +46,7 @@ public abstract class AirCurrentMixin {
 			FanProcessingType segmentType = self.getTypeAt(i - 1);
 			for (int offset : Iterate.zeroAndOne) {
 				BlockPos pos = start.relative(self.direction, i).below(offset);
-				CastingDepotBehaviour behaviour = BlockEntityBehaviour.get(world, pos, CastingDepotBehaviour.INPUT);
+				CastingDepotBehaviour behaviour = BlockEntityBehaviour.get(world, pos, CastingDepotBehaviour.TYPE);
 				if (behaviour != null) {
 					FanProcessingType type = FanProcessingType.getAt(world, pos);
 					if (type == null) type = segmentType;

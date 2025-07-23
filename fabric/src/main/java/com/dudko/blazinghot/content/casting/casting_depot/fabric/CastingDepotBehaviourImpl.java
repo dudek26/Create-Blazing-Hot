@@ -429,7 +429,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 
 	@Override
 	public BehaviourType<?> getType() {
-		return INPUT;
+		return TYPE;
 	}
 
 	public boolean isItemValid(ItemStack stack) {

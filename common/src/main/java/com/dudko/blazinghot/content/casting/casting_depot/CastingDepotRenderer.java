@@ -27,22 +27,18 @@ public class CastingDepotRenderer extends SafeBlockEntityRenderer<CastingDepotBl
 	@Override
 	protected void renderSafe(CastingDepotBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
 
-		renderFluid(be, partialTicks, ms, buffer, light, overlay);
+		renderFluid(be, partialTicks, ms, buffer, light);
 
-		ms.pushPose();
-		renderItem(be.getLevel(),
-				ms,
-				buffer,
-				light,
-				overlay,
-				be.getHeldItem(),
-				be.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING),
-				-0.05);
-		ms.popPose();
+		Direction direction = be.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
+
+		renderItem(be.getLevel(), ms, buffer, light, overlay, be.getHeldItem(), direction, -0.045);
+		renderItem(be.getLevel(), ms, buffer, light, overlay, be.getOutputItem(), direction, -0.04);
+
 	}
 
 	public static void renderItem(Level level, PoseStack ms, MultiBufferSource buffer, int light, int overlay, ItemStack itemStack, Direction direction, double yOffset) {
 		if (itemStack == null || itemStack.isEmpty()) return;
+		ms.pushPose();
 		ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 		PoseTransformStack msr = TransformStack.of(ms);
 
@@ -52,10 +48,11 @@ public class CastingDepotRenderer extends SafeBlockEntityRenderer<CastingDepotBl
 		msr.rotate(HORIZONTAL_ANGLES.get(direction).floatValue(), Direction.Axis.Z);
 
 		itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, light, overlay, ms, buffer, level, 0);
+		ms.popPose();
 	}
 
 	@ExpectPlatform
-	public static void renderFluid(CastingDepotBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
+	public static void renderFluid(CastingDepotBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light) {
 		throw new AssertionError();
 	}
 

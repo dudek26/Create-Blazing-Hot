@@ -3,6 +3,7 @@ package com.dudko.blazinghot.content.casting.casting_depot.forge;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -46,7 +47,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 
 	public CastingDepotBehaviourImpl(final CastingDepotBlockEntity be, BehaviourType<CastingDepotBehaviour> type) {
 		super(be, type);
-		this.processingOutputBuffer = new ItemStackHandler(8) {
+		this.processingOutputBuffer = new ItemStackHandler(1) {
 			protected void onContentsChanged(int slot) {
 				be.notifyUpdate();
 			}
@@ -202,10 +203,11 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 
 	@Override
 	public void addSubBehaviours(List<BlockEntityBehaviour> behaviours) {
-		behaviours.add((new DirectBeltInputBehaviour(this.blockEntity))
-				.allowingBeltFunnels()
-				.setInsertionHandler(this::tryInsertingFromSide)
-				.considerOccupiedWhen(this::isOccupied));
+		if (Objects.equals(behaviourType.getName(), TYPE.getName()))
+			behaviours.add((new DirectBeltInputBehaviour(this.blockEntity))
+					.allowingBeltFunnels()
+					.setInsertionHandler(this::tryInsertingFromSide)
+					.considerOccupiedWhen(this::isOccupied));
 	}
 
 	public ItemStack getHeldItemStack() {
@@ -382,7 +384,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 	}
 
 	public BehaviourType<?> getType() {
-		return INPUT;
+		return TYPE;
 	}
 
 	public boolean isItemValid(ItemStack stack) {

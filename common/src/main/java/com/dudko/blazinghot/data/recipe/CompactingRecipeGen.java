@@ -1,11 +1,8 @@
 package com.dudko.blazinghot.data.recipe;
 
-import static com.dudko.blazinghot.content.metal.MoltenMetals.ALL;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.ironIngot;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherCompound;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.powderedObsidian;
-
-import java.util.List;
 
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.simibubi.create.AllRecipeTypes;
@@ -20,17 +17,6 @@ public class CompactingRecipeGen extends BlazingProcessingRecipeGen {
 	public CompactingRecipeGen(PackOutput output) {
 		super(output);
 	}
-
-	// TODO: remove after implementing casting
-	List<GeneratedRecipe>
-			ALL_MOLTEN_COMPACTING_RECIPES =
-			ALL
-					.stream()
-					.map(metal -> create(metal.moltenName(),
-							b -> b
-									.require(metal.fluidTag(), metal.compactingResult().getSecond())
-									.output(metal.compactingResult().getFirst())))
-					.toList();
 
 	GeneratedRecipe
 			STURDY_ALLOY =

@@ -30,8 +30,8 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 	public SpoutCastingBehaviour(CastingDepotBlockEntity depot) {
 		super(depot);
 		state = State.NONE;
-		processingTicks = 0;
-		coolingTicks = 0;
+		processingTicks = -1;
+		coolingTicks = -1;
 		castItem = ItemStack.EMPTY;
 		visualFluid = null;
 	}
@@ -75,6 +75,8 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 
 	public abstract int getRecipeProcessingDuration();
 
+	public abstract void reset();
+
 	@Override
 	public void write(CompoundTag nbt, boolean clientPacket) {
 		super.write(nbt, clientPacket);
@@ -88,6 +90,7 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 		if (nbt.contains("CoolingTicks")) coolingTicks = nbt.getFloat("CoolingTicks");
 		if (nbt.contains("State")) state = State.valueOf(nbt.getString("State").toUpperCase());
 	}
+
 
 	public enum State {
 		NONE,

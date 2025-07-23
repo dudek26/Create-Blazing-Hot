@@ -29,7 +29,7 @@ public class Molds {
 	public static class Mold {
 
 		public final String name;
-		public final long capacity;
+		public final long fluidAmount;
 		public final TagKey<Item> shape;
 		public final Map<MoldType, ItemEntry<? extends Item>> items = new HashMap<>();
 
@@ -37,9 +37,9 @@ public class Molds {
 			this(name, 0, null);
 		}
 
-		public Mold(String name, long capacity, TagKey<Item> shape) {
+		public Mold(String name, long fluidAmount, TagKey<Item> shape) {
 			this.name = name;
-			this.capacity = capacity;
+			this.fluidAmount = fluidAmount;
 			this.shape = shape;
 		}
 
@@ -63,6 +63,10 @@ public class Molds {
 			return items.get(type);
 		}
 
+		@Override
+		public String toString() {
+			return name;
+		}
 	}
 
 	public enum MoldType {
@@ -78,6 +82,11 @@ public class Molds {
 			this.tag = tag;
 			this.reusable = reusable;
 			this.fireResistant = fireResistant;
+		}
+
+		@Override
+		public String toString() {
+			return name;
 		}
 	}
 }

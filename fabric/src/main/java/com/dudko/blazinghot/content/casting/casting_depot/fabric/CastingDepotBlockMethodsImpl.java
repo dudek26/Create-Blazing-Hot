@@ -35,7 +35,7 @@ import net.minecraft.world.phys.Vec3;
 public class CastingDepotBlockMethodsImpl {
 
 	protected static CastingDepotBehaviourImpl get(BlockGetter worldIn, BlockPos pos) {
-		return (CastingDepotBehaviourImpl) BlockEntityBehaviour.get(worldIn, pos, CastingDepotBehaviour.INPUT);
+		return (CastingDepotBehaviourImpl) BlockEntityBehaviour.get(worldIn, pos, CastingDepotBehaviour.TYPE);
 	}
 
 	public static InteractionResult onUse(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult ray) {
