@@ -6,6 +6,7 @@ import static com.dudko.blazinghot.registry.CommonTags.itemTagOf;
 import java.util.Objects;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -14,10 +15,13 @@ import com.dudko.blazinghot.content.casting.Molds;
 import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.CommonTags.Namespace;
 
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
 public class Forms {
 
 	public static final Forms INGOT = Forms.of("ingot", "ingots", MultiAmount.INGOT, 400, true, Molds.INGOT),
@@ -96,7 +100,7 @@ public class Forms {
 		return (tagFolder + "&" + customLocation).hashCode();
 	}
 
-	public static Forms of(String name, String tagFolder, MultiAmount amount, int processingTime, boolean mechanicalMixerMeltable, Molds.Mold mold) {
+	public static Forms of(String name, String tagFolder, MultiAmount amount, int processingTime, boolean mechanicalMixerMeltable, @Nullable Molds.Mold mold) {
 		return new Forms(name, tagFolder, amount, processingTime, mechanicalMixerMeltable, mold);
 	}
 

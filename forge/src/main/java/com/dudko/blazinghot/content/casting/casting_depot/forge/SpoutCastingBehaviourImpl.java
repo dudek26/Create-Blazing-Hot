@@ -17,6 +17,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
@@ -83,6 +84,7 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 			if (!CastingBySpout.canItemBeCast(level, stack) || availableFluid.getAmount() < requiredAmount) return;
 			currentRecipe = CastingBySpout.findRecipe(level, requiredAmount, stack, availableFluid);
 			state = State.SPOUTING;
+			depot.visualFluid = availableFluid.getFluid();
 		}
 		else if (state == State.SPOUTING) {
 			if (currentRecipe == null || spout == null) {
@@ -148,6 +150,7 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 		coolingTicks = -1;
 		currentRecipe = null;
 		castItem = ItemStack.EMPTY;
+		((CastingDepotBlockEntity) blockEntity).visualFluid = Fluids.EMPTY;
 	}
 
 	@Override

@@ -63,8 +63,8 @@ public class MoltenMetals {
 			MoltenMetal
 					.builder("blaze_gold")
 					.mod(BLAZINGHOT)
-					.basicAndPlateForms()
-					.coreForms(Forms.ROD)
+					.basicForms()
+					.coreForms(Forms.PLATE, Forms.ROD)
 					.addFluidInteraction(Fluids.WATER, () -> Blocks.NETHERRACK)
 					.register(),
 

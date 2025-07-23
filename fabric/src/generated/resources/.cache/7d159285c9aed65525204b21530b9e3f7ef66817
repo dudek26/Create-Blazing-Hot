@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-23T23:34:22.6014213	Create: Blazing Hot/Registrate Provider for blazinghot [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2025-07-24T00:16:50.9359177	Create: Blazing Hot/Registrate Provider for blazinghot [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 35582f6a39b31bd602ad24eee06054776b007cff data\blazinghot\advancements\recipes\redstone\stonecutting\modern_lamp_panel\black_modern_lamp_quad_panel.json
 a590a23b122c283991ff608a5b63fd42a560c2ba assets\blazinghot\models\block\molten_iron.json
 9d9ca79d0346d4828cb340467d0fd622fcdeca3f data\blazinghot\recipes\crafting\modern_lamp\block\orange_modern_lamp_from_other_lamps.json
@@ -393,8 +393,8 @@ bc8242297e0ddbf805831187e21f1ac34bc4eafd data\blazinghot\recipes\stonecutting\mo
 c0310460c0f0da8bbad0e431c31781f41f309574 data\blazinghot\recipes\stonecutting\modern_lamp\gray_modern_lamp_small_panel_from_block.json
 d5997d01c5f9c6978b30677efff750add27749ff data\blazinghot\recipes\crafting\modern_lamp\panel\purple_modern_lamp_panel_from_other_lamp.json
 39bb326d7ee1b61ebd33e09f305ea4019da258a0 data\blazinghot\advancements\recipes\redstone\stonecutting\modern_lamp\yellow_modern_lamp_double_panel_from_block.json
-a1aa5b31903ad01c03c5f82e8e4fc5b3bd03b609 data\blazinghot\advancements\recipes\redstone\stonecutting\modern_lamp_panel\blue_modern_lamp_quad_panel.json
 01c1b5ff33f9c4432c325ef9418524e9b6ee01ac data\blazinghot\advancements\recipes\redstone\stonecutting\modern_lamp\purple_modern_lamp_quad_panel_from_block.json
+a1aa5b31903ad01c03c5f82e8e4fc5b3bd03b609 data\blazinghot\advancements\recipes\redstone\stonecutting\modern_lamp_panel\blue_modern_lamp_quad_panel.json
 0ab145c7cf5693cfa5be7095cd212ea116afc499 data\blazinghot\advancements\recipes\redstone\crafting\modern_lamp\light_blue_modern_lamp_from_stained_glass.json
 1952c556d4913833bad8701a8cbb018e48c9737b data\blazinghot\loot_tables\blocks\green_modern_lamp_quad_panel.json
 e4318872b77495c54b9baf24e2e6c1775c75a5c8 data\blazinghot\recipes\crafting\modern_lamp\double_panel\white_modern_lamp_double_panel_from_other_lamps.json

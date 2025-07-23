@@ -20,15 +20,17 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 
 public abstract class CastingDepotBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
 	protected SmartFluidTankBehaviour tank;
 	protected CastingDepotBehaviour depotBehaviour;
-	protected CastingDepotBehaviour outputBehaviour;
+	public Fluid visualFluid;
 
 	protected CastingDepotBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
+		visualFluid = Fluids.EMPTY;
 	}
 
 	@ExpectPlatform

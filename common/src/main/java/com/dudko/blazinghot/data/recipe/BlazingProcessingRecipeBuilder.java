@@ -116,7 +116,8 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 		int baseDuration = 50;
 		int minDuration = 15;
 		int duration = (int) (fluidAmount / MultiAmount.INGOT.get()) * baseDuration;
-		return duration(Math.max(duration, minDuration)).coolingDuration((int) (duration * coolingFactor));
+		duration = Math.max(duration, minDuration);
+		return duration(duration).coolingDuration((int) (duration * coolingFactor));
 	}
 
 	public BlazingProcessingRecipeBuilder<T> castingDuration(MultiAmount amount) {

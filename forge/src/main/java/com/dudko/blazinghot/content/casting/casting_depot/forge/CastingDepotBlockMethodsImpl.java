@@ -65,10 +65,6 @@ public class CastingDepotBlockMethodsImpl {
 			if (!player.getItemInHand(hand).isEmpty()) return InteractionResult.SUCCESS;
 			player.getInventory().placeItemBackInInventory(mainItemStack);
 			behaviour.removeHeldStack();
-			extracted = true;
-		}
-
-		if (extracted) {
 			world.playSound(null,
 					pos,
 					SoundEvents.ITEM_PICKUP,
@@ -77,7 +73,7 @@ public class CastingDepotBlockMethodsImpl {
 					1f + world.getRandom().nextFloat());
 		}
 
-		if (!wasEmptyHanded && !shouldntPlaceItem) {
+		if (!wasEmptyHanded && !shouldntPlaceItem && !extracted) {
 			behaviour.setHeldStack(heldItem.copyWithCount(1));
 			ItemStack newHeldItem = heldItem.copyWithCount(heldItem.getCount() - 1);
 			player.setItemInHand(hand, newHeldItem);

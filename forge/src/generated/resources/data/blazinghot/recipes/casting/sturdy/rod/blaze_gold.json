@@ -1,0 +1,20 @@
+{
+  "type": "blazinghot:casting",
+  "coolingDuration": 45,
+  "ingredients": [
+    {
+      "item": "blazinghot:sturdy_rod_mold"
+    },
+    {
+      "amount": 72,
+      "fluidTag": "forge:molten_blaze_gold"
+    }
+  ],
+  "keepItem": true,
+  "processingTime": 15,
+  "results": [
+    {
+      "item": "blazinghot:blaze_gold_rod"
+    }
+  ]
+}

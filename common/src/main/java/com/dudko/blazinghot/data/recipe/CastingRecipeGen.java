@@ -6,8 +6,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.compat.Mods;
-import com.dudko.blazinghot.content.casting.Molds;
 import com.dudko.blazinghot.content.casting.Molds.Mold;
 import com.dudko.blazinghot.content.casting.Molds.MoldType;
 import com.dudko.blazinghot.content.metal.Forms;
@@ -15,8 +15,6 @@ import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.data.conditions.DefaultLoadConditions;
 import com.dudko.blazinghot.data.conditions.LoadCondition;
-import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
-import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
@@ -36,17 +34,7 @@ public class CastingRecipeGen extends BlazingProcessingRecipeGen {
 
 	List<GeneratedRecipe> ALL_CASTING_RECIPES = castingRecipes();
 
-	GeneratedRecipe
-			BLAZE_GOLD_INGOT =
-			create("blaze_gold_ingot",
-					b -> b
-							.require(Molds.INGOT.get(MoldType.STURDY))
-							.require(MoltenMetals.BLAZE_GOLD.fluidTag(), MultiAmount.INGOT)
-							.castingDuration(MultiAmount.INGOT)
-							.toolNotConsumed(MoldType.STURDY.reusable)
-							.output(BlazingItems.BLAZE_GOLD_INGOT));
-
-	private GeneratedRecipe casting(MoltenMetal metal, Forms form, MoldType moldType, Collection<LoadCondition<?>> conditions) {
+	private GeneratedRecipe casting(MoltenMetal metal, Forms form, MoldType moldType, Collection<LoadCondition<?>> conditions, Mods outputMod) {
 		Mold mold = form.mold;
 		if (mold == null) return null;
 		return create(moldType + "/" + mold + "/" + metal.name,
@@ -54,13 +42,17 @@ public class CastingRecipeGen extends BlazingProcessingRecipeGen {
 						.withConditions(conditions)
 						.require(mold.get(moldType))
 						.require(metal.fluidTag(), metal.getAmount(form))
-						.castingDuration(form.amount)
+						.castingDuration(metal.getAmount(form))
 						.toolNotConsumed(moldType.reusable)
-						.output(metal.getLocation(form)));
+						.output(metal.getLocation(form, outputMod)));
 	}
 
 	private List<GeneratedRecipe> casting(MoltenMetal metal, Forms form, Collection<LoadCondition<?>> conditions, Mods outputMod) {
-		return Arrays.stream(MoldType.values()).map(moldType -> casting(metal, form, moldType, conditions)).toList();
+		BlazingHot.LOGGER.info("Casting {} {} ({})", metal.name, form.name, outputMod);
+		return Arrays
+				.stream(MoldType.values())
+				.map(moldType -> casting(metal, form, moldType, conditions, outputMod))
+				.toList();
 	}
 
 	private List<GeneratedRecipe> castingRecipes() {

@@ -16,13 +16,19 @@ public class CastingDepotRendererImpl {
 		SmartFluidTankBehaviour tank = be.getTank();
 		if (tank == null) return;
 
-		FluidStack fluidStack = tank.getPrimaryTank().getRenderedFluid();
+		FluidStack tankFluidStack = tank.getPrimaryTank().getRenderedFluid();
 		SpoutCastingBehaviour spoutBehaviour = be.getBehaviour(SpoutCastingBehaviour.TYPE);
 
 		if (be.getHeldItem().isEmpty()) return;
 
 		int processingDuration = spoutBehaviour.getRecipeProcessingDuration();
 		if (processingDuration <= 12) return;
+
+		FluidStack
+				fluidStack =
+				spoutBehaviour.getState() == SpoutCastingBehaviour.State.COOLING ?
+				tankFluidStack :
+				new FluidStack(be.visualFluid, 1, tankFluidStack.getTag());
 
 		int processingTicks = spoutBehaviour.getProcessingTicks();
 		float level = Mth.clamp((float) (processingTicks - 12) / (processingDuration - 12), 0, 1);

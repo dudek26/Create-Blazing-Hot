@@ -195,6 +195,7 @@ public class MoltenMetal {
 
 		protected Builder(String name) {
 			this.name = name;
+			this.mod = VANILLA;
 		}
 
 		/**
@@ -269,13 +270,13 @@ public class MoltenMetal {
 		 * For Vanilla and Create metals except Zinc: Ingot, Nugget, Plate + Create Crafts & Additions Rod compat <br>
 		 */
 		public Builder createForms() {
-			return basicAndPlateForms().compatForm(Forms.ROD, CREATE_ADDITIONS);
+			return basicAndCreatePlateForms().compatForm(Forms.ROD, CREATE_ADDITIONS);
 		}
 
 		/**
 		 * For metals that also have a plate form
 		 */
-		public Builder basicAndPlateForms() {
+		public Builder basicAndCreatePlateForms() {
 			return basicForms().createForms(Forms.PLATE);
 		}
 
@@ -329,7 +330,7 @@ public class MoltenMetal {
 
 		public MoltenMetal build() {
 			return new MoltenMetal(name,
-					mod == null ? VANILLA : mod,
+					mod,
 					supportedForms,
 					optionalForms,
 					compatForms,
