@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.content.casting.casting_depot.forge;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBehaviour;
@@ -25,11 +26,11 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 @ParametersAreNonnullByDefault
 public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 
-	CastingRecipe currentRecipe;
+	ResourceLocation currentRecipeId;
 
 	public SpoutCastingBehaviourImpl(CastingDepotBlockEntity depot) {
 		super(depot);
-		currentRecipe = null;
+		currentRecipeId = null;
 	}
 
 	public static SpoutCastingBehaviour of(CastingDepotBlockEntity depot) {
@@ -38,12 +39,12 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 
 	@Override
 	public int getRecipeCoolingDuration() {
-		return currentRecipe == null ? -1 : currentRecipe.getCoolingDuration();
+		return getCurrentRecipe() == null ? -1 : getCurrentRecipe().getCoolingDuration();
 	}
 
 	@Override
 	public int getRecipeProcessingDuration() {
-		return currentRecipe == null ? -1 : currentRecipe.getProcessingDuration();
+		return getCurrentRecipe() == null ? -1 : getCurrentRecipe().getProcessingDuration();
 	}
 
 	private FluidStack getFluid() {
@@ -58,7 +59,7 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 
 		SpoutBlockEntity spout = getSpout();
 		if (spout == null) {
-			if (state == State.SPOUTING) {
+			if (state == State.FILLING) {
 				state = State.NONE;
 				processingTicks = -1;
 				return;
@@ -78,15 +79,16 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 		FluidStack availableFluid = getFluid();
 		if (availableFluid.isEmpty()) return;
 		int requiredAmount = CastingBySpout.getRequiredAmountForItem(level, stack, availableFluid);
+		CastingRecipe currentRecipe = getCurrentRecipe();
 
 		if (state == State.NONE) {
 			if (!depot.getOutputItem().isEmpty()) return;
 			if (!CastingBySpout.canItemBeCast(level, stack) || availableFluid.getAmount() < requiredAmount) return;
-			currentRecipe = CastingBySpout.findRecipe(level, requiredAmount, stack, availableFluid);
-			state = State.SPOUTING;
-			depot.visualFluid = availableFluid.getFluid();
+			currentRecipeId = CastingBySpout.findRecipe(level, requiredAmount, stack, availableFluid).getId();
+			state = State.FILLING;
+			depot.setVisualFluid(availableFluid.getFluid());
 		}
-		else if (state == State.SPOUTING) {
+		else if (state == State.FILLING) {
 			if (currentRecipe == null || spout == null) {
 				reset();
 				return;
@@ -97,9 +99,10 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 			if (processingTicks == 8)
 				AllSoundEvents.SPOUTING.playOnServer(level, getPos(), 0.75f, 0.9f + 0.2f * (float) Math.random());
 
-			if (processingTicks >= 8 && level.isClientSide) {
-				depot.spawnProcessingParticles(availableFluid);
-
+			if (level.isClientSide) {
+				if (processingTicks >= 8 && duration - processingTicks > 5) {
+					depot.spawnProcessingParticles(availableFluid);
+				}
 				if (processingTicks >= 12 && processingTicks % 4 == 0) {
 					depot.spawnSplash(availableFluid);
 				}
@@ -148,15 +151,22 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 		state = State.NONE;
 		processingTicks = -1;
 		coolingTicks = -1;
-		currentRecipe = null;
+		currentRecipeId = null;
 		castItem = ItemStack.EMPTY;
-		((CastingDepotBlockEntity) blockEntity).visualFluid = Fluids.EMPTY;
+		((CastingDepotBlockEntity) blockEntity).setVisualFluid(Fluids.EMPTY);
+	}
+
+	@Nullable
+	public CastingRecipe getCurrentRecipe() {
+		Level level = getWorld();
+		if (level == null) return null;
+		return CastingBySpout.findRecipe(level, currentRecipeId);
 	}
 
 	@Override
 	public void write(CompoundTag nbt, boolean clientPacket) {
 		super.write(nbt, clientPacket);
-		if (currentRecipe != null) nbt.putString("ProcessedRecipe", currentRecipe.getId().toString());
+		if (currentRecipeId != null) nbt.putString("ProcessedRecipe", currentRecipeId.toString());
 		if (!castItem.isEmpty()) nbt.put("CastItem", castItem.serializeNBT());
 	}
 
@@ -164,11 +174,7 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 	public void read(CompoundTag nbt, boolean clientPacket) {
 		super.read(nbt, clientPacket);
 		if (nbt.contains("ProcessedRecipe")) {
-			ResourceLocation id = ResourceLocation.tryParse(nbt.getString("ProcessedRecipe"));
-			if (id == null) {
-				currentRecipe = null;
-			}
-			else currentRecipe = CastingBySpout.findRecipe(getWorld(), id);
+			currentRecipeId = ResourceLocation.tryParse(nbt.getString("ProcessedRecipe"));
 		}
 		if (nbt.contains("CastItem")) {
 			castItem = ItemStack.of(nbt.getCompound("CastItem"));

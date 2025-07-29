@@ -31,4 +31,8 @@ public class MultiRegistriesImpl {
 	public static RegisteredObjectsHelper<?> getRegisteredObjectsHelper() {
 		return new FabricRegisteredObjectsHelper();
 	}
+
+	public static ResourceLocation getFluidId(Fluid fluid) {
+		return BuiltInRegistries.FLUID.getKey(fluid);
+	}
 }

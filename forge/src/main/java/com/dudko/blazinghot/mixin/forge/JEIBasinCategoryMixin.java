@@ -15,7 +15,7 @@ import net.minecraft.world.item.ItemStack;
 
 @IfModLoaded("jei")
 @Mixin(BasinCategory.class)
-public class JEIBasinCategoryMixin {
+public abstract class JEIBasinCategoryMixin {
 	@WrapOperation(method = "setRecipe(Lmezz/jei/api/gui/builder/IRecipeLayoutBuilder;Lcom/simibubi/create/content/processing/basin/BasinRecipe;Lmezz/jei/api/recipe/IFocusGroup;)V",
 			remap = false,
 			at = @At(value = "INVOKE",

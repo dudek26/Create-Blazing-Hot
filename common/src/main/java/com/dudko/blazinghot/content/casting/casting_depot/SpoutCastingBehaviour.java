@@ -3,6 +3,7 @@ package com.dudko.blazinghot.content.casting.casting_depot;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.simibubi.create.content.fluids.spout.SpoutBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -10,9 +11,11 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -81,7 +84,8 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 	public void write(CompoundTag nbt, boolean clientPacket) {
 		super.write(nbt, clientPacket);
 		nbt.putFloat("CoolingTicks", coolingTicks);
-		nbt.putString("State", state.toString());
+		nbt.putString("State", state.savable ? state.toString() : State.NONE.toString());
+		nbt.putString("VisualFluid", MultiRegistries.getFluidId(visualFluid).toString());
 	}
 
 	@Override
@@ -89,13 +93,28 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 		super.read(nbt, clientPacket);
 		if (nbt.contains("CoolingTicks")) coolingTicks = nbt.getFloat("CoolingTicks");
 		if (nbt.contains("State")) state = State.valueOf(nbt.getString("State").toUpperCase());
+		if (nbt.contains("VisualFluid")) {
+			ResourceLocation fluidId = ResourceLocation.tryParse(nbt.getString("VisualFluid"));
+			if (fluidId == null) visualFluid = Fluids.EMPTY;
+			else visualFluid = MultiRegistries.getFluidFromRegistry(fluidId).get();
+		}
 	}
 
 
 	public enum State {
 		NONE,
-		SPOUTING,
+		FILLING(false),
 		COOLING;
+
+		public final boolean savable;
+
+		State(boolean savable) {
+			this.savable = savable;
+		}
+
+		State() {
+			this.savable = true;
+		}
 
 		@Override
 		public String toString() {

@@ -26,7 +26,8 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 
 	protected SmartFluidTankBehaviour tank;
 	protected CastingDepotBehaviour depotBehaviour;
-	public Fluid visualFluid;
+
+	protected Fluid visualFluid;
 
 	protected CastingDepotBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -95,6 +96,15 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 
 		cooling.add(speedComponent).forGoggles(tooltip);
 		return true;
+	}
+
+	public Fluid getVisualFluid() {
+		return visualFluid;
+	}
+
+	public void setVisualFluid(Fluid visualFluid) {
+		this.visualFluid = visualFluid;
+		notifyUpdate();
 	}
 
 	public abstract ItemStack getHeldItem();

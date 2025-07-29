@@ -4,6 +4,7 @@
   "package": "com.dudko.blazinghot.mixin.forge",
   "compatibilityLevel": "JAVA_17",
   "client": [
+    "SpoutRendererMixin"
   ],
   "mixins": [
     "DatagenModLoaderForgeMixin",

@@ -2,6 +2,7 @@ package com.dudko.blazinghot.content.casting.casting_depot.forge;
 
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
 import com.dudko.blazinghot.content.casting.casting_depot.SpoutCastingBehaviour;
+import com.dudko.blazinghot.content.casting.casting_depot.SpoutCastingBehaviour.State;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 
@@ -20,20 +21,22 @@ public class CastingDepotRendererImpl {
 		SpoutCastingBehaviour spoutBehaviour = be.getBehaviour(SpoutCastingBehaviour.TYPE);
 
 		if (be.getHeldItem().isEmpty()) return;
+		if (spoutBehaviour.getState() == State.NONE) return;
 
 		int processingDuration = spoutBehaviour.getRecipeProcessingDuration();
 		if (processingDuration <= 12) return;
 
 		FluidStack
 				fluidStack =
-				spoutBehaviour.getState() == SpoutCastingBehaviour.State.COOLING ?
+				spoutBehaviour.getState() == State.COOLING ?
 				tankFluidStack :
-				new FluidStack(be.visualFluid, 1, tankFluidStack.getTag());
+				new FluidStack(be.getVisualFluid(), 1, tankFluidStack.getTag());
 
-		int processingTicks = spoutBehaviour.getProcessingTicks();
-		float level = Mth.clamp((float) (processingTicks - 12) / (processingDuration - 12), 0, 1);
-		if (spoutBehaviour.getState() == SpoutCastingBehaviour.State.COOLING) level = 1;
-
+		int processingTicks = spoutBehaviour.getProcessingTicks() - 1;
+		float level = 1;
+		if (spoutBehaviour.getState() == State.FILLING) {
+			level = Mth.clamp((processingTicks - 12 + partialTicks) / (processingDuration - 12), 0, 1);
+		}
 		if (!fluidStack.isEmpty() && level != 0) {
 			float xMin = 1 / 16f;
 			float xMax = 15 / 16f;
