@@ -8,10 +8,13 @@ import static com.dudko.blazinghot.data.recipe.BlazingIngredients.moltenCopper;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.moltenGold;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.moltenIron;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.moltenZinc;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherCompound;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherEssence;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherFlora;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherrackDust;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.soulDust;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.stoneDust;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.wheatFlour;
 import static com.dudko.blazinghot.util.ListUtil.compactLists;
 
 import java.util.ArrayList;
@@ -56,6 +59,13 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
 							.require(netherrackDust())
 							.require(soulDust())
 							.output(BlazingItems.NETHER_COMPOUND, 2)),
+			NETHER_DOUGH =
+					create("nether_dough",
+							b -> b
+									.require(netherCompound())
+									.require(netherFlora())
+									.require(wheatFlour())
+									.output(BlazingItems.NETHER_DOUGH)),
 			NETHERRACK_DUST =
 					create("netherrack_dust",
 							b -> b.require(cinderFlour()).require(stoneDust()).output(BlazingItems.NETHERRACK_DUST)),

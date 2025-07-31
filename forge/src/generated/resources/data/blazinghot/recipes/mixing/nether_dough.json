@@ -1,0 +1,19 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "blazinghot:nether_compound"
+    },
+    {
+      "tag": "blazinghot:nether_flora"
+    },
+    {
+      "item": "create:wheat_flour"
+    }
+  ],
+  "results": [
+    {
+      "item": "blazinghot:nether_dough"
+    }
+  ]
+}

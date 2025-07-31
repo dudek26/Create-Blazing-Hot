@@ -13,10 +13,12 @@ import java.util.function.BiConsumer;
 
 import com.dudko.blazinghot.BlazingHot;
 
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.createmod.catnip.lang.Lang;
 import net.createmod.catnip.lang.LangBuilder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.level.material.Fluid;
 
 public enum BlazingLang {
 
@@ -34,7 +36,9 @@ public enum BlazingLang {
 	LAMP_GOGGLE_UNLOCKED(GOGGLES, "modern_lamp.unlocked", "Unlocked"),
 	CASTING_GOGGLE_TITLE(GOGGLES, "casting_depot", "Casting Depot Info:"),
 	CASTING_GOGGLE_NO_MOLD(GOGGLES, "casting_depot.no_mold", "Empty"),
-	CASTING_GOGGLE_COOLING(GOGGLES, "casting_depot.cooling", "Cooling speed:"),
+	CASTING_GOGGLE_COOLING_SPEED(GOGGLES, "casting_depot.cooling_speed", "Cooling speed:"),
+	CASTING_GOGGLE_FILLING(GOGGLES, "casting_depot.filling", "Casting"),
+	CASTING_GOGGLE_COOLING(GOGGLES, "casting_depot.cooling", "Cooling"),
 
 	NETHER_LAVA_INFO(INFO,
 			"nether_lava_cobblestone",
@@ -82,6 +86,11 @@ public enum BlazingLang {
 		for (BlazingLang lang : values()) {
 			consumer.accept(lang.key, lang.translation);
 		}
+	}
+
+	@ExpectPlatform
+	public static LangBuilder fluidName(Fluid fluid) {
+		throw new AssertionError();
 	}
 
 	enum Prefix {

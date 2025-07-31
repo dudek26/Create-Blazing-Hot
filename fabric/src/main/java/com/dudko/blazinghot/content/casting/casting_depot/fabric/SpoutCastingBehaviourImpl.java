@@ -30,7 +30,7 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 	}
 
 	@Override
-	public void reset() {
+	public void resetProcessing() {
 
 	}
 

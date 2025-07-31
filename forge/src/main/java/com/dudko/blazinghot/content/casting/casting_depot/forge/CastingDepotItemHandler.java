@@ -2,6 +2,8 @@ package com.dudko.blazinghot.content.casting.casting_depot.forge;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlock;
+import com.dudko.blazinghot.content.casting.casting_depot.SpoutCastingBehaviour;
 import com.simibubi.create.content.kinetics.belt.transport.TransportedItemStack;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -20,7 +22,7 @@ public class CastingDepotItemHandler implements IItemHandler {
 	}
 
 	public int getSlots() {
-		return 9;
+		return 2;
 	}
 
 	public ItemStack getStackInSlot(int slot) {
@@ -29,6 +31,7 @@ public class CastingDepotItemHandler implements IItemHandler {
 			   this.behaviour.processingOutputBuffer.getStackInSlot(slot - 1);
 	}
 
+	@Override
 	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
 		if (slot != 0) {
 			return stack;
@@ -49,11 +52,19 @@ public class CastingDepotItemHandler implements IItemHandler {
 		}
 	}
 
+	@Override
 	public ItemStack extractItem(int slot, int amount, boolean simulate) {
 		if (slot != 0) {
 			return this.behaviour.processingOutputBuffer.extractItem(slot - 1, amount, simulate);
 		}
 		else {
+			CastingDepotBlockEntityImpl depot = (CastingDepotBlockEntityImpl) behaviour.blockEntity;
+			if (!depot.getBlockState().getValue(CastingDepotBlock.POWERED)) {
+				return ItemStack.EMPTY;
+			}
+			if (depot.getState() != SpoutCastingBehaviour.State.NONE || !depot.getOutputItem().isEmpty()) {
+				return ItemStack.EMPTY;
+			}
 			ItemStack held = this.behaviour.heldStack;
 			if (held == null) {
 				return ItemStack.EMPTY;

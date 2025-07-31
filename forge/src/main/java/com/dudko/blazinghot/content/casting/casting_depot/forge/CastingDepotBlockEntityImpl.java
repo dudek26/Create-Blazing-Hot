@@ -65,6 +65,10 @@ public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity {
 		tank.getPrimaryHandler().setFluid(new FluidStack(fluid, (int) amount));
 	}
 
+	public FluidStack getFluid() {
+		return tank.getPrimaryHandler().getFluid();
+	}
+
 	@Override
 	public void resetFluid() {
 		tank.getPrimaryHandler().setFluid(FluidStack.EMPTY);

@@ -134,19 +134,6 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 			}
 		}
 
-		ItemStack previousItem = heldStack;
-		ItemStack
-				afterInsert =
-				blockEntity
-						.getBehaviour(DirectBeltInputBehaviour.TYPE)
-						.tryExportingToBeltFunnel(previousItem, null, false);
-		if (afterInsert == null) return;
-		if (previousItem.getCount() != afterInsert.getCount()) {
-			if (afterInsert.isEmpty()) heldStack = null;
-			else heldStack = afterInsert;
-			blockEntity.notifyUpdate();
-		}
-
 	}
 
 	@Override

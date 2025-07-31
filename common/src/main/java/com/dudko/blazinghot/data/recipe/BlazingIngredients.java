@@ -158,6 +158,10 @@ public class BlazingIngredients {
 		return BlazingItems.NETHER_DOUGH;
 	}
 
+	public static ItemLike wheatFlour() {
+		return AllItems.WHEAT_FLOUR;
+	}
+
 	//    Dusts
 
 	public static TagKey<Item> stoneDust() {

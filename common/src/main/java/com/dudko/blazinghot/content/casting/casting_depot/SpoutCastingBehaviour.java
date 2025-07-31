@@ -29,6 +29,7 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 	protected ItemStack castItem;
 
 	protected Fluid visualFluid;
+	protected ResourceLocation currentRecipeId;
 
 	public SpoutCastingBehaviour(CastingDepotBlockEntity depot) {
 		super(depot);
@@ -37,6 +38,7 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 		coolingTicks = -1;
 		castItem = ItemStack.EMPTY;
 		visualFluid = null;
+		currentRecipeId = null;
 	}
 
 	@ExpectPlatform
@@ -47,8 +49,8 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 	@Nullable
 	protected SpoutBlockEntity getSpout() {
 		BlockEntity be = getWorld().getBlockEntity(getPos().above(2));
-		if (be instanceof SpoutBlockEntity) {
-			return (SpoutBlockEntity) be;
+		if (be instanceof SpoutBlockEntity spout) {
+			return spout;
 		}
 		return null;
 	}
@@ -78,32 +80,41 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 
 	public abstract int getRecipeProcessingDuration();
 
-	public abstract void reset();
+	public abstract void resetProcessing();
 
 	@Override
 	public void write(CompoundTag nbt, boolean clientPacket) {
 		super.write(nbt, clientPacket);
 		nbt.putFloat("CoolingTicks", coolingTicks);
-		nbt.putString("State", state.savable ? state.toString() : State.NONE.toString());
+		nbt.putInt("ProcessingTicks", processingTicks);
+		nbt.putString("State", state.toString());
 		nbt.putString("VisualFluid", MultiRegistries.getFluidId(visualFluid).toString());
+		if (currentRecipeId != null) nbt.putString("ProcessedRecipe", currentRecipeId.toString());
+		CompoundTag castItemTag = new CompoundTag();
+		castItem.save(castItemTag);
+		nbt.put("CastItem", castItemTag);
 	}
 
 	@Override
 	public void read(CompoundTag nbt, boolean clientPacket) {
 		super.read(nbt, clientPacket);
-		if (nbt.contains("CoolingTicks")) coolingTicks = nbt.getFloat("CoolingTicks");
-		if (nbt.contains("State")) state = State.valueOf(nbt.getString("State").toUpperCase());
-		if (nbt.contains("VisualFluid")) {
-			ResourceLocation fluidId = ResourceLocation.tryParse(nbt.getString("VisualFluid"));
-			if (fluidId == null) visualFluid = Fluids.EMPTY;
-			else visualFluid = MultiRegistries.getFluidFromRegistry(fluidId).get();
+		coolingTicks = nbt.getFloat("CoolingTicks");
+		processingTicks = nbt.getInt("ProcessingTicks");
+		state = State.valueOf(nbt.getString("State").toUpperCase());
+		ResourceLocation fluidId = ResourceLocation.tryParse(nbt.getString("VisualFluid"));
+		if (fluidId == null) visualFluid = Fluids.EMPTY;
+		else visualFluid = MultiRegistries.getFluidFromRegistry(fluidId).get();
+
+		if (nbt.contains("ProcessedRecipe")) {
+			currentRecipeId = ResourceLocation.tryParse(nbt.getString("ProcessedRecipe"));
 		}
+		castItem = ItemStack.of(nbt.getCompound("CastItem"));
 	}
 
 
 	public enum State {
 		NONE,
-		FILLING(false),
+		FILLING,
 		COOLING;
 
 		public final boolean savable;

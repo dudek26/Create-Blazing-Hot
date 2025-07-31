@@ -15,7 +15,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 @Mixin(value = KineticBlock.class)
-public class KineticBlockMixin {
+public abstract class KineticBlockMixin {
 
 	@Inject(method = "setPlacedBy", at = @At("HEAD"))
 	private void blazinghot$setBlazingAdvancementsOwner(Level worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack, CallbackInfo ci) {

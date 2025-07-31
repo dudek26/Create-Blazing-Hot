@@ -12,8 +12,6 @@ import com.simibubi.create.content.fluids.spout.SpoutBlockEntity;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
@@ -26,11 +24,8 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 @ParametersAreNonnullByDefault
 public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 
-	ResourceLocation currentRecipeId;
-
 	public SpoutCastingBehaviourImpl(CastingDepotBlockEntity depot) {
 		super(depot);
-		currentRecipeId = null;
 	}
 
 	public static SpoutCastingBehaviour of(CastingDepotBlockEntity depot) {
@@ -60,11 +55,10 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 		SpoutBlockEntity spout = getSpout();
 		if (spout == null) {
 			if (state == State.FILLING) {
-				state = State.NONE;
-				processingTicks = -1;
+				resetProcessing();
 				return;
 			}
-			if (state == State.NONE) return;
+			else if (state == State.NONE) return;
 		}
 
 		Level level = getWorld();
@@ -72,12 +66,12 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 
 		ItemStack stack = depot.getHeldItem();
 		if (stack.isEmpty()) {
-			reset();
+			resetProcessing();
 			return;
 		}
 
 		FluidStack availableFluid = getFluid();
-		if (availableFluid.isEmpty()) return;
+		if (availableFluid.isEmpty() && state != State.COOLING) return;
 		int requiredAmount = CastingBySpout.getRequiredAmountForItem(level, stack, availableFluid);
 		CastingRecipe currentRecipe = getCurrentRecipe();
 
@@ -87,23 +81,26 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 			currentRecipeId = CastingBySpout.findRecipe(level, requiredAmount, stack, availableFluid).getId();
 			state = State.FILLING;
 			depot.setVisualFluid(availableFluid.getFluid());
+			depot.notifyUpdate();
 		}
 		else if (state == State.FILLING) {
 			if (currentRecipe == null || spout == null) {
-				reset();
+				resetProcessing();
 				return;
 			}
+			if (processingTicks == 0)
+				AllSoundEvents.SPOUTING.playOnServer(level, getPos(), 0.75f, 0.9f + 0.2f * (float) Math.random());
+
 			processingTicks++;
 			int duration = currentRecipe.getProcessingDuration();
 
-			if (processingTicks == 8)
-				AllSoundEvents.SPOUTING.playOnServer(level, getPos(), 0.75f, 0.9f + 0.2f * (float) Math.random());
+			if (getVisualFluid() == Fluids.EMPTY) depot.setVisualFluid(availableFluid.getFluid());
 
 			if (level.isClientSide) {
-				if (processingTicks >= 8 && duration - processingTicks > 5) {
+				if (processingTicks >= 4 && duration - processingTicks > 8) {
 					depot.spawnProcessingParticles(availableFluid);
 				}
-				if (processingTicks >= 12 && processingTicks % 4 == 0) {
+				if (processingTicks >= 5 && processingTicks % 4 == 0) {
 					depot.spawnSplash(availableFluid);
 				}
 			}
@@ -118,9 +115,10 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 			}
 		}
 		else if (state == State.COOLING) {
-			if (currentRecipe == null) {
-				state = State.NONE;
-				coolingTicks = -1;
+			if (currentRecipe == null || depot.getFluid().getAmount() < getCurrentRecipe()
+					.getRequiredFluid()
+					.getRequiredAmount()) {
+				resetProcessing();
 				return;
 			}
 
@@ -138,7 +136,7 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 						false);
 				depot.resetFluid();
 				CastingBySpout.finishCasting(currentRecipe, stack);
-				reset();
+				resetProcessing();
 				if (level.isClientSide) {
 					level.playLocalSound(getPos(), SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 0.6f, 2f, false);
 				}
@@ -147,7 +145,7 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 	}
 
 	@Override
-	public void reset() {
+	public void resetProcessing() {
 		state = State.NONE;
 		processingTicks = -1;
 		coolingTicks = -1;
@@ -163,21 +161,4 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 		return CastingBySpout.findRecipe(level, currentRecipeId);
 	}
 
-	@Override
-	public void write(CompoundTag nbt, boolean clientPacket) {
-		super.write(nbt, clientPacket);
-		if (currentRecipeId != null) nbt.putString("ProcessedRecipe", currentRecipeId.toString());
-		if (!castItem.isEmpty()) nbt.put("CastItem", castItem.serializeNBT());
-	}
-
-	@Override
-	public void read(CompoundTag nbt, boolean clientPacket) {
-		super.read(nbt, clientPacket);
-		if (nbt.contains("ProcessedRecipe")) {
-			currentRecipeId = ResourceLocation.tryParse(nbt.getString("ProcessedRecipe"));
-		}
-		if (nbt.contains("CastItem")) {
-			castItem = ItemStack.of(nbt.getCompound("CastItem"));
-		}
-	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.data.lang.BlazingLang;
+import com.dudko.blazinghot.util.TooltipUtil;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -15,7 +16,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -26,6 +26,7 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 
 	protected SmartFluidTankBehaviour tank;
 	protected CastingDepotBehaviour depotBehaviour;
+	protected SpoutCastingBehaviour castingBehaviour;
 
 	protected Fluid visualFluid;
 
@@ -54,7 +55,11 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 		behaviours.add(depotBehaviour = CastingDepotBehaviour.of(this, CastingDepotBehaviour.TYPE));
 		depotBehaviour.addSubBehaviours(behaviours);
 
-		behaviours.add(SpoutCastingBehaviour.of(this));
+		behaviours.add(castingBehaviour = SpoutCastingBehaviour.of(this));
+	}
+
+	public SpoutCastingBehaviour.State getState() {
+		return castingBehaviour.getState();
 	}
 
 	@SuppressWarnings("SameReturnValue")
@@ -66,35 +71,79 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 			BlazingLang.CASTING_GOGGLE_NO_MOLD.translate().style(ChatFormatting.GRAY).forGoggles(tooltip);
 		}
 		else {
-			Style style = Style.EMPTY.withColor(ChatFormatting.GRAY);
-			Component name = getHeldItem().getHoverName().copy().setStyle(style);
+			Component name = getHeldItem().getHoverName().copy().withStyle(ChatFormatting.GRAY);
 			BlazingHot.lang().add(name).forGoggles(tooltip);
 		}
 
-
-		LangBuilder cooling = BlazingLang.CASTING_GOGGLE_COOLING.translate().style(ChatFormatting.GRAY);
-		cooling.add(Component.literal(" "));
-
-		ChatFormatting color = ChatFormatting.AQUA;
+		ChatFormatting coolingSpeedColor = ChatFormatting.AQUA;
 
 		if (getCoolingSpeed() < 0) {
-			color = ChatFormatting.DARK_RED;
+			coolingSpeedColor = ChatFormatting.DARK_RED;
 		}
 		else if (getCoolingSpeed() == 0) {
-			color = ChatFormatting.RED;
+			coolingSpeedColor = ChatFormatting.RED;
 		}
 		else if (getCoolingSpeed() < 1) {
-			color = ChatFormatting.GOLD;
+			coolingSpeedColor = ChatFormatting.GOLD;
 		}
 		else if (getCoolingSpeed() == 1) {
-			color = ChatFormatting.GREEN;
+			coolingSpeedColor = ChatFormatting.GREEN;
 		}
 
-		MutableComponent
-				speedComponent =
-				Component.literal("x" + getCoolingSpeed()).setStyle(Style.EMPTY.withColor(color));
+		MutableComponent speedComponent = Component.literal("x" + getCoolingSpeed()).withStyle(coolingSpeedColor);
 
-		cooling.add(speedComponent).forGoggles(tooltip);
+		LangBuilder cooling = BlazingLang.CASTING_GOGGLE_COOLING_SPEED.translate().style(ChatFormatting.GRAY);
+		cooling.add(Component.literal(" "));
+		cooling.add(speedComponent);
+
+
+		switch (getState()) {
+			case NONE -> cooling.forGoggles(tooltip);
+			case FILLING -> {
+				LangBuilder filling = BlazingHot.lang().text("→ ").style(ChatFormatting.GOLD);
+				filling.add(BlazingLang.fluidName(getVisualFluid()).style(ChatFormatting.GRAY));
+				MutableComponent
+						progress =
+						TooltipUtil.asciiProgressBar(10,
+								castingBehaviour.getProcessingTicks(),
+								castingBehaviour.getRecipeProcessingDuration());
+
+				filling.forGoggles(tooltip);
+				BlazingHot.lang().add(progress).forGoggles(tooltip);
+
+				cooling.forGoggles(tooltip);
+			}
+			case COOLING -> {
+				Component castItem = castingBehaviour.castItem.getHoverName();
+
+				LangBuilder
+						filling =
+						BlazingHot
+								.lang()
+								.text("❄ ")
+								.style(ChatFormatting.AQUA)
+								.add(castItem.copy().withStyle(ChatFormatting.GRAY));
+
+				MutableComponent
+						progress =
+						TooltipUtil.asciiProgressBar(10,
+								castingBehaviour.getCoolingTicks(),
+								castingBehaviour.getRecipeCoolingDuration());
+
+				filling.forGoggles(tooltip);
+				BlazingHot
+						.lang()
+						.add(progress)
+						.add(Component
+								.literal(" (")
+								.withStyle(ChatFormatting.GRAY)
+								.append(speedComponent)
+								.append(")")
+								.withStyle(ChatFormatting.GRAY))
+						.forGoggles(tooltip);
+			}
+		}
+
 		return true;
 	}
 

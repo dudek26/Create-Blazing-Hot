@@ -2,6 +2,7 @@ package com.dudko.blazinghot.content.casting.casting_depot.forge;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.google.gson.JsonObject;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
@@ -16,6 +17,8 @@ import net.minecraftforge.items.wrapper.RecipeWrapper;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class CastingRecipe extends ProcessingRecipe<RecipeWrapper> {
+
+	public int SAFE_RENDERING_LIMIT = 10;
 
 	protected int coolingDuration;
 
@@ -84,6 +87,11 @@ public class CastingRecipe extends ProcessingRecipe<RecipeWrapper> {
 		super.readAdditional(json);
 		if (json.has("coolingDuration")) coolingDuration = json.get("coolingDuration").getAsInt();
 		if (json.has("keepItem")) keepItem = json.get("keepItem").getAsBoolean();
+		if (processingDuration < SAFE_RENDERING_LIMIT) BlazingHot.LOGGER.warn(
+				"Recipe {} has processing duration ({}) below safe rendering limit ({})",
+				id,
+				processingDuration,
+				SAFE_RENDERING_LIMIT);
 	}
 
 	@Override

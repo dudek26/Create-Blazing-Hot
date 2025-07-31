@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-24T00:17:10.1538772	Blazing Hot Processing Recipes
+// 1.20.1	2025-07-31T12:01:15.2635846	Blazing Hot Processing Recipes
 dadde300f60ec6610688d80a7a0facf336df225d data/blazinghot/recipes/blaze_mixing/melting/ancient_debris.json
 5443cf03eab7c3541524f2853a62e8e6e38f6892 data/blazinghot/recipes/blaze_mixing/melting/andesite_alloy.json
 b413f1049b33a5941ed597e1828ca07b50fb3303 data/blazinghot/recipes/blaze_mixing/melting/ingots/blaze_gold.json
@@ -120,5 +120,6 @@ ba96b8d65999a0f851b735c2bed4d387cd9c0058 data/blazinghot/recipes/mixing/melting/
 26a6418e2a7a23fa8be2db06a12f158da22ab6a8 data/blazinghot/recipes/mixing/molten_netherite.json
 ca3deb1acb80f63693d8c376ab8ef3b5c6f7124d data/blazinghot/recipes/mixing/netherrack_dust.json
 cec67aec048e301f1a367585b31df8e1f3ccbd6e data/blazinghot/recipes/mixing/nether_compound.json
+368d724a671a12d0fccd98a25b0913490bd92a4e data/blazinghot/recipes/mixing/nether_dough.json
 ba687b8f44da6487841d28f87c8c31d1a64a3475 data/blazinghot/recipes/pressing/blaze_gold_ingot.json
 bb517588858034b2474fbe41960d04b3bb3918d5 data/blazinghot/recipes/pressing/sturdy_alloy.json

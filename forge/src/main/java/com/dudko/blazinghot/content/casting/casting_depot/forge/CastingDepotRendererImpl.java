@@ -24,7 +24,7 @@ public class CastingDepotRendererImpl {
 		if (spoutBehaviour.getState() == State.NONE) return;
 
 		int processingDuration = spoutBehaviour.getRecipeProcessingDuration();
-		if (processingDuration <= 12) return;
+		if (processingDuration < 10) return;
 
 		FluidStack
 				fluidStack =
@@ -33,9 +33,10 @@ public class CastingDepotRendererImpl {
 				new FluidStack(be.getVisualFluid(), 1, tankFluidStack.getTag());
 
 		int processingTicks = spoutBehaviour.getProcessingTicks() - 1;
+		float processingPT = processingTicks + partialTicks;
 		float level = 1;
 		if (spoutBehaviour.getState() == State.FILLING) {
-			level = Mth.clamp((processingTicks - 12 + partialTicks) / (processingDuration - 12), 0, 1);
+			level = Mth.clamp((processingPT - 5) / (processingDuration - 5), 0, 1);
 		}
 		if (!fluidStack.isEmpty() && level != 0) {
 			float xMin = 1 / 16f;

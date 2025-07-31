@@ -18,7 +18,6 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -42,7 +41,7 @@ public abstract class CastingDepotBehaviour extends BlockEntityBehaviour {
 		super(be);
 		maxStackSize = () -> 1;
 		canAcceptItems = () -> true;
-		canFunnelsPullFrom = $ -> be.getBlockState().getValue(BlockStateProperties.POWERED);
+		canFunnelsPullFrom = $ -> true;
 		acceptedItems = $ -> true;
 		onHeldInserted = $ -> {
 		};

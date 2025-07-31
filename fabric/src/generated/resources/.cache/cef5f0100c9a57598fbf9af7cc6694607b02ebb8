@@ -1,9 +1,10 @@
-// 1.20.1	2025-07-24T00:16:50.9629576	Create: Blazing Hot/Blazing Hot Processing Recipes
+// 1.20.1	2025-07-31T12:01:01.1983659	Create: Blazing Hot/Blazing Hot Processing Recipes
 62108726c3709936746a7f1d3e8a8cd2d99d8114 data\blazinghot\recipes\blaze_mixing\melting\copper_plates.json
 71920abad5da1549342ae207050e78a7d2c39a64 data\blazinghot\recipes\mixing\melting\zinc_plates.json
 205be55e911c2775d1256489cb571e2dc072a35b data\blazinghot\recipes\filling\copper_apple.json
 7c44cef22d6962f81b9b0d1bad75da317f7e6bc9 data\blazinghot\recipes\haunting\nether_compound.json
 34fc25886f602b461b86f08895a9887f50d540db data\blazinghot\recipes\mixing\melting\copper_plates.json
+368d724a671a12d0fccd98a25b0913490bd92a4e data\blazinghot\recipes\mixing\nether_dough.json
 b2e402bf639b1a8f2ff96458966903451ad7eb1c data\blazinghot\recipes\casting\sturdy\nugget\blaze_gold.json
 95d5bc05bcff4a91604ccf6724a2caf9f913f209 data\blazinghot\recipes\filling\golden_apple.json
 41865cc54c29bdc32b4e2303c28f83b11267bf3a data\blazinghot\recipes\blaze_mixing\melting\zinc_nuggets.json
