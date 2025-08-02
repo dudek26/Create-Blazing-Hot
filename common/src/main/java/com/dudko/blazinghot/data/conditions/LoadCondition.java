@@ -50,7 +50,10 @@ public class LoadCondition<T> {
 
 		TAGS_POPULATED("tags_populated"),
 		ANY_MOD_LOADED("any_mod_loaded"),
-		ALL_MODS_LOADED("all_mods_loaded");
+		ALL_MODS_LOADED("all_mods_loaded"),
+		NOT("not"),
+		AND("and"),
+		OR("or");
 
 		public final String id;
 

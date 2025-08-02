@@ -7,7 +7,7 @@ Create: Blazing Hot 0.7
 * Casting Depot and casting mechanics
 * Sturdy Alloy and Sturdy Casing
 * Nether Dough
-* Blaze Roll - a new superheating fuel for Blaze Burners
+* Blaze Roll — new superheating fuel for Blaze Burners
 
 ### Changed:
 
@@ -19,7 +19,11 @@ Create: Blazing Hot 0.7
 ### Fixed:
 
 * Nether Lava now can create other stone variants (basalt, limestone etc.) (#17)
-* All fluids now behave correctly on pipe collisions / spilling (#16)
+* All fluids now behave correctly in pipe collisions / spilling (#16)
+
+### Removed:
+
+* Molten metal compacting recipes
 
 ------------------------------------------------------
 Create: Blazing Hot 0.6.6

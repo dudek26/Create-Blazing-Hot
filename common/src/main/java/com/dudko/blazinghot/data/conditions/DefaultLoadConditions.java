@@ -24,6 +24,18 @@ public class DefaultLoadConditions {
 		return anyModLoaded(Stream.of(mods).map(m -> m.id).toArray(String[]::new));
 	}
 
+	public static LoadCondition<LoadCondition<?>> or(LoadCondition<?>... conditions) {
+		return new LoadCondition<>(LoadCondition.Type.OR, conditions);
+	}
+
+	public static LoadCondition<LoadCondition<?>> and(LoadCondition<?>... conditions) {
+		return new LoadCondition<>(LoadCondition.Type.AND, conditions);
+	}
+
+	public static LoadCondition<LoadCondition<?>> not(LoadCondition<?> condition) {
+		return new LoadCondition<>(LoadCondition.Type.NOT, condition);
+	}
+
 	@SafeVarargs
 	public static <T> LoadCondition<TagKey<T>> tagsPopulated(TagKey<T>... tags) {
 		return new LoadCondition<>(LoadCondition.Type.TAGS_POPULATED, tags);

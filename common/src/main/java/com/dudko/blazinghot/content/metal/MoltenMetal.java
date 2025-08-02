@@ -38,6 +38,10 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
+/**
+ * @see BlazingMetal
+ */
+@Deprecated
 @SuppressWarnings("unused")
 public class MoltenMetal {
 

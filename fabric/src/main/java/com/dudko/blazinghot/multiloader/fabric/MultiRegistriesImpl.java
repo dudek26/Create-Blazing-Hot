@@ -35,4 +35,8 @@ public class MultiRegistriesImpl {
 	public static ResourceLocation getFluidId(Fluid fluid) {
 		return BuiltInRegistries.FLUID.getKey(fluid);
 	}
+
+	public static ResourceLocation getItemId(Item item) {
+		return BuiltInRegistries.ITEM.getKey(item);
+	}
 }

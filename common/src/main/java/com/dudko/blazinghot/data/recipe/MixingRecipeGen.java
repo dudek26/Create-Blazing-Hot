@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.dudko.blazinghot.content.metal.BlazingForm;
+import com.dudko.blazinghot.content.metal.BlazingMetal;
 import com.dudko.blazinghot.content.metal.Forms;
 import com.dudko.blazinghot.content.metal.MoltenMetal;
 import com.dudko.blazinghot.content.metal.MoltenMetals;
@@ -104,6 +106,9 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
 	protected IRecipeTypeInfo getRecipeType() {
 		return AllRecipeTypes.MIXING;
 
+	}
+
+	private void melting(BlazingMetal metal, BlazingForm form) {
 	}
 
 	private GeneratedRecipe melting(String name, Ingredient ingredient, Fluid result, MultiAmount amount, int duration, Collection<LoadCondition<?>> conditions) {

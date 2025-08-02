@@ -20,8 +20,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
+/**
+ * @see BlazingForm
+ */
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
+@Deprecated
 public class Forms {
 
 	public static final Forms INGOT = Forms.of("ingot", "ingots", MultiAmount.INGOT, 400, true, Molds.INGOT),

@@ -34,6 +34,11 @@ public class MultiRegistries {
 	}
 
 	@ExpectPlatform
+	public static ResourceLocation getItemId(Item item) {
+		throw new AssertionError();
+	}
+
+	@ExpectPlatform
 	public static RegisteredObjectsHelper<?> getRegisteredObjectsHelper() {
 		throw new AssertionError();
 	}

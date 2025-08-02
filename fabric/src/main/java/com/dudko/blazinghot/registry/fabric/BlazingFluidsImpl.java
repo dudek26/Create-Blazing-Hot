@@ -134,7 +134,6 @@ public class BlazingFluidsImpl {
 	@Nullable
 	public static BlockState getFluidInteraction(FluidState fluidState, FluidState metFluidState) {
 		Fluid fluid = fluidState.getType();
-		Fluid metFluid = metFluidState.getType();
 
 		for (MoltenMetal metal : MoltenMetals.ALL) {
 			for (Map.Entry<Fluid, NonNullSupplier<Block>> entry : metal.getFluidInteractions().entrySet()) {

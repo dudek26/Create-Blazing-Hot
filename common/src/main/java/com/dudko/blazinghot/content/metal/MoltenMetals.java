@@ -16,6 +16,10 @@ import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 
+/**
+ * @see com.dudko.blazinghot.registry.BlazingMetals
+ */
+@Deprecated
 public class MoltenMetals {
 	public static final List<MoltenMetal> ALL = new ArrayList<>();
 
@@ -40,7 +44,7 @@ public class MoltenMetals {
 							VANILLA)
 					.customForm("ancient_debris",
 							VANILLA.asResource("ancient_debris"),
-							MultiAmount.NUGGET.multiply(12),
+							MultiAmount.RAW_ORE,
 							Forms.INGOT.processingTime * 2,
 							Forms.INGOT.fuelCost * 2,
 							false,

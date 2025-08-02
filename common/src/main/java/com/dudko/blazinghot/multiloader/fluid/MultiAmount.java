@@ -13,6 +13,7 @@ public record MultiAmount(long droplets, int millibuckets) {
 	public static final MultiAmount ROD = metal(4500);
 	public static final MultiAmount INGOT_COVER = INGOT.multiply(6);
 	public static final MultiAmount NUGGET_COVER = NUGGET.multiply(6);
+	public static final MultiAmount RAW_ORE = NUGGET.multiply(12);
 
 	/**
 	 * Gets the platformed amount.
@@ -21,18 +22,18 @@ public record MultiAmount(long droplets, int millibuckets) {
 		return get(this);
 	}
 
-	public MultiAmount multiply(long multiplier) {
+	public MultiAmount multiply(float multiplier) {
 		if (multiplier == 0) {
 			return EMPTY;
 		}
-		return new MultiAmount(droplets * multiplier, (int) (millibuckets * multiplier));
+		return new MultiAmount((long) (droplets * multiplier), (int) (millibuckets * multiplier));
 	}
 
-	public MultiAmount divide(long divider) {
+	public MultiAmount divide(float divider) {
 		if (divider == 0) {
 			return EMPTY;
 		}
-		return new MultiAmount(droplets / divider, (int) (millibuckets / divider));
+		return new MultiAmount((long) (droplets / divider), (int) (millibuckets / divider));
 	}
 
 	/**
