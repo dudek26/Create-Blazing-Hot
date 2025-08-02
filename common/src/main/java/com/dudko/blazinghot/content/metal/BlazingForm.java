@@ -43,6 +43,8 @@ public class BlazingForm {
 	public final boolean mechanicalMixerMeltable;
 	public final boolean optional;
 
+	public final List<Flag> flags;
+
 	private BlazingForm(Builder builder) {
 		name = builder.name;
 		tagFolder = builder.tagFolder;
@@ -62,6 +64,7 @@ public class BlazingForm {
 
 		mechanicalMixerMeltable = builder.mechanicalMixerMeltable;
 		optional = builder.optional;
+		flags = List.copyOf(builder.flags);
 	}
 
 	/**
@@ -99,12 +102,9 @@ public class BlazingForm {
 		builder.mechanicalMixerMeltable = mechanicalMixerMeltable;
 		builder.optional = optional;
 
-		return builderFunction.apply(builder);
-	}
+		builder.flags = new ArrayList<>(flags);
 
-	public ResourceLocation getCastingResult(BlazingMetal metal, Mods mod) {
-		if (customLocation != null) return customLocation;
-		return mod.asResource(metal.name + "_" + name);
+		return builderFunction.apply(builder);
 	}
 
 	public Ingredient getMeltingIngredient(BlazingMetal metal) {
@@ -112,18 +112,18 @@ public class BlazingForm {
 		return Ingredient.of(getItemTag(metal));
 	}
 
-	public List<LoadCondition<?>> getLoadConditions(BlazingMetal metal) {
-		List<Mods> formMods = this.mods.stream().filter(f -> !f.alwaysIncluded).toList();
-		List<Mods> metalMods = metal.mods.stream().filter(m -> !m.alwaysIncluded).toList();
-
+	public List<LoadCondition<?>> getMeltingLoadConditions(BlazingMetal metal) {
 		List<LoadCondition<?>> conditions = new ArrayList<>();
-		if (!metalMods.isEmpty()) conditions.add(DefaultLoadConditions.anyModLoaded(metalMods));
-		if (!formMods.isEmpty()) conditions.add(DefaultLoadConditions.anyModLoaded(formMods));
-		if (optional) {
-			if (customLocation != null) conditions.add(DefaultLoadConditions.itemsRegistered(MultiRegistries
-					.getItemFromRegistry(customLocation)
-					.get()));
-			else conditions.add(DefaultLoadConditions.tagsPopulated(getItemTag(metal)));
+		if (customLocation != null) {
+			List<Mods> formMods = this.mods.stream().filter(f -> !f.alwaysIncluded).toList();
+			List<Mods> metalMods = metal.mods.stream().filter(m -> !m.alwaysIncluded).toList();
+
+			if (!metalMods.isEmpty()) conditions.add(DefaultLoadConditions.anyModLoaded(metalMods));
+			if (!formMods.isEmpty()) conditions.add(DefaultLoadConditions.anyModLoaded(formMods));
+			return conditions;
+		}
+		else if (optional) {
+			conditions.add(DefaultLoadConditions.tagsPopulated(getItemTag(metal)));
 		}
 
 		return conditions;
@@ -134,8 +134,23 @@ public class BlazingForm {
 		return "melting/" + tagFolder + "/" + metal.name;
 	}
 
+	public ResourceLocation getCastingResult(BlazingMetal metal, Mods mod) {
+		if (customLocation != null) return customLocation;
+		return mod.asResource(metal.name + "_" + name);
+	}
+
+	public String getCastingRecipeName(Molds.MoldType moldType, BlazingMetal metal) {
+		if (customLocation != null) return moldType + "/" + customLocation.getPath();
+		return moldType + "/" + name + "/" + metal.name;
+	}
+
 	public TagKey<Item> getItemTag(BlazingMetal metal) {
 		return CommonTags.itemTagOf(tagFolder, metal.name, CommonTags.Namespace.platform());
+	}
+
+	public List<Mods> getMods(BlazingMetal metal) {
+		if (mods.isEmpty()) return metal.mods;
+		return mods;
 	}
 
 	// Shortcuts
@@ -152,6 +167,13 @@ public class BlazingForm {
 	 */
 	public BlazingForm fromMods(Mods... mods) {
 		return createFrom(name, b -> b.clearMods().fromMods(mods).build());
+	}
+
+	/**
+	 * Creates a new BlazingForm form an existing one with specified datagen flags. All flags will be applied at default.
+	 */
+	public BlazingForm withFlags(Flag... flags) {
+		return createFrom(name, b -> b.setFlags(flags).build());
 	}
 
 
@@ -172,6 +194,8 @@ public class BlazingForm {
 		private boolean mechanicalMixerMeltable;
 		private boolean optional;
 
+		private List<Flag> flags;
+
 		private Builder(String name) {
 			this.name = name;
 			this.tagFolder = "";
@@ -185,6 +209,10 @@ public class BlazingForm {
 
 			this.mechanicalMixerMeltable = false;
 			this.optional = false;
+
+			this.flags = new ArrayList<>();
+			flags.add(Flag.MELTING);
+			flags.add(Flag.CASTING);
 		}
 
 		/**
@@ -299,6 +327,15 @@ public class BlazingForm {
 		}
 
 		/**
+		 * Flags define places where this form will be used in datagen.
+		 */
+		public Builder setFlags(Flag... flags) {
+			this.flags.clear();
+			this.flags.addAll(List.of(flags));
+			return this;
+		}
+
+		/**
 		 * Builds and returns the form.
 		 * <ul>
 		 *  If not overridden:
@@ -322,13 +359,13 @@ public class BlazingForm {
 			int coolingMultiplier = 3;
 			int baseDuration = 50;
 			int minDuration = 12;
-			int castingDuration = (int) (amount.get() / MultiAmount.INGOT.get()) * baseDuration;
+			int castingDuration = Math.toIntExact((amount.get() / MultiAmount.INGOT.get()) * baseDuration);
 
 			if (castingTime < 0) {
 				castingTime = Math.max(minDuration, castingDuration);
 			}
 			if (coolingTime < 0) {
-				coolingTime = castingDuration * coolingMultiplier;
+				coolingTime = castingTime * coolingMultiplier;
 			}
 			if (fuelCost == null) {
 				fuelCost = amount.divide(2);
@@ -337,5 +374,10 @@ public class BlazingForm {
 			return new BlazingForm(this);
 		}
 
+	}
+
+	public enum Flag {
+		MELTING,
+		CASTING
 	}
 }

@@ -8,21 +8,21 @@
     }
   ],
   "type": "blazinghot:casting",
-  "coolingDuration": 45,
+  "coolingDuration": 36,
   "ingredients": [
     {
       "item": "blazinghot:sturdy_rod_mold"
     },
     {
       "amount": 4500,
-      "fluidTag": "c:molten_gold"
+      "fluidTag": "c:molten_iron"
     }
   ],
   "keepItem": true,
-  "processingTime": 15,
+  "processingTime": 12,
   "results": [
     {
-      "item": "createaddition:gold_rod"
+      "item": "createaddition:iron_rod"
     }
   ]
 }

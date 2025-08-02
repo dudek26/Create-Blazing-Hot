@@ -1,5 +1,11 @@
 {
   "type": "blazinghot:casting",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "createaddition"
+    }
+  ],
   "coolingDuration": 36,
   "ingredients": [
     {
@@ -7,14 +13,14 @@
     },
     {
       "amount": 72,
-      "fluidTag": "forge:molten_blaze_gold"
+      "fluidTag": "forge:molten_copper"
     }
   ],
   "keepItem": true,
   "processingTime": 12,
   "results": [
     {
-      "item": "blazinghot:blaze_gold_rod"
+      "item": "createaddition:copper_rod"
     }
   ]
 }

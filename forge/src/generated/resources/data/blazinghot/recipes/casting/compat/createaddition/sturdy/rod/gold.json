@@ -6,21 +6,21 @@
       "modid": "createaddition"
     }
   ],
-  "coolingDuration": 45,
+  "coolingDuration": 36,
   "ingredients": [
     {
       "item": "blazinghot:sturdy_rod_mold"
     },
     {
       "amount": 72,
-      "fluidTag": "forge:molten_brass"
+      "fluidTag": "forge:molten_gold"
     }
   ],
   "keepItem": true,
-  "processingTime": 15,
+  "processingTime": 12,
   "results": [
     {
-      "item": "createaddition:brass_rod"
+      "item": "createaddition:gold_rod"
     }
   ]
 }

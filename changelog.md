@@ -17,6 +17,7 @@ Create: Blazing Hot 0.7
 * Renamed `blazinghot:fuel` to `mixerFuel` in Blaze Mixing recipes
 * Adjusted duration of melting recipes
 * Adjusted fuel cost for blaze mixing melting recipes
+* Reworked internal metal system
 
 ### Fixed:
 

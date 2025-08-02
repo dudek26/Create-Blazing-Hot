@@ -1,22 +1,21 @@
 {
-  "type": "blazinghot:casting",
-  "conditions": [
+  "fabric:load_conditions": [
     {
-      "type": "forge:not",
-      "value": {
-        "type": "forge:tag_empty",
-        "tag": "forge:plates/zinc"
-      }
+      "condition": "fabric:any_mod_loaded",
+      "values": [
+        "createaddition"
+      ]
     }
   ],
+  "type": "blazinghot:casting",
   "coolingDuration": 150,
   "ingredients": [
     {
       "item": "blazinghot:sturdy_sheet_mold"
     },
     {
-      "amount": 144,
-      "fluidTag": "forge:molten_zinc"
+      "amount": 9000,
+      "fluidTag": "c:molten_zinc"
     }
   ],
   "keepItem": true,

@@ -1,20 +1,15 @@
 package com.dudko.blazinghot.data.recipe;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
-import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.compat.Mods;
 import com.dudko.blazinghot.content.casting.Molds.Mold;
 import com.dudko.blazinghot.content.casting.Molds.MoldType;
-import com.dudko.blazinghot.content.metal.Forms;
-import com.dudko.blazinghot.content.metal.MoltenMetal;
-import com.dudko.blazinghot.content.metal.MoltenMetals;
+import com.dudko.blazinghot.content.metal.BlazingForm;
+import com.dudko.blazinghot.content.metal.BlazingMetal;
 import com.dudko.blazinghot.data.conditions.DefaultLoadConditions;
-import com.dudko.blazinghot.data.conditions.LoadCondition;
+import com.dudko.blazinghot.registry.BlazingMetals;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
@@ -25,6 +20,7 @@ public class CastingRecipeGen extends BlazingProcessingRecipeGen {
 
 	public CastingRecipeGen(PackOutput output) {
 		super(output);
+		BlazingMetals.ALL.forEach(this::casting);
 	}
 
 	@Override
@@ -32,54 +28,41 @@ public class CastingRecipeGen extends BlazingProcessingRecipeGen {
 		return BlazingRecipeTypes.CASTING.get();
 	}
 
-	List<GeneratedRecipe> ALL_CASTING_RECIPES = castingRecipes();
+	private void casting(BlazingMetal metal) {
+		for (BlazingForm form : metal.forms) {
+			if (!form.flags.contains(BlazingForm.Flag.CASTING)) continue;
+			Mold mold = form.mold;
+			if (mold == null) continue;
+			for (MoldType moldType : MoldType.values()) {
+				List<Mods> usedMods = new ArrayList<>();
+				for (Mods mod : form.getMods(metal)) {
+					String
+							name =
+							(mod.alwaysIncluded ? "" : "compat/" + mod.id + "/") + form.getCastingRecipeName(moldType,
+									metal);
+					create(name, b -> {
+						b
+								.require(mold.get(moldType))
+								.require(metal.getFluidTag(), form.amount)
+								.duration(form.castingTime)
+								.coolingDuration(form.coolingTime)
+								.toolNotConsumed(moldType.reusable)
+								.output(form.getCastingResult(metal, mod));
+						if (!mod.alwaysIncluded) {
+							b.withCondition(DefaultLoadConditions.anyModLoaded(mod));
+							if (!usedMods.isEmpty()) {
+								b.withCondition(DefaultLoadConditions.not(DefaultLoadConditions.anyModLoaded(usedMods)));
+							}
+						}
 
-	private GeneratedRecipe casting(MoltenMetal metal, Forms form, MoldType moldType, Collection<LoadCondition<?>> conditions, Mods outputMod) {
-		Mold mold = form.mold;
-		if (mold == null) return null;
-		return create(moldType + "/" + mold + "/" + metal.name,
-				(b) -> b
-						.withConditions(conditions)
-						.require(mold.get(moldType))
-						.require(metal.fluidTag(), metal.getAmount(form))
-						.castingDuration(metal.getAmount(form))
-						.toolNotConsumed(moldType.reusable)
-						.output(metal.getLocation(form, outputMod)));
-	}
+						usedMods.add(mod);
+						return b;
+					});
 
-	private List<GeneratedRecipe> casting(MoltenMetal metal, Forms form, Collection<LoadCondition<?>> conditions, Mods outputMod) {
-		BlazingHot.LOGGER.info("Casting {} {} ({})", metal.name, form.name, outputMod);
-		return Arrays
-				.stream(MoldType.values())
-				.map(moldType -> casting(metal, form, moldType, conditions, outputMod))
-				.toList();
-	}
+				}
 
-	private List<GeneratedRecipe> castingRecipes() {
-		return MoltenMetals.ALL.stream().map(this::castingRecipes).flatMap(Collection::stream).toList();
-	}
-
-	private List<GeneratedRecipe> castingRecipes(MoltenMetal metal) {
-		List<GeneratedRecipe> recipes = new ArrayList<>();
-
-		metal.supportedForms.forEach((form, mod) -> recipes.addAll(casting(metal,
-				form,
-				metal.getLoadConditions(),
-				mod)));
-		metal.customForms.forEach((form, mod) -> recipes.addAll(casting(metal, form, metal.getLoadConditions(), mod)));
-		metal.compatForms.forEach((form, mod) -> recipes.addAll(casting(metal,
-				form,
-				metal.getLoadConditions(form, mod),
-				mod)));
-
-		for (Map.Entry<Forms, Mods> optional : metal.optionalForms.entrySet()) {
-			List<LoadCondition<?>> conditions = new ArrayList<>(metal.getLoadConditions());
-			conditions.add(DefaultLoadConditions.tagsPopulated(optional.getKey().tag(metal)));
-			recipes.addAll(casting(metal, optional.getKey(), conditions, optional.getValue()));
+			}
 		}
-
-
-		return recipes;
 	}
 
 }

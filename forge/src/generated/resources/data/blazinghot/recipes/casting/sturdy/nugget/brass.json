@@ -1,6 +1,6 @@
 {
   "type": "blazinghot:casting",
-  "coolingDuration": 45,
+  "coolingDuration": 36,
   "ingredients": [
     {
       "item": "blazinghot:sturdy_nugget_mold"
@@ -11,7 +11,7 @@
     }
   ],
   "keepItem": true,
-  "processingTime": 15,
+  "processingTime": 12,
   "results": [
     {
       "item": "create:brass_nugget"

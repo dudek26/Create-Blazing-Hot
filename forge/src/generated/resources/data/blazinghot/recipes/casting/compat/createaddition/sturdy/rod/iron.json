@@ -6,21 +6,21 @@
       "modid": "createaddition"
     }
   ],
-  "coolingDuration": 45,
+  "coolingDuration": 36,
   "ingredients": [
     {
       "item": "blazinghot:sturdy_rod_mold"
     },
     {
       "amount": 72,
-      "fluidTag": "forge:molten_copper"
+      "fluidTag": "forge:molten_iron"
     }
   ],
   "keepItem": true,
-  "processingTime": 15,
+  "processingTime": 12,
   "results": [
     {
-      "item": "createaddition:copper_rod"
+      "item": "createaddition:iron_rod"
     }
   ]
 }

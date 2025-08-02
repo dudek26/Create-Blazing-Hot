@@ -21,14 +21,22 @@ public class BlazingMetals {
 	public static BlazingMetal
 			IRON =
 			BlazingMetal
-					.create("iron", b -> b.createForms().withForms(BlazingForms.ROD).waterCobble().build())
+					.create("iron",
+							b -> b
+									.createForms()
+									.withForms(BlazingForms.OPTIONAL_ROD, BlazingForms.COMPAT_ROD)
+									.waterCobble()
+									.build())
 					.register(),
 			COPPER =
 					BlazingMetal
 							.create("copper",
 									b -> b
 											.createForms()
-											.withForms(BlazingForms.ROD, BlazingForms.WIRE)
+											.withForms(BlazingForms.OPTIONAL_ROD,
+													BlazingForms.OPTIONAL_WIRE,
+													BlazingForms.COMPAT_ROD,
+													BlazingForms.COMPAT_WIRE)
 											.waterCobble()
 											.build())
 							.register(),
@@ -37,7 +45,10 @@ public class BlazingMetals {
 							.create("gold",
 									b -> b
 											.createForms()
-											.withForms(BlazingForms.ROD, BlazingForms.WIRE)
+											.withForms(BlazingForms.OPTIONAL_ROD,
+													BlazingForms.OPTIONAL_WIRE,
+													BlazingForms.COMPAT_ROD,
+													BlazingForms.COMPAT_WIRE)
 											.waterCobble()
 											.build())
 							.register(),
@@ -68,7 +79,7 @@ public class BlazingMetals {
 							b -> b
 									.fromMods(Mods.CREATE)
 									.createForms()
-									.withForms(BlazingForms.ROD)
+									.withForms(BlazingForms.OPTIONAL_ROD, BlazingForms.COMPAT_ROD)
 									.waterCobble()
 									.build())
 					.register(),
@@ -87,7 +98,7 @@ public class BlazingMetals {
 									b -> b
 											.fromMods(Mods.CREATE)
 											.vanillaForms()
-											.withForms(BlazingForms.ZINC_SHEET)
+											.withForms(BlazingForms.OPTIONAL_SHEET, BlazingForms.ZINC_SHEET)
 											.waterCobble()
 											.build())
 							.register();
@@ -100,7 +111,7 @@ public class BlazingMetals {
 							b -> b
 									.fromMods(Mods.BLAZINGHOT)
 									.createForms()
-									.withForms(BlazingForms.BLAZE_GOLD_ROD)
+									.withForms(BlazingForms.ROD)
 									.addFluidInteraction(Fluids.WATER, () -> Blocks.NETHERRACK)
 									.build())
 					.register();

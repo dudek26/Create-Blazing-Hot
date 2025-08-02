@@ -12,9 +12,11 @@ import com.dudko.blazinghot.compat.Mods;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.dudko.blazinghot.registry.BlazingForms;
 import com.dudko.blazinghot.registry.BlazingMetals;
+import com.dudko.blazinghot.registry.CommonTags;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -54,6 +56,10 @@ public class BlazingMetal {
 
 	public Supplier<Fluid> getFluid() {
 		return MultiRegistries.getFluidFromRegistry(getFluidLocation());
+	}
+
+	public TagKey<Fluid> getFluidTag() {
+		return CommonTags.fluidTagOf(getMoltenName(), CommonTags.Namespace.platform());
 	}
 
 	public Supplier<ItemLike> getBucket() {
@@ -97,7 +103,7 @@ public class BlazingMetal {
 		}
 
 		public Builder createForms() {
-			if (mods.contains(Mods.VANILLA) || mods.contains(Mods.CREATE))
+			if (mods.isEmpty() || mods.contains(Mods.VANILLA) || mods.contains(Mods.CREATE))
 				return vanillaForms().withForms(BlazingForms.SHEET.fromMods(Mods.CREATE));
 			else return vanillaForms().withForms(BlazingForms.SHEET);
 		}

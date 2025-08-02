@@ -23,9 +23,7 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 	public BlazeMixingRecipeGen(PackOutput output) {
 		super(output);
 
-		for (BlazingMetal metal : BlazingMetals.ALL) {
-			melting(metal);
-		}
+		BlazingMetals.ALL.forEach(this::melting);
 	}
 
 	@Override
@@ -54,9 +52,10 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 
 	private void melting(BlazingMetal metal) {
 		for (BlazingForm form : metal.forms) {
+			if (!form.flags.contains(BlazingForm.Flag.MELTING)) continue;
 			create(form.getMeltingRecipeName(metal),
 					b -> b
-							.withConditions(form.getLoadConditions(metal))
+							.withConditions(form.getMeltingLoadConditions(metal))
 							.requireFuel(fuel(), form.fuelCost)
 							.require(form.getMeltingIngredient(metal))
 							.duration(form.meltingTime)
