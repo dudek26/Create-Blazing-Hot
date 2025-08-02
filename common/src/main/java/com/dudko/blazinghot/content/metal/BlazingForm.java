@@ -359,7 +359,7 @@ public class BlazingForm {
 			int coolingMultiplier = 3;
 			int baseDuration = 50;
 			int minDuration = 12;
-			int castingDuration = Math.toIntExact((amount.get() / MultiAmount.INGOT.get()) * baseDuration);
+			int castingDuration = Math.toIntExact((amount.droplets() / MultiAmount.INGOT.droplets()) * baseDuration);
 
 			if (castingTime < 0) {
 				castingTime = Math.max(minDuration, castingDuration);
@@ -368,7 +368,10 @@ public class BlazingForm {
 				coolingTime = castingTime * coolingMultiplier;
 			}
 			if (fuelCost == null) {
-				fuelCost = amount.divide(2);
+				fuelCost =
+						MultiAmount
+								.fromBucketFraction(1, 20)
+								.multiply((float) amount.droplets() / MultiAmount.INGOT.droplets());
 			}
 
 			return new BlazingForm(this);
