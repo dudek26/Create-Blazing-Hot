@@ -7,10 +7,10 @@
     }
   ],
   "mixerFuel": {
-    "amount": 16200,
+    "amount": 6000,
     "fluidTag": "blazinghot:blaze_mixer_fuel"
   },
-  "processingTime": 800,
+  "processingTime": 300,
   "results": [
     {
       "amount": 12000,

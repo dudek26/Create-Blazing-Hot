@@ -10,6 +10,7 @@ import com.dudko.blazinghot.registry.BlazingCreativeTabs;
 import com.dudko.blazinghot.registry.BlazingEntities;
 import com.dudko.blazinghot.registry.BlazingFluids;
 import com.dudko.blazinghot.registry.BlazingItems;
+import com.dudko.blazinghot.registry.BlazingMetals;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
@@ -53,6 +54,8 @@ public class BlazingHot {
 		BlazingEntities.register();
 		BlazingBlockEntityTypes.register();
 		BlazingRecipeTypes.register();
+
+		BlazingMetals.init();
 
 		finalizeRegistrate();
 	}

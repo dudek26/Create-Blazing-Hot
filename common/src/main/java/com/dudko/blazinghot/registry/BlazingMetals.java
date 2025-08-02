@@ -12,51 +12,97 @@ import net.minecraft.world.level.material.Fluids;
 
 public class BlazingMetals {
 
+	public static void init() {
+	}
+
 	public static List<BlazingMetal> ALL = new ArrayList<>();
 
 	// Vanilla
 	public static BlazingMetal
 			IRON =
-			BlazingMetal.create("iron", b -> b.createForms().withForms(BlazingForms.ROD).waterCobble().build()),
+			BlazingMetal
+					.create("iron", b -> b.createForms().withForms(BlazingForms.ROD).waterCobble().build())
+					.register(),
 			COPPER =
-					BlazingMetal.create("copper",
-							b -> b.createForms().withForms(BlazingForms.ROD, BlazingForms.WIRE).waterCobble().build()),
+					BlazingMetal
+							.create("copper",
+									b -> b
+											.createForms()
+											.withForms(BlazingForms.ROD, BlazingForms.WIRE)
+											.waterCobble()
+											.build())
+							.register(),
 			GOLD =
-					BlazingMetal.create("gold",
-							b -> b.createForms().withForms(BlazingForms.ROD, BlazingForms.WIRE).waterCobble().build()),
+					BlazingMetal
+							.create("gold",
+									b -> b
+											.createForms()
+											.withForms(BlazingForms.ROD, BlazingForms.WIRE)
+											.waterCobble()
+											.build())
+							.register(),
 			ANCIENT_DEBRIS =
-					BlazingMetal.create("ancient_debris",
-							b -> b
-									.withForms(BlazingForms.ANCIENT_DEBRIS, BlazingForms.NETHERITE_SCRAP)
-									.addFluidInteraction(Fluids.WATER,
-											() -> AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get())
-									.build()),
+					BlazingMetal
+							.create("ancient_debris",
+									b -> b
+											.withForms(BlazingForms.ANCIENT_DEBRIS, BlazingForms.NETHERITE_SCRAP)
+											.addFluidInteraction(Fluids.WATER,
+													() -> AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get())
+											.build())
+							.register(),
 			NETHERITE =
-					BlazingMetal.create("netherite",
-							b -> b
-									.withForms(BlazingForms.NETHERITE_INGOT)
-									.addFluidInteraction(Fluids.WATER,
-											() -> AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get())
-									.build());
+					BlazingMetal
+							.create("netherite",
+									b -> b
+											.withForms(BlazingForms.NETHERITE_INGOT)
+											.addFluidInteraction(Fluids.WATER,
+													() -> AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get())
+											.build())
+							.register();
 
 	// Create
 	public static BlazingMetal
 			BRASS =
-			BlazingMetal.create("brass",
-					b -> b.fromMods(Mods.CREATE).createForms().withForms(BlazingForms.ROD).waterCobble().build()),
+			BlazingMetal
+					.create("brass",
+							b -> b
+									.fromMods(Mods.CREATE)
+									.createForms()
+									.withForms(BlazingForms.ROD)
+									.waterCobble()
+									.build())
+					.register(),
 			ANDESITE =
-					BlazingMetal.create("andesite",
-							b -> b.fromMods(Mods.CREATE).withForms(BlazingForms.ANDESITE_ALLOY).waterCobble().build());
+					BlazingMetal
+							.create("andesite",
+									b -> b
+											.fromMods(Mods.CREATE)
+											.withForms(BlazingForms.ANDESITE_ALLOY)
+											.waterCobble()
+											.build())
+							.register(),
+			ZINC =
+					BlazingMetal
+							.create("zinc",
+									b -> b
+											.fromMods(Mods.CREATE)
+											.vanillaForms()
+											.withForms(BlazingForms.ZINC_SHEET)
+											.waterCobble()
+											.build())
+							.register();
 
 	// Create: Blazing Hot
 	public static BlazingMetal
 			BLAZE_GOLD =
-			BlazingMetal.create("blaze_gold",
-					b -> b
-							.fromMods(Mods.BLAZINGHOT)
-							.createForms()
-							.withForms(BlazingForms.BLAZE_GOLD_ROD)
-							.addFluidInteraction(Fluids.WATER, () -> Blocks.NETHERRACK)
-							.build());
+			BlazingMetal
+					.create("blaze_gold",
+							b -> b
+									.fromMods(Mods.BLAZINGHOT)
+									.createForms()
+									.withForms(BlazingForms.BLAZE_GOLD_ROD)
+									.addFluidInteraction(Fluids.WATER, () -> Blocks.NETHERRACK)
+									.build())
+					.register();
 
 }

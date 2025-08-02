@@ -16,7 +16,7 @@ public class BlazingForms {
 					b -> b
 							.withAmount(MultiAmount.INGOT)
 							.withTagFolder("ingots")
-							.withMeltingTime(400)
+							.withMeltingTime(200)
 							.mechanicalMixerMeltable(true)
 							.withMold(Molds.INGOT)
 							.build()),
@@ -25,7 +25,7 @@ public class BlazingForms {
 							b -> b
 									.withAmount(MultiAmount.NUGGET)
 									.withTagFolder("nuggets")
-									.withMeltingTime(65)
+									.withMeltingTime(30)
 									.mechanicalMixerMeltable(true)
 									.withMold(Molds.INGOT)
 									.build()),
@@ -39,11 +39,13 @@ public class BlazingForms {
 					b -> b
 							.withAmount(MultiAmount.ROD)
 							.withTagFolder("rods")
-							.withMeltingTime(250)
+							.withMeltingTime(125)
 							.mechanicalMixerMeltable(true)
 							.withMold(Molds.ROD)
 							.optional(true)
-							.build()), WIRE = ROD.createFrom("wire", b -> b.withMold(null).build()),
+							.build()),
+			WIRE =
+					ROD.createFrom("wire", b -> b.withTagFolder("wires").withMold(null).build()),
 			ZINC_SHEET =
 					SHEET.asOptional(true);
 
@@ -53,7 +55,7 @@ public class BlazingForms {
 			BlazingForm.create("ancient_debris",
 					b -> b
 							.withAmount(MultiAmount.RAW_ORE)
-							.withMeltingTime(500)
+							.withMeltingTime(300)
 							.withCustomItem(Items.ANCIENT_DEBRIS)
 							.build()),
 			NETHERITE_SCRAP =
@@ -65,5 +67,5 @@ public class BlazingForms {
 	public static BlazingForm BLAZE_GOLD_ROD = ROD.asOptional(false);
 	public static BlazingForm
 			ANDESITE_ALLOY =
-			INGOT.createFrom("andesite_alloy", b -> b.withCustomItem(AllItems.ANDESITE_ALLOY).build());
+			INGOT.createFrom("andesite_alloy", b -> b.withCustomItem(AllItems.ANDESITE_ALLOY.getId()).build());
 }

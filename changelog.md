@@ -15,6 +15,8 @@ Create: Blazing Hot 0.7
 * Updated texture for Nether Compound
 * Fluids in recipes now use amounts appropriate for their platform (Forge - mb, Fabric - droplets)
 * Renamed `blazinghot:fuel` to `mixerFuel` in Blaze Mixing recipes
+* Adjusted duration of melting recipes
+* Adjusted fuel cost for blaze mixing melting recipes
 
 ### Fixed:
 

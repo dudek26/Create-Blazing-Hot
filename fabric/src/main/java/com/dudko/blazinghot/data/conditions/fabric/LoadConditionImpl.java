@@ -41,7 +41,10 @@ public class LoadConditionImpl {
 						.getValues()
 						.get(0)));
 			}
-			default -> throw new IllegalArgumentException("Unknown fabric condition type: " + condition.getType());
+			case ITEMS_REGISTERED -> {
+				return DefaultResourceConditions.itemsRegistered(LoadConditionHelper.itemLikeValues(condition.getValues()));
+			}
+			default -> throw new IllegalArgumentException("Unknown fabric condition type: " + condition.getType().id);
 		}
 
 	}

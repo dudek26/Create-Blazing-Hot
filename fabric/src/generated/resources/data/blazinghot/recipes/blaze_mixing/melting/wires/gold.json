@@ -1,9 +1,9 @@
 {
   "fabric:load_conditions": [
     {
-      "condition": "fabric:any_mod_loaded",
+      "condition": "fabric:tags_populated",
       "values": [
-        "createaddition"
+        "c:wires/gold"
       ]
     }
   ],
@@ -15,10 +15,10 @@
     }
   ],
   "mixerFuel": {
-    "amount": 5063,
+    "amount": 2250,
     "fluidTag": "blazinghot:blaze_mixer_fuel"
   },
-  "processingTime": 250,
+  "processingTime": 125,
   "results": [
     {
       "amount": 4500,

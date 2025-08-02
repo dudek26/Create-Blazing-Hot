@@ -2,8 +2,11 @@
   "type": "blazinghot:blaze_mixing",
   "conditions": [
     {
-      "type": "forge:mod_loaded",
-      "modid": "createaddition"
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:wires/gold"
+      }
     }
   ],
   "heatRequirement": "superheated",
@@ -13,10 +16,10 @@
     }
   ],
   "mixerFuel": {
-    "amount": 62,
+    "amount": 36,
     "fluidTag": "blazinghot:blaze_mixer_fuel"
   },
-  "processingTime": 250,
+  "processingTime": 125,
   "results": [
     {
       "amount": 72,

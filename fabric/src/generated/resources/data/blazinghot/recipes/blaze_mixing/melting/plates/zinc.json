@@ -1,0 +1,28 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "values": [
+        "c:zinc_plates"
+      ]
+    }
+  ],
+  "type": "blazinghot:blaze_mixing",
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "c:zinc_plates"
+    }
+  ],
+  "mixerFuel": {
+    "amount": 4500,
+    "fluidTag": "blazinghot:blaze_mixer_fuel"
+  },
+  "processingTime": 200,
+  "results": [
+    {
+      "amount": 9000,
+      "fluid": "blazinghot:molten_zinc"
+    }
+  ]
+}

@@ -11,6 +11,7 @@ import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.compat.Mods;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.dudko.blazinghot.registry.BlazingForms;
+import com.dudko.blazinghot.registry.BlazingMetals;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 
 import net.minecraft.resources.ResourceLocation;
@@ -36,6 +37,11 @@ public class BlazingMetal {
 
 	public static BlazingMetal create(String name, Function<Builder, BlazingMetal> builderFunction) {
 		return builderFunction.apply(new Builder(name));
+	}
+
+	public BlazingMetal register() {
+		BlazingMetals.ALL.add(this);
+		return this;
 	}
 
 	public String getMoltenName() {
@@ -101,6 +107,7 @@ public class BlazingMetal {
 		 * <p>Never add AllPaletteStoneTypes directly by {@code [...].getBaseBlock()}! You should always add them by <code>() -> [...].getBaseBlock().get()</code></p>
 		 * <p>Fabric: remember to update {@link com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl#fluidTags}</p>
 		 */
+		@SuppressWarnings("JavadocReference")
 		public Builder addFluidInteraction(Fluid fluid, NonNullSupplier<Block> block) {
 			this.fluidInteractions.put(fluid, block);
 			return this;

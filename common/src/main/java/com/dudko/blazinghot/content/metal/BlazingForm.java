@@ -84,15 +84,20 @@ public class BlazingForm {
 	public BlazingForm createFrom(String name, Function<Builder, BlazingForm> builderFunction) {
 		Builder builder = new Builder(name);
 		builder.tagFolder = tagFolder;
-		builder.mods = mods;
+		builder.mods = new ArrayList<>(mods);
 		builder.customLocation = customLocation;
 
+		builder.mold = mold;
 		builder.amount = amount;
+
 		builder.meltingTime = meltingTime;
 		builder.castingTime = castingTime;
+		builder.coolingTime = coolingTime;
+
 		builder.fuelCost = fuelCost;
 
 		builder.mechanicalMixerMeltable = mechanicalMixerMeltable;
+		builder.optional = optional;
 
 		return builderFunction.apply(builder);
 	}
@@ -104,12 +109,33 @@ public class BlazingForm {
 
 	public Ingredient getMeltingIngredient(BlazingMetal metal) {
 		if (customLocation != null) return Ingredient.of(MultiRegistries.getItemFromRegistry(customLocation).get());
-		TagKey<Item> tag = CommonTags.itemTagOf(tagFolder, metal.name, CommonTags.Namespace.platform());
-		return Ingredient.of(tag);
+		return Ingredient.of(getItemTag(metal));
 	}
 
-	public LoadCondition<?> getLoadConditions(BlazingMetal metal) {
-		if (this.mods.isEmpty()) return DefaultLoadConditions.
+	public List<LoadCondition<?>> getLoadConditions(BlazingMetal metal) {
+		List<Mods> formMods = this.mods.stream().filter(f -> !f.alwaysIncluded).toList();
+		List<Mods> metalMods = metal.mods.stream().filter(m -> !m.alwaysIncluded).toList();
+
+		List<LoadCondition<?>> conditions = new ArrayList<>();
+		if (!metalMods.isEmpty()) conditions.add(DefaultLoadConditions.anyModLoaded(metalMods));
+		if (!formMods.isEmpty()) conditions.add(DefaultLoadConditions.anyModLoaded(formMods));
+		if (optional) {
+			if (customLocation != null) conditions.add(DefaultLoadConditions.itemsRegistered(MultiRegistries
+					.getItemFromRegistry(customLocation)
+					.get()));
+			else conditions.add(DefaultLoadConditions.tagsPopulated(getItemTag(metal)));
+		}
+
+		return conditions;
+	}
+
+	public String getMeltingRecipeName(BlazingMetal metal) {
+		if (customLocation != null) return "melting/" + customLocation.getPath();
+		return "melting/" + tagFolder + "/" + metal.name;
+	}
+
+	public TagKey<Item> getItemTag(BlazingMetal metal) {
+		return CommonTags.itemTagOf(tagFolder, metal.name, CommonTags.Namespace.platform());
 	}
 
 	// Shortcuts
@@ -278,7 +304,7 @@ public class BlazingForm {
 		 *  If not overridden:
 		 * 	<li>casting time is determined from amount</li>
 		 * 	<li>cooling time is thrice the value of casting time</li>
-		 * 	<li>fuel cost is determined from melting time</li>
+		 * 	<li>fuel cost is determined from amount</li>
 		 * </ul>
 		 *
 		 * @throws NullPointerException          if amount is not specified
@@ -305,11 +331,7 @@ public class BlazingForm {
 				coolingTime = castingDuration * coolingMultiplier;
 			}
 			if (fuelCost == null) {
-				float meltingFactor = 1;
-				if (meltingTime != 0) {
-					meltingFactor = meltingTime / 100f;
-				}
-				fuelCost = MultiAmount.fromBucketFraction(1, 40).multiply(meltingFactor);
+				fuelCost = amount.divide(2);
 			}
 
 			return new BlazingForm(this);

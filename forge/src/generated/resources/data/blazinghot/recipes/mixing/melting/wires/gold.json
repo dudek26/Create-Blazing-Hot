@@ -2,8 +2,11 @@
   "type": "create:mixing",
   "conditions": [
     {
-      "type": "forge:mod_loaded",
-      "modid": "createaddition"
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:wires/gold"
+      }
     }
   ],
   "heatRequirement": "superheated",
@@ -12,7 +15,7 @@
       "tag": "forge:wires/gold"
     }
   ],
-  "processingTime": 750,
+  "processingTime": 375,
   "results": [
     {
       "amount": 72,

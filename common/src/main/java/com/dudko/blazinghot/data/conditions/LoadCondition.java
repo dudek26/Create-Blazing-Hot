@@ -53,7 +53,8 @@ public class LoadCondition<T> {
 		ALL_MODS_LOADED("all_mods_loaded"),
 		NOT("not"),
 		AND("and"),
-		OR("or");
+		OR("or"),
+		ITEMS_REGISTERED("items_registered");
 
 		public final String id;
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.ItemLike;
 
 public class LoadConditionHelper {
 
@@ -22,6 +23,14 @@ public class LoadConditionHelper {
 			throw new IllegalArgumentException("Condition values must be tag keys");
 		}
 		return values.stream().map(c -> (TagKey<R>) c).toArray(TagKey[]::new);
+	}
+
+	public static <T> ItemLike[] itemLikeValues(List<T> values) {
+		if (values.isEmpty()) return new ItemLike[]{};
+		if (!(values.get(0) instanceof ItemLike)) {
+			throw new IllegalArgumentException("Condition values must be item likes");
+		}
+		return values.stream().map(c -> (ItemLike) c).toArray(ItemLike[]::new);
 	}
 
 	@ExpectPlatform

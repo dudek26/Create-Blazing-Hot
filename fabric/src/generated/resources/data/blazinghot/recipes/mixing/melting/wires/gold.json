@@ -1,9 +1,9 @@
 {
   "fabric:load_conditions": [
     {
-      "condition": "fabric:any_mod_loaded",
+      "condition": "fabric:tags_populated",
       "values": [
-        "createaddition"
+        "c:wires/gold"
       ]
     }
   ],
@@ -14,7 +14,7 @@
       "tag": "c:wires/gold"
     }
   ],
-  "processingTime": 750,
+  "processingTime": 375,
   "results": [
     {
       "amount": 4500,

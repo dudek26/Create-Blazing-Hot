@@ -1,0 +1,24 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "values": [
+        "c:iron_rods"
+      ]
+    }
+  ],
+  "type": "create:mixing",
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "c:iron_rods"
+    }
+  ],
+  "processingTime": 375,
+  "results": [
+    {
+      "amount": 4500,
+      "fluid": "blazinghot:molten_iron"
+    }
+  ]
+}
