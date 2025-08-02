@@ -1,4 +1,4 @@
-// 1.20.1	2025-08-03T00:00:16.1419817	Create: Blazing Hot/Blazing Hot Processing Recipes
+// 1.20.1	2025-08-03T00:21:13.8641192	Create: Blazing Hot/Blazing Hot Processing Recipes
 c20e67420efb146ac38174f43a184ca1855451bd data\blazinghot\recipes\mixing\melting\rods\gold.json
 82f99e045761d534c9ce934606f51e04a9e08a8e data\blazinghot\recipes\mixing\melting\nuggets\zinc.json
 205be55e911c2775d1256489cb571e2dc072a35b data\blazinghot\recipes\filling\copper_apple.json
@@ -72,6 +72,7 @@ db6650c33e9e5d0d82dcbab57e6d961a9908183b data\blazinghot\recipes\casting\sturdy\
 eb506e615c83c023a4f0adc4ed2d5fa6542a80cf data\blazinghot\recipes\casting\compat\createaddition\sturdy\rod\brass.json
 0c83bd22629cf4db296a4cefa8eef3d053261758 data\blazinghot\recipes\filling\blaze_apple.json
 90bfa8df280a9d71f253204a3991fede71a22be4 data\blazinghot\recipes\blaze_mixing\melting\plates\iron.json
+19afe8151fc8864e89a3e8cbb9518b159ff5044d data\blazinghot\recipes\mixing\melting\wires\iron.json
 ba43466273fd350894cf679ee2bd3acba31a722c data\blazinghot\recipes\mixing\melting\ingots\blaze_gold.json
 57931e0ce37252644ff765dd8a5fe900fdc5961f data\blazinghot\recipes\blaze_mixing\molten_blaze_gold.json
 2125ccc3df93458d0578f45fb259e005e0b9c27e data\blazinghot\recipes\casting\sturdy\sheet\blaze_gold.json
@@ -113,6 +114,7 @@ e065ca18e621e4a061a08f3e8b4108c7b536b19e data\blazinghot\recipes\mixing\melting\
 a937a81e90cc2c02832a966ba270d68373e9dce8 data\blazinghot\recipes\filling\zinc_carrot.json
 0a4b07d9a0e611ea6df494cdbae8ed3d3fc50b03 data\blazinghot\recipes\crushing\soul_sand.json
 9b22443ffccbd9e2c73ea818d654fff627197df3 data\blazinghot\recipes\blaze_mixing\melting\ingots\brass.json
+2b41f3a2e483f27d38b9f5c27db83d164d845f4e data\blazinghot\recipes\blaze_mixing\melting\wires\iron.json
 2ba3b23ddf682b9b34471744fce3e8370d4f29da data\blazinghot\recipes\blaze_mixing\melting\rods\copper.json
 d4ec6c52ec9b6c32fdf3b44122b159abf0ec9e53 data\blazinghot\recipes\casting\sturdy\ingot\blaze_gold.json
 7cc7fab4cec2ea14e8d0ddfd8de532136db617fc data\blazinghot\recipes\casting\sturdy\nugget\iron.json

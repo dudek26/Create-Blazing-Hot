@@ -24,7 +24,10 @@ public class BlazingMetals {
 					.create("iron",
 							b -> b
 									.createForms()
-									.withForms(BlazingForms.OPTIONAL_ROD, BlazingForms.COMPAT_ROD)
+									.withForms(BlazingForms.OPTIONAL_ROD,
+											BlazingForms.OPTIONAL_WIRE,
+											BlazingForms.COMPAT_ROD,
+											BlazingForms.COMPAT_WIRE)
 									.waterCobble()
 									.build())
 					.register(),
