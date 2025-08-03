@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "blazinghot:molten_ancient_debris_bucket"
+              "blazinghot:molten_gold_bucket"
             ]
           }
         ]
@@ -18,7 +18,7 @@
         "items": [
           {
             "items": [
-              "blazinghot:molten_iron_bucket"
+              "blazinghot:molten_blaze_gold_bucket"
             ]
           }
         ]
@@ -30,50 +30,14 @@
         "items": [
           {
             "items": [
-              "blazinghot:molten_zinc_bucket"
+              "blazinghot:molten_netherite_bucket"
             ]
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "3": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "blazinghot:molten_gold_bucket"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "4": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "blazinghot:molten_blaze_gold_bucket"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "5": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "blazinghot:molten_copper_bucket"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "6": {
+    "9": {
       "conditions": {
         "items": [
           {
@@ -85,12 +49,60 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
+    "3": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blazinghot:molten_andesite_bucket"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "4": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blazinghot:molten_zinc_bucket"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "5": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blazinghot:molten_iron_bucket"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "6": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blazinghot:molten_copper_bucket"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "7": {
       "conditions": {
         "items": [
           {
             "items": [
-              "blazinghot:molten_netherite_bucket"
+              "blazinghot:molten_ancient_debris_bucket"
             ]
           }
         ]
@@ -102,7 +114,7 @@
         "items": [
           {
             "items": [
-              "blazinghot:molten_andesite_bucket"
+              "blazinghot:molten_sturdy_alloy_bucket"
             ]
           }
         ]
@@ -153,6 +165,9 @@
     ],
     [
       "8"
+    ],
+    [
+      "9"
     ]
   ],
   "rewards": {

@@ -130,7 +130,17 @@ public class BlazingMetals {
 									.withForms(BlazingForms.ROD)
 									.addFluidInteraction(Fluids.WATER, () -> Blocks.NETHERRACK)
 									.build())
-					.register();
+					.register(),
+			STURDY_ALLOY =
+					BlazingMetal
+							.create("sturdy_alloy",
+									b -> b
+											.fromMods(Mods.BLAZINGHOT)
+											.withForms(BlazingForms.STURDY_ALLOY, BlazingForms.STURDY_SHEET)
+											.addFluidInteraction(Fluids.WATER,
+													() -> AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get())
+											.build())
+							.register();
 
 	/**
 	 * @see BlazingAdvancements#ALL_MOLTEN_METALS

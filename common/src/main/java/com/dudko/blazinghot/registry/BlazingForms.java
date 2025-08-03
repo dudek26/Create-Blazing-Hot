@@ -49,7 +49,7 @@ public class BlazingForms {
 							.setFlags(Flag.MELTING)
 							.build()),
 			OPTIONAL_WIRE =
-					OPTIONAL_ROD.createFrom("wire", b -> b.withTagFolder("wires").withMold(null).build()),
+					OPTIONAL_ROD.createFrom("wire", b -> b.withTagFolder("wires").build()),
 			OPTIONAL_SHEET =
 					SHEET.withFlags(Flag.MELTING).asOptional(true);
 
@@ -82,7 +82,12 @@ public class BlazingForms {
 					SHEET.fromMods(Mods.CREATE);
 
 	// Create: Blazing Hot
-	public static BlazingForm ROD = OPTIONAL_ROD.withFlags(Flag.MELTING, Flag.CASTING).asOptional(false);
+	public static BlazingForm ROD = OPTIONAL_ROD.withFlags(Flag.MELTING, Flag.CASTING).asOptional(false),
+			STURDY_ALLOY =
+					INGOT.createFrom("sturdy_alloy",
+							b -> b.withCustomItem(BlazingItems.STURDY_ALLOY.getId()).mechanicalMixerMeltable(false).build()),
+			STURDY_SHEET =
+					SHEET.createFrom("sturdy_sheet", b -> b.withCustomItem(AllItems.STURDY_SHEET.getId()).build());
 
 	// Compat forms
 	public static BlazingForm COMPAT_ROD = ROD.withFlags(Flag.CASTING).fromMods(Mods.CREATE_ADDITIONS),
