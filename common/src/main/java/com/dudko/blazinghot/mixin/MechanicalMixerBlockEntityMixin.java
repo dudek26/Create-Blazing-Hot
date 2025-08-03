@@ -8,10 +8,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.mixin_interfaces.IAdvancementBehaviour;
 import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
+import com.dudko.blazinghot.registry.BlazingMetals;
 import com.simibubi.create.content.kinetics.mixer.MechanicalMixerBlockEntity;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
@@ -53,10 +53,10 @@ public abstract class MechanicalMixerBlockEntityMixin extends BasinOperatingBloc
 			remap = false)
 	private void blazinghot$meltingAdvancements(CallbackInfo ci) {
 		if (currentRecipe instanceof MixingRecipe recipe) {
-			if (MultiFluids.recipeResultContains(recipe, MoltenMetals.GOLD.fluidTag())) {
+			if (MultiFluids.recipeResultContains(recipe, BlazingMetals.GOLD.getFluidTag())) {
 				blazinghot$award(BlazingAdvancements.MOLTEN_GOLD);
 			}
-			if (MultiFluids.recipeResultContains(recipe, MoltenMetals.BLAZE_GOLD.fluidTag())) {
+			if (MultiFluids.recipeResultContains(recipe, BlazingMetals.BLAZE_GOLD.getFluidTag())) {
 				blazinghot$award(BlazingAdvancements.MOLTEN_BLAZE_GOLD);
 			}
 		}

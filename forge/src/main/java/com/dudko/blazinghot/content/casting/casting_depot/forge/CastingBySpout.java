@@ -37,6 +37,8 @@ public class CastingBySpout {
 		return -1;
 	}
 
+	@SuppressWarnings("DataFlowIssue")
+	@Nullable
 	public static CastingRecipe findRecipe(Level world, int requiredAmount, ItemStack stack, FluidStack availableFluid) {
 		FluidStack toCast = availableFluid.copy();
 		toCast.setAmount(requiredAmount);

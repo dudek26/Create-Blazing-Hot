@@ -27,11 +27,11 @@ import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.content.metal.MoltenMetal;
-import com.dudko.blazinghot.content.metal.MoltenMetals;
+import com.dudko.blazinghot.content.metal.BlazingMetal;
 import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
+import com.dudko.blazinghot.registry.BlazingMetals;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.press.PressingRecipe;
@@ -50,37 +50,37 @@ public class SequencedAssemblyRecipeGen extends BlazingRecipeProvider {
 
 	GeneratedRecipe
 			ENCHANTED_GOLDEN_APPLE =
-			enchantedMetalApple(MoltenMetals.GOLD,
+			enchantedMetalApple(BlazingMetals.GOLD,
 					stellarGoldenApple(),
 					GILDED_STELLAR_GOLDEN_APPLE,
 					Items.ENCHANTED_GOLDEN_APPLE),
 
 	ENCHANTED_BLAZE_APPLE =
-			enchantedMetalApple(MoltenMetals.BLAZE_GOLD,
+			enchantedMetalApple(BlazingMetals.BLAZE_GOLD,
 					stellarBlazeApple(),
 					BURNING_STELLAR_BLAZE_APPLE,
 					BlazingItems.ENCHANTED_BLAZE_APPLE),
 
 	ENCHANTED_IRON_APPLE =
-			enchantedMetalApple(MoltenMetals.IRON,
+			enchantedMetalApple(BlazingMetals.IRON,
 					stellarIronApple(),
 					HEAVY_STELLAR_IRON_APPLE,
 					BlazingItems.ENCHANTED_IRON_APPLE),
 
 	ENCHANTED_BRASS_APPLE =
-			enchantedMetalApple(MoltenMetals.BRASS,
+			enchantedMetalApple(BlazingMetals.BRASS,
 					stellarBrassApple(),
 					BRASSY_STELLAR_BRASS_APPLE,
 					BlazingItems.ENCHANTED_BRASS_APPLE),
 
 	ENCHANTED_ZINC_APPLE =
-			enchantedMetalApple(MoltenMetals.ZINC,
+			enchantedMetalApple(BlazingMetals.ZINC,
 					stellarZincApple(),
 					GALVANIZED_STELLAR_ZINC_APPLE,
 					BlazingItems.ENCHANTED_ZINC_APPLE),
 
 	ENCHANTED_COPPER_APPLE =
-			enchantedMetalApple(MoltenMetals.COPPER,
+			enchantedMetalApple(BlazingMetals.COPPER,
 					stellarCopperApple(),
 					COATED_STELLAR_COPPER_APPLE,
 					BlazingItems.ENCHANTED_COPPER_APPLE),
@@ -109,14 +109,15 @@ public class SequencedAssemblyRecipeGen extends BlazingRecipeProvider {
 							.addStep(DeployerApplicationRecipe::new, r -> r.require(cogwheel()))
 							.addStep(DeployerApplicationRecipe::new, r -> r.require(extensionPole())));
 
-	private GeneratedRecipe enchantedMetalApple(MoltenMetal metal, ItemLike input, ItemLike transition, ItemLike output) {
+	private GeneratedRecipe enchantedMetalApple(BlazingMetal metal, ItemLike input, ItemLike transition, ItemLike output) {
 		return create(output.asItem().toString(),
 				b -> b
 						.require(input)
 						.transitionTo(transition)
 						.addOutput(output, 1)
 						.loops(6)
-						.addBlazingStep(FillingRecipe::new, r -> r.require(metal.fluidTag(), MultiAmount.INGOT_COVER))
+						.addBlazingStep(FillingRecipe::new,
+								r -> r.require(metal.getFluidTag(), MultiAmount.INGOT_COVER))
 						.addStep(DeployerApplicationRecipe::new, r -> r.require(diamond()))
 						.addStep(PressingRecipe::new, r -> r));
 	}

@@ -145,7 +145,11 @@ public class BlazingForm {
 	}
 
 	public TagKey<Item> getItemTag(BlazingMetal metal) {
-		return CommonTags.itemTagOf(tagFolder, metal.name, CommonTags.Namespace.platform());
+		return getItemTag(metal.name);
+	}
+
+	public TagKey<Item> getItemTag(String metal) {
+		return CommonTags.itemTagOf(tagFolder, metal, CommonTags.Namespace.platform());
 	}
 
 	public List<Mods> getMods(BlazingMetal metal) {

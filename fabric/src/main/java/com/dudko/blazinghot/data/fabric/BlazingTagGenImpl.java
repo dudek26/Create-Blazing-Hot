@@ -1,12 +1,10 @@
 package com.dudko.blazinghot.data.fabric;
 
 import static com.dudko.blazinghot.data.BlazingTagGen.OPTIONAL_TAGS;
-import static com.dudko.blazinghot.registry.CommonTags.itemTagOf;
 
-import com.dudko.blazinghot.content.metal.Forms;
-import com.dudko.blazinghot.content.metal.MoltenMetal;
-import com.dudko.blazinghot.content.metal.MoltenMetals;
+import com.dudko.blazinghot.content.metal.BlazingMetal;
 import com.dudko.blazinghot.data.BlazingTagGen;
+import com.dudko.blazinghot.registry.BlazingMetals;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
@@ -52,8 +50,8 @@ public class BlazingTagGenImpl {
 			}
 		}
 
-		for (MoltenMetal metal : MoltenMetals.ALL) {
-			TagKey<Fluid> tag = CommonTags.fluidTagOf(metal.moltenName(), CommonTags.Namespace.platform());
+		for (BlazingMetal metal : BlazingMetals.ALL) {
+			TagKey<Fluid> tag = CommonTags.fluidTagOf(metal.getMoltenName(), CommonTags.Namespace.platform());
 
 			tagAppender(prov, tag);
 		}
@@ -89,6 +87,7 @@ public class BlazingTagGenImpl {
 			if (tag.alwaysDatagen) BlazingTagGen.tagAppender(prov, tag);
 		}
 
+		/*
 		for (MoltenMetal metal : MoltenMetals.ALL) {
 			if (metal.ignoreTagGen) continue;
 			for (Forms form : metal.nonCustomForms()) {
@@ -99,6 +98,7 @@ public class BlazingTagGenImpl {
 				tagAppender(prov, tag);
 			}
 		}
+		*/
 
 		for (CommonTags.Items tag : CommonTags.Items.values()) {
 			tagAppender(prov, tag.tag());

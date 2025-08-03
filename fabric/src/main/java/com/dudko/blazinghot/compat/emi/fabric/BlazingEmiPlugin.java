@@ -12,11 +12,11 @@ import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
-import com.dudko.blazinghot.content.metal.MoltenMetal;
-import com.dudko.blazinghot.content.metal.MoltenMetals;
+import com.dudko.blazinghot.content.metal.BlazingMetal;
 import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.BlazingBlocks;
+import com.dudko.blazinghot.registry.BlazingMetals;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
 import com.simibubi.create.AllBlocks;
@@ -117,7 +117,7 @@ public class BlazingEmiPlugin implements EmiPlugin {
 				registry.addRecipe(new BlazeMixingEmiRecipe(BLAZE_AUTOMATIC_BREWING, recipe));
 		}
 
-		for (MoltenMetal metal : MoltenMetals.ALL) {
+		for (BlazingMetal metal : BlazingMetals.ALL) {
 			addMoltenMetalCollisions(registry, metal);
 		}
 
@@ -158,11 +158,11 @@ public class BlazingEmiPlugin implements EmiPlugin {
 		}
 	}
 
-	private void addMoltenMetalCollisions(EmiRegistry registry, MoltenMetal metal) {
+	private void addMoltenMetalCollisions(EmiRegistry registry, BlazingMetal metal) {
 
-		for (Map.Entry<Fluid, NonNullSupplier<Block>> entry : metal.getFluidInteractions().entrySet()) {
+		for (Map.Entry<Fluid, NonNullSupplier<Block>> entry : metal.fluidInteractions.entrySet()) {
 			addFluidCollision(registry,
-					metal.moltenName() + "_and_" + BuiltInRegistries.FLUID.getKey(entry.getKey()).getPath(),
+					metal.getMoltenName() + "_and_" + BuiltInRegistries.FLUID.getKey(entry.getKey()).getPath(),
 					BlazingFluidsImpl.MOLTEN_METALS.getFluid(metal),
 					entry.getKey(),
 					entry.getValue());

@@ -45,6 +45,7 @@ import net.minecraft.world.level.material.Fluid;
 /**
  * From {@link ProcessingRecipeBuilder}
  */
+@SuppressWarnings({"unused", "UnusedReturnValue"})
 public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 
 	public final ResourceLocation recipeId;

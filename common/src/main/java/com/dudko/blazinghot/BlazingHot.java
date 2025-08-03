@@ -3,7 +3,6 @@ package com.dudko.blazinghot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.registry.BlazingBlockEntityTypes;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingCreativeTabs;
@@ -42,8 +41,6 @@ public class BlazingHot {
 
 	public static void init() {
 		LOGGER.info("Create mod addon {} initializing!", NAME);
-
-		MoltenMetals.init();
 
 		BlazingTags.register();
 		CommonTags.register();

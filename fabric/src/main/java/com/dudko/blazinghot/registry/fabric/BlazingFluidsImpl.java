@@ -13,10 +13,11 @@ import java.util.function.Function;
 import javax.annotation.Nullable;
 
 import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.content.metal.MoltenMetal;
-import com.dudko.blazinghot.content.metal.MoltenMetals;
+import com.dudko.blazinghot.content.metal.BlazingMetal;
+import com.dudko.blazinghot.registry.BlazingMetals;
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.AllTags.AllFluidTags;
 import com.simibubi.create.foundation.data.CreateRegistrate;
@@ -56,7 +57,7 @@ public class BlazingFluidsImpl {
 
 	public static final MoltenMetalsList<SimpleFlowableFluid.Flowing>
 			MOLTEN_METALS =
-			new MoltenMetalsList<>(metal -> createFromLava(metal.moltenName()));
+			new MoltenMetalsList<>(metal -> createFromLava(metal.getMoltenName()));
 
 	public static final FluidEntry<SimpleFlowableFluid.Flowing> NETHER_LAVA = createFromLava("nether_lava", 10, 1);
 
@@ -135,14 +136,14 @@ public class BlazingFluidsImpl {
 	public static BlockState getFluidInteraction(FluidState fluidState, FluidState metFluidState) {
 		Fluid fluid = fluidState.getType();
 
-		for (MoltenMetal metal : MoltenMetals.ALL) {
-			for (Map.Entry<Fluid, NonNullSupplier<Block>> entry : metal.getFluidInteractions().entrySet()) {
+		for (BlazingMetal metal : BlazingMetals.ALL) {
+			for (Map.Entry<Fluid, NonNullSupplier<Block>> entry : metal.fluidInteractions.entrySet()) {
 
 				TagKey<Fluid> fluidTag = fluidTags.get(entry.getKey());
 
 				if (entry.getValue() == null) {
 					BlazingHot.LOGGER.debug("Null fluid interaction for {}, {}",
-							metal.moltenName(),
+							metal.getMoltenName(),
 							BuiltInRegistries.FLUID.getKey(entry.getKey()));
 					continue;
 				}
@@ -186,27 +187,27 @@ public class BlazingFluidsImpl {
 
 	public static class MoltenMetalsList<T extends SimpleFlowableFluid> implements Iterable<FluidEntry<T>> {
 
-		private static final int METAL_AMOUNT = MoltenMetals.ALL.size();
+		private static final int METAL_AMOUNT = BlazingMetals.ALL.size();
 
 		private final FluidEntry<?>[] values = new FluidEntry<?>[METAL_AMOUNT];
 
-		private static int metalOrdinal(MoltenMetal metal) {
-			return MoltenMetals.ALL.indexOf(metal);
+		private static int metalOrdinal(BlazingMetal metal) {
+			return BlazingMetals.ALL.indexOf(metal);
 		}
 
-		public MoltenMetalsList(Function<MoltenMetal, FluidEntry<? extends T>> filler) {
-			for (MoltenMetal metal : MoltenMetals.ALL) {
+		public MoltenMetalsList(Function<BlazingMetal, FluidEntry<? extends T>> filler) {
+			for (BlazingMetal metal : BlazingMetals.ALL) {
 				values[metalOrdinal(metal)] = filler.apply(metal);
 			}
 		}
 
 		@SuppressWarnings("unchecked")
-		public FluidEntry<T> get(MoltenMetal metal) {
+		public FluidEntry<T> get(BlazingMetal metal) {
 			return (FluidEntry<T>) values[metalOrdinal(metal)];
 		}
 
 		@SuppressWarnings("unchecked")
-		public T getFluid(MoltenMetal metal) {
+		public T getFluid(BlazingMetal metal) {
 			return (T) get(metal).getSource();
 		}
 
@@ -225,7 +226,7 @@ public class BlazingFluidsImpl {
 		}
 
 		@Override
-		public Iterator<FluidEntry<T>> iterator() {
+		public @NotNull Iterator<FluidEntry<T>> iterator() {
 			return new Iterator<>() {
 				private int index = 0;
 

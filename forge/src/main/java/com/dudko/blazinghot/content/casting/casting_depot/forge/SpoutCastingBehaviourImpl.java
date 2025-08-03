@@ -78,7 +78,9 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 		if (state == State.NONE) {
 			if (!depot.getOutputItem().isEmpty()) return;
 			if (!CastingBySpout.canItemBeCast(level, stack) || availableFluid.getAmount() < requiredAmount) return;
-			currentRecipeId = CastingBySpout.findRecipe(level, requiredAmount, stack, availableFluid).getId();
+			currentRecipe = CastingBySpout.findRecipe(level, requiredAmount, stack, availableFluid);
+			if (currentRecipe == null) return;
+			currentRecipeId = currentRecipe.getId();
 			state = State.FILLING;
 			depot.setVisualFluid(availableFluid.getFluid());
 			depot.notifyUpdate();

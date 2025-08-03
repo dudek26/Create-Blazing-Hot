@@ -1,14 +1,14 @@
 package com.dudko.blazinghot.data.recipe;
 
-import static com.dudko.blazinghot.content.metal.Forms.INGOT;
-import static com.dudko.blazinghot.content.metal.Forms.NUGGET;
-import static com.dudko.blazinghot.content.metal.Forms.PLATE;
-import static com.dudko.blazinghot.content.metal.Forms.ROD;
+import static com.dudko.blazinghot.registry.BlazingForms.INGOT;
+import static com.dudko.blazinghot.registry.BlazingForms.NUGGET;
+import static com.dudko.blazinghot.registry.BlazingForms.ROD;
+import static com.dudko.blazinghot.registry.BlazingForms.SHEET;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
+import com.dudko.blazinghot.registry.BlazingMetals;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.simibubi.create.AllBlocks;
@@ -24,6 +24,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
+@SuppressWarnings("unused")
 public class BlazingIngredients {
 
 	private static final CommonTags.Namespace TAG_NAMESPACE = CommonTags.Namespace.platform();
@@ -31,11 +32,11 @@ public class BlazingIngredients {
 	//    Shortcuts
 
 	public static TagKey<Item> ingotTag(String material) {
-		return INGOT.tag(material);
+		return INGOT.getItemTag(material);
 	}
 
 	public static TagKey<Item> nuggetTag(String material) {
-		return NUGGET.tag(material);
+		return NUGGET.getItemTag(material);
 	}
 
 	public static Item modApple(String material) {
@@ -81,31 +82,31 @@ public class BlazingIngredients {
 	//    Fluids
 
 	public static TagKey<Fluid> moltenGold() {
-		return MoltenMetals.GOLD.fluidTag();
+		return BlazingMetals.GOLD.getFluidTag();
 	}
 
 	public static TagKey<Fluid> moltenIron() {
-		return MoltenMetals.IRON.fluidTag();
+		return BlazingMetals.IRON.getFluidTag();
 	}
 
 	public static TagKey<Fluid> moltenCopper() {
-		return MoltenMetals.COPPER.fluidTag();
+		return BlazingMetals.COPPER.getFluidTag();
 	}
 
 	public static TagKey<Fluid> moltenZinc() {
-		return MoltenMetals.ZINC.fluidTag();
+		return BlazingMetals.ZINC.getFluidTag();
 	}
 
 	public static TagKey<Fluid> moltenBlazeGold() {
-		return MoltenMetals.BLAZE_GOLD.fluidTag();
+		return BlazingMetals.BLAZE_GOLD.getFluidTag();
 	}
 
 	public static TagKey<Fluid> moltenAncientDebris() {
-		return MoltenMetals.ANCIENT_DEBRIS.fluidTag();
+		return BlazingMetals.ANCIENT_DEBRIS.getFluidTag();
 	}
 
 	public static TagKey<Fluid> moltenNetherite() {
-		return MoltenMetals.NETHERITE.fluidTag();
+		return BlazingMetals.NETHERITE.getFluidTag();
 	}
 
 	public static Fluid water() {
@@ -253,7 +254,7 @@ public class BlazingIngredients {
 	}
 
 	public static TagKey<Item> blazeGoldSheet() {
-		return PLATE.tag(MoltenMetals.BLAZE_GOLD);
+		return SHEET.getItemTag(BlazingMetals.BLAZE_GOLD);
 	}
 
 	public static ItemLike sturdyAlloy() {
@@ -261,7 +262,7 @@ public class BlazingIngredients {
 	}
 
 	public static TagKey<Item> blazeGoldRod() {
-		return ROD.tag(MoltenMetals.BLAZE_GOLD);
+		return ROD.getItemTag(BlazingMetals.BLAZE_GOLD);
 	}
 
 	//    Food

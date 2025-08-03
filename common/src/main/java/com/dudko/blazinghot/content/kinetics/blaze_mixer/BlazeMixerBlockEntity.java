@@ -5,12 +5,12 @@ import java.util.Optional;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.config.BlazingConfigs;
-import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancement;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.mixin_interfaces.IAdvancementBehaviour;
 import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
+import com.dudko.blazinghot.registry.BlazingMetals;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.Create;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
@@ -180,11 +180,11 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 				}
 			}
 
-			if (MultiFluids.recipeResultContains(recipe, MoltenMetals.GOLD.fluidTag())) {
+			if (MultiFluids.recipeResultContains(recipe, BlazingMetals.GOLD.getFluidTag())) {
 				award(BlazingAdvancements.MOLTEN_GOLD);
 			}
 
-			if (MultiFluids.recipeResultContains(recipe, MoltenMetals.BLAZE_GOLD.fluidTag())) {
+			if (MultiFluids.recipeResultContains(recipe, BlazingMetals.BLAZE_GOLD.getFluidTag())) {
 				award(BlazingAdvancements.MOLTEN_BLAZE_GOLD);
 			}
 

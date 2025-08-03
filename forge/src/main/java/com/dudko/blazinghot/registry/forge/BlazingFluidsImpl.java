@@ -11,8 +11,8 @@ import javax.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.content.metal.MoltenMetal;
-import com.dudko.blazinghot.content.metal.MoltenMetals;
+import com.dudko.blazinghot.content.metal.BlazingMetal;
+import com.dudko.blazinghot.registry.BlazingMetals;
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
@@ -40,7 +40,7 @@ public class BlazingFluidsImpl {
 
 	public static MoltenMetalsList<ForgeFlowingFluid.Flowing>
 			MOLTEN_METALS =
-			new MoltenMetalsList<>(metal -> createFromLava(metal.moltenName()));
+			new MoltenMetalsList<>(metal -> createFromLava(metal.getMoltenName()));
 
 	public static FluidEntry<ForgeFlowingFluid.Flowing> NETHER_LAVA = createFromLava("nether_lava", 10, 1);
 
@@ -99,11 +99,11 @@ public class BlazingFluidsImpl {
 				AllFluids.CHOCOLATE.get(),
 				AllFluids.CHOCOLATE.get().getSource());
 
-		for (MoltenMetal metal : MoltenMetals.ALL) {
-			for (Map.Entry<Fluid, NonNullSupplier<Block>> entry : metal.getFluidInteractions().entrySet()) {
+		for (BlazingMetal metal : BlazingMetals.ALL) {
+			for (Map.Entry<Fluid, NonNullSupplier<Block>> entry : metal.fluidInteractions.entrySet()) {
 				if (entry.getValue() == null) {
 					BlazingHot.LOGGER.error("Null fluid interaction for {}, {}",
-							metal.moltenName(),
+							metal.getMoltenName(),
 							ForgeRegistries.FLUIDS.getKey(entry.getKey()));
 					continue;
 				}
@@ -137,11 +137,11 @@ public class BlazingFluidsImpl {
 
 	@Nullable
 	public static BlockState getFluidInteraction(FluidState fluidState, FluidState metFluidState) {
-		for (MoltenMetal metal : MoltenMetals.ALL) {
-			for (Map.Entry<Fluid, NonNullSupplier<Block>> entry : metal.getFluidInteractions().entrySet()) {
+		for (BlazingMetal metal : BlazingMetals.ALL) {
+			for (Map.Entry<Fluid, NonNullSupplier<Block>> entry : metal.fluidInteractions.entrySet()) {
 				if (entry.getValue() == null) {
 					BlazingHot.LOGGER.debug("Null fluid interaction for {}, {}",
-							metal.moltenName(),
+							metal.getMoltenName(),
 							ForgeRegistries.FLUIDS.getKey(entry.getKey()));
 					continue;
 				}
@@ -161,26 +161,26 @@ public class BlazingFluidsImpl {
 
 	public static class MoltenMetalsList<T extends ForgeFlowingFluid> implements Iterable<FluidEntry<T>> {
 
-		private static final int METAL_AMOUNT = MoltenMetals.ALL.size();
+		private static final int METAL_AMOUNT = BlazingMetals.ALL.size();
 
 		private final FluidEntry<?>[] values = new FluidEntry<?>[METAL_AMOUNT];
 
-		private static int metalOrdinal(MoltenMetal metal) {
-			return MoltenMetals.ALL.indexOf(metal);
+		private static int metalOrdinal(BlazingMetal metal) {
+			return BlazingMetals.ALL.indexOf(metal);
 		}
 
-		public MoltenMetalsList(Function<MoltenMetal, FluidEntry<? extends T>> filler) {
-			for (MoltenMetal metal : MoltenMetals.ALL) {
+		public MoltenMetalsList(Function<BlazingMetal, FluidEntry<? extends T>> filler) {
+			for (BlazingMetal metal : BlazingMetals.ALL) {
 				values[metalOrdinal(metal)] = filler.apply(metal);
 			}
 		}
 
 		@SuppressWarnings("unchecked")
-		public FluidEntry<T> get(MoltenMetal metal) {
+		public FluidEntry<T> get(BlazingMetal metal) {
 			return (FluidEntry<T>) values[metalOrdinal(metal)];
 		}
 
-		public T getFluid(MoltenMetal metal) {
+		public T getFluid(BlazingMetal metal) {
 			return get(metal).getSource();
 		}
 

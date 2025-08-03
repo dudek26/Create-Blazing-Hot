@@ -1,6 +1,5 @@
 package com.dudko.blazinghot.data.advancement;
 
-import static com.dudko.blazinghot.content.metal.MoltenMetal.allBuckets;
 import static com.dudko.blazinghot.data.advancement.BlazingAdvancement.TaskType.CHALLENGE;
 import static com.dudko.blazinghot.data.advancement.BlazingAdvancement.TaskType.EXPERT;
 import static com.dudko.blazinghot.data.advancement.BlazingAdvancement.TaskType.NOISY;
@@ -18,9 +17,9 @@ import java.util.function.UnaryOperator;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
+import com.dudko.blazinghot.registry.BlazingMetals;
 import com.google.common.collect.Sets;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -106,7 +105,7 @@ public class BlazingAdvancements implements DataProvider {
 	MOLTEN_GOLD =
 			create("molten_gold",
 					b -> b
-							.icon(MoltenMetals.GOLD.bucket().get())
+							.icon(BlazingMetals.GOLD.getBucket().get())
 							.title("Flowing Riches")
 							.description("Melt Gold in Mixer")
 							.special(NOISY)
@@ -117,13 +116,13 @@ public class BlazingAdvancements implements DataProvider {
 	ALL_MOLTEN_METALS =
 			create("all_molten_metals",
 					b -> b
-							.icon(MoltenMetals.NETHERITE.bucket().get())
+							.icon(BlazingMetals.NETHERITE.getBucket().get())
 							.title("Tinkers' Construct")
 							.description("Obtain a bucket of every non-compat molten metal.")
 							.after(MOLTEN_GOLD)
 							.special(CHALLENGE)
 							.rewards(r -> r.addExperience(100).build())
-							.whenItemsCollected(allBuckets(false))),
+							.whenItemsCollected(BlazingMetals.allBuckets(false))),
 
 	// Metal Food
 
@@ -170,7 +169,7 @@ public class BlazingAdvancements implements DataProvider {
 	MOLTEN_BLAZE_GOLD =
 			create("molten_blaze_gold_00",
 					b -> b
-							.icon(MoltenMetals.BLAZE_GOLD.bucket().get())
+							.icon(BlazingMetals.BLAZE_GOLD.getBucket().get())
 							.title("Fake Alloys")
 							.description("Mix Molten Gold and Nether Essence together to obtain Molten Blaze Gold")
 							.after(MOLTEN_GOLD)),
