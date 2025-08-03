@@ -114,16 +114,11 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 				spoutTank.drain(requiredAmount, IFluidHandler.FluidAction.EXECUTE);
 				depot.setFluid(spoutTank.getFluid().getFluid(), requiredAmount);
 				castItem = CastingBySpout.getCastingResult(currentRecipe);
+				coolingDuration = currentRecipe.getCoolingDuration();
+				keepMold = currentRecipe.isKeepItem();
 			}
 		}
 		else if (state == State.COOLING) {
-			if (currentRecipe == null || depot.getFluid().getAmount() < getCurrentRecipe()
-					.getRequiredFluid()
-					.getRequiredAmount()) {
-				resetProcessing();
-				return;
-			}
-
 			if (level.isClientSide && ((int) coolingTicks) % 3 == 0) {
 				depot.spawnCoolingParticles();
 			}
@@ -131,13 +126,14 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 			float coolingSpeed = depot.getCoolingSpeed();
 			coolingTicks = Math.max(coolingTicks + coolingSpeed, 0);
 
-			if (coolingTicks >= currentRecipe.getCoolingDuration()) {
+			if (coolingTicks >= coolingDuration) {
 				((CastingDepotBehaviourImpl) depot.getBehaviour(CastingDepotBehaviour.TYPE)).processingOutputBuffer.insertItem(
 						0,
 						castItem,
 						false);
 				depot.resetFluid();
-				CastingBySpout.finishCasting(currentRecipe, stack);
+
+				if (!keepMold) stack.shrink(1);
 				resetProcessing();
 				if (level.isClientSide) {
 					level.playLocalSound(getPos(), SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 0.6f, 2f, false);
@@ -151,6 +147,8 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 		state = State.NONE;
 		processingTicks = -1;
 		coolingTicks = -1;
+		coolingDuration = -1;
+		keepMold = false;
 		currentRecipeId = null;
 		castItem = ItemStack.EMPTY;
 		((CastingDepotBlockEntity) blockEntity).setVisualFluid(Fluids.EMPTY);

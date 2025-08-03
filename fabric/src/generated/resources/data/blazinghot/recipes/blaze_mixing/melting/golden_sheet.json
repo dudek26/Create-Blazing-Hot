@@ -1,17 +1,9 @@
 {
-  "fabric:load_conditions": [
-    {
-      "condition": "fabric:tags_populated",
-      "values": [
-        "c:gold_plates"
-      ]
-    }
-  ],
   "type": "blazinghot:blaze_mixing",
   "heatRequirement": "superheated",
   "ingredients": [
     {
-      "tag": "c:gold_plates"
+      "item": "create:golden_sheet"
     }
   ],
   "mixerFuel": {

@@ -62,25 +62,6 @@ public class BlazingBlocks {
 		BlazingCreativeTabs.useBaseTab();
 	}
 
-	public static final BlockEntry<BlazeMixerBlock>
-			BLAZE_MIXER =
-			REGISTRATE
-					.block("blaze_mixer", BlazeMixerBlock::new)
-					.initialProperties(SharedProperties::stone)
-					.properties(p -> p.noOcclusion().mapColor(MapColor.STONE))
-					.transform(axeOrPickaxe())
-					.transform(simpleBlockState())
-					.addLayer(() -> RenderType::cutoutMipped)
-					.transform(CStress.setImpact(4.0))
-					.item(AssemblyOperatorBlockItem::new)
-					.onRegisterAfter(Registries.ITEM,
-							v -> ItemDescription.useKey(v, ItemDescriptions.BLAZE_MIXER.getKey()))
-					.transform(customItemModel())
-					.register();
-
-	public static final BlockEntry<CastingDepotBlock>
-			CASTING_DEPOT =
-			REGISTRATE.block("casting_depot", CastingDepotBlock::new).transform(castingDepotModel()).register();
 
 	public static final BlockEntry<CasingBlock>
 			BLAZE_CASING =
@@ -95,7 +76,34 @@ public class BlazingBlocks {
 			REGISTRATE
 					.block("sturdy_casing", CasingBlock::new)
 					.transform(BuilderTransformers.casing(() -> BlazingSpriteShifts.STURDY_CASING))
-					.properties(p -> p.mapColor(MapColor.COLOR_BLACK).sound(SoundType.NETHERITE_BLOCK))
+					.properties(p -> p
+							.mapColor(MapColor.COLOR_BLACK)
+							.sound(SoundType.NETHERITE_BLOCK)
+							.explosionResistance(1200))
+					.register();
+
+	public static final BlockEntry<CastingDepotBlock>
+			CASTING_DEPOT =
+			REGISTRATE
+					.block("casting_depot", CastingDepotBlock::new)
+					.initialProperties(STURDY_CASING)
+					.transform(castingDepotModel())
+					.register();
+
+	public static final BlockEntry<BlazeMixerBlock>
+			BLAZE_MIXER =
+			REGISTRATE
+					.block("blaze_mixer", BlazeMixerBlock::new)
+					.initialProperties(SharedProperties::stone)
+					.properties(p -> p.noOcclusion().mapColor(MapColor.STONE))
+					.transform(axeOrPickaxe())
+					.transform(simpleBlockState())
+					.addLayer(() -> RenderType::cutoutMipped)
+					.transform(CStress.setImpact(4.0))
+					.item(AssemblyOperatorBlockItem::new)
+					.onRegisterAfter(Registries.ITEM,
+							v -> ItemDescription.useKey(v, ItemDescriptions.BLAZE_MIXER.getKey()))
+					.transform(customItemModel())
 					.register();
 
 	// BUILDING BLOCKS

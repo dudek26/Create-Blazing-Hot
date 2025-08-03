@@ -1,10 +1,11 @@
-package com.dudko.blazinghot.compat.jei.forge;
+package com.dudko.blazinghot.compat.jei.category;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.dudko.blazinghot.compat.jei.category.animations.AnimatedBlazeMixer;
 import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.dudko.blazinghot.data.lang.BlazingLang;

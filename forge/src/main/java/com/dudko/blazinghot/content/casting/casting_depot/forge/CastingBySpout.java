@@ -74,8 +74,8 @@ public class CastingBySpout {
 		return results.isEmpty() ? ItemStack.EMPTY : results.get(0);
 	}
 
-	public static void finishCasting(CastingRecipe recipe, ItemStack stack) {
-		if (recipe.isKeepItem()) return;
+	public static void finishCasting(boolean keepMold, ItemStack stack) {
+		if (keepMold) return;
 		stack.shrink(1);
 	}
 

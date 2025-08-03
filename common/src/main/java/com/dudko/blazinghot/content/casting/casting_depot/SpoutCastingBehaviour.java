@@ -26,7 +26,10 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 	protected State state;
 	protected int processingTicks;
 	protected float coolingTicks;
+
 	protected ItemStack castItem;
+	protected boolean keepMold;
+	protected int coolingDuration;
 
 	protected Fluid visualFluid;
 	protected ResourceLocation currentRecipeId;
@@ -36,7 +39,9 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 		state = State.NONE;
 		processingTicks = -1;
 		coolingTicks = -1;
+		coolingDuration = -1;
 		castItem = ItemStack.EMPTY;
+		keepMold = false;
 		visualFluid = null;
 		currentRecipeId = null;
 	}

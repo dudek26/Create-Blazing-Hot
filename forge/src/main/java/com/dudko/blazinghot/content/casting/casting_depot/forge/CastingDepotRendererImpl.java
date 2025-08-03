@@ -24,7 +24,6 @@ public class CastingDepotRendererImpl {
 		if (spoutBehaviour.getState() == State.NONE) return;
 
 		int processingDuration = spoutBehaviour.getRecipeProcessingDuration();
-		if (processingDuration < 10) return;
 
 		FluidStack
 				fluidStack =

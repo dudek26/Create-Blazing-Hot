@@ -104,7 +104,7 @@ public class BlazingMetal {
 
 		public Builder createForms() {
 			if (mods.isEmpty() || mods.contains(Mods.VANILLA) || mods.contains(Mods.CREATE))
-				return vanillaForms().withForms(BlazingForms.SHEET.fromMods(Mods.CREATE));
+				return vanillaForms().withForms(BlazingForms.CREATE_SHEET);
 			else return vanillaForms().withForms(BlazingForms.SHEET);
 		}
 

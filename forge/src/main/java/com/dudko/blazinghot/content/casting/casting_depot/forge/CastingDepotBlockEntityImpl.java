@@ -79,7 +79,11 @@ public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity {
 	public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
 		super.addBehaviours(behaviours);
 
-		tank = SmartFluidTankBehaviour.single(this, (int) MultiAmount.BLOCK.multiply(4).get());
+		tank =
+				SmartFluidTankBehaviour
+						.single(this, (int) MultiAmount.BLOCK.multiply(4).get())
+						.forbidExtraction()
+						.forbidInsertion();
 		behaviours.add(tank);
 	}
 

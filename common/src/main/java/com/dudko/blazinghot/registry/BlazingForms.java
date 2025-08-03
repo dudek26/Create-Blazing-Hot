@@ -6,6 +6,7 @@ import com.dudko.blazinghot.content.metal.BlazingForm;
 import com.dudko.blazinghot.content.metal.BlazingForm.Flag;
 import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.simibubi.create.AllItems;
+import com.simibubi.create.Create;
 
 import net.minecraft.world.item.Items;
 
@@ -70,7 +71,15 @@ public class BlazingForms {
 	// Create
 	public static BlazingForm
 			ANDESITE_ALLOY =
-			INGOT.createFrom("andesite_alloy", b -> b.withCustomItem(AllItems.ANDESITE_ALLOY.getId()).build());
+			INGOT.createFrom("andesite_alloy", b -> b.withCustomItem(AllItems.ANDESITE_ALLOY.getId()).build()),
+			CREATE_NUGGET =
+					NUGGET.withFlags(Flag.MELTING).asOptional(true),
+			COPPER_NUGGET =
+					NUGGET.withFlags(Flag.CASTING).fromMods(Mods.CREATE),
+			GOLDEN_SHEET =
+					SHEET.createFrom("golden_sheet", b -> b.withCustomItem(Create.asResource("golden_sheet")).build()),
+			CREATE_SHEET =
+					SHEET.fromMods(Mods.CREATE);
 
 	// Create: Blazing Hot
 	public static BlazingForm ROD = OPTIONAL_ROD.withFlags(Flag.MELTING, Flag.CASTING).asOptional(false);

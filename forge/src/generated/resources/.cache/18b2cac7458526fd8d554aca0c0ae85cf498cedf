@@ -1,4 +1,4 @@
-// 1.20.1	2025-08-03T15:17:44.4033601	Registrate Provider for blazinghot [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2025-08-03T19:46:29.856341	Registrate Provider for blazinghot [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 f00ce73b2ba10d3d022c8cec15f98d4345b54a0f assets/blazinghot/blockstates/black_modern_lamp.json
 1b515ab855a765669e085696ccdb6d602b5ddcb9 assets/blazinghot/blockstates/black_modern_lamp_double_panel.json
 c1767b8a04e6ffe0c445c730aeb00f68c42a4936 assets/blazinghot/blockstates/black_modern_lamp_half_panel.json
@@ -110,8 +110,8 @@ cc863cd8eebaed5a37b57b53f873adfc1cce262a assets/blazinghot/blockstates/yellow_mo
 a735791018f8abb4b78292870f420c53a5070523 assets/blazinghot/blockstates/yellow_modern_lamp_panel.json
 c9e3f398e0f8296d30b9a3651d8800f5c5554d00 assets/blazinghot/blockstates/yellow_modern_lamp_quad_panel.json
 4085b48ce1980ce1638918ad9eb9f71114c6369c assets/blazinghot/blockstates/yellow_modern_lamp_small_panel.json
-52ddc82c078d32c0dba3db8ef213a80b24bf7c01 assets/blazinghot/lang/en_ud.json
-90d0795c599f52a4653b217ccc95154db4493bd0 assets/blazinghot/lang/en_us.json
+930dca08eb9d97148a52b8de3165d0dbb1ab616f assets/blazinghot/lang/en_ud.json
+2f0b6b23f89d58ce4658073abcb428c3cc916435 assets/blazinghot/lang/en_us.json
 20fba755fb03441f9f8a270f2193e75f07226d98 assets/blazinghot/models/block/black_modern_lamp.json
 3f213f560fc292a1231e5437155fcab43c580f9a assets/blazinghot/models/block/black_modern_lamp_powered.json
 14d84006ae1a050b0d028e3932068b0bbb955356 assets/blazinghot/models/block/blaze_casing.json
@@ -1368,8 +1368,8 @@ f453a85a2919ea3f488b562855fe212d7829c823 data/forge/tags/items/plates/blaze_gold
 08c2703964d38558c91a71a2c11d01f3cc0d6d4b data/forge/tags/items/storage_blocks.json
 08c2703964d38558c91a71a2c11d01f3cc0d6d4b data/forge/tags/items/storage_blocks/blaze_gold.json
 08c2703964d38558c91a71a2c11d01f3cc0d6d4b data/minecraft/tags/blocks/beacon_base_blocks.json
-b5311fd984e58ddbea49476f46a39b8eb0e63ca4 data/minecraft/tags/blocks/mineable/axe.json
-781046fe4021a900d0a7a727d81e108d6321fcd3 data/minecraft/tags/blocks/mineable/pickaxe.json
+51ba4ae74fab6054a2c30862da17ebb90174c05b data/minecraft/tags/blocks/mineable/axe.json
+2bb12457205c7e7a14041cf79a333a8cb8356adc data/minecraft/tags/blocks/mineable/pickaxe.json
 08c2703964d38558c91a71a2c11d01f3cc0d6d4b data/minecraft/tags/blocks/needs_iron_tool.json
 9d8b81fcd0d2f4e9761569817feef925e7574ae1 data/minecraft/tags/entity_types/arrows.json
 9d8b81fcd0d2f4e9761569817feef925e7574ae1 data/minecraft/tags/items/arrows.json

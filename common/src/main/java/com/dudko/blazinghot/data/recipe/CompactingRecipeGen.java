@@ -23,7 +23,7 @@ public class CompactingRecipeGen extends BlazingProcessingRecipeGen {
 			create("sturdy_alloy",
 					b -> b
 							.requireMultiple(netherCompound(), 2)
-							.require(powderedObsidian())
+							.requireMultiple(powderedObsidian(), 2)
 							.require(ironIngot())
 							.output(BlazingItems.STURDY_ALLOY)
 							.requiresHeat(HeatCondition.SUPERHEATED));

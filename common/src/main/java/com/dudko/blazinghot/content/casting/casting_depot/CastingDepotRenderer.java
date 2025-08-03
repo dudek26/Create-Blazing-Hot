@@ -57,4 +57,8 @@ public class CastingDepotRenderer extends SmartBlockEntityRenderer<CastingDepotB
 		throw new AssertionError();
 	}
 
+	@Override
+	public int getViewDistance() {
+		return 32;
+	}
 }

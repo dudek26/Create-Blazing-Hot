@@ -43,11 +43,14 @@ public class BlazingMetals {
 					BlazingMetal
 							.create("copper",
 									b -> b
-											.createForms()
 											.withForms(BlazingForms.OPTIONAL_ROD,
 													BlazingForms.OPTIONAL_WIRE,
 													BlazingForms.COMPAT_ROD,
-													BlazingForms.COMPAT_WIRE)
+													BlazingForms.COMPAT_WIRE,
+													BlazingForms.INGOT,
+													BlazingForms.CREATE_SHEET,
+													BlazingForms.CREATE_NUGGET,
+													BlazingForms.COPPER_NUGGET)
 											.waterCobble()
 											.build())
 							.register(),
@@ -55,11 +58,13 @@ public class BlazingMetals {
 					BlazingMetal
 							.create("gold",
 									b -> b
-											.createForms()
+											.vanillaForms()
 											.withForms(BlazingForms.OPTIONAL_ROD,
 													BlazingForms.OPTIONAL_WIRE,
 													BlazingForms.COMPAT_ROD,
-													BlazingForms.COMPAT_WIRE)
+													BlazingForms.COMPAT_WIRE,
+													BlazingForms.OPTIONAL_SHEET,
+													BlazingForms.GOLDEN_SHEET)
 											.waterCobble()
 											.build())
 							.register(),

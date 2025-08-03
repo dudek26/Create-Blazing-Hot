@@ -112,7 +112,15 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 
 
 		switch (getState()) {
-			case NONE -> cooling.forGoggles(tooltip);
+			case NONE -> {
+				ItemStack outputStack = getOutputItem();
+				if (!outputStack.isEmpty()) {
+					LangBuilder output = BlazingHot.lang().text("← ").style(ChatFormatting.GREEN);
+					output.add(outputStack.getHoverName().copy().withStyle(ChatFormatting.GRAY));
+					output.forGoggles(tooltip);
+				}
+				cooling.forGoggles(tooltip);
+			}
 			case FILLING -> {
 				LangBuilder filling = BlazingHot.lang().text("→ ").style(ChatFormatting.GOLD);
 				filling.add(BlazingLang.fluidName(getVisualFluid()).style(ChatFormatting.GRAY));

@@ -1,4 +1,4 @@
-package com.dudko.blazinghot.compat.jei.forge;
+package com.dudko.blazinghot.compat.jei;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,6 +15,9 @@ import javax.annotation.Nonnull;
 import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.compat.jei.category.BlazeMixingCategory;
+import com.dudko.blazinghot.compat.jei.category.CastingCategory;
+import com.dudko.blazinghot.content.casting.casting_depot.forge.CastingRecipe;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.dudko.blazinghot.data.lang.BlazingLang;
@@ -107,7 +110,16 @@ public class BlazingJEI implements IModPlugin {
 								.catalyst(AllBlocks.BASIN::get)
 								.doubleItemIcon(BlazingBlocks.BLAZE_MIXER.get(), Blocks.BREWING_STAND)
 								.emptyBackground(177, 103)
-								.build("blaze_automatic_brewing", BlazeMixingCategory::autoBrewing);
+								.build("blaze_automatic_brewing", BlazeMixingCategory::autoBrewing),
+
+				casting =
+						builder(CastingRecipe.class)
+								.addTypedRecipes(BlazingRecipeTypesImpl.CASTING)
+								.catalyst(AllBlocks.SPOUT::get)
+								.catalyst(BlazingBlocks.CASTING_DEPOT::get)
+								.doubleItemIcon(AllBlocks.SPOUT.get(), BlazingBlocks.CASTING_DEPOT.get())
+								.emptyBackground(177, 103)
+								.build("casting", CastingCategory::new);
 	}
 
 	private <T extends Recipe<?>> CategoryBuilder<T> builder(Class<? extends T> recipeClass) {

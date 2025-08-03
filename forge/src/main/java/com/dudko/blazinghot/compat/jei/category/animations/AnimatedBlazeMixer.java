@@ -1,4 +1,4 @@
-package com.dudko.blazinghot.compat.jei.forge;
+package com.dudko.blazinghot.compat.jei.category.animations;
 
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingPartialModels;

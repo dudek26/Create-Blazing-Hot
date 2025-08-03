@@ -1,4 +1,12 @@
 {
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "values": [
+        "c:copper_nuggets"
+      ]
+    }
+  ],
   "type": "create:mixing",
   "heatRequirement": "superheated",
   "ingredients": [
