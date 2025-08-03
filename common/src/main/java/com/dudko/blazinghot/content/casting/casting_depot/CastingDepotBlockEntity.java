@@ -198,6 +198,10 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 		return filtering;
 	}
 
+	public boolean isPowered() {
+		return getBlockState().getValue(CastingDepotBlock.POWERED);
+	}
+
 	static class CastingDepotValueBox extends ValueBoxTransform.Sided {
 
 		@Override

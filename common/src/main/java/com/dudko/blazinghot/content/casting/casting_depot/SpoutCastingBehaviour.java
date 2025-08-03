@@ -81,6 +81,10 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 		return visualFluid;
 	}
 
+	public boolean canSpout() {
+		return !((CastingDepotBlockEntity) blockEntity).isPowered();
+	}
+
 	public abstract int getRecipeCoolingDuration();
 
 	public abstract int getRecipeProcessingDuration();

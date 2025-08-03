@@ -225,7 +225,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 
 		int
 				fromGetter =
-				Math.min((Integer) this.maxStackSize.get() == 0 ? 64 : (Integer) this.maxStackSize.get(),
+				Math.min(this.maxStackSize.get() == 0 ? 64 : this.maxStackSize.get(),
 						this.getHeldItemStack().getMaxStackSize());
 		return fromGetter - cumulativeStackSize;
 	}

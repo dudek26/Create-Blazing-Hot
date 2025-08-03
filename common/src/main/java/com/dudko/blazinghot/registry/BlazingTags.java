@@ -165,6 +165,8 @@ public class BlazingTags {
 
 		MOLDS,
 		STURDY_MOLDS,
+		CLAY_MOLDS,
+		PORCELAIN_MOLDS,
 
 		METAL_FOOD,
 		METAL_CARROTS,

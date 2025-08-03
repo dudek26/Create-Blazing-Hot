@@ -4,13 +4,16 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.dudko.blazinghot.compat.jei.category.animations.AnimatedCastingSpout;
 import com.dudko.blazinghot.content.casting.casting_depot.forge.CastingRecipe;
+import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.gui.GuiGraphics;
 
@@ -26,10 +29,16 @@ public class CastingCategory extends CreateRecipeCategory<CastingRecipe> {
 
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, CastingRecipe recipe, IFocusGroup focuses) {
-		builder
-				.addSlot(RecipeIngredientRole.INPUT, 27, 51)
-				.setBackground(getRenderedSlot(), -1, -1)
-				.addIngredients(recipe.getIngredients().get(0));
+		IRecipeSlotBuilder
+				ingredientSlot =
+				builder
+						.addSlot(RecipeIngredientRole.INPUT, 27, 51)
+						.setBackground(getRenderedSlot(), -1, -1)
+						.addIngredients(recipe.getIngredients().get(0));
+
+		if (!recipe.isKeepItem()) ingredientSlot.addRichTooltipCallback((v, t) -> t.add(BlazingLang.MOLD_CONSUMED
+				.get()
+				.withStyle(ChatFormatting.RED)));
 
 		addFluidSlot(builder, 27, 32, recipe.getRequiredFluid());
 

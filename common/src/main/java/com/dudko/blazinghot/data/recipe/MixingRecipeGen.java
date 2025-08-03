@@ -12,6 +12,7 @@ import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherCompound
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherEssence;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherFlora;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherrackDust;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.powderedObsidian;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.soulDust;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.stoneDust;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.wheatFlour;
@@ -83,7 +84,16 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
 									.require(moltenCopper(), MultiAmount.INGOT)
 									.require(moltenZinc(), MultiAmount.INGOT)
 									.requiresHeat(HeatCondition.HEATED)
-									.output(BlazingMetals.BRASS.getFluid().get(), MultiAmount.INGOT.multiply(2)));
+									.output(BlazingMetals.BRASS.getFluid().get(), MultiAmount.INGOT.multiply(2))),
+			MOLTEN_STURDY_ALLOY =
+					create("molten_sturdy_alloy",
+							b -> b
+									.require(moltenIron(), MultiAmount.INGOT)
+									.require(powderedObsidian())
+									.require(netherCompound())
+									.duration(200)
+									.requiresHeat(HeatCondition.SUPERHEATED)
+									.output(BlazingMetals.STURDY_ALLOY.getFluid().get(), MultiAmount.INGOT));
 
 	@Override
 	protected IRecipeTypeInfo getRecipeType() {

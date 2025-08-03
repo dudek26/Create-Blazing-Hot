@@ -40,7 +40,7 @@ public abstract class CastingDepotBehaviour extends BlockEntityBehaviour {
 	public CastingDepotBehaviour(CastingDepotBlockEntity be, BehaviourType<CastingDepotBehaviour> type) {
 		super(be);
 		maxStackSize = () -> 1;
-		canAcceptItems = () -> true;
+		canAcceptItems = () -> !be.isPowered();
 		canFunnelsPullFrom = $ -> true;
 		acceptedItems = $ -> true;
 		onHeldInserted = $ -> {

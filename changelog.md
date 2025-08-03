@@ -4,10 +4,11 @@ Create: Blazing Hot 0.7
 
 ### Added:
 
-* Casting Depot and casting mechanics
-* Sturdy Alloy and Sturdy Casing
-* Nether Dough
-* Blaze Roll — new superheating fuel for Blaze Burners
+* New casting mechanic:
+    * New block: Casting Depot,
+    * Molds for casting: Sturdy, Clay and Porcelain variants
+* Sturdy Alloy, Molten Sturdy Alloy and Sturdy Casing
+* Nether Dough and Blaze Roll — new superheating fuel for Blaze Burners
 
 ### Changed:
 

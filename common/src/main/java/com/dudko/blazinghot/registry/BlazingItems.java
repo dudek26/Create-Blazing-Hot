@@ -81,9 +81,12 @@ public class BlazingItems {
 			BLAZE_GOLD_INGOT =
 			taggedIngredient("blaze_gold_ingot",
 					CommonTags.Items.BLAZE_GOLD_INGOTS.tag(),
+					CommonTags.Items.INGOTS.tag(),
 					ItemTags.BEACON_PAYMENT_ITEMS),
 			BLAZE_GOLD_NUGGET =
-					taggedIngredient("blaze_gold_nugget", CommonTags.Items.BLAZE_GOLD_NUGGETS.tag()),
+					taggedIngredient("blaze_gold_nugget",
+							CommonTags.Items.BLAZE_GOLD_NUGGETS.tag(),
+							CommonTags.Items.NUGGETS.tag()),
 			BLAZE_GOLD_SHEET =
 					taggedIngredient("blaze_gold_sheet",
 							CommonTags.Items.BLAZE_GOLD_PLATES.tag(),
@@ -92,12 +95,13 @@ public class BlazingItems {
 					REGISTRATE
 							.item("blaze_gold_rod", Item::new)
 							.tag(CommonTags.Items.BLAZE_GOLD_RODS.tag())
+							.tag(CommonTags.Items.RODS.tag())
 							.transform(handheld())
 							.register();
 
 	public static final ItemEntry<Item> BLAZE_WHISK = ingredient("blaze_whisk"),
 			STURDY_ALLOY =
-					ingredient("sturdy_alloy");
+					taggedIngredient("sturdy_alloy", CommonTags.Items.INGOTS.tag());
 
 	public static final ItemEntry<Item> NETHER_DOUGH = ingredient("nether_dough");
 

@@ -3,10 +3,17 @@
   "heatRequirement": "superheated",
   "ingredients": [
     {
-      "item": "create:sturdy_sheet"
+      "tag": "forge:dusts/obsidian"
+    },
+    {
+      "item": "blazinghot:nether_compound"
+    },
+    {
+      "amount": 144,
+      "fluidTag": "forge:molten_iron"
     }
   ],
-  "processingTime": 600,
+  "processingTime": 200,
   "results": [
     {
       "amount": 144,

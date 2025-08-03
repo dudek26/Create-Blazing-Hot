@@ -1,4 +1,7 @@
 {
   "replace": false,
-  "values": []
+  "values": [
+    "blazinghot:blaze_gold_ingot",
+    "blazinghot:sturdy_alloy"
+  ]
 }

@@ -1,0 +1,19 @@
+{
+  "type": "blazinghot:casting",
+  "coolingDuration": 36,
+  "ingredients": [
+    {
+      "item": "blazinghot:porcelain_nugget_mold"
+    },
+    {
+      "amount": 16,
+      "fluidTag": "forge:molten_copper"
+    }
+  ],
+  "processingTime": 12,
+  "results": [
+    {
+      "item": "create:copper_nugget"
+    }
+  ]
+}

@@ -85,9 +85,16 @@ public class BlazingForms {
 	public static BlazingForm ROD = OPTIONAL_ROD.withFlags(Flag.MELTING, Flag.CASTING).asOptional(false),
 			STURDY_ALLOY =
 					INGOT.createFrom("sturdy_alloy",
-							b -> b.withCustomItem(BlazingItems.STURDY_ALLOY.getId()).mechanicalMixerMeltable(false).build()),
+							b -> b
+									.withCustomItem(BlazingItems.STURDY_ALLOY.getId())
+									.mechanicalMixerMeltable(false)
+									.build()),
 			STURDY_SHEET =
-					SHEET.createFrom("sturdy_sheet", b -> b.withCustomItem(AllItems.STURDY_SHEET.getId()).build());
+					SHEET.createFrom("sturdy_sheet",
+							b -> b
+									.withCustomItem(AllItems.STURDY_SHEET.getId())
+									.mechanicalMixerMeltable(false)
+									.build());
 
 	// Compat forms
 	public static BlazingForm COMPAT_ROD = ROD.withFlags(Flag.CASTING).fromMods(Mods.CREATE_ADDITIONS),

@@ -1,0 +1,19 @@
+{
+  "type": "blazinghot:casting",
+  "coolingDuration": 45,
+  "ingredients": [
+    {
+      "item": "minecraft:iron_bars"
+    },
+    {
+      "amount": 288,
+      "fluidTag": "forge:molten_sturdy_alloy"
+    }
+  ],
+  "processingTime": 15,
+  "results": [
+    {
+      "item": "blazinghot:sturdy_blank_mold"
+    }
+  ]
+}

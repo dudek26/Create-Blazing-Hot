@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "blazinghot:clay_blank_mold"
+  },
+  "result": "blazinghot:clay_sheet_mold"
+}

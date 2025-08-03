@@ -1,0 +1,19 @@
+{
+  "type": "blazinghot:casting",
+  "coolingDuration": 36,
+  "ingredients": [
+    {
+      "item": "blazinghot:porcelain_nugget_mold"
+    },
+    {
+      "amount": 1000,
+      "fluidTag": "c:molten_zinc"
+    }
+  ],
+  "processingTime": 12,
+  "results": [
+    {
+      "item": "create:zinc_nugget"
+    }
+  ]
+}

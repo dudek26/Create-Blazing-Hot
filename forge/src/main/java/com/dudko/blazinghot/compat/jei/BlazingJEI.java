@@ -118,8 +118,8 @@ public class BlazingJEI implements IModPlugin {
 								.catalyst(AllBlocks.SPOUT::get)
 								.catalyst(BlazingBlocks.CASTING_DEPOT::get)
 								.doubleItemIcon(AllBlocks.SPOUT.get(), BlazingBlocks.CASTING_DEPOT.get())
-								.emptyBackground(177, 103)
-								.build("casting", CastingCategory::new);
+								.emptyBackground(177, 70)
+								.build("spout_casting", CastingCategory::new);
 	}
 
 	private <T extends Recipe<?>> CategoryBuilder<T> builder(Class<? extends T> recipeClass) {

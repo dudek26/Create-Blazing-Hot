@@ -7,6 +7,7 @@ import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBehaviour;
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
 import com.dudko.blazinghot.content.casting.casting_depot.SpoutCastingBehaviour;
 import com.dudko.blazinghot.mixin.accessor.SpoutBlockEntityAccessor;
+import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.fluids.spout.SpoutBlockEntity;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
@@ -76,6 +77,7 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 		CastingRecipe currentRecipe = getCurrentRecipe();
 
 		if (state == State.NONE) {
+			if (!canSpout()) return;
 			if (!depot.getOutputItem().isEmpty()) return;
 			if (!CastingBySpout.canItemBeCast(level, stack) || availableFluid.getAmount() < requiredAmount) return;
 			currentRecipe = CastingBySpout.findRecipe(depot, level, requiredAmount, stack, availableFluid);
@@ -86,7 +88,7 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 			depot.notifyUpdate();
 		}
 		else if (state == State.FILLING) {
-			if (currentRecipe == null || spout == null) {
+			if (currentRecipe == null || spout == null || !canSpout()) {
 				resetProcessing();
 				return;
 			}
@@ -127,13 +129,18 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 			coolingTicks = Math.max(coolingTicks + coolingSpeed, 0);
 
 			if (coolingTicks >= coolingDuration) {
-				((CastingDepotBehaviourImpl) depot.getBehaviour(CastingDepotBehaviour.TYPE)).processingOutputBuffer.insertItem(
-						0,
-						castItem,
-						false);
+				if (!keepMold) stack.shrink(1);
+				CastingDepotBehaviourImpl
+						depotBehaviour =
+						((CastingDepotBehaviourImpl) depot.getBehaviour(CastingDepotBehaviour.TYPE));
+				if (BlazingTags.Items.MOLDS.matches(castItem)) {
+					depotBehaviour.setHeldStack(castItem);
+				}
+				else {
+					depotBehaviour.processingOutputBuffer.insertItem(0, castItem, false);
+				}
 				depot.resetFluid();
 
-				if (!keepMold) stack.shrink(1);
 				resetProcessing();
 				if (level.isClientSide) {
 					level.playLocalSound(getPos(), SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 0.6f, 2f, false);
