@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.registry;
 
+import static com.dudko.blazinghot.multiloader.BlazingBuilderTransformers.castingDepotModel;
 import static com.dudko.blazinghot.multiloader.BlazingBuilderTransformers.simpleBlockState;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
@@ -79,11 +80,7 @@ public class BlazingBlocks {
 
 	public static final BlockEntry<CastingDepotBlock>
 			CASTING_DEPOT =
-			REGISTRATE
-					.block("casting_depot", CastingDepotBlock::new)
-					.transform(simpleBlockState())
-					.simpleItem()
-					.register();
+			REGISTRATE.block("casting_depot", CastingDepotBlock::new).transform(castingDepotModel()).register();
 
 	public static final BlockEntry<CasingBlock>
 			BLAZE_CASING =

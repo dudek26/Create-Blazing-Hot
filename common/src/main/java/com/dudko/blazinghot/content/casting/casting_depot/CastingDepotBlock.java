@@ -56,11 +56,7 @@ public class CastingDepotBlock extends HorizontalDirectionalBlock implements IWr
 
 	@Override
 	public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
-		Direction
-				direction =
-				context.getPlayer() != null && context.getPlayer().isCrouching() ?
-				context.getHorizontalDirection() :
-				context.getHorizontalDirection().getOpposite();
+		Direction direction = context.getHorizontalDirection();
 		return defaultBlockState().setValue(FACING, direction).setValue(POWERED, false);
 	}
 

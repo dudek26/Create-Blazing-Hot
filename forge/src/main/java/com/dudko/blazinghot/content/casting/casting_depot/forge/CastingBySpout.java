@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
+import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringBehaviour;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import net.minecraft.resources.ResourceLocation;
@@ -39,7 +41,7 @@ public class CastingBySpout {
 
 	@SuppressWarnings("DataFlowIssue")
 	@Nullable
-	public static CastingRecipe findRecipe(Level world, int requiredAmount, ItemStack stack, FluidStack availableFluid) {
+	public static CastingRecipe findRecipe(CastingDepotBlockEntity depot, Level world, int requiredAmount, ItemStack stack, FluidStack availableFluid) {
 		FluidStack toCast = availableFluid.copy();
 		toCast.setAmount(requiredAmount);
 
@@ -53,13 +55,16 @@ public class CastingBySpout {
 			FluidIngredient requiredFluid = cr.getRequiredFluid();
 			if (requiredFluid.test(toCast)) castingRecipe = cr;
 		}
-		return castingRecipe;
+
+		if (castingRecipe == null) return null;
+		return matchFilter(depot, castingRecipe) ? castingRecipe : null;
 	}
 
-	public static CastingRecipe findRecipe(Level world, ResourceLocation id) {
+	@Nullable
+	public static CastingRecipe findRecipe(CastingDepotBlockEntity depot, Level world, ResourceLocation id) {
 		Recipe<?> recipe = world.getRecipeManager().byKey(id).orElse(null);
-		if (!(recipe instanceof CastingRecipe)) return null;
-		return (CastingRecipe) recipe;
+		if (!(recipe instanceof CastingRecipe castingRecipe)) return null;
+		return matchFilter(depot, castingRecipe) ? castingRecipe : null;
 
 	}
 
@@ -72,5 +77,18 @@ public class CastingBySpout {
 	public static void finishCasting(CastingRecipe recipe, ItemStack stack) {
 		if (recipe.isKeepItem()) return;
 		stack.shrink(1);
+	}
+
+	public static boolean matchFilter(CastingDepotBlockEntity depot, CastingRecipe recipe) {
+		FilteringBehaviour filter = depot.getFilter();
+		if (filter == null || depot.getLevel() == null) return false;
+
+		boolean filterTest = filter.test(recipe.getResultItem(depot.getLevel().registryAccess()));
+
+		if (recipe.getRollableResults().isEmpty() && !recipe.getFluidResults().isEmpty())
+			filterTest = filter.test(recipe.getFluidResults().get(0));
+
+
+		return filterTest;
 	}
 }

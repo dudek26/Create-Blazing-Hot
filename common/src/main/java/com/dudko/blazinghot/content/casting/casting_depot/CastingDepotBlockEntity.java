@@ -8,12 +8,16 @@ import com.dudko.blazinghot.util.TooltipUtil;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
+import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.createmod.catnip.lang.LangBuilder;
+import net.createmod.catnip.math.VecHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
@@ -21,12 +25,16 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.Vec3;
 
 public abstract class CastingDepotBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
 	protected SmartFluidTankBehaviour tank;
 	protected CastingDepotBehaviour depotBehaviour;
 	protected SpoutCastingBehaviour castingBehaviour;
+	protected FilteringBehaviour filtering;
+
+	protected boolean contentsChanged;
 
 	protected Fluid visualFluid;
 
@@ -54,6 +62,12 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 	public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
 		behaviours.add(depotBehaviour = CastingDepotBehaviour.of(this, CastingDepotBehaviour.TYPE));
 		depotBehaviour.addSubBehaviours(behaviours);
+
+		filtering =
+				new FilteringBehaviour(this, new CastingDepotValueBox())
+						.withCallback(newFilter -> contentsChanged = true)
+						.forRecipes();
+		behaviours.add(filtering);
 
 		behaviours.add(castingBehaviour = SpoutCastingBehaviour.of(this));
 	}
@@ -170,5 +184,23 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 
 	public SmartFluidTankBehaviour getTank() {
 		return tank;
+	}
+
+	public FilteringBehaviour getFilter() {
+		return filtering;
+	}
+
+	static class CastingDepotValueBox extends ValueBoxTransform.Sided {
+
+		@Override
+		protected Vec3 getSouthLocation() {
+			return VecHelper.voxelSpace(8, 7.25, 15.5);
+		}
+
+		@Override
+		protected boolean isSideActive(BlockState state, Direction direction) {
+			return direction.getAxis().isHorizontal();
+		}
+
 	}
 }

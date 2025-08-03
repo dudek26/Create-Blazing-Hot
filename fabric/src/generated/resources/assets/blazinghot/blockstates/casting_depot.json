@@ -1,7 +1,28 @@
 {
   "variants": {
-    "": {
+    "facing=east,powered=false": {
       "model": "blazinghot:block/casting_depot/block"
+    },
+    "facing=east,powered=true": {
+      "model": "blazinghot:block/casting_depot/block_powered"
+    },
+    "facing=north,powered=false": {
+      "model": "blazinghot:block/casting_depot/block"
+    },
+    "facing=north,powered=true": {
+      "model": "blazinghot:block/casting_depot/block_powered"
+    },
+    "facing=south,powered=false": {
+      "model": "blazinghot:block/casting_depot/block"
+    },
+    "facing=south,powered=true": {
+      "model": "blazinghot:block/casting_depot/block_powered"
+    },
+    "facing=west,powered=false": {
+      "model": "blazinghot:block/casting_depot/block"
+    },
+    "facing=west,powered=true": {
+      "model": "blazinghot:block/casting_depot/block_powered"
     }
   }
 }

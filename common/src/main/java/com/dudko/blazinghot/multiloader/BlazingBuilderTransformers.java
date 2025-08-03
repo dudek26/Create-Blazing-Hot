@@ -55,6 +55,11 @@ public class BlazingBuilderTransformers {
 	}
 
 	@ExpectPlatform
+	public static <B extends Block, P> NonNullUnaryOperator<BlockBuilder<B, P>> castingDepotModel() {
+		throw new AssertionError();
+	}
+
+	@ExpectPlatform
 	public static <I extends Item, P> NonNullUnaryOperator<ItemBuilder<I, P>> handheld() {
 		throw new AssertionError();
 	}

@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "blazinghot:block/sturdy_casing",
-		"1": "blazinghot:block/casting_depot_side",
+		"1": "blazinghot:block/casting_depot_side_powered",
 		"2": "blazinghot:block/casting_depot_top",
 		"particle": "blazinghot:block/sturdy_casing"
 	},

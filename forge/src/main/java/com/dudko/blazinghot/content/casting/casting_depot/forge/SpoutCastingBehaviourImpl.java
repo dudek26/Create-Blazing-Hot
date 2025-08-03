@@ -78,7 +78,7 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 		if (state == State.NONE) {
 			if (!depot.getOutputItem().isEmpty()) return;
 			if (!CastingBySpout.canItemBeCast(level, stack) || availableFluid.getAmount() < requiredAmount) return;
-			currentRecipe = CastingBySpout.findRecipe(level, requiredAmount, stack, availableFluid);
+			currentRecipe = CastingBySpout.findRecipe(depot, level, requiredAmount, stack, availableFluid);
 			if (currentRecipe == null) return;
 			currentRecipeId = currentRecipe.getId();
 			state = State.FILLING;
@@ -160,7 +160,7 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 	public CastingRecipe getCurrentRecipe() {
 		Level level = getWorld();
 		if (level == null) return null;
-		return CastingBySpout.findRecipe(level, currentRecipeId);
+		return CastingBySpout.findRecipe((CastingDepotBlockEntity) blockEntity, level, currentRecipeId);
 	}
 
 }

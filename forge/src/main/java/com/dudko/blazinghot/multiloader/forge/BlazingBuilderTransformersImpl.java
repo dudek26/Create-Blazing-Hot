@@ -8,6 +8,7 @@ import com.dudko.blazinghot.content.block.modern_lamp.ModernLampHalfPanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.SmallModernLampPanelBlock;
 import com.dudko.blazinghot.content.casting.Molds;
+import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlock;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
@@ -177,6 +178,22 @@ public class BlazingBuilderTransformersImpl {
 		return b -> b.blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)));
 	}
 
+	public static <B extends Block, P> NonNullUnaryOperator<BlockBuilder<B, P>> castingDepotModel() {
+		return b -> b
+				.blockstate((c, p) -> p
+						.getVariantBuilder(c.get())
+						.forAllStates(state -> ConfiguredModel
+								.builder()
+								.modelFile(state.getValue(CastingDepotBlock.POWERED) ?
+										   AssetLookup.partialBaseModel(c, p, "powered") :
+										   AssetLookup.partialBaseModel(c, p))
+								.build()))
+				.item()
+				.model((c, p) -> p.withExistingParent(c.getName(),
+						BlazingHot.asResource("block/" + c.getName() + "/block")))
+				.build();
+	}
+
 	public static <I extends Item, P> NonNullUnaryOperator<ItemBuilder<I, P>> handheld() {
 		return b -> b.model((c, p) -> p.handheld(c));
 	}
@@ -191,5 +208,6 @@ public class BlazingBuilderTransformersImpl {
 			return p;
 		}).model((c, p) -> p.generated(c::get, BlazingHot.asResource("item/" + type.name + "_mold/" + name)));
 	}
+
 
 }

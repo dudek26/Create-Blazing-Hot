@@ -1,4 +1,4 @@
-// 1.20.1	2025-08-03T12:23:59.5947726	Registrate Provider for blazinghot [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2025-08-03T15:17:44.4033601	Registrate Provider for blazinghot [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 f00ce73b2ba10d3d022c8cec15f98d4345b54a0f assets/blazinghot/blockstates/black_modern_lamp.json
 1b515ab855a765669e085696ccdb6d602b5ddcb9 assets/blazinghot/blockstates/black_modern_lamp_double_panel.json
 c1767b8a04e6ffe0c445c730aeb00f68c42a4936 assets/blazinghot/blockstates/black_modern_lamp_half_panel.json
@@ -20,7 +20,7 @@ ed1cb5d382ffb0f745f30917482295cbadcf8021 assets/blazinghot/blockstates/brown_mod
 948e2ba99e37683b84ada068b4add508fb91a0bb assets/blazinghot/blockstates/brown_modern_lamp_panel.json
 01a1fd94efbcc936f3dc126a04d308b2b799d5e5 assets/blazinghot/blockstates/brown_modern_lamp_quad_panel.json
 c1d24de09363aaf631430fd112d67833a8aed288 assets/blazinghot/blockstates/brown_modern_lamp_small_panel.json
-d51cf0447ea8cabb06a357603e2b74e3bc38ce33 assets/blazinghot/blockstates/casting_depot.json
+26b8f65561681f6132e9c370c9407fc382ff321b assets/blazinghot/blockstates/casting_depot.json
 c8c15bb63deb56a77f6f2ba4bef76b25ddd63458 assets/blazinghot/blockstates/cyan_modern_lamp.json
 b635182faad4c2521a32d6c4aa685f388c5ca40d assets/blazinghot/blockstates/cyan_modern_lamp_double_panel.json
 1ec928a2b294edc3ba287eb150339beba56c361b assets/blazinghot/blockstates/cyan_modern_lamp_half_panel.json

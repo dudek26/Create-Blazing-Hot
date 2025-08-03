@@ -90,7 +90,7 @@ allprojects {
 
 tasks.register("datagen") {
     group = 'build'
-    description = "Generate data on both platforms"
+    description = "Generate data on all platforms"
     dependsOn(":fabric:runDatagen", ":forge:runData")
 }
 

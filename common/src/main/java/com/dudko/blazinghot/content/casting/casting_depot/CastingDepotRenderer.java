@@ -3,7 +3,7 @@ package com.dudko.blazinghot.content.casting.casting_depot;
 import static com.dudko.blazinghot.util.DirectionUtil.HORIZONTAL_ANGLES;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
+import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import dev.engine_room.flywheel.lib.transform.PoseTransformStack;
@@ -19,14 +19,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
-public class CastingDepotRenderer extends SafeBlockEntityRenderer<CastingDepotBlockEntity> {
+public class CastingDepotRenderer extends SmartBlockEntityRenderer<CastingDepotBlockEntity> {
 
 	public CastingDepotRenderer(BlockEntityRendererProvider.Context context) {
+		super(context);
 	}
 
 	@Override
 	protected void renderSafe(CastingDepotBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
-
+		super.renderSafe(be, partialTicks, ms, buffer, light, overlay);
 		renderFluid(be, partialTicks, ms, buffer, light);
 
 		Direction direction = be.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
