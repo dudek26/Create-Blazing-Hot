@@ -6,6 +6,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBehaviour;
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
 import com.dudko.blazinghot.content.casting.casting_depot.SpoutCastingBehaviour;
+import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.mixin.accessor.SpoutBlockEntityAccessor;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.AllSoundEvents;
@@ -133,6 +134,12 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 				CastingDepotBehaviourImpl
 						depotBehaviour =
 						((CastingDepotBehaviourImpl) depot.getBehaviour(CastingDepotBehaviour.TYPE));
+
+				if (BlazingTags.Items.STURDY_MOLDS.matches(castItem)) {
+					depot.award(BlazingAdvancements.STURDY_MOLD);
+				}
+				depot.award(BlazingAdvancements.CASTING);
+
 				if (BlazingTags.Items.MOLDS.matches(castItem)) {
 					depotBehaviour.setHeldStack(castItem);
 				}
@@ -140,6 +147,7 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 					depotBehaviour.processingOutputBuffer.insertItem(0, castItem, false);
 				}
 				depot.resetFluid();
+
 
 				resetProcessing();
 				if (level.isClientSide) {

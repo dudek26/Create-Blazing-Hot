@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.data.recipe;
 
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.cinderFlour;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.soulSand;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.stone;
 
@@ -30,7 +31,13 @@ public class MillingRecipeGen extends BlazingProcessingRecipeGen {
 									.require(stone())
 									.output(BlazingItems.STONE_DUST)
 									.averageProcessingDuration()
-									.output(0.5F, BlazingItems.STONE_DUST));
+									.output(0.5F, BlazingItems.STONE_DUST)),
+			CINDER_FLOUR =
+					create("cinder_flour",
+							b -> b
+									.require(cinderFlour())
+									.output(0.75f, BlazingItems.NETHERRACK_DUST)
+									.averageProcessingDuration());
 
 	@Override
 	protected IRecipeTypeInfo getRecipeType() {

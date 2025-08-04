@@ -54,7 +54,7 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
 									.output(BlazingItems.NETHER_DOUGH)),
 			NETHERRACK_DUST =
 					create("netherrack_dust",
-							b -> b.require(cinderFlour()).require(stoneDust()).output(BlazingItems.NETHERRACK_DUST)),
+							b -> b.require(cinderFlour()).require(stoneDust()).output(BlazingItems.NETHERRACK_DUST, 2)),
 			MOLTEN_BLAZE_GOLD =
 					create("molten_blaze_gold",
 							b -> b

@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.data.recipe;
 
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.blazeGoldRod;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.cinderFlour;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.soulSand;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.stone;
 
@@ -37,7 +38,10 @@ public class CrushingRecipeGen extends BlazingProcessingRecipeGen {
 									.duration(200)),
 			BLAZE_GOLD_ROD =
 					create("blaze_gold_rod",
-							b -> b.require(blazeGoldRod()).output(0.5F, Items.BLAZE_POWDER).duration(250));
+							b -> b.require(blazeGoldRod()).output(0.5F, Items.BLAZE_POWDER).duration(250)),
+			CINDER_FLOUR =
+					create("cinder_flour",
+							b -> b.require(cinderFlour()).output(BlazingItems.NETHERRACK_DUST).duration(150));
 
 	@Override
 	protected IRecipeTypeInfo getRecipeType() {

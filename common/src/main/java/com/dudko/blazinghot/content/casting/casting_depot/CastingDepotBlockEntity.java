@@ -3,7 +3,10 @@ package com.dudko.blazinghot.content.casting.casting_depot;
 import java.util.List;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.data.advancement.BlazingAdvancement;
+import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.lang.BlazingLang;
+import com.dudko.blazinghot.mixin_interfaces.IAdvancementBehaviour;
 import com.dudko.blazinghot.util.TooltipUtil;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
@@ -70,6 +73,8 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 		behaviours.add(filtering);
 
 		behaviours.add(castingBehaviour = SpoutCastingBehaviour.of(this));
+
+		registerAwardables(behaviours, BlazingAdvancements.CASTING, BlazingAdvancements.STURDY_MOLD);
 	}
 
 	public SpoutCastingBehaviour.State getState() {
@@ -200,6 +205,18 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 
 	public boolean isPowered() {
 		return getBlockState().getValue(CastingDepotBlock.POWERED);
+	}
+
+	public void registerAwardables(List<BlockEntityBehaviour> behaviours, BlazingAdvancement... advancements) {
+		((IAdvancementBehaviour) this).blazinghot$registerAwardables(behaviours, advancements);
+	}
+
+	public void award(BlazingAdvancement advancement) {
+		((IAdvancementBehaviour) this).blazinghot$award(advancement);
+	}
+
+	public void awardPlayerIfNear(BlazingAdvancement advancement, int maxDistance) {
+		((IAdvancementBehaviour) this).blazinghot$award(advancement);
 	}
 
 	static class CastingDepotValueBox extends ValueBoxTransform.Sided {

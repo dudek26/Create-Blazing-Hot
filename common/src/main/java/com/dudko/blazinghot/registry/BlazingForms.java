@@ -81,7 +81,10 @@ public class BlazingForms {
 							b -> b.withCustomItem(BlazingItems.STURDY_ALLOY.getId()).mechanicalMixerMeltable(false)),
 			STURDY_SHEET =
 					SHEET.createFrom("sturdy_sheet",
-							b -> b.withCustomItem(AllItems.STURDY_SHEET.getId()).mechanicalMixerMeltable(false));
+							b -> b.withCustomItem(AllItems.STURDY_SHEET.getId()).mechanicalMixerMeltable(false)),
+			STURDY_MOLD =
+					INGOT.createFrom("sturdy_mold",
+							b -> b.withAmount(MultiAmount.INGOT.multiply(2)).withMeltingTime(300));
 
 	// Compat forms
 	public static BlazingForm COMPAT_ROD = ROD.withFlags(Flag.CASTING).fromMods(Mods.CREATE_ADDITIONS),

@@ -9,6 +9,8 @@ Create: Blazing Hot 0.7
     * Molds for casting: Sturdy, Clay and Porcelain variants
 * Sturdy Alloy, Molten Sturdy Alloy and Sturdy Casing
 * Nether Dough and Blaze Roll — new superheating fuel for Blaze Burners
+* Alternate recipes for Netherrack Dust
+* Four new advancements
 
 ### Changed:
 
@@ -19,6 +21,7 @@ Create: Blazing Hot 0.7
 * Adjusted duration of melting recipes
 * Adjusted fuel cost for blaze mixing melting recipes
 * Reworked internal metal system
+* Adjusted existing Netherrack Dust recipe
 
 ### Fixed:
 

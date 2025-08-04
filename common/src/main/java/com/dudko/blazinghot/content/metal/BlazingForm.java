@@ -252,7 +252,7 @@ public class BlazingForm {
 		 *
 		 * @param location ResourceLocation of the item.
 		 */
-		public Builder withCustomItem(ResourceLocation location) {
+		public Builder withCustomItem(@Nullable ResourceLocation location) {
 			this.customLocation = location;
 			return this;
 		}

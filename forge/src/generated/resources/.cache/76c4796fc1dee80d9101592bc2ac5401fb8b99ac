@@ -1,6 +1,6 @@
-// 1.20.1	2025-08-04T13:13:09.8071385	Blazing Hot's Advancements
-00ec6def63a51663a191ae463c1e60da95651f7f data/blazinghot/advancements/all_metal_food.json
-8587266587cc6f0854cd46b2079cc3e12f8a0eb5 data/blazinghot/advancements/all_molten_metals.json
+// 1.20.1	2025-08-04T16:54:45.9585957	Blazing Hot's Advancements
+1b7072dfb3c6154f8580726d31e73c2f23aa6e4c data/blazinghot/advancements/all_metal_food.json
+bcd4ef475ebae5f9a444c81ca3c161d3fc9ea807 data/blazinghot/advancements/all_molten_metals.json
 3600101b8df7051c5f6df4320e8ecd9607be0bf4 data/blazinghot/advancements/ancient_debris_melting.json
 a54e6cdc3c4911f92ae3709e2d571bc1418a52c7 data/blazinghot/advancements/blaze_arrow.json
 786631ed41d9414388f29ceb0060dd9771f5c9e8 data/blazinghot/advancements/blaze_arrow_interdimensional.json
@@ -9,6 +9,7 @@ a9754be78458468d5f5daefb6698f36be6a2c135 data/blazinghot/advancements/blaze_casi
 e685d815a62b9994b1efa34ec0fc463fd6f708ae data/blazinghot/advancements/blaze_mixer.json
 b09515505ad367a3753565329667dcb5d7554b69 data/blazinghot/advancements/blaze_mixer_max.json
 6ef2bb888466362e78bbecd43b840f076dc0ab3d data/blazinghot/advancements/blaze_roll.json
+31f4a49631a3f00fb68f9a337a309c0ccdce63ca data/blazinghot/advancements/casting.json
 e07a9d2ef6d0711f3ca394a0f18b82b4bb2d1105 data/blazinghot/advancements/extinguishing_food_save.json
 95290d64cfddcedfab7100c13f4942016f33c7b5 data/blazinghot/advancements/golden_apple_factory.json
 1c2bfc5f90990f291f5532f7cf0ab9ae88483869 data/blazinghot/advancements/metal_apple_spout_0000.json
@@ -20,3 +21,4 @@ e07a9d2ef6d0711f3ca394a0f18b82b4bb2d1105 data/blazinghot/advancements/extinguish
 daaa321fb97dd3690d0c511609012840f9e4b28f data/blazinghot/advancements/root.json
 2efe79fe5c34bc1bef2c5012f71e8827799d5eca data/blazinghot/advancements/sturdy_alloy.json
 89c6240083a2de7947218d77729d0bc5db064a6f data/blazinghot/advancements/sturdy_casing.json
+7bc3b6794a30eade6e2636205162ed979d886ede data/blazinghot/advancements/sturdy_mold.json

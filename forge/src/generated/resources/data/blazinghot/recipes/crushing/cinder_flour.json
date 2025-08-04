@@ -1,16 +1,13 @@
 {
-  "type": "create:mixing",
+  "type": "create:crushing",
   "ingredients": [
     {
       "item": "create:cinder_flour"
-    },
-    {
-      "tag": "c:stone_dusts"
     }
   ],
+  "processingTime": 150,
   "results": [
     {
-      "count": 2,
       "item": "blazinghot:netherrack_dust"
     }
   ]

@@ -304,7 +304,6 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 		return true;
 	}
 
-
 	public void registerAwardables(List<BlockEntityBehaviour> behaviours, BlazingAdvancement... advancements) {
 		((IAdvancementBehaviour) this).blazinghot$registerAwardables(behaviours, advancements);
 	}

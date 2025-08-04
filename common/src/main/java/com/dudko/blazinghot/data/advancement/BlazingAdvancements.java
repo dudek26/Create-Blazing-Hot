@@ -17,6 +17,7 @@ import java.util.function.UnaryOperator;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.dudko.blazinghot.content.casting.Molds;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingMetals;
@@ -86,10 +87,26 @@ public class BlazingAdvancements implements DataProvider {
 			create("sturdy_casing",
 					b -> b
 							.icon(BlazingBlocks.STURDY_CASING)
-							.title("The Heavy Age")
+							.title("The Sturdy Age")
 							.description("Use your Sturdy Alloys to make some Andesite Casings sturdy")
 							.special(NOISY)
 							.after(STURDY_ALLOY)),
+
+	CASTING =
+			create("casting",
+					b -> b
+							.icon(BlazingBlocks.CASTING_DEPOT)
+							.title("Casting Apprentice")
+							.description("Cast an item using a mold in a Casting Depot")
+							.after(STURDY_CASING)),
+
+	STURDY_MOLD =
+			create("sturdy_mold",
+					b -> b
+							.icon(Molds.INGOT.get(Molds.MoldType.STURDY))
+							.title("Experienced Founder")
+							.description("Create a sturdy mold")
+							.after(CASTING)),
 
 	// Nether Essence - Molten Metal branch
 
