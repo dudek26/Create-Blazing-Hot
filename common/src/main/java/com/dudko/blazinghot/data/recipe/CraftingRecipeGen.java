@@ -6,8 +6,11 @@ import static com.dudko.blazinghot.data.recipe.BlazingIngredients.blazeGoldSheet
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.brassIngot;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.carrot;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.coal;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.electronTube;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.feather;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.glowstone;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.sturdyAlloy;
+import static com.dudko.blazinghot.data.recipe.BlazingIngredients.sturdyCasing;
 import static com.dudko.blazinghot.registry.BlazingBlocks.BLAZE_GOLD_BLOCK;
 import static com.dudko.blazinghot.registry.BlazingForms.INGOT;
 import static com.dudko.blazinghot.registry.BlazingForms.NUGGET;
@@ -131,7 +134,18 @@ public class CraftingRecipeGen extends BlazingRecipeProvider {
 									.define('Y', blazeGoldSheet())
 									.pattern(" X ")
 									.pattern("YXY")
-									.pattern("YYY"));
+									.pattern("YYY")),
+
+	CASTING_DEPOT =
+			create(BlazingBlocks.CASTING_DEPOT)
+					.unlockedBy(BlazingIngredients::sturdyCasing)
+					.viaShaped(b -> b
+							.define('C', sturdyCasing())
+							.define('A', sturdyAlloy())
+							.define('E', electronTube())
+							.pattern("A")
+							.pattern("C")
+							.pattern("E"));
 
 	GeneratedRecipeBuilder create(Supplier<ItemLike> result) {
 		return new GeneratedRecipeBuilder("/", result);

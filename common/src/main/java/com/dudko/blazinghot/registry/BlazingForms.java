@@ -21,8 +21,7 @@ public class BlazingForms {
 							.withTagFolder("ingots")
 							.withMeltingTime(200)
 							.mechanicalMixerMeltable(true)
-							.withMold(Molds.INGOT)
-							.build()),
+							.withMold(Molds.INGOT)),
 			NUGGET =
 					BlazingForm.create("nugget",
 							b -> b
@@ -30,10 +29,9 @@ public class BlazingForms {
 									.withTagFolder("nuggets")
 									.withMeltingTime(30)
 									.mechanicalMixerMeltable(true)
-									.withMold(Molds.NUGGET)
-									.build()),
+									.withMold(Molds.NUGGET)),
 			SHEET =
-					INGOT.createFrom("sheet", b -> b.withTagFolder("plates").withMold(Molds.SHEET).build());
+					INGOT.createFrom("sheet", b -> b.withTagFolder("plates").withMold(Molds.SHEET));
 
 	// Basic compat forms
 	public static BlazingForm
@@ -46,10 +44,9 @@ public class BlazingForms {
 							.mechanicalMixerMeltable(true)
 							.withMold(Molds.ROD)
 							.optional(true)
-							.setFlags(Flag.MELTING)
-							.build()),
+							.setFlags(Flag.MELTING)),
 			OPTIONAL_WIRE =
-					OPTIONAL_ROD.createFrom("wire", b -> b.withTagFolder("wires").build()),
+					OPTIONAL_ROD.createFrom("wire", b -> b.withTagFolder("wires")),
 			OPTIONAL_SHEET =
 					SHEET.withFlags(Flag.MELTING).asOptional(true);
 
@@ -57,27 +54,23 @@ public class BlazingForms {
 	public static BlazingForm
 			ANCIENT_DEBRIS =
 			BlazingForm.create("ancient_debris",
-					b -> b
-							.withAmount(MultiAmount.RAW_ORE)
-							.withMeltingTime(300)
-							.withCustomItem(Items.ANCIENT_DEBRIS)
-							.build()),
+					b -> b.withAmount(MultiAmount.RAW_ORE).withMeltingTime(300).withCustomItem(Items.ANCIENT_DEBRIS)),
 			NETHERITE_SCRAP =
 					INGOT.createFrom("netherite_scrap",
-							b -> b.withCustomItem(Items.NETHERITE_SCRAP).mechanicalMixerMeltable(false).build()),
+							b -> b.withCustomItem(Items.NETHERITE_SCRAP).mechanicalMixerMeltable(false)),
 			NETHERITE_INGOT =
-					INGOT.createFrom("ingot", b -> b.mechanicalMixerMeltable(false).build());
+					INGOT.createFrom("ingot", b -> b.mechanicalMixerMeltable(false));
 
 	// Create
 	public static BlazingForm
 			ANDESITE_ALLOY =
-			INGOT.createFrom("andesite_alloy", b -> b.withCustomItem(AllItems.ANDESITE_ALLOY.getId()).build()),
+			INGOT.createFrom("andesite_alloy", b -> b.withCustomItem(AllItems.ANDESITE_ALLOY.getId())),
 			CREATE_NUGGET =
 					NUGGET.withFlags(Flag.MELTING).asOptional(true),
 			COPPER_NUGGET =
 					NUGGET.withFlags(Flag.CASTING).fromMods(Mods.CREATE),
 			GOLDEN_SHEET =
-					SHEET.createFrom("golden_sheet", b -> b.withCustomItem(Create.asResource("golden_sheet")).build()),
+					SHEET.createFrom("golden_sheet", b -> b.withCustomItem(Create.asResource("golden_sheet"))),
 			CREATE_SHEET =
 					SHEET.fromMods(Mods.CREATE);
 
@@ -85,16 +78,10 @@ public class BlazingForms {
 	public static BlazingForm ROD = OPTIONAL_ROD.withFlags(Flag.MELTING, Flag.CASTING).asOptional(false),
 			STURDY_ALLOY =
 					INGOT.createFrom("sturdy_alloy",
-							b -> b
-									.withCustomItem(BlazingItems.STURDY_ALLOY.getId())
-									.mechanicalMixerMeltable(false)
-									.build()),
+							b -> b.withCustomItem(BlazingItems.STURDY_ALLOY.getId()).mechanicalMixerMeltable(false)),
 			STURDY_SHEET =
 					SHEET.createFrom("sturdy_sheet",
-							b -> b
-									.withCustomItem(AllItems.STURDY_SHEET.getId())
-									.mechanicalMixerMeltable(false)
-									.build());
+							b -> b.withCustomItem(AllItems.STURDY_SHEET.getId()).mechanicalMixerMeltable(false));
 
 	// Compat forms
 	public static BlazingForm COMPAT_ROD = ROD.withFlags(Flag.CASTING).fromMods(Mods.CREATE_ADDITIONS),

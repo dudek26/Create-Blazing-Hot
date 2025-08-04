@@ -2,7 +2,7 @@ package com.dudko.blazinghot.content.metal;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -73,8 +73,8 @@ public class BlazingForm {
 	 * @param name            Name of the form, used to automatically generate casting recipes
 	 * @param builderFunction Builder function
 	 */
-	public static BlazingForm create(String name, Function<Builder, BlazingForm> builderFunction) {
-		return builderFunction.apply(new Builder(name));
+	public static BlazingForm create(String name, UnaryOperator<Builder> builderFunction) {
+		return builderFunction.apply(new Builder(name)).build();
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class BlazingForm {
 	 * @param builderFunction Builder function
 	 * @return New BlazingForm
 	 */
-	public BlazingForm createFrom(String name, Function<Builder, BlazingForm> builderFunction) {
+	public BlazingForm createFrom(String name, UnaryOperator<Builder> builderFunction) {
 		Builder builder = new Builder(name);
 		builder.tagFolder = tagFolder;
 		builder.mods = new ArrayList<>(mods);
@@ -104,7 +104,7 @@ public class BlazingForm {
 
 		builder.flags = new ArrayList<>(flags);
 
-		return builderFunction.apply(builder);
+		return builderFunction.apply(builder).build();
 	}
 
 	public Ingredient getMeltingIngredient(BlazingMetal metal) {
@@ -163,21 +163,21 @@ public class BlazingForm {
 	 * Creates a new BlazingForm from an existing one and makes it optional or not.
 	 */
 	public BlazingForm asOptional(boolean optional) {
-		return createFrom(name, b -> b.optional(optional).build());
+		return createFrom(name, b -> b.optional(optional));
 	}
 
 	/**
 	 * Creates a new BlazingForm from an existing one with specified mods.
 	 */
 	public BlazingForm fromMods(Mods... mods) {
-		return createFrom(name, b -> b.clearMods().fromMods(mods).build());
+		return createFrom(name, b -> b.clearMods().fromMods(mods));
 	}
 
 	/**
 	 * Creates a new BlazingForm form an existing one with specified datagen flags. All flags will be applied at default.
 	 */
 	public BlazingForm withFlags(Flag... flags) {
-		return createFrom(name, b -> b.setFlags(flags).build());
+		return createFrom(name, b -> b.setFlags(flags));
 	}
 
 

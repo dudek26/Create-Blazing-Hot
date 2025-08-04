@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.compat.Mods;
@@ -37,8 +37,8 @@ public class BlazingMetal {
 		fluidInteractions = Map.copyOf(builder.fluidInteractions);
 	}
 
-	public static BlazingMetal create(String name, Function<Builder, BlazingMetal> builderFunction) {
-		return builderFunction.apply(new Builder(name));
+	public static BlazingMetal create(String name, UnaryOperator<Builder> builderFunction) {
+		return builderFunction.apply(new Builder(name)).build();
 	}
 
 	public BlazingMetal register() {

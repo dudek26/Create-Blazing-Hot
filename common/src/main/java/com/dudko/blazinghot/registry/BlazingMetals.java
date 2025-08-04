@@ -36,8 +36,7 @@ public class BlazingMetals {
 											BlazingForms.OPTIONAL_WIRE,
 											BlazingForms.COMPAT_ROD,
 											BlazingForms.COMPAT_WIRE)
-									.waterCobble()
-									.build())
+									.waterCobble())
 					.register(),
 			COPPER =
 					BlazingMetal
@@ -51,8 +50,7 @@ public class BlazingMetals {
 													BlazingForms.CREATE_SHEET,
 													BlazingForms.CREATE_NUGGET,
 													BlazingForms.COPPER_NUGGET)
-											.waterCobble()
-											.build())
+											.waterCobble())
 							.register(),
 			GOLD =
 					BlazingMetal
@@ -65,8 +63,7 @@ public class BlazingMetals {
 													BlazingForms.COMPAT_WIRE,
 													BlazingForms.OPTIONAL_SHEET,
 													BlazingForms.GOLDEN_SHEET)
-											.waterCobble()
-											.build())
+											.waterCobble())
 							.register(),
 			ANCIENT_DEBRIS =
 					BlazingMetal
@@ -74,8 +71,7 @@ public class BlazingMetals {
 									b -> b
 											.withForms(BlazingForms.ANCIENT_DEBRIS, BlazingForms.NETHERITE_SCRAP)
 											.addFluidInteraction(Fluids.WATER,
-													() -> AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get())
-											.build())
+													() -> AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get()))
 							.register(),
 			NETHERITE =
 					BlazingMetal
@@ -83,8 +79,7 @@ public class BlazingMetals {
 									b -> b
 											.withForms(BlazingForms.NETHERITE_INGOT)
 											.addFluidInteraction(Fluids.WATER,
-													() -> AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get())
-											.build())
+													() -> AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get()))
 							.register();
 
 	// Create
@@ -96,17 +91,12 @@ public class BlazingMetals {
 									.fromMods(Mods.CREATE)
 									.createForms()
 									.withForms(BlazingForms.OPTIONAL_ROD, BlazingForms.COMPAT_ROD)
-									.waterCobble()
-									.build())
+									.waterCobble())
 					.register(),
 			ANDESITE =
 					BlazingMetal
 							.create("andesite",
-									b -> b
-											.fromMods(Mods.CREATE)
-											.withForms(BlazingForms.ANDESITE_ALLOY)
-											.waterCobble()
-											.build())
+									b -> b.fromMods(Mods.CREATE).withForms(BlazingForms.ANDESITE_ALLOY).waterCobble())
 							.register(),
 			ZINC =
 					BlazingMetal
@@ -115,8 +105,7 @@ public class BlazingMetals {
 											.fromMods(Mods.CREATE)
 											.vanillaForms()
 											.withForms(BlazingForms.OPTIONAL_SHEET, BlazingForms.ZINC_SHEET)
-											.waterCobble()
-											.build())
+											.waterCobble())
 							.register();
 
 	// Create: Blazing Hot
@@ -128,8 +117,7 @@ public class BlazingMetals {
 									.fromMods(Mods.BLAZINGHOT)
 									.createForms()
 									.withForms(BlazingForms.ROD)
-									.addFluidInteraction(Fluids.WATER, () -> Blocks.NETHERRACK)
-									.build())
+									.addFluidInteraction(Fluids.WATER, () -> Blocks.NETHERRACK))
 					.register(),
 			STURDY_ALLOY =
 					BlazingMetal
@@ -138,8 +126,7 @@ public class BlazingMetals {
 											.fromMods(Mods.BLAZINGHOT)
 											.withForms(BlazingForms.STURDY_ALLOY, BlazingForms.STURDY_SHEET)
 											.addFluidInteraction(Fluids.WATER,
-													() -> AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get())
-											.build())
+													() -> AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get()))
 							.register();
 
 	/**

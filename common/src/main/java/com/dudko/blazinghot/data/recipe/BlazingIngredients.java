@@ -79,6 +79,10 @@ public class BlazingIngredients {
 		return AllBlocks.ANDESITE_CASING;
 	}
 
+	public static ItemLike sturdyCasing() {
+		return BlazingBlocks.STURDY_CASING;
+	}
+
 	//    Fluids
 
 	public static TagKey<Fluid> moltenGold() {
@@ -161,6 +165,10 @@ public class BlazingIngredients {
 
 	public static ItemLike wheatFlour() {
 		return AllItems.WHEAT_FLOUR;
+	}
+
+	public static ItemLike electronTube() {
+		return AllItems.ELECTRON_TUBE;
 	}
 
 	//    Dusts
