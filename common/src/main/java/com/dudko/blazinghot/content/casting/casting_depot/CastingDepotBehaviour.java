@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.content.casting.casting_depot;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -8,7 +9,10 @@ import java.util.function.Supplier;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.simibubi.create.content.kinetics.belt.behaviour.TransportedItemStackHandlerBehaviour;
+import com.simibubi.create.content.kinetics.belt.transport.TransportedItemStack;
 import com.simibubi.create.content.kinetics.fan.processing.AllFanProcessingTypes;
 import com.simibubi.create.content.kinetics.fan.processing.FanProcessingType;
 import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
@@ -35,7 +39,8 @@ public abstract class CastingDepotBehaviour extends BlockEntityBehaviour {
 
 	protected BehaviourType<CastingDepotBehaviour> behaviourType;
 
-	public ItemStack heldStack;
+	public @NotNull ItemStack heldStack;
+	protected List<TransportedItemStack> incoming;
 
 	public CastingDepotBehaviour(CastingDepotBlockEntity be, BehaviourType<CastingDepotBehaviour> type) {
 		super(be);
@@ -47,6 +52,8 @@ public abstract class CastingDepotBehaviour extends BlockEntityBehaviour {
 		};
 		behaviourType = type;
 		allowMerge = false;
+		heldStack = ItemStack.EMPTY;
+		incoming = new ArrayList<>();
 	}
 
 	@ExpectPlatform
@@ -55,6 +62,36 @@ public abstract class CastingDepotBehaviour extends BlockEntityBehaviour {
 	}
 
 	public abstract void addSubBehaviours(List<BlockEntityBehaviour> behaviours);
+
+	public ItemStack getHeldItemStack() {
+		return this.heldStack;
+	}
+
+	public boolean canMergeItems() {
+		return this.allowMerge;
+	}
+
+	public abstract int getPresentStackSize();
+
+	public abstract int getRemainingSpace();
+
+	public abstract ItemStack insert(ItemStack heldItem, Direction insertedFrom, boolean simulate);
+
+	public void setHeldStack(ItemStack heldStack) {
+		this.heldStack = heldStack;
+	}
+
+	public void removeHeldStack() {
+		this.heldStack = ItemStack.EMPTY;
+	}
+
+	public boolean isEmpty() {
+		return this.heldStack.isEmpty() && this.isOutputEmpty();
+	}
+
+	protected abstract boolean isOccupied(Direction side);
+
+	public abstract boolean isOutputEmpty();
 
 	@Override
 	public BehaviourType<?> getType() {
@@ -68,4 +105,5 @@ public abstract class CastingDepotBehaviour extends BlockEntityBehaviour {
 	public static final Map<FanProcessingType, Float>
 			COOLING_SPEEDS =
 			Map.of(AllFanProcessingTypes.BLASTING, -0.25f, AllFanProcessingTypes.SPLASHING, 0.5f);
+
 }

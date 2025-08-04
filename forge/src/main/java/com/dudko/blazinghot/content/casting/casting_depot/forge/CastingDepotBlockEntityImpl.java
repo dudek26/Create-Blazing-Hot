@@ -42,7 +42,7 @@ public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity {
 
 	@Override
 	public ItemStack getHeldItem() {
-		return depotBehaviour.heldStack == null ? ItemStack.EMPTY : depotBehaviour.heldStack;
+		return depotBehaviour.heldStack;
 	}
 
 	@Override

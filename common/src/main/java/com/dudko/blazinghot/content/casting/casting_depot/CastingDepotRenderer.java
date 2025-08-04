@@ -38,7 +38,7 @@ public class CastingDepotRenderer extends SmartBlockEntityRenderer<CastingDepotB
 	}
 
 	public static void renderItem(Level level, PoseStack ms, MultiBufferSource buffer, int light, int overlay, ItemStack itemStack, Direction direction, double yOffset) {
-		if (itemStack == null || itemStack.isEmpty()) return;
+		if (itemStack.isEmpty()) return;
 		ms.pushPose();
 		ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 		PoseTransformStack msr = TransformStack.of(ms);

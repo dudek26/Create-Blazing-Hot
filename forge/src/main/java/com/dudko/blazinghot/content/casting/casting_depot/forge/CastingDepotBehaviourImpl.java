@@ -1,11 +1,8 @@
 package com.dudko.blazinghot.content.casting.casting_depot.forge;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -40,7 +37,6 @@ import net.minecraftforge.items.ItemStackHandler;
 @MethodsReturnNonnullByDefault
 public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 
-	List<TransportedItemStack> incoming;
 	ItemStackHandler processingOutputBuffer;
 	CastingDepotItemHandler itemHandler;
 	LazyOptional<CastingDepotItemHandler> lazyItemHandler;
@@ -52,27 +48,12 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 				be.notifyUpdate();
 			}
 		};
-		incoming = new ArrayList<>();
 		itemHandler = new CastingDepotItemHandler(this);
 		lazyItemHandler = LazyOptional.of(() -> itemHandler);
 	}
 
 	public static CastingDepotBehaviour of(CastingDepotBlockEntity be, BehaviourType<CastingDepotBehaviour> type) {
 		return new CastingDepotBehaviourImpl(be, type);
-	}
-
-	public void enableMerging() {
-		this.allowMerge = true;
-	}
-
-	public CastingDepotBehaviourImpl withCallback(Consumer<ItemStack> changeListener) {
-		this.onHeldInserted = changeListener;
-		return this;
-	}
-
-	public CastingDepotBehaviourImpl onlyAccepts(Predicate<ItemStack> filter) {
-		this.acceptedItems = filter;
-		return this;
 	}
 
 	@Override
@@ -83,9 +64,9 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 		Iterator<TransportedItemStack> iterator = this.incoming.iterator();
 
 		while (iterator.hasNext()) {
-			TransportedItemStack ts = (TransportedItemStack) iterator.next();
+			TransportedItemStack ts = iterator.next();
 			if (!world.isClientSide || this.blockEntity.isVirtual()) {
-				if (this.heldStack == null) {
+				if (this.heldStack.isEmpty()) {
 					this.heldStack = ts.stack;
 				}
 				else if (!ItemHelper.canItemStackAmountsStack(this.heldStack, ts.stack)) {
@@ -105,7 +86,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 			}
 		}
 
-		if (this.heldStack != null) {
+		if (!this.heldStack.isEmpty()) {
 			if (!world.isClientSide) {
 				this.handleBeltFunnelOutput();
 			}
@@ -153,16 +134,16 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 
 	}
 
+	@Override
 	public void unload() {
 		if (this.lazyItemHandler != null) {
 			this.lazyItemHandler.invalidate();
 		}
-
 	}
 
 	@Override
 	public void write(CompoundTag compound, boolean clientPacket) {
-		if (this.heldStack != null) {
+		if (!this.heldStack.isEmpty()) {
 			compound.put("HeldStack", this.heldStack.serializeNBT());
 		}
 
@@ -175,7 +156,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 
 	@Override
 	public void read(CompoundTag compound, boolean clientPacket) {
-		this.heldStack = null;
+		this.heldStack = ItemStack.EMPTY;
 		if (compound.contains("HeldStack")) {
 			this.heldStack = ItemStack.of(compound.getCompound("HeldStack"));
 		}
@@ -197,14 +178,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 					.considerOccupiedWhen(this::isOccupied));
 	}
 
-	public ItemStack getHeldItemStack() {
-		return this.heldStack == null ? ItemStack.EMPTY : this.heldStack;
-	}
-
-	public boolean canMergeItems() {
-		return this.allowMerge;
-	}
-
+	@Override
 	public int getPresentStackSize() {
 		int cumulativeStackSize = 0;
 		cumulativeStackSize += this.getHeldItemStack().getCount();
@@ -216,6 +190,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 		return cumulativeStackSize;
 	}
 
+	@Override
 	public int getRemainingSpace() {
 		int cumulativeStackSize = this.getPresentStackSize();
 
@@ -230,31 +205,30 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 		return fromGetter - cumulativeStackSize;
 	}
 
-	public ItemStack insert(TransportedItemStack heldItem, boolean simulate) {
+	@Override
+	public ItemStack insert(ItemStack heldItem, Direction insertedFrom, boolean simulate) {
 		if (!(Boolean) this.canAcceptItems.get()) {
-			return heldItem.stack;
+			return heldItem;
 		}
-		else if (!this.acceptedItems.test(heldItem.stack)) {
-			return heldItem.stack;
+		else if (!this.acceptedItems.test(heldItem)) {
+			return heldItem;
 		}
 		else if (this.canMergeItems()) {
 			int remainingSpace = this.getRemainingSpace();
-			ItemStack inserted = heldItem.stack;
 			if (remainingSpace <= 0) {
-				return inserted;
+				return heldItem;
 			}
-			else if (this.heldStack != null && !ItemHelper.canItemStackAmountsStack(this.heldStack, inserted)) {
-				return inserted;
+			else if (!this.heldStack.isEmpty() && !ItemHelper.canItemStackAmountsStack(this.heldStack, heldItem)) {
+				return heldItem;
 			}
 			else {
 				ItemStack returned = ItemStack.EMPTY;
-				if (remainingSpace < inserted.getCount()) {
-					returned =
-							ItemHandlerHelper.copyStackWithSize(heldItem.stack, inserted.getCount() - remainingSpace);
+				if (remainingSpace < heldItem.getCount()) {
+					returned = ItemHandlerHelper.copyStackWithSize(heldItem, heldItem.getCount() - remainingSpace);
 					if (!simulate) {
-						TransportedItemStack copy = heldItem.copy();
+						TransportedItemStack copy = new TransportedItemStack(heldItem.copy());
 						copy.stack.setCount(remainingSpace);
-						if (this.heldStack != null) {
+						if (!this.heldStack.isEmpty()) {
 							this.incoming.add(copy);
 						}
 						else {
@@ -263,11 +237,12 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 					}
 				}
 				else if (!simulate) {
-					if (this.heldStack != null) {
-						this.incoming.add(heldItem);
+					if (!this.heldStack.isEmpty()) {
+						TransportedItemStack transported = new TransportedItemStack(heldItem);
+						this.incoming.add(transported);
 					}
 					else {
-						this.heldStack = heldItem.stack;
+						this.heldStack = heldItem;
 					}
 				}
 
@@ -277,17 +252,14 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 		else {
 			ItemStack returned = ItemStack.EMPTY;
 			int maxCount = 1;
-			boolean stackTooLarge = maxCount < heldItem.stack.getCount();
+			boolean stackTooLarge = maxCount < heldItem.getCount();
 			if (stackTooLarge) {
-				returned = ItemHandlerHelper.copyStackWithSize(heldItem.stack, heldItem.stack.getCount() - maxCount);
+				returned = ItemHandlerHelper.copyStackWithSize(heldItem, heldItem.getCount() - maxCount);
 			}
 
-			if (simulate) {
-				return returned;
-			}
-			else {
+			if (!simulate) {
 				if (this.isEmpty()) {
-					if (heldItem.insertedFrom.getAxis().isHorizontal()) {
+					if (insertedFrom.getAxis().isHorizontal()) {
 						AllSoundEvents.DEPOT_SLIDE.playOnServer(this.getWorld(), this.getPos());
 					}
 					else {
@@ -297,29 +269,22 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 
 				if (stackTooLarge) {
 					heldItem = heldItem.copy();
-					heldItem.stack.setCount(maxCount);
+					heldItem.setCount(maxCount);
 				}
 
-				this.heldStack = heldItem.stack;
-				this.onHeldInserted.accept(heldItem.stack);
-				return returned;
+				this.heldStack = heldItem;
+				this.onHeldInserted.accept(heldItem);
 			}
+			return returned;
 		}
-	}
-
-	public void setHeldStack(ItemStack heldStack) {
-		this.heldStack = heldStack;
-	}
-
-	public void removeHeldStack() {
-		this.heldStack = null;
 	}
 
 	public <T> LazyOptional<T> getItemCapability() {
 		return this.lazyItemHandler.cast();
 	}
 
-	private boolean isOccupied(Direction side) {
+	@Override
+	protected boolean isOccupied(Direction side) {
 		if (!this.getHeldItemStack().isEmpty() && !this.canMergeItems()) {
 			return true;
 		}
@@ -343,7 +308,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 			transportedStack.insertedFrom = side;
 			transportedStack.prevSideOffset = transportedStack.sideOffset;
 			transportedStack.prevBeltPosition = transportedStack.beltPosition;
-			ItemStack remainder = this.insert(transportedStack, simulate);
+			ItemStack remainder = this.insert(getHeldItemStack(), transportedStack.insertedFrom, simulate);
 			if (remainder.getCount() != size) {
 				this.blockEntity.notifyUpdate();
 			}
@@ -352,10 +317,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 		}
 	}
 
-	public boolean isEmpty() {
-		return this.heldStack == null && this.isOutputEmpty();
-	}
-
+	@Override
 	public boolean isOutputEmpty() {
 		for (int i = 0; i < this.processingOutputBuffer.getSlots(); ++i) {
 			if (!this.processingOutputBuffer.getStackInSlot(i).isEmpty()) {
@@ -364,14 +326,6 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 		}
 
 		return true;
-	}
-
-	private Vec3 getWorldPositionOf(TransportedItemStack transported) {
-		return VecHelper.getCenterOf(this.blockEntity.getBlockPos());
-	}
-
-	public BehaviourType<?> getType() {
-		return TYPE;
 	}
 
 	public boolean isItemValid(ItemStack stack) {

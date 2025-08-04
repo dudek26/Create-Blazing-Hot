@@ -1,0 +1,7 @@
+@ParametersAreNonnullByDefault @MethodsReturnNonnullByDefault @FieldsAreNonnullByDefault
+package com.dudko.blazinghot.gui.ponder;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import net.minecraft.FieldsAreNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;

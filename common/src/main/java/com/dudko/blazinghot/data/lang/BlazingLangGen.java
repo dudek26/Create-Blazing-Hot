@@ -3,6 +3,7 @@ package com.dudko.blazinghot.data.lang;
 import java.util.function.BiConsumer;
 
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
+import com.dudko.blazinghot.gui.ponder.BlazingPonderPlugin;
 import com.dudko.blazinghot.registry.BlazingMetals;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags;
@@ -21,6 +22,7 @@ public class BlazingLangGen {
 		BlazingLang.provideLangEntries(langConsumer);
 		ItemDescriptions.provideLangEntries(langConsumer);
 		DyeUtil.provideLangEntries(langConsumer);
+		BlazingPonderPlugin.providePonderLang(langConsumer);
 	}
 
 }

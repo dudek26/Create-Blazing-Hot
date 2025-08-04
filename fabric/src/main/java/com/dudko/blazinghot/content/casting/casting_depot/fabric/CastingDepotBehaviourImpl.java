@@ -45,13 +45,13 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
+// TODO: clean this mess
 @SuppressWarnings("UnstableApiUsage")
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 
 	TransportedItemStack heldItem;
-	List<TransportedItemStack> incoming;
 	ItemStackHandler processingOutputBuffer;
 	public CastingDepotItemHandler itemHandler;
 
@@ -210,10 +210,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 			if (afterInsert.isEmpty()) heldItem = null;
 			else heldItem.stack = afterInsert;
 			blockEntity.notifyUpdate();
-			return;
 		}
-
-		return;
 	}
 
 	@Override
@@ -263,12 +260,17 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 		behaviours.add(transportedHandler);
 	}
 
+	@Override
+	public ItemStack insert(ItemStack heldItem, Direction insertedFrom, boolean simulate) {
+		return ItemStack.EMPTY;
+	}
+
 	public ItemStack getHeldItemStack() {
 		return heldItem == null ? ItemStack.EMPTY : heldItem.stack;
 	}
 
 	public boolean canMergeItems() {
-		return allowMerge;
+		return super.canMergeItems();
 	}
 
 	public int getPresentStackSize() {
@@ -353,11 +355,11 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 //		return lazyItemHandler.cast();
 //	}
 
-	private boolean isOccupied(Direction side) {
+	@Override
+	protected boolean isOccupied(Direction side) {
 		if (!getHeldItemStack().isEmpty() && !canMergeItems()) return true;
 		if (!isOutputEmpty() && !canMergeItems()) return true;
-		if (!canAcceptItems.get()) return true;
-		return false;
+		return !canAcceptItems.get();
 	}
 
 	private ItemStack tryInsertingFromSide(TransportedItemStack transportedStack, Direction side, boolean simulate) {
@@ -413,10 +415,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 		if (dirty) blockEntity.notifyUpdate();
 	}
 
-	public boolean isEmpty() {
-		return heldItem == null && isOutputEmpty();
-	}
-
+	@Override
 	public boolean isOutputEmpty() {
 		for (int i = 0; i < processingOutputBuffer.getSlotCount(); i++)
 			if (!processingOutputBuffer.getStackInSlot(i).isEmpty()) return false;
@@ -425,11 +424,6 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 
 	private Vec3 getWorldPositionOf(TransportedItemStack transported) {
 		return VecHelper.getCenterOf(blockEntity.getBlockPos());
-	}
-
-	@Override
-	public BehaviourType<?> getType() {
-		return TYPE;
 	}
 
 	public boolean isItemValid(ItemStack stack) {

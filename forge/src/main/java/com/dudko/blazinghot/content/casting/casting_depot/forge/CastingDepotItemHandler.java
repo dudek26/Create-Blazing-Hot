@@ -4,9 +4,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlock;
 import com.dudko.blazinghot.content.casting.casting_depot.SpoutCastingBehaviour;
-import com.simibubi.create.content.kinetics.belt.transport.TransportedItemStack;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 
@@ -43,7 +43,7 @@ public class CastingDepotItemHandler implements IItemHandler {
 			return stack;
 		}
 		else {
-			ItemStack remainder = this.behaviour.insert(new TransportedItemStack(stack), simulate);
+			ItemStack remainder = this.behaviour.insert(stack, Direction.UP, simulate);
 			if (!simulate && remainder != stack) {
 				this.behaviour.blockEntity.notifyUpdate();
 			}
@@ -66,18 +66,14 @@ public class CastingDepotItemHandler implements IItemHandler {
 				return ItemStack.EMPTY;
 			}
 			ItemStack held = this.behaviour.heldStack;
-			if (held == null) {
-				return ItemStack.EMPTY;
+			if (held == ItemStack.EMPTY) {
+				return held;
 			}
 			else {
 				ItemStack stack = held.copy();
 				ItemStack extracted = stack.split(amount);
 				if (!simulate) {
 					this.behaviour.heldStack = stack;
-					if (stack.isEmpty()) {
-						this.behaviour.heldStack = null;
-					}
-
 					this.behaviour.blockEntity.notifyUpdate();
 				}
 

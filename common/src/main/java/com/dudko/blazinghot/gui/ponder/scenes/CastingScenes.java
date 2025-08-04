@@ -1,0 +1,155 @@
+package com.dudko.blazinghot.gui.ponder.scenes;
+
+import com.dudko.blazinghot.content.casting.Molds;
+import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBehaviour;
+import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
+import com.dudko.blazinghot.content.casting.casting_depot.SpoutCastingBehaviour;
+import com.simibubi.create.content.fluids.pump.PumpBlock;
+import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
+
+import net.createmod.catnip.math.Pointing;
+import net.createmod.ponder.api.element.ElementLink;
+import net.createmod.ponder.api.element.WorldSectionElement;
+import net.createmod.ponder.api.level.PonderLevel;
+import net.createmod.ponder.api.scene.SceneBuilder;
+import net.createmod.ponder.api.scene.SceneBuildingUtil;
+import net.createmod.ponder.api.scene.Selection;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.Vec3;
+
+public class CastingScenes {
+
+	public static void castingBySpout(SceneBuilder builder, SceneBuildingUtil util) {
+		CreateSceneBuilder scene = new CreateSceneBuilder(builder);
+
+		scene.title("spout_casting", "Casting items using a Spout");
+		scene.configureBasePlate(0, 0, 5);
+		scene.showBasePlate();
+		scene.idle(5);
+
+		Selection depotS = util.select().position(2, 1, 2);
+		Selection spoutS = util.select().position(2, 3, 2);
+		BlockPos spoutPos = util.grid().at(2, 3, 2);
+		BlockPos depotPos = util.grid().at(2, 1, 2);
+
+		Selection largeCog = util.select().position(3, 0, 5);
+		Selection kinetics = util.select().fromTo(2, 1, 5, 2, 2, 3);
+		Selection tank = util.select().fromTo(1, 1, 4, 1, 2, 4);
+		Selection pipes = util.select().fromTo(1, 3, 4, 2, 3, 3);
+
+		scene.world().modifyBlock(util.grid().at(2, 3, 3), s -> s.setValue(PumpBlock.FACING, Direction.NORTH), false);
+
+		ElementLink<WorldSectionElement> depot = scene.world().showIndependentSection(depotS, Direction.DOWN);
+
+		scene.idle(10);
+		scene.world().showSection(spoutS, Direction.DOWN);
+
+		scene.idle(10);
+		Vec3 spoutSide = util.vector().blockSurface(spoutPos, Direction.WEST);
+		scene
+				.overlay()
+				.showText(60)
+				.pointAt(spoutSide)
+				.placeNearTarget()
+				.attachKeyFrame()
+				.text("The Spout can cast fluids onto a Casting Depot below");
+
+		scene.idle(50);
+		scene.world().showSection(tank, Direction.DOWN);
+
+		scene.idle(5);
+		scene.world().showSection(largeCog, Direction.UP);
+		scene.world().showSection(kinetics, Direction.NORTH);
+		scene.world().showSection(pipes, Direction.NORTH);
+
+		scene.idle(20);
+		Vec3 depotCenter = util.vector().centerOf(depotPos);
+		scene
+				.overlay()
+				.showText(60)
+				.pointAt(depotCenter)
+				.placeNearTarget()
+				.attachKeyFrame()
+				.text("When Casting Depot has a valid mold...");
+
+		scene.idle(60);
+		ItemStack porcelainMold = Molds.INGOT.get(Molds.MoldType.PORCELAIN).asStack();
+		scene.overlay().showControls(depotCenter, Pointing.UP, 30).withItem(porcelainMold);
+		castingDepotInsert(scene, depotPos, porcelainMold.copy());
+
+		scene.idle(40);
+		scene
+				.overlay()
+				.showText(60)
+				.pointAt(depotCenter)
+				.placeNearTarget()
+				.attachKeyFrame()
+				.text("...the spout will fill the depot...");
+
+		scene.idle(140);
+		scene
+				.overlay()
+				.showText(60)
+				.pointAt(depotCenter)
+				.placeNearTarget()
+				.attachKeyFrame()
+				.text("...and the metal will cool down into a specified form.");
+
+		scene.idle(50);
+		ItemStack ingot = Items.IRON_INGOT.getDefaultInstance();
+		scene.overlay().showControls(depotCenter, Pointing.UP, 30).withItem(ingot);
+
+		scene.idle(40);
+		scene.world().hideIndependentSection(depot, Direction.UP);
+		castingDepotReset(scene, depotPos);
+
+		scene.idle(20);
+		depot = scene.world().showIndependentSection(depotS, Direction.DOWN);
+
+		scene.idle(20);
+		ItemStack sturdyMold = Molds.SHEET.get(Molds.MoldType.STURDY).asStack();
+		scene.overlay().showControls(depotCenter, Pointing.UP, 30).withItem(sturdyMold);
+		castingDepotInsert(scene, depotPos, sturdyMold.copy());
+
+		scene.idle(40);
+		scene
+				.overlay()
+				.showText(80)
+				.pointAt(depotCenter)
+				.placeNearTarget()
+				.attachKeyFrame()
+				.text("Sturdy molds don't get consumed on cast.");
+		scene.idle(160);
+	}
+
+	private static void castingDepotInsert(CreateSceneBuilder scene, BlockPos pos, ItemStack stack) {
+		scene.addInstruction(ponderScene -> {
+			PonderLevel world = ponderScene.getWorld();
+			BlockEntity blockEntity = world.getBlockEntity(pos);
+			if (!(blockEntity instanceof CastingDepotBlockEntity castingDepot)) return;
+			CastingDepotBehaviour depotBehaviour = castingDepot.getBehaviour(CastingDepotBehaviour.TYPE);
+			if (depotBehaviour == null) return;
+			depotBehaviour.insert(stack, Direction.UP, false);
+		});
+	}
+
+	private static void castingDepotReset(CreateSceneBuilder scene, BlockPos pos) {
+		scene.addInstruction(ponderScene -> {
+			PonderLevel world = ponderScene.getWorld();
+			BlockEntity blockEntity = world.getBlockEntity(pos);
+			if (!(blockEntity instanceof CastingDepotBlockEntity castingDepot)) return;
+			CastingDepotBehaviour depotBehaviour = castingDepot.getBehaviour(CastingDepotBehaviour.TYPE);
+			if (depotBehaviour == null) return;
+			depotBehaviour.removeHeldStack();
+			castingDepot.setOutputItem(ItemStack.EMPTY);
+			SpoutCastingBehaviour castingBehaviour = castingDepot.getBehaviour(SpoutCastingBehaviour.TYPE);
+			if (castingBehaviour == null) return;
+			castingBehaviour.resetProcessing();
+		});
+	}
+
+}
