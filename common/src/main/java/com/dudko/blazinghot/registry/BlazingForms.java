@@ -4,11 +4,14 @@ import com.dudko.blazinghot.compat.Mods;
 import com.dudko.blazinghot.content.casting.Molds;
 import com.dudko.blazinghot.content.metal.BlazingForm;
 import com.dudko.blazinghot.content.metal.BlazingForm.Flag;
+import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.Create;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 
 public class BlazingForms {
 
@@ -61,6 +64,17 @@ public class BlazingForms {
 			NETHERITE_INGOT =
 					INGOT.createFrom("ingot", b -> b.mechanicalMixerMeltable(false));
 
+	// Raw Ores
+	public static BlazingForm RAW_IRON = rawOre(Items.RAW_IRON), RAW_GOLD = rawOre(Items.RAW_GOLD),
+			RAW_COPPER =
+					rawOre(Items.RAW_COPPER), RAW_ZINC = rawOre(AllItems.RAW_ZINC.getId());
+
+	public static BlazingForm CRUSHED_RAW_IRON = rawOre(AllItems.CRUSHED_IRON.getId()),
+			CRUSHED_RAW_GOLD =
+					rawOre(AllItems.CRUSHED_GOLD.getId()), CRUSHED_RAW_COPPER = rawOre(AllItems.CRUSHED_COPPER.getId()),
+			CRUSHED_RAW_ZINC =
+					rawOre(AllItems.CRUSHED_ZINC.getId());
+
 	// Create
 	public static BlazingForm
 			ANDESITE_ALLOY =
@@ -92,4 +106,20 @@ public class BlazingForms {
 					OPTIONAL_WIRE.asOptional(false).withFlags(Flag.CASTING).fromMods(Mods.CREATE_ADDITIONS),
 			ZINC_SHEET =
 					SHEET.withFlags(Flag.CASTING).fromMods(Mods.CREATE_ADDITIONS);
+
+	public static BlazingForm rawOre(ItemLike item, Mods... mods) {
+		return rawOre(MultiRegistries.getItemId(item.asItem()), mods);
+	}
+
+	public static BlazingForm rawOre(ResourceLocation rawOre, Mods... mods) {
+		return BlazingForm.create(rawOre.getPath(),
+				b -> b
+						.withAmount(MultiAmount.RAW_ORE)
+						.withCustomItem(rawOre)
+						.withMeltingTime(250)
+						.fromMods(mods)
+						.setFlags(Flag.MELTING)
+						.mechanicalMixerMeltable(false)
+						.overrideFuelCost(MultiAmount.fromBucketFraction(1, 20)));
+	}
 }

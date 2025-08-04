@@ -1,6 +1,6 @@
 {
   "type": "blazinghot:casting",
-  "coolingDuration": 45,
+  "coolingDuration": 300,
   "ingredients": [
     {
       "tag": "forge:nuggets"
@@ -10,7 +10,7 @@
       "fluidTag": "forge:molten_sturdy_alloy"
     }
   ],
-  "processingTime": 15,
+  "processingTime": 100,
   "results": [
     {
       "item": "blazinghot:sturdy_nugget_mold"

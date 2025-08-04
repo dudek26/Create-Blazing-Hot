@@ -8,6 +8,7 @@ Create: Blazing Hot 0.7
     * New block: Casting Depot,
     * Molds for casting: Sturdy, Clay and Porcelain variants
 * Sturdy Alloy, Molten Sturdy Alloy and Sturdy Casing
+* Raw ore melting recipes
 * Nether Dough and Blaze Roll — new superheating fuel for Blaze Burners
 * Alternate recipes for Netherrack Dust
 * Four new advancements

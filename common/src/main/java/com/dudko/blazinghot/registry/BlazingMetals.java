@@ -35,7 +35,9 @@ public class BlazingMetals {
 									.withForms(BlazingForms.OPTIONAL_ROD,
 											BlazingForms.OPTIONAL_WIRE,
 											BlazingForms.COMPAT_ROD,
-											BlazingForms.COMPAT_WIRE)
+											BlazingForms.COMPAT_WIRE,
+											BlazingForms.RAW_IRON,
+											BlazingForms.CRUSHED_RAW_IRON)
 									.waterCobble())
 					.register(),
 			COPPER =
@@ -49,7 +51,9 @@ public class BlazingMetals {
 													BlazingForms.INGOT,
 													BlazingForms.CREATE_SHEET,
 													BlazingForms.CREATE_NUGGET,
-													BlazingForms.COPPER_NUGGET)
+													BlazingForms.COPPER_NUGGET,
+													BlazingForms.RAW_COPPER,
+													BlazingForms.CRUSHED_RAW_COPPER)
 											.waterCobble())
 							.register(),
 			GOLD =
@@ -62,7 +66,9 @@ public class BlazingMetals {
 													BlazingForms.COMPAT_ROD,
 													BlazingForms.COMPAT_WIRE,
 													BlazingForms.OPTIONAL_SHEET,
-													BlazingForms.GOLDEN_SHEET)
+													BlazingForms.GOLDEN_SHEET,
+													BlazingForms.RAW_GOLD,
+													BlazingForms.CRUSHED_RAW_GOLD)
 											.waterCobble())
 							.register(),
 			ANCIENT_DEBRIS =
@@ -104,7 +110,10 @@ public class BlazingMetals {
 									b -> b
 											.fromMods(Mods.CREATE)
 											.vanillaForms()
-											.withForms(BlazingForms.OPTIONAL_SHEET, BlazingForms.ZINC_SHEET)
+											.withForms(BlazingForms.OPTIONAL_SHEET,
+													BlazingForms.ZINC_SHEET,
+													BlazingForms.RAW_ZINC,
+													BlazingForms.CRUSHED_RAW_ZINC)
 											.waterCobble())
 							.register();
 

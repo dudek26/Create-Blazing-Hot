@@ -42,7 +42,7 @@ public class CastingRecipeGen extends BlazingProcessingRecipeGen {
 				b -> b
 						.require(base)
 						.require(BlazingMetals.STURDY_ALLOY.getFluidTag(), MultiAmount.INGOT.multiply(2))
-						.castingDuration(50)
+						.castingDuration(MultiAmount.INGOT.multiply(2))
 						.output(mold.get(MoldType.STURDY)));
 	}
 
