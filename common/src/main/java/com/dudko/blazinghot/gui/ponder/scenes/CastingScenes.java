@@ -4,6 +4,9 @@ import com.dudko.blazinghot.content.casting.Molds;
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBehaviour;
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
 import com.dudko.blazinghot.content.casting.casting_depot.SpoutCastingBehaviour;
+import com.dudko.blazinghot.gui.ponder.BlazingPonderScenes;
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.registry.BlazingMetals;
 import com.simibubi.create.content.fluids.pump.PumpBlock;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
 
@@ -19,6 +22,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.Vec3;
 
 public class CastingScenes {
@@ -31,15 +35,22 @@ public class CastingScenes {
 		scene.showBasePlate();
 		scene.idle(5);
 
-		Selection depotS = util.select().position(2, 1, 2);
-		Selection spoutS = util.select().position(2, 3, 2);
 		BlockPos spoutPos = util.grid().at(2, 3, 2);
 		BlockPos depotPos = util.grid().at(2, 1, 2);
+		BlockPos tankPos = util.grid().at(1, 1, 4);
+
+		Selection depotS = util.select().position(2, 1, 2);
+		Selection spoutS = util.select().position(2, 3, 2);
 
 		Selection largeCog = util.select().position(3, 0, 5);
 		Selection kinetics = util.select().fromTo(2, 1, 5, 2, 2, 3);
 		Selection tank = util.select().fromTo(1, 1, 4, 1, 2, 4);
 		Selection pipes = util.select().fromTo(1, 3, 4, 2, 3, 3);
+
+		// This is mostly for multiloader compatibility
+		Fluid fluid = BlazingMetals.GOLD.getFluid().get();
+		BlazingPonderScenes.setFluidInTank(scene, tankPos, fluid, MultiAmount.BUCKET.multiply(12).get());
+		BlazingPonderScenes.setFluidInTank(scene, spoutPos, fluid, MultiAmount.BUCKET.get());
 
 		scene.world().modifyBlock(util.grid().at(2, 3, 3), s -> s.setValue(PumpBlock.FACING, Direction.NORTH), false);
 
@@ -100,7 +111,7 @@ public class CastingScenes {
 				.text("...and the metal will cool down into a specified form.");
 
 		scene.idle(50);
-		ItemStack ingot = Items.IRON_INGOT.getDefaultInstance();
+		ItemStack ingot = Items.GOLD_INGOT.getDefaultInstance();
 		scene.overlay().showControls(depotCenter, Pointing.UP, 30).withItem(ingot);
 
 		scene.idle(40);
@@ -108,6 +119,7 @@ public class CastingScenes {
 		castingDepotReset(scene, depotPos);
 
 		scene.idle(20);
+		// TODO: make a separate molds section + add filters in that section
 		depot = scene.world().showIndependentSection(depotS, Direction.DOWN);
 
 		scene.idle(20);
@@ -124,6 +136,8 @@ public class CastingScenes {
 				.attachKeyFrame()
 				.text("Sturdy molds don't get consumed on cast.");
 		scene.idle(160);
+
+		// TODO: sections for transporting items and powering the depot
 	}
 
 	private static void castingDepotInsert(CreateSceneBuilder scene, BlockPos pos, ItemStack stack) {
