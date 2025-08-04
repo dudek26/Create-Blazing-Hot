@@ -19,14 +19,16 @@ Create: Blazing Hot 0.7
 * Fluids in recipes now use amounts appropriate for their platform (Forge - mb, Fabric - droplets)
 * Renamed `blazinghot:fuel` to `mixerFuel` in Blaze Mixing recipes
 * Adjusted duration of melting recipes
-* Adjusted fuel cost for blaze mixing melting recipes
+* Adjusted fuel costs for blaze mixing melting recipes
+* Mixing Stone Dust and Cinder Flour now returns two netherrack dusts (previously 1)
+* Adjusted placement of Modern Lamp Half Panels
 * Reworked internal metal system
-* Adjusted existing Netherrack Dust recipe
 
 ### Fixed:
 
 * Nether Lava now can create other stone variants (basalt, limestone etc.) (#17)
 * All fluids now behave correctly in pipe collisions / spilling (#16)
+* Modern Lamps are now powered when placed next to a signal source
 
 ### Removed:
 

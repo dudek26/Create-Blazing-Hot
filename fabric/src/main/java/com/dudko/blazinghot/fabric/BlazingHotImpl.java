@@ -3,6 +3,7 @@ package com.dudko.blazinghot.fabric;
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.config.fabric.BlazingConfigsImpl;
 import com.dudko.blazinghot.content.fluid.fabric.FluidReactionsImpl;
+import com.dudko.blazinghot.content.kinetics.mechanicalArm.BlazingArmInteractionPointTypes;
 import com.dudko.blazinghot.data.BlazingTagGen;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.advancement.BlazingTriggers;
@@ -37,6 +38,8 @@ public class BlazingHotImpl implements ModInitializer {
 
 		BlazingAdvancements.register();
 		BlazingTriggers.register();
+
+		BlazingArmInteractionPointTypes.init();
 
 		FluidReactionsImpl.registerEvents();
 	}
