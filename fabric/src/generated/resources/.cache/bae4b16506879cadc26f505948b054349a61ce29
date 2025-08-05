@@ -1,6 +1,6 @@
-// 1.20.1	2025-08-05T23:43:00.4240104	Create: Blazing Hot/Blazing Hot's Advancements
+// 1.20.1	2025-08-06T00:09:53.8227541	Create: Blazing Hot/Blazing Hot's Advancements
 15592cebc914a1507786362634fad2ae52a94ebf data\blazinghot\advancements\blaze_gold.json
-bcd1baa9fe650446fd4c208157d748b87d5f121e data\blazinghot\advancements\all_metal_food.json
+05e33192326782fc6ef31cc70c12a02b3fc3c519 data\blazinghot\advancements\all_metal_food.json
 1c2bfc5f90990f291f5532f7cf0ab9ae88483869 data\blazinghot\advancements\metal_apple_spout_0000.json
 75d292bfa0f068fc649781c4d8af0a922dd14a48 data\blazinghot\advancements\modern_lamp.json
 daaa321fb97dd3690d0c511609012840f9e4b28f data\blazinghot\advancements\root.json
@@ -15,7 +15,7 @@ a9754be78458468d5f5daefb6698f36be6a2c135 data\blazinghot\advancements\blaze_casi
 6ef2bb888466362e78bbecd43b840f076dc0ab3d data\blazinghot\advancements\blaze_roll.json
 36dbc3c2dcfd739e9047b168779dd76e1f1d5438 data\blazinghot\advancements\molten_gold.json
 31f4a49631a3f00fb68f9a337a309c0ccdce63ca data\blazinghot\advancements\casting.json
-18503a9199c9042aee8ad836e7d494c1f3d067a4 data\blazinghot\advancements\all_molten_metals.json
+9fead6b3c57362cf87b3154393f7ed837025717b data\blazinghot\advancements\all_molten_metals.json
 821fc3d162e346d2d725efe4b4ddbe2fbf78cebe data\blazinghot\advancements\molten_blaze_gold_00.json
 a54e6cdc3c4911f92ae3709e2d571bc1418a52c7 data\blazinghot\advancements\blaze_arrow.json
 7bc3b6794a30eade6e2636205162ed979d886ede data\blazinghot\advancements\sturdy_mold.json

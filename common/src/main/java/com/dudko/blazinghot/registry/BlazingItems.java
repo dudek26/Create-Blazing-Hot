@@ -131,7 +131,7 @@ public class BlazingItems {
 
 	public static final ItemEntry<Item> NETHER_COMPOUND = ingredient("nether_compound"),
 			NETHER_ESSENCE =
-					ingredient("nether_essence");
+					REGISTRATE.item("nether_essence", Item::new).lang("Crimson Essence").register();
 
 	public static final ItemEntry<BlazeArrowItem>
 			BLAZE_ARROW =

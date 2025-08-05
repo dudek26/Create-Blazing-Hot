@@ -7,7 +7,8 @@ Create: Blazing Hot 0.7
 * New casting mechanic:
     * New block: Casting Depot,
     * Molds for casting: Sturdy, Clay and Porcelain variants
-* Ponder for Casting
+    * Ponder for Casting
+    * New casting-related config options
 * Sturdy Alloy, Molten Sturdy Alloy and Sturdy Casing
 * Raw ore melting recipes
 * Nether Dough and Blaze Roll — new superheating fuel for Blaze Burners
@@ -16,6 +17,7 @@ Create: Blazing Hot 0.7
 
 ### Changed:
 
+* Updated to Create 6.0.6
 * Updated Blaze Mixer's item description
 * Updated texture for Nether Compound
 * Fluids in recipes now use amounts appropriate for their platform (Forge - mb, Fabric - droplets)
@@ -25,7 +27,7 @@ Create: Blazing Hot 0.7
 * Mixing Stone Dust and Cinder Flour now returns two netherrack dusts (previously 1)
 * Adjusted placement of Modern Lamp Half Panels
 * Reworked internal metal system
-* Updated to Create 6.0.6
+* Renamed Nether Essence to Crimson Essence and updates its texture
 
 ### Fixed:
 
