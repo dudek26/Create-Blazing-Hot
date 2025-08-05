@@ -84,7 +84,7 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 			currentRecipe = CastingBySpout.findRecipe(depot, level, requiredAmount, stack, availableFluid);
 			if (currentRecipe == null) return;
 			currentRecipeId = currentRecipe.getId();
-			depot.setVisualFluid(availableFluid.getFluid());
+			visualFluid = availableFluid.getFluid();
 			state = State.FILLING;
 			depot.notifyUpdate();
 		}
@@ -99,7 +99,7 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 			processingTicks++;
 			int duration = currentRecipe.getProcessingDuration();
 
-			if (getVisualFluid() == Fluids.EMPTY) depot.setVisualFluid(availableFluid.getFluid());
+			if (visualFluid == Fluids.EMPTY) visualFluid = availableFluid.getFluid();
 
 			if (level.isClientSide) {
 				if (processingTicks >= 4 && duration - processingTicks > 8) {
@@ -147,7 +147,6 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 					depotBehaviour.processingOutputBuffer.insertItem(0, castItem, false);
 				}
 				depot.resetFluid();
-
 
 				resetProcessing();
 				if (level.isClientSide) {

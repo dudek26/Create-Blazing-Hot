@@ -19,8 +19,11 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.createmod.catnip.nbt.NBTHelper;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.world.item.ItemStack;
 
 @MethodsReturnNonnullByDefault
@@ -59,6 +62,35 @@ public abstract class CastingDepotBehaviour extends BlockEntityBehaviour {
 	@ExpectPlatform
 	public static CastingDepotBehaviour of(CastingDepotBlockEntity be, BehaviourType<CastingDepotBehaviour> type) {
 		throw new AssertionError();
+	}
+
+	@Override
+	public void write(CompoundTag compound, boolean clientPacket) {
+		super.write(compound, clientPacket);
+		if (!this.heldStack.isEmpty()) {
+			CompoundTag stack = new CompoundTag();
+			heldStack.save(stack);
+			compound.put("HeldStack", stack);
+		}
+
+		if (this.canMergeItems() && !this.incoming.isEmpty()) {
+			compound.put("Incoming", NBTHelper.writeCompoundList(this.incoming, TransportedItemStack::serializeNBT));
+		}
+
+	}
+
+	@Override
+	public void read(CompoundTag compound, boolean clientPacket) {
+		super.read(compound, clientPacket);
+		this.heldStack = ItemStack.EMPTY;
+		if (compound.contains("HeldStack")) {
+			this.heldStack = ItemStack.of(compound.getCompound("HeldStack"));
+		}
+		if (this.canMergeItems()) {
+			ListTag list = compound.getList("Incoming", 10);
+			this.incoming = NBTHelper.readCompoundList(list, TransportedItemStack::read);
+		}
+
 	}
 
 	public abstract void addSubBehaviours(List<BlockEntityBehaviour> behaviours);

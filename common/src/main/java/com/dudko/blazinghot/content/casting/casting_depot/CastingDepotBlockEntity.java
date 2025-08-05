@@ -27,7 +27,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
 
 public abstract class CastingDepotBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
@@ -39,11 +38,8 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 
 	protected boolean contentsChanged;
 
-	protected Fluid visualFluid;
-
 	protected CastingDepotBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
-		visualFluid = Fluids.EMPTY;
 	}
 
 	@ExpectPlatform
@@ -175,12 +171,11 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 	}
 
 	public Fluid getVisualFluid() {
-		return visualFluid;
+		return castingBehaviour.visualFluid;
 	}
 
 	public void setVisualFluid(Fluid visualFluid) {
-		this.visualFluid = visualFluid;
-		notifyUpdate();
+		castingBehaviour.visualFluid = visualFluid;
 	}
 
 	public abstract ItemStack getHeldItem();

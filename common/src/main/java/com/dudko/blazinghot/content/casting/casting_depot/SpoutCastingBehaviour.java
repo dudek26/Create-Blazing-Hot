@@ -3,6 +3,8 @@ package com.dudko.blazinghot.content.casting.casting_depot;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.dudko.blazinghot.multiloader.MultiRegistries;
 import com.simibubi.create.content.fluids.spout.SpoutBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
@@ -31,6 +33,7 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 	protected boolean keepMold;
 	protected int coolingDuration;
 
+	@NotNull
 	protected Fluid visualFluid;
 	protected ResourceLocation currentRecipeId;
 
@@ -42,7 +45,7 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 		coolingDuration = -1;
 		castItem = ItemStack.EMPTY;
 		keepMold = false;
-		visualFluid = null;
+		visualFluid = Fluids.EMPTY;
 		currentRecipeId = null;
 	}
 
@@ -77,10 +80,6 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 		return coolingTicks;
 	}
 
-	public Fluid getVisualFluid() {
-		return visualFluid;
-	}
-
 	public boolean canSpout() {
 		return !((CastingDepotBlockEntity) blockEntity).isPowered();
 	}
@@ -99,9 +98,13 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 		nbt.putString("State", state.toString());
 		nbt.putString("VisualFluid", MultiRegistries.getFluidId(visualFluid).toString());
 		if (currentRecipeId != null) nbt.putString("ProcessedRecipe", currentRecipeId.toString());
-		CompoundTag castItemTag = new CompoundTag();
-		castItem.save(castItemTag);
-		nbt.put("CastItem", castItemTag);
+		if (!castItem.isEmpty()) {
+			CompoundTag castItemTag = new CompoundTag();
+			castItem.save(castItemTag);
+			nbt.put("CastItem", castItemTag);
+		}
+		nbt.putInt("CoolingDuration", coolingDuration);
+		nbt.putBoolean("KeepMold", keepMold);
 	}
 
 	@Override
@@ -117,7 +120,12 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 		if (nbt.contains("ProcessedRecipe")) {
 			currentRecipeId = ResourceLocation.tryParse(nbt.getString("ProcessedRecipe"));
 		}
-		castItem = ItemStack.of(nbt.getCompound("CastItem"));
+		castItem = ItemStack.EMPTY;
+		if (nbt.contains("CastItem")) {
+			castItem = ItemStack.of(nbt.getCompound("CastItem"));
+		}
+		coolingDuration = nbt.getInt("CoolingDuration");
+		keepMold = nbt.getBoolean("KeepMold");
 	}
 
 

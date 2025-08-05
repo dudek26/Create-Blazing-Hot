@@ -17,12 +17,10 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import com.simibubi.create.foundation.item.ItemHelper;
 
 import net.createmod.catnip.math.VecHelper;
-import net.createmod.catnip.nbt.NBTHelper;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -143,30 +141,14 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 
 	@Override
 	public void write(CompoundTag compound, boolean clientPacket) {
-		if (!this.heldStack.isEmpty()) {
-			compound.put("HeldStack", this.heldStack.serializeNBT());
-		}
-
+		super.write(compound, clientPacket);
 		compound.put("OutputBuffer", this.processingOutputBuffer.serializeNBT());
-		if (this.canMergeItems() && !this.incoming.isEmpty()) {
-			compound.put("Incoming", NBTHelper.writeCompoundList(this.incoming, TransportedItemStack::serializeNBT));
-		}
-
 	}
 
 	@Override
 	public void read(CompoundTag compound, boolean clientPacket) {
-		this.heldStack = ItemStack.EMPTY;
-		if (compound.contains("HeldStack")) {
-			this.heldStack = ItemStack.of(compound.getCompound("HeldStack"));
-		}
-
+		super.read(compound, clientPacket);
 		this.processingOutputBuffer.deserializeNBT(compound.getCompound("OutputBuffer"));
-		if (this.canMergeItems()) {
-			ListTag list = compound.getList("Incoming", 10);
-			this.incoming = NBTHelper.readCompoundList(list, TransportedItemStack::read);
-		}
-
 	}
 
 	@Override

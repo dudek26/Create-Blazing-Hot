@@ -30,7 +30,7 @@ public class BlazingPonderTags {
 				.addToIndex()
 				.item(BlazingBlocks.CASTING_DEPOT, true, true)
 				.title("Casting Related")
-				.description("Components used in casting")
+				.description("Components related to Casting mechanics")
 				.register();
 
 		HELPER.addToTag(CASTING_RELATED).add(BlazingBlocks.CASTING_DEPOT).add(AllBlocks.SPOUT);

@@ -20,7 +20,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -72,7 +71,6 @@ public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity {
 	@Override
 	public void resetFluid() {
 		tank.getPrimaryHandler().setFluid(FluidStack.EMPTY);
-		visualFluid = Fluids.EMPTY;
 	}
 
 	@Override
