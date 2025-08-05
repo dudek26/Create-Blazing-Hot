@@ -8,7 +8,7 @@
     }
   ],
   "type": "blazinghot:casting",
-  "coolingDuration": 36,
+  "coolingDuration": 75,
   "ingredients": [
     {
       "item": "blazinghot:porcelain_rod_mold"
@@ -18,7 +18,7 @@
       "fluidTag": "c:molten_gold"
     }
   ],
-  "processingTime": 12,
+  "processingTime": 25,
   "results": [
     {
       "item": "createaddition:gold_rod"

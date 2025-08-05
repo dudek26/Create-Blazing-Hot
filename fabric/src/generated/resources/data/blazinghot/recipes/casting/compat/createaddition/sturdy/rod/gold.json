@@ -8,7 +8,7 @@
     }
   ],
   "type": "blazinghot:casting",
-  "coolingDuration": 36,
+  "coolingDuration": 75,
   "ingredients": [
     {
       "item": "blazinghot:sturdy_rod_mold"
@@ -19,7 +19,7 @@
     }
   ],
   "keepItem": true,
-  "processingTime": 12,
+  "processingTime": 25,
   "results": [
     {
       "item": "createaddition:gold_rod"

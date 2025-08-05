@@ -24,7 +24,10 @@ public class BlazingPonderScenes {
 
 		HELPER
 				.forComponents(BlazingBlocks.CASTING_DEPOT)
-				.addStoryBoard("casting/spout", CastingScenes::castingBySpout, BlazingPonderTags.CASTING_RELATED);
+				.addStoryBoard("casting/spout", CastingScenes::castingBySpout, BlazingPonderTags.CASTING_RELATED)
+				.addStoryBoard("casting/molds", CastingScenes::molds)
+				.addStoryBoard("casting/air_current", CastingScenes::airCurrent)
+				.addStoryBoard("casting/transporting", CastingScenes::transporting);
 	}
 
 	public static void setFluidInTank(SceneBuilder builder, BlockPos pos, Fluid fluid, long amount) {

@@ -363,7 +363,7 @@ public class BlazingForm {
 			int coolingMultiplier = 3;
 			int baseDuration = 50;
 			int minDuration = 12;
-			int castingDuration = Math.toIntExact((amount.droplets() / MultiAmount.INGOT.droplets()) * baseDuration);
+			int castingDuration = (int) ((float) amount.droplets() / MultiAmount.INGOT.droplets() * baseDuration);
 
 			if (castingTime < 0) {
 				castingTime = Math.max(minDuration, castingDuration);

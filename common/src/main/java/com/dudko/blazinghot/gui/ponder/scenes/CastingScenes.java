@@ -11,8 +11,6 @@ import com.simibubi.create.content.fluids.pump.PumpBlock;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
 
 import net.createmod.catnip.math.Pointing;
-import net.createmod.ponder.api.element.ElementLink;
-import net.createmod.ponder.api.element.WorldSectionElement;
 import net.createmod.ponder.api.level.PonderLevel;
 import net.createmod.ponder.api.scene.SceneBuilder;
 import net.createmod.ponder.api.scene.SceneBuildingUtil;
@@ -54,7 +52,7 @@ public class CastingScenes {
 
 		scene.world().modifyBlock(util.grid().at(2, 3, 3), s -> s.setValue(PumpBlock.FACING, Direction.NORTH), false);
 
-		ElementLink<WorldSectionElement> depot = scene.world().showIndependentSection(depotS, Direction.DOWN);
+		scene.world().showSection(depotS, Direction.DOWN);
 
 		scene.idle(10);
 		scene.world().showSection(spoutS, Direction.DOWN);
@@ -67,7 +65,7 @@ public class CastingScenes {
 				.pointAt(spoutSide)
 				.placeNearTarget()
 				.attachKeyFrame()
-				.text("The Spout can cast fluids onto a Casting Depot below");
+				.text("The Spout can cast fluids onto a Casting Depot below.");
 
 		scene.idle(50);
 		scene.world().showSection(tank, Direction.DOWN);
@@ -115,12 +113,12 @@ public class CastingScenes {
 		scene.overlay().showControls(depotCenter, Pointing.UP, 30).withItem(ingot);
 
 		scene.idle(40);
-		scene.world().hideIndependentSection(depot, Direction.UP);
+		scene.world().hideSection(depotS, Direction.UP);
 		castingDepotReset(scene, depotPos);
 
 		scene.idle(20);
-		// TODO: make a separate molds section + add filters in that section
-		depot = scene.world().showIndependentSection(depotS, Direction.DOWN);
+		// TODO: add filters in this section
+		scene.world().showSection(depotS, Direction.DOWN);
 
 		scene.idle(20);
 		ItemStack sturdyMold = Molds.SHEET.get(Molds.MoldType.STURDY).asStack();
@@ -136,8 +134,92 @@ public class CastingScenes {
 				.attachKeyFrame()
 				.text("Sturdy molds don't get consumed on cast.");
 		scene.idle(160);
+	}
 
-		// TODO: sections for transporting items and powering the depot
+	public static void molds(SceneBuilder builder, SceneBuildingUtil util) {
+		CreateSceneBuilder scene = new CreateSceneBuilder(builder);
+
+		scene.title("casting_molds", "Using different mold types");
+		scene.configureBasePlate(0, 0, 5);
+		scene.showBasePlate();
+		scene.idle(5);
+
+		BlockPos spout1Pos = util.grid().at(1, 3, 2);
+		BlockPos depot1Pos = util.grid().at(1, 1, 2);
+		BlockPos spout2Pos = util.grid().at(3, 3, 2);
+		BlockPos depot2Pos = util.grid().at(3, 1, 2);
+		BlockPos tankPos = util.grid().at(2, 1, 4);
+
+		Selection depot1S = util.select().position(depot1Pos);
+		Selection spout1S = util.select().position(spout1Pos);
+		Selection depot2S = util.select().position(depot2Pos);
+		Selection spout2S = util.select().position(spout2Pos);
+
+		Selection largeCog = util.select().position(2, 0, 5);
+		Selection kinetics = util.select().fromTo(3, 1, 5, 3, 3, 3);
+		Selection tank = util.select().fromTo(2, 1, 4, 2, 2, 4);
+		Selection pipes = util.select().fromTo(2, 3, 4, 2, 3, 2);
+
+		// This is mostly for multiloader compatibility
+		Fluid fluid = BlazingMetals.BLAZE_GOLD.getFluid().get();
+		BlazingPonderScenes.setFluidInTank(scene, tankPos, fluid, MultiAmount.BUCKET.multiply(12).get());
+		BlazingPonderScenes.setFluidInTank(scene, spout1Pos, fluid, MultiAmount.BUCKET.get());
+		BlazingPonderScenes.setFluidInTank(scene, spout2Pos, fluid, MultiAmount.BUCKET.get());
+
+		scene.world().modifyBlock(util.grid().at(2, 3, 3), s -> s.setValue(PumpBlock.FACING, Direction.NORTH), false);
+		scene.world().showSection(depot1S, Direction.DOWN);
+		scene.world().showSection(depot2S, Direction.DOWN);
+
+		scene.idle(10);
+		scene.world().showSection(spout1S, Direction.DOWN);
+		scene.world().showSection(spout2S, Direction.DOWN);
+
+		scene.idle(10);
+		scene.world().showSection(tank, Direction.DOWN);
+
+		scene.idle(5);
+		scene.world().showSection(largeCog, Direction.UP);
+		scene.world().showSection(kinetics, Direction.NORTH);
+		scene.world().showSection(pipes, Direction.NORTH);
+
+		scene
+				.overlay()
+				.showText(60)
+				.independent()
+				.placeNearTarget()
+				.attachKeyFrame()
+				.text("Molds can be either sturdy or porcelain.");
+
+		scene.idle(50);
+
+		Molds.Mold mold = Molds.ROD;
+		ItemStack porcelain = mold.get(Molds.MoldType.PORCELAIN).asStack();
+		ItemStack sturdy = mold.get(Molds.MoldType.STURDY).asStack();
+		Vec3 depot1Center = util.vector().centerOf(depot1Pos);
+		Vec3 depot2Center = util.vector().centerOf(depot2Pos);
+
+		castingDepotInsert(scene, depot1Pos, porcelain.copy());
+		castingDepotInsert(scene, depot2Pos, sturdy.copy());
+		scene.overlay().showControls(depot1Center, Pointing.UP, 30).withItem(porcelain);
+		scene.overlay().showControls(depot2Center, Pointing.UP, 30).withItem(sturdy);
+	}
+
+	public static void transporting(SceneBuilder builder, SceneBuildingUtil util) {
+		CreateSceneBuilder scene = new CreateSceneBuilder(builder);
+
+		scene.title("casting_transporting", "Transporting items to and from Casting Depots");
+		scene.configureBasePlate(0, 0, 5);
+		scene.showBasePlate();
+		scene.idle(5);
+	}
+
+	public static void airCurrent(SceneBuilder builder, SceneBuildingUtil util) {
+		CreateSceneBuilder scene = new CreateSceneBuilder(builder);
+
+		scene.title("casting_air_current", "Modifying cooling speed with air current");
+		scene.configureBasePlate(0, 0, 5);
+		scene.showBasePlate();
+		scene.idle(5);
 	}
 
 	private static void castingDepotInsert(CreateSceneBuilder scene, BlockPos pos, ItemStack stack) {
