@@ -65,6 +65,7 @@ public class BlazingFluidsImpl {
 						.canHydrate(false)
 						.sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_LAVA)
 						.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_LAVA)
+						.lightLevel(15)
 						// from forge lava type
 						.motionScale(0.0023333333333333335D)
 						.canSwim(false)

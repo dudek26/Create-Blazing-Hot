@@ -35,6 +35,7 @@ Create: Blazing Hot 0.7
 * Nether Lava now can create other stone variants (basalt, limestone etc.) (#17)
 * All fluids now behave correctly in pipe collisions / spilling (#16)
 * Modern Lamps are now powered when placed next to a signal source
+* Molten Metals nad Nether Lava now emit light in Fluid Tanks
 
 ### Removed:
 
