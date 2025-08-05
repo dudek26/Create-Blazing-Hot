@@ -28,6 +28,7 @@ Create: Blazing Hot 0.7
 * Adjusted placement of Modern Lamp Half Panels
 * Reworked internal metal system
 * Renamed Nether Essence to Crimson Essence and updates its texture
+* Updated Blaze Gold textures
 
 ### Fixed:
 
