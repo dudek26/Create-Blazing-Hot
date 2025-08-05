@@ -9,9 +9,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
+import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.mojang.datafixers.util.Pair;
 
 import net.minecraft.MethodsReturnNonnullByDefault;

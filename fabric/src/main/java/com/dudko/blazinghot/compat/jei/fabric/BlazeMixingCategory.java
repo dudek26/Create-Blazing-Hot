@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
 import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.dudko.blazinghot.gui.BlazingGuiTextures;
+import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.compat.jei.category.BasinCategory;
 import com.simibubi.create.compat.jei.category.animations.AnimatedBlazeBurner;

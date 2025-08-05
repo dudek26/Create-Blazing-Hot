@@ -1,4 +1,4 @@
-package com.dudko.blazinghot.config;
+package com.dudko.blazinghot.registry;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -7,6 +7,9 @@ import java.util.function.Supplier;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.config.CClient;
+import com.dudko.blazinghot.config.CServer;
+import com.dudko.blazinghot.config.CStress;
 import com.simibubi.create.api.stress.BlockStressValues;
 
 import net.createmod.catnip.config.ConfigBase;

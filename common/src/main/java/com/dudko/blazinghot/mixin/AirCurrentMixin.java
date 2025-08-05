@@ -39,7 +39,7 @@ public abstract class AirCurrentMixin {
 		BlockPos start = self.source.getAirCurrentPos();
 		blazinghot$affectedDepotHandlers.forEach(pair ->
 				pair.getFirst().coolingSpeedModifier -=
-						CastingDepotBehaviour.COOLING_SPEEDS.get(pair.getSecond()));
+						CastingDepotBehaviour.getCoolingSpeed(pair.getSecond()));
 		blazinghot$affectedDepotHandlers.clear();
 		int limit = getLimit();
 		for (int i = 1; i <= limit; i++) {
@@ -52,7 +52,7 @@ public abstract class AirCurrentMixin {
 					if (type == null) type = segmentType;
 					if (type == null) continue;
 
-					float speed = CastingDepotBehaviour.COOLING_SPEEDS.get(type);
+					float speed = CastingDepotBehaviour.getCoolingSpeed(type);
 					behaviour.coolingSpeedModifier += speed;
 
 					blazinghot$affectedDepotHandlers.add(Pair.of(behaviour, type));

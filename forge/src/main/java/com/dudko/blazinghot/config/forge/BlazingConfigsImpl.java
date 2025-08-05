@@ -2,7 +2,7 @@ package com.dudko.blazinghot.config.forge;
 
 import java.util.Map;
 
-import com.dudko.blazinghot.config.BlazingConfigs;
+import com.dudko.blazinghot.registry.BlazingConfigs;
 
 import net.createmod.catnip.config.ConfigBase;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

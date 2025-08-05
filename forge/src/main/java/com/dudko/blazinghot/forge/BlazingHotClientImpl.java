@@ -2,7 +2,7 @@ package com.dudko.blazinghot.forge;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.BlazingHotClient;
-import com.dudko.blazinghot.config.BlazingConfigs;
+import com.dudko.blazinghot.registry.BlazingConfigs;
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory;

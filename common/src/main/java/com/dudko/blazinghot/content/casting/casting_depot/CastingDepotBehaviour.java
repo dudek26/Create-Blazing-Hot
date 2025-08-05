@@ -2,7 +2,6 @@ package com.dudko.blazinghot.content.casting.casting_depot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -11,6 +10,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.simibubi.create.content.kinetics.belt.behaviour.TransportedItemStackHandlerBehaviour;
 import com.simibubi.create.content.kinetics.belt.transport.TransportedItemStack;
 import com.simibubi.create.content.kinetics.fan.processing.AllFanProcessingTypes;
@@ -102,10 +102,13 @@ public abstract class CastingDepotBehaviour extends BlockEntityBehaviour {
 
 	protected abstract void handleBeltFunnelOutput();
 
-
-	// TODO: config for these
-	public static final Map<FanProcessingType, Float>
-			COOLING_SPEEDS =
-			Map.of(AllFanProcessingTypes.BLASTING, -0.25f, AllFanProcessingTypes.SPLASHING, 0.5f);
-
+	public static float getCoolingSpeed(FanProcessingType type) {
+		if (type.equals(AllFanProcessingTypes.BLASTING)) {
+			return BlazingConfigs.server().casting.blastingCoolingModifier.getF();
+		}
+		if (type.equals(AllFanProcessingTypes.SPLASHING)) {
+			return BlazingConfigs.server().casting.splashingCoolingModifier.getF();
+		}
+		return 0;
+	}
 }
