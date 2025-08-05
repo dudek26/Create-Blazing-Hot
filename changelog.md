@@ -7,6 +7,7 @@ Create: Blazing Hot 0.7
 * New casting mechanic:
     * New block: Casting Depot,
     * Molds for casting: Sturdy, Clay and Porcelain variants
+* Ponder for Casting
 * Sturdy Alloy, Molten Sturdy Alloy and Sturdy Casing
 * Raw ore melting recipes
 * Nether Dough and Blaze Roll — new superheating fuel for Blaze Burners
@@ -24,6 +25,7 @@ Create: Blazing Hot 0.7
 * Mixing Stone Dust and Cinder Flour now returns two netherrack dusts (previously 1)
 * Adjusted placement of Modern Lamp Half Panels
 * Reworked internal metal system
+* Updated to Create 6.0.6
 
 ### Fixed:
 
@@ -34,6 +36,14 @@ Create: Blazing Hot 0.7
 ### Removed:
 
 * Molten metal compacting recipes
+
+------------------------------------------------------
+Create: Blazing Hot 0.6.7
+------------------------------------------------------
+
+### Fixed:
+
+* Fixed Milling Recipes processing infinitely (#14)
 
 ------------------------------------------------------
 Create: Blazing Hot 0.6.6
