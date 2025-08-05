@@ -206,6 +206,11 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 	}
 
 	@Override
+	public ItemStack extract(int slot, int amount, boolean simulate) {
+		return itemHandler.extractItem(slot, amount, simulate);
+	}
+
+	@Override
 	public ItemStack insert(ItemStack heldItem, Direction insertedFrom, boolean simulate) {
 		if (!(Boolean) this.canAcceptItems.get()) {
 			return heldItem;

@@ -77,6 +77,8 @@ public abstract class CastingDepotBehaviour extends BlockEntityBehaviour {
 
 	public abstract ItemStack insert(ItemStack heldItem, Direction insertedFrom, boolean simulate);
 
+	public abstract ItemStack extract(int slot, int amount, boolean simulate);
+
 	public void setHeldStack(ItemStack heldStack) {
 		this.heldStack = heldStack;
 	}

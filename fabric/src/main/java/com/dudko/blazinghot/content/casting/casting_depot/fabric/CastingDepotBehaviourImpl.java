@@ -265,6 +265,11 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 		return ItemStack.EMPTY;
 	}
 
+	@Override
+	public ItemStack extract(int slot, int amount, boolean simulate) {
+		return ItemStack.EMPTY;
+	}
+
 	public ItemStack getHeldItemStack() {
 		return heldItem == null ? ItemStack.EMPTY : heldItem.stack;
 	}
