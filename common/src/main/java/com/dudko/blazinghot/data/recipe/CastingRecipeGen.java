@@ -1,8 +1,5 @@
 package com.dudko.blazinghot.data.recipe;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.dudko.blazinghot.compat.Mods;
 import com.dudko.blazinghot.content.casting.Molds;
 import com.dudko.blazinghot.content.casting.Molds.Mold;
@@ -53,7 +50,6 @@ public class CastingRecipeGen extends BlazingProcessingRecipeGen {
 			if (mold == null) continue;
 			for (MoldType moldType : MoldType.values()) {
 				if (!moldType.usable) continue;
-				List<Mods> usedMods = new ArrayList<>();
 				for (Mods mod : form.getMods(metal)) {
 					String
 							name =
@@ -69,12 +65,7 @@ public class CastingRecipeGen extends BlazingProcessingRecipeGen {
 								.output(form.getCastingResult(metal, mod));
 						if (!mod.alwaysIncluded) {
 							b.withCondition(DefaultLoadConditions.anyModLoaded(mod));
-							if (!usedMods.isEmpty()) {
-								b.withCondition(DefaultLoadConditions.not(DefaultLoadConditions.anyModLoaded(usedMods)));
-							}
 						}
-
-						usedMods.add(mod);
 						return b;
 					});
 

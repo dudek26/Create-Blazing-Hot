@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "blazinghot:clay_rod_mold_from_clay_blank_mold_stonecutting"
+        "recipe": "blazinghot:stonecutting/clay_mold/nugget_from_blank"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "blazinghot:clay_rod_mold_from_clay_blank_mold_stonecutting"
+      "blazinghot:stonecutting/clay_mold/nugget_from_blank"
     ]
   },
   "sends_telemetry_event": false

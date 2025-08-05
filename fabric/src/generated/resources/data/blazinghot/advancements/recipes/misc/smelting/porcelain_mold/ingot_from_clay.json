@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "blazinghot:porcelain_ingot_mold_from_clay_ingot_mold_smelting"
+        "recipe": "blazinghot:smelting/porcelain_mold/ingot_from_clay"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "blazinghot:porcelain_ingot_mold_from_clay_ingot_mold_smelting"
+      "blazinghot:smelting/porcelain_mold/ingot_from_clay"
     ]
   },
   "sends_telemetry_event": false

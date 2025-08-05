@@ -1,5 +1,7 @@
 package com.dudko.blazinghot.content.casting;
 
+import static com.tterrag.registrate.providers.RegistrateRecipeProvider.DEFAULT_SMELT_TIME;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,12 +13,15 @@ import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags.Items;
 import com.tterrag.registrate.AbstractRegistrate;
-import com.tterrag.registrate.util.DataIngredient;
+import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.ItemEntry;
 
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.recipes.SingleItemRecipeBuilder;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.Ingredient;
 
 public class Molds {
 
@@ -62,15 +67,30 @@ public class Molds {
 								.transform(BlazingBuilderTransformers.mold(name, type))
 								.recipe((c, p) -> {
 									if (type == MoldType.CLAY && shape != null) {
-										p.stonecutting(DataIngredient.items(Molds.BLANK.get(MoldType.CLAY).get()),
-												RecipeCategory.MISC,
-												get(type));
+										ItemEntry<?> blankMold = Molds.BLANK.get(MoldType.CLAY);
+										SingleItemRecipeBuilder
+												.stonecutting(Ingredient.of(blankMold), RecipeCategory.MISC, get(type))
+												.unlockedBy("has_" + blankMold.getId().getPath(),
+														RegistrateRecipeProvider.has(blankMold))
+												.save(p,
+														BlazingHot.asResource("stonecutting/clay_mold/"
+																+ name
+																+ "_from_blank"));
 									}
 									else if (type == MoldType.PORCELAIN) {
-										p.smelting(DataIngredient.items(this.get(MoldType.CLAY).get()),
-												RecipeCategory.MISC,
-												get(type),
-												3);
+										ItemEntry<?> clayMold = get(MoldType.CLAY);
+										SimpleCookingRecipeBuilder
+												.smelting(Ingredient.of(clayMold),
+														RecipeCategory.MISC,
+														get(type),
+														3,
+														DEFAULT_SMELT_TIME)
+												.unlockedBy("has_" + clayMold.getId().getPath(),
+														RegistrateRecipeProvider.has(clayMold))
+												.save(p,
+														BlazingHot.asResource("smelting/porcelain_mold/")
+																+ name
+																+ "_from_clay");
 									}
 								})
 								.register());

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_clay_rod_mold": {
+    "has_clay_blank_mold": {
       "conditions": {
         "items": [
           {
             "items": [
-              "blazinghot:clay_rod_mold"
+              "blazinghot:clay_blank_mold"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "blazinghot:porcelain_rod_mold_from_clay_rod_mold_smelting"
+        "recipe": "blazinghot:smelting/porcelain_mold/blank_from_clay"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_clay_rod_mold",
+      "has_clay_blank_mold",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "blazinghot:porcelain_rod_mold_from_clay_rod_mold_smelting"
+      "blazinghot:smelting/porcelain_mold/blank_from_clay"
     ]
   },
   "sends_telemetry_event": false

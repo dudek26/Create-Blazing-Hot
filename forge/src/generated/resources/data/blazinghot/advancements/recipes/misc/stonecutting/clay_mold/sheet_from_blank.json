@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_clay_nugget_mold": {
+    "has_clay_blank_mold": {
       "conditions": {
         "items": [
           {
             "items": [
-              "blazinghot:clay_nugget_mold"
+              "blazinghot:clay_blank_mold"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "blazinghot:porcelain_nugget_mold_from_clay_nugget_mold_smelting"
+        "recipe": "blazinghot:stonecutting/clay_mold/sheet_from_blank"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_clay_nugget_mold",
+      "has_clay_blank_mold",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "blazinghot:porcelain_nugget_mold_from_clay_nugget_mold_smelting"
+      "blazinghot:stonecutting/clay_mold/sheet_from_blank"
     ]
   },
   "sends_telemetry_event": false
