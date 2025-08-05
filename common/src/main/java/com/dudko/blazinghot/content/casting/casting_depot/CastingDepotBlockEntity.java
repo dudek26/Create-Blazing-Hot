@@ -3,10 +3,12 @@ package com.dudko.blazinghot.content.casting.casting_depot;
 import java.util.List;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.config.CClient.CastingProgressIndicator;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancement;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.dudko.blazinghot.mixin_interfaces.IAdvancementBehaviour;
+import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.dudko.blazinghot.util.TooltipUtil;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
@@ -111,6 +113,7 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 		cooling.add(Component.literal(" "));
 		cooling.add(speedComponent);
 
+		CastingProgressIndicator config = BlazingConfigs.client().castingProgressIndicator.get();
 
 		switch (getState()) {
 			case NONE -> {
@@ -127,13 +130,15 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 				filling.add(BlazingLang.fluidName(getVisualFluid()).style(ChatFormatting.GRAY));
 				MutableComponent
 						progress =
-						TooltipUtil.asciiProgressBar(10,
+						progressIndicator(config,
+								10,
 								castingBehaviour.getProcessingTicks(),
 								castingBehaviour.getRecipeProcessingDuration());
 
+				if (config.inline) filling.add(Component.literal(" ")).add(progress);
 				filling.forGoggles(tooltip);
-				BlazingHot.lang().add(progress).forGoggles(tooltip);
 
+				if (!config.inline) BlazingHot.lang().add(progress).forGoggles(tooltip);
 				cooling.forGoggles(tooltip);
 			}
 			case COOLING -> {
@@ -149,21 +154,28 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 
 				MutableComponent
 						progress =
-						TooltipUtil.asciiProgressBar(10,
+						progressIndicator(config,
+								10,
 								castingBehaviour.getCoolingTicks(),
-								castingBehaviour.getRecipeCoolingDuration());
+								castingBehaviour.coolingDuration);
 
 				filling.forGoggles(tooltip);
-				BlazingHot
-						.lang()
-						.add(progress)
-						.add(Component
-								.literal(" (")
-								.withStyle(ChatFormatting.GRAY)
-								.append(speedComponent)
-								.append(")")
-								.withStyle(ChatFormatting.GRAY))
-						.forGoggles(tooltip);
+
+				if (config == CastingProgressIndicator.NONE) {
+					cooling.forGoggles(tooltip);
+				}
+				else {
+					BlazingHot
+							.lang()
+							.add(progress)
+							.add(Component
+									.literal(" (")
+									.withStyle(ChatFormatting.GRAY)
+									.append(speedComponent)
+									.append(")")
+									.withStyle(ChatFormatting.GRAY))
+							.forGoggles(tooltip);
+				}
 			}
 		}
 
@@ -226,5 +238,28 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 			return direction.getAxis().isHorizontal();
 		}
 
+	}
+
+	public static MutableComponent progressIndicator(CastingProgressIndicator config, int length, float value, float max) {
+		float fill = value / max;
+		ChatFormatting style = ChatFormatting.RED;
+		if (fill > 0.75) style = ChatFormatting.GREEN;
+		else if (fill > 0.5) style = ChatFormatting.YELLOW;
+		else if (fill > 0.25) style = ChatFormatting.GOLD;
+
+		switch (config) {
+			case BAR -> {
+				return TooltipUtil.asciiProgressBar(length, value, max);
+			}
+			case PERCENTAGE -> {
+				return Component.literal(Math.round(fill * 100) + "%").withStyle(style);
+			}
+			case EXACT -> {
+				return Component.literal(Math.round(value) + "/" + Math.round(max)).withStyle(style);
+			}
+			default -> {
+				return Component.empty();
+			}
+		}
 	}
 }
