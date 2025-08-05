@@ -7,10 +7,6 @@ import net.createmod.catnip.config.ConfigBase;
 
 public class CRecipes extends ConfigBase {
 
-	public CRecipes() {
-
-	}
-
 	private static final int DEFAULT_FUEL_USAGE = (int) MultiAmount.fromBucketFraction(1, 40).get();
 
 	public final ConfigBool
