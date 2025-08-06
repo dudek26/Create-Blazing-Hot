@@ -4,27 +4,24 @@ import static com.dudko.blazinghot.content.item.BlazingFoodItem.ExtraProperties.
 import static com.dudko.blazinghot.util.TooltipUtil.addEffectTooltip;
 
 import java.util.List;
-
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import org.jetbrains.annotations.Nullable;
+import java.util.Objects;
 
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.registry.BlazingConfigs;
-import com.mojang.datafixers.util.Pair;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
-@ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class BlazingFoodItem extends Item {
 
@@ -95,24 +92,24 @@ public class BlazingFoodItem extends Item {
 		}
 		if (removeSlowness == REMOVE_SLOWNESS_ANY.value || (removeSlowness >= 0
 				&& livingEntity.hasEffect(MobEffects.MOVEMENT_SLOWDOWN)
-				&& livingEntity.getEffect(MobEffects.MOVEMENT_SLOWDOWN).getAmplifier() <= removeSlowness)) {
+				&& Objects.requireNonNull(livingEntity.getEffect(MobEffects.MOVEMENT_SLOWDOWN)).getAmplifier()
+				<= removeSlowness)) {
 			livingEntity.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
 		}
 		return super.finishUsingItem(stack, level, livingEntity);
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> lines, TooltipFlag isAdvanced) {
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
 		if (effectTooltip && BlazingConfigs.client().foodTooltips.get()) {
-			Item item = stack.getItem();
-			if (item.getFoodProperties() != null) item
-					.getFoodProperties()
-					.getEffects()
+			FoodProperties foodProperties = components().get(DataComponents.FOOD);
+			if (foodProperties != null) foodProperties
+					.effects()
 					.stream()
-					.map(Pair::getFirst)
-					.forEach(mobEffectInstance -> addEffectTooltip(lines, mobEffectInstance));
+					.map(FoodProperties.PossibleEffect::effect)
+					.forEach(mobEffectInstance -> addEffectTooltip(tooltipComponents, context, mobEffectInstance));
 		}
-		super.appendHoverText(stack, level, lines, isAdvanced);
+		super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
 	}
 
 	public enum ExtraProperties {

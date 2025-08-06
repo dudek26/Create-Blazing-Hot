@@ -7,7 +7,7 @@ plugins {
 
 architectury {
     platformSetupLoomIde()
-    forge()
+    neoForge()
 }
 
 def generatedResources = file("src/generated/resources")
@@ -22,11 +22,6 @@ sourceSets.main {
 
 loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath
-
-    forge {
-        convertAccessWideners = true
-        extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
-    }
 
     runs.configureEach {
         programArg "-mixin.config=create.mixins.json"
@@ -85,7 +80,7 @@ configurations {
     shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
-    developmentForge.extendsFrom common
+    developmentNeoForge.extendsFrom common
 }
 
 repositories {
@@ -99,9 +94,9 @@ repositories {
 }
 
 dependencies {
-    forge("net.minecraftforge:forge:${minecraft_version}-${neoforge_version}")
+    neoForge "net.neoforged:neoforge:${neoforge_version}"
     common(project(path: ":common", configuration: "namedElements")) { transitive = false }
-    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionNeoForge")) { transitive = false }
 
     // Create and its dependencies
     modImplementation("com.simibubi.create:create-${minecraft_version}:${create_neoforge_version}:slim") { transitive = false }
@@ -137,15 +132,6 @@ processResources {
 
     filesMatching("META-INF/mods.toml") {
         expand properties
-    }
-}
-
-loom {
-    forge {
-        mixinConfig(
-                "blazinghot-common.mixins.json",
-                "blazinghot.mixins.json"
-        )
     }
 }
 

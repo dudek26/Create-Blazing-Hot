@@ -16,7 +16,7 @@ logoFile = "icon.png"
 [[dependencies.blazinghot]]
 modId = "forge"
 mandatory = true
-versionRange = "[${forge_version},)"
+versionRange = "[${neoforge_version},)"
 ordering = "NONE"
 side = "BOTH"
 
@@ -33,3 +33,9 @@ mandatory = true
 versionRange = "[${create_version},)"
 ordering = "NONE"
 side = "BOTH"
+
+[[mixins]]
+config = "blazinghot-common.mixins.json"
+
+[[mixins]]
+config = "blazinghot.mixins.json"
