@@ -8,6 +8,15 @@ on:
                 description: Platform
                 options:
                     - forge
+            modrinth:
+                type: boolean
+                description: Modrinth
+            curseforge:
+                type: boolean
+                description: Modrinth
+            github-releases:
+                type: boolean
+                description: Modrinth
 
 jobs:
     build:
