@@ -10,13 +10,19 @@ on:
                     - forge
             modrinth:
                 type: boolean
+                default: true
                 description: Modrinth
             curseforge:
                 type: boolean
+                default: true
                 description: CurseForge
-            github-releases:
+            github_releases:
                 type: boolean
+                default: true
                 description: GitHub Releases
+
+permissions:
+    contents: write
 
 jobs:
     build:
@@ -55,4 +61,7 @@ jobs:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                     PLATFORM: ${{ inputs.platform }}
                     BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+                    MODRINTH_RELEASE: ${{ inputs.modrinth }}
+                    CURSEFORGE_RELEASE: ${{ inputs.curseforge }}
+                    GITHUB_RELEASE: ${{ inputs.github_releases }}
                 run: ./gradlew blazinghotPublish

@@ -5,7 +5,7 @@ plugins {
     id "dev.architectury.loom" version "1.9.+" apply false
     id "io.github.p03w.machete" version "1.+" // automatic jar compressing on build
     id "dev.ithundxr.silk" version "0.11.16"
-    id "me.modmuss50.mod-publish-plugin" version "0.6.3"
+    id "me.modmuss50.mod-publish-plugin" version "0.8.4"
 }
 
 architectury {
@@ -117,6 +117,8 @@ publishMods {
         repository = "dudek26/Create-Blazing-Hot"
         commitish = System.getenv("BRANCH_NAME")
         tagName = "mc${minecraft_version}/v${mod_version}"
+
+        dryRun = !System.getenv("GITHUB_RELEASE")?.toBoolean()
 
         // Allow the release to be initially created without any files.
         allowEmptyFiles = true
