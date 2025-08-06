@@ -134,8 +134,7 @@ public class BlazingMetals {
 									b -> b
 											.fromMods(Mods.BLAZINGHOT)
 											.withForms(BlazingForms.STURDY_ALLOY, BlazingForms.STURDY_SHEET)
-											.addFluidInteraction(Fluids.WATER,
-													() -> AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get()))
+											.addFluidInteraction(Fluids.WATER, () -> Blocks.COBBLED_DEEPSLATE))
 							.register();
 
 	/**

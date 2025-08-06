@@ -106,7 +106,7 @@ tasks.register("blazinghotPublish") {
 publishMods {
     String uncutChangelogText = ChangelogText.getChangelogText(rootProject).toString()
     String cutChangelogText = uncutChangelogText.startsWith("Create:") ? uncutChangelogText.split(":", 3)[2] : uncutChangelogText.split(":", 2)[1]
-    String changelogText = release_type.equalsIgnoreCase("beta") || release_type.equalsIgnoreCase("alpha") ? "Pre-release version. Back up your worlds before updating.  " + cutChangelogText : cutChangelogText
+    String changelogText = cutChangelogText
 
     changelog = changelogText
     displayName = "Create: Blazing Hot v${mod_version} for mc${minecraft_version}"
