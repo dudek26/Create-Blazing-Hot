@@ -13,10 +13,10 @@ on:
                 description: Modrinth
             curseforge:
                 type: boolean
-                description: Modrinth
+                description: CurseForge
             github-releases:
                 type: boolean
-                description: Modrinth
+                description: GitHub Releases
 
 jobs:
     build:
