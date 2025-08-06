@@ -6,6 +6,8 @@ import static com.dudko.blazinghot.util.TooltipUtil.addEffectTooltip;
 import java.util.List;
 import java.util.Objects;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.registry.BlazingConfigs;
@@ -23,6 +25,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
 @MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
 public class BlazingFoodItem extends Item {
 
 	private boolean foil;

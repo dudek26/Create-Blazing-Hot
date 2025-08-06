@@ -17,8 +17,8 @@ import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
+import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import net.minecraft.core.NonNullList;
@@ -36,7 +36,7 @@ public class BlazeMixingRecipe extends BasinRecipe {
 	@Nullable
 	protected FluidIngredient fuelFluid;
 
-	public BlazeMixingRecipe(ProcessingRecipeBuilder.ProcessingRecipeParams params) {
+	public BlazeMixingRecipe(ProcessingRecipeParams params) {
 		super(BlazingRecipeTypes.BLAZE_MIXING.get(), params);
 	}
 
@@ -53,14 +53,14 @@ public class BlazeMixingRecipe extends BasinRecipe {
 	/**
 	 * @apiNote Already platformed.
 	 */
-	public static long getFuelCost(Recipe<?> r) {
+	public static long getFuelCost(@Nullable Recipe<?> r) {
 		if (r == null) return MultiAmount.BUCKET.get() + 1;
 
 		if (r instanceof MixingRecipe && PotionMixingRecipes.ALL.contains(r))
 			return BlazingConfigs.server().recipes.blazeBrewingFuelUsage.get();
 
 		else if (r.getType() == AllRecipeTypes.MIXING.getType())
-			return durationToFuelCost(((ProcessingRecipe<?>) r).getProcessingDuration());
+			return durationToFuelCost(((StandardProcessingRecipe<?>) r).getProcessingDuration());
 
 		else if ((r instanceof CraftingRecipe
 				&& !(r instanceof ShapedRecipe)

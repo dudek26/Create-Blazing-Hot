@@ -1,6 +1,6 @@
 package com.dudko.blazinghot.multiloader.fluid.forge;
 
-import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
+import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import net.minecraft.tags.TagKey;
@@ -19,7 +19,7 @@ public class MultiFluidsImpl {
 		return "";
 	}
 
-	public static boolean recipeResultContains(ProcessingRecipe<?> r, TagKey<Fluid> fluid) {
+	public static boolean recipeResultContains(StandardProcessingRecipe<?> r, TagKey<Fluid> fluid) {
 		return r.getFluidResults().stream().anyMatch(fs -> fs.getFluid().defaultFluidState().is(fluid));
 	}
 

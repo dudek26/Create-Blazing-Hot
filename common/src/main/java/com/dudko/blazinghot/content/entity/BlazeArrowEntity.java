@@ -6,13 +6,11 @@ import static com.dudko.blazinghot.util.WorldUtil.dimensionToString;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.mixin.accessor.ProjectileAccessor;
 import com.dudko.blazinghot.registry.BlazingItems;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
@@ -21,11 +19,11 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 
+@MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class BlazeArrowEntity extends AbstractArrow {
 
@@ -37,14 +35,13 @@ public class BlazeArrowEntity extends AbstractArrow {
 		this.dimensionOrigin = level.dimension();
 	}
 
-	public BlazeArrowEntity(EntityType<? extends AbstractArrow> entityType, LivingEntity shooter, Level level) {
-		super(entityType, shooter, level);
+	public BlazeArrowEntity(EntityType<? extends AbstractArrow> entityType, LivingEntity owner, Level level, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
+		super(entityType, owner, level, pickupItemStack, firedFromWeapon);
 		this.dimensionOrigin = level.dimension();
-		setOwner(shooter);
 	}
 
 	@Override
-	protected @NotNull ItemStack getPickupItem() {
+	protected ItemStack getDefaultPickupItem() {
 		return new ItemStack(BlazingItems.BLAZE_ARROW.asItem());
 	}
 
@@ -55,16 +52,6 @@ public class BlazeArrowEntity extends AbstractArrow {
 		}
 		super.tick();
 
-	}
-
-	@ExpectPlatform
-	public static BlazeArrowEntity create(EntityType<? extends AbstractArrow> entityType, LivingEntity shooter, Level level, Item referenceItem) {
-		throw new AssertionError();
-	}
-
-	@ExpectPlatform
-	public static BlazeArrowEntity create(EntityType<? extends AbstractArrow> entityType, Level level) {
-		throw new AssertionError();
 	}
 
 	@Override
@@ -97,6 +84,7 @@ public class BlazeArrowEntity extends AbstractArrow {
 		dimensionOrigin = dimensionFromString(compound.getString("DimensionOrigin"));
 	}
 
+	// TODO: check if it's still necessary
 	@Override
 	public @Nullable Entity getOwner() {
 		Entity entity = super.getOwner();

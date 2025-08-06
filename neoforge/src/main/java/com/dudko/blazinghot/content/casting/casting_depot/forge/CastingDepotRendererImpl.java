@@ -5,7 +5,7 @@ import com.dudko.blazinghot.content.casting.casting_depot.SpoutCastingBehaviour;
 import com.dudko.blazinghot.content.casting.casting_depot.SpoutCastingBehaviour.State;
 import com.mojang.blaze3d.vertex.PoseStack;
 
-import net.createmod.catnip.platform.ForgeCatnipServices;
+import net.createmod.catnip.platform.NeoForgeCatnipServices;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.util.Mth;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -35,7 +35,7 @@ public class CastingDepotRendererImpl {
 			final float zMin = 1 / 16f;
 			final float zMax = 15 / 16f;
 			ms.pushPose();
-			ForgeCatnipServices.FLUID_RENDERER.renderFluidBox(fluidStack,
+			NeoForgeCatnipServices.FLUID_RENDERER.renderFluidBox(fluidStack,
 					xMin,
 					yMin,
 					zMin,

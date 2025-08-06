@@ -18,6 +18,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -101,8 +102,8 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 	public abstract void resetProcessing();
 
 	@Override
-	public void write(CompoundTag nbt, boolean clientPacket) {
-		super.write(nbt, clientPacket);
+	public void write(CompoundTag nbt, HolderLookup.Provider registries, boolean clientPacket) {
+		super.write(nbt, registries, clientPacket);
 		nbt.putFloat("CoolingTicks", coolingTicks);
 		nbt.putInt("ProcessingTicks", processingTicks);
 		nbt.putString("State", state.toString());
@@ -110,7 +111,7 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 		if (currentRecipeId != null) nbt.putString("ProcessedRecipe", currentRecipeId.toString());
 		if (!castItem.isEmpty()) {
 			CompoundTag castItemTag = new CompoundTag();
-			castItem.save(castItemTag);
+			castItem.save(registries, castItemTag);
 			nbt.put("CastItem", castItemTag);
 		}
 		nbt.putInt("CoolingDuration", coolingDuration);
@@ -118,8 +119,8 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 	}
 
 	@Override
-	public void read(CompoundTag nbt, boolean clientPacket) {
-		super.read(nbt, clientPacket);
+	public void read(CompoundTag nbt, HolderLookup.Provider registries, boolean clientPacket) {
+		super.read(nbt, registries, clientPacket);
 		coolingTicks = nbt.getFloat("CoolingTicks");
 		processingTicks = nbt.getInt("ProcessingTicks");
 		state = State.valueOf(nbt.getString("State").toUpperCase());
@@ -132,7 +133,7 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 		}
 		castItem = ItemStack.EMPTY;
 		if (nbt.contains("CastItem")) {
-			castItem = ItemStack.of(nbt.getCompound("CastItem"));
+			castItem = ItemStack.parseOptional(registries, nbt.getCompound("CastItem"));
 		}
 		coolingDuration = nbt.getInt("CoolingDuration");
 		keepMold = nbt.getBoolean("KeepMold");

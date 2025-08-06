@@ -1,6 +1,6 @@
 package com.dudko.blazinghot.content.kinetics.blaze_mixer;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.dudko.blazinghot.registry.BlazingBlockEntityTypes;
 import com.simibubi.create.AllBlocks;
@@ -9,6 +9,7 @@ import com.simibubi.create.content.kinetics.base.KineticBlock;
 import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel;
 import com.simibubi.create.foundation.block.IBE;
 
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -22,7 +23,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-@SuppressWarnings("deprecation")
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class BlazeMixerBlock extends KineticBlock implements IBE<BlazeMixerBlockEntity>, ICogWheel {
 
 	public BlazeMixerBlock(Properties properties) {
@@ -30,12 +32,12 @@ public class BlazeMixerBlock extends KineticBlock implements IBE<BlazeMixerBlock
 	}
 
 	@Override
-	public boolean canSurvive(@NotNull BlockState state, LevelReader worldIn, BlockPos pos) {
+	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
 		return !AllBlocks.BASIN.has(worldIn.getBlockState(pos.below()));
 	}
 
 	@Override
-	public @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter worldIn, @NotNull BlockPos pos, @NotNull CollisionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 		if (context instanceof EntityCollisionContext
 				&& ((EntityCollisionContext) context).getEntity() instanceof Player)
 			return AllShapes.CASING_14PX.get(Direction.DOWN);
@@ -74,7 +76,7 @@ public class BlazeMixerBlock extends KineticBlock implements IBE<BlazeMixerBlock
 	}
 
 	@Override
-	public boolean isPathfindable(@NotNull BlockState state, @NotNull BlockGetter reader, @NotNull BlockPos pos, @NotNull PathComputationType type) {
+	protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
 		return false;
 	}
 

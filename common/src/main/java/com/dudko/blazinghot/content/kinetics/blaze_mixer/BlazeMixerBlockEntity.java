@@ -19,7 +19,7 @@ import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
+import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.advancement.AllAdvancements;
 import com.simibubi.create.foundation.advancement.CreateAdvancement;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -32,6 +32,7 @@ import net.createmod.catnip.lang.Lang;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction.Axis;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -128,26 +129,25 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 	}
 
 	@Override
-	protected void read(CompoundTag compound, boolean clientPacket) {
+	protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
 		running = compound.getBoolean("Running");
 		runningTicks = compound.getInt("Ticks");
 		fueled = compound.getBoolean("Fueled");
 		blazeMixing = compound.getBoolean("BlazeMixing");
 		ancientDebrisMelted = compound.getInt("AncientDebrisMelted");
-		super.read(compound, clientPacket);
-
+		super.read(compound, registries, clientPacket);
 		if (clientPacket && hasLevel())
 			getBasin().ifPresent(bte -> bte.setAreFluidsMoving(running && runningTicks <= 20));
 	}
 
 	@Override
-	public void write(CompoundTag compound, boolean clientPacket) {
+	protected void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
 		compound.putBoolean("Running", running);
 		compound.putInt("Ticks", runningTicks);
 		compound.putBoolean("Fueled", fueled);
 		compound.putBoolean("BlazeMixing", blazeMixing);
 		compound.putInt("AncientDebrisMelted", ancientDebrisMelted);
-		super.write(compound, clientPacket);
+		super.write(compound, registries, clientPacket);
 	}
 
 	public static float multipliedRecipeSpeed(float speed, Recipe<?> r) {
@@ -171,7 +171,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 
 	public void updateAdvancements(Recipe<?> r) {
 		award(BlazingAdvancements.BLAZE_MIXER);
-		if (r instanceof ProcessingRecipe<?> recipe) {
+		if (r instanceof StandardProcessingRecipe<?> recipe) {
 			if (recipe.getId().equals(BlazingHot.asResource("blaze_mixing/melting/ancient_debris"))) {
 				ancientDebrisMelted++;
 				if (ancientDebrisMelted >= 15) {
@@ -224,11 +224,11 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 	@Override
 	protected abstract <C extends Container> boolean matchBasinRecipe(Recipe<C> recipe);
 
-	public static boolean doInputsMatch(ProcessingRecipe<?> a, ProcessingRecipe<?> b) {
+	public static boolean doInputsMatch(StandardProcessingRecipe<?> a, StandardProcessingRecipe<?> b) {
 		return doItemInputsMatch(a, b) && doFluidInputsMatch(a, b);
 	}
 
-	public static boolean doItemInputsMatch(ProcessingRecipe<?> a, ProcessingRecipe<?> b) {
+	public static boolean doItemInputsMatch(StandardProcessingRecipe<?> a, StandardProcessingRecipe<?> b) {
 		if (!a.getIngredients().isEmpty() && !b.getIngredients().isEmpty()) {
 			List<ItemStack[]> allItems = a.getIngredients().stream().map(Ingredient::getItems).toList();
 			for (ItemStack[] matchingStacks : allItems) {
@@ -245,7 +245,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 	}
 
 	@ExpectPlatform
-	public static boolean doFluidInputsMatch(ProcessingRecipe<?> a, ProcessingRecipe<?> b) {
+	public static boolean doFluidInputsMatch(StandardProcessingRecipe<?> a, StandardProcessingRecipe<?> b) {
 		return true; // no assertion error so IntelliJ doesn't cry
 	}
 

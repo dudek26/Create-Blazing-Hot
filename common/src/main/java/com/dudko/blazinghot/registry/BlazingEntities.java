@@ -20,7 +20,7 @@ public class BlazingEntities {
 	public static final EntityEntry<BlazeArrowEntity>
 			BLAZE_ARROW =
 			REGISTRATE
-					.<BlazeArrowEntity>entity("blaze_arrow", BlazeArrowEntity::create, MobCategory.MISC)
+					.<BlazeArrowEntity>entity("blaze_arrow", BlazeArrowEntity::new, MobCategory.MISC)
 					.renderer(() -> BlazeArrowRenderer::new)
 					.properties(configure(c -> c.size(0.25f, 0.25f)))
 					.tag(EntityTypeTags.ARROWS)

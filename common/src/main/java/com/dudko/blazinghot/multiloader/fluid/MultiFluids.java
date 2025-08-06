@@ -1,6 +1,6 @@
 package com.dudko.blazinghot.multiloader.fluid;
 
-import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
+import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
@@ -22,7 +22,7 @@ public class MultiFluids {
 	}
 
 	@ExpectPlatform
-	public static boolean recipeResultContains(ProcessingRecipe<?> r, TagKey<Fluid> fluid) {
+	public static boolean recipeResultContains(StandardProcessingRecipe<?> r, TagKey<Fluid> fluid) {
 		return true;
 	}
 

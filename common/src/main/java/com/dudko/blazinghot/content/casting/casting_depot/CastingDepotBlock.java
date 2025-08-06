@@ -2,6 +2,8 @@ package com.dudko.blazinghot.content.casting.casting_depot;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import net.minecraft.world.ItemInteractionResult;
+
 import org.jetbrains.annotations.Nullable;
 
 import com.dudko.blazinghot.content.block.shape.Shapes;
@@ -37,6 +39,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
+import java.util.function.Function;
 
 @SuppressWarnings("deprecation")
 @ParametersAreNonnullByDefault
@@ -88,8 +92,13 @@ public class CastingDepotBlock extends HorizontalDirectionalBlock implements IWr
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult ray) {
-		return CastingDepotBlockMethods.onUse(state, world, pos, player, hand, ray);
+	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult ray) {
+		return CastingDepotBlockMethods.useItemOn(stack, state, level, pos, player, hand, ray);
+	}
+
+	@Override
+	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult ray) {
+		return CastingDepotBlockMethods.useWithoutItem(state, level, pos, player, ray);
 	}
 
 	@Override
@@ -104,7 +113,7 @@ public class CastingDepotBlock extends HorizontalDirectionalBlock implements IWr
 	}
 
 	@Override
-	public boolean isPathfindable(BlockState state, BlockGetter reader, BlockPos pos, PathComputationType type) {
+	protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
 		return false;
 	}
 

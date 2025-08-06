@@ -70,7 +70,7 @@ public class Molds {
 										ItemEntry<?> blankMold = Molds.BLANK.get(MoldType.CLAY);
 										SingleItemRecipeBuilder
 												.stonecutting(Ingredient.of(blankMold), RecipeCategory.MISC, get(type))
-												.unlockedBy("has_" + blankMold.getId().getPath(),
+												.unlockedBy("has_" + blankMold.get().getPath(),
 														RegistrateRecipeProvider.has(blankMold))
 												.save(p,
 														BlazingHot.asResource("stonecutting/clay_mold/"
