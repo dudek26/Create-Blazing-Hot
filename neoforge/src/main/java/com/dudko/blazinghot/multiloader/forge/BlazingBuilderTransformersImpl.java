@@ -27,7 +27,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 
 public class BlazingBuilderTransformersImpl {
 	public static <B extends ModernLampBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampBlock(DyeColor color) {

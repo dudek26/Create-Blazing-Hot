@@ -8,9 +8,9 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mojang.logging.LogUtils;
 
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.data.loading.DatagenModLoader;
-import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.data.loading.DatagenModLoader;
+import net.neoforged.neoforge.fml.loading.FMLEnvironment;
 
 @Mixin(value = DatagenModLoader.class, remap = false)
 public abstract class DatagenModLoaderForgeMixin {

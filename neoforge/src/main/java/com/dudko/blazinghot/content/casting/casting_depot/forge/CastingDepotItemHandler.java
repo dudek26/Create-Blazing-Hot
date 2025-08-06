@@ -8,7 +8,7 @@ import com.dudko.blazinghot.content.casting.casting_depot.SpoutCastingBehaviour;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.items.IItemHandler;
+import net.neoforged.neoforge.items.IItemHandler;
 
 @SuppressWarnings("UnstableApiUsage")
 @MethodsReturnNonnullByDefault

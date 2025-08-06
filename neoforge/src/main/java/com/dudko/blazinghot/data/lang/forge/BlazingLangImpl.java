@@ -4,7 +4,7 @@ import com.dudko.blazinghot.BlazingHot;
 
 import net.createmod.catnip.lang.LangBuilder;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 public class BlazingLangImpl {
 

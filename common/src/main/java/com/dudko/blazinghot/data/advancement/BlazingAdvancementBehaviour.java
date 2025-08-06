@@ -11,6 +11,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -90,14 +91,14 @@ public class BlazingAdvancementBehaviour extends BlockEntityBehaviour {
 	}
 
 	@Override
-	public void write(CompoundTag nbt, boolean clientPacket) {
-		super.write(nbt, clientPacket);
+	public void write(CompoundTag nbt, HolderLookup.Provider registries, boolean clientPacket) {
+		super.write(nbt, registries, clientPacket);
 		if (playerId != null) nbt.putUUID("Owner", playerId);
 	}
 
 	@Override
-	public void read(CompoundTag nbt, boolean clientPacket) {
-		super.read(nbt, clientPacket);
+	public void read(CompoundTag nbt, HolderLookup.Provider registries, boolean clientPacket) {
+		super.read(nbt, registries, clientPacket);
 		if (nbt.contains("Owner")) playerId = nbt.getUUID("Owner");
 	}
 

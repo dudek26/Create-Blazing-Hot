@@ -12,7 +12,7 @@ import com.tterrag.registrate.providers.ProviderType;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 public class BlazingHotDataForge {
 

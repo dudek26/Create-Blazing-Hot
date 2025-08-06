@@ -143,7 +143,7 @@ public class BlazingMetals {
 	public static Set<ItemLike> allBuckets(boolean includeCompat) {
 		return ALL
 				.stream()
-				.filter(m -> m.mods.get(0).alwaysIncluded || includeCompat)
+				.filter(m -> m.mods.getFirst().alwaysIncluded || includeCompat)
 				.map(m -> m.getBucket().get())
 				.collect(Collectors.toSet());
 	}

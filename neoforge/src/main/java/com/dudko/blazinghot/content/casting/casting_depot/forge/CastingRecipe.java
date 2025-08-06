@@ -12,7 +12,7 @@ import com.simibubi.create.foundation.fluid.FluidIngredient;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.items.wrapper.RecipeWrapper;
+import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault

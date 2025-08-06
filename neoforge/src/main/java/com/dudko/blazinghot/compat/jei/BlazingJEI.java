@@ -43,8 +43,8 @@ import com.simibubi.create.infrastructure.config.CRecipes;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
@@ -62,7 +62,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 @JeiPlugin
 @SuppressWarnings("SameParameterValue")
@@ -142,7 +142,7 @@ public class BlazingJEI implements IModPlugin {
 	public void registerRecipes(@NotNull IRecipeRegistration registration) {
 		allCategories.forEach(c -> c.registerRecipes(registration));
 		registration.addIngredientInfo((new FluidStack(BlazingFluidsImpl.NETHER_LAVA.getSource(), 1000)),
-				ForgeTypes.FLUID_STACK,
+				NeoForgeTypes.FLUID_STACK,
 				BlazingLang.NETHER_LAVA_INFO.get());
 	}
 

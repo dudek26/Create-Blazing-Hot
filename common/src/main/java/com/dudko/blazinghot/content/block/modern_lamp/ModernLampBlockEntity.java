@@ -4,6 +4,8 @@ import static net.minecraft.ChatFormatting.GRAY;
 
 import java.util.List;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import org.jetbrains.annotations.Nullable;
 
 import com.dudko.blazinghot.data.lang.BlazingLang;
@@ -14,6 +16,7 @@ import net.createmod.catnip.lang.LangBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
@@ -23,6 +26,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
+@ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ModernLampBlockEntity extends BlockEntity implements IHaveGoggleInformation {
 
@@ -33,18 +37,19 @@ public class ModernLampBlockEntity extends BlockEntity implements IHaveGoggleInf
 		super(type, pos, blockState);
 	}
 
+
 	@Override
-	protected void saveAdditional(CompoundTag tag) {
+	protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
 		tag.putBoolean("powered", powered);
 		tag.putBoolean("locked", locked);
-		super.saveAdditional(tag);
+		super.saveAdditional(tag, registries);
 	}
 
 	@Override
-	public void load(CompoundTag tag) {
+	protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
 		powered = tag.getBoolean("powered");
 		locked = tag.getBoolean("locked");
-		super.load(tag);
+		super.loadAdditional(tag, registries);
 	}
 
 	@Override
@@ -53,8 +58,8 @@ public class ModernLampBlockEntity extends BlockEntity implements IHaveGoggleInf
 	}
 
 	@Override
-	public CompoundTag getUpdateTag() {
-		return saveWithFullMetadata();
+	public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+		return saveWithFullMetadata(registries);
 	}
 
 	@Override

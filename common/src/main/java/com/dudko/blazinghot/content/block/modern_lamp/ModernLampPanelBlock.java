@@ -19,7 +19,7 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
@@ -48,16 +48,15 @@ public class ModernLampPanelBlock extends AbstractModernLampPanel implements Sim
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		if (!player.isShiftKeyDown() && player.mayBuild()) {
-			ItemStack heldItem = player.getItemInHand(hand);
 			IPlacementHelper helper = PlacementHelpers.get(placementHelperId);
-			if (helper.matchesItem(heldItem)) return helper
+			if (helper.matchesItem(stack)) return helper
 					.getOffset(player, level, state, pos, hit)
-					.placeInWorld(level, (BlockItem) heldItem.getItem(), player, hand, hit);
+					.placeInWorld(level, (BlockItem) stack.getItem(), player, hand, hit);
 		}
 
-		return super.use(state, level, pos, player, hand, hit);
+		return super.useItemOn(stack, state, level, pos, player, hand, hit);
 	}
 
 	@Override

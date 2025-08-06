@@ -18,6 +18,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
@@ -32,7 +33,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
-@SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public abstract class AbstractModernLamp extends Block implements IBE<ModernLampBlockEntity> {
@@ -68,19 +68,22 @@ public abstract class AbstractModernLamp extends Block implements IBE<ModernLamp
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-
+	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
 		boolean locked = isLocked(level, pos);
-
-		if (player.getItemInHand(hand).isEmpty() && !locked) {
+		if (!locked) {
 			float pitch = state.getValue(LIT) ? 0.5F : 0.8F;
 			if (!level.isClientSide) BlazingAdvancements.MODERN_LAMP.awardTo(player);
 			level.setBlockAndUpdate(pos, state.cycle(LIT));
 			level.playLocalSound(pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 1.0F, pitch, false);
 			return InteractionResult.SUCCESS;
 		}
+		return InteractionResult.FAIL;
+	}
 
-		if (player.getItemInHand(hand).is(AllTags.AllItemTags.WRENCH.tag) && !player.isCrouching()) {
+	@Override
+	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+		boolean locked = isLocked(level, pos);
+		if (stack.is(AllTags.AllItemTags.WRENCH.tag) && !player.isCrouching()) {
 			Component action = locked ? BlazingLang.LAMP_UNLOCKED_MESSAGE.get() : BlazingLang.LAMP_LOCKED_MESSAGE.get();
 			player.displayClientMessage(action, true);
 
@@ -88,10 +91,9 @@ public abstract class AbstractModernLamp extends Block implements IBE<ModernLamp
 			player.playSound(sound, 1.0F, 1.0F);
 
 			setLocked(level, pos, !locked);
-			return InteractionResult.SUCCESS;
+			return ItemInteractionResult.SUCCESS;
 		}
-
-		return InteractionResult.FAIL;
+		return ItemInteractionResult.FAIL;
 	}
 
 	@Override

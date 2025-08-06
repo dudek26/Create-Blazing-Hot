@@ -5,11 +5,11 @@ import java.util.Map;
 import com.dudko.blazinghot.registry.BlazingConfigs;
 
 import net.createmod.catnip.config.ConfigBase;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
+import net.neoforged.neoforge.eventbus.api.SubscribeEvent;
+import net.neoforged.neoforge.fml.ModLoadingContext;
+import net.neoforged.neoforge.fml.common.Mod;
+import net.neoforged.neoforge.fml.config.ModConfig;
+import net.neoforged.neoforge.fml.event.config.ModConfigEvent;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class BlazingConfigsImpl {

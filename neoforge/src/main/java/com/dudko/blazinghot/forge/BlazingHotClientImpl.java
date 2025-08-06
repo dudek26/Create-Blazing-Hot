@@ -4,13 +4,13 @@ import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.BlazingHotClient;
 import com.dudko.blazinghot.registry.BlazingConfigs;
 
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ModContainer;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
+import net.neoforged.neoforge.api.distmarker.Dist;
+import net.neoforged.neoforge.client.ConfigScreenHandler.ConfigScreenFactory;
+import net.neoforged.neoforge.eventbus.api.IEventBus;
+import net.neoforged.neoforge.fml.ModContainer;
+import net.neoforged.neoforge.fml.ModList;
+import net.neoforged.neoforge.fml.common.Mod;
+import net.neoforged.neoforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 
 @Mod.EventBusSubscriber(Dist.CLIENT)
 public class BlazingHotClientImpl {

@@ -17,6 +17,7 @@ import com.dudko.blazinghot.registry.CommonTags;
 
 import net.minecraft.FieldsAreNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -108,7 +109,7 @@ public class BlazingForm {
 	}
 
 	public Ingredient getMeltingIngredient(BlazingMetal metal) {
-		if (customLocation != null) return Ingredient.of(MultiRegistries.getItemFromRegistry(customLocation).get());
+		if (customLocation != null) return Ingredient.of(BuiltInRegistries.ITEM.get(customLocation));
 		return Ingredient.of(getItemTag(metal));
 	}
 

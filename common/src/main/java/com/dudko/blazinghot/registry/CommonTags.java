@@ -26,7 +26,7 @@ public class CommonTags {
 	}
 
 	public static <T> TagKey<T> tagOf(Registry<T> registry, String path, Namespace namespace) {
-		return optionalTag(registry, new ResourceLocation(namespace.namespace, path));
+		return optionalTag(registry, ResourceLocation.fromNamespaceAndPath(namespace.namespace, path));
 	}
 
 	public static TagKey<Block> blockTagOf(String path, Namespace namespace) {
@@ -79,7 +79,7 @@ public class CommonTags {
 		}
 
 		public ResourceLocation asResource(String path) {
-			return new ResourceLocation(namespace, path);
+			return ResourceLocation.fromNamespaceAndPath(namespace, path);
 		}
 	}
 

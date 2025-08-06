@@ -27,7 +27,7 @@ loom {
         programArg "-mixin.config=create.mixins.json"
     }
 
-    //    Runs only on Forge
+    //    Runs only on NeoForge
     runs {
         data {
             data()
@@ -124,13 +124,13 @@ processResources {
     // set up properties for filling into metadata
     Map<String, String> properties = Map.of(
             "version", version as String,
-            "neoforge_version", neoforge_version.split("\\.")[0], // only specify major version of forge
+            "neoforge_version", neoforge_version.split("\\.")[0], // only specify major version of neoforge
             "minecraft_version", minecraft_version,
             "create_version", create_neoforge_version.split("-")[0] // cut off build number
     )
     properties.forEach((k, v) -> inputs.property(k, v))
 
-    filesMatching("META-INF/mods.toml") {
+    filesMatching("META-INF/neoforge.mods.toml") {
         expand properties
     }
 }

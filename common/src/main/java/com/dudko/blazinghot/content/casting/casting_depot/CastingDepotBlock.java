@@ -7,6 +7,7 @@ import org.jetbrains.annotations.Nullable;
 import com.dudko.blazinghot.content.block.shape.Shapes;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancementBehaviour;
 import com.dudko.blazinghot.registry.BlazingBlockEntityTypes;
+import com.mojang.serialization.MapCodec;
 import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
@@ -41,11 +42,16 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class CastingDepotBlock extends HorizontalDirectionalBlock implements IWrenchable, IBE<CastingDepotBlockEntity> {
-
+	public static final MapCodec<CastingDepotBlock> CODEC = simpleCodec(CastingDepotBlock::new);
 	public static BooleanProperty POWERED = BlockStateProperties.POWERED;
 
 	public CastingDepotBlock(Properties properties) {
 		super(properties);
+	}
+
+	@Override
+	protected MapCodec<CastingDepotBlock> codec() {
+		return CODEC;
 	}
 
 	@Override

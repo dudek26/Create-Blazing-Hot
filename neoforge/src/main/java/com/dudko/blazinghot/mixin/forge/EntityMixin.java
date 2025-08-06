@@ -13,7 +13,7 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import net.minecraft.world.entity.Entity;
-import net.minecraftforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.FluidType;
 
 
 @Mixin(Entity.class)

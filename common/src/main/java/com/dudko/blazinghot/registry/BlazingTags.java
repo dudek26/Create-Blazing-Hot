@@ -72,7 +72,9 @@ public class BlazingTags {
 		}
 
 		Blocks(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-			ResourceLocation id = new ResourceLocation(namespace.id, path == null ? Lang.asId(name()) : path);
+			ResourceLocation
+					id =
+					ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? Lang.asId(name()) : path);
 			if (optional) {
 				tag = optionalTag(BuiltInRegistries.BLOCK, id);
 			}
@@ -124,7 +126,9 @@ public class BlazingTags {
 		}
 
 		Fluids(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-			ResourceLocation id = new ResourceLocation(namespace.id, path == null ? Lang.asId(name()) : path);
+			ResourceLocation
+					id =
+					ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? Lang.asId(name()) : path);
 			if (optional) {
 				tag = optionalTag(BuiltInRegistries.FLUID, id);
 			}
@@ -195,7 +199,9 @@ public class BlazingTags {
 		}
 
 		Items(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-			ResourceLocation id = new ResourceLocation(namespace.id, path == null ? Lang.asId(name()) : path);
+			ResourceLocation
+					id =
+					ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? Lang.asId(name()) : path);
 			if (optional) {
 				tag = optionalTag(BuiltInRegistries.ITEM, id);
 			}

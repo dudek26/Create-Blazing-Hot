@@ -6,14 +6,9 @@ import com.dudko.blazinghot.content.block.shape.Shapes;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -34,11 +29,6 @@ public class ModernLampQuadPanelBlock extends ModernLampPanelBlock {
 				.add(8.5, 0, 8.5, 15, 2, 15)
 				.forDirectional()
 				.get(pState.getValue(FACING));
-	}
-
-	@Override
-	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		return super.use(state, level, pos, player, hand, hit);
 	}
 
 }

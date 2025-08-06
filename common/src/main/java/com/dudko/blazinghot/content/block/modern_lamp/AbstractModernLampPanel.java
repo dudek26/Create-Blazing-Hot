@@ -4,8 +4,6 @@ import static net.minecraft.world.level.block.state.properties.BlockStatePropert
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import org.jetbrains.annotations.NotNull;
-
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,7 +22,6 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-@SuppressWarnings("deprecation")
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public abstract class AbstractModernLampPanel extends AbstractModernLamp {
@@ -42,7 +39,7 @@ public abstract class AbstractModernLampPanel extends AbstractModernLamp {
 	}
 
 	@Override
-	public BlockState getStateForPlacement(@NotNull BlockPlaceContext pContext) {
+	public BlockState getStateForPlacement(BlockPlaceContext pContext) {
 		BlockState stateForPlacement = super.getStateForPlacement(pContext);
 		assert stateForPlacement != null;
 		return stateForPlacement
@@ -57,7 +54,7 @@ public abstract class AbstractModernLampPanel extends AbstractModernLamp {
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction direction, BlockState neighbourState, LevelAccessor world, BlockPos pos, @NotNull BlockPos neighbourPos) {
+	public BlockState updateShape(BlockState state, Direction direction, BlockState neighbourState, LevelAccessor world, BlockPos pos, BlockPos neighbourPos) {
 		if (state.getValue(WATERLOGGED)) world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
 		return state;
 	}
@@ -66,7 +63,7 @@ public abstract class AbstractModernLampPanel extends AbstractModernLamp {
 	public abstract VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext);
 
 	@Override
-	public boolean isPathfindable(BlockState pState, BlockGetter pLevel, BlockPos pPos, PathComputationType pType) {
+	protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
 		return false;
 	}
 }

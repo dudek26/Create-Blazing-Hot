@@ -35,7 +35,7 @@ public enum Mods {
 	}
 
 	public ResourceLocation asResource(String path) {
-		return new ResourceLocation(id, path);
+		return ResourceLocation.fromNamespaceAndPath(id, path);
 	}
 
 	public LoadCondition<String> asLoadCondition() {

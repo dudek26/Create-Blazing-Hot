@@ -13,7 +13,7 @@ public class BlazeArrowRenderer extends ArrowRenderer<BlazeArrowEntity> {
 
 	@Override
 	public @NotNull ResourceLocation getTextureLocation(@NotNull BlazeArrowEntity entity) {
-		return new ResourceLocation(BlazingHot.ID, "textures/entity/projectiles/blaze_arrow.png");
+		return ResourceLocation.fromNamespaceAndPath(BlazingHot.ID, "textures/entity/projectiles/blaze_arrow.png");
 	}
 
 	public BlazeArrowRenderer(EntityRendererProvider.Context context) {

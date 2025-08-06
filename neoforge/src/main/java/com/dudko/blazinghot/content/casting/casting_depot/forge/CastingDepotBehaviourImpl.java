@@ -20,6 +20,7 @@ import net.createmod.catnip.math.VecHelper;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
@@ -27,9 +28,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.ItemHandlerHelper;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -37,7 +36,6 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 
 	ItemStackHandler processingOutputBuffer;
 	CastingDepotItemHandler itemHandler;
-	LazyOptional<CastingDepotItemHandler> lazyItemHandler;
 
 	public CastingDepotBehaviourImpl(final CastingDepotBlockEntity be, BehaviourType<CastingDepotBehaviour> type) {
 		super(be, type);
@@ -47,7 +45,6 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 			}
 		};
 		itemHandler = new CastingDepotItemHandler(this);
-		lazyItemHandler = LazyOptional.of(() -> itemHandler);
 	}
 
 	public static CastingDepotBehaviour of(CastingDepotBlockEntity be, BehaviourType<CastingDepotBehaviour> type) {
@@ -133,22 +130,15 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 	}
 
 	@Override
-	public void unload() {
-		if (this.lazyItemHandler != null) {
-			this.lazyItemHandler.invalidate();
-		}
+	public void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+		super.write(compound, registries, clientPacket);
+		compound.put("OutputBuffer", this.processingOutputBuffer.serializeNBT(registries));
 	}
 
 	@Override
-	public void write(CompoundTag compound, boolean clientPacket) {
-		super.write(compound, clientPacket);
-		compound.put("OutputBuffer", this.processingOutputBuffer.serializeNBT());
-	}
-
-	@Override
-	public void read(CompoundTag compound, boolean clientPacket) {
-		super.read(compound, clientPacket);
-		this.processingOutputBuffer.deserializeNBT(compound.getCompound("OutputBuffer"));
+	public void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+		super.read(compound, registries, clientPacket);
+		this.processingOutputBuffer.deserializeNBT(registries, compound.getCompound("OutputBuffer"));
 	}
 
 	@Override
@@ -211,7 +201,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 			else {
 				ItemStack returned = ItemStack.EMPTY;
 				if (remainingSpace < heldItem.getCount()) {
-					returned = ItemHandlerHelper.copyStackWithSize(heldItem, heldItem.getCount() - remainingSpace);
+					returned = heldItem.copyWithCount(heldItem.getCount() - remainingSpace);
 					if (!simulate) {
 						TransportedItemStack copy = new TransportedItemStack(heldItem.copy());
 						copy.stack.setCount(remainingSpace);
@@ -241,7 +231,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 			int maxCount = 1;
 			boolean stackTooLarge = maxCount < heldItem.getCount();
 			if (stackTooLarge) {
-				returned = ItemHandlerHelper.copyStackWithSize(heldItem, heldItem.getCount() - maxCount);
+				returned = heldItem.copyWithCount(heldItem.getCount() - maxCount);
 			}
 
 			if (!simulate) {
@@ -264,10 +254,6 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 			}
 			return returned;
 		}
-	}
-
-	public <T> LazyOptional<T> getItemCapability() {
-		return this.lazyItemHandler.cast();
 	}
 
 	@Override

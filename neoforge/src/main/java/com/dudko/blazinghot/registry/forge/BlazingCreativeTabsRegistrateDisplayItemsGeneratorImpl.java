@@ -6,7 +6,7 @@ import com.tterrag.registrate.util.entry.RegistryEntry;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.RegistryObject;
 
 public class BlazingCreativeTabsRegistrateDisplayItemsGeneratorImpl {
 	public static boolean isInCreativeTab(RegistryEntry<?> entry, ResourceKey<CreativeModeTab> tab) {

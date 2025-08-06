@@ -58,7 +58,7 @@ public class BlazingHot {
 	}
 
 	public static ResourceLocation asResource(String path) {
-		return new ResourceLocation(ID, path);
+		return ResourceLocation.fromNamespaceAndPath(ID, path);
 	}
 
 	public static CreateRegistrate registrate() {

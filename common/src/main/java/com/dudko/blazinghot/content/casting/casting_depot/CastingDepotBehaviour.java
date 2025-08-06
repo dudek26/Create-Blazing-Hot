@@ -19,6 +19,7 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.createmod.catnip.nbt.NBTHelper;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.item.ItemStack;
@@ -61,32 +62,31 @@ public abstract class CastingDepotBehaviour extends BlockEntityBehaviour {
 	}
 
 	@Override
-	public void write(CompoundTag compound, boolean clientPacket) {
-		super.write(compound, clientPacket);
+	public void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+		super.write(compound, registries, clientPacket);
 		if (!this.heldStack.isEmpty()) {
 			CompoundTag stack = new CompoundTag();
-			heldStack.save(stack);
+			heldStack.save(registries, stack);
 			compound.put("HeldStack", stack);
 		}
 
 		if (this.canMergeItems() && !this.incoming.isEmpty()) {
-			compound.put("Incoming", NBTHelper.writeCompoundList(this.incoming, TransportedItemStack::serializeNBT));
+			compound.put("Incoming",
+					NBTHelper.writeCompoundList(this.incoming, stack -> stack.serializeNBT(registries)));
 		}
-
 	}
 
 	@Override
-	public void read(CompoundTag compound, boolean clientPacket) {
-		super.read(compound, clientPacket);
+	public void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+		super.read(compound, registries, clientPacket);
 		this.heldStack = ItemStack.EMPTY;
 		if (compound.contains("HeldStack")) {
-			this.heldStack = ItemStack.of(compound.getCompound("HeldStack"));
+			this.heldStack = ItemStack.parse(registries, compound.getCompound("HeldStack")).orElse(ItemStack.EMPTY);
 		}
 		if (this.canMergeItems()) {
 			ListTag list = compound.getList("Incoming", 10);
-			this.incoming = NBTHelper.readCompoundList(list, TransportedItemStack::read);
+			incoming = NBTHelper.readCompoundList(list, c -> TransportedItemStack.read(c, registries));
 		}
-
 	}
 
 	public abstract void addSubBehaviours(List<BlockEntityBehaviour> behaviours);
