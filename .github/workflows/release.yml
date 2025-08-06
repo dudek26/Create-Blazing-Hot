@@ -43,7 +43,7 @@ jobs:
                     RELEASE_BUILD: true
                     MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
                     CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
-                    GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                     PLATFORM: ${{ inputs.platform }}
                     BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
                 run: ./gradlew blazinghotPublish
