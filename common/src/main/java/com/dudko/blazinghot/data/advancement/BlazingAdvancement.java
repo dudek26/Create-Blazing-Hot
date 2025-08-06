@@ -38,7 +38,7 @@ public class BlazingAdvancement {
 
 	static final ResourceLocation BACKGROUND = BlazingHot.asResource("textures/gui/advancements.png");
 	static final String LANG = "advancement." + BlazingHot.ID + ".";
-	static final String SECRET_SUFFIX = "\n\u00A77(Hidden Advancement)";
+	static final String SECRET_SUFFIX = "\n§7(Hidden Advancement)";
 
 	private final Advancement.Builder builder;
 	private SimpleBlazingTrigger builtinTrigger;

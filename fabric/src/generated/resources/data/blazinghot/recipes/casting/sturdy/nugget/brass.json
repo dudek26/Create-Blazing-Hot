@@ -1,0 +1,20 @@
+{
+  "type": "blazinghot:casting",
+  "coolingDuration": 36,
+  "ingredients": [
+    {
+      "item": "blazinghot:sturdy_nugget_mold"
+    },
+    {
+      "amount": 1000,
+      "fluidTag": "c:molten_brass"
+    }
+  ],
+  "keepItem": true,
+  "processingTime": 12,
+  "results": [
+    {
+      "item": "create:brass_nugget"
+    }
+  ]
+}

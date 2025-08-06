@@ -17,7 +17,7 @@ import net.minecraftforge.fluids.FluidType;
 
 
 @Mixin(Entity.class)
-public class EntityMixin {
+public abstract class EntityMixin {
 
 	@Shadow
 	protected boolean firstTick;

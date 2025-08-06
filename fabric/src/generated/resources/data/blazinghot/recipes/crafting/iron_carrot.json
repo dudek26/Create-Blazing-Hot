@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": {
+      "tag": "c:iron_nuggets"
+    },
+    "Y": {
+      "item": "minecraft:carrot"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "XYX",
+    "XXX"
+  ],
+  "result": {
+    "item": "blazinghot:iron_carrot"
+  },
+  "show_notification": true
+}

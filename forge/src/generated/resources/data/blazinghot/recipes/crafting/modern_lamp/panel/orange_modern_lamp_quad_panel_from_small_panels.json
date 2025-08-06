@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "blazinghot:orange_modern_lamp_small_panel"
+    },
+    {
+      "item": "blazinghot:orange_modern_lamp_small_panel"
+    },
+    {
+      "item": "blazinghot:orange_modern_lamp_small_panel"
+    },
+    {
+      "item": "blazinghot:orange_modern_lamp_small_panel"
+    }
+  ],
+  "result": {
+    "item": "blazinghot:orange_modern_lamp_quad_panel"
+  }
+}

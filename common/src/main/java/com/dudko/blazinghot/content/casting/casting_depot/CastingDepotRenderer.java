@@ -1,0 +1,64 @@
+package com.dudko.blazinghot.content.casting.casting_depot;
+
+import static com.dudko.blazinghot.util.DirectionUtil.HORIZONTAL_ANGLES;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
+
+import dev.architectury.injectables.annotations.ExpectPlatform;
+import dev.engine_room.flywheel.lib.transform.PoseTransformStack;
+import dev.engine_room.flywheel.lib.transform.TransformStack;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+
+public class CastingDepotRenderer extends SmartBlockEntityRenderer<CastingDepotBlockEntity> {
+
+	public CastingDepotRenderer(BlockEntityRendererProvider.Context context) {
+		super(context);
+	}
+
+	@Override
+	protected void renderSafe(CastingDepotBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
+		super.renderSafe(be, partialTicks, ms, buffer, light, overlay);
+		renderFluid(be, partialTicks, ms, buffer, light);
+
+		Direction direction = be.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
+
+		renderItem(be.getLevel(), ms, buffer, light, overlay, be.getHeldItem(), direction, -0.045);
+		renderItem(be.getLevel(), ms, buffer, light, overlay, be.getOutputItem(), direction, -0.04);
+
+	}
+
+	public static void renderItem(Level level, PoseStack ms, MultiBufferSource buffer, int light, int overlay, ItemStack itemStack, Direction direction, double yOffset) {
+		if (itemStack.isEmpty()) return;
+		ms.pushPose();
+		ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
+		PoseTransformStack msr = TransformStack.of(ms);
+
+		ms.translate(0.5, 12 / 16d + yOffset, 0.5);
+		ms.scale(14 / 16f, 1, 14 / 16f);
+		if (!(itemStack.getItem() instanceof BlockItem)) msr.rotateX((float) Math.toRadians(90));
+		msr.rotate(HORIZONTAL_ANGLES.get(direction).floatValue(), Direction.Axis.Z);
+
+		itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, light, overlay, ms, buffer, level, 0);
+		ms.popPose();
+	}
+
+	@ExpectPlatform
+	public static void renderFluid(CastingDepotBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light) {
+		throw new AssertionError();
+	}
+
+	@Override
+	public int getViewDistance() {
+		return 32;
+	}
+}

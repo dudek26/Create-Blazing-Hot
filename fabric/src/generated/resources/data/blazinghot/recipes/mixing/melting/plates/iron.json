@@ -1,0 +1,16 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "c:iron_plates"
+    }
+  ],
+  "processingTime": 600,
+  "results": [
+    {
+      "amount": 9000,
+      "fluid": "blazinghot:molten_iron"
+    }
+  ]
+}

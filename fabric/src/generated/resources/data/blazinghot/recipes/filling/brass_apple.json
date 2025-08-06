@@ -1,0 +1,17 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:apple"
+    },
+    {
+      "amount": 54000,
+      "fluidTag": "c:molten_brass"
+    }
+  ],
+  "results": [
+    {
+      "item": "blazinghot:brass_apple"
+    }
+  ]
+}

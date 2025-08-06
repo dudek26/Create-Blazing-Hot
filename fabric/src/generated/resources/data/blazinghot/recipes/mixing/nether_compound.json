@@ -1,0 +1,20 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:clay_ball"
+    },
+    {
+      "tag": "c:netherrack_dusts"
+    },
+    {
+      "tag": "c:soul_sand_dusts"
+    }
+  ],
+  "results": [
+    {
+      "count": 2,
+      "item": "blazinghot:nether_compound"
+    }
+  ]
+}

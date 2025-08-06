@@ -3,7 +3,7 @@ package com.dudko.blazinghot.config.fabric;
 import java.util.Map;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.config.BlazingConfigs;
+import com.dudko.blazinghot.registry.BlazingConfigs;
 
 import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
 import fuzs.forgeconfigapiport.api.config.v2.ModConfigEvents;

@@ -6,6 +6,8 @@
   "client": [
   ],
   "mixins": [
+    "AirCurrentMixin",
+    "AssemblyOperatorBlockItemMixin",
     "BeltDeployerCallbacksMixin",
     "DeployerBlockEntityMixin",
     "ItemMixin",
@@ -15,8 +17,11 @@
     "SmartBlockEntityMixin",
     "SpoutBlockEntityMixin",
     "SpoutBlockMixin",
-    "accessor.ProjectileAccessor"
+    "accessor.ProjectileAccessor",
+    "accessor.SequencedAssemblyRecipeBuilderAccessor",
+    "accessor.SpoutBlockEntityAccessor"
   ],
+  "plugin": "com.moulberry.mixinconstraints.ConstraintsMixinPlugin",
   "injectors": {
     "defaultRequire": 1
   }

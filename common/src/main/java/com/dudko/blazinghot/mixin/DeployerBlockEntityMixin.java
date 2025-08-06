@@ -20,7 +20,7 @@ public abstract class DeployerBlockEntityMixin {
 
 	@Inject(method = "addBehaviours", at = @At(value = "TAIL"))
 	private void blazinghot$addBehaviours(List<BlockEntityBehaviour> behaviours, CallbackInfo ci) {
-		blazinghot$registerAwardables(behaviours, BlazingAdvancements.BLAZE_CASING);
+		blazinghot$registerAwardables(behaviours, BlazingAdvancements.BLAZE_CASING, BlazingAdvancements.STURDY_CASING);
 	}
 
 	@Unique

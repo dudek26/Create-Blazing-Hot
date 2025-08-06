@@ -31,4 +31,12 @@ public class MultiRegistriesImpl {
 	public static RegisteredObjectsHelper<?> getRegisteredObjectsHelper() {
 		return new ForgeRegisteredObjectsHelper();
 	}
+
+	public static ResourceLocation getFluidId(Fluid fluid) {
+		return ForgeRegistries.FLUIDS.getKey(fluid);
+	}
+
+	public static ResourceLocation getItemId(Item item) {
+		return ForgeRegistries.ITEMS.getKey(item);
+	}
 }

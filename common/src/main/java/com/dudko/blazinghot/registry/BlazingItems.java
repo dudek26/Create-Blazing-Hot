@@ -7,6 +7,8 @@ import static com.dudko.blazinghot.content.item.BlazingFoodItem.ExtraProperties.
 import static com.dudko.blazinghot.content.item.BlazingFoodItem.ExtraProperties.REMOVE_SLOWNESS_1;
 import static com.dudko.blazinghot.content.item.BlazingFoodItem.ExtraProperties.REMOVE_SLOWNESS_2;
 import static com.dudko.blazinghot.content.item.BlazingFoodItem.ExtraProperties.REMOVE_SLOWNESS_ANY;
+import static com.dudko.blazinghot.multiloader.BlazingBuilderTransformers.existingParent;
+import static com.dudko.blazinghot.multiloader.BlazingBuilderTransformers.handheld;
 import static com.dudko.blazinghot.registry.BlazingItems.FoodItemBuilder.tickMinutes;
 import static com.dudko.blazinghot.registry.BlazingItems.FoodItemBuilder.tickSeconds;
 
@@ -14,14 +16,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.content.casting.Molds;
 import com.dudko.blazinghot.content.item.BlazeArrowItem;
 import com.dudko.blazinghot.content.item.BlazingFoodItem;
 import com.dudko.blazinghot.data.lang.BlazingItemDescription;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.util.ListUtil;
+import com.simibubi.create.AllTags.AllItemTags;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.simibubi.create.foundation.item.CombustibleItem;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.util.entry.ItemEntry;
@@ -40,6 +47,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.ItemLike;
 
 @SuppressWarnings({"SameParameterValue", "unused"})
+@ParametersAreNonnullByDefault
 public class BlazingItems {
 
 	private static final CreateRegistrate REGISTRATE = BlazingHot.registrate();
@@ -48,6 +56,8 @@ public class BlazingItems {
 
 	static {
 		BlazingCreativeTabs.useBaseTab();
+
+		Molds.register();
 	}
 
 	private static ItemEntry<Item> ingredient(String name) {
@@ -70,45 +80,58 @@ public class BlazingItems {
 	public static final ItemEntry<Item>
 			BLAZE_GOLD_INGOT =
 			taggedIngredient("blaze_gold_ingot",
-					CommonTags.Items.BLAZE_GOLD_INGOTS.forge,
-					CommonTags.Items.BLAZE_GOLD_INGOTS.fabric,
+					CommonTags.Items.BLAZE_GOLD_INGOTS.tag(),
+					CommonTags.Items.INGOTS.tag(),
 					ItemTags.BEACON_PAYMENT_ITEMS),
 			BLAZE_GOLD_NUGGET =
-					taggedIngredient("blaze_gold_nugget", CommonTags.Items.BLAZE_GOLD_NUGGETS.bothTags()),
+					taggedIngredient("blaze_gold_nugget",
+							CommonTags.Items.BLAZE_GOLD_NUGGETS.tag(),
+							CommonTags.Items.NUGGETS.tag()),
 			BLAZE_GOLD_SHEET =
 					taggedIngredient("blaze_gold_sheet",
-							CommonTags.Items.BLAZE_GOLD_PLATES.fabric,
-							CommonTags.Items.BLAZE_GOLD_PLATES.forge,
-							CommonTags.Items.PLATES.forge,
-							CommonTags.Items.PLATES.fabric),
+							CommonTags.Items.BLAZE_GOLD_PLATES.tag(),
+							CommonTags.Items.PLATES.tag()),
 			BLAZE_GOLD_ROD =
 					REGISTRATE
 							.item("blaze_gold_rod", Item::new)
-							.tag(CommonTags.Items.BLAZE_GOLD_RODS.fabric)
-							.model((c, p) -> p.handheld(c))
+							.tag(CommonTags.Items.BLAZE_GOLD_RODS.tag())
+							.tag(CommonTags.Items.RODS.tag())
+							.transform(handheld())
 							.register();
 
-	public static final ItemEntry<Item> BLAZE_WHISK = ingredient("blaze_whisk");
+	public static final ItemEntry<Item> BLAZE_WHISK = ingredient("blaze_whisk"),
+			STURDY_ALLOY =
+					taggedIngredient("sturdy_alloy", CommonTags.Items.INGOTS.tag());
+
+	public static final ItemEntry<Item> NETHER_DOUGH = ingredient("nether_dough");
+
+	public static final ItemEntry<CombustibleItem>
+			BLAZE_ROLL =
+			REGISTRATE
+					.item("blaze_roll", CombustibleItem::new)
+					.tag(AllItemTags.BLAZE_BURNER_FUEL_SPECIAL.tag)
+					.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "item.create.blaze_cake"))
+					.onRegister(i -> i.setBurnTime(4800))
+					.register();
 
 	public static final ItemEntry<SequencedAssemblyItem>
 			INCOMPLETE_BLAZE_MIXER =
 			REGISTRATE
 					.item("incomplete_blaze_mixer", SequencedAssemblyItem::new)
-					.model((c, p) -> p.withExistingParent(c.getName(),
-							BlazingHot.asResource("block/blaze_mixer/block")))
+					.transform(existingParent(BlazingHot.asResource("block/blaze_mixer/block")))
 					.register();
 
 	public static final ItemEntry<Item>
 			NETHERRACK_DUST =
-			taggedIngredient("netherrack_dust", CommonTags.Items.NETHERRACK_DUSTS.bothTags()),
+			taggedIngredient("netherrack_dust", CommonTags.Items.NETHERRACK_DUSTS.tag()),
 			STONE_DUST =
-					taggedIngredient("stone_dust", CommonTags.Items.STONE_DUSTS.bothTags()),
+					taggedIngredient("stone_dust", CommonTags.Items.STONE_DUSTS.tag()),
 			SOUL_DUST =
-					taggedIngredient("soul_dust", CommonTags.Items.SOUL_SAND_DUSTS.bothTags());
+					taggedIngredient("soul_dust", CommonTags.Items.SOUL_SAND_DUSTS.tag());
 
 	public static final ItemEntry<Item> NETHER_COMPOUND = ingredient("nether_compound"),
 			NETHER_ESSENCE =
-					ingredient("nether_essence");
+					REGISTRATE.item("nether_essence", Item::new).lang("Crimson Essence").register();
 
 	public static final ItemEntry<BlazeArrowItem>
 			BLAZE_ARROW =
@@ -341,7 +364,7 @@ public class BlazingItems {
 		protected FoodItemBuilder(String name, NonNullFunction<Item.Properties, T> factory) {
 			this.name = name;
 			this.factory = factory;
-			this.tags = List.of(CommonTags.Items.FOODS.bothTags()).toArray(new TagKey[1]);
+			this.tags = List.of(CommonTags.Items.FOODS.tag()).toArray(new TagKey[1]);
 		}
 
 		protected FoodItemBuilder<T> maxStackSize(int maxStackSize) {
@@ -460,7 +483,7 @@ public class BlazingItems {
 					REGISTRATE
 							.item(name, factory)
 							.properties(p -> finishProperties())
-							.tag(CommonTags.Items.FOODS.bothTags());
+							.tag(CommonTags.Items.FOODS.tag());
 			if (tags.length > 0) builder.tag(tags);
 
 			builder.onRegisterAfter(Registries.ITEM, c -> {

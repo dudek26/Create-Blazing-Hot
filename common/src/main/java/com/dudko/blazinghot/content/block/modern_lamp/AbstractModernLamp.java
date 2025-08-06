@@ -2,6 +2,8 @@ package com.dudko.blazinghot.content.block.modern_lamp;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import org.jetbrains.annotations.Nullable;
+
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.dudko.blazinghot.registry.BlazingBlockEntityTypes;
@@ -16,8 +18,11 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -45,6 +50,21 @@ public abstract class AbstractModernLamp extends Block implements IBE<ModernLamp
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
 		super.createBlockStateDefinition(pBuilder.add(LIT));
+	}
+
+	@Nullable
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		return this.defaultBlockState().setValue(LIT, context.getLevel().hasNeighborSignal(context.getClickedPos()));
+	}
+
+	@Override
+	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+		super.setPlacedBy(level, pos, state, placer, stack);
+		ModernLampBlockEntity be = getBlockEntity(level, pos);
+		if (be != null && level.hasNeighborSignal(pos)) {
+			be.powered = true;
+			be.setChanged();
+		}
 	}
 
 	@Override

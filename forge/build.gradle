@@ -10,6 +10,16 @@ architectury {
     forge()
 }
 
+def generatedResources = file("src/generated/resources")
+def existingResources = project.rootProject.file("common/src/main/resources")
+
+sourceSets.main {
+    resources {
+        srcDir("src/generated/resources")
+        exclude(".cache/**")
+    }
+}
+
 loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath
 
@@ -20,6 +30,16 @@ loom {
 
     runs.configureEach {
         programArg "-mixin.config=create.mixins.json"
+    }
+
+    //    Runs only on Forge
+    runs {
+        data {
+            data()
+            programArgs "--all", "--mod", "blazinghot"
+            programArgs "--output", generatedResources.absolutePath
+            programArgs "--existing", existingResources.absolutePath
+        }
     }
 }
 
@@ -69,6 +89,8 @@ configurations {
 repositories {
     // mavens for Forge-exclusives
     maven { url = "https://maven.theillusivec4.top/" } // Curios
+    maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // ForgeConfigAPIPort
+    maven { url = "https://maven.createmod.net" } // Create, Ponder, Flywheel
     maven { url = "https://maven.tterrag.com" } // Registrate
     maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // ForgeConfigAPIPort
     maven { url = "https://api.modrinth.com/maven" }

@@ -44,6 +44,8 @@ subprojects {
             it.parchment("org.parchmentmc.data:parchment-${minecraft_version}:${parchment_version}@zip")
         })
 
+        include(implementation("com.moulberry:mixinconstraints:${mixinconstraints_version}"))
+
         // see each subproject for dependencies.
     }
 }
@@ -71,7 +73,7 @@ allprojects {
         // for more information about repositories.
     }
 
-    tasks.withType(JavaCompile) {
+    tasks.withType(JavaCompile).configureEach {
         options.encoding = "UTF-8"
     }
 
@@ -86,6 +88,12 @@ allprojects {
 
 }
 
+tasks.register("datagen") {
+    group = 'build'
+    description = "Generate data on all platforms"
+    dependsOn(":fabric:runDatagen", ":forge:runData")
+}
+
 String platform = System.getenv("PLATFORM")
 tasks.register("blazinghotPublish") {
     if (platform == "both") {
@@ -98,7 +106,7 @@ tasks.register("blazinghotPublish") {
 publishMods {
     String uncutChangelogText = ChangelogText.getChangelogText(rootProject).toString()
     String cutChangelogText = uncutChangelogText.startsWith("Create:") ? uncutChangelogText.split(":", 3)[2] : uncutChangelogText.split(":", 2)[1]
-    String changelogText = release_type.equalsIgnoreCase("beta") || release_type.equalsIgnoreCase("alpha") ? "Pre-release version. Back up your worlds before updating.  " + cutChangelogText : cutChangelogText
+    String changelogText = cutChangelogText
 
     changelog = changelogText
     displayName = "Create: Blazing Hot v${mod_version} for mc${minecraft_version}"
@@ -108,7 +116,7 @@ publishMods {
         accessToken = System.getenv("GITHUB_TOKEN")
         repository = "dudek26/Create-Blazing-Hot"
         commitish = System.getenv("BRANCH_NAME")
-        tagName = "v${mod_version}"
+        tagName = "mc${minecraft_version}/v${mod_version}"
 
         // Allow the release to be initially created without any files.
         allowEmptyFiles = true

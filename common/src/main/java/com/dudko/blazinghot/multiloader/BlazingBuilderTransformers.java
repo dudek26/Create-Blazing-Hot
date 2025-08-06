@@ -6,11 +6,16 @@ import com.dudko.blazinghot.content.block.modern_lamp.ModernLampDoublePanelBlock
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampHalfPanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.SmallModernLampPanelBlock;
+import com.dudko.blazinghot.content.casting.Molds;
 import com.tterrag.registrate.builders.BlockBuilder;
+import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 public class BlazingBuilderTransformers {
 
@@ -41,6 +46,31 @@ public class BlazingBuilderTransformers {
 
 	@ExpectPlatform
 	public static <B extends SmallModernLampPanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampSmallPanel(DyeColor color, String name) {
+		throw new AssertionError();
+	}
+
+	@ExpectPlatform
+	public static <B extends Block, P> NonNullUnaryOperator<BlockBuilder<B, P>> simpleBlockState() {
+		throw new AssertionError();
+	}
+
+	@ExpectPlatform
+	public static <B extends Block, P> NonNullUnaryOperator<BlockBuilder<B, P>> castingDepotModel() {
+		throw new AssertionError();
+	}
+
+	@ExpectPlatform
+	public static <I extends Item, P> NonNullUnaryOperator<ItemBuilder<I, P>> handheld() {
+		throw new AssertionError();
+	}
+
+	@ExpectPlatform
+	public static <I extends Item, P> NonNullUnaryOperator<ItemBuilder<I, P>> existingParent(ResourceLocation parent) {
+		throw new AssertionError();
+	}
+
+	@ExpectPlatform
+	public static <T extends Item, P> NonNullUnaryOperator<ItemBuilder<T, P>> mold(String name, Molds.MoldType type) {
 		throw new AssertionError();
 	}
 

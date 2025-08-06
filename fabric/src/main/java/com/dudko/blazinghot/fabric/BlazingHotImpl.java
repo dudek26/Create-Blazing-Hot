@@ -2,15 +2,16 @@ package com.dudko.blazinghot.fabric;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.config.fabric.BlazingConfigsImpl;
+import com.dudko.blazinghot.content.fluid.fabric.FluidReactionsImpl;
+import com.dudko.blazinghot.content.kinetics.mechanicalArm.BlazingArmInteractionPointTypes;
+import com.dudko.blazinghot.data.BlazingTagGen;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.advancement.BlazingTriggers;
-import com.dudko.blazinghot.data.fabric.BlazingTagGen;
 import com.dudko.blazinghot.data.lang.BlazingLangGen;
-import com.dudko.blazinghot.data.recipe.fabric.BlazingProcessingRecipeGen;
-import com.dudko.blazinghot.data.recipe.fabric.CraftingRecipeGen;
-import com.dudko.blazinghot.data.recipe.fabric.SequencedAssemblyRecipeGen;
+import com.dudko.blazinghot.data.recipe.BlazingProcessingRecipeGen;
+import com.dudko.blazinghot.data.recipe.CraftingRecipeGen;
+import com.dudko.blazinghot.data.recipe.SequencedAssemblyRecipeGen;
 import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
-import com.dudko.blazinghot.registry.fabric.BlazingRecipeTypesImpl;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.providers.ProviderType;
 
@@ -31,13 +32,16 @@ public class BlazingHotImpl implements ModInitializer {
 	}
 
 	public static void finalizeRegistrate() {
-		BlazingRecipeTypesImpl.platformRegister();
 		BlazingHot.registrate().register();
 
 		BlazingFluidsImpl.registerFluidInteractions();
 
 		BlazingAdvancements.register();
 		BlazingTriggers.register();
+
+		BlazingArmInteractionPointTypes.init();
+
+		FluidReactionsImpl.registerEvents();
 	}
 
 	public static void gatherData(DataGenerator.PackGenerator pack) {

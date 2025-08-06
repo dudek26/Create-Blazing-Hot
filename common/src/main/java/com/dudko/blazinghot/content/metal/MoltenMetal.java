@@ -2,7 +2,6 @@ package com.dudko.blazinghot.content.metal;
 
 import static com.dudko.blazinghot.compat.Mods.CREATE_ADDITIONS;
 import static com.dudko.blazinghot.compat.Mods.VANILLA;
-import static com.dudko.blazinghot.registry.CommonTags.Namespace.INTERNAL;
 import static com.dudko.blazinghot.registry.CommonTags.itemTagOf;
 import static com.dudko.blazinghot.util.LangUtil.titleCaseConversion;
 
@@ -15,17 +14,21 @@ import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nullable;
+
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.compat.Mods;
+import com.dudko.blazinghot.content.casting.Molds;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
+import com.dudko.blazinghot.data.conditions.DefaultLoadConditions;
+import com.dudko.blazinghot.data.conditions.LoadCondition;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.dudko.blazinghot.util.ListUtil;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 
 import net.createmod.catnip.data.Pair;
-import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
-import net.fabricmc.fabric.api.resource.conditions.v1.DefaultResourceConditions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -35,23 +38,28 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
+/**
+ * @see BlazingMetal
+ */
+@Deprecated
 @SuppressWarnings("unused")
 public class MoltenMetal {
 
 	public final String name;
 	public final Mods mod;
-	public final Forms[] supportedForms;
-	public final Forms[] optionalForms;
+	public final Map<Forms, Mods> supportedForms;
+	public final Map<Forms, Mods> optionalForms;
 	public final Map<Forms, Mods> compatForms;
 	public final boolean ignoreTagGen;
 	public final boolean mechanicalMixerMeltable;
 
 	public final Map<Fluid, NonNullSupplier<Block>> fluidInteractions;
 
-	public final Forms[] customForms;
-	public final Pair<ResourceLocation, Long> compactingOverride;
+	public final Map<Forms, Mods> customForms;
+	public final Pair<ResourceLocation, MultiAmount> compactingOverride;
+	public final HashMap<Forms, Pair<ResourceLocation, MultiAmount>> castingOverrides;
 
-	MoltenMetal(String name, Mods mod, Forms[] supportedForms, Forms[] optionalForms, Map<Forms, Mods> compatForms, boolean ignoreTagGen, boolean mechanicalMixerMeltable, Map<Fluid, NonNullSupplier<Block>> fluidInteractions, Forms[] customForms, Pair<ResourceLocation, Long> compactingOverride) {
+	MoltenMetal(String name, Mods mod, Map<Forms, Mods> supportedForms, Map<Forms, Mods> optionalForms, Map<Forms, Mods> compatForms, boolean ignoreTagGen, boolean mechanicalMixerMeltable, Map<Fluid, NonNullSupplier<Block>> fluidInteractions, Map<Forms, Mods> customForms, Pair<ResourceLocation, MultiAmount> compactingOverride, HashMap<Forms, Pair<ResourceLocation, MultiAmount>> castingOverrides) {
 		this.name = name;
 		this.mod = mod;
 		this.optionalForms = optionalForms;
@@ -62,6 +70,7 @@ public class MoltenMetal {
 		this.customForms = customForms;
 		this.compactingOverride = compactingOverride;
 		this.ignoreTagGen = ignoreTagGen;
+		this.castingOverrides = castingOverrides;
 	}
 
 	/**
@@ -76,14 +85,35 @@ public class MoltenMetal {
 		return new Builder(name);
 	}
 
+	/**
+	 * @deprecated use {@link MoltenMetal#getLocation(Forms)}
+	 */
+	@Deprecated
 	public ResourceLocation ingotLocation() {
 		if (compactingOverride != null) return compactingOverride.getFirst();
 		return Forms.INGOT.resourceLocation(this);
 	}
 
-	public Pair<ItemLike, Long> compactingResult() {
+	public ResourceLocation getLocation(Forms form) {
+		return getLocation(form, mod);
+	}
+
+	public ResourceLocation getLocation(Forms form, Mods mod) {
+		Pair<ResourceLocation, MultiAmount> override = castingOverrides.get(form);
+		if (override != null) return override.getFirst();
+		return form.resourceLocation(this, mod);
+	}
+
+	public MultiAmount getAmount(Forms form) {
+		Pair<ResourceLocation, MultiAmount> override = castingOverrides.get(form);
+		if (override != null) return override.getSecond();
+		return form.amount;
+	}
+
+	@Deprecated
+	public Pair<ItemLike, MultiAmount> compactingResult() {
 		return Pair.of(MultiRegistries.getItemFromRegistry(ingotLocation()).get(),
-				(compactingOverride != null ? compactingOverride.getSecond() : Forms.INGOT.amount));
+				(compactingOverride != null ? compactingOverride.getSecond() : MultiAmount.INGOT));
 	}
 
 	public ResourceLocation fluidLocation() {
@@ -110,7 +140,7 @@ public class MoltenMetal {
 	}
 
 	public TagKey<Fluid> fluidTag() {
-		return CommonTags.fluidTagOf(moltenName(), INTERNAL);
+		return CommonTags.fluidTagOf(moltenName(), CommonTags.Namespace.platform());
 	}
 
 	public String moltenName() {
@@ -119,18 +149,18 @@ public class MoltenMetal {
 
 	public List<Forms> nonCustomForms() {
 		List<Forms> all = new ArrayList<>();
-		ListUtil.addIfAbsent(all, supportedForms);
+		ListUtil.addIfAbsent(all, supportedForms());
 		ListUtil.addIfAbsent(all, compatForms.keySet());
-		ListUtil.addIfAbsent(all, optionalForms);
+		ListUtil.addIfAbsent(all, optionalForms.keySet());
 		return all;
 	}
 
 	public List<Forms> supportedForms() {
-		return new ArrayList<>(List.of(supportedForms));
+		return new ArrayList<>(supportedForms.keySet());
 	}
 
 	public List<Forms> customForms() {
-		return new ArrayList<>(List.of(customForms));
+		return new ArrayList<>(customForms.keySet());
 	}
 
 	public Map<Fluid, NonNullSupplier<Block>> getFluidInteractions() {
@@ -139,15 +169,15 @@ public class MoltenMetal {
 		return interactions;
 	}
 
-	public List<ConditionJsonProvider> getLoadConditions() {
-		List<ConditionJsonProvider> conditions = new ArrayList<>();
+	public List<LoadCondition<?>> getLoadConditions() {
+		List<LoadCondition<?>> conditions = new ArrayList<>();
 		if (!mod.alwaysIncluded) conditions.add(mod.asLoadCondition());
 		return conditions;
 	}
 
-	public List<ConditionJsonProvider> getLoadConditions(Forms form, Mods formMod) {
-		List<ConditionJsonProvider> conditions = getLoadConditions();
-		conditions.add(DefaultResourceConditions.anyModLoaded(formMod.id));
+	public List<LoadCondition<?>> getLoadConditions(Forms form, Mods formMod) {
+		List<LoadCondition<?>> conditions = getLoadConditions();
+		conditions.add(DefaultLoadConditions.anyModLoaded(formMod.id));
 		return conditions;
 	}
 
@@ -156,18 +186,20 @@ public class MoltenMetal {
 
 		private final String name;
 		private Mods mod;
-		private final List<Forms> supportedForms = new ArrayList<>();
-		private final List<Forms> optionalForms = new ArrayList<>();
+		private final Map<Forms, Mods> supportedForms = new HashMap<>();
+		private final Map<Forms, Mods> optionalForms = new HashMap<>();
 		private final HashMap<Forms, Mods> compatForms = new HashMap<>();
 		private boolean ignoreTagDatagen;
-		private final List<Forms> customForms = new ArrayList<>();
+		private final Map<Forms, Mods> customForms = new HashMap<>();
 		private boolean mechanicalMixerMeltable = true;
 		private final HashMap<Fluid, NonNullSupplier<Block>> fluidInteractions = new HashMap<>();
 
-		private Pair<ResourceLocation, Long> compactingOverride;
+		private Pair<ResourceLocation, MultiAmount> castingOverride;
+		private final HashMap<Forms, Pair<ResourceLocation, MultiAmount>> castingOverrides = new HashMap<>();
 
 		protected Builder(String name) {
 			this.name = name;
+			this.mod = VANILLA;
 		}
 
 		/**
@@ -192,16 +224,28 @@ public class MoltenMetal {
 		/**
 		 * For forms added by the main mod of the metal
 		 */
-		public Builder supportedForms(Forms... supportedForms) {
-			this.supportedForms.addAll(List.of(supportedForms));
+		public Builder coreForms(Forms... supportedForms) {
+			for (Forms form : supportedForms) {
+				this.supportedForms.put(form, mod);
+			}
+			return this;
+		}
+
+		/**
+		 * For forms added by Create
+		 */
+		public Builder createForms(Forms... createForms) {
+			for (Forms form : createForms) {
+				this.supportedForms.put(form, Mods.CREATE);
+			}
 			return this;
 		}
 
 		/**
 		 * For tag-based forms that are not present in Vanilla or create.
 		 */
-		public Builder optionalForms(Forms... optionalForms) {
-			this.optionalForms.addAll(List.of(optionalForms));
+		public Builder optionalForm(Forms form, Mods mod) {
+			this.optionalForms.put(form, mod);
 			return this;
 		}
 
@@ -213,8 +257,14 @@ public class MoltenMetal {
 			return this;
 		}
 
-		public Builder customForm(ResourceLocation item, long amount, int processingTime, long fuelCost, boolean mechanicalMixerMeltable) {
-			this.customForms.add(Forms.custom(item, amount, processingTime, fuelCost, mechanicalMixerMeltable));
+		public Builder customForm(String name, ResourceLocation item, MultiAmount amount, int processingTime, long fuelCost, boolean mechanicalMixerMeltable, @Nullable Molds.Mold mold, Mods mod) {
+			this.customForms.put(Forms.custom(name,
+					item,
+					amount,
+					processingTime,
+					fuelCost,
+					mechanicalMixerMeltable,
+					mold), mod);
 			return this;
 		}
 
@@ -224,31 +274,45 @@ public class MoltenMetal {
 		 * For Vanilla and Create metals except Zinc: Ingot, Nugget, Plate + Create Crafts & Additions Rod compat <br>
 		 */
 		public Builder createForms() {
-			return basicAndPlateForms().compatForm(Forms.ROD, CREATE_ADDITIONS);
+			return basicAndCreatePlateForms().compatForm(Forms.ROD, CREATE_ADDITIONS);
 		}
 
 		/**
 		 * For metals that also have a plate form
 		 */
-		public Builder basicAndPlateForms() {
-			return basicForms().supportedForms(Forms.PLATE);
+		public Builder basicAndCreatePlateForms() {
+			return basicForms().createForms(Forms.PLATE);
 		}
 
 		/**
 		 * For metals that only have ingot and nugget forms
 		 */
 		public Builder basicForms() {
-			return supportedForms(Forms.INGOT, Forms.NUGGET);
+			return coreForms(Forms.INGOT, Forms.NUGGET);
 		}
 
 		/**
 		 * If compacting the molten metal should return something else than an item that starts with the metal's name and ends with <code>_ingot</code>
 		 *
-		 * @param item     Resource location of the item to return
-		 * @param droplets Amount of droplets required to compact one item
+		 * @param item   Resource location of the item to return
+		 * @param amount Amount of fluid required to compact one item
+		 * @deprecated use {@link Builder#castingOverride(Forms, ResourceLocation, MultiAmount)}
 		 */
-		public Builder compactingOverride(ResourceLocation item, long droplets) {
-			this.compactingOverride = Pair.of(item, droplets);
+		@Deprecated
+		public Builder compactingOverride(ResourceLocation item, MultiAmount amount) {
+			this.castingOverride = Pair.of(item, amount);
+			return this;
+		}
+
+		/**
+		 * If casting the molten metal should return something else than an item that starts with the metal's name and ends with form name
+		 *
+		 * @param form   Form to override the name of
+		 * @param item   Resource location of the item to return
+		 * @param amount Amount of fluid required to compact one item
+		 */
+		public Builder castingOverride(Forms form, ResourceLocation item, MultiAmount amount) {
+			this.castingOverrides.put(form, Pair.of(item, amount));
 			return this;
 		}
 
@@ -270,15 +334,16 @@ public class MoltenMetal {
 
 		public MoltenMetal build() {
 			return new MoltenMetal(name,
-					mod == null ? VANILLA : mod,
-					supportedForms.toArray(Forms[]::new),
-					optionalForms.toArray(Forms[]::new),
+					mod,
+					supportedForms,
+					optionalForms,
 					compatForms,
 					ignoreTagDatagen,
 					mechanicalMixerMeltable,
 					fluidInteractions,
-					customForms.toArray(Forms[]::new),
-					compactingOverride);
+					customForms,
+					castingOverride,
+					castingOverrides);
 		}
 
 		/**
@@ -298,7 +363,7 @@ public class MoltenMetal {
 						titleCaseConversion(metal.fluidLocation().getPath().replace('_', ' ')));
 
 				for (Forms form : metal.nonCustomForms()) {
-					TagKey<Item> tag = itemTagOf(namespace.tagPath(form.tagFolder, metal.name), namespace);
+					TagKey<Item> tag = itemTagOf(form.tagFolder, metal.name, namespace);
 					ResourceLocation loc = tag.location();
 					consumer.accept("tag.item." + namespace.namespace + "." + loc.getPath().replace('/', '.'),
 							titleCaseConversion((metal.name + ' ' + form.tagFolder).replace('_', ' ')));

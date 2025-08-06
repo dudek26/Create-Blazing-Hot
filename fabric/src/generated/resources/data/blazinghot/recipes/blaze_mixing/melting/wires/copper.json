@@ -1,0 +1,28 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "values": [
+        "c:wires/copper"
+      ]
+    }
+  ],
+  "type": "blazinghot:blaze_mixing",
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "c:wires/copper"
+    }
+  ],
+  "mixerFuel": {
+    "amount": 2025,
+    "fluidTag": "blazinghot:blaze_mixer_fuel"
+  },
+  "processingTime": 125,
+  "results": [
+    {
+      "amount": 4500,
+      "fluid": "blazinghot:molten_copper"
+    }
+  ]
+}

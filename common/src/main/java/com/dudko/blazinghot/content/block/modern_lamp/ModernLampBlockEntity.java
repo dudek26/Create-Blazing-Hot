@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.data.lang.BlazingLang;
+import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 
 import net.createmod.catnip.lang.LangBuilder;

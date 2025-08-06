@@ -1,6 +1,5 @@
 package com.dudko.blazinghot.data.advancement;
 
-import static com.dudko.blazinghot.content.metal.MoltenMetal.allBuckets;
 import static com.dudko.blazinghot.data.advancement.BlazingAdvancement.TaskType.CHALLENGE;
 import static com.dudko.blazinghot.data.advancement.BlazingAdvancement.TaskType.EXPERT;
 import static com.dudko.blazinghot.data.advancement.BlazingAdvancement.TaskType.NOISY;
@@ -18,9 +17,10 @@ import java.util.function.UnaryOperator;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import com.dudko.blazinghot.content.metal.MoltenMetals;
+import com.dudko.blazinghot.content.casting.Molds;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
+import com.dudko.blazinghot.registry.BlazingMetals;
 import com.google.common.collect.Sets;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -61,6 +61,55 @@ public class BlazingAdvancements implements DataProvider {
 							.after(ROOT)
 							.whenIconCollected()),
 
+	// Blaze Roll
+
+	BLAZE_ROLL =
+			create("blaze_roll",
+					b -> b
+							.icon(BlazingItems.BLAZE_ROLL)
+							.title("Forbidden Sweets")
+							.description("\"Bake\" a Blaze Roll")
+							.after(NETHER_COMPOUND)
+							.whenIconCollected()),
+
+	// Sturdy Alloy - Casting branch
+
+	STURDY_ALLOY =
+			create("sturdy_alloy",
+					b -> b
+							.icon(BlazingItems.STURDY_ALLOY)
+							.title("Tough Alloys")
+							.description("Obtain a Sturdy Alloy")
+							.after(NETHER_COMPOUND)
+							.whenIconCollected()),
+
+	STURDY_CASING =
+			create("sturdy_casing",
+					b -> b
+							.icon(BlazingBlocks.STURDY_CASING)
+							.title("The Sturdy Age")
+							.description("Use your Sturdy Alloys to make some Andesite Casings sturdy")
+							.special(NOISY)
+							.after(STURDY_ALLOY)),
+
+	CASTING =
+			create("casting",
+					b -> b
+							.icon(BlazingBlocks.CASTING_DEPOT)
+							.title("Casting Apprentice")
+							.description("Cast an item using a mold in a Casting Depot")
+							.after(STURDY_CASING)),
+
+	STURDY_MOLD =
+			create("sturdy_mold",
+					b -> b
+							.icon(Molds.INGOT.get(Molds.MoldType.STURDY))
+							.title("Experienced Founder")
+							.description("Create a sturdy mold")
+							.after(CASTING)),
+
+	// Nether Essence - Molten Metal branch
+
 	NETHER_ESSENCE =
 			create("nether_essence",
 					b -> b
@@ -73,7 +122,7 @@ public class BlazingAdvancements implements DataProvider {
 	MOLTEN_GOLD =
 			create("molten_gold",
 					b -> b
-							.icon(MoltenMetals.GOLD.bucket().get())
+							.icon(BlazingMetals.GOLD.getBucket().get())
 							.title("Flowing Riches")
 							.description("Melt Gold in Mixer")
 							.special(NOISY)
@@ -84,13 +133,13 @@ public class BlazingAdvancements implements DataProvider {
 	ALL_MOLTEN_METALS =
 			create("all_molten_metals",
 					b -> b
-							.icon(MoltenMetals.NETHERITE.bucket().get())
+							.icon(BlazingMetals.NETHERITE.getBucket().get())
 							.title("Tinkers' Construct")
 							.description("Obtain a bucket of every non-compat molten metal.")
 							.after(MOLTEN_GOLD)
 							.special(CHALLENGE)
 							.rewards(r -> r.addExperience(100).build())
-							.whenItemsCollected(allBuckets(false))),
+							.whenItemsCollected(BlazingMetals.allBuckets(false))),
 
 	// Metal Food
 
@@ -137,7 +186,7 @@ public class BlazingAdvancements implements DataProvider {
 	MOLTEN_BLAZE_GOLD =
 			create("molten_blaze_gold_00",
 					b -> b
-							.icon(MoltenMetals.BLAZE_GOLD.bucket().get())
+							.icon(BlazingMetals.BLAZE_GOLD.getBucket().get())
 							.title("Fake Alloys")
 							.description("Mix Molten Gold and Nether Essence together to obtain Molten Blaze Gold")
 							.after(MOLTEN_GOLD)),

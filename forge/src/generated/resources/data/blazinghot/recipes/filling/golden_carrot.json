@@ -1,0 +1,17 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "amount": 96,
+      "fluidTag": "forge:molten_gold"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:golden_carrot"
+    }
+  ]
+}

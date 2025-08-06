@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.dudko.blazinghot.config.BlazingConfigs;
+import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.dudko.blazinghot.util.TooltipUtil;
 
 import net.minecraft.network.chat.Component;

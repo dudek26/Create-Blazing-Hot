@@ -2,10 +2,15 @@ package com.dudko.blazinghot.content.block.shape;
 
 import com.simibubi.create.AllShapes;
 
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class Shapes {
+
+	public static final VoxelShape
+			CASTING_DEPOT_SHAPE =
+			shape(AllShapes.CASING_12PX.get(Direction.UP)).erase(1, 11, 1, 15, 12, 15).build();
 
 	public static AllShapes.Builder shape(VoxelShape shape) {
 		return new AllShapes.Builder(shape);

@@ -1,0 +1,19 @@
+{
+  "type": "blazinghot:casting",
+  "coolingDuration": 300,
+  "ingredients": [
+    {
+      "tag": "forge:plates"
+    },
+    {
+      "amount": 288,
+      "fluidTag": "forge:molten_sturdy_alloy"
+    }
+  ],
+  "processingTime": 100,
+  "results": [
+    {
+      "item": "blazinghot:sturdy_sheet_mold"
+    }
+  ]
+}

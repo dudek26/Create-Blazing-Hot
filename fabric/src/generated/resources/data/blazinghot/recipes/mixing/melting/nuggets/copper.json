@@ -1,0 +1,24 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "values": [
+        "c:copper_nuggets"
+      ]
+    }
+  ],
+  "type": "create:mixing",
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "c:copper_nuggets"
+    }
+  ],
+  "processingTime": 90,
+  "results": [
+    {
+      "amount": 1000,
+      "fluid": "blazinghot:molten_copper"
+    }
+  ]
+}

@@ -5,17 +5,12 @@ import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecip
 import java.util.List;
 import java.util.Optional;
 
-import net.createmod.catnip.animation.AnimationTickHolder;
-import net.createmod.catnip.data.Couple;
-
-import net.createmod.catnip.math.VecHelper;
-
 import org.jetbrains.annotations.NotNull;
 
-import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
-import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.forge.BlazingRecipeTypesImpl;
 import com.simibubi.create.AllRecipeTypes;
@@ -33,6 +28,9 @@ import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTank
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.item.SmartInventory;
 
+import net.createmod.catnip.animation.AnimationTickHolder;
+import net.createmod.catnip.data.Couple;
+import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ItemParticleOption;
@@ -72,7 +70,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 
 	@Override
 	public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-		tank = SmartFluidTankBehaviour.single(this, (int) Constants.BUCKET.platformed());
+		tank = SmartFluidTankBehaviour.single(this, (int) MultiAmount.BUCKET.get());
 		tank.whenFluidUpdates(() -> {
 			if (getBasin().isPresent()) getBasin().get().notifyChangeOfContents();
 		});

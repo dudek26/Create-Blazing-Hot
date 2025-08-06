@@ -74,14 +74,13 @@ public class ModernLampHalfPanelBlock extends AbstractModernLampPanel implements
 	@Override
 	public BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
 		BlockState state = super.getStateForPlacement(context);
-		assert state != null;
 		Direction facing = state.getValue(FACING);
 		Vec2
 				clickedPos =
 				AbstractPoint.flatten3D(context.getClickLocation().subtract(context.getClickedPos().getCenter()),
 						facing.getAxis());
 		DirectionOffset offset = AbstractPoint.getNearest(DirectionOffsetPoint.fourPoints(), clickedPos).offset;
-		return state.setValue(HORIZONTAL, offset.horizontal);
+		return state.setValue(HORIZONTAL, !offset.horizontal);
 	}
 
 	@Override

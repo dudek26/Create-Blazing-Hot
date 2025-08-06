@@ -63,17 +63,13 @@ public class DyeUtil {
 		PURPLE(DyeColor.PURPLE, Items.PURPLE_DYE);
 
 		public final DyeColor color;
-		public final TagKey<Item> internalTag;
-		public final TagKey<Item> forgeTag;
-		public final TagKey<Item> commonTag;
+		public final TagKey<Item> tag;
 		public final Item item;
 		public final Supplier<Block> stainedGlass;
 
 		Dyes(DyeColor color, Item item) {
 			this.color = color;
-			this.internalTag = CommonTags.itemTagOf(this + "_dyes", CommonTags.Namespace.INTERNAL);
-			this.forgeTag = CommonTags.itemTagOf("dyes/" + this, CommonTags.Namespace.FORGE);
-			this.commonTag = CommonTags.itemTagOf(this + "_dyes", CommonTags.Namespace.COMMON);
+			this.tag = CommonTags.itemTagOf("dyes", this.toString(), CommonTags.Namespace.platform());
 			this.item = item;
 			this.stainedGlass = MultiRegistries.getBlockFromRegistry(Mods.VANILLA.asResource(this + "_stained_glass"));
 		}
@@ -85,7 +81,7 @@ public class DyeUtil {
 	}
 
 	public static TagKey<Item> getDyeTag(DyeColor color) {
-		return get(color).internalTag;
+		return get(color).tag;
 	}
 
 	public static Item getDyeItem(DyeColor color) {
@@ -102,7 +98,7 @@ public class DyeUtil {
 
 	public static void provideLangEntries(BiConsumer<String, String> consumer) {
 		for (Dyes dye : Dyes.values()) {
-			ResourceLocation loc = dye.internalTag.location();
+			ResourceLocation loc = dye.tag.location();
 			consumer.accept("tag.item." + BlazingHot.ID + "." + loc.getPath().replace('/', '.'),
 					LangUtil.titleCaseConversion(dye.toString().replace('_', ' ')) + " Dyes");
 		}

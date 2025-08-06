@@ -9,16 +9,16 @@ import java.util.Map;
 import java.util.function.BiFunction;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
-import com.dudko.blazinghot.content.metal.MoltenMetal;
-import com.dudko.blazinghot.content.metal.MoltenMetals;
+import com.dudko.blazinghot.content.metal.BlazingMetal;
 import com.dudko.blazinghot.data.lang.BlazingLang;
-import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.BlazingBlocks;
+import com.dudko.blazinghot.registry.BlazingConfigs;
+import com.dudko.blazinghot.registry.BlazingMetals;
+import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
-import com.dudko.blazinghot.registry.fabric.BlazingRecipeTypesImpl;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.compat.emi.CreateEmiPlugin;
@@ -84,12 +84,12 @@ public class BlazingEmiPlugin implements EmiPlugin {
 
 		RecipeManager manager = registry.getRecipeManager();
 
-		addAll(registry, BlazingRecipeTypesImpl.BLAZE_MIXING, BLAZE_MIXING, BlazeMixingEmiRecipe::new);
+		addAll(registry, BlazingRecipeTypes.BLAZE_MIXING, BLAZE_MIXING, BlazeMixingEmiRecipe::new);
 
 		List<MixingRecipe> mixingRecipes = manager.getAllRecipesFor(AllRecipeTypes.MIXING.getType());
 		List<BlazeMixingRecipe>
 				blazeMixingRecipes =
-				manager.getAllRecipesFor(BlazingRecipeTypesImpl.BLAZE_MIXING.getType());
+				manager.getAllRecipesFor(BlazingRecipeTypes.BLAZE_MIXING.getType());
 		outer:
 		for (MixingRecipe recipe : mixingRecipes) {
 			for (BlazeMixingRecipe blazeMix : blazeMixingRecipes) {
@@ -117,7 +117,7 @@ public class BlazingEmiPlugin implements EmiPlugin {
 				registry.addRecipe(new BlazeMixingEmiRecipe(BLAZE_AUTOMATIC_BREWING, recipe));
 		}
 
-		for (MoltenMetal metal : MoltenMetals.ALL) {
+		for (BlazingMetal metal : BlazingMetals.ALL) {
 			addMoltenMetalCollisions(registry, metal);
 		}
 
@@ -152,17 +152,17 @@ public class BlazingEmiPlugin implements EmiPlugin {
 	}
 
 	@SuppressWarnings("unchecked")
-	private <T extends Recipe<?>> void addAll(EmiRegistry registry, BlazingRecipeTypesImpl type, EmiRecipeCategory category, BiFunction<EmiRecipeCategory, T, EmiRecipe> constructor) {
+	private <T extends Recipe<?>> void addAll(EmiRegistry registry, BlazingRecipeTypes type, EmiRecipeCategory category, BiFunction<EmiRecipeCategory, T, EmiRecipe> constructor) {
 		for (T recipe : (List<T>) registry.getRecipeManager().getAllRecipesFor(type.getType())) {
 			registry.addRecipe(constructor.apply(category, recipe));
 		}
 	}
 
-	private void addMoltenMetalCollisions(EmiRegistry registry, MoltenMetal metal) {
+	private void addMoltenMetalCollisions(EmiRegistry registry, BlazingMetal metal) {
 
-		for (Map.Entry<Fluid, NonNullSupplier<Block>> entry : metal.getFluidInteractions().entrySet()) {
+		for (Map.Entry<Fluid, NonNullSupplier<Block>> entry : metal.fluidInteractions.entrySet()) {
 			addFluidCollision(registry,
-					metal.moltenName() + "_and_" + BuiltInRegistries.FLUID.getKey(entry.getKey()).getPath(),
+					metal.getMoltenName() + "_and_" + BuiltInRegistries.FLUID.getKey(entry.getKey()).getPath(),
 					BlazingFluidsImpl.MOLTEN_METALS.getFluid(metal),
 					entry.getKey(),
 					entry.getValue());
@@ -171,10 +171,10 @@ public class BlazingEmiPlugin implements EmiPlugin {
 	}
 
 	private void addFluidCollision(EmiRegistry registry, String name, Fluid fluid1, Fluid fluid2, NonNullSupplier<Block> result) {
-		EmiStack fluidStack1 = EmiStack.of(fluid1, Constants.BUCKET.platformed());
+		EmiStack fluidStack1 = EmiStack.of(fluid1, MultiAmount.BUCKET.get());
 		fluidStack1 = fluidStack1.setRemainder(fluidStack1);
 
-		EmiStack fluidStack2 = EmiStack.of(fluid2, Constants.BUCKET.platformed());
+		EmiStack fluidStack2 = EmiStack.of(fluid2, MultiAmount.BUCKET.get());
 		fluidStack2 = fluidStack2.setRemainder(fluidStack2);
 
 		Block block = result.get();

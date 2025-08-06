@@ -8,13 +8,18 @@ import static com.dudko.blazinghot.compat.Mods.VANILLA;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.dudko.blazinghot.multiloader.MultiFluids;
+import com.dudko.blazinghot.content.casting.Molds;
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 
+/**
+ * @see com.dudko.blazinghot.registry.BlazingMetals
+ */
+@Deprecated
 public class MoltenMetals {
 	public static final List<MoltenMetal> ALL = new ArrayList<>();
 
@@ -29,17 +34,22 @@ public class MoltenMetals {
 	ANCIENT_DEBRIS =
 			MoltenMetal
 					.builder("ancient_debris")
-					.customForm(VANILLA.asResource("netherite_scrap"),
-							MultiFluids.Constants.INGOT.droplets,
+					.customForm("netherite_scrap",
+							VANILLA.asResource("netherite_scrap"),
+							MultiAmount.INGOT,
 							Forms.INGOT.processingTime * 2,
 							Forms.INGOT.fuelCost * 2,
-							false)
-					.customForm(VANILLA.asResource("ancient_debris"),
-							MultiFluids.Constants.NUGGET.droplets * 12,
+							false,
+							Molds.INGOT,
+							VANILLA)
+					.customForm("ancient_debris",
+							VANILLA.asResource("ancient_debris"),
+							MultiAmount.RAW_ORE,
 							Forms.INGOT.processingTime * 2,
 							Forms.INGOT.fuelCost * 2,
-							false)
-					.compactingOverride(VANILLA.asResource("netherite_scrap"), MultiFluids.Constants.INGOT.droplets)
+							false,
+							null,
+							VANILLA)
 					.addFluidInteraction(Fluids.WATER, () -> AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get())
 					.disableMechanicalMixing()
 					.ignoreTagDatagen()
@@ -48,7 +58,7 @@ public class MoltenMetals {
 	NETHERITE =
 			MoltenMetal
 					.builder("netherite")
-					.supportedForms(Forms.INGOT)
+					.coreForms(Forms.INGOT)
 					.disableMechanicalMixing()
 					.addFluidInteraction(Fluids.WATER, () -> AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get())
 					.register(),
@@ -57,12 +67,12 @@ public class MoltenMetals {
 			MoltenMetal
 					.builder("blaze_gold")
 					.mod(BLAZINGHOT)
-					.basicAndPlateForms()
-					.supportedForms(Forms.ROD)
+					.basicForms()
+					.coreForms(Forms.PLATE, Forms.ROD)
 					.addFluidInteraction(Fluids.WATER, () -> Blocks.NETHERRACK)
 					.register(),
 
-	ZINC = MoltenMetal.builder("zinc").mod(CREATE).basicForms().optionalForms(Forms.PLATE).register(),
+	ZINC = MoltenMetal.builder("zinc").mod(CREATE).basicForms().optionalForm(Forms.PLATE, CREATE_ADDITIONS).register(),
 
 	BRASS = MoltenMetal.builder("brass").mod(CREATE).createForms().register(),
 
@@ -70,12 +80,15 @@ public class MoltenMetals {
 			MoltenMetal
 					.builder("andesite")
 					.mod(CREATE)
-					.customForm(AllItems.ANDESITE_ALLOY.getId(),
+					.customForm("andesite_alloy",
+							AllItems.ANDESITE_ALLOY.getId(),
 							Forms.INGOT.amount,
 							Forms.INGOT.processingTime,
 							Forms.INGOT.fuelCost,
-							true)
-					.compactingOverride(AllItems.ANDESITE_ALLOY.getId(), MultiFluids.Constants.INGOT.droplets)
+							true,
+							Molds.INGOT,
+							CREATE)
+					.castingOverride(Forms.INGOT, AllItems.ANDESITE_ALLOY.getId(), MultiAmount.INGOT)
 					.ignoreTagDatagen()
 					.register();
 

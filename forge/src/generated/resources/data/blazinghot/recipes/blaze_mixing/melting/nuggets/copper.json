@@ -1,0 +1,29 @@
+{
+  "type": "blazinghot:blaze_mixing",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:nuggets/copper"
+      }
+    }
+  ],
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "forge:nuggets/copper"
+    }
+  ],
+  "mixerFuel": {
+    "amount": 5,
+    "fluidTag": "blazinghot:blaze_mixer_fuel"
+  },
+  "processingTime": 30,
+  "results": [
+    {
+      "amount": 16,
+      "fluid": "blazinghot:molten_copper"
+    }
+  ]
+}

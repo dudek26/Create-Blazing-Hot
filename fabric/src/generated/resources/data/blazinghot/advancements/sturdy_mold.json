@@ -1,0 +1,31 @@
+{
+  "parent": "blazinghot:casting",
+  "criteria": {
+    "0": {
+      "conditions": {},
+      "trigger": "blazinghot:sturdy_mold_builtin"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.blazinghot.sturdy_mold.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "blazinghot:sturdy_ingot_mold"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.blazinghot.sturdy_mold"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

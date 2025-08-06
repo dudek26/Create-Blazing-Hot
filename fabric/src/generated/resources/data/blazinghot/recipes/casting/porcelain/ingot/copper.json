@@ -1,0 +1,19 @@
+{
+  "type": "blazinghot:casting",
+  "coolingDuration": 150,
+  "ingredients": [
+    {
+      "item": "blazinghot:porcelain_ingot_mold"
+    },
+    {
+      "amount": 9000,
+      "fluidTag": "c:molten_copper"
+    }
+  ],
+  "processingTime": 50,
+  "results": [
+    {
+      "item": "minecraft:copper_ingot"
+    }
+  ]
+}

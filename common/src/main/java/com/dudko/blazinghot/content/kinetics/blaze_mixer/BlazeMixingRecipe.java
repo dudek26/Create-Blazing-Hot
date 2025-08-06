@@ -1,15 +1,14 @@
 package com.dudko.blazinghot.content.kinetics.blaze_mixer;
 
-import static com.dudko.blazinghot.multiloader.MultiFluids.fromBucketFraction;
-
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import com.dudko.blazinghot.config.BlazingConfigs;
-import com.dudko.blazinghot.multiloader.MultiFluids;
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
+import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.google.gson.JsonObject;
 import com.simibubi.create.AllRecipeTypes;
@@ -22,7 +21,6 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
@@ -56,7 +54,7 @@ public class BlazeMixingRecipe extends BasinRecipe {
 	 * @apiNote Already platformed.
 	 */
 	public static long getFuelCost(Recipe<?> r) {
-		if (r == null) return MultiFluids.Constants.BUCKET.platformed() + 1;
+		if (r == null) return MultiAmount.BUCKET.get() + 1;
 
 		if (r instanceof MixingRecipe && PotionMixingRecipes.ALL.contains(r))
 			return BlazingConfigs.server().recipes.blazeBrewingFuelUsage.get();
@@ -87,6 +85,8 @@ public class BlazeMixingRecipe extends BasinRecipe {
 
 	/**
 	 * Used in melting recipes' datagen
+	 *
+	 * @apiNote Uses droplets.
 	 */
 	@ApiStatus.Internal
 	public static long defaultDurationToFuelCost(int duration) {
@@ -94,15 +94,14 @@ public class BlazeMixingRecipe extends BasinRecipe {
 		if (duration != 0) {
 			recipeSpeed = duration / 100f;
 		}
-		return Mth.ceil(recipeSpeed * fromBucketFraction(1, 40));
+		return Mth.ceil(recipeSpeed * MultiAmount.fromBucketFraction(1, 40).droplets());
 	}
 
 	@Override
 	public void readAdditional(JsonObject json) {
 		super.readAdditional(json);
-		if (GsonHelper.isValidNode(json, "blazinghot:fuel")) {
-			fuelFluid = FluidIngredient.deserialize(json.get("blazinghot:fuel"));
-			platformFuel(fuelFluid);
+		if (GsonHelper.isValidNode(json, "mixerFuel")) {
+			fuelFluid = FluidIngredient.deserialize(json.get("mixerFuel"));
 		}
 	}
 
@@ -122,8 +121,9 @@ public class BlazeMixingRecipe extends BasinRecipe {
 		fuel.write(buffer);
 	}
 
-	@ExpectPlatform
-	public static void platformFuel(FluidIngredient fuel) {
-		throw new AssertionError();
+	@Override
+	public void writeAdditional(JsonObject json) {
+		super.writeAdditional(json);
+		if (!getFuelFluid().equals(FluidIngredient.EMPTY)) json.add("mixerFuel", getFuelFluid().serialize());
 	}
 }

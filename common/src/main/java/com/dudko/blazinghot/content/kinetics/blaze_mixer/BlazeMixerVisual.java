@@ -10,7 +10,6 @@ import com.simibubi.create.foundation.render.AllInstanceTypes;
 import dev.engine_room.flywheel.api.instance.Instance;
 import dev.engine_room.flywheel.api.visual.DynamicVisual;
 import dev.engine_room.flywheel.api.visualization.VisualizationContext;
-import dev.engine_room.flywheel.lib.instance.FlatLit;
 import dev.engine_room.flywheel.lib.instance.InstanceTypes;
 import dev.engine_room.flywheel.lib.instance.OrientedInstance;
 import dev.engine_room.flywheel.lib.model.Models;
@@ -67,8 +66,8 @@ public class BlazeMixerVisual extends SingleAxisRotatingVisual<BlazeMixerBlockEn
 
 	public void updateLight(float partialTick) {
 		super.updateLight(partialTick);
-		this.relight(this.pos.below(), new FlatLit[]{this.mixerHead});
-		this.relight(new FlatLit[]{this.mixerPole});
+		this.relight(this.pos.below(), this.mixerHead);
+		this.relight(this.mixerPole);
 	}
 
 	protected void _delete() {

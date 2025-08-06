@@ -1,4 +1,48 @@
 ------------------------------------------------------
+Create: Blazing Hot 0.7
+------------------------------------------------------
+
+### Added:
+
+* New casting mechanic:
+    * New block: Casting Depot,
+    * Molds for casting: Sturdy, Clay and Porcelain variants
+    * Ponder for Casting
+    * New casting-related config options
+* Sturdy Alloy, Molten Sturdy Alloy and Sturdy Casing
+* Raw ore melting recipes
+* Nether Dough and Blaze Roll — new superheating fuel for Blaze Burners
+* Alternate recipes for Netherrack Dust
+* Four new advancements
+
+### Changed:
+
+* Updated to Create 6.0.6
+* Updated Blaze Mixer's item description
+* Updated texture for Nether Compound
+* Fluids in recipes now use amounts appropriate for their platform (Forge - mb, Fabric - droplets)
+* Renamed `blazinghot:fuel` to `mixerFuel` in Blaze Mixing recipes
+* Adjusted duration of melting recipes
+* Adjusted fuel costs for blaze mixing melting recipes
+* Mixing Stone Dust and Cinder Flour now returns two netherrack dusts (previously 1)
+* Adjusted placement of Modern Lamp Half Panels
+* Reworked internal metal system
+* Renamed Nether Essence to Crimson Essence and updates its texture
+* Updated Blaze Gold textures
+
+### Fixed:
+
+* Nether Lava now can create other stone variants (basalt, limestone etc.) (#17)
+* All fluids now behave correctly in pipe collisions / spilling (#16)
+* Modern Lamps are now powered when placed next to a signal source
+* Molten Metals nad Nether Lava now emit light in Fluid Tanks
+* Fixed Gray Modern Lamp Half Panel textures
+
+### Removed:
+
+* Molten metal compacting recipes
+
+------------------------------------------------------
 Create: Blazing Hot 0.6.7
 ------------------------------------------------------
 
@@ -20,6 +64,40 @@ Create: Blazing Hot 0.6.6
 * Added config for Blaze Mixer stress impact
 
 ### Fixed:
+
+* Fixed Blaze Mixer not having any stress impact
+
+------------------------------------------------------
+Create: Blazing Hot 0.6.5
+------------------------------------------------------
+
+### Changed:
+
+* [Forge] Updated to Create 6.0.1
+
+------------------------------------------------------
+Create: Blazing Hot 0.6.4
+------------------------------------------------------
+
+### Fixed:
+
+* Fixed a crash when joining a world with a working Mixer
+* [Forge] Fixed incorrect melting time for some metal forms
+
+------------------------------------------------------
+Create: Blazing Hot 0.6.6
+------------------------------------------------------
+
+#### Forge-only update. Fabric version will release when Create Fabric updates to v6.
+
+### Changed:
+
+* Updated to Create 6.0.2
+* Made mod config accessible in Mods menu
+* Added config for Blaze Mixer stress impact
+
+### Fixed:
+
 * Fixed Blaze Mixer not having any stress impact
 
 ------------------------------------------------------

@@ -13,10 +13,12 @@ import java.util.function.BiConsumer;
 
 import com.dudko.blazinghot.BlazingHot;
 
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.createmod.catnip.lang.Lang;
 import net.createmod.catnip.lang.LangBuilder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.level.material.Fluid;
 
 public enum BlazingLang {
 
@@ -32,14 +34,21 @@ public enum BlazingLang {
 	LAMP_GOGGLE_STATE(GOGGLES, "modern_lamp.state", "Current state:"),
 	LAMP_GOGGLE_LOCKED(GOGGLES, "modern_lamp.locked", "Locked"),
 	LAMP_GOGGLE_UNLOCKED(GOGGLES, "modern_lamp.unlocked", "Unlocked"),
+	CASTING_GOGGLE_TITLE(GOGGLES, "casting_depot", "Casting Depot Info:"),
+	CASTING_GOGGLE_NO_MOLD(GOGGLES, "casting_depot.no_mold", "Empty"),
+	CASTING_GOGGLE_COOLING_SPEED(GOGGLES, "casting_depot.cooling_speed", "Cooling speed:"),
+	CASTING_GOGGLE_FILLING(GOGGLES, "casting_depot.filling", "Casting"),
+	CASTING_GOGGLE_COOLING(GOGGLES, "casting_depot.cooling", "Cooling"),
 
 	NETHER_LAVA_INFO(INFO,
 			"nether_lava_cobblestone",
 			"You can build faster Cobblestone generators when using Nether Lava instead of regular Lava."),
 	BLAZE_MIXER_FUEL(RECIPE_TOOLTIP, "blaze_mixing.fuel", "Blaze Mixer's fuel"),
+	MOLD_CONSUMED(RECIPE_TOOLTIP, "spout_casting.consumed", "Consumed on cast"),
 	BLAZE_MIXING(RECIPE, "blaze_mixing", "Blaze Mixing"),
 	BLAZE_AUTO_SHAPELESS(RECIPE, "blaze_automatic_shapeless", "Blaze Automated Shapeless Crafting"),
 	BLAZE_AUTO_BREWING(RECIPE, "blaze_automatic_brewing", "Blaze Automated Brewing"),
+	SPOUT_CASTING(RECIPE, "spout_casting", "Casting by Spout"),
 
 	EMI_BLAZE_MIXING(EMI_RECIPE, "blaze_mixing", "Blaze Mixing"),
 	EMI_BLAZE_AUTO_SHAPELESS(EMI_RECIPE, "blaze_automatic_shapeless", "Blaze Automated Shapeless Crafting"),
@@ -79,6 +88,11 @@ public enum BlazingLang {
 		for (BlazingLang lang : values()) {
 			consumer.accept(lang.key, lang.translation);
 		}
+	}
+
+	@ExpectPlatform
+	public static LangBuilder fluidName(Fluid fluid) {
+		throw new AssertionError();
 	}
 
 	enum Prefix {

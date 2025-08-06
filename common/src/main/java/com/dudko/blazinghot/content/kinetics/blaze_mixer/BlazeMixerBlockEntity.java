@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.config.BlazingConfigs;
-import com.dudko.blazinghot.content.metal.MoltenMetals;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancement;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.mixin_interfaces.IAdvancementBehaviour;
-import com.dudko.blazinghot.multiloader.MultiFluids;
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
+import com.dudko.blazinghot.registry.BlazingConfigs;
+import com.dudko.blazinghot.registry.BlazingMetals;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.Create;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
@@ -48,7 +49,6 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
-@SuppressWarnings("UnstableApiUsage")
 public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements IHaveGoggleInformation {
 
 	protected static final Object shapelessOrMixingRecipesKey = new Object();
@@ -180,17 +180,17 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 				}
 			}
 
-			if (MultiFluids.recipeResultContains(recipe, MoltenMetals.GOLD.fluidTag())) {
+			if (MultiFluids.recipeResultContains(recipe, BlazingMetals.GOLD.getFluidTag())) {
 				award(BlazingAdvancements.MOLTEN_GOLD);
 			}
 
-			if (MultiFluids.recipeResultContains(recipe, MoltenMetals.BLAZE_GOLD.fluidTag())) {
+			if (MultiFluids.recipeResultContains(recipe, BlazingMetals.BLAZE_GOLD.getFluidTag())) {
 				award(BlazingAdvancements.MOLTEN_BLAZE_GOLD);
 			}
 
 			//noinspection ConstantValue
 			if (Mth.abs(getSpeed()) >= AllConfigs.server().kinetics.maxRotationSpeed.get()
-					&& hasFuel(MultiFluids.Constants.BUCKET.platformed())) {
+					&& hasFuel(MultiAmount.BUCKET.get())) {
 				award(BlazingAdvancements.BLAZE_MIXER_MAX);
 			}
 		}
@@ -303,7 +303,6 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 
 		return true;
 	}
-
 
 	public void registerAwardables(List<BlockEntityBehaviour> behaviours, BlazingAdvancement... advancements) {
 		((IAdvancementBehaviour) this).blazinghot$registerAwardables(behaviours, advancements);

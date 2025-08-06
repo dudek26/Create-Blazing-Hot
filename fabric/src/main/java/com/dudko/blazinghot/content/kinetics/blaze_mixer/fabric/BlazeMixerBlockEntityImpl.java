@@ -5,21 +5,15 @@ import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecip
 import java.util.List;
 import java.util.Optional;
 
-import net.createmod.catnip.animation.AnimationTickHolder;
-import net.createmod.catnip.data.Couple;
-
-import net.createmod.catnip.math.VecHelper;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import com.dudko.blazinghot.config.BlazingConfigs;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
-import com.dudko.blazinghot.multiloader.MultiFluids.Constants;
+import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.dudko.blazinghot.registry.BlazingTags;
-import com.dudko.blazinghot.registry.fabric.BlazingRecipeTypesImpl;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.fluids.FluidFX;
@@ -37,6 +31,9 @@ import com.simibubi.create.foundation.item.SmartInventory;
 
 import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
 import io.github.fabricators_of_create.porting_lib.transfer.TransferUtil;
+import net.createmod.catnip.animation.AnimationTickHolder;
+import net.createmod.catnip.data.Couple;
+import net.createmod.catnip.math.VecHelper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
@@ -77,7 +74,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
 
 	@Override
 	public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-		tank = SmartFluidTankBehaviour.single(this, Constants.BUCKET.platformed());
+		tank = SmartFluidTankBehaviour.single(this, MultiAmount.BUCKET.get());
 		tank.whenFluidUpdates(() -> {
 			if (getBasin().isPresent()) getBasin().get().notifyChangeOfContents();
 		});
@@ -293,7 +290,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity implements 
 				&& !MechanicalPressBlockEntity.canCompress(r)) && !AllRecipeTypes.shouldIgnoreInAutomation(r)
 				|| (r.getType() == AllRecipeTypes.MIXING.getType()
 				&& BlazingConfigs.server().recipes.allowMixingInBlazeMixer.get()))
-				|| r.getType() == BlazingRecipeTypesImpl.BLAZE_MIXING.getType();
+				|| r.getType() == BlazingRecipeTypes.BLAZE_MIXING.getType();
 	}
 
 	@Override

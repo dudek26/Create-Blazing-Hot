@@ -1,5 +1,7 @@
 package com.dudko.blazinghot.registry;
 
+import static com.dudko.blazinghot.multiloader.BlazingBuilderTransformers.castingDepotModel;
+import static com.dudko.blazinghot.multiloader.BlazingBuilderTransformers.simpleBlockState;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 
@@ -16,6 +18,7 @@ import com.dudko.blazinghot.content.block.modern_lamp.ModernLampHalfPanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampPanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.ModernLampQuadPanelBlock;
 import com.dudko.blazinghot.content.block.modern_lamp.SmallModernLampPanelBlock;
+import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlock;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlock;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
 import com.dudko.blazinghot.multiloader.BlazingBuilderTransformers;
@@ -24,7 +27,6 @@ import com.dudko.blazinghot.util.LangUtil;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
 import com.simibubi.create.foundation.block.DyedBlockList;
-import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.BuilderTransformers;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
@@ -60,21 +62,6 @@ public class BlazingBlocks {
 		BlazingCreativeTabs.useBaseTab();
 	}
 
-	public static final BlockEntry<BlazeMixerBlock>
-			BLAZE_MIXER =
-			REGISTRATE
-					.block("blaze_mixer", BlazeMixerBlock::new)
-					.initialProperties(SharedProperties::stone)
-					.properties(p -> p.noOcclusion().mapColor(MapColor.STONE))
-					.transform(axeOrPickaxe())
-					.blockstate((c, p) -> p.simpleBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p)))
-					.addLayer(() -> RenderType::cutoutMipped)
-					.transform(CStress.setImpact(4.0))
-					.item(AssemblyOperatorBlockItem::new)
-					.onRegisterAfter(Registries.ITEM,
-							v -> ItemDescription.useKey(v, ItemDescriptions.BLAZE_MIXER.getKey()))
-					.transform(customItemModel())
-					.register();
 
 	public static final BlockEntry<CasingBlock>
 			BLAZE_CASING =
@@ -82,6 +69,41 @@ public class BlazingBlocks {
 					.block("blaze_casing", CasingBlock::new)
 					.transform(BuilderTransformers.casing(() -> BlazingSpriteShifts.BLAZE_CASING))
 					.properties(p -> p.mapColor(MapColor.CRIMSON_NYLIUM).sound(SoundType.NETHER_WOOD))
+					.register();
+
+	public static final BlockEntry<CasingBlock>
+			STURDY_CASING =
+			REGISTRATE
+					.block("sturdy_casing", CasingBlock::new)
+					.transform(BuilderTransformers.casing(() -> BlazingSpriteShifts.STURDY_CASING))
+					.properties(p -> p
+							.mapColor(MapColor.COLOR_BLACK)
+							.sound(SoundType.NETHERITE_BLOCK)
+							.explosionResistance(1200))
+					.register();
+
+	public static final BlockEntry<CastingDepotBlock>
+			CASTING_DEPOT =
+			REGISTRATE
+					.block("casting_depot", CastingDepotBlock::new)
+					.initialProperties(STURDY_CASING)
+					.transform(castingDepotModel())
+					.register();
+
+	public static final BlockEntry<BlazeMixerBlock>
+			BLAZE_MIXER =
+			REGISTRATE
+					.block("blaze_mixer", BlazeMixerBlock::new)
+					.initialProperties(SharedProperties::stone)
+					.properties(p -> p.noOcclusion().mapColor(MapColor.STONE))
+					.transform(axeOrPickaxe())
+					.transform(simpleBlockState())
+					.addLayer(() -> RenderType::cutoutMipped)
+					.transform(CStress.setImpact(4.0))
+					.item(AssemblyOperatorBlockItem::new)
+					.onRegisterAfter(Registries.ITEM,
+							v -> ItemDescription.useKey(v, ItemDescriptions.BLAZE_MIXER.getKey()))
+					.transform(customItemModel())
 					.register();
 
 	// BUILDING BLOCKS
@@ -97,12 +119,12 @@ public class BlazingBlocks {
 					.initialProperties(() -> net.minecraft.world.level.block.Blocks.GOLD_BLOCK)
 					.tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.tag(BlockTags.NEEDS_IRON_TOOL)
-					.tag(CommonTags.Blocks.STORAGE_BLOCKS.bothTags())
+					.tag(CommonTags.Blocks.STORAGE_BLOCKS.tag())
 					.tag(BlockTags.BEACON_BASE_BLOCKS)
-					.tag(CommonTags.Blocks.BLAZE_GOLD_BLOCKS.bothTags())
+					.tag(CommonTags.Blocks.BLAZE_GOLD_BLOCKS.tag())
 					.item()
-					.tag(CommonTags.Items.STORAGE_BLOCKS.bothTags())
-					.tag(CommonTags.Items.BLAZE_GOLD_BLOCKS.bothTags())
+					.tag(CommonTags.Items.STORAGE_BLOCKS.tag())
+					.tag(CommonTags.Items.BLAZE_GOLD_BLOCKS.tag())
 					.build()
 					.register();
 

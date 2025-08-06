@@ -1,0 +1,24 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "values": [
+        "c:gold_plates"
+      ]
+    }
+  ],
+  "type": "create:mixing",
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "c:gold_plates"
+    }
+  ],
+  "processingTime": 600,
+  "results": [
+    {
+      "amount": 9000,
+      "fluid": "blazinghot:molten_gold"
+    }
+  ]
+}

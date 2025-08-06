@@ -2,6 +2,7 @@ package com.dudko.blazinghot.forge;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.config.forge.BlazingConfigsImpl;
+import com.dudko.blazinghot.content.kinetics.mechanicalArm.BlazingArmInteractionPointTypes;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.advancement.BlazingTriggers;
 import com.dudko.blazinghot.multiloader.Env;
@@ -9,11 +10,13 @@ import com.dudko.blazinghot.registry.forge.BlazingCreativeTabsImpl;
 import com.dudko.blazinghot.registry.forge.BlazingFluidsImpl;
 import com.dudko.blazinghot.registry.forge.BlazingRecipeTypesImpl;
 
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.RegisterEvent;
 
 @Mod(BlazingHot.ID)
 @Mod.EventBusSubscriber
@@ -26,6 +29,8 @@ public class BlazingHotImpl {
 
 		BlazingCreativeTabsImpl.register(modEventBus);
 		BlazingHot.init();
+
+		modEventBus.addListener(EventPriority.LOWEST, BlazingHotDataForge::gatherData);
 		BlazingConfigsImpl.register(ModLoadingContext.get());
 		Env.CLIENT.runIfCurrent(() -> () -> BlazingHotClientImpl.initClient(modEventBus));
 	}
@@ -39,11 +44,16 @@ public class BlazingHotImpl {
 		});
 	}
 
+	public static void onRegister(final RegisterEvent event) {
+		BlazingArmInteractionPointTypes.init();
+	}
+
 	public static void finalizeRegistrate() {
 		BlazingRecipeTypesImpl.platformRegister(modEventBus);
 		BlazingHot.registrate().registerEventListeners(modEventBus);
 
 		modEventBus.addListener(BlazingHotImpl::init);
+		modEventBus.addListener(BlazingHotImpl::onRegister);
 	}
 
 

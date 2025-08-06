@@ -6,7 +6,8 @@
   "client": [
   ],
   "mixins": [
-    "SequencedAssemblyRecipeBuilderAccessor"
+    "BasinEmiRecipeMixin",
+    "JEIBasinCategoryMixin"
   ],
   "injectors": {
     "defaultRequire": 1

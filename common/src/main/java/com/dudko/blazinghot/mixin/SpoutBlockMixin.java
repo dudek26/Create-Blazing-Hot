@@ -15,7 +15,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 @Mixin(value = SpoutBlock.class)
-public class SpoutBlockMixin {
+public abstract class SpoutBlockMixin {
 
 	@Inject(method = "setPlacedBy", at = @At("TAIL"))
 	private void blazinghot$setBlazingAdvancementsOwner(Level pLevel, BlockPos pPos, BlockState pState, LivingEntity pPlacer, ItemStack pStack, CallbackInfo ci) {

@@ -23,7 +23,6 @@ import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl;
-import com.dudko.blazinghot.registry.fabric.BlazingRecipeTypesImpl;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.compat.jei.DoubleItemIcon;
@@ -76,7 +75,7 @@ public class BlazingJEI implements IModPlugin {
 		CreateRecipeCategory<?>
 				blazeMixing =
 				builder(BasinRecipe.class)
-						.addTypedRecipes(BlazingRecipeTypesImpl.BLAZE_MIXING)
+						.addTypedRecipes(BlazingRecipeTypes.BLAZE_MIXING.get())
 						.addTypedRecipesExcluding(AllRecipeTypes.MIXING::getType,
 								BlazingRecipeTypes.BLAZE_MIXING::getType)
 						.catalyst(BlazingBlocks.BLAZE_MIXER::get)

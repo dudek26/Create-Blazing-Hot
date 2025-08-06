@@ -1,0 +1,19 @@
+{
+  "type": "blazinghot:casting",
+  "coolingDuration": 150,
+  "ingredients": [
+    {
+      "item": "blazinghot:porcelain_sheet_mold"
+    },
+    {
+      "amount": 9000,
+      "fluidTag": "c:molten_sturdy_alloy"
+    }
+  ],
+  "processingTime": 50,
+  "results": [
+    {
+      "item": "create:sturdy_sheet"
+    }
+  ]
+}

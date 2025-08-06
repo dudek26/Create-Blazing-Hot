@@ -1,0 +1,20 @@
+{
+  "type": "blazinghot:casting",
+  "coolingDuration": 36,
+  "ingredients": [
+    {
+      "item": "blazinghot:sturdy_nugget_mold"
+    },
+    {
+      "amount": 16,
+      "fluidTag": "forge:molten_blaze_gold"
+    }
+  ],
+  "keepItem": true,
+  "processingTime": 12,
+  "results": [
+    {
+      "item": "blazinghot:blaze_gold_nugget"
+    }
+  ]
+}

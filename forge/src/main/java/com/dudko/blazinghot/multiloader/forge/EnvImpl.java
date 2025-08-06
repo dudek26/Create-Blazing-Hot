@@ -1,11 +1,11 @@
 package com.dudko.blazinghot.multiloader.forge;
 
+import org.jetbrains.annotations.ApiStatus.Internal;
+
 import com.dudko.blazinghot.multiloader.Env;
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.loading.FMLEnvironment;
-
-import org.jetbrains.annotations.ApiStatus.Internal;
 
 public class EnvImpl {
 
