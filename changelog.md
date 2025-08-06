@@ -27,7 +27,7 @@ Create: Blazing Hot 0.7
 * Mixing Stone Dust and Cinder Flour now returns two netherrack dusts (previously 1)
 * Adjusted placement of Modern Lamp Half Panels
 * Reworked internal metal system
-* Renamed Nether Essence to Crimson Essence and updates its texture
+* Renamed Nether Essence to Crimson Essence and updated its texture
 * Updated Blaze Gold textures
 
 ### Fixed:
