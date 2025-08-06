@@ -11,6 +11,7 @@ import com.dudko.blazinghot.mixin_interfaces.IAdvancementBehaviour;
 import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.dudko.blazinghot.util.TooltipUtil;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.content.kinetics.fan.processing.FanProcessingType;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
@@ -25,6 +26,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -94,20 +96,22 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 
 		ChatFormatting coolingSpeedColor = ChatFormatting.AQUA;
 
-		if (getCoolingSpeed() < 0) {
+		float coolingSpeed = (Math.round(getCoolingSpeed() * 100) / 100f);
+
+		if (coolingSpeed < 0) {
 			coolingSpeedColor = ChatFormatting.DARK_RED;
 		}
-		else if (getCoolingSpeed() == 0) {
+		else if (coolingSpeed == 0) {
 			coolingSpeedColor = ChatFormatting.RED;
 		}
-		else if (getCoolingSpeed() < 1) {
+		else if (coolingSpeed < 1) {
 			coolingSpeedColor = ChatFormatting.GOLD;
 		}
-		else if (getCoolingSpeed() == 1) {
+		else if (coolingSpeed == 1) {
 			coolingSpeedColor = ChatFormatting.GREEN;
 		}
 
-		MutableComponent speedComponent = Component.literal("x" + getCoolingSpeed()).withStyle(coolingSpeedColor);
+		MutableComponent speedComponent = Component.literal("x" + coolingSpeed).withStyle(coolingSpeedColor);
 
 		LangBuilder cooling = BlazingLang.CASTING_GOGGLE_COOLING_SPEED.translate().style(ChatFormatting.GRAY);
 		cooling.add(Component.literal(" "));
@@ -196,7 +200,15 @@ public abstract class CastingDepotBlockEntity extends SmartBlockEntity implement
 
 	public abstract void setOutputItem(ItemStack stack);
 
-	public abstract float getCoolingSpeed();
+	public float getCoolingSpeed() {
+		float min = BlazingConfigs.server().casting.minimumCoolingSpeed.getF();
+		float max = BlazingConfigs.server().casting.maximumCoolingSpeed.getF();
+		float modifier = 0;
+		for (FanProcessingType type : castingBehaviour.fanModifiers) {
+			modifier += SpoutCastingBehaviour.getCoolingModifier(type);
+		}
+		return Mth.clamp(1 + modifier, min, max);
+	}
 
 	public abstract void setFluid(Fluid fluid, long amount);
 

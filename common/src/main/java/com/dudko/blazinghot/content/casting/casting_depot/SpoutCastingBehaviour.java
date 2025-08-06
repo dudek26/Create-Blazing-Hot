@@ -1,12 +1,18 @@
 package com.dudko.blazinghot.content.casting.casting_depot;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.multiloader.MultiRegistries;
+import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.simibubi.create.content.fluids.spout.SpoutBlockEntity;
+import com.simibubi.create.content.kinetics.fan.processing.AllFanProcessingTypes;
+import com.simibubi.create.content.kinetics.fan.processing.FanProcessingType;
 import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 
@@ -37,6 +43,8 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 	protected Fluid visualFluid;
 	protected ResourceLocation currentRecipeId;
 
+	public final List<FanProcessingType> fanModifiers;
+
 	public SpoutCastingBehaviour(CastingDepotBlockEntity depot) {
 		super(depot);
 		state = State.NONE;
@@ -47,6 +55,8 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 		keepMold = false;
 		visualFluid = Fluids.EMPTY;
 		currentRecipeId = null;
+
+		fanModifiers = new ArrayList<>();
 	}
 
 	@ExpectPlatform
@@ -148,5 +158,16 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 		public String toString() {
 			return super.toString().toLowerCase();
 		}
+
+	}
+
+	public static float getCoolingModifier(FanProcessingType type) {
+		if (type.equals(AllFanProcessingTypes.BLASTING)) {
+			return BlazingConfigs.server().casting.blastingCoolingModifier.getF();
+		}
+		if (type.equals(AllFanProcessingTypes.SPLASHING)) {
+			return BlazingConfigs.server().casting.splashingCoolingModifier.getF();
+		}
+		return 0;
 	}
 }

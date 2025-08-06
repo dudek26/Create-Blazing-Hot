@@ -10,6 +10,7 @@
     "AssemblyOperatorBlockItemMixin",
     "BeltDeployerCallbacksMixin",
     "DeployerBlockEntityMixin",
+    "EncasedFanBlockEntityMixin",
     "ItemMixin",
     "KineticBlockMixin",
     "ManualApplicationRecipeMixin",

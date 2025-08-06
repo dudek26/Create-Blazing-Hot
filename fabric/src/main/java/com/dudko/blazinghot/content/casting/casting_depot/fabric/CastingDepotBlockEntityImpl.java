@@ -50,11 +50,6 @@ public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity impleme
 	}
 
 	@Override
-	public float getCoolingSpeed() {
-		return 1 + depotBehaviour.coolingSpeedModifier;
-	}
-
-	@Override
 	public void setFluid(Fluid fluid, long amount) {
 
 	}

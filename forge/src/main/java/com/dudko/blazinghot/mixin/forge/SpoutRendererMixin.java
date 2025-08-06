@@ -34,7 +34,7 @@ public abstract class SpoutRendererMixin {
 
 	@Shadow
 	@Final
-	static final PartialModel[]
+	static PartialModel[]
 			BITS =
 			{AllPartialModels.SPOUT_TOP, AllPartialModels.SPOUT_MIDDLE, AllPartialModels.SPOUT_BOTTOM};
 
@@ -43,7 +43,7 @@ public abstract class SpoutRendererMixin {
 					ordinal = 0,
 					target = "Lcom/simibubi/create/content/fluids/spout/SpoutBlockEntity;processingTicks:I"),
 			cancellable = true)
-	public void modifyProcessingProgress(SpoutBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay, CallbackInfo ci, @Local(
+	public void blazinghot$modifyProcessingProgress(SpoutBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay, CallbackInfo ci, @Local(
 			name = "fluidStack") FluidStack fluidStack) {
 		CastingDepotBlockEntity depot = blazinghot$getCastingDepot(be);
 		if (depot == null) return;
