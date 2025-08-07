@@ -13,9 +13,15 @@ public class LoadCondition<T> {
 	private final List<T> values = new ArrayList<>();
 
 	@SafeVarargs
-	LoadCondition(Type type, T... values) {
+	protected LoadCondition(Type type, T... values) {
 		this.type = type;
 		addValues(values);
+	}
+
+	@SafeVarargs
+	@ExpectPlatform
+	public static <T> LoadCondition<T> create(Type type, T... values) {
+		throw new AssertionError();
 	}
 
 	public void addValue(T value) {
@@ -37,13 +43,9 @@ public class LoadCondition<T> {
 		return type;
 	}
 
+	@Deprecated(forRemoval = true)
 	public JsonObject toJson() {
-		return platformJson(this);
-	}
-
-	@ExpectPlatform
-	public static <T> JsonObject platformJson(LoadCondition<T> condition) {
-		throw new AssertionError();
+		throw new AssertionError("LoadCondition.json() is no longer supported.");
 	}
 
 	public enum Type {

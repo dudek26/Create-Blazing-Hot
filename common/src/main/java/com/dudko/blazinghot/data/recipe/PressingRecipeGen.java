@@ -2,20 +2,21 @@ package com.dudko.blazinghot.data.recipe;
 
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.blazeGoldIngot;
 
+import java.util.concurrent.CompletableFuture;
+
+import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.casting.Molds;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.simibubi.create.AllItems;
-import com.simibubi.create.AllRecipeTypes;
-import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
 
-@SuppressWarnings("unused")
-public class PressingRecipeGen extends BlazingProcessingRecipeGen {
+public class PressingRecipeGen extends com.simibubi.create.api.data.recipe.PressingRecipeGen {
 
-	public PressingRecipeGen(PackOutput output) {
-		super(output);
+	public PressingRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+		super(output, registries, BlazingHot.ID);
 	}
 
 	GeneratedRecipe
@@ -26,9 +27,4 @@ public class PressingRecipeGen extends BlazingProcessingRecipeGen {
 			CLAY_BLANK_MOLD =
 					create("clay_blank_mold",
 							b -> b.require(Items.CLAY_BALL).output(Molds.BLANK.get(Molds.MoldType.CLAY)));
-
-	@Override
-	protected IRecipeTypeInfo getRecipeType() {
-		return AllRecipeTypes.PRESSING;
-	}
 }

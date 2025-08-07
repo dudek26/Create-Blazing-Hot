@@ -6,7 +6,7 @@ import com.dudko.blazinghot.content.kinetics.mechanical_arm.BlazingArmInteractio
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.advancement.BlazingTriggers;
 import com.dudko.blazinghot.foundation.multiloader.Env;
-import com.dudko.blazinghot.foundation.recipe.BlazingRecipeTypeImpl;
+import com.dudko.blazinghot.foundation.recipe.neoforge.BlazingRecipeTypeImpl;
 import com.dudko.blazinghot.registry.neoforge.BlazingCreativeTabsImpl;
 import com.dudko.blazinghot.registry.neoforge.BlazingFluidsImpl;
 

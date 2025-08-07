@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Nullable;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.casting.casting_depot.neoforge.CastingRecipe;
-import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
+import com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecipe;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.dudko.blazinghot.registry.BlazingTags;
+import com.dudko.blazinghot.registry.BlazingTagsV1;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
@@ -18,6 +18,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 
+@Deprecated(forRemoval = true)
 public class BlazingTagGen {
 
 	public static final Map<TagKey<Block>, List<ResourceLocation>> OPTIONAL_TAGS = new HashMap<>();
@@ -46,15 +47,15 @@ public class BlazingTagGen {
 		throw new AssertionError();
 	}
 
-	public static TagsProvider.TagAppender<Item> tagAppender(RegistrateTagsProvider<Item> prov, BlazingTags.Items tag) {
+	public static TagsProvider.TagAppender<Item> tagAppender(RegistrateTagsProvider<Item> prov, BlazingTagsV1.Items tag) {
 		return tagAppender(prov, tag.tag);
 	}
 
-	public static TagsProvider.TagAppender<Block> tagAppender(RegistrateTagsProvider<Block> prov, BlazingTags.Blocks tag) {
+	public static TagsProvider.TagAppender<Block> tagAppender(RegistrateTagsProvider<Block> prov, BlazingTagsV1.Blocks tag) {
 		return tagAppender(prov, tag.tag);
 	}
 
-	public static TagsProvider.TagAppender<Fluid> tagAppender(RegistrateTagsProvider<Fluid> prov, BlazingTags.Fluids tag) {
+	public static TagsProvider.TagAppender<Fluid> tagAppender(RegistrateTagsProvider<Fluid> prov, BlazingTagsV1.Fluids tag) {
 		return tagAppender(prov, tag.tag);
 	}
 

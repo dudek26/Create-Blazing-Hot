@@ -8,7 +8,7 @@ import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntit
 import com.dudko.blazinghot.content.casting.casting_depot.SpoutCastingBehaviour;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.foundation.mixin.accessor.SpoutBlockEntityAccessor;
-import com.dudko.blazinghot.registry.BlazingTags;
+import com.dudko.blazinghot.registry.BlazingTagsV1;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.fluids.spout.SpoutBlockEntity;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
@@ -135,12 +135,12 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 						depotBehaviour =
 						((CastingDepotBehaviourImpl) depot.getBehaviour(CastingDepotBehaviour.TYPE));
 
-				if (BlazingTags.Items.STURDY_MOLDS.matches(castItem)) {
+				if (BlazingTagsV1.Items.STURDY_MOLDS.matches(castItem)) {
 					depot.award(BlazingAdvancements.STURDY_MOLD);
 				}
 				depot.award(BlazingAdvancements.CASTING);
 
-				if (BlazingTags.Items.MOLDS.matches(castItem)) {
+				if (BlazingTagsV1.Items.MOLDS.matches(castItem)) {
 					depotBehaviour.setHeldStack(castItem);
 				}
 				else {

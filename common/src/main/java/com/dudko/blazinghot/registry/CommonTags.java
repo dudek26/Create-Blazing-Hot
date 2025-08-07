@@ -19,6 +19,7 @@ import net.minecraft.world.level.material.Fluid;
  * @apiNote Internal tags are used for recipes, advancements etc.
  * <br> Don't use <code>[...]tagOf</code> methods on Forge, as they use <code>BuiltInRegistries</code>!!!
  */
+@Deprecated(forRemoval = true)
 public class CommonTags {
 
 	public static <T> TagKey<T> optionalTag(Registry<T> registry, ResourceLocation id) {

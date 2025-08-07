@@ -11,7 +11,7 @@ import net.minecraft.world.level.ItemLike;
 public class DefaultLoadConditions {
 
 	public static LoadCondition<String> allModsLoaded(String... mods) {
-		return new LoadCondition<>(LoadCondition.Type.ALL_MODS_LOADED, mods);
+		return LoadCondition.create(LoadCondition.Type.ALL_MODS_LOADED, mods);
 	}
 
 	public static LoadCondition<String> allModsLoaded(Mods... mods) {
@@ -23,7 +23,7 @@ public class DefaultLoadConditions {
 	}
 
 	public static LoadCondition<String> anyModLoaded(String... mods) {
-		return new LoadCondition<>(LoadCondition.Type.ANY_MOD_LOADED, mods);
+		return LoadCondition.create(LoadCondition.Type.ANY_MOD_LOADED, mods);
 	}
 
 	public static LoadCondition<String> anyModLoaded(Mods... mods) {
@@ -35,24 +35,24 @@ public class DefaultLoadConditions {
 	}
 
 	public static LoadCondition<LoadCondition<?>> or(LoadCondition<?>... conditions) {
-		return new LoadCondition<>(LoadCondition.Type.OR, conditions);
+		return LoadCondition.create(LoadCondition.Type.OR, conditions);
 	}
 
 	public static LoadCondition<LoadCondition<?>> and(LoadCondition<?>... conditions) {
-		return new LoadCondition<>(LoadCondition.Type.AND, conditions);
+		return LoadCondition.create(LoadCondition.Type.AND, conditions);
 	}
 
 	public static LoadCondition<LoadCondition<?>> not(LoadCondition<?> condition) {
-		return new LoadCondition<>(LoadCondition.Type.NOT, condition);
+		return LoadCondition.create(LoadCondition.Type.NOT, condition);
 	}
 
 	public static LoadCondition<ItemLike> itemsRegistered(ItemLike... items) {
-		return new LoadCondition<>(LoadCondition.Type.ITEMS_REGISTERED, items);
+		return LoadCondition.create(LoadCondition.Type.ITEMS_REGISTERED, items);
 	}
 
 	@SafeVarargs
 	public static <T> LoadCondition<TagKey<T>> tagsPopulated(TagKey<T>... tags) {
-		return new LoadCondition<>(LoadCondition.Type.TAGS_POPULATED, tags);
+		return LoadCondition.create(LoadCondition.Type.TAGS_POPULATED, tags);
 	}
 
 }

@@ -4,17 +4,18 @@ import static com.dudko.blazinghot.data.recipe.BlazingIngredients.cinderFlour;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.soulSand;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.stone;
 
-import com.dudko.blazinghot.registry.BlazingItems;
-import com.simibubi.create.AllRecipeTypes;
-import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
+import java.util.concurrent.CompletableFuture;
 
+import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.registry.BlazingItems;
+
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 
-@SuppressWarnings("unused")
-public class MillingRecipeGen extends BlazingProcessingRecipeGen {
+public class MillingRecipeGen extends com.simibubi.create.api.data.recipe.MillingRecipeGen {
 
-	public MillingRecipeGen(PackOutput output) {
-		super(output);
+	public MillingRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+		super(output, registries, BlazingHot.ID);
 	}
 
 	GeneratedRecipe
@@ -38,11 +39,4 @@ public class MillingRecipeGen extends BlazingProcessingRecipeGen {
 									.require(cinderFlour())
 									.output(0.75f, BlazingItems.NETHERRACK_DUST)
 									.averageProcessingDuration());
-
-	@Override
-	protected IRecipeTypeInfo getRecipeType() {
-		return AllRecipeTypes.MILLING;
-	}
-
-
 }

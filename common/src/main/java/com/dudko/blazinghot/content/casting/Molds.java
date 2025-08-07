@@ -10,7 +10,7 @@ import java.util.Map;
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.foundation.multiloader.BlazingBuilderTransformers;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
-import com.dudko.blazinghot.registry.BlazingTags;
+import com.dudko.blazinghot.registry.BlazingTagsV1;
 import com.dudko.blazinghot.registry.CommonTags.Items;
 import com.tterrag.registrate.AbstractRegistrate;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
@@ -111,9 +111,9 @@ public class Molds {
 	}
 
 	public enum MoldType {
-		STURDY("sturdy", BlazingTags.Items.STURDY_MOLDS.tag, true, true),
-		CLAY("clay", BlazingTags.Items.CLAY_MOLDS.tag, false, false, false),
-		PORCELAIN("porcelain", BlazingTags.Items.PORCELAIN_MOLDS.tag, false, false);
+		STURDY("sturdy", BlazingTagsV1.Items.STURDY_MOLDS.tag, true, true),
+		CLAY("clay", BlazingTagsV1.Items.CLAY_MOLDS.tag, false, false, false),
+		PORCELAIN("porcelain", BlazingTagsV1.Items.PORCELAIN_MOLDS.tag, false, false);
 
 		public final String name;
 		public final TagKey<Item> tag;

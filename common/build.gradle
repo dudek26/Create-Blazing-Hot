@@ -31,9 +31,6 @@ dependencies {
     modCompileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${minecraft_version}:${flywheel_neoforge_version}")
     modRuntimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_neoforge_version}")
 
-    // required for proper remapping and compiling
-    modCompileOnly("net.neoforged:neoforge:${neoforge_version}")
-
 }
 
 publishing {

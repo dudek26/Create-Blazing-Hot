@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.foundation.mixin_interfaces.IAdvancementBehaviour;
-import com.dudko.blazinghot.registry.BlazingTags;
+import com.dudko.blazinghot.registry.BlazingTagsV1;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.fluids.spout.SpoutBlockEntity;
 import com.simibubi.create.content.kinetics.belt.behaviour.BeltProcessingBehaviour;
@@ -39,7 +39,7 @@ public abstract class SpoutBlockEntityMixin implements IAdvancementBehaviour {
 
 	@Inject(method = "whenItemHeld", at = @At("TAIL"))
 	private void blazinghot$giveAdvancements(TransportedItemStack transported, TransportedItemStackHandlerBehaviour handler, CallbackInfoReturnable<BeltProcessingBehaviour.ProcessingResult> cir, @Local ItemStack out) {
-		if (out.is(BlazingTags.Items.METAL_APPLES.tag)) blazinghot$award(BlazingAdvancements.METAL_APPLE_SPOUT);
+		if (out.is(BlazingTagsV1.Items.METAL_APPLES.tag)) blazinghot$award(BlazingAdvancements.METAL_APPLE_SPOUT);
 		if (out.is(Items.GOLDEN_APPLE)) {
 			blazinghot$goldenApplesCreated += out.getCount();
 			if (blazinghot$goldenApplesCreated >= 64) {

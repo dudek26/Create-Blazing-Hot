@@ -7,19 +7,20 @@ import static com.dudko.blazinghot.data.recipe.BlazingIngredients.goldenApple;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.ironApple;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.zincApple;
 
-import com.dudko.blazinghot.registry.BlazingItems;
-import com.simibubi.create.AllRecipeTypes;
-import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
+import java.util.concurrent.CompletableFuture;
 
+import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.registry.BlazingItems;
+
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
-@SuppressWarnings("unused")
-public class DeployingRecipeGen extends BlazingProcessingRecipeGen {
+public class DeployingRecipeGen extends com.simibubi.create.api.data.recipe.DeployingRecipeGen {
 
-	public DeployingRecipeGen(PackOutput output) {
-		super(output);
+	public DeployingRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+		super(output, registries, BlazingHot.ID);
 	}
 
 	GeneratedRecipe STELLAR_GOLDEN_APPLE = stellarApple(goldenApple(), BlazingItems.STELLAR_GOLDEN_APPLE),
@@ -34,13 +35,7 @@ public class DeployingRecipeGen extends BlazingProcessingRecipeGen {
 			STELLAR_BRASS_APPLE =
 					stellarApple(brassApple(), BlazingItems.STELLAR_BRASS_APPLE);
 
-	@Override
-	protected IRecipeTypeInfo getRecipeType() {
-		return AllRecipeTypes.DEPLOYING;
-	}
-
 	private GeneratedRecipe stellarApple(ItemLike metalApple, ItemLike result) {
 		return create(result.asItem().toString(), b -> b.require(metalApple).require(Items.NETHER_STAR).output(result));
 	}
-
 }

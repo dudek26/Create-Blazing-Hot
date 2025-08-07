@@ -5,32 +5,34 @@ import static com.dudko.blazinghot.data.recipe.BlazingIngredients.lava;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.moltenGold;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherEssence;
 
+import java.util.concurrent.CompletableFuture;
+
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecipe;
+import com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecipeBuilder;
 import com.dudko.blazinghot.content.metal.BlazingForm;
 import com.dudko.blazinghot.content.metal.BlazingMetal;
-import com.dudko.blazinghot.foundation.multiloader.MultiRegistries;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.foundation.recipe.BlazingRecipeGen;
 import com.dudko.blazinghot.registry.BlazingForms;
 import com.dudko.blazinghot.registry.BlazingMetals;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
-import com.dudko.blazinghot.registry.BlazingTags;
+import com.dudko.blazinghot.registry.BlazingTagsV1;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 
-@SuppressWarnings({"unused"})
-public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
+public class BlazeMixingRecipeGen extends BlazingRecipeGen<ProcessingRecipeParams, BlazeMixingRecipe, BlazeMixingRecipeBuilder> {
 
-	public BlazeMixingRecipeGen(PackOutput output) {
-		super(output);
+	public BlazeMixingRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+		super(output, registries);
 
 		BlazingMetals.ALL.forEach(this::melting);
-	}
-
-	@Override
-	protected IRecipeTypeInfo getRecipeType() {
-		return BlazingRecipeTypes.BLAZE_MIXING.get();
 	}
 
 	GeneratedRecipe
@@ -40,7 +42,7 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 							.requireMultiple(netherEssence(), 2)
 							.require(lava(), MultiAmount.fromBucketFraction(1, 10))
 							.requiresHeat(HeatCondition.SUPERHEATED)
-							.output(MultiRegistries.getFluidFromRegistry(BlazingHot.asResource("nether_lava")).get(),
+							.output(BuiltInRegistries.FLUID.get(BlazingHot.asResource("nether_lava")),
 									MultiAmount.fromBucketFraction(1, 10))),
 			MOLTEN_BLAZE_GOLD =
 					create("molten_blaze_gold",
@@ -53,6 +55,16 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 									.output(BlazingMetals.BLAZE_GOLD.getFluid().get(), MultiAmount.INGOT)),
 			STURDY_MOLDS_MELTING =
 					moldMelting();
+
+	@Override
+	protected IRecipeTypeInfo getRecipeType() {
+		return BlazingRecipeTypes.BLAZE_MIXING;
+	}
+
+	@Override
+	protected BlazeMixingRecipeBuilder getBuilder(ResourceLocation id) {
+		return new BlazeMixingRecipeBuilder(BlazeMixingRecipe::new, id);
+	}
 
 	private void melting(BlazingMetal metal) {
 		for (BlazingForm form : metal.forms) {
@@ -73,11 +85,9 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 		return create("melting/sturdy_molds",
 				b -> b
 						.requireFuel(fuel(), form.fuelCost)
-						.require(BlazingTags.Items.STURDY_MOLDS.tag)
+						.require(BlazingTagsV1.Items.STURDY_MOLDS.tag)
 						.duration(form.meltingTime)
 						.requiresHeat(HeatCondition.SUPERHEATED)
 						.output(BlazingMetals.STURDY_ALLOY.getFluid().get(), form.amount));
 	}
-
 }
-

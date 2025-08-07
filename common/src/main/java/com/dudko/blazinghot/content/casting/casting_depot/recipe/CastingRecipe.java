@@ -1,29 +1,29 @@
-package com.dudko.blazinghot.content.casting.casting_depot;
+package com.dudko.blazinghot.content.casting.casting_depot.recipe;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.mojang.serialization.MapCodec;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
-import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class CastingRecipe extends StandardProcessingRecipe<SingleRecipeInput> {
+public class CastingRecipe extends ProcessingRecipe<SingleRecipeInput, CastingRecipeParams> {
 
 	public static final int SAFE_RENDERING_LIMIT = 10;
 
 	protected int coolingDuration;
 	protected boolean keepItem;
 
-	public CastingRecipe(ProcessingRecipeParams params) {
+	public CastingRecipe(CastingRecipeParams params) {
 		super(BlazingRecipeTypes.CASTING, params);
 		coolingDuration = 0;
 		keepItem = false;
@@ -66,27 +66,30 @@ public class CastingRecipe extends StandardProcessingRecipe<SingleRecipeInput> {
 		if (fluidIngredients.isEmpty()) throw new IllegalStateException("Casting Recipe has no fluid ingredient!");
 		return fluidIngredients.getFirst();
 	}
-	
-	// TODO: finish this
-	public static class Serializer extends StandardProcessingRecipe.Serializer<CastingRecipe> {
 
-		public Serializer(Factory<CastingRecipe> factory) {
-			super(factory);
-		}
+	public static class Serializer implements RecipeSerializer<CastingRecipe> {
+		private final ProcessingRecipe.Factory<CastingRecipeParams, CastingRecipe> factory;
+		private final MapCodec<CastingRecipe> codec;
+		private final StreamCodec<RegistryFriendlyByteBuf, CastingRecipe> streamCodec;
 
-		@Override
-		public Factory<CastingRecipe> factory() {
-			return super.factory();
-		}
-
-		@Override
-		public StreamCodec<RegistryFriendlyByteBuf, CastingRecipe> streamCodec() {
-			return super.streamCodec();
+		public Serializer(ProcessingRecipe.Factory<CastingRecipeParams, CastingRecipe> factory) {
+			this.factory = factory;
+			this.codec = ProcessingRecipe.codec(factory, CastingRecipeParams.CODEC);
+			this.streamCodec = ProcessingRecipe.streamCodec(factory, CastingRecipeParams.STREAM_CODEC);
 		}
 
 		@Override
 		public MapCodec<CastingRecipe> codec() {
-			return super.codec();
+			return codec;
+		}
+
+		@Override
+		public StreamCodec<RegistryFriendlyByteBuf, CastingRecipe> streamCodec() {
+			return streamCodec;
+		}
+
+		public ProcessingRecipe.Factory<CastingRecipeParams, CastingRecipe> factory() {
+			return factory;
 		}
 	}
 

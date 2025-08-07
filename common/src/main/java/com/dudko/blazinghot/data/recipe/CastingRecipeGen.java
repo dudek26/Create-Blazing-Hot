@@ -1,54 +1,65 @@
 package com.dudko.blazinghot.data.recipe;
 
+import java.util.concurrent.CompletableFuture;
+
 import com.dudko.blazinghot.compat.Mods;
 import com.dudko.blazinghot.content.casting.Molds;
-import com.dudko.blazinghot.content.casting.Molds.Mold;
-import com.dudko.blazinghot.content.casting.Molds.MoldType;
+import com.dudko.blazinghot.content.casting.casting_depot.recipe.CastingRecipe;
+import com.dudko.blazinghot.content.casting.casting_depot.recipe.CastingRecipeBuilder;
+import com.dudko.blazinghot.content.casting.casting_depot.recipe.CastingRecipeParams;
 import com.dudko.blazinghot.content.metal.BlazingForm;
 import com.dudko.blazinghot.content.metal.BlazingMetal;
 import com.dudko.blazinghot.data.conditions.DefaultLoadConditions;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.foundation.recipe.BlazingRecipeGen;
 import com.dudko.blazinghot.registry.BlazingMetals;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 
-@SuppressWarnings({"unused"})
-public class CastingRecipeGen extends BlazingProcessingRecipeGen {
+public class CastingRecipeGen extends BlazingRecipeGen<CastingRecipeParams, CastingRecipe, CastingRecipeBuilder> {
 
-	public CastingRecipeGen(PackOutput output) {
-		super(output);
+	public CastingRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+		super(output, registries);
+
 		BlazingMetals.ALL.forEach(this::casting);
 		Molds.ALL.forEach(this::mold);
 	}
 
 	@Override
 	protected IRecipeTypeInfo getRecipeType() {
-		return BlazingRecipeTypes.CASTING.get();
+		return BlazingRecipeTypes.CASTING;
 	}
 
-	private void mold(Mold mold) {
+	@Override
+	protected CastingRecipeBuilder getBuilder(ResourceLocation id) {
+		return getRecipeType().getSerializer();
+	}
+
+	private void mold(Molds.Mold mold) {
 		Ingredient base;
 		if (mold.shape != null) base = Ingredient.of(mold.shape);
 		else base = Ingredient.of(Items.IRON_BARS);
 
-		create(mold.get(MoldType.STURDY).getId(),
+		create(mold.get(Molds.MoldType.STURDY).getId(),
 				b -> b
 						.require(base)
 						.require(BlazingMetals.STURDY_ALLOY.getFluidTag(), MultiAmount.INGOT.multiply(2))
 						.castingDuration(MultiAmount.INGOT.multiply(2))
-						.output(mold.get(MoldType.STURDY)));
+						.output(mold.get(Molds.MoldType.STURDY)));
 	}
 
 	private void casting(BlazingMetal metal) {
 		for (BlazingForm form : metal.forms) {
 			if (!form.flags.contains(BlazingForm.Flag.CASTING)) continue;
-			Mold mold = form.mold;
+			Molds.Mold mold = form.mold;
 			if (mold == null) continue;
-			for (MoldType moldType : MoldType.values()) {
+			for (Molds.MoldType moldType : Molds.MoldType.values()) {
 				if (!moldType.usable) continue;
 				for (Mods mod : form.getMods(metal)) {
 					String
@@ -61,10 +72,10 @@ public class CastingRecipeGen extends BlazingProcessingRecipeGen {
 								.require(metal.getFluidTag(), form.amount)
 								.duration(form.castingTime)
 								.coolingDuration(form.coolingTime)
-								.toolNotConsumed(moldType.reusable)
+								.keepMold(moldType.reusable)
 								.output(form.getCastingResult(metal, mod));
 						if (!mod.alwaysIncluded) {
-							b.withCondition(DefaultLoadConditions.anyModLoaded(mod));
+							b.withConditions(DefaultLoadConditions.anyModLoaded(mod));
 						}
 						return b;
 					});
@@ -74,6 +85,4 @@ public class CastingRecipeGen extends BlazingProcessingRecipeGen {
 			}
 		}
 	}
-
 }
-

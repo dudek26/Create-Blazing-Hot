@@ -10,7 +10,7 @@ public class LoadConditionHelper {
 
 	public static <T> String[] stringValues(List<T> values) {
 		if (values.isEmpty()) return new String[]{};
-		if (!(values.get(0) instanceof String)) {
+		if (!(values.getFirst() instanceof String)) {
 			throw new IllegalArgumentException("Condition values must be strings");
 		}
 		return values.stream().map(c -> (String) c).toArray(String[]::new);
@@ -19,7 +19,7 @@ public class LoadConditionHelper {
 	@SuppressWarnings("unchecked")
 	public static <T, R> TagKey<R>[] tagValues(List<T> values) {
 		if (values.isEmpty()) return new TagKey[]{};
-		if (!(values.get(0) instanceof TagKey<?>)) {
+		if (!(values.getFirst() instanceof TagKey<?>)) {
 			throw new IllegalArgumentException("Condition values must be tag keys");
 		}
 		return values.stream().map(c -> (TagKey<R>) c).toArray(TagKey[]::new);
@@ -27,13 +27,14 @@ public class LoadConditionHelper {
 
 	public static <T> ItemLike[] itemLikeValues(List<T> values) {
 		if (values.isEmpty()) return new ItemLike[]{};
-		if (!(values.get(0) instanceof ItemLike)) {
+		if (!(values.getFirst() instanceof ItemLike)) {
 			throw new IllegalArgumentException("Condition values must be item likes");
 		}
 		return values.stream().map(c -> (ItemLike) c).toArray(ItemLike[]::new);
 	}
 
 	@ExpectPlatform
+	@Deprecated(forRemoval = true)
 	public static String conditionsKey() {
 		throw new AssertionError();
 	}

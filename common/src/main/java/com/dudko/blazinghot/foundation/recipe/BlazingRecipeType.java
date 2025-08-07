@@ -6,10 +6,9 @@ import java.util.function.Supplier;
 import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecipe;
+import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.simibubi.create.AllRecipeTypes;
-import com.simibubi.create.content.kinetics.deployer.ItemApplicationRecipe;
-import com.simibubi.create.content.kinetics.deployer.ItemApplicationRecipeParams;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
@@ -45,16 +44,6 @@ public abstract class BlazingRecipeType implements IRecipeTypeInfo, StringRepres
 		isProcessingRecipe = false;
 	}
 
-	protected BlazingRecipeType(String id, StandardProcessingRecipe.Factory<?> processingFactory) {
-		this(id, () -> new StandardProcessingRecipe.Serializer<>(processingFactory));
-		isProcessingRecipe = true;
-	}
-
-	protected BlazingRecipeType(String id, ProcessingRecipe.Factory<ItemApplicationRecipeParams, ? extends ItemApplicationRecipe> itemApplicationFactory) {
-		this(id, () -> new ItemApplicationRecipe.Serializer<>(itemApplicationFactory));
-		isProcessingRecipe = true;
-	}
-
 	@ExpectPlatform
 	public static BlazingRecipeType create(String id, Supplier<RecipeSerializer<?>> serializerSupplier, Supplier<RecipeType<?>> typeSupplier, boolean registerType) {
 		throw new AssertionError();
@@ -71,13 +60,18 @@ public abstract class BlazingRecipeType implements IRecipeTypeInfo, StringRepres
 	}
 
 	@ExpectPlatform
-	public static BlazingRecipeType create(String id, ProcessingRecipe.Factory<ItemApplicationRecipeParams, ? extends ItemApplicationRecipe> itemApplicationFactory) {
+	public static BlazingRecipeType blazeMixing(String id, BlazeMixingRecipe.Factory blazeMixingFactory) {
 		throw new AssertionError();
 	}
 
 	@Override
 	public ResourceLocation getId() {
 		return id;
+	}
+
+	public BlazingRecipeType register() {
+		BlazingRecipeTypes.ALL.add(this);
+		return this;
 	}
 
 	public <I extends RecipeInput, R extends Recipe<I>> Optional<RecipeHolder<R>> find(I inv, Level world) {

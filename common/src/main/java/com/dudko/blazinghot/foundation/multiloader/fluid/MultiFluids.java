@@ -9,7 +9,7 @@ import net.minecraft.world.level.material.Fluid;
 
 public class MultiFluids {
 
-	public static final float MELTABLE_CONVERSION = 9000 / 144f;
+	public static final float MELTABLE_CONVERSION = 9000 / 90f; // DROPLETS to MILLIBUCKETS ratio for ingots
 
 	@ExpectPlatform
 	public static String platformedName() {

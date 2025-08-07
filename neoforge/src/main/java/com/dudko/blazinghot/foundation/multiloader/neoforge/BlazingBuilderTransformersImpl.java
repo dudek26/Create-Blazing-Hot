@@ -10,7 +10,7 @@ import com.dudko.blazinghot.content.block.modern_lamp.SmallModernLampPanelBlock;
 import com.dudko.blazinghot.content.casting.Molds;
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlock;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
-import com.dudko.blazinghot.registry.BlazingTags;
+import com.dudko.blazinghot.registry.BlazingTagsV1;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.data.AssetLookup;
@@ -34,7 +34,7 @@ public class BlazingBuilderTransformersImpl {
 		return a -> a
 				.initialProperties(() -> Blocks.GLOWSTONE)
 				.properties(p -> p.mapColor(color).lightLevel(s -> s.getValue(ModernLampBlock.LIT) ? 15 : 0))
-				.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag, BlazingTags.Blocks.MODERN_LAMPS.tag)
+				.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag, BlazingTagsV1.Blocks.MODERN_LAMPS.tag)
 				.blockstate((c, p) -> p
 						.getVariantBuilder(c.get())
 						.forAllStates(state -> ConfiguredModel
@@ -50,7 +50,7 @@ public class BlazingBuilderTransformersImpl {
 
 						))
 				.item()
-				.tag(BlazingTags.Items.MODERN_LAMPS.tag)
+				.tag(BlazingTagsV1.Items.MODERN_LAMPS.tag)
 				.model((c, b) -> b.blockItem(c).texture("#all", b.modLoc("block/modern_lamp/block/" + color.getName())))
 				.build();
 	}
@@ -203,7 +203,7 @@ public class BlazingBuilderTransformersImpl {
 	}
 
 	public static <T extends Item, P> NonNullUnaryOperator<ItemBuilder<T, P>> mold(String name, Molds.MoldType type) {
-		return b -> b.tag(BlazingTags.Items.MOLDS.tag, type.tag).properties(p -> {
+		return b -> b.tag(BlazingTagsV1.Items.MOLDS.tag, type.tag).properties(p -> {
 			if (type.fireResistant) p.fireResistant();
 			return p;
 		}).model((c, p) -> p.generated(c::get, BlazingHot.asResource("item/" + type.name + "_mold/" + name)));

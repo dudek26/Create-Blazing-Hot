@@ -17,22 +17,26 @@ import static com.dudko.blazinghot.data.recipe.BlazingIngredients.soulDust;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.stoneDust;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.wheatFlour;
 
+import java.util.concurrent.CompletableFuture;
+
 import com.dudko.blazinghot.content.metal.BlazingForm;
 import com.dudko.blazinghot.content.metal.BlazingMetal;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.foundation.recipe.BlazingStandardRecipeGen;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingMetals;
 import com.simibubi.create.AllRecipeTypes;
+import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 
-@SuppressWarnings("unused")
-public class MixingRecipeGen extends BlazingProcessingRecipeGen {
+public class MixingRecipeGen extends BlazingStandardRecipeGen<MixingRecipe> {
 
-	public MixingRecipeGen(PackOutput output) {
-		super(output);
+	public MixingRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+		super(output, registries);
 
 		BlazingMetals.ALL.forEach(this::melting);
 	}
@@ -56,64 +60,62 @@ public class MixingRecipeGen extends BlazingProcessingRecipeGen {
 					create("netherrack_dust",
 							b -> b.require(cinderFlour()).require(stoneDust()).output(BlazingItems.NETHERRACK_DUST, 2)),
 			MOLTEN_BLAZE_GOLD =
-					create("molten_blaze_gold",
+					bCreate("molten_blaze_gold",
 							b -> b
+									.output(BlazingMetals.BLAZE_GOLD.getFluid().get(), MultiAmount.ROD)
 									.requireMultiple(netherEssence(), 2)
 									.require(moltenGold(), MultiAmount.ROD)
 									.requiresHeat(HeatCondition.SUPERHEATED)
-									.duration(200)
-									.output(BlazingMetals.BLAZE_GOLD.getFluid().get(), MultiAmount.ROD)),
+									.duration(200)),
 			MOLTEN_NETHERITE =
-					create("molten_netherite",
+					bCreate("molten_netherite",
 							b -> b
+									.output(BlazingMetals.NETHERITE.getFluid().get(), MultiAmount.INGOT.divide(4))
 									.require(moltenGold(), MultiAmount.INGOT)
 									.require(moltenAncientDebris(), MultiAmount.INGOT)
 									.duration(200)
-									.requiresHeat(HeatCondition.SUPERHEATED)
-									.output(BlazingMetals.NETHERITE.getFluid().get(), MultiAmount.INGOT.divide(4))),
+									.requiresHeat(HeatCondition.SUPERHEATED)),
 			MOLTEN_ANDESITE =
-					create("molten_andesite",
+					bCreate("molten_andesite",
 							b -> b
+									.output(BlazingMetals.ANDESITE.getFluid().get(), MultiAmount.ROD.multiply(3))
 									.require(moltenIron(), MultiAmount.NUGGET)
 									.require(andesite())
-									.requiresHeat(HeatCondition.HEATED)
-									.output(BlazingMetals.ANDESITE.getFluid().get(), MultiAmount.ROD.multiply(3))),
+									.requiresHeat(HeatCondition.HEATED)),
 			MOLTEN_BRASS =
-					create("molten_brass",
+					bCreate("molten_brass",
 							b -> b
+									.output(BlazingMetals.BRASS.getFluid().get(), MultiAmount.INGOT.multiply(2))
 									.require(moltenCopper(), MultiAmount.INGOT)
 									.require(moltenZinc(), MultiAmount.INGOT)
-									.requiresHeat(HeatCondition.HEATED)
-									.output(BlazingMetals.BRASS.getFluid().get(), MultiAmount.INGOT.multiply(2))),
+									.requiresHeat(HeatCondition.HEATED)),
 			MOLTEN_STURDY_ALLOY =
-					create("molten_sturdy_alloy",
+					bCreate("molten_sturdy_alloy",
 							b -> b
+									.output(BlazingMetals.STURDY_ALLOY.getFluid().get(), MultiAmount.INGOT)
 									.require(moltenIron(), MultiAmount.INGOT)
 									.require(powderedObsidian())
 									.require(netherCompound())
 									.duration(200)
-									.requiresHeat(HeatCondition.SUPERHEATED)
-									.output(BlazingMetals.STURDY_ALLOY.getFluid().get(), MultiAmount.INGOT));
-
-	@Override
-	protected IRecipeTypeInfo getRecipeType() {
-		return AllRecipeTypes.MIXING;
-
-	}
+									.requiresHeat(HeatCondition.SUPERHEATED));
 
 	private void melting(BlazingMetal metal) {
 		for (BlazingForm form : metal.forms) {
 			if (!form.flags.contains(BlazingForm.Flag.MELTING)) continue;
 			if (!form.mechanicalMixerMeltable) continue;
-			create(form.getMeltingRecipeName(metal),
+			bCreate(form.getMeltingRecipeName(metal),
 					b -> b
 							.withConditions(form.getMeltingLoadConditions(metal))
+							.output(metal.getFluid().get(), form.amount)
 							.require(form.getMeltingIngredient(metal))
 							.duration(form.meltingTime * 3)
-							.requiresHeat(HeatCondition.SUPERHEATED)
-							.output(metal.getFluid().get(), form.amount));
+							.requiresHeat(HeatCondition.SUPERHEATED));
 		}
 
 	}
 
+	@Override
+	protected IRecipeTypeInfo getRecipeType() {
+		return AllRecipeTypes.MIXING;
+	}
 }

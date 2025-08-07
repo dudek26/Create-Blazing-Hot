@@ -1,6 +1,6 @@
 package com.dudko.blazinghot.content.kinetics.blaze_mixer.neoforge;
 
-import static com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe.getFuelCost;
+import static com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecipe.getFuelCost;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +9,10 @@ import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
-import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
+import com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecipe;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.BlazingConfigs;
-import com.dudko.blazinghot.registry.BlazingTags;
+import com.dudko.blazinghot.registry.BlazingTagsV1;
 import com.dudko.blazinghot.registry.neoforge.BlazingRecipeTypesImpl;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.AllSoundEvents;
@@ -87,11 +87,11 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 	public void updateFueled() {
 		FluidState fluidState = getFluidStack().getFluid().defaultFluidState();
 
-		fueled = fluidState.is(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag) && getFuelAmount() > 0;
+		fueled = fluidState.is(BlazingTagsV1.Fluids.BLAZE_MIXER_FUEL.tag) && getFuelAmount() > 0;
 	}
 
 	public boolean hasFuel(long amount) {
-		return hasFuel(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag, amount);
+		return hasFuel(BlazingTagsV1.Fluids.BLAZE_MIXER_FUEL.tag, amount);
 	}
 
 	public boolean hasFuel(TagKey<Fluid> tag, long amount) {
@@ -141,13 +141,13 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 							recipeSpeed = t / 100f;
 						}
 						if (processingRecipe instanceof BlazeMixingRecipe blazeMixingRecipe && blazeMixingRecipe
-								.getFuelFluid()
+								.getMixerFuel()
 								.test(getFluidStack())) {
-							fuelCost = blazeMixingRecipe.getFuelFluid().getRequiredAmount();
+							fuelCost = blazeMixingRecipe.getMixerFuel().getRequiredAmount();
 							blazeMixing = true;
 						}
 					}
-					int calculatedCost = (int) getFuelCost(currentRecipe);
+					int calculatedCost = (int) getFuelCost(currentRecipe, level);
 					if (hasFuel(calculatedCost) && !(currentRecipe instanceof BlazeMixingRecipe)) {
 						List<RecipeHolder<? extends Recipe<?>>> list = new ArrayList<>();
 						for (RecipeHolder<? extends Recipe<?>> r : RecipeFinder.get(getRecipeCacheKey(),
@@ -216,7 +216,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 				0,
 				0);
 
-		if (getFluidStack().getFluid().defaultFluidState().is(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag))
+		if (getFluidStack().getFluid().defaultFluidState().is(BlazingTagsV1.Fluids.BLAZE_MIXER_FUEL.tag))
 			level.addParticle(ParticleTypes.SMALL_FLAME,
 					center.x,
 					center.y - 1 - runningOffset,
@@ -300,7 +300,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 		if (basin.isEmpty()) return false;
 
 		if (recipe instanceof BlazeMixingRecipe bmxRecipe) {
-			return BasinRecipe.match(basin.get(), bmxRecipe) && hasFuel(bmxRecipe.getFuelFluid());
+			return BasinRecipe.match(basin.get(), bmxRecipe) && hasFuel(bmxRecipe.getMixerFuel());
 		}
 		else if (recipe instanceof MixingRecipe mRecipe) {
 			assert level != null;
@@ -323,7 +323,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 				&& !(recipe instanceof ShapedRecipe)
 				&& BlazingConfigs.server().recipes.allowShapelessInBlazeMixer.get()
 				&& recipe.getIngredients().size() > 1
-				&& !MechanicalPressBlockEntity.canCompress(recipe)) && !AllRecipeTypes.shouldIgnoreInAutomation(recipe)
+				&& !MechanicalPressBlockEntity.canCompress(recipe)) && !AllRecipeTypes.shouldIgnoreInAutomation(holder)
 				|| (recipe.getType() == AllRecipeTypes.MIXING.getType()
 				&& BlazingConfigs.server().recipes.allowMixingInBlazeMixer.get()))
 				|| recipe.getType() == BlazingRecipeTypesImpl.BLAZE_MIXING.getType();

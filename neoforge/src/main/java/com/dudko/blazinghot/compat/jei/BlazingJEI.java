@@ -19,7 +19,7 @@ import com.dudko.blazinghot.compat.jei.category.BlazeMixingCategory;
 import com.dudko.blazinghot.compat.jei.category.CastingCategory;
 import com.dudko.blazinghot.content.casting.casting_depot.neoforge.CastingRecipe;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
-import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixingRecipe;
+import com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecipe;
 import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.dudko.blazinghot.foundation.mixin.neoforge.RecipeManagerAccessor;
 import com.dudko.blazinghot.registry.BlazingBlocks;

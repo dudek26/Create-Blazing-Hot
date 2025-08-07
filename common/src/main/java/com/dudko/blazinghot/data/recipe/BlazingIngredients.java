@@ -9,7 +9,7 @@ import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingMetals;
-import com.dudko.blazinghot.registry.BlazingTags;
+import com.dudko.blazinghot.registry.BlazingTagsV1;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
@@ -122,7 +122,7 @@ public class BlazingIngredients {
 	}
 
 	public static TagKey<Fluid> fuel() {
-		return BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag;
+		return BlazingTagsV1.Fluids.BLAZE_MIXER_FUEL.tag;
 	}
 
 	//    Materials
@@ -144,7 +144,7 @@ public class BlazingIngredients {
 	}
 
 	public static TagKey<Item> netherFlora() {
-		return BlazingTags.Items.NETHER_FLORA.tag;
+		return BlazingTagsV1.Items.NETHER_FLORA.tag;
 	}
 
 	public static Item netherCompound() {

@@ -5,18 +5,19 @@ import static com.dudko.blazinghot.data.recipe.BlazingIngredients.cinderFlour;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.soulSand;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.stone;
 
-import com.dudko.blazinghot.registry.BlazingItems;
-import com.simibubi.create.AllRecipeTypes;
-import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
+import java.util.concurrent.CompletableFuture;
 
+import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.registry.BlazingItems;
+
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
 
-@SuppressWarnings("unused")
-public class CrushingRecipeGen extends BlazingProcessingRecipeGen {
+public class CrushingRecipeGen extends com.simibubi.create.api.data.recipe.CrushingRecipeGen {
 
-	public CrushingRecipeGen(PackOutput output) {
-		super(output);
+	public CrushingRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+		super(output, registries, BlazingHot.ID);
 	}
 
 	GeneratedRecipe
@@ -43,8 +44,4 @@ public class CrushingRecipeGen extends BlazingProcessingRecipeGen {
 					create("cinder_flour",
 							b -> b.require(cinderFlour()).output(BlazingItems.NETHERRACK_DUST).duration(150));
 
-	@Override
-	protected IRecipeTypeInfo getRecipeType() {
-		return AllRecipeTypes.CRUSHING;
-	}
 }

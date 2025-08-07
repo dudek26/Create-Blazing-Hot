@@ -1,6 +1,6 @@
 package com.dudko.blazinghot.registry;
 
-import static com.dudko.blazinghot.registry.BlazingTags.NameSpace.MOD;
+import static com.dudko.blazinghot.registry.BlazingTagsV1.NameSpace.MOD;
 
 import java.util.function.BiConsumer;
 
@@ -22,7 +22,8 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 
 @SuppressWarnings("unused")
-public class BlazingTags {
+@Deprecated(forRemoval = true)
+public class BlazingTagsV1 {
 
 	public static <T> TagKey<T> optionalTag(Registry<T> registry, ResourceLocation id) {
 		return TagKey.create(registry.key(), id);
@@ -84,7 +85,6 @@ public class BlazingTags {
 			this.alwaysDatagen = alwaysDatagen;
 		}
 
-		@SuppressWarnings("deprecation")
 		public boolean matches(Block block) {
 			return block.builtInRegistryHolder().is(tag);
 		}

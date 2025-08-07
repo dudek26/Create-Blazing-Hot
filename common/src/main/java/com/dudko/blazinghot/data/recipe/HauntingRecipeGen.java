@@ -2,25 +2,22 @@ package com.dudko.blazinghot.data.recipe;
 
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherCompound;
 
-import com.dudko.blazinghot.registry.BlazingItems;
-import com.simibubi.create.AllRecipeTypes;
-import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
+import java.util.concurrent.CompletableFuture;
 
+import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.registry.BlazingItems;
+
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 
-@SuppressWarnings("unused")
-public class HauntingRecipeGen extends BlazingProcessingRecipeGen {
+public class HauntingRecipeGen extends com.simibubi.create.api.data.recipe.HauntingRecipeGen {
 
-	public HauntingRecipeGen(PackOutput output) {
-		super(output);
+	public HauntingRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+		super(output, registries, BlazingHot.ID);
 	}
 
 	GeneratedRecipe
 			NETHER_COMPOUND =
 			create("nether_compound", b -> b.require(netherCompound()).output(BlazingItems.NETHER_ESSENCE));
 
-	@Override
-	protected IRecipeTypeInfo getRecipeType() {
-		return AllRecipeTypes.HAUNTING;
-	}
 }

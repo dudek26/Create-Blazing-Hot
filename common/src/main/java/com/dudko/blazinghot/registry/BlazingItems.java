@@ -146,7 +146,7 @@ public class BlazingItems {
 			STELLAR_GOLDEN_APPLE =
 			new FoodItemBuilder<>("stellar_golden_apple", BlazingFoodItem::new)
 					.metalApple()
-					.tag(BlazingTags.Items.STELLAR_METAL_APPLES.tag)
+					.tag(BlazingTagsV1.Items.STELLAR_METAL_APPLES.tag)
 					.addEffect(MobEffects.ABSORPTION, tickMinutes(1), 2)
 					.addEffect(MobEffects.REGENERATION, tickSeconds(20), 1)
 					.addEffect(MobEffects.FIRE_RESISTANCE, tickMinutes(3))
@@ -156,19 +156,19 @@ public class BlazingItems {
 					new FoodItemBuilder<>("iron_carrot", BlazingFoodItem::new)
 							.nutrition(5)
 							.saturationMod(0.8f)
-							.tag(BlazingTags.Items.METAL_CARROTS.tag)
+							.tag(BlazingTagsV1.Items.METAL_CARROTS.tag)
 							.register(),
 			IRON_APPLE =
 					new FoodItemBuilder<>("iron_apple", BlazingFoodItem::new)
 							.metalApple()
-							.tag(BlazingTags.Items.METAL_APPLES.tag)
+							.tag(BlazingTagsV1.Items.METAL_APPLES.tag)
 							.addEffect(MobEffects.ABSORPTION, tickMinutes(1))
 							.addEffect(MobEffects.DAMAGE_RESISTANCE, tickSeconds(30))
 							.register(),
 			STELLAR_IRON_APPLE =
 					new FoodItemBuilder<>("stellar_iron_apple", BlazingFoodItem::new)
 							.metalApple()
-							.tag(BlazingTags.Items.STELLAR_METAL_APPLES.tag)
+							.tag(BlazingTagsV1.Items.STELLAR_METAL_APPLES.tag)
 							.addEffect(MobEffects.ABSORPTION, tickMinutes(1), 1)
 							.addEffect(MobEffects.REGENERATION, tickSeconds(10))
 							.addEffect(MobEffects.DAMAGE_RESISTANCE, tickMinutes(2), 1)
@@ -186,12 +186,12 @@ public class BlazingItems {
 							.saturationMod(1.2f)
 							.alwaysEat()
 							.fireResistant()
-							.tag(BlazingTags.Items.METAL_CARROTS.tag)
+							.tag(BlazingTagsV1.Items.METAL_CARROTS.tag)
 							.register(),
 			BLAZE_APPLE =
 					new FoodItemBuilder<>("blaze_apple", p -> new BlazingFoodItem(p, EXTINGUISHING))
 							.metalApple()
-							.tag(BlazingTags.Items.METAL_APPLES.tag)
+							.tag(BlazingTagsV1.Items.METAL_APPLES.tag)
 							.addEffect(MobEffects.ABSORPTION, tickMinutes(2))
 							.addEffect(MobEffects.FIRE_RESISTANCE, tickMinutes(5))
 							.fireResistant()
@@ -199,7 +199,7 @@ public class BlazingItems {
 			STELLAR_BLAZE_APPLE =
 					new FoodItemBuilder<>("stellar_blaze_apple", p -> new BlazingFoodItem(p, EXTINGUISHING))
 							.metalApple()
-							.tag(BlazingTags.Items.STELLAR_METAL_APPLES.tag)
+							.tag(BlazingTagsV1.Items.STELLAR_METAL_APPLES.tag)
 							.addEffect(MobEffects.ABSORPTION, tickMinutes(1), 1)
 							.addEffect(MobEffects.REGENERATION, tickSeconds(10))
 							.addEffect(MobEffects.FIRE_RESISTANCE, tickMinutes(8))
@@ -220,19 +220,19 @@ public class BlazingItems {
 							.saturationMod(1f)
 							.alwaysEat()
 							.description(ItemDescriptions.OXYGEN_FOOD)
-							.tag(BlazingTags.Items.METAL_CARROTS.tag)
+							.tag(BlazingTagsV1.Items.METAL_CARROTS.tag)
 							.register(),
 			COPPER_APPLE =
 					new FoodItemBuilder<>("copper_apple", BlazingFoodItem::new)
 							.metalApple()
-							.tag(BlazingTags.Items.METAL_APPLES.tag)
+							.tag(BlazingTagsV1.Items.METAL_APPLES.tag)
 							.addEffect(MobEffects.ABSORPTION, tickSeconds(30))
 							.addEffect(MobEffects.WATER_BREATHING, tickMinutes(1))
 							.register(),
 			STELLAR_COPPER_APPLE =
 					new FoodItemBuilder<>("stellar_copper_apple", BlazingFoodItem::new)
 							.metalApple()
-							.tag(BlazingTags.Items.STELLAR_METAL_APPLES.tag)
+							.tag(BlazingTagsV1.Items.STELLAR_METAL_APPLES.tag)
 							.addEffect(MobEffects.ABSORPTION, tickMinutes(1), 1)
 							.addEffect(MobEffects.REGENERATION, tickSeconds(10))
 							.addEffect(MobEffects.WATER_BREATHING, tickMinutes(5))
@@ -251,12 +251,12 @@ public class BlazingItems {
 							.saturationMod(0.8f)
 							.alwaysEat()
 							.description(ItemDescriptions.SLOWNESS_REMOVING_FOOD_0)
-							.tag(BlazingTags.Items.METAL_CARROTS.tag)
+							.tag(BlazingTagsV1.Items.METAL_CARROTS.tag)
 							.register(),
 			ZINC_APPLE =
 					new FoodItemBuilder<>("zinc_apple", p -> new BlazingFoodItem(p, REMOVE_SLOWNESS_1))
 							.metalApple()
-							.tag(BlazingTags.Items.METAL_APPLES.tag)
+							.tag(BlazingTagsV1.Items.METAL_APPLES.tag)
 							.description(ItemDescriptions.SLOWNESS_REMOVING_FOOD_1)
 							.addEffect(MobEffects.ABSORPTION, tickMinutes(1))
 							.addEffect(MobEffects.MOVEMENT_SPEED, tickSeconds(30))
@@ -264,7 +264,7 @@ public class BlazingItems {
 			STELLAR_ZINC_APPLE =
 					new FoodItemBuilder<>("stellar_zinc_apple", p -> new BlazingFoodItem(p, REMOVE_SLOWNESS_2))
 							.metalApple()
-							.tag(BlazingTags.Items.STELLAR_METAL_APPLES.tag)
+							.tag(BlazingTagsV1.Items.STELLAR_METAL_APPLES.tag)
 							.description(ItemDescriptions.SLOWNESS_REMOVING_FOOD_2)
 							.addEffect(MobEffects.ABSORPTION, tickMinutes(1), 1)
 							.addEffect(MobEffects.REGENERATION, tickSeconds(10))
@@ -284,21 +284,21 @@ public class BlazingItems {
 					new FoodItemBuilder<>("brass_carrot", BlazingFoodItem::new)
 							.nutrition(6)
 							.saturationMod(1f)
-							.tag(BlazingTags.Items.METAL_CARROTS.tag)
+							.tag(BlazingTagsV1.Items.METAL_CARROTS.tag)
 							.alwaysEat()
 							.addEffect(MobEffects.DIG_SPEED, tickSeconds(10))
 							.register(),
 			BRASS_APPLE =
 					new FoodItemBuilder<>("brass_apple", BlazingFoodItem::new)
 							.metalApple()
-							.tag(BlazingTags.Items.METAL_APPLES.tag)
+							.tag(BlazingTagsV1.Items.METAL_APPLES.tag)
 							.addEffect(MobEffects.ABSORPTION, tickMinutes(2))
 							.addEffect(MobEffects.DIG_SPEED, tickMinutes(2))
 							.register(),
 			STELLAR_BRASS_APPLE =
 					new FoodItemBuilder<>("stellar_brass_apple", BlazingFoodItem::new)
 							.metalApple()
-							.tag(BlazingTags.Items.STELLAR_METAL_APPLES.tag)
+							.tag(BlazingTagsV1.Items.STELLAR_METAL_APPLES.tag)
 							.addEffect(MobEffects.ABSORPTION, tickMinutes(1), 1)
 							.addEffect(MobEffects.REGENERATION, tickSeconds(10), 1)
 							.addEffect(MobEffects.DIG_SPEED, tickMinutes(5))
@@ -390,7 +390,7 @@ public class BlazingItems {
 					.saturationMod(1.1f)
 					.alwaysEat()
 					.rarity(Rarity.EPIC)
-					.tag(BlazingTags.Items.ENCHANTED_METAL_APPLES.tag);
+					.tag(BlazingTagsV1.Items.ENCHANTED_METAL_APPLES.tag);
 		}
 
 		protected final FoodItemBuilder<T> description(String description) {
@@ -499,10 +499,10 @@ public class BlazingItems {
 				builder.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, description));
 
 			if (ListUtil.containsAny(Arrays.stream(tags).toList(),
-					BlazingTags.Items.METAL_CARROTS.tag,
-					BlazingTags.Items.METAL_APPLES.tag,
-					BlazingTags.Items.STELLAR_METAL_APPLES.tag,
-					BlazingTags.Items.ENCHANTED_METAL_APPLES.tag)) {
+					BlazingTagsV1.Items.METAL_CARROTS.tag,
+					BlazingTagsV1.Items.METAL_APPLES.tag,
+					BlazingTagsV1.Items.STELLAR_METAL_APPLES.tag,
+					BlazingTagsV1.Items.ENCHANTED_METAL_APPLES.tag)) {
 				builder.onRegisterAfter(Registries.ITEM, METAL_FOOD::add);
 			}
 			return builder;

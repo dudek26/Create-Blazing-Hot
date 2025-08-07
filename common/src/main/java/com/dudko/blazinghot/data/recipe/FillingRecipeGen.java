@@ -6,31 +6,36 @@ import static com.dudko.blazinghot.data.recipe.BlazingIngredients.lava;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.melon;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.moltenGold;
 import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherDough;
+import static com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount.NUGGET_COVER;
+
+import java.util.concurrent.CompletableFuture;
 
 import com.dudko.blazinghot.content.metal.BlazingMetal;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.foundation.recipe.BlazingStandardRecipeGen;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingMetals;
 import com.simibubi.create.AllRecipeTypes;
+import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
-@SuppressWarnings("unused")
-public class FillingRecipeGen extends BlazingProcessingRecipeGen {
+public class FillingRecipeGen extends BlazingStandardRecipeGen<FillingRecipe> {
 
-	public FillingRecipeGen(PackOutput output) {
-		super(output);
+	public FillingRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+		super(output, registries);
 	}
 
 	GeneratedRecipe
 			GLISTERING_MELON =
-			create("glistering_melon",
-					b -> b.require(melon()).require(moltenGold(), NUGGET_COVER).output(Items.GLISTERING_MELON_SLICE)),
-			GOLDEN_APPLE =
-					metalApple(BlazingMetals.GOLD, Items.GOLDEN_APPLE),
+			bCreate("glistering_melon",
+					b -> b.require(moltenGold(), NUGGET_COVER).require(melon()).output(Items.GLISTERING_MELON_SLICE)),
+
+	GOLDEN_APPLE = metalApple(BlazingMetals.GOLD, Items.GOLDEN_APPLE),
 			GOLDEN_CARROT =
 					metalCarrot(BlazingMetals.GOLD, Items.GOLDEN_CARROT),
 			BLAZE_CARROT =
@@ -54,24 +59,24 @@ public class FillingRecipeGen extends BlazingProcessingRecipeGen {
 			ZINC_APPLE =
 					metalApple(BlazingMetals.ZINC, BlazingItems.ZINC_APPLE),
 			BLAZE_ROLL =
-					create("blaze_roll",
+					bCreate("blaze_roll",
 							b -> b
-									.require(netherDough())
 									.require(lava(), MultiAmount.BOTTLE)
+									.require(netherDough())
 									.output(BlazingItems.BLAZE_ROLL));
+
+	private GeneratedRecipe metalApple(BlazingMetal metal, ItemLike result) {
+		return bCreate(result.asItem().toString(),
+				b -> b.require(metal.getFluidTag(), MultiAmount.INGOT_COVER).require(apple()).output(result));
+	}
+
+	private GeneratedRecipe metalCarrot(BlazingMetal metal, ItemLike result) {
+		return bCreate(result.asItem().toString(),
+				b -> b.require(metal.getFluidTag(), NUGGET_COVER).require(carrot()).output(result));
+	}
 
 	@Override
 	protected IRecipeTypeInfo getRecipeType() {
 		return AllRecipeTypes.FILLING;
-	}
-
-	private GeneratedRecipe metalApple(BlazingMetal metal, ItemLike result) {
-		return create(result.asItem().toString(),
-				b -> b.require(apple()).require(metal.getFluidTag(), MultiAmount.INGOT_COVER).output(result));
-	}
-
-	private GeneratedRecipe metalCarrot(BlazingMetal metal, ItemLike result) {
-		return create(result.asItem().toString(),
-				b -> b.require(carrot()).require(metal.getFluidTag(), MultiAmount.NUGGET_COVER).output(result));
 	}
 }

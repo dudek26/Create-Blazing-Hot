@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import com.dudko.blazinghot.content.metal.BlazingMetal;
 import com.dudko.blazinghot.data.BlazingTagGen;
 import com.dudko.blazinghot.registry.BlazingMetals;
-import com.dudko.blazinghot.registry.BlazingTags;
+import com.dudko.blazinghot.registry.BlazingTagsV1;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.dudko.blazinghot.registry.neoforge.BlazingFluidsImpl;
 import com.dudko.blazinghot.util.DyeUtil;
@@ -22,12 +22,11 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.neoforged.neoforge.registries.ForgeRegistries;
 
 public class BlazingTagGenImpl {
 
 	public static void generateBlockTags(RegistrateTagsProvider<Block> prov) {
-		for (BlazingTags.Blocks tag : BlazingTags.Blocks.values()) {
+		for (BlazingTagsV1.Blocks tag : BlazingTagsV1.Blocks.values()) {
 			if (tag.alwaysDatagen) {
 				BlazingTagGen.tagAppender(prov, tag);
 			}
@@ -44,11 +43,11 @@ public class BlazingTagGenImpl {
 
 	public static void generateFluidTags(RegistrateTagsProvider<Fluid> prov) {
 		prov
-				.addTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag)
+				.addTag(BlazingTagsV1.Fluids.BLAZE_MIXER_FUEL.tag)
 				.add(ForgeRegistries.FLUIDS.getResourceKey(Fluids.LAVA).get())
 				.add(ForgeRegistries.FLUIDS.getResourceKey(BlazingFluidsImpl.NETHER_LAVA.get()).get());
 
-		for (BlazingTags.Fluids tag : BlazingTags.Fluids.values()) {
+		for (BlazingTagsV1.Fluids tag : BlazingTagsV1.Fluids.values()) {
 			if (tag.alwaysDatagen) {
 				BlazingTagGen.tagAppender(prov, tag);
 			}
@@ -66,7 +65,7 @@ public class BlazingTagGenImpl {
 
 	public static void generateItemTags(RegistrateTagsProvider<Item> prov) {
 		prov
-				.addTag(BlazingTags.Items.NETHER_FLORA.tag)
+				.addTag(BlazingTagsV1.Items.NETHER_FLORA.tag)
 				.add(itemKey(Items.WARPED_FUNGUS),
 						itemKey(Items.CRIMSON_FUNGUS),
 						itemKey(Items.WARPED_ROOTS),
@@ -75,18 +74,18 @@ public class BlazingTagGenImpl {
 						itemKey(Items.TWISTING_VINES),
 						itemKey(Items.NETHER_SPROUTS));
 
-		prov.addTag(BlazingTags.Items.METAL_CARROTS.tag).add(itemKey(Items.GOLDEN_CARROT));
-		prov.addTag(BlazingTags.Items.METAL_APPLES.tag).add(itemKey(Items.GOLDEN_APPLE));
-		prov.addTag(BlazingTags.Items.ENCHANTED_METAL_APPLES.tag).add(itemKey(Items.ENCHANTED_GOLDEN_APPLE));
+		prov.addTag(BlazingTagsV1.Items.METAL_CARROTS.tag).add(itemKey(Items.GOLDEN_CARROT));
+		prov.addTag(BlazingTagsV1.Items.METAL_APPLES.tag).add(itemKey(Items.GOLDEN_APPLE));
+		prov.addTag(BlazingTagsV1.Items.ENCHANTED_METAL_APPLES.tag).add(itemKey(Items.ENCHANTED_GOLDEN_APPLE));
 
 		BlazingTagGen
-				.tagAppender(prov, BlazingTags.Items.METAL_FOOD)
-				.addTag(BlazingTags.Items.METAL_CARROTS.tag)
-				.addTag(BlazingTags.Items.METAL_APPLES.tag)
-				.addTag(BlazingTags.Items.STELLAR_METAL_APPLES.tag)
-				.addTag(BlazingTags.Items.ENCHANTED_METAL_APPLES.tag);
+				.tagAppender(prov, BlazingTagsV1.Items.METAL_FOOD)
+				.addTag(BlazingTagsV1.Items.METAL_CARROTS.tag)
+				.addTag(BlazingTagsV1.Items.METAL_APPLES.tag)
+				.addTag(BlazingTagsV1.Items.STELLAR_METAL_APPLES.tag)
+				.addTag(BlazingTagsV1.Items.ENCHANTED_METAL_APPLES.tag);
 
-		for (BlazingTags.Items tag : BlazingTags.Items.values()) {
+		for (BlazingTagsV1.Items tag : BlazingTagsV1.Items.values()) {
 			if (tag.alwaysDatagen) BlazingTagGen.tagAppender(prov, tag);
 		}
 

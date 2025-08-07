@@ -5,7 +5,7 @@ import java.util.function.BiConsumer;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.gui.ponder.BlazingPonderPlugin;
 import com.dudko.blazinghot.registry.BlazingMetals;
-import com.dudko.blazinghot.registry.BlazingTags;
+import com.dudko.blazinghot.registry.BlazingTagsV1;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.dudko.blazinghot.util.DyeUtil;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
@@ -15,7 +15,7 @@ public class BlazingLangGen {
 	public static void generate(RegistrateLangProvider provider) {
 		BiConsumer<String, String> langConsumer = provider::add;
 
-		BlazingTags.provideLangEntries(langConsumer);
+		BlazingTagsV1.provideLangEntries(langConsumer);
 		CommonTags.provideLangEntries(langConsumer);
 		BlazingMetals.provideLangEntries(langConsumer);
 		BlazingAdvancements.provideLangEntries(langConsumer);

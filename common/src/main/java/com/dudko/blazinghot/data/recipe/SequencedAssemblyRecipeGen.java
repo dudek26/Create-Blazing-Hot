@@ -22,30 +22,28 @@ import static com.dudko.blazinghot.registry.BlazingItems.GILDED_STELLAR_GOLDEN_A
 import static com.dudko.blazinghot.registry.BlazingItems.HEAVY_STELLAR_IRON_APPLE;
 import static com.dudko.blazinghot.registry.BlazingItems.INCOMPLETE_BLAZE_MIXER;
 
-import java.util.function.Function;
+import java.util.concurrent.CompletableFuture;
 
-import org.jetbrains.annotations.NotNull;
-
-import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.metal.BlazingMetal;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.foundation.recipe.BlazingSequencedAssemblyRecipeGen;
+import com.dudko.blazinghot.foundation.recipe.BlazingStandardRecipeBuilder;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingMetals;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.press.PressingRecipe;
-import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
-@SuppressWarnings("unused")
-public class SequencedAssemblyRecipeGen extends BlazingRecipeProvider {
+public class SequencedAssemblyRecipeGen extends BlazingSequencedAssemblyRecipeGen {
 
-	public SequencedAssemblyRecipeGen(PackOutput dataOutput) {
-		super(dataOutput);
+	public SequencedAssemblyRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+		super(output, registries);
 	}
 
 	GeneratedRecipe
@@ -86,14 +84,14 @@ public class SequencedAssemblyRecipeGen extends BlazingRecipeProvider {
 					BlazingItems.ENCHANTED_COPPER_APPLE),
 
 	ENCHANTED_NETHERITE_APPLE =
-			create("enchanted_netherite_apple",
+			bCreate("enchanted_netherite_apple",
 					b -> b
 							.require(netheriteAppleIngredients())
 							.transitionTo(ANCIENT_ENCHANTED_APPLE)
 							.addOutput(BlazingItems.ENCHANTED_NETHERITE_APPLE, 1)
 							.loops(3)
-							.addBlazingStep(FillingRecipe::new,
-									r -> r.require(moltenNetherite(), MultiAmount.INGOT.divide(4)))
+							.addBlazingStep(id -> new BlazingStandardRecipeBuilder<>(FillingRecipe::new, id),
+									r -> r.require(moltenNetherite(), MultiAmount.INGOT_COVER))
 							.addStep(PressingRecipe::new, r -> r));
 
 	GeneratedRecipe
@@ -110,28 +108,16 @@ public class SequencedAssemblyRecipeGen extends BlazingRecipeProvider {
 							.addStep(DeployerApplicationRecipe::new, r -> r.require(extensionPole())));
 
 	private GeneratedRecipe enchantedMetalApple(BlazingMetal metal, ItemLike input, ItemLike transition, ItemLike output) {
-		return create(output.asItem().toString(),
+		return bCreate(output.asItem().toString(),
 				b -> b
 						.require(input)
 						.transitionTo(transition)
 						.addOutput(output, 1)
 						.loops(6)
-						.addBlazingStep(FillingRecipe::new,
-								r -> r.require(metal.getFluidTag(), MultiAmount.INGOT_COVER))
+						.addBlazingStep(id -> new BlazingStandardRecipeBuilder<>(FillingRecipe::new, id),
+								r -> r.require(moltenNetherite(), MultiAmount.INGOT_COVER))
 						.addStep(DeployerApplicationRecipe::new, r -> r.require(diamond()))
 						.addStep(PressingRecipe::new, r -> r));
 	}
 
-	private GeneratedRecipe create(String name, Function<BlazingSequencedAssemblyRecipeBuilder, SequencedAssemblyRecipeBuilder> transform) {
-		GeneratedRecipe
-				generatedRecipe =
-				c -> transform.apply(new BlazingSequencedAssemblyRecipeBuilder(BlazingHot.asResource(name))).build(c);
-		all.add(generatedRecipe);
-		return generatedRecipe;
-	}
-
-	@Override
-	public @NotNull String getName() {
-		return "Blazing Hot Sequenced Assembly Recipes";
-	}
 }
