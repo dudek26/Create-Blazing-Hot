@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.metal.BlazingMetal;
-import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingMetals;

@@ -8,7 +8,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.dudko.blazinghot.multiloader.MultiRegistries;
+import com.dudko.blazinghot.foundation.multiloader.MultiRegistries;
 import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.simibubi.create.content.fluids.spout.SpoutBlockEntity;
 import com.simibubi.create.content.kinetics.fan.processing.AllFanProcessingTypes;

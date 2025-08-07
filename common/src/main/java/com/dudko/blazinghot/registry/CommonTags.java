@@ -5,7 +5,7 @@ import static com.dudko.blazinghot.util.LangUtil.titleCaseConversion;
 import java.util.function.BiConsumer;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.multiloader.Platform;
+import com.dudko.blazinghot.foundation.multiloader.Platform;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -101,8 +101,10 @@ public class CommonTags {
 
 		Blocks(String forge, String fabric, String internal) {
 			this.internal = TagKey.create(BuiltInRegistries.BLOCK.key(), BlazingHot.asResource(internal));
-			this.forge = TagKey.create(BuiltInRegistries.BLOCK.key(), new ResourceLocation("forge", forge));
-			this.fabric = TagKey.create(BuiltInRegistries.BLOCK.key(), new ResourceLocation("c", fabric));
+			this.forge =
+					TagKey.create(BuiltInRegistries.BLOCK.key(), ResourceLocation.fromNamespaceAndPath("forge", forge));
+			this.fabric =
+					TagKey.create(BuiltInRegistries.BLOCK.key(), ResourceLocation.fromNamespaceAndPath("c", fabric));
 		}
 
 		public TagKey<Block> tag() {
@@ -158,8 +160,10 @@ public class CommonTags {
 
 		Items(String forge, String fabric, String internal, boolean alwaysDatagen) {
 			this.internal = TagKey.create(BuiltInRegistries.ITEM.key(), BlazingHot.asResource(internal));
-			this.forge = TagKey.create(BuiltInRegistries.ITEM.key(), new ResourceLocation("forge", forge));
-			this.fabric = TagKey.create(BuiltInRegistries.ITEM.key(), new ResourceLocation("c", fabric));
+			this.forge =
+					TagKey.create(BuiltInRegistries.ITEM.key(), ResourceLocation.fromNamespaceAndPath("forge", forge));
+			this.fabric =
+					TagKey.create(BuiltInRegistries.ITEM.key(), ResourceLocation.fromNamespaceAndPath("c", fabric));
 			this.alwaysDatagen = alwaysDatagen;
 		}
 
@@ -191,8 +195,10 @@ public class CommonTags {
 
 		Fluids(String forge, String fabric, String internal) {
 			this.internal = TagKey.create(BuiltInRegistries.FLUID.key(), BlazingHot.asResource(internal));
-			this.forge = TagKey.create(BuiltInRegistries.FLUID.key(), new ResourceLocation("forge", forge));
-			this.fabric = TagKey.create(BuiltInRegistries.FLUID.key(), new ResourceLocation("c", fabric));
+			this.forge =
+					TagKey.create(BuiltInRegistries.FLUID.key(), ResourceLocation.fromNamespaceAndPath("forge", forge));
+			this.fabric =
+					TagKey.create(BuiltInRegistries.FLUID.key(), ResourceLocation.fromNamespaceAndPath("c", fabric));
 
 		}
 

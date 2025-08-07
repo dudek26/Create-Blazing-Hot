@@ -1,7 +1,7 @@
 package com.dudko.blazinghot.registry;
 
-import static com.dudko.blazinghot.multiloader.BlazingBuilderTransformers.castingDepotModel;
-import static com.dudko.blazinghot.multiloader.BlazingBuilderTransformers.simpleBlockState;
+import static com.dudko.blazinghot.foundation.multiloader.BlazingBuilderTransformers.castingDepotModel;
+import static com.dudko.blazinghot.foundation.multiloader.BlazingBuilderTransformers.simpleBlockState;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 
@@ -21,7 +21,7 @@ import com.dudko.blazinghot.content.block.modern_lamp.SmallModernLampPanelBlock;
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlock;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlock;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
-import com.dudko.blazinghot.multiloader.BlazingBuilderTransformers;
+import com.dudko.blazinghot.foundation.multiloader.BlazingBuilderTransformers;
 import com.dudko.blazinghot.util.DyeUtil;
 import com.dudko.blazinghot.util.LangUtil;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;

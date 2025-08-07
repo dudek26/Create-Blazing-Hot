@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.metal.BlazingMetal;
-import com.dudko.blazinghot.multiloader.MultiRegistries;
+import com.dudko.blazinghot.foundation.multiloader.MultiRegistries;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingMetals;
@@ -241,7 +241,7 @@ public class CraftingRecipeGen extends BlazingRecipeProvider {
 		private static ResourceLocation clean(ResourceLocation loc) {
 			String path = loc.getPath();
 			while (path.contains("//")) path = path.replaceAll("//", "/");
-			return new ResourceLocation(loc.getNamespace(), path);
+			return ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), path);
 		}
 
 		private ResourceLocation createSimpleLocation(String recipeType) {

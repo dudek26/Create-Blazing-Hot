@@ -4,8 +4,8 @@ import com.dudko.blazinghot.compat.Mods;
 import com.dudko.blazinghot.content.casting.Molds;
 import com.dudko.blazinghot.content.metal.BlazingForm;
 import com.dudko.blazinghot.content.metal.BlazingForm.Flag;
-import com.dudko.blazinghot.multiloader.MultiRegistries;
-import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.foundation.multiloader.MultiRegistries;
+import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.Create;
 

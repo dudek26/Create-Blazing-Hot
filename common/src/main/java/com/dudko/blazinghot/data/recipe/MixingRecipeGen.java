@@ -19,7 +19,7 @@ import static com.dudko.blazinghot.data.recipe.BlazingIngredients.wheatFlour;
 
 import com.dudko.blazinghot.content.metal.BlazingForm;
 import com.dudko.blazinghot.content.metal.BlazingMetal;
-import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingMetals;
 import com.simibubi.create.AllRecipeTypes;

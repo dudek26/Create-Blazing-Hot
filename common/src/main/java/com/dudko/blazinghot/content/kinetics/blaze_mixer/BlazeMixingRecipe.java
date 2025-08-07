@@ -6,8 +6,8 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
-import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
+import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.foundation.multiloader.fluid.MultiFluids;
 import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.google.gson.JsonObject;
@@ -27,6 +27,7 @@ import net.minecraft.util.GsonHelper;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.material.Fluids;
 
@@ -103,6 +104,11 @@ public class BlazeMixingRecipe extends BasinRecipe {
 		if (GsonHelper.isValidNode(json, "mixerFuel")) {
 			fuelFluid = FluidIngredient.deserialize(json.get("mixerFuel"));
 		}
+	}
+
+	@Override
+	public RecipeSerializer<?> getSerializer() {
+		return super.getSerializer();
 	}
 
 	private static final FluidIngredient PLACEHOLDER_FUEL = MultiFluids.fluidIngredientFromFluid(Fluids.LAVA, 0);

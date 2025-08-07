@@ -39,7 +39,9 @@ public class BlazeMixingEmiRecipe extends BasinEmiRecipe {
 					FluidIngredient.EMPTY;
 
 			ResourceLocation id = recipe.getId();
-			this.id = new ResourceLocation("emi", "blazinghot/blaze_mixing/" + id.getNamespace() + "/" + id.getPath());
+			this.id =
+					ResourceLocation.fromNamespaceAndPath("emi",
+							"blazinghot/blaze_mixing/" + id.getNamespace() + "/" + id.getPath());
 		}
 		if (fuelFluid == FluidIngredient.EMPTY) this.fuels = new ArrayList<>();
 		else this.fuels = List.of(firstFluidOrEmpty(fuelFluid.getMatchingFluidStacks()));

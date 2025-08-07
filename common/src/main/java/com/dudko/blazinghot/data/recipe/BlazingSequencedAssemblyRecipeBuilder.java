@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.data.conditions.LoadCondition;
 import com.dudko.blazinghot.data.conditions.LoadConditionHelper;
-import com.dudko.blazinghot.mixin.accessor.SequencedAssemblyRecipeBuilderAccessor;
+import com.dudko.blazinghot.foundation.mixin.accessor.SequencedAssemblyRecipeBuilderAccessor;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.simibubi.create.AllRecipeTypes;
@@ -78,7 +78,7 @@ public class BlazingSequencedAssemblyRecipeBuilder extends SequencedAssemblyReci
 	public <T extends ProcessingRecipe<?>> BlazingSequencedAssemblyRecipeBuilder addBlazingStep(ProcessingRecipeBuilder.ProcessingRecipeFactory<T> factory, UnaryOperator<BlazingProcessingRecipeBuilder<T>> builder) {
 		BlazingProcessingRecipeBuilder<T>
 				recipeBuilder =
-				new BlazingProcessingRecipeBuilder<>(factory, new ResourceLocation("dummy"));
+				new BlazingProcessingRecipeBuilder<>(factory, ResourceLocation.fromNamespaceAndPath("dummy"));
 		Item placeHolder = self().getRecipe().getTransitionalItem().getItem();
 		self()
 				.getRecipe()
@@ -131,7 +131,7 @@ public class BlazingSequencedAssemblyRecipeBuilder extends SequencedAssemblyReci
 			this.recipe = recipe;
 			String namespace = recipe.getId().getNamespace();
 			String path = AllRecipeTypes.SEQUENCED_ASSEMBLY.getId().getPath();
-			this.id = new ResourceLocation(namespace, path + "/" + recipe.getId().getPath());
+			this.id = ResourceLocation.fromNamespaceAndPath(namespace, path + "/" + recipe.getId().getPath());
 			this.serializer = (SequencedAssemblyRecipeSerializer) recipe.getSerializer();
 		}
 

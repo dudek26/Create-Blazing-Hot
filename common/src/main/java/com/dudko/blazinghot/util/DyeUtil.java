@@ -6,7 +6,7 @@ import java.util.function.Supplier;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.compat.Mods;
-import com.dudko.blazinghot.multiloader.MultiRegistries;
+import com.dudko.blazinghot.foundation.multiloader.MultiRegistries;
 import com.dudko.blazinghot.registry.CommonTags;
 import com.simibubi.create.foundation.block.DyedBlockList;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;

@@ -1,16 +1,16 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.dudko.blazinghot.mixin.forge",
-  "compatibilityLevel": "JAVA_17",
+  "package": "com.dudko.blazinghot.foundation.mixin.neoforge",
+  "compatibilityLevel": "JAVA_21",
   "client": [
-    "SpoutRendererMixin"
+    "com.dudko.blazinghot.foundation.mixin.forge.SpoutRendererMixin"
   ],
   "mixins": [
-    "DatagenModLoaderForgeMixin",
-    "EntityMixin",
-    "JEIBasinCategoryMixin",
-    "RecipeManagerAccessor"
+    "com.dudko.blazinghot.foundation.mixin.forge.DatagenModLoaderForgeMixin",
+    "com.dudko.blazinghot.foundation.mixin.forge.EntityMixin",
+    "com.dudko.blazinghot.foundation.mixin.forge.JEIBasinCategoryMixin",
+    "com.dudko.blazinghot.foundation.mixin.forge.RecipeManagerAccessor"
   ],
   "plugin": "com.moulberry.mixinconstraints.ConstraintsMixinPlugin",
   "injectors": {

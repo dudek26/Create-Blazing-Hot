@@ -19,7 +19,7 @@ import net.minecraft.world.level.material.Fluids;
 public class MultiFluidStackImpl {
 	@SuppressWarnings("ConstantValue")
 	public static MultiFluidStack deserializeFluidStack(JsonObject json) {
-		ResourceLocation id = new ResourceLocation(GsonHelper.getAsString(json, "fluid"));
+		ResourceLocation id = ResourceLocation.fromNamespaceAndPath(GsonHelper.getAsString(json, "fluid"));
 		Fluid fluid = BuiltInRegistries.FLUID.get(id);
 		if (fluid == null) throw new JsonSyntaxException("Unknown fluid '" + id + "'");
 		if (fluid == Fluids.EMPTY) throw new JsonSyntaxException("Invalid empty fluid '" + id + "'");

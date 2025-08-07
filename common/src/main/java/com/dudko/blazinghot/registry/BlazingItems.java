@@ -7,8 +7,8 @@ import static com.dudko.blazinghot.content.item.BlazingFoodItem.ExtraProperties.
 import static com.dudko.blazinghot.content.item.BlazingFoodItem.ExtraProperties.REMOVE_SLOWNESS_1;
 import static com.dudko.blazinghot.content.item.BlazingFoodItem.ExtraProperties.REMOVE_SLOWNESS_2;
 import static com.dudko.blazinghot.content.item.BlazingFoodItem.ExtraProperties.REMOVE_SLOWNESS_ANY;
-import static com.dudko.blazinghot.multiloader.BlazingBuilderTransformers.existingParent;
-import static com.dudko.blazinghot.multiloader.BlazingBuilderTransformers.handheld;
+import static com.dudko.blazinghot.foundation.multiloader.BlazingBuilderTransformers.existingParent;
+import static com.dudko.blazinghot.foundation.multiloader.BlazingBuilderTransformers.handheld;
 import static com.dudko.blazinghot.registry.BlazingItems.FoodItemBuilder.tickMinutes;
 import static com.dudko.blazinghot.registry.BlazingItems.FoodItemBuilder.tickSeconds;
 

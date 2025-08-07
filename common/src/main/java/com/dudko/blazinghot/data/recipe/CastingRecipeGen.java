@@ -7,7 +7,7 @@ import com.dudko.blazinghot.content.casting.Molds.MoldType;
 import com.dudko.blazinghot.content.metal.BlazingForm;
 import com.dudko.blazinghot.content.metal.BlazingMetal;
 import com.dudko.blazinghot.data.conditions.DefaultLoadConditions;
-import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.BlazingMetals;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;

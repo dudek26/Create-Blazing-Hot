@@ -1,7 +1,7 @@
 package com.dudko.blazinghot.config;
 
-import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
-import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
+import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.foundation.multiloader.fluid.MultiFluids;
 
 import net.createmod.catnip.config.ConfigBase;
 

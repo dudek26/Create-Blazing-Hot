@@ -7,7 +7,7 @@ import com.dudko.blazinghot.config.CClient.CastingProgressIndicator;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancement;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.lang.BlazingLang;
-import com.dudko.blazinghot.mixin_interfaces.IAdvancementBehaviour;
+import com.dudko.blazinghot.foundation.mixin_interfaces.IAdvancementBehaviour;
 import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.dudko.blazinghot.util.TooltipUtil;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;

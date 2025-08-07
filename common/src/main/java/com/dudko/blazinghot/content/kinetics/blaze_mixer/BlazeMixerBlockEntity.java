@@ -3,12 +3,11 @@ package com.dudko.blazinghot.content.kinetics.blaze_mixer;
 import java.util.List;
 import java.util.Optional;
 
-import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancement;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
-import com.dudko.blazinghot.mixin_interfaces.IAdvancementBehaviour;
-import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
-import com.dudko.blazinghot.multiloader.fluid.MultiFluids;
+import com.dudko.blazinghot.foundation.mixin_interfaces.IAdvancementBehaviour;
+import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.foundation.multiloader.fluid.MultiFluids;
 import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.dudko.blazinghot.registry.BlazingMetals;
 import com.simibubi.create.AllRecipeTypes;
@@ -38,11 +37,13 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
-import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -150,20 +151,30 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 		super.write(compound, registries, clientPacket);
 	}
 
-	public static float multipliedRecipeSpeed(float speed, Recipe<?> r) {
-		if (r == null) return speed;
+	public float multipliedRecipeSpeed(float speed, RecipeHolder<? extends Recipe<?>> holder) {
+		if (holder == null) return speed;
+		Recipe<?> recipe = holder.value();
 
-		if (r instanceof MixingRecipe && PotionMixingRecipes.ALL.contains(r)) {
-			return speed / BlazingConfigs.server().recipes.blazeBrewingSpeedMultiplier.getF();
+		if (recipe instanceof MixingRecipe) {
+			for (ItemStack stack : getAvailableItems()) {
+				if (stack.isEmpty()) continue;
+
+				List<MixingRecipe> list = PotionMixingRecipes.sortRecipesByItem(level).get(stack.getItem());
+				if (list == null) continue;
+				for (MixingRecipe mixingRecipe : list)
+					if (matchBasinRecipe(mixingRecipe))
+						return speed / BlazingConfigs.server().recipes.blazeBrewingSpeedMultiplier.getF();
+			}
 		}
-		else if (r.getType() == AllRecipeTypes.MIXING.getType()) {
+		else if (recipe.getType() == AllRecipeTypes.MIXING.getType()) {
 			return speed / BlazingConfigs.server().recipes.blazeMixingSpeedMultiplier.getF();
 		}
-		else if ((r instanceof CraftingRecipe
-				&& !(r instanceof ShapedRecipe)
+		else if ((recipe instanceof CraftingRecipe
+				&& !(recipe instanceof ShapedRecipe)
 				&& AllConfigs.server().recipes.allowShapelessInMixer.get()
-				&& r.getIngredients().size() > 1
-				&& !MechanicalPressBlockEntity.canCompress(r)) && !AllRecipeTypes.shouldIgnoreInAutomation(r)) {
+				&& recipe.getIngredients().size() > 1
+				&& !MechanicalPressBlockEntity.canCompress(recipe))
+				&& !AllRecipeTypes.shouldIgnoreInAutomation(holder)) {
 			return speed / BlazingConfigs.server().recipes.blazeShapelessSpeedMultiplier.getF();
 		}
 		return speed;
@@ -172,7 +183,10 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 	public void updateAdvancements(Recipe<?> r) {
 		award(BlazingAdvancements.BLAZE_MIXER);
 		if (r instanceof StandardProcessingRecipe<?> recipe) {
-			if (recipe.getId().equals(BlazingHot.asResource("blaze_mixing/melting/ancient_debris"))) {
+			if (MultiFluids.recipeResultContains(recipe, BlazingMetals.ANCIENT_DEBRIS.getFluidTag()) && recipe
+					.getIngredients()
+					.stream()
+					.anyMatch(i -> i.test(Items.ANCIENT_DEBRIS.getDefaultInstance()))) {
 				ancientDebrisMelted++;
 				if (ancientDebrisMelted >= 15) {
 					award(BlazingAdvancements.ANCIENT_DEBRIS_MELTING);
@@ -210,6 +224,8 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 
 	public abstract void renderParticles();
 
+	public abstract List<ItemStack> getAvailableItems();
+
 	protected void spillParticle(ParticleOptions data) {
 		assert level != null;
 		float angle = level.random.nextFloat() * 360;
@@ -222,7 +238,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 	}
 
 	@Override
-	protected abstract <C extends Container> boolean matchBasinRecipe(Recipe<C> recipe);
+	protected abstract <I extends RecipeInput> boolean matchBasinRecipe(Recipe<I> recipe);
 
 	public static boolean doInputsMatch(StandardProcessingRecipe<?> a, StandardProcessingRecipe<?> b) {
 		return doItemInputsMatch(a, b) && doFluidInputsMatch(a, b);

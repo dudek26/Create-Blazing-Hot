@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
-import com.dudko.blazinghot.mixin.accessor.ProjectileAccessor;
+import com.dudko.blazinghot.foundation.mixin.accessor.ProjectileAccessor;
 import com.dudko.blazinghot.registry.BlazingItems;
 
 import net.minecraft.MethodsReturnNonnullByDefault;

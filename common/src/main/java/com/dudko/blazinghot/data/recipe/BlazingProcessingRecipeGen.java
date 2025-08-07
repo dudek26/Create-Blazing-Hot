@@ -9,12 +9,13 @@ import java.util.function.UnaryOperator;
 import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.multiloader.MultiRegistries;
-import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.foundation.multiloader.MultiRegistries;
+import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
+import net.createmod.catnip.registry.RegisteredObjectsHelper;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
@@ -70,9 +71,8 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 			ItemLike itemLike = singleIngredient.get();
 			transform
 					.apply(new BlazingProcessingRecipeBuilder<>(serializer.getFactory(),
-							new ResourceLocation(namespace,
-									MultiRegistries
-											.getRegisteredObjectsHelper()
+							ResourceLocation.fromNamespaceAndPath(namespace,
+									RegisteredObjectsHelper
 											.getKeyOrThrow(itemLike.asItem())
 											.getPath())).withItemIngredients(Ingredient.of(itemLike)))
 					.build(c);

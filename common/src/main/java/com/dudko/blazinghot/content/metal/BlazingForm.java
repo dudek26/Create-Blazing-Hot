@@ -11,8 +11,8 @@ import com.dudko.blazinghot.compat.Mods;
 import com.dudko.blazinghot.content.casting.Molds;
 import com.dudko.blazinghot.data.conditions.DefaultLoadConditions;
 import com.dudko.blazinghot.data.conditions.LoadCondition;
-import com.dudko.blazinghot.multiloader.MultiRegistries;
-import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.foundation.multiloader.MultiRegistries;
+import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.CommonTags;
 
 import net.minecraft.FieldsAreNonnullByDefault;

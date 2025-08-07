@@ -11,9 +11,9 @@ import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.data.conditions.LoadCondition;
 import com.dudko.blazinghot.data.conditions.LoadConditionHelper;
-import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
-import com.dudko.blazinghot.multiloader.fluid.MultiFluidIngredient;
-import com.dudko.blazinghot.multiloader.fluid.MultiFluidStack;
+import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.foundation.multiloader.fluid.MultiFluidIngredient;
+import com.dudko.blazinghot.foundation.multiloader.fluid.MultiFluidStack;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
@@ -365,7 +365,7 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 				throw new IllegalStateException("Cannot datagen ProcessingRecipe of type: " + typeId);
 
 			this.id =
-					new ResourceLocation(recipe.getId().getNamespace(),
+					ResourceLocation.fromNamespaceAndPath(recipe.getId().getNamespace(),
 							typeId.getPath() + "/" + recipe.getId().getPath());
 			this.serializer = (ProcessingRecipeSerializer<S>) recipe.getSerializer();
 

@@ -9,7 +9,7 @@ import java.util.function.UnaryOperator;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.compat.Mods;
-import com.dudko.blazinghot.multiloader.MultiRegistries;
+import com.dudko.blazinghot.foundation.multiloader.MultiRegistries;
 import com.dudko.blazinghot.registry.BlazingForms;
 import com.dudko.blazinghot.registry.BlazingMetals;
 import com.dudko.blazinghot.registry.CommonTags;

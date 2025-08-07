@@ -3,7 +3,7 @@ package com.dudko.blazinghot.compat.jei.category;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.dudko.blazinghot.compat.jei.category.animations.AnimatedCastingSpout;
-import com.dudko.blazinghot.content.casting.casting_depot.forge.CastingRecipe;
+import com.dudko.blazinghot.content.casting.casting_depot.neoforge.CastingRecipe;
 import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.foundation.gui.AllGuiTextures;

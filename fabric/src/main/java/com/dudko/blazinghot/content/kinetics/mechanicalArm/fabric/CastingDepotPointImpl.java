@@ -1,6 +1,6 @@
-package com.dudko.blazinghot.content.kinetics.mechanicalArm.fabric;
+package com.dudko.blazinghot.content.kinetics.mechanical_arm.fabric;
 
-import com.dudko.blazinghot.content.kinetics.mechanicalArm.CastingDepotPoint;
+import com.dudko.blazinghot.content.kinetics.mechanical_arm.CastingDepotPoint;
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
 
 import net.minecraft.core.BlockPos;

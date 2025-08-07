@@ -8,14 +8,15 @@ import java.util.List;
 import java.util.Map;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.multiloader.BlazingBuilderTransformers;
-import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.foundation.multiloader.BlazingBuilderTransformers;
+import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.CommonTags.Items;
 import com.tterrag.registrate.AbstractRegistrate;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.ItemEntry;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.data.recipes.SingleItemRecipeBuilder;
@@ -70,7 +71,7 @@ public class Molds {
 										ItemEntry<?> blankMold = Molds.BLANK.get(MoldType.CLAY);
 										SingleItemRecipeBuilder
 												.stonecutting(Ingredient.of(blankMold), RecipeCategory.MISC, get(type))
-												.unlockedBy("has_" + blankMold.get().getPath(),
+												.unlockedBy("has_" + BuiltInRegistries.ITEM.getKey(blankMold.get()),
 														RegistrateRecipeProvider.has(blankMold))
 												.save(p,
 														BlazingHot.asResource("stonecutting/clay_mold/"
