@@ -122,7 +122,7 @@ public class BlazingAdvancements implements DataProvider {
 	MOLTEN_GOLD =
 			create("molten_gold",
 					b -> b
-							.icon(BlazingMetals.GOLD.getBucket().get())
+							.icon(BlazingMetals.GOLD.getBucket())
 							.title("Flowing Riches")
 							.description("Melt Gold in Mixer")
 							.special(NOISY)
@@ -133,7 +133,7 @@ public class BlazingAdvancements implements DataProvider {
 	ALL_MOLTEN_METALS =
 			create("all_molten_metals",
 					b -> b
-							.icon(BlazingMetals.NETHERITE.getBucket().get())
+							.icon(BlazingMetals.NETHERITE.getBucket())
 							.title("Tinkers' Construct")
 							.description("Obtain a bucket of every non-compat molten metal.")
 							.after(MOLTEN_GOLD)
@@ -186,7 +186,7 @@ public class BlazingAdvancements implements DataProvider {
 	MOLTEN_BLAZE_GOLD =
 			create("molten_blaze_gold_00",
 					b -> b
-							.icon(BlazingMetals.BLAZE_GOLD.getBucket().get())
+							.icon(BlazingMetals.BLAZE_GOLD.getBucket())
 							.title("Fake Alloys")
 							.description("Mix Molten Gold and Nether Essence together to obtain Molten Blaze Gold")
 							.after(MOLTEN_GOLD)),

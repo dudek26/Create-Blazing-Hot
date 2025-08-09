@@ -2,7 +2,6 @@ package com.dudko.blazinghot.data.conditions;
 
 import java.util.List;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.ItemLike;
 
@@ -33,9 +32,4 @@ public class LoadConditionHelper {
 		return values.stream().map(c -> (ItemLike) c).toArray(ItemLike[]::new);
 	}
 
-	@ExpectPlatform
-	@Deprecated(forRemoval = true)
-	public static String conditionsKey() {
-		throw new AssertionError();
-	}
 }

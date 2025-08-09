@@ -17,7 +17,7 @@ import com.dudko.blazinghot.foundation.recipe.BlazingRecipeGen;
 import com.dudko.blazinghot.registry.BlazingForms;
 import com.dudko.blazinghot.registry.BlazingMetals;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
-import com.dudko.blazinghot.registry.BlazingTagsV1;
+import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
@@ -52,7 +52,7 @@ public class BlazeMixingRecipeGen extends BlazingRecipeGen<ProcessingRecipeParam
 									.require(moltenGold(), MultiAmount.INGOT)
 									.requiresHeat(HeatCondition.SUPERHEATED)
 									.duration(200)
-									.output(BlazingMetals.BLAZE_GOLD.getFluid().get(), MultiAmount.INGOT)),
+									.output(BlazingMetals.BLAZE_GOLD.getFluid(), MultiAmount.INGOT)),
 			STURDY_MOLDS_MELTING =
 					moldMelting();
 
@@ -76,7 +76,7 @@ public class BlazeMixingRecipeGen extends BlazingRecipeGen<ProcessingRecipeParam
 							.require(form.getMeltingIngredient(metal))
 							.duration(form.meltingTime)
 							.requiresHeat(HeatCondition.SUPERHEATED)
-							.output(metal.getFluid().get(), form.amount));
+							.output(metal.getFluid(), form.amount));
 		}
 	}
 
@@ -85,9 +85,9 @@ public class BlazeMixingRecipeGen extends BlazingRecipeGen<ProcessingRecipeParam
 		return create("melting/sturdy_molds",
 				b -> b
 						.requireFuel(fuel(), form.fuelCost)
-						.require(BlazingTagsV1.Items.STURDY_MOLDS.tag)
+						.require(BlazingTags.Items.STURDY_MOLDS.tag())
 						.duration(form.meltingTime)
 						.requiresHeat(HeatCondition.SUPERHEATED)
-						.output(BlazingMetals.STURDY_ALLOY.getFluid().get(), form.amount));
+						.output(BlazingMetals.STURDY_ALLOY.getFluid(), form.amount));
 	}
 }

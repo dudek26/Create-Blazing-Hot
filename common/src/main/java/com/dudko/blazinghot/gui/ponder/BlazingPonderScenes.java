@@ -20,7 +20,7 @@ import net.minecraft.world.level.material.Fluid;
 public class BlazingPonderScenes {
 
 	public static void register(PonderSceneRegistrationHelper<ResourceLocation> helper) {
-		PonderSceneRegistrationHelper<ItemProviderEntry<?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
+		PonderSceneRegistrationHelper<ItemProviderEntry<?, ?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
 
 		HELPER
 				.forComponents(BlazingBlocks.CASTING_DEPOT)

@@ -11,9 +11,8 @@ import com.dudko.blazinghot.compat.Mods;
 import com.dudko.blazinghot.content.casting.Molds;
 import com.dudko.blazinghot.data.conditions.DefaultLoadConditions;
 import com.dudko.blazinghot.data.conditions.LoadCondition;
-import com.dudko.blazinghot.foundation.multiloader.MultiRegistries;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
-import com.dudko.blazinghot.registry.CommonTags;
+import com.dudko.blazinghot.registry.BlazingTags;
 
 import net.minecraft.FieldsAreNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -150,7 +149,7 @@ public class BlazingForm {
 	}
 
 	public TagKey<Item> getItemTag(String metal) {
-		return CommonTags.itemTagOf(tagFolder, metal, CommonTags.Namespace.platform());
+		return BlazingTags.itemTag(BlazingTags.Namespace.COMMON.asResource(tagFolder + "/" + metal));
 	}
 
 	public List<Mods> getMods(BlazingMetal metal) {
@@ -264,7 +263,7 @@ public class BlazingForm {
 		 * @see Builder#withCustomItem(ResourceLocation)
 		 */
 		public Builder withCustomItem(ItemLike item) {
-			return withCustomItem(MultiRegistries.getItemId(item.asItem()));
+			return withCustomItem(BuiltInRegistries.ITEM.getKey(item.asItem()));
 		}
 
 		/**

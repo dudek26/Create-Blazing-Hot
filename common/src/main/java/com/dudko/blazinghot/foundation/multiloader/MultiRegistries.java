@@ -18,7 +18,7 @@ public class MultiRegistries {
 	 * @deprecated use {@link BuiltInRegistries}
 	 */
 	@ExpectPlatform
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public static Supplier<Item> getItemFromRegistry(ResourceLocation resourceLocation) {
 		throw new AssertionError();
 	}
@@ -27,7 +27,7 @@ public class MultiRegistries {
 	 * @deprecated use {@link BuiltInRegistries}
 	 */
 	@ExpectPlatform
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public static Supplier<Fluid> getFluidFromRegistry(ResourceLocation resourceLocation) {
 		throw new AssertionError();
 	}
@@ -36,7 +36,7 @@ public class MultiRegistries {
 	 * @deprecated use {@link BuiltInRegistries}
 	 */
 	@ExpectPlatform
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public static Supplier<Block> getBlockFromRegistry(ResourceLocation resourceLocation) {
 		throw new AssertionError();
 	}
@@ -45,7 +45,7 @@ public class MultiRegistries {
 	 * @deprecated use {@link BuiltInRegistries}
 	 */
 	@ExpectPlatform
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public static ResourceLocation getFluidId(Fluid fluid) {
 		throw new AssertionError();
 	}
@@ -54,7 +54,7 @@ public class MultiRegistries {
 	 * @deprecated use {@link BuiltInRegistries}
 	 */
 	@ExpectPlatform
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public static ResourceLocation getItemId(Item item) {
 		throw new AssertionError();
 	}
@@ -63,7 +63,7 @@ public class MultiRegistries {
 	 * @deprecated use static methods from {@link RegisteredObjectsHelper}
 	 */
 	@ExpectPlatform
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public static RegisteredObjectsHelper getRegisteredObjectsHelper() {
 		throw new AssertionError();
 	}

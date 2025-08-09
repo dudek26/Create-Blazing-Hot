@@ -1,6 +1,9 @@
 package com.dudko.blazinghot.registry;
 
+import java.util.function.BiConsumer;
+
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.util.LangUtil;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -10,7 +13,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 
-public class BlazingTagsV2 {
+public class BlazingTags {
 
 	public enum Namespace {
 		BLAZINGHOT(BlazingHot.ID, true),
@@ -78,7 +81,7 @@ public class BlazingTagsV2 {
 		}
 
 		public TagKey<Item> itemTag() {
-			return BlazingTagsV2.itemTag(resourceLocation());
+			return BlazingTags.itemTag(resourceLocation());
 		}
 	}
 
@@ -195,6 +198,29 @@ public class BlazingTagsV2 {
 
 	public static TagKey<Fluid> fluidTag(String namespace, String path) {
 		return fluidTag(ResourceLocation.fromNamespaceAndPath(namespace, path));
+	}
+
+	public static void provideLangEntries(BiConsumer<String, String> consumer) {
+		for (Blocks blockTag : Blocks.values()) {
+			if (!blockTag.alwaysDatagen) continue;
+			ResourceLocation loc = blockTag.tag().location();
+			consumer.accept("tag.block." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
+					LangUtil.titleCaseConversion(blockTag.name()).replace('_', ' '));
+		}
+
+		for (Items itemTag : Items.values()) {
+			if (!itemTag.alwaysDatagen) continue;
+			ResourceLocation loc = itemTag.tag().location();
+			consumer.accept("tag.item." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
+					LangUtil.titleCaseConversion(itemTag.name().replace('_', ' ')));
+		}
+
+		for (Fluids itemTag : Fluids.values()) {
+			if (!itemTag.alwaysDatagen) continue;
+			ResourceLocation loc = itemTag.tag().location();
+			consumer.accept("tag.fluid." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
+					LangUtil.titleCaseConversion(itemTag.name().replace('_', ' ')));
+		}
 	}
 
 }

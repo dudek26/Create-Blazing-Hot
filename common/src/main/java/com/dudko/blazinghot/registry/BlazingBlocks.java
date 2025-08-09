@@ -36,6 +36,7 @@ import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
 
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -120,10 +121,10 @@ public class BlazingBlocks {
 					.tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.tag(BlockTags.NEEDS_IRON_TOOL)
 					.tag(BlockTags.BEACON_BASE_BLOCKS)
-					.tag(BlazingTagsV2.Blocks.BLAZE_GOLD_BLOCKS.tag())
+					.tag(BlazingTags.Blocks.BLAZE_GOLD_BLOCKS.tag())
 					.item()
-					.tag(BlazingTagsV2.Items.STORAGE_BLOCKS.tag())
-					.tag(BlazingTagsV2.Blocks.BLAZE_GOLD_BLOCKS.itemTag())
+					.tag(BlazingTags.Items.STORAGE_BLOCKS.tag())
+					.tag(BlazingTags.Blocks.BLAZE_GOLD_BLOCKS.itemTag())
 					.build()
 					.register();
 
@@ -143,13 +144,14 @@ public class BlazingBlocks {
 							.define('g', DyeUtil.getStainedGlass(color))
 							.define('l', Blocks.GLOWSTONE)
 							.define('r', BlazingItems.BLAZE_GOLD_ROD)
-							.unlockedBy("has_" + BlazingItems.BLAZE_GOLD_ROD.getId().getPath(),
-									RegistrateRecipeProvider.has(BlazingItems.BLAZE_GOLD_ROD))
+							.unlockedBy("has_" + BuiltInRegistries.ITEM
+									.getKey(BlazingItems.BLAZE_GOLD_ROD.asItem())
+									.getPath(), RegistrateRecipeProvider.has(BlazingItems.BLAZE_GOLD_ROD))
 							.save(p,
 									BlazingHot.asResource("crafting/modern_lamp/"
 											+ c.getName()
 											+ "_from_stained_glass"));
-					modernLampDyeing(c, p, BlazingTagsV2.Blocks.MODERN_LAMP_BLOCKS.itemTag(), color, "block");
+					modernLampDyeing(c, p, BlazingTags.Blocks.MODERN_LAMP_BLOCKS.itemTag(), color, "block");
 				})
 				.register();
 	});
@@ -166,14 +168,14 @@ public class BlazingBlocks {
 							.pattern("ll")
 							.define('l', MODERN_LAMP_BLOCKS.get(color))
 							.unlockedBy("has_modern_lamps",
-									RegistrateRecipeProvider.has(BlazingTagsV2.Blocks.MODERN_LAMP_PANELS.itemTag()))
+									RegistrateRecipeProvider.has(BlazingTags.Blocks.MODERN_LAMP_PANELS.itemTag()))
 							.save(p,
 									BlazingHot.asResource("crafting/modern_lamp/panel/"
 											+ c.getName()
 											+ "_from_full_block"));
 					panelStoneCuttingRecipe(c, p, color);
 					lampStoneCuttingRecipe(c, p, color, 2);
-					modernLampDyeing(c, p, BlazingTagsV1.Items.MODERN_LAMP_PANELS.tag, color, "panel");
+					modernLampDyeing(c, p, BlazingTags.Blocks.MODERN_LAMP_PANELS.itemTag(), color, "panel");
 				})
 				.register();
 	});
@@ -192,7 +194,7 @@ public class BlazingBlocks {
 							lampStoneCuttingRecipe(c, p, color, 2);
 							modernLampDyeing(c,
 									p,
-									BlazingTagsV1.Items.MODERN_LAMP_DOUBLE_PANELS.tag,
+									BlazingTags.Blocks.MODERN_LAMP_DOUBLE_PANELS.itemTag(),
 									color,
 									"double_panel");
 						})
@@ -207,7 +209,7 @@ public class BlazingBlocks {
 				.transform(BlazingBuilderTransformers.modernLampPanel(color, "modern_lamp/quad_panel"))
 				.recipe((c, p) -> {
 					panelStoneCuttingRecipe(c, p, color);
-					modernLampDyeing(c, p, BlazingTagsV1.Items.MODERN_LAMP_QUAD_PANELS.tag, color, "quad_panel");
+					modernLampDyeing(c, p, BlazingTags.Blocks.MODERN_LAMP_QUAD_PANELS.itemTag(), color, "quad_panel");
 					lampStoneCuttingRecipe(c, p, color, 2);
 				})
 				.register();
@@ -225,7 +227,7 @@ public class BlazingBlocks {
 							.pattern("ll")
 							.define('l', MODERN_LAMP_PANELS.get(color))
 							.unlockedBy("has_modern_lamps",
-									RegistrateRecipeProvider.has(BlazingTagsV1.Items.MODERN_LAMPS.tag))
+									RegistrateRecipeProvider.has(BlazingTags.Blocks.MODERN_LAMP_BLOCKS.itemTag()))
 							.save(p,
 									BlazingHot.asResource("crafting/modern_lamp/half_panel/"
 											+ c.getName()
@@ -237,14 +239,14 @@ public class BlazingBlocks {
 							.shapeless(RecipeCategory.REDSTONE, doublePanel)
 							.requires(c.get(), 2)
 							.unlockedBy("has_modern_lamps",
-									RegistrateRecipeProvider.has(BlazingTagsV1.Items.MODERN_LAMPS.tag))
+									RegistrateRecipeProvider.has(BlazingTags.Blocks.MODERN_LAMP_BLOCKS.itemTag()))
 							.save(p,
-									BlazingHot.asResource("crafting/modern_lamp/panel/"
-											+ doublePanel.getId().getPath()
-											+ "_from_half_panels"));
+									BlazingHot.asResource("crafting/modern_lamp/panel/" + BuiltInRegistries.ITEM
+											.getKey(doublePanel.asItem())
+											.getPath() + "_from_half_panels"));
 					lampStoneCuttingRecipe(c, p, color, 2);
 					panelStoneCuttingRecipe(c, p, color, c.getName() + "_from_panel", 2);
-					modernLampDyeing(c, p, BlazingTagsV1.Items.MODERN_LAMP_HALF_PANELS.tag, color, "half_panel");
+					modernLampDyeing(c, p, BlazingTags.Blocks.MODERN_LAMP_HALF_PANELS.itemTag(), color, "half_panel");
 				})
 				.register();
 	});
@@ -266,15 +268,15 @@ public class BlazingBlocks {
 									.shapeless(RecipeCategory.REDSTONE, quadPanel)
 									.requires(c.get(), 4)
 									.unlockedBy("has_modern_lamps",
-											RegistrateRecipeProvider.has(BlazingTagsV1.Items.MODERN_LAMPS.tag))
+											RegistrateRecipeProvider.has(BlazingTags.Blocks.MODERN_LAMP_BLOCKS.itemTag()))
 									.save(p,
-											BlazingHot.asResource("crafting/modern_lamp/panel/" + quadPanel
-													.getId()
+											BlazingHot.asResource("crafting/modern_lamp/panel/" + BuiltInRegistries.ITEM
+													.getKey(quadPanel.asItem())
 													.getPath() + "_from_small_panels"));
 							lampStoneCuttingRecipe(c, p, color, 4);
 							modernLampDyeing(c,
 									p,
-									BlazingTagsV1.Items.MODERN_LAMP_SMALL_PANELS.tag,
+									BlazingTags.Blocks.MODERN_LAMP_SMALL_PANELS.itemTag(),
 									color,
 									"small_panel");
 							panelStoneCuttingRecipe(c, p, color, c.getName() + "_from_panel", 4);
@@ -318,14 +320,16 @@ public class BlazingBlocks {
 	private static <T extends AbstractModernLampPanel> void panelStoneCuttingRecipe(DataGenContext<Block, T> ctx, RegistrateRecipeProvider prov, DyeColor color, String name, int count) {
 		SingleItemRecipeBuilder
 				.stonecutting(Ingredient.of(lampPanels(color)), RecipeCategory.REDSTONE, ctx.get(), count)
-				.unlockedBy("has_modern_lamps", RegistrateRecipeProvider.has(BlazingTagsV1.Items.MODERN_LAMPS.tag))
+				.unlockedBy("has_modern_lamps",
+						RegistrateRecipeProvider.has(BlazingTags.Blocks.MODERN_LAMP_BLOCKS.itemTag()))
 				.save(prov, BlazingHot.asResource("stonecutting/modern_lamp_panel/" + name));
 	}
 
 	private static <T extends AbstractModernLamp> void lampStoneCuttingRecipe(DataGenContext<Block, T> ctx, RegistrateRecipeProvider prov, DyeColor color, int count) {
 		SingleItemRecipeBuilder
 				.stonecutting(Ingredient.of(MODERN_LAMP_BLOCKS.get(color)), RecipeCategory.REDSTONE, ctx.get(), count)
-				.unlockedBy("has_modern_lamps", RegistrateRecipeProvider.has(BlazingTagsV1.Items.MODERN_LAMPS.tag))
+				.unlockedBy("has_modern_lamps",
+						RegistrateRecipeProvider.has(BlazingTags.Blocks.MODERN_LAMP_BLOCKS.itemTag()))
 				.save(prov, BlazingHot.asResource("stonecutting/modern_lamp/" + ctx.getName() + "_from_block"));
 	}
 

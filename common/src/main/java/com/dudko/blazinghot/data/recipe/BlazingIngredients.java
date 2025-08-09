@@ -9,10 +9,10 @@ import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingMetals;
-import com.dudko.blazinghot.registry.BlazingTagsV1;
-import com.dudko.blazinghot.registry.CommonTags;
+import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
+import com.simibubi.create.AllTags;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.ItemTags;
@@ -26,8 +26,6 @@ import net.minecraft.world.level.material.Fluids;
 
 @SuppressWarnings("unused")
 public class BlazingIngredients {
-
-	private static final CommonTags.Namespace TAG_NAMESPACE = CommonTags.Namespace.platform();
 
 	//    Shortcuts
 
@@ -122,7 +120,7 @@ public class BlazingIngredients {
 	}
 
 	public static TagKey<Fluid> fuel() {
-		return BlazingTagsV1.Fluids.BLAZE_MIXER_FUEL.tag;
+		return BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag();
 	}
 
 	//    Materials
@@ -144,7 +142,7 @@ public class BlazingIngredients {
 	}
 
 	public static TagKey<Item> netherFlora() {
-		return BlazingTagsV1.Items.NETHER_FLORA.tag;
+		return BlazingTags.Items.NETHER_FLORA.tag();
 	}
 
 	public static Item netherCompound() {
@@ -174,19 +172,19 @@ public class BlazingIngredients {
 	//    Dusts
 
 	public static TagKey<Item> stoneDust() {
-		return CommonTags.itemTagOf(TAG_NAMESPACE.tagPath("dusts", "stone"), TAG_NAMESPACE);
+		return BlazingTags.Items.STONE_DUSTS.tag();
 	}
 
 	public static TagKey<Item> netherrackDust() {
-		return CommonTags.itemTagOf(TAG_NAMESPACE.tagPath("dusts", "netherrack"), TAG_NAMESPACE);
+		return BlazingTags.Items.NETHERRACK_DUSTS.tag();
 	}
 
 	public static TagKey<Item> soulDust() {
-		return CommonTags.itemTagOf(TAG_NAMESPACE.tagPath("dusts", "soul_sand"), TAG_NAMESPACE);
+		return BlazingTags.Items.SOUL_SAND_DUSTS.tag();
 	}
 
 	public static TagKey<Item> powderedObsidian() {
-		return CommonTags.itemTagOf(TAG_NAMESPACE.tagPath("dusts", "obsidian"), TAG_NAMESPACE);
+		return AllTags.AllItemTags.OBSIDIAN_DUST.tag;
 	}
 
 	//    Blocks

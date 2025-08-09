@@ -2,7 +2,7 @@ package com.dudko.blazinghot.data;
 
 import com.dudko.blazinghot.content.metal.BlazingMetal;
 import com.dudko.blazinghot.registry.BlazingMetals;
-import com.dudko.blazinghot.registry.BlazingTagsV2;
+import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.neoforge.BlazingFluidsImpl;
 import com.dudko.blazinghot.util.DyeUtil;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
@@ -22,39 +22,37 @@ import net.minecraft.world.level.material.Fluids;
 public class NeoForgeTagGen {
 
 	public static void generateBlockTags(RegistrateTagsProvider<Block> prov) {
-		for (BlazingTagsV2.Blocks tag : BlazingTagsV2.Blocks.values()) {
+		for (BlazingTags.Blocks tag : BlazingTags.Blocks.values()) {
 			if (tag.alwaysDatagen) {
 				tagAppender(prov, tag);
 			}
 		}
 
-		prov.addTag(BlazingTagsV2.Blocks.STORAGE_BLOCKS.tag()).addTag(BlazingTagsV2.Blocks.BLAZE_GOLD_BLOCKS.tag());
+		prov.addTag(BlazingTags.Blocks.STORAGE_BLOCKS.tag()).addTag(BlazingTags.Blocks.BLAZE_GOLD_BLOCKS.tag());
 
-		tagAppender(prov, BlazingTagsV2.Blocks.MODERN_LAMPS)
-				.addTag(BlazingTagsV2.Blocks.MODERN_LAMP_BLOCKS.tag())
-				.addTag(BlazingTagsV2.Blocks.MODERN_LAMP_PANELS.tag())
-				.addTag(BlazingTagsV2.Blocks.MODERN_LAMP_QUAD_PANELS.tag())
-				.addTag(BlazingTagsV2.Blocks.MODERN_LAMP_DOUBLE_PANELS.tag())
-				.addTag(BlazingTagsV2.Blocks.MODERN_LAMP_HALF_PANELS.tag())
-				.addTag(BlazingTagsV2.Blocks.MODERN_LAMP_SMALL_PANELS.tag());
+		tagAppender(prov, BlazingTags.Blocks.MODERN_LAMPS)
+				.addTag(BlazingTags.Blocks.MODERN_LAMP_BLOCKS.tag())
+				.addTag(BlazingTags.Blocks.MODERN_LAMP_PANELS.tag())
+				.addTag(BlazingTags.Blocks.MODERN_LAMP_QUAD_PANELS.tag())
+				.addTag(BlazingTags.Blocks.MODERN_LAMP_DOUBLE_PANELS.tag())
+				.addTag(BlazingTags.Blocks.MODERN_LAMP_HALF_PANELS.tag())
+				.addTag(BlazingTags.Blocks.MODERN_LAMP_SMALL_PANELS.tag());
 	}
 
 	public static void generateFluidTags(RegistrateTagsProvider<Fluid> prov) {
 		prov
-				.addTag(BlazingTagsV2.Fluids.BLAZE_MIXER_FUEL.tag())
+				.addTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag())
 				.add(fluidKey(Fluids.LAVA))
 				.add(fluidKey(BlazingFluidsImpl.NETHER_LAVA.getSource()));
 
-		for (BlazingTagsV2.Fluids tag : BlazingTagsV2.Fluids.values()) {
+		for (BlazingTags.Fluids tag : BlazingTags.Fluids.values()) {
 			if (tag.alwaysDatagen) {
 				tagAppender(prov, tag);
 			}
 		}
 
 		for (BlazingMetal metal : BlazingMetals.ALL) {
-			TagKey<Fluid>
-					tag =
-					BlazingTagsV2.fluidTag(BlazingTagsV2.Namespace.COMMON.asResource(metal.getMoltenName()));
+			TagKey<Fluid> tag = BlazingTags.fluidTag(BlazingTags.Namespace.COMMON.asResource(metal.getMoltenName()));
 			tagAppender(prov, tag);
 		}
 
@@ -62,7 +60,7 @@ public class NeoForgeTagGen {
 
 	public static void generateItemTags(RegistrateTagsProvider<Item> prov) {
 		prov
-				.addTag(BlazingTagsV2.Items.NETHER_FLORA.tag())
+				.addTag(BlazingTags.Items.NETHER_FLORA.tag())
 				.add(itemKey(Items.WARPED_FUNGUS),
 						itemKey(Items.CRIMSON_FUNGUS),
 						itemKey(Items.WARPED_ROOTS),
@@ -71,21 +69,21 @@ public class NeoForgeTagGen {
 						itemKey(Items.TWISTING_VINES),
 						itemKey(Items.NETHER_SPROUTS));
 
-		prov.addTag(BlazingTagsV2.Items.METAL_CARROTS.tag()).add(itemKey(Items.GOLDEN_CARROT));
-		prov.addTag(BlazingTagsV2.Items.METAL_APPLES.tag()).add(itemKey(Items.GOLDEN_APPLE));
-		prov.addTag(BlazingTagsV2.Items.ENCHANTED_METAL_APPLES.tag()).add(itemKey(Items.ENCHANTED_GOLDEN_APPLE));
+		prov.addTag(BlazingTags.Items.METAL_CARROTS.tag()).add(itemKey(Items.GOLDEN_CARROT));
+		prov.addTag(BlazingTags.Items.METAL_APPLES.tag()).add(itemKey(Items.GOLDEN_APPLE));
+		prov.addTag(BlazingTags.Items.ENCHANTED_METAL_APPLES.tag()).add(itemKey(Items.ENCHANTED_GOLDEN_APPLE));
 
-		tagAppender(prov, BlazingTagsV2.Items.METAL_FOODS.tag())
-				.addTag(BlazingTagsV2.Items.METAL_CARROTS.tag())
-				.addTag(BlazingTagsV2.Items.METAL_APPLES.tag())
-				.addTag(BlazingTagsV2.Items.STELLAR_METAL_APPLES.tag())
-				.addTag(BlazingTagsV2.Items.ENCHANTED_METAL_APPLES.tag());
+		tagAppender(prov, BlazingTags.Items.METAL_FOODS.tag())
+				.addTag(BlazingTags.Items.METAL_CARROTS.tag())
+				.addTag(BlazingTags.Items.METAL_APPLES.tag())
+				.addTag(BlazingTags.Items.STELLAR_METAL_APPLES.tag())
+				.addTag(BlazingTags.Items.ENCHANTED_METAL_APPLES.tag());
 
-		for (BlazingTagsV2.Items tag : BlazingTagsV2.Items.values()) {
+		for (BlazingTags.Items tag : BlazingTags.Items.values()) {
 			if (tag.alwaysDatagen) tagAppender(prov, tag);
 		}
 
-		for (BlazingTagsV2.Blocks tag : BlazingTagsV2.Blocks.values()) {
+		for (BlazingTags.Blocks tag : BlazingTags.Blocks.values()) {
 			if (tag.alwaysDatagen && tag.item) blockItemTagAppender(prov, tag);
 		}
 
@@ -94,15 +92,15 @@ public class NeoForgeTagGen {
 		}
 
 		blockItemTagAppender(prov,
-				BlazingTagsV2.Blocks.STORAGE_BLOCKS).addTag(BlazingTagsV2.Blocks.BLAZE_GOLD_BLOCKS.itemTag());
+				BlazingTags.Blocks.STORAGE_BLOCKS).addTag(BlazingTags.Blocks.BLAZE_GOLD_BLOCKS.itemTag());
 
-		blockItemTagAppender(prov, BlazingTagsV2.Blocks.MODERN_LAMPS)
-				.addTag(BlazingTagsV2.Blocks.MODERN_LAMP_BLOCKS.itemTag())
-				.addTag(BlazingTagsV2.Blocks.MODERN_LAMP_PANELS.itemTag())
-				.addTag(BlazingTagsV2.Blocks.MODERN_LAMP_QUAD_PANELS.itemTag())
-				.addTag(BlazingTagsV2.Blocks.MODERN_LAMP_DOUBLE_PANELS.itemTag())
-				.addTag(BlazingTagsV2.Blocks.MODERN_LAMP_HALF_PANELS.itemTag())
-				.addTag(BlazingTagsV2.Blocks.MODERN_LAMP_SMALL_PANELS.itemTag());
+		blockItemTagAppender(prov, BlazingTags.Blocks.MODERN_LAMPS)
+				.addTag(BlazingTags.Blocks.MODERN_LAMP_BLOCKS.itemTag())
+				.addTag(BlazingTags.Blocks.MODERN_LAMP_PANELS.itemTag())
+				.addTag(BlazingTags.Blocks.MODERN_LAMP_QUAD_PANELS.itemTag())
+				.addTag(BlazingTags.Blocks.MODERN_LAMP_DOUBLE_PANELS.itemTag())
+				.addTag(BlazingTags.Blocks.MODERN_LAMP_HALF_PANELS.itemTag())
+				.addTag(BlazingTags.Blocks.MODERN_LAMP_SMALL_PANELS.itemTag());
 	}
 
 	private static ResourceKey<Block> blockKey(Block block) {
@@ -123,19 +121,19 @@ public class NeoForgeTagGen {
 				.orElseThrow(() -> new NullPointerException("Couldn't get fluid's ResourceKey."));
 	}
 
-	public static TagsProvider.TagAppender<Item> tagAppender(RegistrateTagsProvider<Item> prov, BlazingTagsV2.Items tag) {
+	public static TagsProvider.TagAppender<Item> tagAppender(RegistrateTagsProvider<Item> prov, BlazingTags.Items tag) {
 		return tagAppender(prov, tag.tag());
 	}
 
-	public static TagsProvider.TagAppender<Item> blockItemTagAppender(RegistrateTagsProvider<Item> prov, BlazingTagsV2.Blocks tag) {
+	public static TagsProvider.TagAppender<Item> blockItemTagAppender(RegistrateTagsProvider<Item> prov, BlazingTags.Blocks tag) {
 		return tagAppender(prov, tag.itemTag());
 	}
 
-	public static TagsProvider.TagAppender<Block> tagAppender(RegistrateTagsProvider<Block> prov, BlazingTagsV2.Blocks tag) {
+	public static TagsProvider.TagAppender<Block> tagAppender(RegistrateTagsProvider<Block> prov, BlazingTags.Blocks tag) {
 		return tagAppender(prov, tag.tag());
 	}
 
-	public static TagsProvider.TagAppender<Fluid> tagAppender(RegistrateTagsProvider<Fluid> prov, BlazingTagsV2.Fluids tag) {
+	public static TagsProvider.TagAppender<Fluid> tagAppender(RegistrateTagsProvider<Fluid> prov, BlazingTags.Fluids tag) {
 		return tagAppender(prov, tag.tag());
 	}
 

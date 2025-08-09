@@ -8,7 +8,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.dudko.blazinghot.foundation.multiloader.MultiRegistries;
 import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.simibubi.create.content.fluids.spout.SpoutBlockEntity;
 import com.simibubi.create.content.kinetics.fan.processing.AllFanProcessingTypes;
@@ -19,6 +18,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -107,7 +107,7 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 		nbt.putFloat("CoolingTicks", coolingTicks);
 		nbt.putInt("ProcessingTicks", processingTicks);
 		nbt.putString("State", state.toString());
-		nbt.putString("VisualFluid", MultiRegistries.getFluidId(visualFluid).toString());
+		nbt.putString("VisualFluid", BuiltInRegistries.FLUID.getKey(visualFluid).toString());
 		if (currentRecipeId != null) nbt.putString("ProcessedRecipe", currentRecipeId.toString());
 		if (!castItem.isEmpty()) {
 			CompoundTag castItemTag = new CompoundTag();
@@ -126,7 +126,7 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 		state = State.valueOf(nbt.getString("State").toUpperCase());
 		ResourceLocation fluidId = ResourceLocation.tryParse(nbt.getString("VisualFluid"));
 		if (fluidId == null) visualFluid = Fluids.EMPTY;
-		else visualFluid = MultiRegistries.getFluidFromRegistry(fluidId).get();
+		else visualFluid = BuiltInRegistries.FLUID.get(fluidId);
 
 		if (nbt.contains("ProcessedRecipe")) {
 			currentRecipeId = ResourceLocation.tryParse(nbt.getString("ProcessedRecipe"));

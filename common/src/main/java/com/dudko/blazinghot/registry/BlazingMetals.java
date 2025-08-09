@@ -144,7 +144,7 @@ public class BlazingMetals {
 		return ALL
 				.stream()
 				.filter(m -> m.mods.getFirst().alwaysIncluded || includeCompat)
-				.map(m -> m.getBucket().get())
+				.map(BlazingMetal::getBucket)
 				.collect(Collectors.toSet());
 	}
 

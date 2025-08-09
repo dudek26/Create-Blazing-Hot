@@ -62,7 +62,7 @@ public class MixingRecipeGen extends BlazingStandardRecipeGen<MixingRecipe> {
 			MOLTEN_BLAZE_GOLD =
 					bCreate("molten_blaze_gold",
 							b -> b
-									.output(BlazingMetals.BLAZE_GOLD.getFluid().get(), MultiAmount.ROD)
+									.output(BlazingMetals.BLAZE_GOLD.getFluid(), MultiAmount.ROD)
 									.requireMultiple(netherEssence(), 2)
 									.require(moltenGold(), MultiAmount.ROD)
 									.requiresHeat(HeatCondition.SUPERHEATED)
@@ -70,7 +70,7 @@ public class MixingRecipeGen extends BlazingStandardRecipeGen<MixingRecipe> {
 			MOLTEN_NETHERITE =
 					bCreate("molten_netherite",
 							b -> b
-									.output(BlazingMetals.NETHERITE.getFluid().get(), MultiAmount.INGOT.divide(4))
+									.output(BlazingMetals.NETHERITE.getFluid(), MultiAmount.INGOT.divide(4))
 									.require(moltenGold(), MultiAmount.INGOT)
 									.require(moltenAncientDebris(), MultiAmount.INGOT)
 									.duration(200)
@@ -78,21 +78,21 @@ public class MixingRecipeGen extends BlazingStandardRecipeGen<MixingRecipe> {
 			MOLTEN_ANDESITE =
 					bCreate("molten_andesite",
 							b -> b
-									.output(BlazingMetals.ANDESITE.getFluid().get(), MultiAmount.ROD.multiply(3))
+									.output(BlazingMetals.ANDESITE.getFluid(), MultiAmount.ROD.multiply(3))
 									.require(moltenIron(), MultiAmount.NUGGET)
 									.require(andesite())
 									.requiresHeat(HeatCondition.HEATED)),
 			MOLTEN_BRASS =
 					bCreate("molten_brass",
 							b -> b
-									.output(BlazingMetals.BRASS.getFluid().get(), MultiAmount.INGOT.multiply(2))
+									.output(BlazingMetals.BRASS.getFluid(), MultiAmount.INGOT.multiply(2))
 									.require(moltenCopper(), MultiAmount.INGOT)
 									.require(moltenZinc(), MultiAmount.INGOT)
 									.requiresHeat(HeatCondition.HEATED)),
 			MOLTEN_STURDY_ALLOY =
 					bCreate("molten_sturdy_alloy",
 							b -> b
-									.output(BlazingMetals.STURDY_ALLOY.getFluid().get(), MultiAmount.INGOT)
+									.output(BlazingMetals.STURDY_ALLOY.getFluid(), MultiAmount.INGOT)
 									.require(moltenIron(), MultiAmount.INGOT)
 									.require(powderedObsidian())
 									.require(netherCompound())
@@ -106,7 +106,7 @@ public class MixingRecipeGen extends BlazingStandardRecipeGen<MixingRecipe> {
 			bCreate(form.getMeltingRecipeName(metal),
 					b -> b
 							.withConditions(form.getMeltingLoadConditions(metal))
-							.output(metal.getFluid().get(), form.amount)
+							.output(metal.getFluid(), form.amount)
 							.require(form.getMeltingIngredient(metal))
 							.duration(form.meltingTime * 3)
 							.requiresHeat(HeatCondition.SUPERHEATED));

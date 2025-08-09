@@ -10,8 +10,8 @@ import java.util.Map;
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.foundation.multiloader.BlazingBuilderTransformers;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
-import com.dudko.blazinghot.registry.BlazingTagsV1;
-import com.dudko.blazinghot.registry.CommonTags.Items;
+import com.dudko.blazinghot.registry.BlazingTags;
+import com.dudko.blazinghot.registry.BlazingTags.Items;
 import com.tterrag.registrate.AbstractRegistrate;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.ItemEntry;
@@ -86,8 +86,9 @@ public class Molds {
 														get(type),
 														3,
 														DEFAULT_SMELT_TIME)
-												.unlockedBy("has_" + clayMold.getId().getPath(),
-														RegistrateRecipeProvider.has(clayMold))
+												.unlockedBy("has_" + BuiltInRegistries.ITEM
+														.getKey(clayMold.asItem())
+														.getPath(), RegistrateRecipeProvider.has(clayMold))
 												.save(p,
 														BlazingHot.asResource("smelting/porcelain_mold/")
 																+ name
@@ -111,9 +112,9 @@ public class Molds {
 	}
 
 	public enum MoldType {
-		STURDY("sturdy", BlazingTagsV1.Items.STURDY_MOLDS.tag, true, true),
-		CLAY("clay", BlazingTagsV1.Items.CLAY_MOLDS.tag, false, false, false),
-		PORCELAIN("porcelain", BlazingTagsV1.Items.PORCELAIN_MOLDS.tag, false, false);
+		STURDY("sturdy", BlazingTags.Items.STURDY_MOLDS.tag(), true, true),
+		CLAY("clay", BlazingTags.Items.CLAY_MOLDS.tag(), false, false, false),
+		PORCELAIN("porcelain", BlazingTags.Items.PORCELAIN_MOLDS.tag(), false, false);
 
 		public final String name;
 		public final TagKey<Item> tag;

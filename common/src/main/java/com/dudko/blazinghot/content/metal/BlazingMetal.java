@@ -4,17 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.compat.Mods;
-import com.dudko.blazinghot.foundation.multiloader.MultiRegistries;
 import com.dudko.blazinghot.registry.BlazingForms;
 import com.dudko.blazinghot.registry.BlazingMetals;
-import com.dudko.blazinghot.registry.CommonTags;
+import com.dudko.blazinghot.registry.BlazingTags;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.ItemLike;
@@ -54,16 +53,16 @@ public class BlazingMetal {
 		return BlazingHot.asResource(getMoltenName());
 	}
 
-	public Supplier<Fluid> getFluid() {
-		return MultiRegistries.getFluidFromRegistry(getFluidLocation());
+	public Fluid getFluid() {
+		return BuiltInRegistries.FLUID.get(getFluidLocation());
 	}
 
 	public TagKey<Fluid> getFluidTag() {
-		return CommonTags.fluidTagOf(getMoltenName(), CommonTags.Namespace.platform());
+		return BlazingTags.fluidTag(BlazingTags.Namespace.COMMON.asResource(getMoltenName()));
 	}
 
-	public Supplier<ItemLike> getBucket() {
-		return () -> getFluid().get().getBucket();
+	public ItemLike getBucket() {
+		return getFluid().getBucket();
 	}
 
 	public static class Builder {

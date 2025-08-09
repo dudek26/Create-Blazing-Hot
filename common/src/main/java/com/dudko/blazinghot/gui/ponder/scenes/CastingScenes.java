@@ -57,7 +57,7 @@ public class CastingScenes {
 		Selection pipes = util.select().fromTo(1, 3, 4, 2, 3, 3);
 
 		// This is mostly for multiloader compatibility
-		Fluid fluid = BlazingMetals.GOLD.getFluid().get();
+		Fluid fluid = BlazingMetals.GOLD.getFluid();
 		BlazingPonderScenes.setFluidInTank(scene, tankPos, fluid, MultiAmount.BUCKET.multiply(12).get());
 		BlazingPonderScenes.setFluidInTank(scene, spoutPos, fluid, MultiAmount.BUCKET.get());
 
@@ -184,7 +184,7 @@ public class CastingScenes {
 		Selection funnels = util.select().fromTo(1, 1, 1, 3, 1, 1);
 
 		// This is mostly for multiloader compatibility
-		Fluid fluid = BlazingMetals.BLAZE_GOLD.getFluid().get();
+		Fluid fluid = BlazingMetals.BLAZE_GOLD.getFluid();
 		BlazingPonderScenes.setFluidInTank(scene, tankPos, fluid, MultiAmount.BUCKET.multiply(12).get());
 		BlazingPonderScenes.setFluidInTank(scene, spout1Pos, fluid, MultiAmount.BUCKET.get());
 		BlazingPonderScenes.setFluidInTank(scene, spout2Pos, fluid, MultiAmount.BUCKET.get());
@@ -294,7 +294,7 @@ public class CastingScenes {
 		Selection pipes = util.select().fromTo(1, 3, 2, 1, 3, 3);
 
 		// This is mostly for multiloader compatibility
-		Fluid fluid = BlazingMetals.COPPER.getFluid().get();
+		Fluid fluid = BlazingMetals.COPPER.getFluid();
 		BlazingPonderScenes.setFluidInTank(scene, tankPos, fluid, MultiAmount.BUCKET.multiply(12).get());
 		BlazingPonderScenes.setFluidInTank(scene, spoutPos, fluid, MultiAmount.BUCKET.get());
 
@@ -435,7 +435,7 @@ public class CastingScenes {
 		Selection arm = util.select().position(4, 1, 1).add(util.select().fromTo(2, 1, 1, 1, 1, 0));
 
 		// This is mostly for multiloader compatibility
-		Fluid fluid = BlazingMetals.ZINC.getFluid().get();
+		Fluid fluid = BlazingMetals.ZINC.getFluid();
 		BlazingPonderScenes.setFluidInTank(scene, tankPos, fluid, MultiAmount.BUCKET.multiply(12).get());
 		BlazingPonderScenes.setFluidInTank(scene, spoutPos, fluid, MultiAmount.BUCKET.get());
 

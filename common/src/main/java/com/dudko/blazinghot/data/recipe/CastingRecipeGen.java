@@ -17,6 +17,7 @@ import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
@@ -46,7 +47,7 @@ public class CastingRecipeGen extends BlazingRecipeGen<CastingRecipeParams, Cast
 		if (mold.shape != null) base = Ingredient.of(mold.shape);
 		else base = Ingredient.of(Items.IRON_BARS);
 
-		create(mold.get(Molds.MoldType.STURDY).getId(),
+		create(BuiltInRegistries.ITEM.getKey(mold.get(Molds.MoldType.STURDY).asItem()),
 				b -> b
 						.require(base)
 						.require(BlazingMetals.STURDY_ALLOY.getFluidTag(), MultiAmount.INGOT.multiply(2))
