@@ -151,19 +151,9 @@ public class BlazingMetals {
 	public static void provideLangEntries(BiConsumer<String, String> consumer) {
 
 		for (BlazingMetal metal : ALL) {
-			for (CommonTags.Namespace namespace : CommonTags.Namespace.values()) {
-				ResourceLocation fluidLoc = metal.getFluidTag().location();
-				consumer.accept("tag.fluid." + namespace.namespace + "." + fluidLoc.getPath().replace('/', '.'),
-						titleCaseConversion(metal.getFluidLocation().getPath().replace('_', ' ')));
-
-//				for (BlazingForm form : metal.forms) {
-//					if (form.customLocation != null) continue;
-//					TagKey<Item> tag = itemTagOf(form.tagFolder, metal.name, namespace);
-//					ResourceLocation loc = tag.location();
-//					consumer.accept("tag.item." + namespace.namespace + "." + loc.getPath().replace('/', '.'),
-//							titleCaseConversion((metal.name + ' ' + form.tagFolder).replace('_', ' ')));
-//				}
-			}
+			ResourceLocation fluidLoc = metal.getFluidTag().location();
+			consumer.accept("tag.fluid." + BlazingTags.Namespace.COMMON.id + "." + fluidLoc.getPath().replace('/', '.'),
+					titleCaseConversion(metal.getFluidLocation().getPath().replace('_', ' ')));
 		}
 
 	}

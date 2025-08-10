@@ -19,7 +19,7 @@ public class TooltipUtil {
 					effect.getAmplifier() == 0 ?
 					Component.empty() :
 					Component.translatable("potion.potency." + effect.getAmplifier()).append(" ");
-			lines.add(Component
+			return lines.add(Component
 					.translatable(effect.getDescriptionId())
 					.append(" ")
 					.append(amplifier)

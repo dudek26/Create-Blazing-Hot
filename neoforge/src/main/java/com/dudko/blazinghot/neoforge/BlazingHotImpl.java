@@ -1,12 +1,12 @@
 package com.dudko.blazinghot.neoforge;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.config.neoforge.BlazingConfigsImpl;
 import com.dudko.blazinghot.content.kinetics.mechanical_arm.BlazingArmInteractionPointTypes;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.advancement.BlazingTriggers;
 import com.dudko.blazinghot.foundation.multiloader.Env;
 import com.dudko.blazinghot.foundation.recipe.neoforge.BlazingRecipeTypeImpl;
+import com.dudko.blazinghot.registry.neoforge.BlazingConfigsImpl;
 import com.dudko.blazinghot.registry.neoforge.BlazingCreativeTabsImpl;
 import com.dudko.blazinghot.registry.neoforge.BlazingFluidsImpl;
 
@@ -33,7 +33,7 @@ public class BlazingHotImpl {
 		BlazingHot.init();
 
 		modEventBus.addListener(EventPriority.LOWEST, BlazingHotDataForge::gatherData);
-		BlazingConfigsImpl.register(modLoadingContext);
+		BlazingConfigsImpl.register(modLoadingContext, modContainer);
 		Env.CLIENT.runIfCurrent(() -> () -> BlazingHotClientImpl.initClient(modEventBus));
 	}
 

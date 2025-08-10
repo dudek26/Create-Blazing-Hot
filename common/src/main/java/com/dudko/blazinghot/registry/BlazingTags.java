@@ -15,6 +15,10 @@ import net.minecraft.world.level.material.Fluid;
 
 public class BlazingTags {
 
+	public static void register() {
+
+	}
+
 	public enum Namespace {
 		BLAZINGHOT(BlazingHot.ID, true),
 		COMMON("c", false);
@@ -27,8 +31,8 @@ public class BlazingTags {
 			this.alwaysDatagenDefault = alwaysDatagenDefault;
 		}
 
-		public ResourceLocation asResource(String path) {
-			return ResourceLocation.fromNamespaceAndPath(id, path);
+		public ResourceLocation asResource(String... path) {
+			return ResourceLocation.fromNamespaceAndPath(id, String.join("/", path));
 		}
 	}
 

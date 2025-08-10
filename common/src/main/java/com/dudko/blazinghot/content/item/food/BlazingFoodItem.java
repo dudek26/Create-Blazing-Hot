@@ -1,6 +1,6 @@
-package com.dudko.blazinghot.content.item;
+package com.dudko.blazinghot.content.item.food;
 
-import static com.dudko.blazinghot.content.item.BlazingFoodItem.ExtraProperties.REMOVE_SLOWNESS_ANY;
+import static com.dudko.blazinghot.content.item.food.BlazingFoodItem.ExtraProperties.REMOVE_SLOWNESS_ANY;
 import static com.dudko.blazinghot.util.TooltipUtil.addEffectTooltip;
 
 import java.util.List;

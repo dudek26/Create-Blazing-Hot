@@ -11,8 +11,7 @@ import com.dudko.blazinghot.registry.BlazingFluids;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingMetals;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
-import com.dudko.blazinghot.registry.BlazingTagsV1;
-import com.dudko.blazinghot.registry.CommonTags;
+import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
@@ -42,8 +41,7 @@ public class BlazingHot {
 	public static void init() {
 		LOGGER.info("Create mod addon {} initializing!", NAME);
 
-		BlazingTagsV1.register();
-		CommonTags.register();
+		BlazingTags.register();
 		BlazingCreativeTabs.register();
 		BlazingBlocks.register();
 		BlazingItems.register();

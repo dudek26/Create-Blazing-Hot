@@ -6,11 +6,11 @@ import java.util.function.Supplier;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.compat.Mods;
-import com.dudko.blazinghot.foundation.multiloader.MultiRegistries;
-import com.dudko.blazinghot.registry.CommonTags;
+import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.foundation.block.DyedBlockList;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
@@ -69,9 +69,9 @@ public class DyeUtil {
 
 		Dyes(DyeColor color, Item item) {
 			this.color = color;
-			this.tag = CommonTags.itemTagOf("dyes", this.toString(), CommonTags.Namespace.platform());
+			this.tag = BlazingTags.itemTag(BlazingTags.Namespace.COMMON.asResource("dyes", toString()));
 			this.item = item;
-			this.stainedGlass = MultiRegistries.getBlockFromRegistry(Mods.VANILLA.asResource(this + "_stained_glass"));
+			this.stainedGlass = () -> BuiltInRegistries.BLOCK.get(Mods.VANILLA.asResource(this + "_stained_glass"));
 		}
 
 		@Override

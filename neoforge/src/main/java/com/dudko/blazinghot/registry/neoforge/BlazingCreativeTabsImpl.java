@@ -1,48 +1,78 @@
 package com.dudko.blazinghot.registry.neoforge;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
+import org.jetbrains.annotations.NotNull;
+
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.data.lang.BlazingLang;
+import com.dudko.blazinghot.foundation.multiloader.Env;
 import com.dudko.blazinghot.registry.BlazingBlocks;
-import com.dudko.blazinghot.registry.BlazingCreativeTabs.RegistrateDisplayItemsGenerator;
-import com.dudko.blazinghot.registry.BlazingCreativeTabs.Tabs;
+import com.dudko.blazinghot.registry.BlazingCreativeTabs;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.simibubi.create.AllCreativeModeTabs;
+import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
+import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.simibubi.create.foundation.item.TagDependentIngredientItem;
+import com.tterrag.registrate.util.entry.ItemEntry;
+import com.tterrag.registrate.util.entry.ItemProviderEntry;
+import com.tterrag.registrate.util.entry.RegistryEntry;
 
+import it.unimi.dsi.fastutil.objects.Reference2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Reference2ReferenceOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ReferenceArrayList;
+import it.unimi.dsi.fastutil.objects.ReferenceLinkedOpenHashSet;
+import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 @EventBusSubscriber
-public class BlazingCreativeTabsImpl {
+public class BlazingCreativeTabsImpl extends BlazingCreativeTabs {
 
 	private static final DeferredRegister<CreativeModeTab>
 			REGISTER =
 			DeferredRegister.create(Registries.CREATIVE_MODE_TAB, BlazingHot.ID);
 
-	public static final RegistryObject<CreativeModeTab>
-			BASE_TAB =
-			REGISTER.register("create_blazing_hot",
+	public static final DeferredHolder<CreativeModeTab, CreativeModeTab>
+			BASE_CREATIVE_TAB =
+			REGISTER.register("base",
 					() -> CreativeModeTab
 							.builder()
-							.title(BlazingLang.TAB_BASE.get())
+							.title(Component.translatable("itemGroup.blazinghot"))
 							.withTabsBefore(AllCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
-							.icon(() -> BlazingItems.BLAZE_GOLD_INGOT.asItem().getDefaultInstance())
-							.displayItems(new RegistrateDisplayItemsGenerator(true, Tabs.BASE))
+							.icon(BlazingItems.BLAZE_GOLD_INGOT::asStack)
+							.displayItems(new RegistrateDisplayItemsGenerator(true,
+									BlazingCreativeTabsImpl.BASE_CREATIVE_TAB))
 							.build());
 
-	public static final RegistryObject<CreativeModeTab>
-			BUILDING_TAB =
-			REGISTER.register("create_blazing_hot_building",
+	public static final DeferredHolder<CreativeModeTab, CreativeModeTab>
+			BUILDING_CREATIVE_TAB =
+			REGISTER.register("building",
 					() -> CreativeModeTab
 							.builder()
-							.title(BlazingLang.TAB_BUILDING.get())
-							.withTabsBefore(BlazingCreativeTabsImpl.BASE_TAB.getKey())
+							.title(Component.translatable("itemGroup.blazinghot.building"))
+							.withTabsBefore(BASE_CREATIVE_TAB.getKey())
 							.icon(() -> BlazingBlocks.MODERN_LAMP_BLOCKS.get(DyeColor.WHITE).asStack())
-							.displayItems(new RegistrateDisplayItemsGenerator(false, Tabs.BUILDING))
+							.displayItems(new RegistrateDisplayItemsGenerator(false,
+									BlazingCreativeTabsImpl.BUILDING_CREATIVE_TAB))
 							.build());
 
 	public static void register(IEventBus eventBus) {
@@ -50,19 +80,210 @@ public class BlazingCreativeTabsImpl {
 	}
 
 	public static ResourceKey<CreativeModeTab> getBaseTabKey() {
-		return BASE_TAB.getKey();
+		return BASE_CREATIVE_TAB.getKey();
 	}
 
 	public static ResourceKey<CreativeModeTab> getBuildingTabKey() {
-		return BUILDING_TAB.getKey();
+		return BUILDING_CREATIVE_TAB.getKey();
 	}
 
 	public static void useBaseTab() {
-		BlazingHot.registrate().setCreativeTab(BASE_TAB);
+		REGISTRATE.setCreativeTab(BASE_CREATIVE_TAB);
 	}
 
 	public static void useBuildingTab() {
-		BlazingHot.registrate().setCreativeTab(BUILDING_TAB);
+		REGISTRATE.setCreativeTab(BUILDING_CREATIVE_TAB);
 	}
 
+	@SuppressWarnings("RedundantOperationOnEmptyContainer")
+	public static class RegistrateDisplayItemsGenerator implements CreativeModeTab.DisplayItemsGenerator {
+
+		private final boolean addItems;
+		private final DeferredHolder<CreativeModeTab, CreativeModeTab> tab;
+
+		public RegistrateDisplayItemsGenerator(boolean addItems, DeferredHolder<CreativeModeTab, CreativeModeTab> tab) {
+			this.addItems = addItems;
+			this.tab = tab;
+		}
+
+
+		private static Predicate<Item> makeExclusionPredicate() {
+			Set<Item> exclusions = new ReferenceOpenHashSet<>();
+
+			List<ItemProviderEntry<?, ?>> simpleExclusions = List.of(
+//                    AllBlocks.REFINED_RADIANCE_CASING - example
+			);
+
+			List<ItemEntry<TagDependentIngredientItem>> tagDependentExclusions = List.of(
+//                    AllItems.CRUSHED_OSMIUM - example
+			);
+
+			for (ItemProviderEntry<?, ?> entry : simpleExclusions) {
+				exclusions.add(entry.asItem());
+			}
+
+			for (ItemEntry<TagDependentIngredientItem> entry : tagDependentExclusions) {
+				TagDependentIngredientItem item = entry.get();
+				if (item.shouldHide()) {
+					exclusions.add(entry.asItem());
+				}
+			}
+
+			return (item) -> exclusions.contains(item) || item instanceof SequencedAssemblyItem;
+		}
+
+		private static List<ItemOrdering> makeOrderings() {
+			List<ItemOrdering> orderings = new ReferenceArrayList<>();
+
+			Map<ItemProviderEntry<?, ?>, ItemProviderEntry<?, ?>> simpleBeforeOrderings = Map.of(
+//                    AllItems.EMPTY_BLAZE_BURNER, AllBlocks.BLAZE_BURNER,
+//                    AllItems.SCHEDULE, AllBlocks.TRACK_STATION
+			);
+
+			Map<ItemProviderEntry<?, ?>, ItemProviderEntry<?, ?>> simpleAfterOrderings = Map.of(
+//                    AllItems.VERTICAL_GEARBOX, AllBlocks.GEARBOX
+			);
+
+			simpleBeforeOrderings.forEach((entry, otherEntry) -> orderings.add(ItemOrdering.before(entry.asItem(),
+					otherEntry.asItem())));
+
+			simpleAfterOrderings.forEach((entry, otherEntry) -> orderings.add(ItemOrdering.after(entry.asItem(),
+					otherEntry.asItem())));
+
+			return orderings;
+		}
+
+		private static Function<Item, ItemStack> makeStackFunc() {
+			Map<Item, Function<Item, ItemStack>> factories = new Reference2ReferenceOpenHashMap<>();
+
+			Map<ItemProviderEntry<?, ?>, Function<Item, ItemStack>> simpleFactories = Map.of(
+//                    AllItems.COPPER_BACKTANK, item -> {
+//                        ItemStack stack = new ItemStack(item);
+//                        stack.getOrCreateTag().putInt("Air", BacktankUtil.maxAirWithoutEnchants());
+//                        return stack;
+//                    }
+			);
+
+			simpleFactories.forEach((entry, factory) -> factories.put(entry.asItem(), factory));
+
+			return item -> {
+				Function<Item, ItemStack> factory = factories.get(item);
+				if (factory != null) {
+					return factory.apply(item);
+				}
+				return new ItemStack(item);
+			};
+		}
+
+		private static Function<Item, CreativeModeTab.TabVisibility> makeVisibilityFunc() {
+			Map<Item, CreativeModeTab.TabVisibility> visibilities = new Reference2ObjectOpenHashMap<>();
+
+			Map<ItemProviderEntry<?, ?>, CreativeModeTab.TabVisibility> simpleVisibilities = Map.of(
+//                    AllItems.BLAZE_CAKE_BASE, TabVisibility.SEARCH_TAB_ONLY
+			);
+
+			simpleVisibilities.forEach((entry, factory) -> visibilities.put(entry.asItem(), factory));
+
+//            for (BlockEntry<ValveHandleBlock> entry : AllBlocks.DYED_VALVE_HANDLES) {
+//                visibilities.put(entry.asItem(), TabVisibility.SEARCH_TAB_ONLY);
+//            }
+
+			return item -> {
+				CreativeModeTab.TabVisibility visibility = visibilities.get(item);
+				return Objects.requireNonNullElse(visibility, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+			};
+		}
+
+		@Override
+		public void accept(@NotNull CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.@NotNull Output output) {
+			Predicate<Item> exclusionPredicate = makeExclusionPredicate();
+			List<ItemOrdering> orderings = makeOrderings();
+			Function<Item, ItemStack> stackFunc = makeStackFunc();
+			Function<Item, CreativeModeTab.TabVisibility> visibilityFunc = makeVisibilityFunc();
+
+			List<Item> items = new LinkedList<>();
+			Predicate<Item>
+					is3d =
+					Env.unsafeRunForDist(() -> () -> item -> Minecraft
+							.getInstance()
+							.getItemRenderer()
+							.getModel(new ItemStack(item), null, null, 0)
+							.isGui3d(), () -> () -> item -> false);
+			if (addItems) items.addAll(collectItems(exclusionPredicate, is3d, true));
+
+			items.addAll(collectBlocks(exclusionPredicate));
+			if (addItems) items.addAll(collectItems(exclusionPredicate, is3d, false));
+
+			applyOrderings(items, orderings);
+			outputAll(output, items, stackFunc, visibilityFunc);
+		}
+
+		private List<Item> collectBlocks(Predicate<Item> exclusionPredicate) {
+			List<Item> items = new ReferenceArrayList<>();
+			for (RegistryEntry<Block, Block> entry : REGISTRATE.getAll(Registries.BLOCK)) {
+				if (!CreateRegistrate.isInCreativeTab(entry, tab)) continue;
+				Item item = entry.get().asItem();
+				if (item == Items.AIR) continue;
+				if (!exclusionPredicate.test(item)) items.add(item);
+			}
+			items = new ReferenceArrayList<>(new ReferenceLinkedOpenHashSet<>(items));
+			return items;
+		}
+
+		private List<Item> collectItems(Predicate<Item> exclusionPredicate, Predicate<Item> is3d, boolean special) {
+			List<Item> items = new ReferenceArrayList<>();
+			for (RegistryEntry<Item, Item> entry : REGISTRATE.getAll(Registries.ITEM)) {
+				if (!CreateRegistrate.isInCreativeTab(entry, tab)) continue;
+				Item item = entry.get();
+				if (item instanceof BlockItem) continue;
+				if (is3d.test(item) != special) continue;
+				if (!exclusionPredicate.test(item)) items.add(item);
+			}
+			return items;
+		}
+
+		private static void applyOrderings(List<Item> items, List<ItemOrdering> orderings) {
+			for (ItemOrdering ordering : orderings) {
+				int anchorIndex = items.indexOf(ordering.anchor());
+				if (anchorIndex != -1) {
+					Item item = ordering.item();
+					int itemIndex = items.indexOf(item);
+					if (itemIndex != -1) {
+						items.remove(itemIndex);
+						if (itemIndex < anchorIndex) {
+							anchorIndex--;
+						}
+					}
+					if (ordering.type() == ItemOrdering.Type.AFTER) {
+						items.add(anchorIndex + 1, item);
+					}
+					else {
+						items.add(anchorIndex, item);
+					}
+				}
+			}
+		}
+
+		private static void outputAll(CreativeModeTab.Output output, List<Item> items, Function<Item, ItemStack> stackFunc, Function<Item, CreativeModeTab.TabVisibility> visibilityFunc) {
+			for (Item item : items) {
+				output.accept(stackFunc.apply(item), visibilityFunc.apply(item));
+			}
+		}
+
+		private record ItemOrdering(Item item, Item anchor, ItemOrdering.Type type) {
+			public static ItemOrdering before(Item item, Item anchor) {
+				return new ItemOrdering(item, anchor, ItemOrdering.Type.BEFORE);
+			}
+
+			public static ItemOrdering after(Item item, Item anchor) {
+				return new ItemOrdering(item, anchor, ItemOrdering.Type.AFTER);
+			}
+
+			public enum Type {
+				BEFORE,
+				AFTER
+			}
+		}
+
+	}
 }

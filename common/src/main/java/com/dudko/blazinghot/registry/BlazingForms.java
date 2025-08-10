@@ -4,11 +4,11 @@ import com.dudko.blazinghot.compat.Mods;
 import com.dudko.blazinghot.content.casting.Molds;
 import com.dudko.blazinghot.content.metal.BlazingForm;
 import com.dudko.blazinghot.content.metal.BlazingForm.Flag;
-import com.dudko.blazinghot.foundation.multiloader.MultiRegistries;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.Create;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
@@ -67,18 +67,20 @@ public class BlazingForms {
 	// Raw Ores
 	public static BlazingForm RAW_IRON = rawOre(Items.RAW_IRON), RAW_GOLD = rawOre(Items.RAW_GOLD),
 			RAW_COPPER =
-					rawOre(Items.RAW_COPPER), RAW_ZINC = rawOre(AllItems.RAW_ZINC.getId());
+					rawOre(Items.RAW_COPPER), RAW_ZINC = rawOre(getItemKey(AllItems.RAW_ZINC));
 
-	public static BlazingForm CRUSHED_RAW_IRON = rawOre(AllItems.CRUSHED_IRON.getId()),
+	public static BlazingForm CRUSHED_RAW_IRON = rawOre(getItemKey(AllItems.CRUSHED_IRON)),
 			CRUSHED_RAW_GOLD =
-					rawOre(AllItems.CRUSHED_GOLD.getId()), CRUSHED_RAW_COPPER = rawOre(AllItems.CRUSHED_COPPER.getId()),
+					rawOre(getItemKey(AllItems.CRUSHED_GOLD)),
+			CRUSHED_RAW_COPPER =
+					rawOre(getItemKey(AllItems.CRUSHED_COPPER)),
 			CRUSHED_RAW_ZINC =
-					rawOre(AllItems.CRUSHED_ZINC.getId());
+					rawOre(getItemKey(AllItems.CRUSHED_ZINC));
 
 	// Create
 	public static BlazingForm
 			ANDESITE_ALLOY =
-			INGOT.createFrom("andesite_alloy", b -> b.withCustomItem(AllItems.ANDESITE_ALLOY.getId())),
+			INGOT.createFrom("andesite_alloy", b -> b.withCustomItem(getItemKey(AllItems.ANDESITE_ALLOY))),
 			CREATE_NUGGET =
 					NUGGET.withFlags(Flag.MELTING).asOptional(true),
 			COPPER_NUGGET =
@@ -92,10 +94,10 @@ public class BlazingForms {
 	public static BlazingForm ROD = OPTIONAL_ROD.withFlags(Flag.MELTING, Flag.CASTING).asOptional(false),
 			STURDY_ALLOY =
 					INGOT.createFrom("sturdy_alloy",
-							b -> b.withCustomItem(BlazingItems.STURDY_ALLOY.getId()).mechanicalMixerMeltable(false)),
+							b -> b.withCustomItem(BlazingItems.STURDY_ALLOY.get()).mechanicalMixerMeltable(false)),
 			STURDY_SHEET =
 					SHEET.createFrom("sturdy_sheet",
-							b -> b.withCustomItem(AllItems.STURDY_SHEET.getId()).mechanicalMixerMeltable(false)),
+							b -> b.withCustomItem(getItemKey(AllItems.STURDY_SHEET)).mechanicalMixerMeltable(false)),
 			STURDY_MOLD =
 					INGOT.createFrom("sturdy_mold",
 							b -> b.withAmount(MultiAmount.INGOT.multiply(2)).withMeltingTime(300));
@@ -107,8 +109,12 @@ public class BlazingForms {
 			ZINC_SHEET =
 					SHEET.withFlags(Flag.CASTING).fromMods(Mods.CREATE_ADDITIONS);
 
+	private static ResourceLocation getItemKey(ItemLike item) {
+		return BuiltInRegistries.ITEM.getKey(item.asItem());
+	}
+
 	public static BlazingForm rawOre(ItemLike item, Mods... mods) {
-		return rawOre(MultiRegistries.getItemId(item.asItem()), mods);
+		return rawOre(getItemKey(item), mods);
 	}
 
 	public static BlazingForm rawOre(ResourceLocation rawOre, Mods... mods) {
