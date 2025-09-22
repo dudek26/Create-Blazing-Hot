@@ -5,6 +5,7 @@ import static com.dudko.blazinghot.util.TooltipUtil.addEffectTooltip;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.function.BiConsumer;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -28,29 +29,12 @@ import net.minecraft.world.level.Level;
 @ParametersAreNonnullByDefault
 public class BlazingFoodItem extends Item {
 
-	private boolean foil;
-	private boolean extinguishing;
 	private boolean effectTooltip = true;
+	private final BiConsumer<Level, LivingEntity> onUse;
 
-	private int oxygen;
-	private int removeSlowness = -1;
-
-	public BlazingFoodItem(Properties properties) {
+	public BlazingFoodItem(Properties properties, BiConsumer<Level, LivingEntity> onUse) {
 		super(properties);
-	}
-
-	public BlazingFoodItem(Properties properties, ExtraProperties... extraProperties) {
-		super(properties);
-		for (ExtraProperties property : extraProperties) {
-			switch (property) {
-				case FOIL -> foil = true;
-				case EXTINGUISHING -> extinguishing = true;
-				case DISABLE_EFFECT_TOOLTIP -> effectTooltip = false;
-				case OXYGEN -> oxygen = property.value;
-				case REMOVE_SLOWNESS_0, REMOVE_SLOWNESS_1, REMOVE_SLOWNESS_2, REMOVE_SLOWNESS_ANY ->
-						removeSlowness = property.value;
-			}
-		}
+		this.onUse = onUse;
 	}
 
 	@Override
