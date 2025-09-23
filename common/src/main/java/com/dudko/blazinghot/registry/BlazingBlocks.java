@@ -35,7 +35,6 @@ import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
 
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -99,7 +98,6 @@ public class BlazingBlocks {
 					.properties(p -> p.noOcclusion().mapColor(MapColor.STONE))
 					.transform(axeOrPickaxe())
 					.transform(simpleBlockState())
-					.addLayer(() -> RenderType::cutoutMipped)
 					.transform(CStress.setImpact(4.0))
 					.item(AssemblyOperatorBlockItem::new)
 					.onRegisterAfter(Registries.ITEM,

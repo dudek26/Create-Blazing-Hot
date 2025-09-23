@@ -6,6 +6,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBehaviour;
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
 import com.dudko.blazinghot.content.casting.casting_depot.SpoutCastingBehaviour;
+import com.dudko.blazinghot.content.casting.casting_depot.recipe.CastingRecipe;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.foundation.mixin.accessor.SpoutBlockEntityAccessor;
 import com.dudko.blazinghot.registry.BlazingTagsV1;
