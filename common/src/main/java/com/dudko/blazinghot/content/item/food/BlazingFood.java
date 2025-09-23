@@ -7,10 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
-
-import org.jetbrains.annotations.Nullable;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
@@ -40,7 +37,7 @@ public class BlazingFood {
 	public final Item.Properties itemProperties;
 	public final BiConsumer<Level, LivingEntity> onUse;
 	public final boolean generateRecipe;
-	public final @Nullable Consumer<? super BlazingFoodItem> onRegisterAfter;
+	public final List<NonNullConsumer<? super BlazingFoodItem>> onRegisterAfter;
 	public final List<TagKey<Item>> tags;
 
 	protected BlazingFood(Builder builder) {
@@ -63,7 +60,7 @@ public class BlazingFood {
 						.registrate()
 						.item(name, properties -> new BlazingFoodItem(properties, onUse))
 						.properties(properties -> itemProperties);
-		if (onRegisterAfter instanceof NonNullConsumer<? super BlazingFoodItem> consumer) {
+		for (NonNullConsumer<? super BlazingFoodItem> consumer : onRegisterAfter) {
 			builder.onRegisterAfter(Registries.ITEM, consumer);
 		}
 
@@ -76,7 +73,7 @@ public class BlazingFood {
 		private final Item.Properties itemProperties;
 		private BiConsumer<Level, LivingEntity> onUse;
 		private boolean generateRecipe;
-		private @Nullable Consumer<? super BlazingFoodItem> onRegisterAfter;
+		private final List<NonNullConsumer<? super BlazingFoodItem>> onRegisterAfter;
 		private final List<TagKey<Item>> tags;
 
 		private Builder(String name) {
@@ -86,7 +83,7 @@ public class BlazingFood {
 			this.foodProperties = new FoodProperties.Builder();
 			this.itemProperties = new Item.Properties();
 			this.generateRecipe = true;
-			this.onRegisterAfter = null;
+			this.onRegisterAfter = new ArrayList<>();
 			this.tags = new ArrayList<>();
 		}
 
@@ -115,7 +112,7 @@ public class BlazingFood {
 		}
 
 		public Builder onRegisterAfter(NonNullConsumer<? super BlazingFoodItem> onRegisterAfter) {
-			this.onRegisterAfter = onRegisterAfter;
+			this.onRegisterAfter.add(onRegisterAfter);
 			return this;
 		}
 
