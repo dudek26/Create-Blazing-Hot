@@ -1,12 +1,9 @@
 package com.dudko.blazinghot.registry;
 
-import static com.dudko.blazinghot.content.item.food.BlazingFoodItem.ExtraProperties.EXTINGUISHING;
-import static com.dudko.blazinghot.content.item.food.BlazingFoodItem.ExtraProperties.FOIL;
-import static com.dudko.blazinghot.content.item.food.BlazingFoodItem.ExtraProperties.OXYGEN;
-import static com.dudko.blazinghot.content.item.food.BlazingFoodItem.ExtraProperties.REMOVE_SLOWNESS_0;
-import static com.dudko.blazinghot.content.item.food.BlazingFoodItem.ExtraProperties.REMOVE_SLOWNESS_1;
-import static com.dudko.blazinghot.content.item.food.BlazingFoodItem.ExtraProperties.REMOVE_SLOWNESS_2;
-import static com.dudko.blazinghot.content.item.food.BlazingFoodItem.ExtraProperties.REMOVE_SLOWNESS_ANY;
+import static com.dudko.blazinghot.content.item.food.StandardFoodBuilders.apple;
+import static com.dudko.blazinghot.content.item.food.StandardFoodBuilders.carrot;
+import static com.dudko.blazinghot.content.item.food.StandardFoodBuilders.enchantedApple;
+import static com.dudko.blazinghot.content.item.food.StandardFoodBuilders.stellarApple;
 import static com.dudko.blazinghot.foundation.multiloader.BlazingBuilderTransformers.existingParent;
 import static com.dudko.blazinghot.foundation.multiloader.BlazingBuilderTransformers.handheld;
 import static com.dudko.blazinghot.registry.BlazingItems.FoodItemBuilder.tickMinutes;
@@ -144,50 +141,40 @@ public class BlazingItems {
 
 	public static final ItemEntry<BlazingFoodItem>
 			STELLAR_GOLDEN_APPLE =
-			new FoodItemBuilder<>("stellar_golden_apple", BlazingFoodItem::new)
-					.metalApple()
-					.tag(BlazingTags.Items.STELLAR_METAL_APPLES.tag())
-					.addEffect(MobEffects.ABSORPTION, tickMinutes(1), 2)
-					.addEffect(MobEffects.REGENERATION, tickSeconds(20), 1)
-					.addEffect(MobEffects.FIRE_RESISTANCE, tickMinutes(3))
-					.fireResistant()
-					.register(),
+			stellarApple("golden",
+					b -> b
+							.effect(MobEffects.ABSORPTION, 20 * 60)
+							.effect(MobEffects.REGENERATION, 20 * 20, 1)
+							.effect(MobEffects.FIRE_RESISTANCE, 20 * 60 * 3)),
 			IRON_CARROT =
-					new FoodItemBuilder<>("iron_carrot", BlazingFoodItem::new)
-							.nutrition(5)
-							.saturationMod(0.8f)
-							.tag(BlazingTags.Items.METAL_CARROTS.tag())
-							.register(),
+					carrot("iron", b -> b.nutrition(5).saturation(0.8f)),
 			IRON_APPLE =
-					new FoodItemBuilder<>("iron_apple", BlazingFoodItem::new)
-							.metalApple()
-							.tag(BlazingTags.Items.METAL_APPLES.tag())
-							.addEffect(MobEffects.ABSORPTION, tickMinutes(1))
-							.addEffect(MobEffects.DAMAGE_RESISTANCE, tickSeconds(30))
-							.register(),
+					apple("iron",
+							b -> b
+									.effect(MobEffects.ABSORPTION, 20 * 60)
+									.effect(MobEffects.DAMAGE_RESISTANCE, 20 * 30)),
 			STELLAR_IRON_APPLE =
-					new FoodItemBuilder<>("stellar_iron_apple", BlazingFoodItem::new)
-							.metalApple()
-							.tag(BlazingTags.Items.STELLAR_METAL_APPLES.tag())
-							.addEffect(MobEffects.ABSORPTION, tickMinutes(1), 1)
-							.addEffect(MobEffects.REGENERATION, tickSeconds(10))
-							.addEffect(MobEffects.DAMAGE_RESISTANCE, tickMinutes(2), 1)
-							.register(),
+					stellarApple("iron",
+							b -> b
+									.effect(MobEffects.ABSORPTION, 20 * 60, 1)
+									.effect(MobEffects.DAMAGE_RESISTANCE, 20 * 60 * 2, 1)
+									.effect(MobEffects.REGENERATION, 20 * 10)),
 			ENCHANTED_IRON_APPLE =
-					new FoodItemBuilder<>("enchanted_iron_apple", p -> new BlazingFoodItem(p, FOIL))
-							.enchantedMetalApple()
-							.addEffect(MobEffects.ABSORPTION, tickMinutes(2), 2)
-							.addEffect(MobEffects.REGENERATION, tickSeconds(10), 1)
-							.addEffect(MobEffects.DAMAGE_RESISTANCE, tickMinutes(3), 2)
-							.register(),
+					enchantedApple("iron",
+							b -> b
+									.effect(MobEffects.ABSORPTION, 20 * 60 * 2, 2)
+									.effect(MobEffects.REGENERATION, 20 * 10, 1)
+									.effect(MobEffects.DAMAGE_RESISTANCE, 20 * 60 * 3, 2));
+
+	public static final ItemEntry<BlazingFoodItem>
 			BLAZE_CARROT =
-					new FoodItemBuilder<>("blaze_carrot", p -> new BlazingFoodItem(p, EXTINGUISHING))
-							.nutrition(6)
-							.saturationMod(1.2f)
-							.alwaysEat()
-							.fireResistant()
-							.tag(BlazingTags.Items.METAL_CARROTS.tag())
-							.register(),
+			new FoodItemBuilder<>("blaze_carrot", p -> new BlazingFoodItem(p, EXTINGUISHING))
+					.nutrition(6)
+					.saturationMod(1.2f)
+					.alwaysEat()
+					.fireResistant()
+					.tag(BlazingTags.Items.METAL_CARROTS.tag())
+					.register(),
 			BLAZE_APPLE =
 					new FoodItemBuilder<>("blaze_apple", p -> new BlazingFoodItem(p, EXTINGUISHING))
 							.metalApple()

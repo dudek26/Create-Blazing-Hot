@@ -21,13 +21,13 @@ public class ItemDescriptions {
 					.summary("Restores some _oxygen_ allowing you to _survive underwater_ for a bit longer")
 					.register(),
 
-	SLOWNESS_REMOVING_FOOD_0 = slownessRemoved(0),
+	SLOWNESS_REMOVING_FOOD_0 = slownessRemovedDescription(0),
 
-	SLOWNESS_REMOVING_FOOD_1 = slownessRemoved(1),
+	SLOWNESS_REMOVING_FOOD_1 = slownessRemovedDescription(1),
 
-	SLOWNESS_REMOVING_FOOD_2 = slownessRemoved(2),
+	SLOWNESS_REMOVING_FOOD_2 = slownessRemovedDescription(2),
 
-	SLOWNESS_REMOVING_FOOD_ANY = slownessRemoved(255),
+	SLOWNESS_REMOVING_FOOD_ANY = slownessRemovedDescription(255),
 
 	BLAZE_ARROW =
 			BlazingItemDescription
@@ -59,7 +59,7 @@ public class ItemDescriptions {
 		}
 	}
 
-	private static BlazingItemDescription slownessRemoved(int maxAmplitude) {
+	public static BlazingItemDescription slownessRemovedDescription(int maxAmplitude) {
 		String summary;
 		if (maxAmplitude == 255) summary = "Removes _Slowness_ effect on consumption";
 		else
