@@ -6,7 +6,7 @@ public class CServer extends ConfigBase {
 
 	public final CRecipes recipes = nested(0, CRecipes::new, Comments.recipes);
 	public final CCasting casting = nested(0, CCasting::new, Comments.casting);
-	public final CStress stressValues = nested(0, CStress::new, Comments.stressValues);
+	public final CStress stressValues = nested(0, CStress::create, Comments.stressValues);
 
 	@Override
 	public String getName() {
