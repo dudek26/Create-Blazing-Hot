@@ -12,11 +12,10 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.neoforged.neoforge.eventbus.api.EventPriority;
-import net.neoforged.neoforge.eventbus.api.SubscribeEvent;
-import net.neoforged.neoforge.fml.common.Mod.EventBusSubscriber;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 
 /**
  * From {@link com.simibubi.create.content.fluids.FluidReactions}
@@ -60,13 +59,13 @@ public class FluidReactionsImpl {
 		Fluid pf = event.getPipeFluid();
 		Fluid wf = event.getWorldFluid();
 
-		FluidState pfState = pf.defaultFluidState();
-		FluidState wfState = wf.defaultFluidState();
+//		FluidState pfState = pf.defaultFluidState();
+//		FluidState wfState = wf.defaultFluidState();
 
 		if (FluidHelper.isTag(pf, FluidTags.WATER) && wf == NETHER_LAVA.getSource()) {
 			event.setState(Blocks.OBSIDIAN.defaultBlockState());
 		}
-		else if (pf == Fluids.WATER && wf == NETHER_LAVA.get().getFlowing()) {
+		else if (pf == Fluids.WATER && wf == NETHER_LAVA.getSource()) {
 			event.setState(Blocks.COBBLESTONE.defaultBlockState());
 		}
 		else if (pf == NETHER_LAVA.getSource() && wf == Fluids.WATER) {
@@ -77,7 +76,7 @@ public class FluidReactionsImpl {
 		}
 
 		if (pf == NETHER_LAVA.getSource()) lavaInteraction(event, wf);
-		else if (wf == NETHER_LAVA.get().getFlowing() && FluidHelper.hasBlockState(pf)) lavaInteraction(event, pf);
+		else if (wf == NETHER_LAVA.getSource() && FluidHelper.hasBlockState(pf)) lavaInteraction(event, pf);
 
 		else if (BlazingFluidsImpl.MOLTEN_METALS.contains(pf) && FluidHelper.isTag(wf, FluidTags.WATER)) {
 			metalInteraction(event, pf, wf);

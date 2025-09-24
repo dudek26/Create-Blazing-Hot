@@ -3,7 +3,8 @@ package com.dudko.blazinghot.data.advancement;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 
 public class BlazingTriggers {
 
@@ -19,7 +20,9 @@ public class BlazingTriggers {
 	}
 
 	public static void register() {
-		triggers.forEach(CriteriaTriggers::register);
+		triggers.forEach(trigger -> {
+			Registry.register(BuiltInRegistries.TRIGGER_TYPES, trigger.getId(), trigger);
+		});
 	}
 
 }

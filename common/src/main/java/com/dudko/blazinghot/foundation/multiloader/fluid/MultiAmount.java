@@ -80,4 +80,9 @@ public record MultiAmount(long droplets, int millibuckets) {
 		throw new AssertionError();
 	}
 
+	@ExpectPlatform
+	public static MultiAmount from(long amount) {
+		throw new AssertionError();
+	}
+
 }

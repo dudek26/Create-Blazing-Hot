@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
+import com.dudko.blazinghot.data.conditions.LoadCondition;
 import com.dudko.blazinghot.foundation.mixin.accessor.SequencedAssemblyRecipeBuilderAccessor;
+import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.kinetics.deployer.ItemApplicationRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
@@ -12,17 +14,19 @@ import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
 import com.simibubi.create.content.processing.sequenced.SequencedRecipe;
 
+import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.neoforge.common.conditions.ICondition;
 
 public class BlazingSequencedAssemblyRecipeBuilder extends SequencedAssemblyRecipeBuilder {
 
-	protected List<ICondition> recipeConditions;
+	protected List<LoadCondition<?>> recipeConditions;
 
 	public BlazingSequencedAssemblyRecipeBuilder(ResourceLocation id) {
 		super(id);
@@ -94,6 +98,23 @@ public class BlazingSequencedAssemblyRecipeBuilder extends SequencedAssemblyReci
 	@Override
 	public BlazingSequencedAssemblyRecipeBuilder addOutput(ItemStack item, float weight) {
 		return (BlazingSequencedAssemblyRecipeBuilder) super.addOutput(item, weight);
+	}
+
+	@Override
+	public void build(RecipeOutput consumer) {
+		RecipeHolder<SequencedAssemblyRecipe> holder = build();
+
+		ResourceLocation
+				id =
+				ResourceLocation.fromNamespaceAndPath(holder.id().getNamespace(),
+						AllRecipeTypes.SEQUENCED_ASSEMBLY.getId().getPath() + "/" + holder.id().getPath());
+
+		finishBuild(consumer, id, holder.value(), recipeConditions);
+	}
+
+	@ExpectPlatform
+	static void finishBuild(RecipeOutput consumer, ResourceLocation id, SequencedAssemblyRecipe recipe, List<LoadCondition<?>> loadConditions) {
+		throw new AssertionError();
 	}
 
 }

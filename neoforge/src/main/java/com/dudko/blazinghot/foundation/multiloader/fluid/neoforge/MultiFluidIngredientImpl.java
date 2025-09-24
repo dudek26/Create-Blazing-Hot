@@ -10,7 +10,7 @@ import net.minecraft.world.level.material.Fluid;
 public class MultiFluidIngredientImpl {
 
 	public static FluidIngredient fromStack(MultiFluidStack fluidStack) {
-		return FluidIngredient.fromFluid(fluidStack.getFluid(), (int) fluidStack.getAmount().get());
+		return FluidIngredient.fromFluid(fluidStack.fluid().value(), (int) fluidStack.amount().get());
 	}
 
 	public static FluidIngredient fromTag(TagKey<Fluid> tag, MultiAmount amount) {

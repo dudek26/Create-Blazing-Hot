@@ -20,7 +20,7 @@ public class BlazingRecipeTypes {
 
 	public static final BlazingRecipeType
 			BLAZE_MIXING =
-			BlazingRecipeType.blazeMixing("blaze_mixing", BlazeMixingRecipe::new).register(),
+			BlazingRecipeType.create("blaze_mixing", BlazeMixingRecipe::new).register(),
 			CASTING =
 					BlazingRecipeType
 							.create("casting", () -> new CastingRecipe.Serializer(CastingRecipe::new))

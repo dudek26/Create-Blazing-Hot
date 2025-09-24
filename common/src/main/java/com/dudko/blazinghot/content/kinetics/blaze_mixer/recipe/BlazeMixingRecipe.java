@@ -19,6 +19,7 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
@@ -32,13 +33,17 @@ import net.minecraft.world.level.Level;
 @MethodsReturnNonnullByDefault
 public class BlazeMixingRecipe extends BasinRecipe {
 
-	public final FluidIngredient mixerFuel;
+	protected final FluidIngredient mixerFuel;
 
 	public BlazeMixingRecipe(ProcessingRecipeParams params) {
 		super(BlazingRecipeTypes.BLAZE_MIXING, params);
 
 		this.mixerFuel = fluidIngredients.getLast(); // temporary solution
 		fluidIngredients.removeLast();
+	}
+
+	public FluidIngredient getMixerFuel() {
+		return mixerFuel;
 	}
 
 	/**
@@ -88,6 +93,11 @@ public class BlazeMixingRecipe extends BasinRecipe {
 	@FunctionalInterface
 	public interface Factory {
 		BlazeMixingRecipe create(BlazeMixingRecipeParams params);
+	}
+
+	@ExpectPlatform
+	public static boolean isMeltingRecipe(Recipe<?> recipe) {
+		return true;
 	}
 
 //	public static MapCodec<BlazeMixingRecipe> codec(Factory factory, MapCodec<BlazeMixingRecipeParams> paramsCodec) {

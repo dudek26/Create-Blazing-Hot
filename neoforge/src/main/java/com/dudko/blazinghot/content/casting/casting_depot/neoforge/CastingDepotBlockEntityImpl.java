@@ -2,9 +2,6 @@ package com.dudko.blazinghot.content.casting.casting_depot.neoforge;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.simibubi.create.content.fluids.FluidFX;
@@ -13,7 +10,6 @@ import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTank
 
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.ItemStack;
@@ -21,18 +17,12 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.capabilities.Capability;
-import net.neoforged.neoforge.common.util.LazyOptional;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity {
 
 	protected CastingDepotBlockEntityImpl(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
-	}
-
-	private CastingDepotBehaviourImpl getInputBehaviour() {
-		return (CastingDepotBehaviourImpl) depotBehaviour;
 	}
 
 	private CastingDepotBehaviourImpl castBehaviour() {
@@ -78,14 +68,6 @@ public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity {
 						.forbidExtraction()
 						.forbidInsertion();
 		behaviours.add(tank);
-	}
-
-	@Override
-	public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-		if (isItemHandlerCap(cap)) {
-			return this.getInputBehaviour().getItemCapability();
-		}
-		return super.getCapability(cap, side);
 	}
 
 	protected void spawnProcessingParticles(FluidStack fluid) {

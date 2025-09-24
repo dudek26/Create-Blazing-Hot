@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.compat.jei.category.BlazeMixingCategory;
 import com.dudko.blazinghot.compat.jei.category.CastingCategory;
-import com.dudko.blazinghot.content.casting.casting_depot.neoforge.CastingRecipe;
+import com.dudko.blazinghot.content.casting.casting_depot.recipe.CastingRecipe;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecipe;
 import com.dudko.blazinghot.data.lang.BlazingLang;
@@ -25,7 +25,6 @@ import com.dudko.blazinghot.foundation.mixin.neoforge.RecipeManagerAccessor;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.dudko.blazinghot.registry.neoforge.BlazingFluidsImpl;
-import com.dudko.blazinghot.registry.neoforge.BlazingRecipeTypesImpl;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.compat.jei.DoubleItemIcon;
@@ -79,7 +78,7 @@ public class BlazingJEI implements IModPlugin {
 		CreateRecipeCategory<?>
 				blazeMixing =
 				builder(BasinRecipe.class)
-						.addTypedRecipes(BlazingRecipeTypesImpl.BLAZE_MIXING)
+						.addTypedRecipes(BlazingRecipeTypes.BLAZE_MIXING)
 						.addTypedRecipesExcluding(AllRecipeTypes.MIXING::getType,
 								BlazingRecipeTypes.BLAZE_MIXING::getType)
 						.catalyst(BlazingBlocks.BLAZE_MIXER::get)
@@ -114,7 +113,7 @@ public class BlazingJEI implements IModPlugin {
 
 				casting =
 						builder(CastingRecipe.class)
-								.addTypedRecipes(BlazingRecipeTypesImpl.CASTING)
+								.addTypedRecipes(BlazingRecipeTypes.CASTING)
 								.catalyst(AllBlocks.SPOUT::get)
 								.catalyst(BlazingBlocks.CASTING_DEPOT::get)
 								.doubleItemIcon(AllBlocks.SPOUT.get(), BlazingBlocks.CASTING_DEPOT.get())

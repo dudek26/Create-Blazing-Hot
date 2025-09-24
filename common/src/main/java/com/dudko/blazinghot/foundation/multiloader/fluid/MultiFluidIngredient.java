@@ -3,6 +3,7 @@ package com.dudko.blazinghot.foundation.multiloader.fluid;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.minecraft.core.Holder;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
 
@@ -13,7 +14,7 @@ public class MultiFluidIngredient {
 		throw new AssertionError();
 	}
 
-	public static FluidIngredient fromFluid(Fluid fluid, MultiAmount amount) {
+	public static FluidIngredient fromFluid(Holder<Fluid> fluid, MultiAmount amount) {
 		return fromStack(new MultiFluidStack(fluid, amount));
 	}
 

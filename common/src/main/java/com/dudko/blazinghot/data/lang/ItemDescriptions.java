@@ -21,14 +21,6 @@ public class ItemDescriptions {
 					.summary("Restores some _oxygen_ allowing you to _survive underwater_ for a bit longer")
 					.register(),
 
-	SLOWNESS_REMOVING_FOOD_0 = slownessRemovedDescription(0),
-
-	SLOWNESS_REMOVING_FOOD_1 = slownessRemovedDescription(1),
-
-	SLOWNESS_REMOVING_FOOD_2 = slownessRemovedDescription(2),
-
-	SLOWNESS_REMOVING_FOOD_ANY = slownessRemovedDescription(255),
-
 	BLAZE_ARROW =
 			BlazingItemDescription
 					.builder("blaze_arrow")

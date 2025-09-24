@@ -25,7 +25,7 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlazingHotDataForge {
+public class BlazingHotDataNeoForge {
 
 	private static final CreateRegistrate REGISTRATE = BlazingHot.registrate();
 
@@ -51,7 +51,7 @@ public class BlazingHotDataForge {
 			}
 		});
 
-		generator.addProvider(event.includeServer(), new BlazingAdvancements(output));
+		generator.addProvider(event.includeServer(), new BlazingAdvancements(output, lookupProvider));
 		generator.addProvider(event.includeServer(), new StandardRecipeGen(output, lookupProvider));
 		generator.addProvider(event.includeServer(), new SequencedAssemblyRecipeGen(output, lookupProvider));
 

@@ -10,8 +10,8 @@ import com.dudko.blazinghot.content.block.modern_lamp.SmallModernLampPanelBlock;
 import com.dudko.blazinghot.content.casting.Molds;
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlock;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
-import com.dudko.blazinghot.registry.BlazingTagsV1;
-import com.dudko.blazinghot.registry.CommonTags;
+import com.dudko.blazinghot.foundation.multiloader.BlazingBuilderTransformers;
+import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.ModelGen;
@@ -29,12 +29,15 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 
+/**
+ * @see BlazingBuilderTransformers
+ */
 public class BlazingBuilderTransformersImpl {
 	public static <B extends ModernLampBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampBlock(DyeColor color) {
 		return a -> a
 				.initialProperties(() -> Blocks.GLOWSTONE)
 				.properties(p -> p.mapColor(color).lightLevel(s -> s.getValue(ModernLampBlock.LIT) ? 15 : 0))
-				.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag, BlazingTagsV1.Blocks.MODERN_LAMPS.tag)
+				.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag, BlazingTags.Blocks.MODERN_LAMPS.tag())
 				.blockstate((c, p) -> p
 						.getVariantBuilder(c.get())
 						.forAllStates(state -> ConfiguredModel
@@ -50,7 +53,7 @@ public class BlazingBuilderTransformersImpl {
 
 						))
 				.item()
-				.tag(BlazingTagsV1.Items.MODERN_LAMPS.tag)
+				.tag(BlazingTags.Blocks.MODERN_LAMPS.itemTag())
 				.model((c, b) -> b.blockItem(c).texture("#all", b.modLoc("block/modern_lamp/block/" + color.getName())))
 				.build();
 	}
@@ -58,7 +61,7 @@ public class BlazingBuilderTransformersImpl {
 	public static <B extends ModernLampPanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampPanel(DyeColor color, String name) {
 		String tagName = name.replace('/', '_') + "s";
 		return b -> b
-				.tag(CommonTags.blockTagOf(tagName, CommonTags.Namespace.platform()))
+				.tag(BlazingTags.blockTag(tagName, BlazingTags.Namespace.COMMON.id))
 				.blockstate((c, p) -> p.getVariantBuilder(c.get()).forAllStates(state -> {
 							Direction facing = state.getValue(ModernLampPanelBlock.FACING);
 							int xRotation = facing == Direction.DOWN ? 180 : 0;
@@ -78,14 +81,14 @@ public class BlazingBuilderTransformersImpl {
 
 				))
 				.item()
-				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.platform()))
+				.tag(BlazingTags.itemTag(tagName, BlazingTags.Namespace.COMMON.id))
 				.transform(ModelGen.customItemModel(name, color.getName()));
 	}
 
 	public static <B extends ModernLampDoublePanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampDirectionalPanel(DyeColor color, String name) {
 		String tagName = name.replace('/', '_') + "s";
 		return b -> b
-				.tag(CommonTags.blockTagOf(tagName, CommonTags.Namespace.platform()))
+				.tag(BlazingTags.blockTag(tagName, BlazingTags.Namespace.COMMON.id))
 				.blockstate((c, p) -> p.getVariantBuilder(c.get()).forAllStates(state -> {
 					Direction facing = state.getValue(ModernLampPanelBlock.FACING);
 					int xRotation = facing == Direction.DOWN ? 180 : 0;
@@ -105,14 +108,14 @@ public class BlazingBuilderTransformersImpl {
 							.build();
 				}))
 				.item()
-				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.platform()))
+				.tag(BlazingTags.itemTag(tagName, BlazingTags.Namespace.COMMON.id))
 				.transform(ModelGen.customItemModel(name, color.getName() + "_h"));
 	}
 
 	public static <B extends ModernLampHalfPanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampHalfPanel(DyeColor color, String name) {
 		String tagName = name.replace('/', '_') + "s";
 		return b -> b
-				.tag(CommonTags.blockTagOf(tagName, CommonTags.Namespace.platform()))
+				.tag(BlazingTags.blockTag(tagName, BlazingTags.Namespace.COMMON.id))
 				.blockstate((c, p) -> p.getVariantBuilder(c.get()).forAllStates(state -> {
 					Direction facing = state.getValue(ModernLampPanelBlock.FACING);
 					int xRotation = facing == Direction.DOWN ? 180 : 0;
@@ -133,14 +136,14 @@ public class BlazingBuilderTransformersImpl {
 							.build();
 				}))
 				.item()
-				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.platform()))
+				.tag(BlazingTags.itemTag(tagName, BlazingTags.Namespace.COMMON.id))
 				.transform(ModelGen.customItemModel(name, color.getName() + "_h"));
 	}
 
 	public static <B extends SmallModernLampPanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampSmallPanel(DyeColor color, String name) {
 		String tagName = name.replace('/', '_') + "s";
 		return b -> b
-				.tag(CommonTags.blockTagOf(tagName, CommonTags.Namespace.platform()))
+				.tag(BlazingTags.blockTag(tagName, BlazingTags.Namespace.COMMON.id))
 				.blockstate((c, p) -> p.getVariantBuilder(c.get()).forAllStates(state -> {
 					Direction facing = state.getValue(ModernLampPanelBlock.FACING);
 					int xRotation = facing == Direction.DOWN ? 180 : 0;
@@ -159,7 +162,7 @@ public class BlazingBuilderTransformersImpl {
 							.build();
 				}))
 				.item()
-				.tag(CommonTags.itemTagOf(tagName, CommonTags.Namespace.platform()))
+				.tag(BlazingTags.itemTag(tagName, BlazingTags.Namespace.COMMON.id))
 				.transform(ModelGen.customItemModel(name, color.getName()));
 	}
 
@@ -203,7 +206,7 @@ public class BlazingBuilderTransformersImpl {
 	}
 
 	public static <T extends Item, P> NonNullUnaryOperator<ItemBuilder<T, P>> mold(String name, Molds.MoldType type) {
-		return b -> b.tag(BlazingTagsV1.Items.MOLDS.tag, type.tag).properties(p -> {
+		return b -> b.tag(BlazingTags.Items.MOLDS.tag(), type.tag).properties(p -> {
 			if (type.fireResistant) p.fireResistant();
 			return p;
 		}).model((c, p) -> p.generated(c::get, BlazingHot.asResource("item/" + type.name + "_mold/" + name)));

@@ -1,41 +1,24 @@
 package com.dudko.blazinghot.foundation.multiloader.fluid;
 
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.PatchedDataComponentMap;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
-public class MultiFluidStack {
+public record MultiFluidStack(Holder<Fluid> fluid, MultiAmount amount, PatchedDataComponentMap components) {
 
-	public static final MultiFluidStack EMPTY = new MultiFluidStack(Fluids.EMPTY, MultiAmount.EMPTY);
+	public static final MultiFluidStack
+			EMPTY =
+			new MultiFluidStack(BuiltInRegistries.FLUID.wrapAsHolder(Fluids.EMPTY), MultiAmount.EMPTY);
 
-	private final Fluid fluid;
-	private final MultiAmount amount;
-	private CompoundTag tag;
-
-	public MultiFluidStack(Fluid fluid, MultiAmount amount) {
-		this.fluid = fluid;
-		this.amount = amount;
+	public MultiFluidStack(Holder<Fluid> fluid, MultiAmount amount, DataComponentMap components) {
+		this(fluid, amount, new PatchedDataComponentMap(components));
 	}
 
-	public Fluid getFluid() {
-		return fluid;
-	}
-
-	public MultiAmount getAmount() {
-		return amount;
-	}
-
-	public CompoundTag getTag() {
-		return this.tag;
-	}
-
-	public void setTag(CompoundTag tag) {
-		if (this.getFluid() == Fluids.EMPTY) {
-			throw new IllegalStateException("Can't modify the empty stack.");
-		}
-		else {
-			this.tag = tag;
-		}
+	public MultiFluidStack(Holder<Fluid> fluid, MultiAmount amount) {
+		this(fluid, amount, DataComponentMap.EMPTY);
 	}
 
 }

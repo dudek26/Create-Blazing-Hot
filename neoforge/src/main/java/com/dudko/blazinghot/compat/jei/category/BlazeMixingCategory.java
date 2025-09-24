@@ -10,7 +10,7 @@ import com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecip
 import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.dudko.blazinghot.gui.BlazingGuiTextures;
 import com.dudko.blazinghot.registry.BlazingConfigs;
-import com.dudko.blazinghot.registry.BlazingTagsV1;
+import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.compat.jei.category.BasinCategory;
 import com.simibubi.create.compat.jei.category.animations.AnimatedBlazeBurner;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
@@ -55,14 +55,14 @@ public class BlazeMixingCategory extends BasinCategory {
 	}
 
 	private FluidIngredient getFuelFromRecipe(BasinRecipe recipe) {
-		if (type == MixingType.AUTO_SHAPELESS) return FluidIngredient.fromTag(BlazingTagsV1.Fluids.BLAZE_MIXER_FUEL.tag,
+		if (type == MixingType.AUTO_SHAPELESS) return FluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag(),
 				BlazingConfigs.server().recipes.blazeShapelessFuelUsage.get());
 		if (recipe instanceof BlazeMixingRecipe bmRecipe) return bmRecipe.getMixerFuel();
 		else {
 			assert Minecraft.getInstance().level != null;
 			int calculatedCost = (int) BlazeMixingRecipe.getFuelCost(recipe, Minecraft.getInstance().level);
 			return calculatedCost > 0 ?
-				   FluidIngredient.fromTag(BlazingTagsV1.Fluids.BLAZE_MIXER_FUEL.tag, calculatedCost) :
+				   FluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag(), calculatedCost) :
 				   FluidIngredient.EMPTY;
 		}
 	}

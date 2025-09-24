@@ -5,7 +5,6 @@ import java.util.function.Supplier;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
-import com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecipe;
 import com.dudko.blazinghot.foundation.recipe.BlazingRecipeType;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.Create;
@@ -57,10 +56,10 @@ public class BlazingRecipeTypeImpl extends BlazingRecipeType {
 		isProcessingRecipe = true;
 	}
 
-	protected BlazingRecipeTypeImpl(String id, BlazeMixingRecipe.Factory blazeMixingFactory) {
-		this(id, () -> new BlazeMixingRecipe.Serializer(blazeMixingFactory));
-		isProcessingRecipe = true;
-	}
+//	protected BlazingRecipeTypeImpl(String id, BlazeMixingRecipe.Factory blazeMixingFactory) {
+//		this(id, () -> new BlazeMixingRecipe.Serializer(blazeMixingFactory));
+//		isProcessingRecipe = true;
+//	}
 
 	public static BlazingRecipeType create(String id, Supplier<RecipeSerializer<?>> serializerSupplier, Supplier<RecipeType<?>> typeSupplier, boolean registerType) {
 		return new BlazingRecipeTypeImpl(id, serializerSupplier, typeSupplier, registerType);
@@ -74,9 +73,9 @@ public class BlazingRecipeTypeImpl extends BlazingRecipeType {
 		return new BlazingRecipeTypeImpl(id, processingFactory);
 	}
 
-	public static BlazingRecipeType blazeMixing(String id, BlazeMixingRecipe.Factory blazeMixingFactory) {
-		return new BlazingRecipeTypeImpl(id, blazeMixingFactory);
-	}
+//	public static BlazingRecipeType blazeMixing(String id, BlazeMixingRecipe.Factory blazeMixingFactory) {
+//		return new BlazingRecipeTypeImpl(id, blazeMixingFactory);
+//	}
 
 	@SuppressWarnings("unchecked")
 	@Override

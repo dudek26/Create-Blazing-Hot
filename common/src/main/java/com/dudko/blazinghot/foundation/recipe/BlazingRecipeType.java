@@ -6,7 +6,6 @@ import java.util.function.Supplier;
 import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecipe;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
@@ -59,10 +58,10 @@ public abstract class BlazingRecipeType implements IRecipeTypeInfo, StringRepres
 		throw new AssertionError();
 	}
 
-	@ExpectPlatform
-	public static BlazingRecipeType blazeMixing(String id, BlazeMixingRecipe.Factory blazeMixingFactory) {
-		throw new AssertionError();
-	}
+//	@ExpectPlatform
+//	public static BlazingRecipeType blazeMixing(String id, BlazeMixingRecipe.Factory blazeMixingFactory) {
+//		throw new AssertionError();
+//	}
 
 	@Override
 	public ResourceLocation getId() {

@@ -32,7 +32,7 @@ public class BlazingHotImpl {
 		BlazingCreativeTabsImpl.register(modEventBus);
 		BlazingHot.init();
 
-		modEventBus.addListener(EventPriority.LOWEST, BlazingHotDataForge::gatherData);
+		modEventBus.addListener(EventPriority.LOWEST, BlazingHotDataNeoForge::gatherData);
 		BlazingConfigsImpl.register(modLoadingContext, modContainer);
 		Env.CLIENT.runIfCurrent(() -> () -> BlazingHotClientImpl.initClient(modEventBus));
 	}

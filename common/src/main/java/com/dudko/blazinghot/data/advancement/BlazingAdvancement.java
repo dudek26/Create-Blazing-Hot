@@ -8,19 +8,21 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.simibubi.create.Create;
+import com.simibubi.create.foundation.advancement.AllTriggers;
+import com.simibubi.create.foundation.advancement.SimpleCreateTrigger;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 
 import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRewards;
-import net.minecraft.advancements.CriterionTriggerInstance;
-import net.minecraft.advancements.FrameType;
+import net.minecraft.advancements.AdvancementType;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.ConsumeItemTrigger;
-import net.minecraft.advancements.critereon.EnchantmentPredicate;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.ItemUsedOnLocationTrigger;
-import net.minecraft.advancements.critereon.MinMaxBounds;
-import net.minecraft.advancements.critereon.NbtPredicate;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -38,42 +40,33 @@ public class BlazingAdvancement {
 
 	static final ResourceLocation BACKGROUND = BlazingHot.asResource("textures/gui/advancements.png");
 	static final String LANG = "advancement." + BlazingHot.ID + ".";
-	static final String SECRET_SUFFIX = "\n§7(Hidden Advancement)";
+	static final String SECRET_SUFFIX = "\n\u00A77(Hidden Advancement)";
 
-	private final Advancement.Builder builder;
-	private SimpleBlazingTrigger builtinTrigger;
+	private final Advancement.Builder mcBuilder = Advancement.Builder.advancement();
+	private SimpleCreateTrigger builtinTrigger;
 	private BlazingAdvancement parent;
+	private final Builder createBuilder = new Builder();
 
-	Advancement datagenResult;
+	AdvancementHolder datagenResult;
 
-	private final String id;
+	private String id;
 	private String title;
 	private String description;
+	private AdvancementRewards rewards;
 
-	BlazingAdvancement(String id, UnaryOperator<Builder> b) {
-		this.builder = Advancement.Builder.advancement();
+	public BlazingAdvancement(String id, UnaryOperator<Builder> b) {
 		this.id = id;
 
-		Builder t = new Builder();
-		b.apply(t);
+		b.apply(createBuilder);
 
-		if (!t.externalTrigger) {
-			builtinTrigger = BlazingTriggers.addSimple(id + "_builtin");
-			builder.addCriterion("0", builtinTrigger.instance());
+		if (!createBuilder.externalTrigger) {
+			builtinTrigger = AllTriggers.addSimple(id + "_builtin");
+			mcBuilder.addCriterion("0", builtinTrigger.createCriterion(builtinTrigger.instance()));
 		}
 
-		if (t.rewards != null) builder.rewards(t.rewards);
+		if (this.rewards != null) createBuilder.rewards($ -> rewards);
 
-		builder.display(t.icon,
-				Component.translatable(titleKey()),
-				Component.translatable(descriptionKey()).withStyle(s -> s.withColor(0xDBA213)),
-				id.equals("root") ? BACKGROUND : null,
-				t.type.frame,
-				t.type.toast,
-				t.type.announce,
-				t.type.hide);
-
-		if (t.type == TaskType.SECRET) description += SECRET_SUFFIX;
+		if (createBuilder.type == TaskType.SECRET) description += SECRET_SUFFIX;
 
 		BlazingAdvancements.ENTRIES.add(this);
 	}
@@ -86,10 +79,9 @@ public class BlazingAdvancement {
 		return titleKey() + ".desc";
 	}
 
-	@SuppressWarnings("DataFlowIssue")
 	public boolean isAlreadyAwardedTo(Player player) {
 		if (!(player instanceof ServerPlayer sp)) return true;
-		Advancement advancement = sp.getServer().getAdvancements().getAdvancement(BlazingHot.asResource(id));
+		AdvancementHolder advancement = sp.getServer().getAdvancements().get(Create.asResource(id));
 		if (advancement == null) return true;
 		return sp.getAdvancements().getOrStartProgress(advancement).isDone();
 	}
@@ -102,9 +94,21 @@ public class BlazingAdvancement {
 		builtinTrigger.trigger(sp);
 	}
 
-	void save(Consumer<Advancement> t) {
-		if (parent != null) builder.parent(parent.datagenResult);
-		datagenResult = builder.save(t, BlazingHot.asResource(id).toString());
+	void save(Consumer<AdvancementHolder> t, HolderLookup.Provider registries) {
+		if (parent != null) mcBuilder.parent(parent.datagenResult);
+
+		if (createBuilder.func != null) createBuilder.icon(createBuilder.func.apply(registries));
+
+		mcBuilder.display(createBuilder.icon,
+				Component.translatable(titleKey()),
+				Component.translatable(descriptionKey()).withStyle(s -> s.withColor(0xDBA213)),
+				id.equals("root") ? BACKGROUND : null,
+				createBuilder.type.advancementType,
+				createBuilder.type.toast,
+				createBuilder.type.announce,
+				createBuilder.type.hide);
+
+		datagenResult = mcBuilder.save(t, Create.asResource(id).toString());
 	}
 
 	void provideLang(BiConsumer<String, String> consumer) {
@@ -114,34 +118,33 @@ public class BlazingAdvancement {
 
 	enum TaskType {
 
-		SILENT(FrameType.TASK, false, false, false),
-		NORMAL(FrameType.TASK, true, false, false),
-		NOISY(FrameType.TASK, true, true, false),
-		EXPERT(FrameType.GOAL, true, true, false),
-		SECRET(FrameType.GOAL, true, true, true),
-		CHALLENGE(FrameType.CHALLENGE, true, true, false);
+		SILENT(AdvancementType.TASK, false, false, false),
+		NORMAL(AdvancementType.TASK, true, false, false),
+		NOISY(AdvancementType.TASK, true, true, false),
+		EXPERT(AdvancementType.GOAL, true, true, false),
+		SECRET(AdvancementType.GOAL, true, true, true),
+		CHALLENGE(AdvancementType.CHALLENGE, true, true, false);
 
-		private final FrameType frame;
+		private final AdvancementType advancementType;
 		private final boolean toast;
 		private final boolean announce;
 		private final boolean hide;
 
-		TaskType(FrameType frame, boolean toast, boolean announce, boolean hide) {
-			this.frame = frame;
+		TaskType(AdvancementType advancementType, boolean toast, boolean announce, boolean hide) {
+			this.advancementType = advancementType;
 			this.toast = toast;
 			this.announce = announce;
 			this.hide = hide;
 		}
 	}
 
-	@SuppressWarnings("SameParameterValue")
 	class Builder {
 
 		private TaskType type = TaskType.NORMAL;
 		private boolean externalTrigger;
 		private int keyIndex;
 		private ItemStack icon;
-		private AdvancementRewards rewards;
+		private Function<HolderLookup.Provider, ItemStack> func;
 
 		Builder special(TaskType type) {
 			this.type = type;
@@ -153,7 +156,7 @@ public class BlazingAdvancement {
 			return this;
 		}
 
-		Builder icon(ItemProviderEntry<?> item) {
+		Builder icon(ItemProviderEntry<?, ?> item) {
 			return icon(item.asStack());
 		}
 
@@ -163,6 +166,11 @@ public class BlazingAdvancement {
 
 		Builder icon(ItemStack stack) {
 			icon = stack;
+			return this;
+		}
+
+		Builder icon(Function<HolderLookup.Provider, ItemStack> func) {
+			this.func = func;
 			return this;
 		}
 
@@ -178,7 +186,7 @@ public class BlazingAdvancement {
 
 		Builder rewards(Function<AdvancementRewards.Builder, AdvancementRewards> b) {
 			AdvancementRewards.Builder rewardsBuilder = new AdvancementRewards.Builder();
-			this.rewards = b.apply(rewardsBuilder);
+			BlazingAdvancement.this.rewards = b.apply(rewardsBuilder);
 			return this;
 		}
 
@@ -190,7 +198,7 @@ public class BlazingAdvancement {
 			return externalTrigger(InventoryChangeTrigger.TriggerInstance.hasItems(icon.getItem()));
 		}
 
-		Builder whenItemCollected(ItemProviderEntry<?> item) {
+		Builder whenItemCollected(ItemProviderEntry<?, ?> item) {
 			return whenItemCollected(item.asStack().getItem());
 		}
 
@@ -199,7 +207,10 @@ public class BlazingAdvancement {
 		}
 
 		Builder whenItemCollected(TagKey<Item> tag) {
-			return externalTrigger(InventoryChangeTrigger.TriggerInstance.hasItems(simpleTagPredicate(tag)));
+			return externalTrigger(InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder
+					.item()
+					.of(tag)
+					.build()));
 		}
 
 		Builder whenItemsCollected(ItemLike... items) {
@@ -213,15 +224,11 @@ public class BlazingAdvancement {
 			return this;
 		}
 
-		Builder whenIconUsed() {
-			return whenUsed(icon.getItem());
-		}
-
 		Builder whenUsed(ItemLike itemProvider) {
 			return externalTrigger(ConsumeItemTrigger.TriggerInstance.usedItem(itemProvider));
 		}
 
-		Builder whenUsed(ItemProviderEntry<?> item) {
+		Builder whenUsed(ItemProviderEntry<?, ?> item) {
 			return whenUsed(item.asItem());
 		}
 
@@ -240,8 +247,8 @@ public class BlazingAdvancement {
 			return this;
 		}
 
-		Builder whenAllUsed(ItemProviderEntry<?>[] items) {
-			for (ItemProviderEntry<?> item : items) {
+		Builder whenAllUsed(ItemProviderEntry<?, ?>[] items) {
+			for (ItemProviderEntry<?, ?> item : items) {
 				whenUsed(item);
 			}
 			return this;
@@ -251,24 +258,16 @@ public class BlazingAdvancement {
 			return externalTrigger(InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[]{}));
 		}
 
-		Builder externalTrigger(CriterionTriggerInstance trigger) {
-			builder.addCriterion(String.valueOf(keyIndex), trigger);
+		Builder externalTrigger(Criterion<?> trigger) {
+			mcBuilder.addCriterion(String.valueOf(keyIndex), trigger);
 			externalTrigger = true;
 			keyIndex++;
 			return this;
 		}
 
-		private static ItemPredicate simpleTagPredicate(TagKey<Item> tag) {
-			return new ItemPredicate(tag,
-					null,
-					MinMaxBounds.Ints.ANY,
-					MinMaxBounds.Ints.ANY,
-					EnchantmentPredicate.NONE,
-					EnchantmentPredicate.NONE,
-					null,
-					NbtPredicate.ANY);
+		private static ItemPredicate.Builder simpleTagPredicate(TagKey<Item> tag) {
+			return ItemPredicate.Builder.item().of(tag);
 		}
 
 	}
-
 }

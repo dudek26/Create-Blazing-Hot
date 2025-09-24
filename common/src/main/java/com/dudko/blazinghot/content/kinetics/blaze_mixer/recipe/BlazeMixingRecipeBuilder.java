@@ -10,6 +10,7 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
@@ -52,7 +53,7 @@ public class BlazeMixingRecipeBuilder extends BlazingRecipeBuilder<ProcessingRec
 	}
 
 	public BlazeMixingRecipeBuilder requireFuel(Fluid fluid, MultiAmount amount) {
-		return requireFuel(MultiFluidIngredient.fromFluid(fluid, amount));
+		return requireFuel(MultiFluidIngredient.fromFluid(BuiltInRegistries.FLUID.wrapAsHolder(fluid), amount));
 	}
 
 	public BlazeMixingRecipeBuilder requireFuel(TagKey<Fluid> fluidTag, MultiAmount amount) {

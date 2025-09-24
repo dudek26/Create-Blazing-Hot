@@ -30,6 +30,5 @@ public class ItemApplicationRecipeGen extends com.simibubi.create.api.data.recip
 									.require(andesiteCasing())
 									.require(sturdyAlloy())
 									.output(BlazingBlocks.STURDY_CASING));
-
-
+	
 }

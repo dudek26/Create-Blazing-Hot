@@ -3,13 +3,15 @@ package com.dudko.blazinghot.content.casting.casting_depot.neoforge;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.dudko.blazinghot.content.casting.casting_depot.CastingBySpout;
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBehaviour;
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
 import com.dudko.blazinghot.content.casting.casting_depot.SpoutCastingBehaviour;
 import com.dudko.blazinghot.content.casting.casting_depot.recipe.CastingRecipe;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.foundation.mixin.accessor.SpoutBlockEntityAccessor;
-import com.dudko.blazinghot.registry.BlazingTagsV1;
+import com.dudko.blazinghot.foundation.multiloader.fluid.neoforge.MultiFluidStackNeoForge;
+import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.fluids.spout.SpoutBlockEntity;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
@@ -18,6 +20,7 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -37,12 +40,12 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 
 	@Override
 	public int getRecipeCoolingDuration() {
-		return getCurrentRecipe() == null ? -1 : getCurrentRecipe().getCoolingDuration();
+		return getCurrentRecipe() == null ? -1 : getCurrentRecipe().value().getCoolingDuration();
 	}
 
 	@Override
 	public int getRecipeProcessingDuration() {
-		return getCurrentRecipe() == null ? -1 : getCurrentRecipe().getProcessingDuration();
+		return getCurrentRecipe() == null ? -1 : getCurrentRecipe().value().getProcessingDuration();
 	}
 
 	private FluidStack getFluid() {
@@ -75,16 +78,25 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 
 		FluidStack availableFluid = getFluid();
 		if (availableFluid.isEmpty() && state != State.COOLING) return;
-		int requiredAmount = CastingBySpout.getRequiredAmountForItem(level, stack, availableFluid);
-		CastingRecipe currentRecipe = getCurrentRecipe();
+		int
+				requiredAmount =
+				CastingBySpout.getRequiredAmountForItem(level,
+						stack,
+						MultiFluidStackNeoForge.fromNeoForgeStack(availableFluid));
+		RecipeHolder<CastingRecipe> currentRecipe = getCurrentRecipe();
 
 		if (state == State.NONE) {
 			if (!canSpout()) return;
 			if (!depot.getOutputItem().isEmpty()) return;
 			if (!CastingBySpout.canItemBeCast(level, stack) || availableFluid.getAmount() < requiredAmount) return;
-			currentRecipe = CastingBySpout.findRecipe(depot, level, requiredAmount, stack, availableFluid);
+			currentRecipe =
+					CastingBySpout.findRecipe(depot,
+							level,
+							requiredAmount,
+							stack,
+							MultiFluidStackNeoForge.fromNeoForgeStack(availableFluid));
 			if (currentRecipe == null) return;
-			currentRecipeId = currentRecipe.getId();
+			currentRecipeId = currentRecipe.id(); // TODO
 			visualFluid = availableFluid.getFluid();
 			state = State.FILLING;
 			depot.notifyUpdate();
@@ -98,7 +110,7 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 				AllSoundEvents.SPOUTING.playOnServer(level, getPos(), 0.75f, 0.9f + 0.2f * (float) Math.random());
 
 			processingTicks++;
-			int duration = currentRecipe.getProcessingDuration();
+			int duration = currentRecipe.value().getProcessingDuration();
 
 			if (visualFluid == Fluids.EMPTY) visualFluid = availableFluid.getFluid();
 
@@ -117,9 +129,9 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 				processingTicks = -1;
 				spoutTank.drain(requiredAmount, IFluidHandler.FluidAction.EXECUTE);
 				depot.setFluid(spoutTank.getFluid().getFluid(), requiredAmount);
-				castItem = CastingBySpout.getCastingResult(currentRecipe);
-				coolingDuration = currentRecipe.getCoolingDuration();
-				keepMold = currentRecipe.isKeepItem();
+				castItem = CastingBySpout.getCastingResult(currentRecipe.value());
+				coolingDuration = currentRecipe.value().getCoolingDuration();
+				keepMold = currentRecipe.value().isKeepItem();
 			}
 		}
 		else if (state == State.COOLING) {
@@ -136,12 +148,12 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 						depotBehaviour =
 						((CastingDepotBehaviourImpl) depot.getBehaviour(CastingDepotBehaviour.TYPE));
 
-				if (BlazingTagsV1.Items.STURDY_MOLDS.matches(castItem)) {
+				if (castItem.is(BlazingTags.Items.STURDY_MOLDS.tag())) {
 					depot.award(BlazingAdvancements.STURDY_MOLD);
 				}
 				depot.award(BlazingAdvancements.CASTING);
 
-				if (BlazingTagsV1.Items.MOLDS.matches(castItem)) {
+				if (castItem.is(BlazingTags.Items.MOLDS.tag())) {
 					depotBehaviour.setHeldStack(castItem);
 				}
 				else {
@@ -170,7 +182,7 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 	}
 
 	@Nullable
-	public CastingRecipe getCurrentRecipe() {
+	public RecipeHolder<CastingRecipe> getCurrentRecipe() {
 		Level level = getWorld();
 		if (level == null) return null;
 		return CastingBySpout.findRecipe((CastingDepotBlockEntity) blockEntity, level, currentRecipeId);

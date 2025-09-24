@@ -3,8 +3,8 @@ package com.dudko.blazinghot.gui.neoforge;
 import com.dudko.blazinghot.gui.BlazingGuiTextures;
 
 import net.minecraft.client.gui.GuiGraphics;
-import net.neoforged.neoforge.api.distmarker.Dist;
-import net.neoforged.neoforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 public class BlazingGuiTexturesImpl {
 

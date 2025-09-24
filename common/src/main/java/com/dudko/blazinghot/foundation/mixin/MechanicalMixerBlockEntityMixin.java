@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecipe;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.foundation.mixin_interfaces.IAdvancementBehaviour;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiFluids;
@@ -18,7 +19,6 @@ import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -39,12 +39,8 @@ public abstract class MechanicalMixerBlockEntityMixin extends BasinOperatingBloc
 
 	@ModifyArg(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(III)I"), index = 2)
 	protected int blazinghot$extendDuration(int max) {
-		if (currentRecipe == null) return max;
-		ResourceLocation id = level.getRecipeManager().id;
-		if (id.getPath().startsWith("mixing/melting")) {
-			return max * 16;
-		}
-		else return max;
+		if (currentRecipe == null || !BlazeMixingRecipe.isMeltingRecipe(currentRecipe)) return max;
+		return max * 16;
 	}
 
 	@Inject(method = "tick",

@@ -8,11 +8,13 @@ import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiFluidIngredient;
 import com.google.common.base.Joiner;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -48,7 +50,7 @@ public interface IBlazingRecipeBuilder<P extends ProcessingRecipeParams, R exten
 	}
 
 	default S require(Fluid fluid, MultiAmount amount) {
-		return require(MultiFluidIngredient.fromFluid(fluid, amount));
+		return require(MultiFluidIngredient.fromFluid(BuiltInRegistries.FLUID.wrapAsHolder(fluid), amount));
 	}
 
 	default S requireMultiple(TagKey<Item> tag, int amount) {
@@ -83,7 +85,7 @@ public interface IBlazingRecipeBuilder<P extends ProcessingRecipeParams, R exten
 	}
 
 	@ExpectPlatform
-	static <P extends ProcessingRecipeParams, R extends ProcessingRecipe<?, P>, S extends IBlazingRecipeBuilder<P, R, S>> S fluidOutput(S builder, Fluid fluid, MultiAmount amount) {
+	static <P extends ProcessingRecipeParams, R extends ProcessingRecipe<?, P>, S extends ProcessingRecipeBuilder<P, R, S>> S fluidOutput(S builder, Fluid fluid, MultiAmount amount) {
 		throw new AssertionError();
 	}
 }

@@ -12,8 +12,8 @@ import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecipe;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.BlazingConfigs;
-import com.dudko.blazinghot.registry.BlazingTagsV1;
-import com.dudko.blazinghot.registry.neoforge.BlazingRecipeTypesImpl;
+import com.dudko.blazinghot.registry.BlazingRecipeTypes;
+import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.fluids.FluidFX;
@@ -35,7 +35,6 @@ import net.createmod.catnip.animation.AnimationTickHolder;
 import net.createmod.catnip.data.Couple;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -55,6 +54,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -87,11 +88,11 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 	public void updateFueled() {
 		FluidState fluidState = getFluidStack().getFluid().defaultFluidState();
 
-		fueled = fluidState.is(BlazingTagsV1.Fluids.BLAZE_MIXER_FUEL.tag) && getFuelAmount() > 0;
+		fueled = fluidState.is(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag()) && getFuelAmount() > 0;
 	}
 
 	public boolean hasFuel(long amount) {
-		return hasFuel(BlazingTagsV1.Fluids.BLAZE_MIXER_FUEL.tag, amount);
+		return hasFuel(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag(), amount);
 	}
 
 	public boolean hasFuel(TagKey<Fluid> tag, long amount) {
@@ -216,7 +217,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 				0,
 				0);
 
-		if (getFluidStack().getFluid().defaultFluidState().is(BlazingTagsV1.Fluids.BLAZE_MIXER_FUEL.tag))
+		if (getFluidStack().getFluid().defaultFluidState().is(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag()))
 			level.addParticle(ParticleTypes.SMALL_FLAME,
 					center.x,
 					center.y - 1 - runningOffset,
@@ -307,7 +308,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 			RecipeManager manager = level.getRecipeManager();
 			List<RecipeHolder<BlazeMixingRecipe>>
 					bmHolders =
-					manager.getAllRecipesFor(BlazingRecipeTypesImpl.BLAZE_MIXING.getType());
+					manager.getAllRecipesFor(BlazingRecipeTypes.BLAZE_MIXING.getType());
 			for (RecipeHolder<BlazeMixingRecipe> bmHolder : bmHolders) {
 				if (doInputsMatch(mRecipe, bmHolder.value())) return false;
 			}
@@ -326,13 +327,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 				&& !MechanicalPressBlockEntity.canCompress(recipe)) && !AllRecipeTypes.shouldIgnoreInAutomation(holder)
 				|| (recipe.getType() == AllRecipeTypes.MIXING.getType()
 				&& BlazingConfigs.server().recipes.allowMixingInBlazeMixer.get()))
-				|| recipe.getType() == BlazingRecipeTypesImpl.BLAZE_MIXING.getType();
-	}
-
-	@Override
-	public <T> @NotNull LazyOptional<T> getCapability(@NotNull Capability<T> cap, Direction side) {
-		if (cap == ForgeCapabilities.FLUID_HANDLER && side != Direction.DOWN) return tank.getCapability().cast();
-		return super.getCapability(cap, side);
+				|| recipe.getType() == BlazingRecipeTypes.BLAZE_MIXING.getType();
 	}
 
 	@Override
@@ -341,7 +336,9 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 		if (kinetics) tooltip.add(Component.empty());
 		boolean
 				fluids =
-				containedFluidTooltip(tooltip, isPlayerSneaking, getCapability(ForgeCapabilities.FLUID_HANDLER));
+				containedFluidTooltip(tooltip,
+						isPlayerSneaking,
+						level.getCapability(Capabilities.FluidHandler.BLOCK, worldPosition, null));
 
 		return kinetics || fluids;
 	}
@@ -357,7 +354,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 		if (runningTicks == 20) AllSoundEvents.MIXING.playAt(level, worldPosition, .75f, 1, true);
 	}
 
-	public static boolean doFluidInputsMatch(ProcessingRecipe<?> a, ProcessingRecipe<?> b) {
+	public static boolean doFluidInputsMatch(ProcessingRecipe<?, ?> a, ProcessingRecipe<?, ?> b) {
 		if (!a.getFluidIngredients().isEmpty() && !b.getFluidIngredients().isEmpty()) {
 			List<List<FluidStack>>
 					allItems =
@@ -365,7 +362,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 			for (List<FluidStack> matchingStacks : allItems) {
 				boolean matched = false;
 				if (!matchingStacks.isEmpty()) {
-					matched = b.getFluidIngredients().stream().anyMatch(i -> i.test(matchingStacks.get(0)));
+					matched = b.getFluidIngredients().stream().anyMatch(i -> i.test(matchingStacks.getFirst()));
 				}
 				if (matched) continue;
 				return false;

@@ -11,6 +11,7 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -35,7 +36,7 @@ public class BlazingStandardRecipeBuilder<R extends StandardProcessingRecipe<?>>
 
 	@Override
 	public BlazingStandardRecipeBuilder<R> output(Fluid fluid, MultiAmount amount) {
-		return IBlazingRecipeBuilder.fluidOutput(self(), fluid, amount);
+		return fluidOutput(self(), fluid, amount);
 	}
 
 	@Override
@@ -75,5 +76,10 @@ public class BlazingStandardRecipeBuilder<R extends StandardProcessingRecipe<?>>
 	@Override
 	public void build(RecipeOutput consumer) {
 		IBlazingRecipeBuilder.super.build(consumer);
+	}
+
+	@ExpectPlatform
+	static <R extends StandardProcessingRecipe<?>, S extends StandardProcessingRecipe.Builder<R>> S fluidOutput(S builder, Fluid fluid, MultiAmount amount) {
+		throw new AssertionError();
 	}
 }
