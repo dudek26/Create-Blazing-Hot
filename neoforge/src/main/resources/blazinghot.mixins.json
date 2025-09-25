@@ -9,8 +9,7 @@
   "mixins": [
     "DatagenModLoaderForgeMixin",
     "EntityMixin",
-    "JEIBasinCategoryMixin",
-    "RecipeManagerAccessor"
+    "JEIBasinCategoryMixin"
   ],
   "plugin": "com.moulberry.mixinconstraints.ConstraintsMixinPlugin",
   "injectors": {

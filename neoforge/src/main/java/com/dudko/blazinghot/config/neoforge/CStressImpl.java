@@ -39,15 +39,15 @@ public class CStressImpl extends CStress {
 		builder.pop();
 	}
 
-	@Nullable
-	public DoubleSupplier getImpact(Block block) {
+	@Override
+	public @Nullable DoubleSupplier getImpact(Block block) {
 		ResourceLocation id = RegisteredObjectsHelper.getKeyOrThrow(block);
 		ConfigValue<Double> value = this.impacts.get(id);
 		return value == null ? null : value::get;
 	}
 
-	@Nullable
-	public DoubleSupplier getCapacity(Block block) {
+	@Override
+	public @Nullable DoubleSupplier getCapacity(Block block) {
 		ResourceLocation id = RegisteredObjectsHelper.getKeyOrThrow(block);
 		ConfigValue<Double> value = this.capacities.get(id);
 		return value == null ? null : value::get;

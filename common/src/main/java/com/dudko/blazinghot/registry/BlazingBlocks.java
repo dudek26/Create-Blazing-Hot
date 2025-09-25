@@ -132,7 +132,7 @@ public class BlazingBlocks {
 		return REGISTRATE
 				.block(colorName + "_modern_lamp", p -> new ModernLampBlock(p, color))
 				.transform(BlazingBuilderTransformers.anyModernLamp(color))
-				.transform(BlazingBuilderTransformers.modernLampBlock(color))
+				.transform(BlazingBuilderTransformers.modernLampBlock(color, BlazingTags.Blocks.MODERN_LAMP_BLOCKS))
 				.recipe((c, p) -> {
 					ShapedRecipeBuilder
 							.shaped(RecipeCategory.REDSTONE, c.get(), 2)
@@ -159,7 +159,9 @@ public class BlazingBlocks {
 		return REGISTRATE
 				.block(colorName + "_modern_lamp_panel", p -> new ModernLampPanelBlock(p, color))
 				.transform(BlazingBuilderTransformers.anyModernLamp(color))
-				.transform(BlazingBuilderTransformers.modernLampPanel(color, "modern_lamp/panel"))
+				.transform(BlazingBuilderTransformers.modernLampPanel(color,
+						"modern_lamp/panel",
+						BlazingTags.Blocks.MODERN_LAMP_PANELS))
 				.recipe((c, p) -> {
 					ShapedRecipeBuilder
 							.shaped(RecipeCategory.REDSTONE, c.get(), 4)
@@ -186,7 +188,8 @@ public class BlazingBlocks {
 						.block(colorName + "_modern_lamp_double_panel", p -> new ModernLampDoublePanelBlock(p, color))
 						.transform(BlazingBuilderTransformers.anyModernLamp(color))
 						.transform(BlazingBuilderTransformers.modernLampDirectionalPanel(color,
-								"modern_lamp/double_panel"))
+								"modern_lamp/double_panel",
+								BlazingTags.Blocks.MODERN_LAMP_DOUBLE_PANELS))
 						.recipe((c, p) -> {
 							panelStoneCuttingRecipe(c, p, color);
 							lampStoneCuttingRecipe(c, p, color, 2);
@@ -204,7 +207,9 @@ public class BlazingBlocks {
 		return REGISTRATE
 				.block(colorName + "_modern_lamp_quad_panel", p -> new ModernLampQuadPanelBlock(p, color))
 				.transform(BlazingBuilderTransformers.anyModernLamp(color))
-				.transform(BlazingBuilderTransformers.modernLampPanel(color, "modern_lamp/quad_panel"))
+				.transform(BlazingBuilderTransformers.modernLampPanel(color,
+						"modern_lamp/quad_panel",
+						BlazingTags.Blocks.MODERN_LAMP_QUAD_PANELS))
 				.recipe((c, p) -> {
 					panelStoneCuttingRecipe(c, p, color);
 					modernLampDyeing(c, p, BlazingTags.Blocks.MODERN_LAMP_QUAD_PANELS.itemTag(), color, "quad_panel");
@@ -218,7 +223,9 @@ public class BlazingBlocks {
 		return REGISTRATE
 				.block(colorName + "_modern_lamp_half_panel", p -> new ModernLampHalfPanelBlock(p, color))
 				.transform(BlazingBuilderTransformers.anyModernLamp(color))
-				.transform(BlazingBuilderTransformers.modernLampHalfPanel(color, "modern_lamp/half_panel"))
+				.transform(BlazingBuilderTransformers.modernLampHalfPanel(color,
+						"modern_lamp/half_panel",
+						BlazingTags.Blocks.MODERN_LAMP_HALF_PANELS))
 				.recipe((c, p) -> {
 					ShapedRecipeBuilder
 							.shaped(RecipeCategory.REDSTONE, c.get(), 4)
@@ -257,7 +264,9 @@ public class BlazingBlocks {
 						.block(colorName + "_modern_lamp_small_panel", p -> new SmallModernLampPanelBlock(p, color))
 						.lang(LangUtil.titleCaseConversion(colorName.replace('_', ' ')) + " Small Modern Lamp Panel")
 						.transform(BlazingBuilderTransformers.anyModernLamp(color))
-						.transform(BlazingBuilderTransformers.modernLampSmallPanel(color, "modern_lamp/small_panel"))
+						.transform(BlazingBuilderTransformers.modernLampSmallPanel(color,
+								"modern_lamp/small_panel",
+								BlazingTags.Blocks.MODERN_LAMP_SMALL_PANELS))
 						.recipe((c, p) -> {
 							BlockEntry<ModernLampQuadPanelBlock>
 									quadPanel =

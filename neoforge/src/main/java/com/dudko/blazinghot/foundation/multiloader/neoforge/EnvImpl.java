@@ -4,8 +4,9 @@ import org.jetbrains.annotations.ApiStatus.Internal;
 
 import com.dudko.blazinghot.foundation.multiloader.Env;
 
-import net.neoforged.neoforge.api.distmarker.Dist;
-import net.neoforged.neoforge.fml.loading.FMLEnvironment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.fml.loading.FMLEnvironment;
+
 
 public class EnvImpl {
 

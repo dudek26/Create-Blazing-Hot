@@ -8,6 +8,7 @@ import com.dudko.blazinghot.registry.BlazingConfigs;
 
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -23,6 +24,7 @@ public class BlazingHotClientImpl {
 		modEventBus.addListener(BlazingHotClientImpl::onLoadComplete);
 	}
 
+	@SubscribeEvent
 	public static void onLoadComplete(FMLLoadCompleteEvent event) {
 		ModContainer
 				container =

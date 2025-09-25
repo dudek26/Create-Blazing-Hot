@@ -32,12 +32,8 @@ public class BlazingSequencedAssemblyRecipeBuilder extends SequencedAssemblyReci
 		super(id);
 	}
 
-	public SequencedAssemblyRecipeBuilderAccessor accessor() {
-		return (SequencedAssemblyRecipeBuilderAccessor) this;
-	}
-
 	protected SequencedAssemblyRecipe getRecipe() {
-		return accessor().getRecipe();
+		return ((SequencedAssemblyRecipeBuilderAccessor) (Object) this).getRecipe();
 	}
 
 	public <B extends BlazingStandardRecipeBuilder<?>> BlazingSequencedAssemblyRecipeBuilder addBlazingStep(Function<ResourceLocation, B> factory, Function<B, ? extends StandardProcessingRecipe.Builder<?>> builder) {

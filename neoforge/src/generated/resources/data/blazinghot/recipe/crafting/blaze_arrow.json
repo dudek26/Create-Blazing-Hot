@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": {
+      "tag": "minecraft:coals"
+    },
+    "Y": {
+      "tag": "c:rods/blaze_gold"
+    },
+    "Z": {
+      "item": "minecraft:feather"
+    }
+  },
+  "pattern": [
+    " X ",
+    " Y ",
+    " Z "
+  ],
+  "result": {
+    "count": 4,
+    "id": "blazinghot:blaze_arrow"
+  }
+}

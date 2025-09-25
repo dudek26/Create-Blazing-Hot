@@ -1,4 +1,4 @@
-package com.dudko.blazinghot.compat.jei.category.animations;
+//package com.dudko.blazinghot.compat.jei.category.animations;
 
 import java.util.List;
 

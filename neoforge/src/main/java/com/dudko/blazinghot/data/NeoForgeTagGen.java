@@ -104,21 +104,15 @@ public class NeoForgeTagGen {
 	}
 
 	private static ResourceKey<Block> blockKey(Block block) {
-		return BuiltInRegistries.BLOCK
-				.getResourceKey(block)
-				.orElseThrow(() -> new NullPointerException("Couldn't get block's ResourceKey."));
+		return BuiltInRegistries.BLOCK.wrapAsHolder(block).getKey();
 	}
 
 	private static ResourceKey<Item> itemKey(Item item) {
-		return BuiltInRegistries.ITEM
-				.getResourceKey(item)
-				.orElseThrow(() -> new NullPointerException("Couldn't get item's ResourceKey."));
+		return BuiltInRegistries.ITEM.wrapAsHolder(item).getKey();
 	}
 
 	private static ResourceKey<Fluid> fluidKey(Fluid fluid) {
-		return BuiltInRegistries.FLUID
-				.getResourceKey(fluid)
-				.orElseThrow(() -> new NullPointerException("Couldn't get fluid's ResourceKey."));
+		return BuiltInRegistries.FLUID.wrapAsHolder(fluid).getKey();
 	}
 
 	public static TagsProvider.TagAppender<Item> tagAppender(RegistrateTagsProvider<Item> prov, BlazingTags.Items tag) {

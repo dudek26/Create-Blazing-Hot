@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "tag": "blazinghot:modern_lamps/quad_panels"
+    },
+    "d": {
+      "tag": "c:dyes/magenta"
+    }
+  },
+  "pattern": [
+    "###",
+    "#d#",
+    "###"
+  ],
+  "result": {
+    "count": 8,
+    "id": "blazinghot:magenta_modern_lamp_quad_panel"
+  }
+}

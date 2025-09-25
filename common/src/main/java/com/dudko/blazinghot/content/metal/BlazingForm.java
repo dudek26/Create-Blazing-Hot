@@ -13,6 +13,7 @@ import com.dudko.blazinghot.data.conditions.DefaultLoadConditions;
 import com.dudko.blazinghot.data.conditions.LoadCondition;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.BlazingTags;
+import com.dudko.blazinghot.util.NullableSupplier;
 
 import net.minecraft.FieldsAreNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -31,7 +32,7 @@ public class BlazingForm {
 	public final String name;
 	public final String tagFolder;
 	public final List<Mods> mods;
-	public final @Nullable ResourceLocation customLocation;
+	protected final NullableSupplier<ResourceLocation> customLocation;
 	public final @Nullable Molds.Mold mold;
 
 	public final MultiAmount amount;
@@ -107,14 +108,19 @@ public class BlazingForm {
 		return builderFunction.apply(builder).build();
 	}
 
+	@Nullable
+	public ResourceLocation getCustomLocation() {
+		return customLocation.get();
+	}
+
 	public Ingredient getMeltingIngredient(BlazingMetal metal) {
-		if (customLocation != null) return Ingredient.of(BuiltInRegistries.ITEM.get(customLocation));
+		if (getCustomLocation() != null) return Ingredient.of(BuiltInRegistries.ITEM.get(getCustomLocation()));
 		return Ingredient.of(getItemTag(metal));
 	}
 
 	public List<LoadCondition<?>> getMeltingLoadConditions(BlazingMetal metal) {
 		List<LoadCondition<?>> conditions = new ArrayList<>();
-		if (customLocation != null) {
+		if (getCustomLocation() != null) {
 			List<Mods> formMods = this.mods.stream().filter(f -> !f.alwaysIncluded).toList();
 			List<Mods> metalMods = metal.mods.stream().filter(m -> !m.alwaysIncluded).toList();
 
@@ -130,17 +136,17 @@ public class BlazingForm {
 	}
 
 	public String getMeltingRecipeName(BlazingMetal metal) {
-		if (customLocation != null) return "melting/" + customLocation.getPath();
+		if (getCustomLocation() != null) return "melting/" + getCustomLocation().getPath();
 		return "melting/" + tagFolder + "/" + metal.name;
 	}
 
 	public ResourceLocation getCastingResult(BlazingMetal metal, Mods mod) {
-		if (customLocation != null) return customLocation;
+		if (getCustomLocation() != null) return getCustomLocation();
 		return mod.asResource(metal.name + "_" + name);
 	}
 
 	public String getCastingRecipeName(Molds.MoldType moldType, BlazingMetal metal) {
-		if (customLocation != null) return moldType + "/" + customLocation.getPath();
+		if (getCustomLocation() != null) return moldType + "/" + getCustomLocation().getPath();
 		return moldType + "/" + name + "/" + metal.name;
 	}
 
@@ -149,7 +155,7 @@ public class BlazingForm {
 	}
 
 	public TagKey<Item> getItemTag(String metal) {
-		return BlazingTags.itemTag(BlazingTags.Namespace.COMMON.asResource(tagFolder + "/" + metal));
+		return BlazingTags.itemTag(BlazingTags.Namespace.COMMON.asResource(tagFolder, metal));
 	}
 
 	public List<Mods> getMods(BlazingMetal metal) {
@@ -186,7 +192,7 @@ public class BlazingForm {
 		private final String name;
 		private String tagFolder;
 		private List<Mods> mods;
-		private @Nullable ResourceLocation customLocation;
+		private NullableSupplier<ResourceLocation> customLocation;
 		private @Nullable Molds.Mold mold;
 
 		private @Nullable MultiAmount amount;
@@ -204,6 +210,7 @@ public class BlazingForm {
 			this.name = name;
 			this.tagFolder = "";
 			this.mods = new ArrayList<>();
+			this.customLocation = () -> null;
 
 			this.amount = null;
 			this.meltingTime = -1;
@@ -252,7 +259,7 @@ public class BlazingForm {
 		 *
 		 * @param location ResourceLocation of the item.
 		 */
-		public Builder withCustomItem(@Nullable ResourceLocation location) {
+		public Builder withCustomItem(NullableSupplier<ResourceLocation> location) {
 			this.customLocation = location;
 			return this;
 		}
@@ -260,10 +267,10 @@ public class BlazingForm {
 		/**
 		 * Shortcut for custom location.
 		 *
-		 * @see Builder#withCustomItem(ResourceLocation)
+		 * @see Builder#withCustomItem(NullableSupplier<ResourceLocation>)
 		 */
 		public Builder withCustomItem(ItemLike item) {
-			return withCustomItem(BuiltInRegistries.ITEM.getKey(item.asItem()));
+			return withCustomItem(() -> BuiltInRegistries.ITEM.getKey(item.asItem()));
 		}
 
 		/**

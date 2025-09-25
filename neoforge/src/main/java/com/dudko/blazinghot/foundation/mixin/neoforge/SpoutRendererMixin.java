@@ -18,7 +18,7 @@ import com.simibubi.create.content.fluids.spout.SpoutBlockEntity;
 import com.simibubi.create.content.fluids.spout.SpoutRenderer;
 
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
-import net.createmod.catnip.platform.ForgeCatnipServices;
+import net.createmod.catnip.platform.NeoForgeCatnipServices;
 import net.createmod.catnip.render.CachedBuffers;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -72,7 +72,7 @@ public abstract class SpoutRendererMixin {
 			else radius = -1;
 			radius = Mth.clamp(radius, -1, 0);
 			AABB bb = new AABB(0.5, 0.0, 0.5, 0.5, -1.4, 0.5).inflate(radius / 32f);
-			ForgeCatnipServices.FLUID_RENDERER.renderFluidBox(fluidStack,
+			NeoForgeCatnipServices.FLUID_RENDERER.renderFluidBox(fluidStack,
 					(float) bb.minX,
 					(float) bb.minY,
 					(float) bb.minZ,

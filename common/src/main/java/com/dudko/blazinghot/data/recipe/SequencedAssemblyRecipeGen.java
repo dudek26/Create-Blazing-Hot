@@ -31,6 +31,7 @@ import com.dudko.blazinghot.foundation.recipe.BlazingStandardRecipeBuilder;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingMetals;
+import com.dudko.blazinghot.util.ItemUtil;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.press.PressingRecipe;
@@ -108,7 +109,7 @@ public class SequencedAssemblyRecipeGen extends BlazingSequencedAssemblyRecipeGe
 							.addStep(DeployerApplicationRecipe::new, r -> r.require(extensionPole())));
 
 	private GeneratedRecipe enchantedMetalApple(BlazingMetal metal, ItemLike input, ItemLike transition, ItemLike output) {
-		return bCreate(output.asItem().toString(),
+		return bCreate(ItemUtil.getItemID(output).getPath(),
 				b -> b
 						.require(input)
 						.transitionTo(transition)

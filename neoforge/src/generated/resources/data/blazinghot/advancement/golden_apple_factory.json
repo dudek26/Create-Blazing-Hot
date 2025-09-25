@@ -1,0 +1,28 @@
+{
+  "parent": "blazinghot:metal_apple_spout_0000",
+  "criteria": {
+    "0": {
+      "trigger": "blazinghot:golden_apple_factory_builtin"
+    }
+  },
+  "display": {
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.blazinghot.golden_apple_factory.desc"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:golden_apple"
+    },
+    "title": {
+      "translate": "advancement.blazinghot.golden_apple_factory"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

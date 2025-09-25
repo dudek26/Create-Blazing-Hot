@@ -8,9 +8,6 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.simibubi.create.Create;
-import com.simibubi.create.foundation.advancement.AllTriggers;
-import com.simibubi.create.foundation.advancement.SimpleCreateTrigger;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 
 import net.minecraft.advancements.Advancement;
@@ -43,7 +40,7 @@ public class BlazingAdvancement {
 	static final String SECRET_SUFFIX = "\n\u00A77(Hidden Advancement)";
 
 	private final Advancement.Builder mcBuilder = Advancement.Builder.advancement();
-	private SimpleCreateTrigger builtinTrigger;
+	private SimpleBlazingTrigger builtinTrigger;
 	private BlazingAdvancement parent;
 	private final Builder createBuilder = new Builder();
 
@@ -60,7 +57,7 @@ public class BlazingAdvancement {
 		b.apply(createBuilder);
 
 		if (!createBuilder.externalTrigger) {
-			builtinTrigger = AllTriggers.addSimple(id + "_builtin");
+			builtinTrigger = BlazingTriggers.addSimple(id + "_builtin");
 			mcBuilder.addCriterion("0", builtinTrigger.createCriterion(builtinTrigger.instance()));
 		}
 
@@ -81,7 +78,7 @@ public class BlazingAdvancement {
 
 	public boolean isAlreadyAwardedTo(Player player) {
 		if (!(player instanceof ServerPlayer sp)) return true;
-		AdvancementHolder advancement = sp.getServer().getAdvancements().get(Create.asResource(id));
+		AdvancementHolder advancement = sp.getServer().getAdvancements().get(BlazingHot.asResource(id));
 		if (advancement == null) return true;
 		return sp.getAdvancements().getOrStartProgress(advancement).isDone();
 	}
@@ -108,7 +105,7 @@ public class BlazingAdvancement {
 				createBuilder.type.announce,
 				createBuilder.type.hide);
 
-		datagenResult = mcBuilder.save(t, Create.asResource(id).toString());
+		datagenResult = mcBuilder.save(t, BlazingHot.asResource(id).toString());
 	}
 
 	void provideLang(BiConsumer<String, String> consumer) {

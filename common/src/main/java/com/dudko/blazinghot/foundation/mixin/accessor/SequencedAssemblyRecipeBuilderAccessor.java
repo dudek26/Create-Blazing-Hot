@@ -6,10 +6,10 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
 
-@Mixin(SequencedAssemblyRecipeBuilder.class)
+@Mixin(value = SequencedAssemblyRecipeBuilder.class, remap = false)
 public interface SequencedAssemblyRecipeBuilderAccessor {
 
-	@Accessor(remap = false)
+	@Accessor
 	SequencedAssemblyRecipe getRecipe();
 
 }

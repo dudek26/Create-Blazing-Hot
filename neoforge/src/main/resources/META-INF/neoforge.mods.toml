@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[${forge_version},)"
+loaderVersion = "[0,)"
 issueTrackerURL = "https://github.com/dudek26/Create-Blazing-Hot/issues"
 license = "MIT"
 
@@ -14,7 +14,7 @@ Nether- and metal-related features and QoL recipes.
 logoFile = "icon.png"
 
 [[dependencies.blazinghot]]
-modId = "forge"
+modId = "neoforge"
 mandatory = true
 versionRange = "[${neoforge_version},)"
 ordering = "NONE"

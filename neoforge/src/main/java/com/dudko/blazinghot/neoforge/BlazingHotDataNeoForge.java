@@ -10,7 +10,6 @@ import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.data.NeoForgeTagGen;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.lang.BlazingLangGen;
-import com.dudko.blazinghot.data.recipe.SequencedAssemblyRecipeGen;
 import com.dudko.blazinghot.data.recipe.StandardRecipeGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.providers.ProviderType;
@@ -29,8 +28,12 @@ public class BlazingHotDataNeoForge {
 
 	private static final CreateRegistrate REGISTRATE = BlazingHot.registrate();
 
+	public static void gatherDataHighPriority(GatherDataEvent event) {
+		if (event.getMods().contains(BlazingHot.ID)) addExtraRegistrateData();
+	}
+
 	public static void gatherData(GatherDataEvent event) {
-		addExtraRegistrateData();
+		if (!event.getMods().contains(BlazingHot.ID)) return;
 
 		DataGenerator generator = event.getGenerator();
 		PackOutput output = generator.getPackOutput();
@@ -53,7 +56,7 @@ public class BlazingHotDataNeoForge {
 
 		generator.addProvider(event.includeServer(), new BlazingAdvancements(output, lookupProvider));
 		generator.addProvider(event.includeServer(), new StandardRecipeGen(output, lookupProvider));
-		generator.addProvider(event.includeServer(), new SequencedAssemblyRecipeGen(output, lookupProvider));
+//		generator.addProvider(event.includeServer(), new SequencedAssemblyRecipeGen(output, lookupProvider));
 
 	}
 

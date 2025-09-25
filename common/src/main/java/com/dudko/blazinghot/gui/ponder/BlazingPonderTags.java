@@ -17,7 +17,7 @@ public class BlazingPonderTags {
 	}
 
 	public static void register(PonderTagRegistrationHelper<ResourceLocation> helper) {
-		PonderTagRegistrationHelper<RegistryEntry<?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
+		PonderTagRegistrationHelper<RegistryEntry<?, ?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
 
 
 		helper

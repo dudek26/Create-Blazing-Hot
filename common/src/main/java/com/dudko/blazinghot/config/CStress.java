@@ -1,5 +1,9 @@
 package com.dudko.blazinghot.config;
 
+import java.util.function.DoubleSupplier;
+
+import org.jetbrains.annotations.Nullable;
+
 import com.dudko.blazinghot.BlazingHot;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
@@ -62,6 +66,12 @@ public abstract class CStress extends ConfigBase {
 	public String getName() {
 		return "stressValues.v" + VERSION;
 	}
+
+	@Nullable
+	public abstract DoubleSupplier getImpact(Block block);
+
+	@Nullable
+	public abstract DoubleSupplier getCapacity(Block block);
 
 	protected static class Comments {
 		public static String su = "[in Stress Units]";

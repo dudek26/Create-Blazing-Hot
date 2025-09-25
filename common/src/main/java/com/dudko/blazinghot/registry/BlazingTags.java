@@ -40,7 +40,7 @@ public class BlazingTags {
 		MODERN_LAMPS("modern_lamps", true),
 		MODERN_LAMP_BLOCKS("modern_lamps/blocks", true),
 		MODERN_LAMP_PANELS("modern_lamps/panels", true),
-		MODERN_LAMP_QUAD_PANELS("modern_lamps/quad_panels/", true),
+		MODERN_LAMP_QUAD_PANELS("modern_lamps/quad_panels", true),
 		MODERN_LAMP_DOUBLE_PANELS("modern_lamps/double_panels", true),
 		MODERN_LAMP_HALF_PANELS("modern_lamps/half_panels", true),
 		MODERN_LAMP_SMALL_PANELS("modern_lamps/small_panels", true),

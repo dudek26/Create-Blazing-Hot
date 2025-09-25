@@ -10,8 +10,10 @@ import com.dudko.blazinghot.registry.neoforge.BlazingConfigsImpl;
 import com.dudko.blazinghot.registry.neoforge.BlazingCreativeTabsImpl;
 import com.dudko.blazinghot.registry.neoforge.BlazingFluidsImpl;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -33,21 +35,24 @@ public class BlazingHotImpl {
 		BlazingHot.init();
 
 		modEventBus.addListener(EventPriority.LOWEST, BlazingHotDataNeoForge::gatherData);
+		modEventBus.addListener(EventPriority.HIGHEST, BlazingHotDataNeoForge::gatherDataHighPriority);
 		BlazingConfigsImpl.register(modLoadingContext, modContainer);
 		Env.CLIENT.runIfCurrent(() -> () -> BlazingHotClientImpl.initClient(modEventBus));
 	}
 
+	@SubscribeEvent
 	public static void init(final FMLCommonSetupEvent event) {
 		BlazingFluidsImpl.registerFluidInteractions();
-
-		event.enqueueWork(() -> {
-			BlazingAdvancements.register();
-			BlazingTriggers.register();
-		});
 	}
 
+	@SubscribeEvent
 	public static void onRegister(final RegisterEvent event) {
 		BlazingArmInteractionPointTypes.init();
+
+		if (event.getRegistry() == BuiltInRegistries.TRIGGER_TYPES) {
+			BlazingAdvancements.register();
+			BlazingTriggers.register();
+		}
 	}
 
 	public static void finalizeRegistrate() {

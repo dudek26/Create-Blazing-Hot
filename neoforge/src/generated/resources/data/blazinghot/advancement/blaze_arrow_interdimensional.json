@@ -1,0 +1,28 @@
+{
+  "parent": "blazinghot:blaze_arrow",
+  "criteria": {
+    "0": {
+      "trigger": "blazinghot:blaze_arrow_interdimensional_builtin"
+    }
+  },
+  "display": {
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.blazinghot.blaze_arrow_interdimensional.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "blazinghot:blaze_arrow"
+    },
+    "title": {
+      "translate": "advancement.blazinghot.blaze_arrow_interdimensional"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -33,11 +33,23 @@ import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
  * @see BlazingBuilderTransformers
  */
 public class BlazingBuilderTransformersImpl {
-	public static <B extends ModernLampBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampBlock(DyeColor color) {
+
+	public static <B extends AbstractModernLamp, P> NonNullUnaryOperator<BlockBuilder<B, P>> anyModernLamp(DyeColor color) {
+		return b -> b
+				.initialProperties(() -> Blocks.GLOWSTONE)
+				.properties(p -> p
+						.mapColor(color)
+						.lightLevel(s -> s.getValue(ModernLampPanelBlock.LIT) ? 15 : 0)
+						.forceSolidOn())
+				.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.MODERN_LAMP.getKey()))
+				.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag);
+	}
+
+	public static <B extends ModernLampBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampBlock(DyeColor color, BlazingTags.Blocks tag) {
 		return a -> a
 				.initialProperties(() -> Blocks.GLOWSTONE)
 				.properties(p -> p.mapColor(color).lightLevel(s -> s.getValue(ModernLampBlock.LIT) ? 15 : 0))
-				.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag, BlazingTags.Blocks.MODERN_LAMPS.tag())
+				.tag(tag.tag())
 				.blockstate((c, p) -> p
 						.getVariantBuilder(c.get())
 						.forAllStates(state -> ConfiguredModel
@@ -53,101 +65,16 @@ public class BlazingBuilderTransformersImpl {
 
 						))
 				.item()
-				.tag(BlazingTags.Blocks.MODERN_LAMPS.itemTag())
+				.tag(tag.itemTag())
 				.model((c, b) -> b.blockItem(c).texture("#all", b.modLoc("block/modern_lamp/block/" + color.getName())))
 				.build();
 	}
 
-	public static <B extends ModernLampPanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampPanel(DyeColor color, String name) {
+	public static <B extends ModernLampPanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampPanel(DyeColor color, String name, BlazingTags.Blocks tag) {
 		String tagName = name.replace('/', '_') + "s";
-		return b -> b
-				.tag(BlazingTags.blockTag(tagName, BlazingTags.Namespace.COMMON.id))
-				.blockstate((c, p) -> p.getVariantBuilder(c.get()).forAllStates(state -> {
-							Direction facing = state.getValue(ModernLampPanelBlock.FACING);
-							int xRotation = facing == Direction.DOWN ? 180 : 0;
-							int yRotation = facing.getAxis().isVertical() ? 0 : (int) facing.toYRot();
-
-							String variant = color.getName();
-							if (state.getValue(ModernLampPanelBlock.FACING).getAxis().isHorizontal()) variant += "_vertical";
-							if (state.getValue(ModernLampPanelBlock.LIT)) variant += "_powered";
-
-							return ConfiguredModel
-									.builder()
-									.modelFile(p.models().getExistingFile(p.modLoc("block/" + name + "/" + variant)))
-									.rotationX((xRotation + 360) % 360)
-									.rotationY((yRotation + 360) % 360)
-									.build();
-						}
-
-				))
-				.item()
-				.tag(BlazingTags.itemTag(tagName, BlazingTags.Namespace.COMMON.id))
-				.transform(ModelGen.customItemModel(name, color.getName()));
-	}
-
-	public static <B extends ModernLampDoublePanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampDirectionalPanel(DyeColor color, String name) {
-		String tagName = name.replace('/', '_') + "s";
-		return b -> b
-				.tag(BlazingTags.blockTag(tagName, BlazingTags.Namespace.COMMON.id))
-				.blockstate((c, p) -> p.getVariantBuilder(c.get()).forAllStates(state -> {
+		return b -> b.tag(tag.tag()).blockstate((c, p) -> p.getVariantBuilder(c.get()).forAllStates(state -> {
 					Direction facing = state.getValue(ModernLampPanelBlock.FACING);
 					int xRotation = facing == Direction.DOWN ? 180 : 0;
-
-					int yRotation = facing.getAxis().isVertical() ? 0 : (int) facing.toYRot();
-
-					String variant = color.getName();
-					if (state.getValue(ModernLampDoublePanelBlock.HORIZONTAL)) variant += "_h";
-					if (state.getValue(ModernLampPanelBlock.FACING).getAxis().isHorizontal()) variant += "_vertical";
-					if (state.getValue(ModernLampPanelBlock.LIT)) variant += "_powered";
-
-					return ConfiguredModel
-							.builder()
-							.modelFile(p.models().getExistingFile(p.modLoc("block/" + name + "/" + variant)))
-							.rotationX((xRotation + 360) % 360)
-							.rotationY((yRotation + 360) % 360)
-							.build();
-				}))
-				.item()
-				.tag(BlazingTags.itemTag(tagName, BlazingTags.Namespace.COMMON.id))
-				.transform(ModelGen.customItemModel(name, color.getName() + "_h"));
-	}
-
-	public static <B extends ModernLampHalfPanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampHalfPanel(DyeColor color, String name) {
-		String tagName = name.replace('/', '_') + "s";
-		return b -> b
-				.tag(BlazingTags.blockTag(tagName, BlazingTags.Namespace.COMMON.id))
-				.blockstate((c, p) -> p.getVariantBuilder(c.get()).forAllStates(state -> {
-					Direction facing = state.getValue(ModernLampPanelBlock.FACING);
-					int xRotation = facing == Direction.DOWN ? 180 : 0;
-
-					int yRotation = facing.getAxis().isVertical() ? 0 : (int) facing.toYRot();
-
-					String dir = state.getValue(ModernLampHalfPanelBlock.HORIZONTAL) ? "h" : "v";
-
-					String variant = color.getName() + "_" + dir;
-					if (state.getValue(ModernLampPanelBlock.FACING).getAxis().isHorizontal()) variant += "_vertical";
-					if (state.getValue(ModernLampPanelBlock.LIT)) variant += "_powered";
-
-					return ConfiguredModel
-							.builder()
-							.modelFile(p.models().getExistingFile(p.modLoc("block/" + name + "/" + variant)))
-							.rotationX((xRotation + 360) % 360)
-							.rotationY((yRotation + 360) % 360)
-							.build();
-				}))
-				.item()
-				.tag(BlazingTags.itemTag(tagName, BlazingTags.Namespace.COMMON.id))
-				.transform(ModelGen.customItemModel(name, color.getName() + "_h"));
-	}
-
-	public static <B extends SmallModernLampPanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampSmallPanel(DyeColor color, String name) {
-		String tagName = name.replace('/', '_') + "s";
-		return b -> b
-				.tag(BlazingTags.blockTag(tagName, BlazingTags.Namespace.COMMON.id))
-				.blockstate((c, p) -> p.getVariantBuilder(c.get()).forAllStates(state -> {
-					Direction facing = state.getValue(ModernLampPanelBlock.FACING);
-					int xRotation = facing == Direction.DOWN ? 180 : 0;
-
 					int yRotation = facing.getAxis().isVertical() ? 0 : (int) facing.toYRot();
 
 					String variant = color.getName();
@@ -160,21 +87,75 @@ public class BlazingBuilderTransformersImpl {
 							.rotationX((xRotation + 360) % 360)
 							.rotationY((yRotation + 360) % 360)
 							.build();
-				}))
-				.item()
-				.tag(BlazingTags.itemTag(tagName, BlazingTags.Namespace.COMMON.id))
-				.transform(ModelGen.customItemModel(name, color.getName()));
+				}
+
+		)).item().tag(tag.itemTag()).transform(ModelGen.customItemModel(name, color.getName()));
 	}
 
-	public static <B extends AbstractModernLamp, P> NonNullUnaryOperator<BlockBuilder<B, P>> anyModernLamp(DyeColor color) {
-		return b -> b
-				.initialProperties(() -> Blocks.GLOWSTONE)
-				.properties(p -> p
-						.mapColor(color)
-						.lightLevel(s -> s.getValue(ModernLampPanelBlock.LIT) ? 15 : 0)
-						.forceSolidOn())
-				.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, ItemDescriptions.MODERN_LAMP.getKey()))
-				.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag);
+	public static <B extends ModernLampDoublePanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampDirectionalPanel(DyeColor color, String name, BlazingTags.Blocks tag) {
+		String tagName = name.replace('/', '_') + "s";
+		return b -> b.tag(tag.tag()).blockstate((c, p) -> p.getVariantBuilder(c.get()).forAllStates(state -> {
+			Direction facing = state.getValue(ModernLampPanelBlock.FACING);
+			int xRotation = facing == Direction.DOWN ? 180 : 0;
+
+			int yRotation = facing.getAxis().isVertical() ? 0 : (int) facing.toYRot();
+
+			String variant = color.getName();
+			if (state.getValue(ModernLampDoublePanelBlock.HORIZONTAL)) variant += "_h";
+			if (state.getValue(ModernLampPanelBlock.FACING).getAxis().isHorizontal()) variant += "_vertical";
+			if (state.getValue(ModernLampPanelBlock.LIT)) variant += "_powered";
+
+			return ConfiguredModel
+					.builder()
+					.modelFile(p.models().getExistingFile(p.modLoc("block/" + name + "/" + variant)))
+					.rotationX((xRotation + 360) % 360)
+					.rotationY((yRotation + 360) % 360)
+					.build();
+		})).item().tag(tag.itemTag()).transform(ModelGen.customItemModel(name, color.getName() + "_h"));
+	}
+
+	public static <B extends ModernLampHalfPanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampHalfPanel(DyeColor color, String name, BlazingTags.Blocks tag) {
+		String tagName = name.replace('/', '_') + "s";
+		return b -> b.tag(tag.tag()).blockstate((c, p) -> p.getVariantBuilder(c.get()).forAllStates(state -> {
+			Direction facing = state.getValue(ModernLampPanelBlock.FACING);
+			int xRotation = facing == Direction.DOWN ? 180 : 0;
+
+			int yRotation = facing.getAxis().isVertical() ? 0 : (int) facing.toYRot();
+
+			String dir = state.getValue(ModernLampHalfPanelBlock.HORIZONTAL) ? "h" : "v";
+
+			String variant = color.getName() + "_" + dir;
+			if (state.getValue(ModernLampPanelBlock.FACING).getAxis().isHorizontal()) variant += "_vertical";
+			if (state.getValue(ModernLampPanelBlock.LIT)) variant += "_powered";
+
+			return ConfiguredModel
+					.builder()
+					.modelFile(p.models().getExistingFile(p.modLoc("block/" + name + "/" + variant)))
+					.rotationX((xRotation + 360) % 360)
+					.rotationY((yRotation + 360) % 360)
+					.build();
+		})).item().tag(tag.itemTag()).transform(ModelGen.customItemModel(name, color.getName() + "_h"));
+	}
+
+	public static <B extends SmallModernLampPanelBlock, P> NonNullUnaryOperator<BlockBuilder<B, P>> modernLampSmallPanel(DyeColor color, String name, BlazingTags.Blocks tag) {
+		String tagName = name.replace('/', '_') + "s";
+		return b -> b.tag(tag.tag()).blockstate((c, p) -> p.getVariantBuilder(c.get()).forAllStates(state -> {
+			Direction facing = state.getValue(ModernLampPanelBlock.FACING);
+			int xRotation = facing == Direction.DOWN ? 180 : 0;
+
+			int yRotation = facing.getAxis().isVertical() ? 0 : (int) facing.toYRot();
+
+			String variant = color.getName();
+			if (state.getValue(ModernLampPanelBlock.FACING).getAxis().isHorizontal()) variant += "_vertical";
+			if (state.getValue(ModernLampPanelBlock.LIT)) variant += "_powered";
+
+			return ConfiguredModel
+					.builder()
+					.modelFile(p.models().getExistingFile(p.modLoc("block/" + name + "/" + variant)))
+					.rotationX((xRotation + 360) % 360)
+					.rotationY((yRotation + 360) % 360)
+					.build();
+		})).item().tag(tag.itemTag()).transform(ModelGen.customItemModel(name, color.getName()));
 	}
 
 	public static <B extends Block, P> NonNullUnaryOperator<BlockBuilder<B, P>> simpleBlockState() {

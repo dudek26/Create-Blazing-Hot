@@ -40,11 +40,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-@EventBusSubscriber
 public class BlazingCreativeTabsImpl extends BlazingCreativeTabs {
 
 	private static final DeferredRegister<CreativeModeTab>
@@ -209,10 +207,9 @@ public class BlazingCreativeTabsImpl extends BlazingCreativeTabs {
 							.getItemRenderer()
 							.getModel(new ItemStack(item), null, null, 0)
 							.isGui3d(), () -> () -> item -> false);
-			if (addItems) items.addAll(collectItems(exclusionPredicate, is3d, true));
-
+			if (addItems) items.addAll(collectItems(exclusionPredicate));
 			items.addAll(collectBlocks(exclusionPredicate));
-			if (addItems) items.addAll(collectItems(exclusionPredicate, is3d, false));
+
 
 			applyOrderings(items, orderings);
 			outputAll(output, items, stackFunc, visibilityFunc);
@@ -230,13 +227,12 @@ public class BlazingCreativeTabsImpl extends BlazingCreativeTabs {
 			return items;
 		}
 
-		private List<Item> collectItems(Predicate<Item> exclusionPredicate, Predicate<Item> is3d, boolean special) {
+		private List<Item> collectItems(Predicate<Item> exclusionPredicate) {
 			List<Item> items = new ReferenceArrayList<>();
 			for (RegistryEntry<Item, Item> entry : REGISTRATE.getAll(Registries.ITEM)) {
 				if (!CreateRegistrate.isInCreativeTab(entry, tab)) continue;
 				Item item = entry.get();
 				if (item instanceof BlockItem) continue;
-				if (is3d.test(item) != special) continue;
 				if (!exclusionPredicate.test(item)) items.add(item);
 			}
 			return items;

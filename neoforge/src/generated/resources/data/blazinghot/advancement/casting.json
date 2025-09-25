@@ -1,0 +1,28 @@
+{
+  "parent": "blazinghot:sturdy_casing",
+  "criteria": {
+    "0": {
+      "trigger": "blazinghot:casting_builtin"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.blazinghot.casting.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "blazinghot:casting_depot"
+    },
+    "title": {
+      "translate": "advancement.blazinghot.casting"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

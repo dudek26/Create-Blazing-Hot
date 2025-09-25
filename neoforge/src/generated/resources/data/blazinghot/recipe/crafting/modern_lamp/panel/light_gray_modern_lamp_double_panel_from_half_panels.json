@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "blazinghot:light_gray_modern_lamp_half_panel"
+    },
+    {
+      "item": "blazinghot:light_gray_modern_lamp_half_panel"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "blazinghot:light_gray_modern_lamp_double_panel"
+  }
+}

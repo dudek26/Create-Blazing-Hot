@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "blazinghot:sturdy_alloy"
+    },
+    "C": {
+      "item": "blazinghot:sturdy_casing"
+    },
+    "E": {
+      "item": "create:electron_tube"
+    }
+  },
+  "pattern": [
+    "A",
+    "C",
+    "E"
+  ],
+  "result": {
+    "count": 1,
+    "id": "blazinghot:casting_depot"
+  }
+}

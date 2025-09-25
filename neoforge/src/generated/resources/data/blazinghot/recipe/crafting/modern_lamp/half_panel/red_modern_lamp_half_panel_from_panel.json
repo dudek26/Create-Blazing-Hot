@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "l": {
+      "item": "blazinghot:red_modern_lamp_panel"
+    }
+  },
+  "pattern": [
+    "ll"
+  ],
+  "result": {
+    "count": 4,
+    "id": "blazinghot:red_modern_lamp_half_panel"
+  }
+}

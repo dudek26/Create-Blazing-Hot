@@ -106,7 +106,13 @@ dependencies {
     modRuntimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_neoforge_version}")
 
     // Development QOL
-    modLocalRuntime("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}") { transitive = false }
+    switch (forge_recipe_viewer.toLowerCase(Locale.ROOT)) {
+        case "jei": modLocalRuntime("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}") { transitive = false }; break
+//        case "rei": modLocalRuntime("me.shedaniel:RoughlyEnoughItems-fabric:${rei_version}"); break
+//        case "emi": modLocalRuntime("dev.emi:emi-fabric:${emi_version}"); break
+        case "disabled": break
+        default: println("Unknown recipe viewer specified: ${forge_recipe_viewer}. Must be JEI or disabled.")
+    }
 
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
     implementation(include("io.github.llamalad7:mixinextras-neoforge:0.5.0"))

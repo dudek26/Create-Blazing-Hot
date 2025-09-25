@@ -26,6 +26,7 @@ import com.dudko.blazinghot.content.metal.BlazingMetal;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingMetals;
+import com.dudko.blazinghot.util.ItemUtil;
 import com.simibubi.create.api.data.recipe.BaseRecipeProvider;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
@@ -131,7 +132,7 @@ public class StandardRecipeGen extends BaseRecipeProvider {
 	private GeneratedRecipe compressing(ItemLike ingredient, ItemLike result, ItemLike unlockedBy) {
 		return create(() -> result)
 				.unlockedBy(() -> unlockedBy)
-				.withSuffix("_from_" + ingredient.asItem())
+				.withSuffix("_from_" + ItemUtil.getItemID(ingredient).getPath())
 				.viaShaped(b -> b.define('X', ingredient).pattern("XXX").pattern("XXX").pattern("XXX"));
 	}
 
@@ -139,7 +140,7 @@ public class StandardRecipeGen extends BaseRecipeProvider {
 		return create(() -> result)
 				.returns(count)
 				.unlockedBy(() -> unlockedBy)
-				.withSuffix("_from_" + ingredient.asItem())
+				.withSuffix("_from_" + ItemUtil.getItemID(ingredient).getPath())
 				.viaShapeless(b -> b.requires(ingredient));
 	}
 
