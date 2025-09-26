@@ -1,0 +1,14 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "create:cinder_flour"
+    }
+  ],
+  "processing_time": 150,
+  "results": [
+    {
+      "id": "blazinghot:netherrack_dust"
+    }
+  ]
+}

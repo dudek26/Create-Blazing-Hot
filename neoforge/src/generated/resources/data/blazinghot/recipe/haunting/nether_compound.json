@@ -1,0 +1,13 @@
+{
+  "type": "create:haunting",
+  "ingredients": [
+    {
+      "item": "blazinghot:nether_compound"
+    }
+  ],
+  "results": [
+    {
+      "id": "blazinghot:nether_essence"
+    }
+  ]
+}

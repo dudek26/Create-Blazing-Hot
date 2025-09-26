@@ -7,7 +7,7 @@
     "SpoutRendererMixin"
   ],
   "mixins": [
-    "DatagenModLoaderForgeMixin",
+    "DatagenModLoaderMixin",
     "EntityMixin",
     "JEIBasinCategoryMixin"
   ],

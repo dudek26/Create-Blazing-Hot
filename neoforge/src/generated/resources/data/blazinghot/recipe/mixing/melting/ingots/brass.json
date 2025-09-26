@@ -1,0 +1,16 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "c:ingots/brass"
+    }
+  ],
+  "processing_time": 600,
+  "results": [
+    {
+      "amount": 90,
+      "id": "blazinghot:molten_brass"
+    }
+  ]
+}

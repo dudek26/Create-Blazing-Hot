@@ -11,6 +11,7 @@ import com.dudko.blazinghot.data.NeoForgeTagGen;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.lang.BlazingLangGen;
 import com.dudko.blazinghot.data.recipe.StandardRecipeGen;
+import com.dudko.blazinghot.foundation.recipe.BlazingRecipeProvider;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.providers.ProviderType;
 
@@ -39,24 +40,30 @@ public class BlazingHotDataNeoForge {
 		PackOutput output = generator.getPackOutput();
 		CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-		generator.addProvider(event.includeServer(), new DataProvider() {
-			@Override
-			public String getName() {
-				return "Create: Blazing Hot's Processing Recipes";
-			}
 
-			@Override
-			public CompletableFuture<?> run(CachedOutput dc) {
-				return CompletableFuture.allOf(GENERATORS
-						.stream()
-						.map(gen -> gen.run(dc))
-						.toArray(CompletableFuture[]::new));
-			}
-		});
-
+		// todo: sequenced recipes, finish processing
 		generator.addProvider(event.includeServer(), new BlazingAdvancements(output, lookupProvider));
 		generator.addProvider(event.includeServer(), new StandardRecipeGen(output, lookupProvider));
 //		generator.addProvider(event.includeServer(), new SequencedAssemblyRecipeGen(output, lookupProvider));
+
+		if (event.includeServer()) {
+			BlazingRecipeProvider.registerAllProcessing(output, lookupProvider);
+
+			generator.addProvider(event.includeServer(), new DataProvider() {
+				@Override
+				public String getName() {
+					return "Create: Blazing Hot's Processing Recipes";
+				}
+
+				@Override
+				public CompletableFuture<?> run(CachedOutput dc) {
+					return CompletableFuture.allOf(GENERATORS
+							.stream()
+							.map(gen -> gen.run(dc))
+							.toArray(CompletableFuture[]::new));
+				}
+			});
+		}
 
 	}
 

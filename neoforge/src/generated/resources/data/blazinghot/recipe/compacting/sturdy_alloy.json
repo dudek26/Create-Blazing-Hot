@@ -1,0 +1,29 @@
+{
+  "type": "create:compacting",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "item": "blazinghot:nether_compound"
+    },
+    {
+      "item": "blazinghot:nether_compound"
+    },
+    {
+      "tag": "c:dusts/obsidian"
+    },
+    {
+      "tag": "c:dusts/obsidian"
+    },
+    {
+      "tag": "c:dusts/obsidian"
+    },
+    {
+      "tag": "c:ingots/iron"
+    }
+  ],
+  "results": [
+    {
+      "id": "blazinghot:sturdy_alloy"
+    }
+  ]
+}

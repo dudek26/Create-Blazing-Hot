@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/blaze_gold"
+    }
+  ],
+  "results": [
+    {
+      "id": "blazinghot:blaze_gold_sheet"
+    }
+  ]
+}

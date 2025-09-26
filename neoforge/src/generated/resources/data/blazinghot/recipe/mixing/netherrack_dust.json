@@ -1,0 +1,17 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "create:cinder_flour"
+    },
+    {
+      "tag": "c:dusts/stone"
+    }
+  ],
+  "results": [
+    {
+      "count": 2,
+      "id": "blazinghot:netherrack_dust"
+    }
+  ]
+}

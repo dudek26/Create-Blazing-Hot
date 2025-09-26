@@ -15,6 +15,7 @@ import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.foundation.recipe.BlazingStandardRecipeGen;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingMetals;
+import com.dudko.blazinghot.util.ItemUtil;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
@@ -66,12 +67,12 @@ public class FillingRecipeGen extends BlazingStandardRecipeGen<FillingRecipe> {
 									.output(BlazingItems.BLAZE_ROLL));
 
 	private GeneratedRecipe metalApple(BlazingMetal metal, ItemLike result) {
-		return bCreate(result.asItem().toString(),
+		return bCreate(ItemUtil.getItemID(result).getPath(),
 				b -> b.require(metal.getFluidTag(), MultiAmount.INGOT_COVER).require(apple()).output(result));
 	}
 
 	private GeneratedRecipe metalCarrot(BlazingMetal metal, ItemLike result) {
-		return bCreate(result.asItem().toString(),
+		return bCreate(ItemUtil.getItemID(result).getPath(),
 				b -> b.require(metal.getFluidTag(), NUGGET_COVER).require(carrot()).output(result));
 	}
 

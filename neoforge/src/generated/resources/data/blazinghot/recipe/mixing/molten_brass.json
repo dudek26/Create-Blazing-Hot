@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "type": "fluid_tag",
+      "amount": 90,
+      "fluid_tag": "c:molten_copper"
+    },
+    {
+      "type": "fluid_tag",
+      "amount": 90,
+      "fluid_tag": "c:molten_zinc"
+    }
+  ],
+  "results": [
+    {
+      "amount": 180,
+      "id": "blazinghot:molten_brass"
+    }
+  ]
+}

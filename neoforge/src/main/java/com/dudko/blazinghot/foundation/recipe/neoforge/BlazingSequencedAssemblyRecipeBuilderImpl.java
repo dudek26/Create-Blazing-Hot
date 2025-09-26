@@ -3,7 +3,7 @@ package com.dudko.blazinghot.foundation.recipe.neoforge;
 import java.util.List;
 
 import com.dudko.blazinghot.data.conditions.LoadCondition;
-import com.dudko.blazinghot.data.conditions.neoforge.ForgeLoadCondition;
+import com.dudko.blazinghot.data.conditions.neoforge.LoadConditionImpl;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipe;
 
 import net.minecraft.data.recipes.RecipeOutput;
@@ -18,8 +18,8 @@ public class BlazingSequencedAssemblyRecipeBuilderImpl {
 				null,
 				loadConditions
 						.stream()
-						.map(c -> (ForgeLoadCondition<?>) c)
-						.map(ForgeLoadCondition::getForgeCondition)
+						.map(c -> (LoadConditionImpl<?>) c)
+						.map(LoadConditionImpl::getNeoForgeCondition)
 						.toArray(ICondition[]::new));
 	}
 

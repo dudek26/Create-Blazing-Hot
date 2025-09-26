@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "type": "fluid_tag",
+      "amount": 90,
+      "fluid_tag": "c:molten_gold"
+    },
+    {
+      "type": "fluid_tag",
+      "amount": 90,
+      "fluid_tag": "c:molten_ancient_debris"
+    }
+  ],
+  "processing_time": 200,
+  "results": [
+    {
+      "amount": 22,
+      "id": "blazinghot:molten_netherite"
+    }
+  ]
+}

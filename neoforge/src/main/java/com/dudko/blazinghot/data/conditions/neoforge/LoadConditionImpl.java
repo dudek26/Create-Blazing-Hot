@@ -19,26 +19,26 @@ import net.neoforged.neoforge.common.conditions.OrCondition;
 import net.neoforged.neoforge.common.conditions.TagEmptyCondition;
 
 @SuppressWarnings("unchecked")
-public class ForgeLoadCondition<T> extends LoadCondition<T> {
+public class LoadConditionImpl<T> extends LoadCondition<T> {
 
-	protected ForgeLoadCondition(Type type, T... values) {
+	protected LoadConditionImpl(Type type, T... values) {
 		super(type, values);
 	}
 
 	@SafeVarargs
 	public static <T> LoadCondition<T> create(Type type, T... values) {
-		return new ForgeLoadCondition<>(type, values);
+		return new LoadConditionImpl<>(type, values);
 	}
 
-	private List<ICondition> forgeListCondition(LoadCondition<LoadCondition<?>> condition) {
-		return condition.getValues().stream().map(this::getForgeCondition).toList();
+	private List<ICondition> neoForgeListCondition(LoadCondition<LoadCondition<?>> condition) {
+		return condition.getValues().stream().map(this::getNeoForgeCondition).toList();
 	}
 
-	public ICondition getForgeCondition() {
-		return getForgeCondition(this);
+	public ICondition getNeoForgeCondition() {
+		return getNeoForgeCondition(this);
 	}
 
-	public ICondition getForgeCondition(LoadCondition<?> condition) {
+	public ICondition getNeoForgeCondition(LoadCondition<?> condition) {
 		switch (condition.getType()) {
 			case TAGS_POPULATED -> {
 				TagKey<?>[] tags = LoadConditionHelper.tagValues(condition.getValues());
@@ -74,13 +74,13 @@ public class ForgeLoadCondition<T> extends LoadCondition<T> {
 				return new OrCondition(modLoaded);
 			}
 			case AND -> {
-				return new AndCondition(forgeListCondition((LoadCondition<LoadCondition<?>>) condition));
+				return new AndCondition(neoForgeListCondition((LoadCondition<LoadCondition<?>>) condition));
 			}
 			case OR -> {
-				return new OrCondition(forgeListCondition((LoadCondition<LoadCondition<?>>) condition));
+				return new OrCondition(neoForgeListCondition((LoadCondition<LoadCondition<?>>) condition));
 			}
 			case NOT -> {
-				return new NotCondition(getForgeCondition((LoadCondition<?>) condition.getValues().getFirst()));
+				return new NotCondition(getNeoForgeCondition((LoadCondition<?>) condition.getValues().getFirst()));
 			}
 			case ITEMS_REGISTERED -> {
 				ItemLike[] items = LoadConditionHelper.itemLikeValues(condition.getValues());

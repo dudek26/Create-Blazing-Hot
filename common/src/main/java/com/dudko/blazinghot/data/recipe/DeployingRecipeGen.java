@@ -11,6 +11,7 @@ import java.util.concurrent.CompletableFuture;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.registry.BlazingItems;
+import com.dudko.blazinghot.util.ItemUtil;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -36,6 +37,7 @@ public class DeployingRecipeGen extends com.simibubi.create.api.data.recipe.Depl
 					stellarApple(brassApple(), BlazingItems.STELLAR_BRASS_APPLE);
 
 	private GeneratedRecipe stellarApple(ItemLike metalApple, ItemLike result) {
-		return create(result.asItem().toString(), b -> b.require(metalApple).require(Items.NETHER_STAR).output(result));
+		return create(ItemUtil.getItemID(metalApple).getPath(),
+				b -> b.require(metalApple).require(Items.NETHER_STAR).output(result));
 	}
 }

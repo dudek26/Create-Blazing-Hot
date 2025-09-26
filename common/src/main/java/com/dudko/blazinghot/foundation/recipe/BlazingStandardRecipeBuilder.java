@@ -79,7 +79,7 @@ public class BlazingStandardRecipeBuilder<R extends StandardProcessingRecipe<?>>
 	}
 
 	@ExpectPlatform
-	static <R extends StandardProcessingRecipe<?>, S extends StandardProcessingRecipe.Builder<R>> S fluidOutput(S builder, Fluid fluid, MultiAmount amount) {
+	public static <R extends StandardProcessingRecipe<?>, S extends StandardProcessingRecipe.Builder<R>> S fluidOutput(S builder, Fluid fluid, MultiAmount amount) {
 		throw new AssertionError();
 	}
 }

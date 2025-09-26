@@ -1,0 +1,16 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "blazinghot:zinc_apple"
+    },
+    {
+      "item": "minecraft:nether_star"
+    }
+  ],
+  "results": [
+    {
+      "id": "blazinghot:stellar_zinc_apple"
+    }
+  ]
+}
