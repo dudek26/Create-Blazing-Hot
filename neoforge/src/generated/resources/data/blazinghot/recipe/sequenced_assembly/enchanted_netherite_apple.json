@@ -1,0 +1,53 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": [
+    {
+      "item": "blazinghot:enchanted_blaze_apple"
+    },
+    {
+      "item": "minecraft:enchanted_golden_apple"
+    }
+  ],
+  "loops": 3,
+  "results": [
+    {
+      "id": "blazinghot:enchanted_netherite_apple"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "blazinghot:ancient_enchanted_apple"
+        },
+        {
+          "type": "fluid_tag",
+          "amount": 540,
+          "fluid_tag": "c:molten_netherite"
+        }
+      ],
+      "results": [
+        {
+          "id": "blazinghot:ancient_enchanted_apple"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "blazinghot:ancient_enchanted_apple"
+        }
+      ],
+      "results": [
+        {
+          "id": "blazinghot:ancient_enchanted_apple"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "blazinghot:ancient_enchanted_apple"
+  }
+}

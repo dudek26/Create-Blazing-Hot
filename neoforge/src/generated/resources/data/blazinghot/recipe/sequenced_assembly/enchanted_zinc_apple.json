@@ -1,0 +1,64 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "blazinghot:stellar_zinc_apple"
+  },
+  "loops": 6,
+  "results": [
+    {
+      "id": "blazinghot:enchanted_zinc_apple"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "blazinghot:galvanized_stellar_zinc_apple"
+        },
+        {
+          "type": "fluid_tag",
+          "amount": 540,
+          "fluid_tag": "c:molten_netherite"
+        }
+      ],
+      "results": [
+        {
+          "id": "blazinghot:galvanized_stellar_zinc_apple"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "blazinghot:galvanized_stellar_zinc_apple"
+        },
+        {
+          "item": "minecraft:diamond"
+        }
+      ],
+      "results": [
+        {
+          "id": "blazinghot:galvanized_stellar_zinc_apple"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "blazinghot:galvanized_stellar_zinc_apple"
+        }
+      ],
+      "results": [
+        {
+          "id": "blazinghot:galvanized_stellar_zinc_apple"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "blazinghot:galvanized_stellar_zinc_apple"
+  }
+}

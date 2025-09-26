@@ -1,0 +1,64 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "blazinghot:stellar_blaze_apple"
+  },
+  "loops": 6,
+  "results": [
+    {
+      "id": "blazinghot:enchanted_blaze_apple"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "blazinghot:burning_stellar_blaze_apple"
+        },
+        {
+          "type": "fluid_tag",
+          "amount": 540,
+          "fluid_tag": "c:molten_netherite"
+        }
+      ],
+      "results": [
+        {
+          "id": "blazinghot:burning_stellar_blaze_apple"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "blazinghot:burning_stellar_blaze_apple"
+        },
+        {
+          "item": "minecraft:diamond"
+        }
+      ],
+      "results": [
+        {
+          "id": "blazinghot:burning_stellar_blaze_apple"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "blazinghot:burning_stellar_blaze_apple"
+        }
+      ],
+      "results": [
+        {
+          "id": "blazinghot:burning_stellar_blaze_apple"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "blazinghot:burning_stellar_blaze_apple"
+  }
+}

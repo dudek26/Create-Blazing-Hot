@@ -9,7 +9,7 @@ import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeB
 @Mixin(value = SequencedAssemblyRecipeBuilder.class, remap = false)
 public interface SequencedAssemblyRecipeBuilderAccessor {
 
-	@Accessor
-	SequencedAssemblyRecipe getRecipe();
+	@Accessor("recipe")
+	SequencedAssemblyRecipe blazinghot$getRecipe();
 
 }

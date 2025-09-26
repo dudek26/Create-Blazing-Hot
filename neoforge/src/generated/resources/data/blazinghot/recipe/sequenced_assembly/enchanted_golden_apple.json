@@ -1,0 +1,64 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "blazinghot:stellar_golden_apple"
+  },
+  "loops": 6,
+  "results": [
+    {
+      "id": "minecraft:enchanted_golden_apple"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "blazinghot:gilded_stellar_golden_apple"
+        },
+        {
+          "type": "fluid_tag",
+          "amount": 540,
+          "fluid_tag": "c:molten_netherite"
+        }
+      ],
+      "results": [
+        {
+          "id": "blazinghot:gilded_stellar_golden_apple"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "blazinghot:gilded_stellar_golden_apple"
+        },
+        {
+          "item": "minecraft:diamond"
+        }
+      ],
+      "results": [
+        {
+          "id": "blazinghot:gilded_stellar_golden_apple"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "blazinghot:gilded_stellar_golden_apple"
+        }
+      ],
+      "results": [
+        {
+          "id": "blazinghot:gilded_stellar_golden_apple"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "blazinghot:gilded_stellar_golden_apple"
+  }
+}

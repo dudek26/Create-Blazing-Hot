@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.foundation.recipe;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
@@ -30,10 +31,11 @@ public class BlazingSequencedAssemblyRecipeBuilder extends SequencedAssemblyReci
 
 	public BlazingSequencedAssemblyRecipeBuilder(ResourceLocation id) {
 		super(id);
+		recipeConditions = new ArrayList<>();
 	}
 
 	protected SequencedAssemblyRecipe getRecipe() {
-		return ((SequencedAssemblyRecipeBuilderAccessor) (Object) this).getRecipe();
+		return ((SequencedAssemblyRecipeBuilderAccessor) this).blazinghot$getRecipe();
 	}
 
 	public <B extends BlazingStandardRecipeBuilder<?>> BlazingSequencedAssemblyRecipeBuilder addBlazingStep(Function<ResourceLocation, B> factory, Function<B, ? extends StandardProcessingRecipe.Builder<?>> builder) {
@@ -109,7 +111,7 @@ public class BlazingSequencedAssemblyRecipeBuilder extends SequencedAssemblyReci
 	}
 
 	@ExpectPlatform
-	static void finishBuild(RecipeOutput consumer, ResourceLocation id, SequencedAssemblyRecipe recipe, List<LoadCondition<?>> loadConditions) {
+	public static void finishBuild(RecipeOutput consumer, ResourceLocation id, SequencedAssemblyRecipe recipe, List<LoadCondition<?>> loadConditions) {
 		throw new AssertionError();
 	}
 

@@ -10,9 +10,12 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.common.conditions.ICondition;
 
+/**
+ * @see com.dudko.blazinghot.foundation.recipe.BlazingSequencedAssemblyRecipeBuilder
+ */
 public class BlazingSequencedAssemblyRecipeBuilderImpl {
 
-	static void finishBuild(RecipeOutput consumer, ResourceLocation id, SequencedAssemblyRecipe recipe, List<LoadCondition<?>> loadConditions) {
+	public static void finishBuild(RecipeOutput consumer, ResourceLocation id, SequencedAssemblyRecipe recipe, List<LoadCondition<?>> loadConditions) {
 		consumer.accept(id,
 				recipe,
 				null,

@@ -1,0 +1,64 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "blazinghot:stellar_brass_apple"
+  },
+  "loops": 6,
+  "results": [
+    {
+      "id": "blazinghot:enchanted_brass_apple"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "blazinghot:brassy_stellar_brass_apple"
+        },
+        {
+          "type": "fluid_tag",
+          "amount": 540,
+          "fluid_tag": "c:molten_netherite"
+        }
+      ],
+      "results": [
+        {
+          "id": "blazinghot:brassy_stellar_brass_apple"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "blazinghot:brassy_stellar_brass_apple"
+        },
+        {
+          "item": "minecraft:diamond"
+        }
+      ],
+      "results": [
+        {
+          "id": "blazinghot:brassy_stellar_brass_apple"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "blazinghot:brassy_stellar_brass_apple"
+        }
+      ],
+      "results": [
+        {
+          "id": "blazinghot:brassy_stellar_brass_apple"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "blazinghot:brassy_stellar_brass_apple"
+  }
+}
