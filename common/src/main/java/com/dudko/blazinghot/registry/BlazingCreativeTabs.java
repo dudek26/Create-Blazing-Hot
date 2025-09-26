@@ -14,6 +14,7 @@ public class BlazingCreativeTabs {
 	protected static final CreateRegistrate REGISTRATE = BlazingHot.registrate();
 
 	public static void register() {
+		REGISTRATE.defaultCreativeTab((ResourceKey<CreativeModeTab>) null);
 	}
 
 	public enum Tabs {
