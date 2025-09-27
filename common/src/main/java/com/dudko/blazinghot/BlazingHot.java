@@ -41,18 +41,17 @@ public class BlazingHot {
 	public static void init() {
 		LOGGER.info("Create mod addon {} initializing!", NAME);
 
-		BlazingTags.register();
-		BlazingCreativeTabs.register();
-		BlazingBlocks.register();
-		BlazingItems.register();
-		BlazingFluids.register();
-		BlazingEntities.register();
-		BlazingBlockEntityTypes.register();
-		BlazingRecipeTypes.register();
-
+		finalizeRegistrate();
 		BlazingMetals.init();
 
-		finalizeRegistrate();
+		BlazingCreativeTabs.register();
+		BlazingItems.register();
+		BlazingBlockEntityTypes.register();
+		BlazingBlocks.register();
+		BlazingTags.register();
+		BlazingFluids.register();
+		BlazingEntities.register();
+		BlazingRecipeTypes.register();
 	}
 
 	public static ResourceLocation asResource(String path) {

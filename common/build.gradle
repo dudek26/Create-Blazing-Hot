@@ -34,7 +34,7 @@ dependencies {
     // Needed for compiling
     compileOnly("com.google.code.findbugs:jsr305:3.0.2")
     compileOnly("net.neoforged:neoforge:${neoforge_version}")
-    
+
 }
 
 publishing {
