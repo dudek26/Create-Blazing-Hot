@@ -7,17 +7,14 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.dudko.blazinghot.data.conditions.LoadCondition;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
-import com.dudko.blazinghot.foundation.multiloader.fluid.MultiFluidIngredient;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.Fluid;
 
@@ -83,21 +80,22 @@ public class BlazingStandardRecipeBuilder<R extends StandardProcessingRecipe<?>>
 
 	@Override
 	public void build(RecipeOutput consumer) {
+//		require(mixerFuel);
 		IBlazingRecipeBuilder.super.build(consumer);
 	}
 
-	public BlazingStandardRecipeBuilder<R> mixerFuel(FluidIngredient mixerFuel) {
-		this.mixerFuel = mixerFuel;
-		return self();
-	}
-
-	public BlazingStandardRecipeBuilder<R> mixerFuel(Fluid fluid, MultiAmount amount) {
-		return mixerFuel(MultiFluidIngredient.fromFluid(BuiltInRegistries.FLUID.wrapAsHolder(fluid), amount));
-	}
-
-	public BlazingStandardRecipeBuilder<R> mixerFuel(TagKey<Fluid> fluidTag, MultiAmount amount) {
-		return mixerFuel(MultiFluidIngredient.fromTag(fluidTag, amount));
-	}
+//	public BlazingStandardRecipeBuilder<R> mixerFuel(FluidIngredient mixerFuel) {
+//		this.mixerFuel = mixerFuel;
+//		return self();
+//	}
+//
+//	public BlazingStandardRecipeBuilder<R> mixerFuel(Fluid fluid, MultiAmount amount) {
+//		return mixerFuel(MultiFluidIngredient.fromFluid(BuiltInRegistries.FLUID.wrapAsHolder(fluid), amount));
+//	}
+//
+//	public BlazingStandardRecipeBuilder<R> mixerFuel(TagKey<Fluid> fluidTag, MultiAmount amount) {
+//		return mixerFuel(MultiFluidIngredient.fromTag(fluidTag, amount));
+//	}
 
 	@ExpectPlatform
 	public static <R extends StandardProcessingRecipe<?>, S extends StandardProcessingRecipe.Builder<R>> S fluidOutput(S builder, Fluid fluid, MultiAmount amount) {
