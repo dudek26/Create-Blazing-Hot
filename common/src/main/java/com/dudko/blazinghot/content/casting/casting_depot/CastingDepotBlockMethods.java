@@ -1,7 +1,5 @@
 package com.dudko.blazinghot.content.casting.casting_depot;
 
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.logistics.box.PackageEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.item.ItemHelper;
@@ -9,7 +7,6 @@ import com.simibubi.create.foundation.item.ItemHelper;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -38,25 +35,9 @@ public class CastingDepotBlockMethods {
 		return BlockEntityBehaviour.get(worldIn, pos, SpoutCastingBehaviour.TYPE);
 	}
 
+	@ExpectPlatform
 	public static ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult ray) {
-		if (ray.getDirection() != Direction.UP) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-		if (world.isClientSide) return ItemInteractionResult.SUCCESS;
-
-		CastingDepotBehaviour behaviour = getDepotBehaviour(world, pos);
-		SpoutCastingBehaviour castingBehaviour = getSpoutingBehaviour(world, pos);
-		if (behaviour == null || castingBehaviour == null)
-			return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-		if (!behaviour.canAcceptItems.get()) return ItemInteractionResult.SUCCESS;
-
-		if (!AllBlocks.MECHANICAL_ARM.isIn(stack)) {
-			behaviour.setHeldStack(stack.copyWithCount(1));
-			ItemStack newHeldItem = stack.copyWithCount(stack.getCount() - 1);
-			player.setItemInHand(hand, newHeldItem);
-			AllSoundEvents.DEPOT_SLIDE.playOnServer(world, pos);
-		}
-
-		behaviour.blockEntity.notifyUpdate();
-		return ItemInteractionResult.SUCCESS;
+		throw new AssertionError();
 	}
 
 	public static void onLanded(BlockGetter worldIn, Entity entityIn) {

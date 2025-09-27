@@ -65,9 +65,7 @@ public abstract class CastingDepotBehaviour extends BlockEntityBehaviour {
 	public void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
 		super.write(compound, registries, clientPacket);
 		if (!this.heldStack.isEmpty()) {
-			CompoundTag stack = new CompoundTag();
-			heldStack.save(registries, stack);
-			compound.put("HeldStack", stack);
+			compound.put("HeldStack", heldStack.saveOptional(registries));
 		}
 
 		if (this.canMergeItems() && !this.incoming.isEmpty()) {
@@ -81,7 +79,7 @@ public abstract class CastingDepotBehaviour extends BlockEntityBehaviour {
 		super.read(compound, registries, clientPacket);
 		this.heldStack = ItemStack.EMPTY;
 		if (compound.contains("HeldStack")) {
-			this.heldStack = ItemStack.parse(registries, compound.getCompound("HeldStack")).orElse(ItemStack.EMPTY);
+			this.heldStack = ItemStack.parseOptional(registries, compound.getCompound("HeldStack"));
 		}
 		if (this.canMergeItems()) {
 			ListTag list = compound.getList("Incoming", 10);

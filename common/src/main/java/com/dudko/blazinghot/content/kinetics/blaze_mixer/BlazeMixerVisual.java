@@ -24,33 +24,32 @@ public class BlazeMixerVisual extends SingleAxisRotatingVisual<BlazeMixerBlockEn
 	public BlazeMixerVisual(VisualizationContext context, BlazeMixerBlockEntity blockEntity, float partialTick) {
 		super(context, blockEntity, partialTick, Models.partial(BlazingPartialModels.SHAFTLESS_CRIMSON_COGWHEEL));
 		this.mixer = blockEntity;
-		this.mixerHead =
-				this
-						.instancerProvider()
+		mixerHead =
+				instancerProvider()
 						.instancer(AllInstanceTypes.ROTATING, Models.partial(BlazingPartialModels.BLAZE_MIXER_HEAD))
 						.createInstance();
-		this.mixerHead.setRotationAxis(Direction.Axis.Y);
-		this.mixerPole =
-				this
-						.instancerProvider()
+		mixerHead.setRotationAxis(Direction.Axis.Y);
+		mixerPole =
+				instancerProvider()
 						.instancer(InstanceTypes.ORIENTED, Models.partial(BlazingPartialModels.BLAZE_MIXER_POLE))
 						.createInstance();
-		this.animate(partialTick);
+		animate(partialTick);
 	}
 
+	@Override
 	public void beginFrame(DynamicVisual.Context ctx) {
-		this.animate(ctx.partialTick());
+		animate(ctx.partialTick());
 	}
 
 	private void animate(float pt) {
-		float renderedHeadOffset = this.mixer.getRenderedHeadOffset(pt);
-		this.transformPole(renderedHeadOffset);
-		this.transformHead(renderedHeadOffset, pt);
+		float renderedHeadOffset = mixer.getRenderedHeadOffset(pt);
+		transformPole(renderedHeadOffset);
+		transformHead(renderedHeadOffset, pt);
 	}
 
 	private void transformHead(float renderedHeadOffset, float pt) {
 		float speed = this.mixer.getRenderedHeadRotationSpeed(pt);
-		this.mixerHead
+		mixerHead
 				.setPosition(this.getVisualPosition())
 				.nudge(0.0F, -renderedHeadOffset, 0.0F)
 				.setRotationalSpeed(speed * 2.0F * 6.0F)
@@ -58,24 +57,24 @@ public class BlazeMixerVisual extends SingleAxisRotatingVisual<BlazeMixerBlockEn
 	}
 
 	private void transformPole(float renderedHeadOffset) {
-		this.mixerPole
-				.position(this.getVisualPosition())
-				.translatePosition(0.0F, -renderedHeadOffset, 0.0F)
-				.setChanged();
+		mixerPole.position(this.getVisualPosition()).translatePosition(0.0F, -renderedHeadOffset, 0.0F).setChanged();
 	}
 
+	@Override
 	public void updateLight(float partialTick) {
 		super.updateLight(partialTick);
 		this.relight(this.pos.below(), this.mixerHead);
 		this.relight(this.mixerPole);
 	}
 
+	@Override
 	protected void _delete() {
 		super._delete();
 		this.mixerHead.delete();
 		this.mixerPole.delete();
 	}
 
+	@Override
 	public void collectCrumblingInstances(Consumer<Instance> consumer) {
 		super.collectCrumblingInstances(consumer);
 		consumer.accept(this.mixerHead);

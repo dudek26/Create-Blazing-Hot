@@ -3,10 +3,10 @@ package com.dudko.blazinghot.content.kinetics.blaze_mixer;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.dudko.blazinghot.registry.BlazingBlockEntityTypes;
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllShapes;
 import com.simibubi.create.content.kinetics.base.KineticBlock;
 import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel;
+import com.simibubi.create.content.processing.basin.BasinBlock;
 import com.simibubi.create.foundation.block.IBE;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -33,7 +33,7 @@ public class BlazeMixerBlock extends KineticBlock implements IBE<BlazeMixerBlock
 
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
-		return !AllBlocks.BASIN.has(worldIn.getBlockState(pos.below()));
+		return !BasinBlock.isBasin(worldIn, pos.below());
 	}
 
 	@Override

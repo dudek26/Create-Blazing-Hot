@@ -83,6 +83,13 @@ public abstract class AbstractModernLamp extends Block implements IBE<ModernLamp
 	@Override
 	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		boolean locked = isLocked(level, pos);
+		if (stack.isEmpty() && !locked) {
+			float pitch = state.getValue(LIT) ? 0.5F : 0.8F;
+			if (!level.isClientSide) BlazingAdvancements.MODERN_LAMP.awardTo(player);
+			level.setBlockAndUpdate(pos, state.cycle(LIT));
+			level.playLocalSound(pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 1.0F, pitch, false);
+			return ItemInteractionResult.SUCCESS;
+		}
 		if (stack.is(AllTags.AllItemTags.WRENCH.tag) && !player.isCrouching()) {
 			Component action = locked ? BlazingLang.LAMP_UNLOCKED_MESSAGE.get() : BlazingLang.LAMP_LOCKED_MESSAGE.get();
 			player.displayClientMessage(action, true);

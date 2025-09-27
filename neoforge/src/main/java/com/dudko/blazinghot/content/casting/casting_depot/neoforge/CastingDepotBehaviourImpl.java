@@ -130,6 +130,11 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 	}
 
 	@Override
+	public void unload() {
+		if (itemHandler != null) blockEntity.invalidateCapabilities();
+	}
+
+	@Override
 	public void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
 		super.write(compound, registries, clientPacket);
 		compound.put("OutputBuffer", this.processingOutputBuffer.serializeNBT(registries));

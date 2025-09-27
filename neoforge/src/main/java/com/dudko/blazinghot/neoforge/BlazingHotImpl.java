@@ -13,16 +13,13 @@ import com.dudko.blazinghot.registry.neoforge.BlazingFluidsImpl;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModLoadingContext;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
 @Mod(BlazingHot.ID)
-@EventBusSubscriber
 public class BlazingHotImpl {
 	static IEventBus modEventBus;
 
@@ -40,12 +37,10 @@ public class BlazingHotImpl {
 		Env.CLIENT.runIfCurrent(() -> () -> BlazingHotClientImpl.initClient(modEventBus));
 	}
 
-	@SubscribeEvent
 	public static void init(final FMLCommonSetupEvent event) {
 		BlazingFluidsImpl.registerFluidInteractions();
 	}
 
-	@SubscribeEvent
 	public static void onRegister(final RegisterEvent event) {
 		BlazingArmInteractionPointTypes.init();
 
