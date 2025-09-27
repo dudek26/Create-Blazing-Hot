@@ -13,6 +13,7 @@ repositories {
     maven { url = "https://maven.createmod.net" } // Create, Ponder, Flywheel
     maven { url = "https://maven.neoforged.net/releases/" } // NeoForge
     maven { url = "https://maven.ithundxr.dev/snapshots" } // Registrate
+    maven { url = "https://maven.blamejared.com/" } // JEI
 }
 
 dependencies {
@@ -35,6 +36,7 @@ dependencies {
     compileOnly("com.google.code.findbugs:jsr305:3.0.2")
     compileOnly("net.neoforged:neoforge:${neoforge_version}")
 
+    modCompileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
 }
 
 publishing {

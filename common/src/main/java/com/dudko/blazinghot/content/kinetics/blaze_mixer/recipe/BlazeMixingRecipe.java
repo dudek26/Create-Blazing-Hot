@@ -1,17 +1,13 @@
 package com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe;
 
-import java.util.List;
-
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.simibubi.create.AllRecipeTypes;
-import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
@@ -38,8 +34,8 @@ public class BlazeMixingRecipe extends BasinRecipe {
 	public BlazeMixingRecipe(ProcessingRecipeParams params) {
 		super(BlazingRecipeTypes.BLAZE_MIXING, params);
 
-		this.mixerFuel = fluidIngredients.getLast(); // temporary solution
-		fluidIngredients.removeLast();
+		this.mixerFuel = fluidIngredients.removeLast(); // temporary solution
+		
 	}
 
 	public FluidIngredient getMixerFuel() {
@@ -55,13 +51,13 @@ public class BlazeMixingRecipe extends BasinRecipe {
 		if (recipe instanceof MixingRecipe mixingRecipe) {
 			for (Ingredient ingredient : mixingRecipe.getIngredients()) {
 				for (ItemStack stack : ingredient.getItems()) {
-					if (stack.isEmpty()) continue;
-
-					List<MixingRecipe> list = PotionMixingRecipes.sortRecipesByItem(level).get(stack.getItem());
-					if (list == null) continue;
-					for (MixingRecipe potionRecipe : list)
-						if (BlazeMixerBlockEntity.doInputsMatch(potionRecipe, mixingRecipe))
-							return BlazingConfigs.server().recipes.blazeBrewingFuelUsage.get();
+//					if (stack.isEmpty()) continue;
+//
+//					List<MixingRecipe> list = PotionMixingRecipes.sortRecipesByItem(level).get(stack.getItem());
+//					if (list == null) continue;
+//					for (MixingRecipe potionRecipe : list)
+//						if (BlazeMixerBlockEntity.doInputsMatch(potionRecipe, mixingRecipe))
+//							return BlazingConfigs.server().recipes.blazeBrewingFuelUsage.get();
 				}
 			}
 		}

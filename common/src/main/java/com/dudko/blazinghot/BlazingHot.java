@@ -20,7 +20,9 @@ import com.simibubi.create.foundation.item.TooltipModifier;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.createmod.catnip.lang.FontHelper;
 import net.createmod.catnip.lang.LangBuilder;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
 
 public class BlazingHot {
 	public static final String ID = "blazinghot";
@@ -36,6 +38,8 @@ public class BlazingHot {
 	static {
 		REGISTRATE.setTooltipModifierFactory(item -> new ItemDescription.Modifier(item,
 				FontHelper.Palette.STANDARD_CREATE).andThen(TooltipModifier.mapNull(KineticStats.create(item))));
+
+		REGISTRATE.defaultCreativeTab((ResourceKey<CreativeModeTab>) null);
 	}
 
 	public static void init() {

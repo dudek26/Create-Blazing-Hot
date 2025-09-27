@@ -1,10 +1,5 @@
 package com.dudko.blazinghot.compat.jei.category;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.jetbrains.annotations.NotNull;
-
 import com.dudko.blazinghot.compat.jei.category.animations.AnimatedBlazeMixer;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecipe;
 import com.dudko.blazinghot.data.lang.BlazingLang;
@@ -17,13 +12,13 @@ import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.neoforged.neoforge.fluids.FluidStack;
 
 public class BlazeMixingCategory extends BasinCategory {
 
@@ -31,7 +26,7 @@ public class BlazeMixingCategory extends BasinCategory {
 	private final AnimatedBlazeBurner heater = new AnimatedBlazeBurner();
 	MixingType type;
 
-	protected enum MixingType {
+	public enum MixingType {
 		MIXING,
 		AUTO_SHAPELESS,
 		AUTO_BREWING
@@ -54,7 +49,7 @@ public class BlazeMixingCategory extends BasinCategory {
 		this.type = type;
 	}
 
-	private FluidIngredient getFuelFromRecipe(BasinRecipe recipe) {
+	protected static FluidIngredient getFuelFromRecipe(MixingType type, BasinRecipe recipe) {
 		if (type == MixingType.AUTO_SHAPELESS) return FluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag(),
 				BlazingConfigs.server().recipes.blazeShapelessFuelUsage.get());
 		if (recipe instanceof BlazeMixingRecipe bmRecipe) return bmRecipe.getMixerFuel();
@@ -67,36 +62,36 @@ public class BlazeMixingCategory extends BasinCategory {
 		}
 	}
 
-	private boolean includeFuel(BasinRecipe recipe) {
-		FluidIngredient fuelFluid = getFuelFromRecipe(recipe);
+	@ExpectPlatform
+	public static boolean includeFuel(MixingType type, BasinRecipe recipe) {
+		throw new AssertionError();
+	}
 
-		List<FluidStack> fuels;
-		if (fuelFluid == FluidIngredient.EMPTY) fuels = new ArrayList<>();
-		else fuels = new ArrayList<>(fuelFluid.getMatchingFluidStacks());
-		return (!fuels.isEmpty() && !fuels.get(0).isEmpty() && fuels.get(0) != null) || (type
-				== MixingType.AUTO_SHAPELESS && BlazingConfigs.server().recipes.blazeShapelessFuelUsage.get() != 0);
+	@ExpectPlatform
+	public static int getFluidResultsSize(BasinRecipe recipe) {
+		throw new AssertionError();
 	}
 
 	@Override
-	public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull BasinRecipe recipe, @NotNull IFocusGroup focuses) {
+	public void setRecipe(IRecipeLayoutBuilder builder, BasinRecipe recipe, IFocusGroup focuses) {
 		super.setRecipe(builder, recipe, focuses);
 
-		FluidIngredient fuelFluid = getFuelFromRecipe(recipe);
+		FluidIngredient fuelFluid = getFuelFromRecipe(type, recipe);
 
 		int vRows = (1 + recipe.getFluidResults().size() + recipe.getRollableResults().size()) / 2;
 
-		if (includeFuel(recipe))
+		if (includeFuel(type, recipe))
 			addFluidSlot(builder, 142, 11 - (19 * (vRows - 1)), fuelFluid).addRichTooltipCallback((v, t) -> t.add(
 					BlazingLang.BLAZE_MIXER_FUEL.get().withStyle(ChatFormatting.DARK_GREEN)));
 
 	}
 
 	@Override
-	public void draw(@NotNull BasinRecipe recipe, @NotNull IRecipeSlotsView iRecipeSlotsView, @NotNull GuiGraphics graphics, double mouseX, double mouseY) {
+	public void draw(BasinRecipe recipe, IRecipeSlotsView iRecipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
 		super.draw(recipe, iRecipeSlotsView, graphics, mouseX, mouseY);
 
-		if (includeFuel(recipe)) {
-			int vRows = (1 + recipe.getFluidResults().size() + recipe.getRollableResults().size()) / 2;
+		if (includeFuel(type, recipe)) {
+			int vRows = (1 + getFluidResultsSize(recipe) + recipe.getRollableResults().size()) / 2;
 			BlazingGuiTextures.JEI_SHORT_ARROW_LEFT.render(graphics, 124, 16 - 19 * (vRows - 1));
 		}
 

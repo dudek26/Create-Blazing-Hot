@@ -1,4 +1,4 @@
-//package com.dudko.blazinghot.compat.jei.category.animations;
+package com.dudko.blazinghot.compat.jei.category.animations;
 
 import java.util.List;
 
@@ -12,16 +12,16 @@ import com.simibubi.create.compat.jei.category.animations.AnimatedKinetics;
 
 import net.createmod.catnip.animation.AnimationTickHolder;
 import net.createmod.catnip.gui.UIRenderHelper;
-import net.createmod.catnip.platform.NeoForgeCatnipServices;
+import net.createmod.catnip.platform.CatnipServices;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.util.Mth;
-import net.neoforged.neoforge.fluids.FluidStack;
+import net.minecraft.world.level.material.FluidState;
 
 public class AnimatedCastingSpout extends AnimatedKinetics {
-	private List<FluidStack> fluids;
+	private List<FluidState> fluids;
 
-	public AnimatedCastingSpout withFluids(List<FluidStack> fluids) {
+	public AnimatedCastingSpout withFluids(List<FluidState> fluids) {
 		this.fluids = fluids;
 		return this;
 	}
@@ -60,8 +60,8 @@ public class AnimatedCastingSpout extends AnimatedKinetics {
 		matrixStack.scale(16, 16, 16);
 		float from = 3f / 16f;
 		float to = 17f / 16f;
-		FluidStack fluidStack = fluids.getFirst();
-		NeoForgeCatnipServices.FLUID_RENDERER.renderFluidBox(fluidStack,
+		FluidState fluidStack = fluids.getFirst();
+		CatnipServices.FLUID_RENDERER.renderFluidBox(fluidStack,
 				from,
 				from,
 				from,
@@ -82,7 +82,7 @@ public class AnimatedCastingSpout extends AnimatedKinetics {
 		matrixStack.translate(-0.5f, 0, -0.5f);
 		from = -width / 2 + 0.5f;
 		to = width / 2 + 0.5f;
-		NeoForgeCatnipServices.FLUID_RENDERER.renderFluidBox(fluidStack,
+		CatnipServices.FLUID_RENDERER.renderFluidBox(fluidStack,
 				from,
 				0,
 				from,

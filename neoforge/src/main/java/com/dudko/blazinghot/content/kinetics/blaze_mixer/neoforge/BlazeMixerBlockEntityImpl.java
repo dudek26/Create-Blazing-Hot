@@ -156,8 +156,13 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 								this::matchStaticFilters))
 							if (matchBasinRecipe(r.value())) list.add(r);
 
-						list.sort((r1, r2) -> r2.value().getIngredients().size() - r1.value().getIngredients().size());
-						recipeSpeed = multipliedRecipeSpeed(recipeSpeed, list.getFirst());
+						if (!list.isEmpty()) {
+							list.sort((r1, r2) -> r2.value().getIngredients().size() - r1
+									.value()
+									.getIngredients()
+									.size());
+							recipeSpeed = multipliedRecipeSpeed(recipeSpeed, list.getFirst());
+						}
 
 						blazeMixing = true;
 						fuelCost = calculatedCost;
