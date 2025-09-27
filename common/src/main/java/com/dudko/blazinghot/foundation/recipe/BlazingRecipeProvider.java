@@ -6,6 +6,8 @@ import java.util.concurrent.CompletableFuture;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.dudko.blazinghot.data.recipe.BlazeMixingRecipeGen;
+import com.dudko.blazinghot.data.recipe.CastingRecipeGen;
 import com.dudko.blazinghot.data.recipe.CompactingRecipeGen;
 import com.dudko.blazinghot.data.recipe.CrushingRecipeGen;
 import com.dudko.blazinghot.data.recipe.CuttingRecipeGen;
@@ -50,6 +52,8 @@ public final class BlazingRecipeProvider extends RecipeProvider {
 		GENERATORS.add(new FillingRecipeGen(output, registries));
 		GENERATORS.add(new HauntingRecipeGen(output, registries));
 		GENERATORS.add(new ItemApplicationRecipeGen(output, registries));
+		GENERATORS.add(new BlazeMixingRecipeGen(output, registries));
+		GENERATORS.add(new CastingRecipeGen(output, registries));
 	}
 
 

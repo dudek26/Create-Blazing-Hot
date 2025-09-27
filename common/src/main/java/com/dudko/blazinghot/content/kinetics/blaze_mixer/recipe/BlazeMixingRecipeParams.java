@@ -42,13 +42,13 @@ public class BlazeMixingRecipeParams extends ProcessingRecipeParams {
 	@Override
 	protected void encode(RegistryFriendlyByteBuf buffer) {
 		super.encode(buffer);
-		FluidIngredient.write(buffer, mixerFuel);
+//		FluidIngredient.write(buffer, mixerFuel);
 	}
 
 	@Override
 	protected void decode(RegistryFriendlyByteBuf buffer) {
 		super.decode(buffer);
-		mixerFuel = FluidIngredient.read(buffer);
+//		mixerFuel = FluidIngredient.read(buffer);
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.compat.jei.category;
 
+import com.dudko.blazinghot.compat.jei.BlazingJEIHelper;
 import com.dudko.blazinghot.compat.jei.category.animations.AnimatedBlazeMixer;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecipe;
 import com.dudko.blazinghot.data.lang.BlazingLang;
@@ -16,6 +17,7 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -80,9 +82,11 @@ public class BlazeMixingCategory extends BasinCategory {
 
 		int vRows = (1 + recipe.getFluidResults().size() + recipe.getRollableResults().size()) / 2;
 
-		if (includeFuel(type, recipe))
-			addFluidSlot(builder, 142, 11 - (19 * (vRows - 1)), fuelFluid).addRichTooltipCallback((v, t) -> t.add(
-					BlazingLang.BLAZE_MIXER_FUEL.get().withStyle(ChatFormatting.DARK_GREEN)));
+		if (includeFuel(type, recipe)) BlazingJEIHelper
+				.addFluidSlot(builder, RecipeIngredientRole.INPUT, 142, 11 - (19 * (vRows - 1)), fuelFluid)
+				.addRichTooltipCallback((v, t) -> t.add(BlazingLang.BLAZE_MIXER_FUEL
+						.get()
+						.withStyle(ChatFormatting.DARK_GREEN)));
 
 	}
 

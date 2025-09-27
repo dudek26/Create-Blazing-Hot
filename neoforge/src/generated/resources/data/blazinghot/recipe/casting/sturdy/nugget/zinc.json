@@ -1,0 +1,21 @@
+{
+  "type": "create:casting",
+  "cooling_duration": 36,
+  "ingredients": [
+    {
+      "item": "blazinghot:sturdy_nugget_mold"
+    },
+    {
+      "type": "fluid_tag",
+      "amount": 10,
+      "fluid_tag": "c:molten_zinc"
+    }
+  ],
+  "keep_mold": true,
+  "processing_time": 12,
+  "results": [
+    {
+      "id": "create:zinc_nugget"
+    }
+  ]
+}

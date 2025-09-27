@@ -2,17 +2,14 @@ package com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import org.jetbrains.annotations.Nullable;
-
-import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
-import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
@@ -34,8 +31,8 @@ public class BlazeMixingRecipe extends BasinRecipe {
 	public BlazeMixingRecipe(ProcessingRecipeParams params) {
 		super(BlazingRecipeTypes.BLAZE_MIXING, params);
 
-		this.mixerFuel = fluidIngredients.removeLast(); // temporary solution
-		
+		if (fluidIngredients.isEmpty()) this.mixerFuel = FluidIngredient.EMPTY;
+		else this.mixerFuel = fluidIngredients.removeLast(); // temporary solution
 	}
 
 	public FluidIngredient getMixerFuel() {
@@ -45,12 +42,11 @@ public class BlazeMixingRecipe extends BasinRecipe {
 	/**
 	 * @apiNote Already platformed.
 	 */
-	public static long getFuelCost(@Nullable Recipe<?> recipe, Level level) {
-		if (recipe == null) return MultiAmount.BUCKET.get() + 1;
-
+	public static long getFuelCost(Recipe<?> recipe, Level level) {
 		if (recipe instanceof MixingRecipe mixingRecipe) {
 			for (Ingredient ingredient : mixingRecipe.getIngredients()) {
 				for (ItemStack stack : ingredient.getItems()) {
+					// TODO fix StackOverflow
 //					if (stack.isEmpty()) continue;
 //
 //					List<MixingRecipe> list = PotionMixingRecipes.sortRecipesByItem(level).get(stack.getItem());
@@ -62,8 +58,8 @@ public class BlazeMixingRecipe extends BasinRecipe {
 			}
 		}
 
-		else if (recipe.getType() == AllRecipeTypes.MIXING.getType())
-			return durationToFuelCost(((StandardProcessingRecipe<?>) recipe).getProcessingDuration());
+		if (recipe.getType() == AllRecipeTypes.MIXING.getType())
+			return durationToFuelCost(((ProcessingRecipe<?, ?>) recipe).getProcessingDuration());
 
 		else if ((recipe instanceof CraftingRecipe
 				&& !(recipe instanceof ShapedRecipe)

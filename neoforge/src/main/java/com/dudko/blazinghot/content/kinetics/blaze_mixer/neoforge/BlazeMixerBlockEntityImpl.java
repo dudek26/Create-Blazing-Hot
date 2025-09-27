@@ -128,7 +128,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 		}
 
 		float speed = Math.abs(getSpeed());
-		if (running && level != null) {
+		if (running && level != null && currentRecipe != null) {
 			if (level.isClientSide && runningTicks == 20) renderParticles();
 
 			if ((!level.isClientSide || isVirtual()) && runningTicks == 20) {

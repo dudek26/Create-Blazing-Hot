@@ -39,22 +39,20 @@ public class BlazeMixingRecipeGen extends BlazingRecipeGen<ProcessingRecipeParam
 			NETHER_LAVA =
 			create("nether_lava",
 					b -> b
+							.output(BuiltInRegistries.FLUID.get(BlazingHot.asResource("nether_lava")),
+									MultiAmount.fromBucketFraction(1, 10))
 							.requireMultiple(netherEssence(), 2)
 							.require(lava(), MultiAmount.fromBucketFraction(1, 10))
-							.requiresHeat(HeatCondition.SUPERHEATED)
-							.output(BuiltInRegistries.FLUID.get(BlazingHot.asResource("nether_lava")),
-									MultiAmount.fromBucketFraction(1, 10))),
+							.requiresHeat(HeatCondition.SUPERHEATED)),
 			MOLTEN_BLAZE_GOLD =
 					create("molten_blaze_gold",
 							b -> b
+									.output(BlazingMetals.BLAZE_GOLD.getFluid(), MultiAmount.INGOT)
 									.requireMultiple(netherEssence(), 2)
-									.requireFuel(fuel(), MultiAmount.fromBucketFraction(1, 20))
+									.mixerFuel(fuel(), MultiAmount.fromBucketFraction(1, 20))
 									.require(moltenGold(), MultiAmount.INGOT)
 									.requiresHeat(HeatCondition.SUPERHEATED)
-									.duration(200)
-									.output(BlazingMetals.BLAZE_GOLD.getFluid(), MultiAmount.INGOT)),
-			STURDY_MOLDS_MELTING =
-					moldMelting();
+									.duration(200)), STURDY_MOLDS_MELTING = moldMelting();
 
 	@Override
 	protected IRecipeTypeInfo getRecipeType() {
@@ -71,12 +69,12 @@ public class BlazeMixingRecipeGen extends BlazingRecipeGen<ProcessingRecipeParam
 			if (!form.flags.contains(BlazingForm.Flag.MELTING)) continue;
 			create(form.getMeltingRecipeName(metal),
 					b -> b
+							.output(metal.getFluid(), form.amount)
 							.withConditions(form.getMeltingLoadConditions(metal))
-							.requireFuel(fuel(), form.fuelCost)
+							.mixerFuel(fuel(), form.fuelCost)
 							.require(form.getMeltingIngredient(metal))
 							.duration(form.meltingTime)
-							.requiresHeat(HeatCondition.SUPERHEATED)
-							.output(metal.getFluid(), form.amount));
+							.requiresHeat(HeatCondition.SUPERHEATED));
 		}
 	}
 
@@ -84,10 +82,10 @@ public class BlazeMixingRecipeGen extends BlazingRecipeGen<ProcessingRecipeParam
 		BlazingForm form = BlazingForms.STURDY_MOLD;
 		return create("melting/sturdy_molds",
 				b -> b
-						.requireFuel(fuel(), form.fuelCost)
+						.output(BlazingMetals.STURDY_ALLOY.getFluid(), form.amount)
+						.mixerFuel(fuel(), form.fuelCost)
 						.require(BlazingTags.Items.STURDY_MOLDS.tag())
 						.duration(form.meltingTime)
-						.requiresHeat(HeatCondition.SUPERHEATED)
-						.output(BlazingMetals.STURDY_ALLOY.getFluid(), form.amount));
+						.requiresHeat(HeatCondition.SUPERHEATED));
 	}
 }

@@ -28,7 +28,6 @@ import net.minecraft.world.level.material.Fluid;
  */
 public interface IBlazingRecipeBuilder<P extends ProcessingRecipeParams, R extends ProcessingRecipe<?, P>, S extends IBlazingRecipeBuilder<P, R, S>> {
 
-
 	R build();
 
 	S require(Ingredient ingredient);

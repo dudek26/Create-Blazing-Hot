@@ -16,7 +16,7 @@ import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
@@ -61,7 +61,7 @@ public class BlazingMetal {
 		return BlazingTags.fluidTag(BlazingTags.Namespace.COMMON.asResource(getMoltenName()));
 	}
 
-	public ItemLike getBucket() {
+	public Item getBucket() {
 		return getFluid().getBucket();
 	}
 

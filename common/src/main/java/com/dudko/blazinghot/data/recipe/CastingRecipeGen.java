@@ -39,7 +39,7 @@ public class CastingRecipeGen extends BlazingRecipeGen<CastingRecipeParams, Cast
 
 	@Override
 	protected CastingRecipeBuilder getBuilder(ResourceLocation id) {
-		return getRecipeType().getSerializer();
+		return new CastingRecipeBuilder(CastingRecipe::new, id);
 	}
 
 	private void mold(Molds.Mold mold) {

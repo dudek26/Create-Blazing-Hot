@@ -1,0 +1,20 @@
+{
+  "type": "create:casting",
+  "cooling_duration": 36,
+  "ingredients": [
+    {
+      "item": "blazinghot:porcelain_nugget_mold"
+    },
+    {
+      "type": "fluid_tag",
+      "amount": 10,
+      "fluid_tag": "c:molten_iron"
+    }
+  ],
+  "processing_time": 12,
+  "results": [
+    {
+      "id": "minecraft:iron_nugget"
+    }
+  ]
+}

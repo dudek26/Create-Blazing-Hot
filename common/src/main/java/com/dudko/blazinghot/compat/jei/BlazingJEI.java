@@ -2,8 +2,6 @@ package com.dudko.blazinghot.compat.jei;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -20,7 +18,6 @@ import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
-import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.utility.RecipeGenericsUtil;
 
 import mezz.jei.api.IModPlugin;
@@ -30,15 +27,11 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeInput;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.block.Blocks;
 
@@ -130,7 +123,7 @@ public abstract class BlazingJEI implements IModPlugin {
 
 		@Override
 		public CreateRecipeCategory<T> build(String name, CreateRecipeCategory.Factory<T> factory) {
-			return super.build(BlazingHot.asResource(name), factory);
+			return build(BlazingHot.asResource(name), factory);
 		}
 
 		public CreateRecipeCategory<T> build(ResourceLocation id, CreateRecipeCategory.Factory<T> factory) {
@@ -138,49 +131,6 @@ public abstract class BlazingJEI implements IModPlugin {
 			allCategories.add(category);
 			return category;
 		}
-	}
-
-	public static void consumeAllRecipes(Consumer<? super RecipeHolder<?>> consumer) {
-		assert Minecraft.getInstance().level != null;
-		Minecraft.getInstance().getConnection().getRecipeManager().getRecipes().forEach(consumer);
-	}
-
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public static void consumeTypedRecipes(Consumer<RecipeHolder<?>> consumer, RecipeType<?> type) {
-		assert Minecraft.getInstance().getConnection() != null;
-		List<? extends RecipeHolder<?>>
-				map =
-				Minecraft.getInstance().getConnection().getRecipeManager().getAllRecipesFor((RecipeType) type);
-		if (!map.isEmpty()) map.forEach(consumer);
-	}
-
-	public static List<RecipeHolder<?>> getTypedRecipes(RecipeType<?> type) {
-		List<RecipeHolder<?>> recipes = new ArrayList<>();
-		consumeTypedRecipes(recipes::add, type);
-		return recipes;
-	}
-
-	public static List<RecipeHolder<?>> getTypedRecipesExcluding(RecipeType<?> type, Predicate<RecipeHolder<?>> exclusionPred) {
-		List<RecipeHolder<?>> recipes = getTypedRecipes(type);
-		recipes.removeIf(exclusionPred);
-		return recipes;
-	}
-
-	public static boolean doInputsMatch(Recipe<?> recipe1, Recipe<?> recipe2) {
-		if (recipe1.getIngredients().isEmpty() || recipe2.getIngredients().isEmpty()) {
-			return false;
-		}
-		ItemStack[] matchingStacks = recipe1.getIngredients().getFirst().getItems();
-		if (matchingStacks.length == 0) {
-			return false;
-		}
-		return recipe2.getIngredients().getFirst().test(matchingStacks[0]);
-	}
-
-	public static boolean doOutputsMatch(Recipe<?> recipe1, Recipe<?> recipe2) {
-		assert Minecraft.getInstance().level != null;
-		RegistryAccess registryAccess = Minecraft.getInstance().level.registryAccess();
-		return ItemHelper.sameItem(recipe1.getResultItem(registryAccess), recipe2.getResultItem(registryAccess));
 	}
 
 	@Override

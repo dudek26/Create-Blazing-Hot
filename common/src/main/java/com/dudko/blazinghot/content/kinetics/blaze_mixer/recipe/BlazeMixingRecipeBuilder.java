@@ -31,11 +31,6 @@ public class BlazeMixingRecipeBuilder extends BlazingRecipeBuilder<ProcessingRec
 		return new BlazeMixingRecipeParams();
 	}
 
-	public BlazeMixingRecipeBuilder mixerFuel(FluidIngredient mixerFuel) {
-		this.mixerFuel = mixerFuel;
-		return self();
-	}
-
 	@Override
 	public BlazeMixingRecipeBuilder self() {
 		return this;
@@ -47,17 +42,17 @@ public class BlazeMixingRecipeBuilder extends BlazingRecipeBuilder<ProcessingRec
 		return factory.create(createParams());
 	}
 
-	public BlazeMixingRecipeBuilder requireFuel(FluidIngredient mixerFuel) {
+	public BlazeMixingRecipeBuilder mixerFuel(FluidIngredient mixerFuel) {
 		this.mixerFuel = mixerFuel;
 		return self();
 	}
 
-	public BlazeMixingRecipeBuilder requireFuel(Fluid fluid, MultiAmount amount) {
-		return requireFuel(MultiFluidIngredient.fromFluid(BuiltInRegistries.FLUID.wrapAsHolder(fluid), amount));
+	public BlazeMixingRecipeBuilder mixerFuel(Fluid fluid, MultiAmount amount) {
+		return mixerFuel(MultiFluidIngredient.fromFluid(BuiltInRegistries.FLUID.wrapAsHolder(fluid), amount));
 	}
 
-	public BlazeMixingRecipeBuilder requireFuel(TagKey<Fluid> fluidTag, MultiAmount amount) {
-		return requireFuel(MultiFluidIngredient.fromTag(fluidTag, amount));
+	public BlazeMixingRecipeBuilder mixerFuel(TagKey<Fluid> fluidTag, MultiAmount amount) {
+		return mixerFuel(MultiFluidIngredient.fromTag(fluidTag, amount));
 	}
 
 }

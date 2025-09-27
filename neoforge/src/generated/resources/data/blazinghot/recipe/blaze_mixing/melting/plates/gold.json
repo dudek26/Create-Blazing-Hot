@@ -1,0 +1,14 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:plates/gold"
+      }
+    }
+  ],
+  "type": "create:blaze_mixing",
+  "ingredients": [],
+  "results": []
+}

@@ -15,7 +15,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 
 public abstract class BlazingStandardRecipeGen<R extends StandardProcessingRecipe<?>> extends StandardProcessingRecipeGen<R> {
-
+	
 	public BlazingStandardRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
 		super(output, registries, BlazingHot.ID);
 	}

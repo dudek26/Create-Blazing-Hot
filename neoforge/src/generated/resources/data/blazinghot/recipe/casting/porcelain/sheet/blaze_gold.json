@@ -1,0 +1,20 @@
+{
+  "type": "create:casting",
+  "cooling_duration": 150,
+  "ingredients": [
+    {
+      "item": "blazinghot:porcelain_sheet_mold"
+    },
+    {
+      "type": "fluid_tag",
+      "amount": 90,
+      "fluid_tag": "c:molten_blaze_gold"
+    }
+  ],
+  "processing_time": 50,
+  "results": [
+    {
+      "id": "blazinghot:blaze_gold_sheet"
+    }
+  ]
+}

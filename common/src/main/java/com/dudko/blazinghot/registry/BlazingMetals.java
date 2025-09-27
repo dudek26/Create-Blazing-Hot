@@ -14,7 +14,7 @@ import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 
@@ -140,7 +140,7 @@ public class BlazingMetals {
 	/**
 	 * @see BlazingAdvancements#ALL_MOLTEN_METALS
 	 */
-	public static Set<ItemLike> allBuckets(boolean includeCompat) {
+	public static Set<Item> allBuckets(boolean includeCompat) {
 		return ALL
 				.stream()
 				.filter(m -> m.mods.getFirst().alwaysIncluded || includeCompat)

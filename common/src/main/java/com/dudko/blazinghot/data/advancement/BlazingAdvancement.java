@@ -210,11 +210,11 @@ public class BlazingAdvancement {
 					.build()));
 		}
 
-		Builder whenItemsCollected(ItemLike... items) {
+		Builder whenItemsCollected(Item... items) {
 			return whenItemsCollected(List.of(items));
 		}
 
-		Builder whenItemsCollected(Collection<ItemLike> items) {
+		Builder whenItemsCollected(Collection<Item> items) {
 			for (ItemLike i : items) {
 				whenItemCollected(i);
 			}

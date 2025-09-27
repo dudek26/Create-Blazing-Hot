@@ -2,6 +2,7 @@ package com.dudko.blazinghot.compat.jei.category;
 
 import java.util.List;
 
+import com.dudko.blazinghot.compat.jei.BlazingJEIHelper;
 import com.dudko.blazinghot.compat.jei.category.animations.AnimatedCastingSpout;
 import com.dudko.blazinghot.content.casting.casting_depot.recipe.CastingRecipe;
 import com.dudko.blazinghot.data.lang.BlazingLang;
@@ -39,7 +40,7 @@ public class CastingCategory extends CreateRecipeCategory<CastingRecipe> {
 				.get()
 				.withStyle(ChatFormatting.RED)));
 
-		addFluidSlot(builder, 27, 32, recipe.getRequiredFluid());
+		BlazingJEIHelper.addFluidSlot(builder, RecipeIngredientRole.INPUT, 27, 32, recipe.getRequiredFluid());
 
 		builder
 				.addSlot(RecipeIngredientRole.OUTPUT, 132, 51)
