@@ -360,21 +360,22 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 	}
 
 	public static boolean doFluidInputsMatch(ProcessingRecipe<?, ?> a, ProcessingRecipe<?, ?> b) {
-		if (!a.getFluidIngredients().isEmpty() && !b.getFluidIngredients().isEmpty()) {
-			List<List<FluidStack>>
-					allItems =
-					a.getFluidIngredients().stream().map(FluidIngredient::getMatchingFluidStacks).toList();
-			for (List<FluidStack> matchingStacks : allItems) {
-				boolean matched = false;
-				if (!matchingStacks.isEmpty()) {
-					matched = b.getFluidIngredients().stream().anyMatch(i -> i.test(matchingStacks.getFirst()));
-				}
-				if (matched) continue;
-				return false;
-			}
-			return true;
-		}
-		else return !a.getIngredients().isEmpty() && !b.getIngredients().isEmpty();
+		return true; // todo: fix stackoverflow
+//		if (!a.getFluidIngredients().isEmpty() && !b.getFluidIngredients().isEmpty()) {
+//			List<List<FluidStack>>
+//					allItems =
+//					a.getFluidIngredients().stream().map(FluidIngredient::getMatchingFluidStacks).toList();
+//			for (List<FluidStack> matchingStacks : allItems) {
+//				boolean matched = false;
+//				if (!matchingStacks.isEmpty()) {
+//					matched = b.getFluidIngredients().stream().anyMatch(i -> i.test(matchingStacks.getFirst()));
+//				}
+//				if (matched) continue;
+//				return false;
+//			}
+//			return true;
+//		}
+//		else return !a.getIngredients().isEmpty() && !b.getIngredients().isEmpty();
 	}
 
 	public static BlazeMixerBlockEntity of(BlockEntityType<?> type, BlockPos pos, BlockState state) {

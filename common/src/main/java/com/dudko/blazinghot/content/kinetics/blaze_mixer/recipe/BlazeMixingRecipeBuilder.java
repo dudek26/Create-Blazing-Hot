@@ -11,6 +11,7 @@ import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
@@ -23,7 +24,7 @@ public class BlazeMixingRecipeBuilder extends BlazingRecipeBuilder<ProcessingRec
 
 	public BlazeMixingRecipeBuilder(ProcessingRecipe.Factory<ProcessingRecipeParams, BlazeMixingRecipe> factory, ResourceLocation recipeId) {
 		super(factory, recipeId);
-		mixerFuel = FluidIngredient.EMPTY;
+		mixerFuel = BlazeMixingRecipe.emptyMixerFuel();
 	}
 
 	@Override
@@ -37,9 +38,9 @@ public class BlazeMixingRecipeBuilder extends BlazingRecipeBuilder<ProcessingRec
 	}
 
 	@Override
-	public BlazeMixingRecipe build() {
-		require(mixerFuel); // temporary solution to params issue
-		return factory.create(createParams());
+	public void build(RecipeOutput consumer) {
+		require(mixerFuel);
+		super.build(consumer);
 	}
 
 	public BlazeMixingRecipeBuilder mixerFuel(FluidIngredient mixerFuel) {

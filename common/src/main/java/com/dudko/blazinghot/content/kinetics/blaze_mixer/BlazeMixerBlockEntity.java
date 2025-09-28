@@ -241,7 +241,8 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 	protected abstract <I extends RecipeInput> boolean matchBasinRecipe(Recipe<I> recipe);
 
 	public static boolean doInputsMatch(StandardProcessingRecipe<?> a, StandardProcessingRecipe<?> b) {
-		return doItemInputsMatch(a, b) && doFluidInputsMatch(a, b);
+//		return doItemInputsMatch(a, b) && doFluidInputsMatch(a, b);
+		return doItemInputsMatch(a, b);
 	}
 
 	public static boolean doItemInputsMatch(StandardProcessingRecipe<?> a, StandardProcessingRecipe<?> b) {

@@ -1,4 +1,4 @@
-package com.dudko.blazinghot.data.recipe;
+package com.dudko.blazinghot.foundation.recipe;
 
 import static com.dudko.blazinghot.registry.BlazingForms.INGOT;
 import static com.dudko.blazinghot.registry.BlazingForms.NUGGET;

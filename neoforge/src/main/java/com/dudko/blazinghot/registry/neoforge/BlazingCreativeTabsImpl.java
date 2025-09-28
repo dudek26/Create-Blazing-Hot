@@ -15,7 +15,6 @@ import com.dudko.blazinghot.foundation.multiloader.Env;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingCreativeTabs;
 import com.dudko.blazinghot.registry.BlazingItems;
-import com.dudko.blazinghot.registry.BlazingMetals;
 import com.simibubi.create.AllCreativeModeTabs;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.simibubi.create.foundation.data.CreateRegistrate;
@@ -213,7 +212,7 @@ public class BlazingCreativeTabsImpl extends BlazingCreativeTabs {
 			items.addAll(collectBlocks(exclusionPredicate));
 			if (addItems) {
 				items.addAll(collectItems(exclusionPredicate, is3d, false));
-				items.addAll(BlazingMetals.allBuckets(true));
+				REGISTRATE.getAll(Registries.FLUID).forEach(entry -> items.add(entry.get().getBucket()));
 			}
 
 			applyOrderings(items, orderings);

@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "blazinghot:molten_copper_bucket"
+            "items": "blazinghot:molten_zinc_bucket"
           }
         ]
       },
@@ -15,7 +15,7 @@
       "conditions": {
         "items": [
           {
-            "items": "blazinghot:molten_iron_bucket"
+            "items": "blazinghot:molten_andesite_bucket"
           }
         ]
       },
@@ -25,7 +25,7 @@
       "conditions": {
         "items": [
           {
-            "items": "blazinghot:molten_blaze_gold_bucket"
+            "items": "blazinghot:molten_copper_bucket"
           }
         ]
       },
@@ -35,7 +35,7 @@
       "conditions": {
         "items": [
           {
-            "items": "blazinghot:molten_zinc_bucket"
+            "items": "blazinghot:molten_brass_bucket"
           }
         ]
       },
@@ -45,7 +45,7 @@
       "conditions": {
         "items": [
           {
-            "items": "blazinghot:molten_netherite_bucket"
+            "items": "blazinghot:molten_sturdy_alloy_bucket"
           }
         ]
       },
@@ -55,7 +55,7 @@
       "conditions": {
         "items": [
           {
-            "items": "blazinghot:molten_brass_bucket"
+            "items": "blazinghot:molten_netherite_bucket"
           }
         ]
       },
@@ -65,7 +65,7 @@
       "conditions": {
         "items": [
           {
-            "items": "blazinghot:molten_andesite_bucket"
+            "items": "blazinghot:molten_gold_bucket"
           }
         ]
       },
@@ -75,7 +75,7 @@
       "conditions": {
         "items": [
           {
-            "items": "blazinghot:molten_sturdy_alloy_bucket"
+            "items": "blazinghot:molten_ancient_debris_bucket"
           }
         ]
       },
@@ -85,7 +85,7 @@
       "conditions": {
         "items": [
           {
-            "items": "blazinghot:molten_gold_bucket"
+            "items": "blazinghot:molten_iron_bucket"
           }
         ]
       },
@@ -95,7 +95,7 @@
       "conditions": {
         "items": [
           {
-            "items": "blazinghot:molten_ancient_debris_bucket"
+            "items": "blazinghot:molten_blaze_gold_bucket"
           }
         ]
       },

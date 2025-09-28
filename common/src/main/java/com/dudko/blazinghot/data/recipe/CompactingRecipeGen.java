@@ -1,8 +1,8 @@
 package com.dudko.blazinghot.data.recipe;
 
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.ironIngot;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherCompound;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.powderedObsidian;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.ironIngot;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.netherCompound;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.powderedObsidian;
 
 import java.util.concurrent.CompletableFuture;
 

@@ -1,11 +1,11 @@
 package com.dudko.blazinghot.data.recipe;
 
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.blazeApple;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.brassApple;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.copperAppple;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.goldenApple;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.ironApple;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.zincApple;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.blazeApple;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.brassApple;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.copperAppple;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.goldenApple;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.ironApple;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.zincApple;
 
 import java.util.concurrent.CompletableFuture;
 

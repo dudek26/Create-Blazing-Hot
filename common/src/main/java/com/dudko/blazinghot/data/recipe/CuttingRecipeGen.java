@@ -1,6 +1,6 @@
 package com.dudko.blazinghot.data.recipe;
 
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.blazeGoldSheet;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.blazeGoldSheet;
 
 import java.util.concurrent.CompletableFuture;
 

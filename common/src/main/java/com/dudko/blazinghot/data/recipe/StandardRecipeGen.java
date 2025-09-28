@@ -1,16 +1,16 @@
 package com.dudko.blazinghot.data.recipe;
 
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.apple;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.blazeGoldRod;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.blazeGoldSheet;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.brassIngot;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.carrot;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.coal;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.electronTube;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.feather;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.glowstone;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.sturdyAlloy;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.sturdyCasing;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.apple;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.blazeGoldRod;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.blazeGoldSheet;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.brassIngot;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.carrot;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.coal;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.electronTube;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.feather;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.glowstone;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.sturdyAlloy;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.sturdyCasing;
 import static com.dudko.blazinghot.registry.BlazingBlocks.BLAZE_GOLD_BLOCK;
 import static com.dudko.blazinghot.registry.BlazingForms.INGOT;
 import static com.dudko.blazinghot.registry.BlazingForms.NUGGET;
@@ -23,6 +23,7 @@ import java.util.function.UnaryOperator;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.metal.BlazingMetal;
+import com.dudko.blazinghot.foundation.recipe.BlazingIngredients;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingItems;
 import com.dudko.blazinghot.registry.BlazingMetals;

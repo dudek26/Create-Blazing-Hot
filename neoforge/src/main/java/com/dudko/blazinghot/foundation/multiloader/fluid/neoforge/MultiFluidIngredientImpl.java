@@ -7,10 +7,13 @@ import com.simibubi.create.foundation.fluid.FluidIngredient;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
 
+/**
+ * @see com.dudko.blazinghot.foundation.multiloader.fluid.MultiFluidIngredient
+ */
 public class MultiFluidIngredientImpl {
 
 	public static FluidIngredient fromStack(MultiFluidStack fluidStack) {
-		return FluidIngredient.fromFluid(fluidStack.fluid().value(), (int) fluidStack.amount().get());
+		return FluidIngredient.fromFluidStack(MultiFluidStackNeoForge.toNeoForgeStack(fluidStack));
 	}
 
 	public static FluidIngredient fromTag(TagKey<Fluid> tag, MultiAmount amount) {

@@ -1,5 +1,21 @@
 {
   "type": "create:blaze_mixing",
-  "ingredients": [],
-  "results": []
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "item": "minecraft:ancient_debris"
+    },
+    {
+      "type": "fluid_tag",
+      "amount": 66,
+      "fluid_tag": "blazinghot:blaze_mixer_fuel"
+    }
+  ],
+  "processing_time": 300,
+  "results": [
+    {
+      "amount": 120,
+      "id": "blazinghot:molten_ancient_debris"
+    }
+  ]
 }

@@ -1,12 +1,12 @@
 package com.dudko.blazinghot.data.recipe;
 
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.apple;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.carrot;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.lava;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.melon;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.moltenGold;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherDough;
 import static com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount.NUGGET_COVER;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.apple;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.carrot;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.lava;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.melon;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.moltenGold;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.netherDough;
 
 import java.util.concurrent.CompletableFuture;
 

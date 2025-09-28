@@ -1,5 +1,33 @@
 {
   "type": "create:blaze_mixing",
-  "ingredients": [],
-  "results": []
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "item": "blazinghot:nether_essence"
+    },
+    {
+      "item": "blazinghot:nether_essence"
+    },
+    {
+      "type": "fluid_stack",
+      "amount": 100,
+      "fluid": "minecraft:lava"
+    },
+    {
+      "type": "fluid_stack",
+      "amount": 1,
+      "components": {
+        "minecraft:custom_data": {
+          "blazinghot:placeholder_fluid": 1
+        }
+      },
+      "fluid": "minecraft:water"
+    }
+  ],
+  "results": [
+    {
+      "amount": 100,
+      "id": "blazinghot:nether_lava"
+    }
+  ]
 }

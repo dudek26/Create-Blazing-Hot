@@ -1,5 +1,29 @@
 {
   "type": "create:blaze_mixing",
-  "ingredients": [],
-  "results": []
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "item": "blazinghot:nether_essence"
+    },
+    {
+      "item": "blazinghot:nether_essence"
+    },
+    {
+      "type": "fluid_tag",
+      "amount": 90,
+      "fluid_tag": "c:molten_gold"
+    },
+    {
+      "type": "fluid_tag",
+      "amount": 50,
+      "fluid_tag": "blazinghot:blaze_mixer_fuel"
+    }
+  ],
+  "processing_time": 200,
+  "results": [
+    {
+      "amount": 90,
+      "id": "blazinghot:molten_blaze_gold"
+    }
+  ]
 }

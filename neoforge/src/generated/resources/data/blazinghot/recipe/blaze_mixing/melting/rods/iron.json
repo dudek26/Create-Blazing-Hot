@@ -9,6 +9,22 @@
     }
   ],
   "type": "create:blaze_mixing",
-  "ingredients": [],
-  "results": []
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "c:rods/iron"
+    },
+    {
+      "type": "fluid_tag",
+      "amount": 25,
+      "fluid_tag": "blazinghot:blaze_mixer_fuel"
+    }
+  ],
+  "processing_time": 125,
+  "results": [
+    {
+      "amount": 45,
+      "id": "blazinghot:molten_iron"
+    }
+  ]
 }

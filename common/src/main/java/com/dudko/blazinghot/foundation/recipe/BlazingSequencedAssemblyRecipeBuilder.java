@@ -38,6 +38,7 @@ public class BlazingSequencedAssemblyRecipeBuilder extends SequencedAssemblyReci
 		return ((SequencedAssemblyRecipeBuilderAccessor) this).blazinghot$getRecipe();
 	}
 
+	@SuppressWarnings("unchecked")
 	public <B extends BlazingStandardRecipeBuilder<?>> BlazingSequencedAssemblyRecipeBuilder addBlazingStep(Function<ResourceLocation, B> factory, Function<B, ? extends StandardProcessingRecipe.Builder<?>> builder) {
 		B recipeBuilder = factory.apply(ResourceLocation.withDefaultNamespace("dummy"));
 		Item placeHolder = getRecipe().getTransitionalItem().getItem();

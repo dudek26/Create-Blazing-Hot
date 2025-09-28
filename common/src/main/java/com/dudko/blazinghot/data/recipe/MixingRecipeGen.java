@@ -1,21 +1,21 @@
 package com.dudko.blazinghot.data.recipe;
 
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.andesite;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.cinderFlour;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.clayBall;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.moltenAncientDebris;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.moltenCopper;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.moltenGold;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.moltenIron;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.moltenZinc;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherCompound;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherEssence;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherFlora;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netherrackDust;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.powderedObsidian;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.soulDust;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.stoneDust;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.wheatFlour;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.andesite;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.cinderFlour;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.clayBall;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.moltenAncientDebris;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.moltenCopper;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.moltenGold;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.moltenIron;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.moltenZinc;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.netherCompound;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.netherEssence;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.netherFlora;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.netherrackDust;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.powderedObsidian;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.soulDust;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.stoneDust;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.wheatFlour;
 
 import java.util.concurrent.CompletableFuture;
 

@@ -1,9 +1,9 @@
 package com.dudko.blazinghot.data.recipe;
 
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.blazeGoldRod;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.cinderFlour;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.soulSand;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.stone;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.blazeGoldRod;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.cinderFlour;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.soulSand;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.stone;
 
 import java.util.concurrent.CompletableFuture;
 

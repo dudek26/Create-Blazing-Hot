@@ -1,9 +1,9 @@
 package com.dudko.blazinghot.data.recipe;
 
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.andesiteCasing;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.blazeGoldSheet;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.copperCasing;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.sturdyAlloy;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.andesiteCasing;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.blazeGoldSheet;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.copperCasing;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.sturdyAlloy;
 
 import java.util.concurrent.CompletableFuture;
 

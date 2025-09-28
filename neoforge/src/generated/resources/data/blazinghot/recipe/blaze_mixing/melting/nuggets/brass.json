@@ -1,5 +1,21 @@
 {
   "type": "create:blaze_mixing",
-  "ingredients": [],
-  "results": []
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "c:nuggets/brass"
+    },
+    {
+      "type": "fluid_tag",
+      "amount": 5,
+      "fluid_tag": "blazinghot:blaze_mixer_fuel"
+    }
+  ],
+  "processing_time": 30,
+  "results": [
+    {
+      "amount": 10,
+      "id": "blazinghot:molten_brass"
+    }
+  ]
 }

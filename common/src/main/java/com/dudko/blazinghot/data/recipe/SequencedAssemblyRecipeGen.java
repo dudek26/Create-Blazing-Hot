@@ -1,18 +1,18 @@
 package com.dudko.blazinghot.data.recipe;
 
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.blazeCasing;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.blazeWhisk;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.cogwheel;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.diamond;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.extensionPole;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.moltenNetherite;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.netheriteAppleIngredients;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.stellarBlazeApple;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.stellarBrassApple;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.stellarCopperApple;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.stellarGoldenApple;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.stellarIronApple;
-import static com.dudko.blazinghot.data.recipe.BlazingIngredients.stellarZincApple;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.blazeCasing;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.blazeWhisk;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.cogwheel;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.diamond;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.extensionPole;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.moltenNetherite;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.netheriteAppleIngredients;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.stellarBlazeApple;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.stellarBrassApple;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.stellarCopperApple;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.stellarGoldenApple;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.stellarIronApple;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.stellarZincApple;
 import static com.dudko.blazinghot.registry.BlazingItems.ANCIENT_ENCHANTED_APPLE;
 import static com.dudko.blazinghot.registry.BlazingItems.BRASSY_STELLAR_BRASS_APPLE;
 import static com.dudko.blazinghot.registry.BlazingItems.BURNING_STELLAR_BLAZE_APPLE;
@@ -116,7 +116,7 @@ public class SequencedAssemblyRecipeGen extends BlazingSequencedAssemblyRecipeGe
 						.addOutput(output, 1)
 						.loops(6)
 						.addBlazingStep(id -> new BlazingStandardRecipeBuilder<>(FillingRecipe::new, id),
-								r -> r.require(moltenNetherite(), MultiAmount.INGOT_COVER))
+								r -> r.require(metal.getFluidTag(), MultiAmount.INGOT_COVER))
 						.addStep(DeployerApplicationRecipe::new, r -> r.require(diamond()))
 						.addStep(PressingRecipe::new, r -> r));
 	}

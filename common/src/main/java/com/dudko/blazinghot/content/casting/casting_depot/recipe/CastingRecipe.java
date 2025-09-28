@@ -1,5 +1,7 @@
 package com.dudko.blazinghot.content.casting.casting_depot.recipe;
 
+import java.util.List;
+
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
@@ -62,8 +64,14 @@ public class CastingRecipe extends ProcessingRecipe<SingleRecipeInput, CastingRe
 		return true;
 	}
 
+	@Override
+	public List<String> validate() {
+		List<String> errors = super.validate();
+		if (fluidIngredients.isEmpty()) errors.add("Recipe has no fluid ingredient!");
+		return errors;
+	}
+
 	public FluidIngredient getRequiredFluid() {
-		if (fluidIngredients.isEmpty()) throw new IllegalStateException("Casting Recipe has no fluid ingredient!");
 		return fluidIngredients.getFirst();
 	}
 
