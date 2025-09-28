@@ -11,10 +11,8 @@ import com.dudko.blazinghot.foundation.multiloader.fluid.MultiFluids;
 import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.dudko.blazinghot.registry.BlazingMetals;
 import com.simibubi.create.AllRecipeTypes;
-import com.simibubi.create.Create;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
-import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
@@ -27,14 +25,12 @@ import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import net.createmod.catnip.lang.Lang;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
@@ -43,7 +39,6 @@ import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -64,7 +59,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 
 	private int ancientDebrisMelted;
 
-	protected SmartFluidTankBehaviour tank;
+	public SmartFluidTankBehaviour tank;
 
 	protected BlazeMixerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -237,9 +232,6 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 		level.addParticle(data, center.x, center.y - 1.75f, center.z, target.x, target.y, target.z);
 	}
 
-	@Override
-	protected abstract <I extends RecipeInput> boolean matchBasinRecipe(Recipe<I> recipe);
-
 	public static boolean doInputsMatch(StandardProcessingRecipe<?> a, StandardProcessingRecipe<?> b) {
 //		return doItemInputsMatch(a, b) && doFluidInputsMatch(a, b);
 		return doItemInputsMatch(a, b);
@@ -302,23 +294,6 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 	@Override
 	protected Optional<CreateAdvancement> getProcessedRecipeTrigger() {
 		return Optional.of(AllAdvancements.MIXER);
-	}
-
-	@Override
-	public abstract boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking);
-
-	public boolean kineticStatsTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-		boolean added = false;
-
-		if (!IRotate.StressImpact.isEnabled()) return added;
-		float stressAtBase = calculateStressApplied();
-		if (Mth.equal(stressAtBase, 0)) return added;
-
-		Lang.builder(Create.ID).translate("gui.goggles.kinetic_stats").forGoggles(tooltip);
-
-		addStressImpactStats(tooltip, stressAtBase);
-
-		return true;
 	}
 
 	public void registerAwardables(List<BlockEntityBehaviour> behaviours, BlazingAdvancement... advancements) {

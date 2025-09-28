@@ -22,21 +22,16 @@ public class CastingRecipe extends ProcessingRecipe<SingleRecipeInput, CastingRe
 
 	public static final int SAFE_RENDERING_LIMIT = 10;
 
-	protected int coolingDuration;
-	protected boolean keepItem;
-
 	public CastingRecipe(CastingRecipeParams params) {
 		super(BlazingRecipeTypes.CASTING, params);
-		coolingDuration = 0;
-		keepItem = false;
 	}
 
 	public boolean isKeepItem() {
-		return keepItem;
+		return params.keepMold;
 	}
 
 	public int getCoolingDuration() {
-		return coolingDuration;
+		return params.coolingDuration;
 	}
 
 	@Override

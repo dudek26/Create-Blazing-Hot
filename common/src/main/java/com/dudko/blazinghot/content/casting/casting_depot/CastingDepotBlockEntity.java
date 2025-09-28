@@ -36,7 +36,7 @@ import net.minecraft.world.phys.Vec3;
 public abstract class CastingDepotBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
 	protected SmartFluidTankBehaviour tank;
-	protected CastingDepotBehaviour depotBehaviour;
+	public CastingDepotBehaviour depotBehaviour;
 	protected SpoutCastingBehaviour castingBehaviour;
 	protected FilteringBehaviour filtering;
 

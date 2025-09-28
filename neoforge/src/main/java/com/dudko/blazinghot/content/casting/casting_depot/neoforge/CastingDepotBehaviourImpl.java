@@ -286,7 +286,7 @@ public class CastingDepotBehaviourImpl extends CastingDepotBehaviour {
 			transportedStack.insertedFrom = side;
 			transportedStack.prevSideOffset = transportedStack.sideOffset;
 			transportedStack.prevBeltPosition = transportedStack.beltPosition;
-			ItemStack remainder = this.insert(getHeldItemStack(), transportedStack.insertedFrom, simulate);
+			ItemStack remainder = this.insert(transportedStack.stack, transportedStack.insertedFrom, simulate);
 			if (remainder.getCount() != size) {
 				this.blockEntity.notifyUpdate();
 			}

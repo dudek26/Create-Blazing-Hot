@@ -1,4 +1,4 @@
-package com.dudko.blazinghot.data.lang.forge;
+package com.dudko.blazinghot.data.lang.neoforge;
 
 import com.dudko.blazinghot.BlazingHot;
 

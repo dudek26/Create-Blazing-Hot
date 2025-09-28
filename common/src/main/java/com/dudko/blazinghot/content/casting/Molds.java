@@ -10,8 +10,10 @@ import java.util.Map;
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.foundation.multiloader.BlazingBuilderTransformers;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.registry.BlazingCreativeTabs;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.dudko.blazinghot.registry.BlazingTags.Items;
+import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.AbstractRegistrate;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.ItemEntry;
@@ -27,6 +29,12 @@ import net.minecraft.world.item.crafting.Ingredient;
 public class Molds {
 
 	public static List<Mold> ALL = new ArrayList<>();
+
+	private static final CreateRegistrate REGISTRATE = BlazingHot.registrate();
+
+	static {
+		BlazingCreativeTabs.useBaseTab();
+	}
 
 	public static void register() {
 
@@ -56,7 +64,7 @@ public class Molds {
 		}
 
 		private Mold register() {
-			return register(BlazingHot.registrate());
+			return register(REGISTRATE);
 		}
 
 		public Mold register(AbstractRegistrate<?> registrate) {

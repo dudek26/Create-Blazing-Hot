@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.dudko.blazinghot.content.casting.casting_depot.CastingDepotBlockEntity;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
+import com.dudko.blazinghot.registry.BlazingBlockEntityTypes;
 import com.simibubi.create.content.fluids.FluidFX;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
@@ -17,12 +18,20 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 public class CastingDepotBlockEntityImpl extends CastingDepotBlockEntity {
 
 	protected CastingDepotBlockEntityImpl(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
+	}
+
+	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK,
+				BlazingBlockEntityTypes.CASTING_DEPOT.get(),
+				(be, context) -> ((CastingDepotBehaviourImpl) be.depotBehaviour).itemHandler);
 	}
 
 	private CastingDepotBehaviourImpl castBehaviour() {
