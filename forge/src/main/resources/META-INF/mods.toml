@@ -9,7 +9,7 @@ version = "${version}"
 displayName = "Create: Blazing Hot"
 authors = "dudko"
 description = '''
-Nether- and metal-related features and QoL recipes.
+Molten metals, casting, new Nether-related content, and QoL improvements.
 '''
 logoFile = "icon.png"
 

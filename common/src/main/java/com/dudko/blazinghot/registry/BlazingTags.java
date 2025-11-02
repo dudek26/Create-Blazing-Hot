@@ -48,8 +48,7 @@ public class BlazingTags {
 	}
 
 	public enum Blocks {
-		MODERN_LAMPS,
-		MODERN_LAMP_PANELS;
+		MODERN_LAMPS;
 
 		public final TagKey<Block> tag;
 		public final boolean alwaysDatagen;
@@ -96,6 +95,10 @@ public class BlazingTags {
 		}
 
 		public static void register() {
+		}
+
+		public static TagKey<Block> of(String id) {
+			return optionalTag(BuiltInRegistries.BLOCK, BlazingHot.asResource(id));
 		}
 	}
 
@@ -155,7 +158,6 @@ public class BlazingTags {
 
 	public enum Items {
 		MODERN_LAMPS,
-		MODERN_LAMP_PANEL_STONECUTTING,
 		MODERN_LAMP_PANELS,
 		MODERN_LAMP_QUAD_PANELS,
 		MODERN_LAMP_DOUBLE_PANELS,
@@ -212,6 +214,10 @@ public class BlazingTags {
 
 		public boolean matches(ItemStack stack) {
 			return stack.is(tag);
+		}
+
+		public static TagKey<Item> of(String id) {
+			return optionalTag(BuiltInRegistries.ITEM, BlazingHot.asResource(id));
 		}
 
 		public static void register() {
