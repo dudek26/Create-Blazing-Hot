@@ -17,9 +17,9 @@
           "item": "blazinghot:burning_stellar_blaze_apple"
         },
         {
-          "type": "fluid_tag",
+          "type": "neoforge:tag",
           "amount": 540,
-          "fluid_tag": "c:molten_blaze_gold"
+          "tag": "c:molten_blaze_gold"
         }
       ],
       "results": [

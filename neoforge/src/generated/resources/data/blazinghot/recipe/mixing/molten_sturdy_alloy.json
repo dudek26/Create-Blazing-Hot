@@ -9,9 +9,9 @@
       "item": "blazinghot:nether_compound"
     },
     {
-      "type": "fluid_tag",
+      "type": "neoforge:tag",
       "amount": 90,
-      "fluid_tag": "c:molten_iron"
+      "tag": "c:molten_iron"
     }
   ],
   "processing_time": 200,

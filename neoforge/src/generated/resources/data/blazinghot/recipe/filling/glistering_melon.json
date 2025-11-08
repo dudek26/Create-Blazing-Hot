@@ -5,9 +5,9 @@
       "item": "minecraft:melon"
     },
     {
-      "type": "fluid_tag",
+      "type": "neoforge:tag",
       "amount": 60,
-      "fluid_tag": "c:molten_gold"
+      "tag": "c:molten_gold"
     }
   ],
   "results": [

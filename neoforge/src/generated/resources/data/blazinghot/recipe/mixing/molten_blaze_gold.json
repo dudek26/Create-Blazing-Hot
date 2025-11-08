@@ -9,9 +9,9 @@
       "item": "blazinghot:nether_essence"
     },
     {
-      "type": "fluid_tag",
+      "type": "neoforge:tag",
       "amount": 45,
-      "fluid_tag": "c:molten_gold"
+      "tag": "c:molten_gold"
     }
   ],
   "processing_time": 200,

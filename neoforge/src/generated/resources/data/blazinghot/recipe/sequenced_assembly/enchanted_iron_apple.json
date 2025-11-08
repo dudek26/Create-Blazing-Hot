@@ -17,9 +17,9 @@
           "item": "blazinghot:heavy_stellar_iron_apple"
         },
         {
-          "type": "fluid_tag",
+          "type": "neoforge:tag",
           "amount": 540,
-          "fluid_tag": "c:molten_iron"
+          "tag": "c:molten_iron"
         }
       ],
       "results": [

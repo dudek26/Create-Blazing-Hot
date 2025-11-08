@@ -9,18 +9,13 @@
       "item": "blazinghot:nether_essence"
     },
     {
-      "type": "fluid_stack",
+      "type": "neoforge:single",
       "amount": 100,
       "fluid": "minecraft:lava"
     },
     {
-      "type": "fluid_stack",
+      "type": "neoforge:single",
       "amount": 1,
-      "components": {
-        "minecraft:custom_data": {
-          "blazinghot:placeholder_fluid": 1
-        }
-      },
       "fluid": "minecraft:water"
     }
   ],

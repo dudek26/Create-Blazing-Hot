@@ -6,9 +6,9 @@
       "item": "blazinghot:porcelain_ingot_mold"
     },
     {
-      "type": "fluid_tag",
+      "type": "neoforge:tag",
       "amount": 90,
-      "fluid_tag": "c:molten_andesite"
+      "tag": "c:molten_andesite"
     }
   ],
   "processing_time": 50,

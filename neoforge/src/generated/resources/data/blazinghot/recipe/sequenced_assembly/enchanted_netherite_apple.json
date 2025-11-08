@@ -22,9 +22,9 @@
           "item": "blazinghot:ancient_enchanted_apple"
         },
         {
-          "type": "fluid_tag",
+          "type": "neoforge:tag",
           "amount": 540,
-          "fluid_tag": "c:molten_netherite"
+          "tag": "c:molten_netherite"
         }
       ],
       "results": [

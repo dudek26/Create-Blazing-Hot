@@ -5,9 +5,9 @@
       "item": "minecraft:carrot"
     },
     {
-      "type": "fluid_tag",
+      "type": "neoforge:tag",
       "amount": 60,
-      "fluid_tag": "c:molten_iron"
+      "tag": "c:molten_iron"
     }
   ],
   "results": [

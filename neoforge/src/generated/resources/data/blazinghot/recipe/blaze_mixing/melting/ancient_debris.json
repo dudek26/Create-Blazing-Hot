@@ -6,9 +6,9 @@
       "item": "minecraft:ancient_debris"
     },
     {
-      "type": "fluid_tag",
+      "type": "neoforge:tag",
       "amount": 66,
-      "fluid_tag": "blazinghot:blaze_mixer_fuel"
+      "tag": "blazinghot:blaze_mixer_fuel"
     }
   ],
   "processing_time": 300,

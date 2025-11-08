@@ -3,7 +3,6 @@
   "ingredient": {
     "item": "blazinghot:blaze_casing"
   },
-  "loops": 1,
   "results": [
     {
       "id": "blazinghot:blaze_mixer"

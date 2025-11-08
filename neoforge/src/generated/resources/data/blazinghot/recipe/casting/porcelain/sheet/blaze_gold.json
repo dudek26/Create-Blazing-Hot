@@ -6,9 +6,9 @@
       "item": "blazinghot:porcelain_sheet_mold"
     },
     {
-      "type": "fluid_tag",
+      "type": "neoforge:tag",
       "amount": 90,
-      "fluid_tag": "c:molten_blaze_gold"
+      "tag": "c:molten_blaze_gold"
     }
   ],
   "processing_time": 50,

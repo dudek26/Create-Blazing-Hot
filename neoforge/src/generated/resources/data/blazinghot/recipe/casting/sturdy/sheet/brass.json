@@ -6,9 +6,9 @@
       "item": "blazinghot:sturdy_sheet_mold"
     },
     {
-      "type": "fluid_tag",
+      "type": "neoforge:tag",
       "amount": 90,
-      "fluid_tag": "c:molten_brass"
+      "tag": "c:molten_brass"
     }
   ],
   "keep_mold": true,

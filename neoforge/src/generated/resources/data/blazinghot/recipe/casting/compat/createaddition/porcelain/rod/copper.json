@@ -12,9 +12,9 @@
       "item": "blazinghot:porcelain_rod_mold"
     },
     {
-      "type": "fluid_tag",
+      "type": "neoforge:tag",
       "amount": 45,
-      "fluid_tag": "c:molten_copper"
+      "tag": "c:molten_copper"
     }
   ],
   "processing_time": 25,

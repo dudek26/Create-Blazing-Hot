@@ -3,14 +3,14 @@
   "heat_requirement": "superheated",
   "ingredients": [
     {
-      "type": "fluid_tag",
+      "type": "neoforge:tag",
       "amount": 90,
-      "fluid_tag": "c:molten_gold"
+      "tag": "c:molten_gold"
     },
     {
-      "type": "fluid_tag",
+      "type": "neoforge:tag",
       "amount": 90,
-      "fluid_tag": "c:molten_ancient_debris"
+      "tag": "c:molten_ancient_debris"
     }
   ],
   "processing_time": 200,

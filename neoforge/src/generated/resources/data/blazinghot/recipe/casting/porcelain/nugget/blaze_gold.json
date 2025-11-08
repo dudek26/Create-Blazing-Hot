@@ -6,9 +6,9 @@
       "item": "blazinghot:porcelain_nugget_mold"
     },
     {
-      "type": "fluid_tag",
+      "type": "neoforge:tag",
       "amount": 10,
-      "fluid_tag": "c:molten_blaze_gold"
+      "tag": "c:molten_blaze_gold"
     }
   ],
   "processing_time": 12,

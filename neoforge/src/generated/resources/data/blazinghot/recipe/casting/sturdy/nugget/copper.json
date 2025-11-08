@@ -6,9 +6,9 @@
       "item": "blazinghot:sturdy_nugget_mold"
     },
     {
-      "type": "fluid_tag",
+      "type": "neoforge:tag",
       "amount": 10,
-      "fluid_tag": "c:molten_copper"
+      "tag": "c:molten_copper"
     }
   ],
   "keep_mold": true,

@@ -17,9 +17,9 @@
           "item": "blazinghot:galvanized_stellar_zinc_apple"
         },
         {
-          "type": "fluid_tag",
+          "type": "neoforge:tag",
           "amount": 540,
-          "fluid_tag": "c:molten_zinc"
+          "tag": "c:molten_zinc"
         }
       ],
       "results": [

@@ -111,8 +111,7 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 		if (currentRecipeId != null) nbt.putString("ProcessedRecipe", currentRecipeId.toString());
 		if (!castItem.isEmpty()) {
 			CompoundTag castItemTag = new CompoundTag();
-			castItem.save(registries, castItemTag);
-			nbt.put("CastItem", castItemTag);
+			nbt.put("CastItem", castItem.save(registries, castItemTag));
 		}
 		nbt.putInt("CoolingDuration", coolingDuration);
 		nbt.putBoolean("KeepMold", keepMold);

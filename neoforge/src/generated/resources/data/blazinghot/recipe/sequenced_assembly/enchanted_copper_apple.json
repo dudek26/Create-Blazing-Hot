@@ -17,9 +17,9 @@
           "item": "blazinghot:coated_stellar_copper_apple"
         },
         {
-          "type": "fluid_tag",
+          "type": "neoforge:tag",
           "amount": 540,
-          "fluid_tag": "c:molten_copper"
+          "tag": "c:molten_copper"
         }
       ],
       "results": [

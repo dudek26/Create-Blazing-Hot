@@ -12,9 +12,9 @@
       "item": "blazinghot:sturdy_rod_mold"
     },
     {
-      "type": "fluid_tag",
+      "type": "neoforge:tag",
       "amount": 45,
-      "fluid_tag": "c:molten_brass"
+      "tag": "c:molten_brass"
     }
   ],
   "keep_mold": true,

@@ -6,9 +6,9 @@
       "tag": "c:rods"
     },
     {
-      "type": "fluid_tag",
+      "type": "neoforge:tag",
       "amount": 180,
-      "fluid_tag": "c:molten_sturdy_alloy"
+      "tag": "c:molten_sturdy_alloy"
     }
   ],
   "processing_time": 100,

@@ -6,9 +6,9 @@
       "item": "blazinghot:sturdy_ingot_mold"
     },
     {
-      "type": "fluid_tag",
+      "type": "neoforge:tag",
       "amount": 90,
-      "fluid_tag": "c:molten_ancient_debris"
+      "tag": "c:molten_ancient_debris"
     }
   ],
   "keep_mold": true,

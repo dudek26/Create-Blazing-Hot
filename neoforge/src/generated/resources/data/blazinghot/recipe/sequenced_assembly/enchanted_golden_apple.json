@@ -17,9 +17,9 @@
           "item": "blazinghot:gilded_stellar_golden_apple"
         },
         {
-          "type": "fluid_tag",
+          "type": "neoforge:tag",
           "amount": 540,
-          "fluid_tag": "c:molten_gold"
+          "tag": "c:molten_gold"
         }
       ],
       "results": [

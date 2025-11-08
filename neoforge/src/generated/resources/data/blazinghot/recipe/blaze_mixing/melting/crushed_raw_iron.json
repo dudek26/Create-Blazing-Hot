@@ -6,9 +6,9 @@
       "item": "create:crushed_raw_iron"
     },
     {
-      "type": "fluid_tag",
+      "type": "neoforge:tag",
       "amount": 50,
-      "fluid_tag": "blazinghot:blaze_mixer_fuel"
+      "tag": "blazinghot:blaze_mixer_fuel"
     }
   ],
   "processing_time": 250,

@@ -3,14 +3,14 @@
   "heat_requirement": "heated",
   "ingredients": [
     {
-      "type": "fluid_tag",
+      "type": "neoforge:tag",
       "amount": 90,
-      "fluid_tag": "c:molten_copper"
+      "tag": "c:molten_copper"
     },
     {
-      "type": "fluid_tag",
+      "type": "neoforge:tag",
       "amount": 90,
-      "fluid_tag": "c:molten_zinc"
+      "tag": "c:molten_zinc"
     }
   ],
   "results": [

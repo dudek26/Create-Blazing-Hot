@@ -1,4 +1,4 @@
-// 1.21.1	2025-09-25T23:24:31.5801655	Registrate Provider for blazinghot [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (enchantments), Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
+// 1.21.1	2025-11-08T23:36:34.5097759	Registrate Provider for blazinghot [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (enchantments), Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
 f00ce73b2ba10d3d022c8cec15f98d4345b54a0f assets/blazinghot/blockstates/black_modern_lamp.json
 1b515ab855a765669e085696ccdb6d602b5ddcb9 assets/blazinghot/blockstates/black_modern_lamp_double_panel.json
 c1767b8a04e6ffe0c445c730aeb00f68c42a4936 assets/blazinghot/blockstates/black_modern_lamp_half_panel.json
@@ -1339,9 +1339,9 @@ eeb5dc291f308666e5351d72361072122f86af27 data/blazinghot/tags/item/molds/clay.js
 1b6f0870284ffa46260c61d5ef357767ea807fc4 data/blazinghot/tags/item/molds/porcelain.json
 2bdca0b0f594f1596ebf9d97a23f384a6583a319 data/blazinghot/tags/item/molds/sturdy.json
 338cdcec1471c86aae16b6a54eab71fa3a76c3d8 data/blazinghot/tags/item/nether_flora.json
+0cba817f4a36eb0f4111a8e9cb16988dd0952c1e data/create/data_maps/item/superheated_blaze_burner_fuels.json
 48b1034e3117aeb2ea436e740996e4db074db38c data/create/tags/block/casing.json
 045f8dc6c345ee39f5f6bbf0697f613896e7d745 data/create/tags/block/wrench_pickup.json
-9e00e4318291a60af5ee939fa627a9336721d59c data/create/tags/item/blaze_burner_fuel/special.json
 48b1034e3117aeb2ea436e740996e4db074db38c data/create/tags/item/casing.json
 700325ac1dc7adda4e1a88095144e698f732978f data/c/tags/block/storage_blocks.json
 08c2703964d38558c91a71a2c11d01f3cc0d6d4b data/c/tags/block/storage_blocks/blaze_gold.json
@@ -1403,3 +1403,4 @@ f453a85a2919ea3f488b562855fe212d7829c823 data/c/tags/item/plates/blaze_gold.json
 9d8b81fcd0d2f4e9761569817feef925e7574ae1 data/minecraft/tags/entity_type/arrows.json
 9d8b81fcd0d2f4e9761569817feef925e7574ae1 data/minecraft/tags/item/arrows.json
 e8cd0ae4c81abc06f77fa3434a760cdfb6c3bf37 data/minecraft/tags/item/beacon_payment_items.json
+86343835f05cde607b00316165dbaaeb617dc1ba data/neoforge/data_maps/item/furnace_fuels.json
