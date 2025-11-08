@@ -1,11 +1,11 @@
 package com.dudko.blazinghot.foundation.multiloader.fluid;
 
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 public class MultiFluids {
 
@@ -30,12 +30,12 @@ public class MultiFluids {
 	}
 
 	@ExpectPlatform
-	public static FluidIngredient fluidIngredientFromFluid(Fluid fluid, long amount) {
+	public static SizedFluidIngredient fluidIngredientFromFluid(Fluid fluid, long amount) {
 		throw new AssertionError();
 	}
 
 	@ExpectPlatform
-	public static long getFluidAmount(FluidIngredient ingredient) {
+	public static long getFluidAmount(SizedFluidIngredient ingredient) {
 		return 1;
 	}
 }

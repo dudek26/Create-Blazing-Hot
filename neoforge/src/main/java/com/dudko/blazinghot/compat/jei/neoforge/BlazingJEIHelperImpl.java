@@ -3,6 +3,7 @@ package com.dudko.blazinghot.compat.jei.neoforge;
 import static com.simibubi.create.compat.jei.category.CreateRecipeCategory.getRenderedSlot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,7 +11,6 @@ import com.dudko.blazinghot.compat.jei.BlazingJEIHelper;
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.content.fluids.potion.PotionFluidHandler;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
@@ -19,6 +19,7 @@ import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.network.chat.Component;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 /**
  * @see BlazingJEIHelper
@@ -26,12 +27,12 @@ import net.neoforged.neoforge.fluids.FluidStack;
 public class BlazingJEIHelperImpl {
 
 	@SuppressWarnings("removal")
-	public static IRecipeSlotBuilder addFluidSlot(IRecipeLayoutBuilder builder, RecipeIngredientRole ingredientRole, int x, int y, FluidIngredient ingredient) {
+	public static IRecipeSlotBuilder addFluidSlot(IRecipeLayoutBuilder builder, RecipeIngredientRole ingredientRole, int x, int y, SizedFluidIngredient ingredient) {
 		return builder
 				.addSlot(ingredientRole, x, y)
 				.setBackground(getRenderedSlot(), -1, -1)
-				.addIngredients(NeoForgeTypes.FLUID_STACK, ingredient.getMatchingFluidStacks())
-				.setFluidRenderer(ingredient.getRequiredAmount(), false, 16, 16) // make fluid take up the full slot
+				.addIngredients(NeoForgeTypes.FLUID_STACK, Arrays.stream(ingredient.getFluids()).toList())
+				.setFluidRenderer(ingredient.amount(), false, 16, 16) // make fluid take up the full slot
 				.addTooltipCallback(BlazingJEIHelperImpl::addPotionTooltip);
 	}
 

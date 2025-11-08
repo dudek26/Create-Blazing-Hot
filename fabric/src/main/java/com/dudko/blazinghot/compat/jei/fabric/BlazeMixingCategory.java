@@ -14,7 +14,7 @@ import com.simibubi.create.compat.jei.category.BasinCategory;
 import com.simibubi.create.compat.jei.category.animations.AnimatedBlazeBurner;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
+
 
 import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;

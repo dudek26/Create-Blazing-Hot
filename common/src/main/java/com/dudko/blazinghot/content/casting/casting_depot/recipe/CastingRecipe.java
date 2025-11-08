@@ -7,7 +7,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -15,6 +14,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -66,7 +66,7 @@ public class CastingRecipe extends ProcessingRecipe<SingleRecipeInput, CastingRe
 		return errors;
 	}
 
-	public FluidIngredient getRequiredFluid() {
+	public SizedFluidIngredient getRequiredFluid() {
 		return fluidIngredients.getFirst();
 	}
 

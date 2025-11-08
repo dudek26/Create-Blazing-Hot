@@ -21,7 +21,6 @@ import com.simibubi.create.foundation.advancement.AllAdvancements;
 import com.simibubi.create.foundation.advancement.CreateAdvancement;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
@@ -45,6 +44,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements IHaveGoggleInformation {
 
@@ -208,7 +208,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 
 	public abstract boolean hasFuel(TagKey<Fluid> tag, long amount);
 
-	public abstract boolean hasFuel(FluidIngredient fluidIngredient);
+	public abstract boolean hasFuel(SizedFluidIngredient fluidIngredient);
 
 	public abstract void updateFueled();
 

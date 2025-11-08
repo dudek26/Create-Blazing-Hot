@@ -14,7 +14,6 @@ import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -32,6 +31,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -49,14 +49,14 @@ public class BlazeMixingRecipe extends BasinRecipe {
 	}
 
 	@Override
-	public NonNullList<FluidIngredient> getFluidIngredients() {
-		NonNullList<FluidIngredient> fluidIngredients = NonNullList.create();
+	public NonNullList<SizedFluidIngredient> getFluidIngredients() {
+		NonNullList<SizedFluidIngredient> fluidIngredients = NonNullList.create();
 		fluidIngredients.addAll(super.getFluidIngredients());
 		fluidIngredients.removeLast();
 		return fluidIngredients;
 	}
 
-	public static FluidIngredient emptyMixerFuel() {
+	public static SizedFluidIngredient emptyMixerFuel() {
 		CompoundTag data = new CompoundTag();
 		data.putBoolean("blazinghot:placeholder_fluid", true);
 		return MultiFluidIngredient.fromFluid(BuiltInRegistries.FLUID.wrapAsHolder(Fluids.WATER),
@@ -64,9 +64,9 @@ public class BlazeMixingRecipe extends BasinRecipe {
 				DataComponentPatch.builder().set(DataComponents.CUSTOM_DATA, CustomData.of(data)).build());
 	}
 
-	public FluidIngredient getMixerFuel() {
-		FluidIngredient fuel = super.getFluidIngredients().getLast();
-		if (isPlaceholder(fuel)) return FluidIngredient.EMPTY;
+	public SizedFluidIngredient getMixerFuel() {
+		SizedFluidIngredient fuel = super.getFluidIngredients().getLast();
+		if (isPlaceholder(fuel)) return MultiFluidIngredient.empty();
 		return fuel;
 	}
 
@@ -129,7 +129,7 @@ public class BlazeMixingRecipe extends BasinRecipe {
 	}
 
 	@ExpectPlatform
-	public static boolean isPlaceholder(FluidIngredient fluidIngredient) {
+	public static boolean isPlaceholder(SizedFluidIngredient fluidIngredient) {
 		return true;
 	}
 

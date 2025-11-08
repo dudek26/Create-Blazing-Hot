@@ -9,7 +9,6 @@ import com.dudko.blazinghot.foundation.multiloader.fluid.MultiFluidStack;
 import com.dudko.blazinghot.foundation.multiloader.fluid.neoforge.MultiFluidStackNeoForge;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringBehaviour;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
@@ -17,6 +16,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 /**
  * @see CastingBySpout
@@ -30,9 +30,9 @@ public class CastingBySpoutImpl {
 				.getRecipeManager()
 				.getRecipesFor(BlazingRecipeTypes.CASTING.getType(), input, world)) {
 			CastingRecipe castingRecipe = (CastingRecipe) recipe.value();
-			FluidIngredient requiredFluid = castingRecipe.getRequiredFluid();
+			SizedFluidIngredient requiredFluid = castingRecipe.getRequiredFluid();
 			if (requiredFluid.test(MultiFluidStackNeoForge.toNeoForgeStack(availableFluid)))
-				return requiredFluid.getRequiredAmount();
+				return requiredFluid.amount();
 		}
 		return -1;
 	}
@@ -50,7 +50,7 @@ public class CastingBySpoutImpl {
 				.getRecipeManager()
 				.getRecipesFor(BlazingRecipeTypes.CASTING.getType(), input, world)) {
 			RecipeHolder<CastingRecipe> cr = (RecipeHolder<CastingRecipe>) recipe;
-			FluidIngredient requiredFluid = cr.value().getRequiredFluid();
+			SizedFluidIngredient requiredFluid = cr.value().getRequiredFluid();
 			if (requiredFluid.test(toCast)) castingRecipe = cr;
 		}
 

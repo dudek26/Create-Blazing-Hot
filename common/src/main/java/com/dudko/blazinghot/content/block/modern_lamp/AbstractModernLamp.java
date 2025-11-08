@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Nullable;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.dudko.blazinghot.registry.BlazingBlockEntityTypes;
-import com.simibubi.create.AllTags;
+import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.foundation.block.IBE;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -90,7 +90,7 @@ public abstract class AbstractModernLamp extends Block implements IBE<ModernLamp
 			level.playLocalSound(pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 1.0F, pitch, false);
 			return ItemInteractionResult.SUCCESS;
 		}
-		if (stack.is(AllTags.AllItemTags.WRENCH.tag) && !player.isCrouching()) {
+		if (stack.is(BlazingTags.Items.WRENCH.tag()) && !player.isCrouching()) {
 			Component action = locked ? BlazingLang.LAMP_UNLOCKED_MESSAGE.get() : BlazingLang.LAMP_LOCKED_MESSAGE.get();
 			player.displayClientMessage(action, true);
 

@@ -267,7 +267,7 @@ public class BlazingForm {
 		/**
 		 * Shortcut for custom location.
 		 *
-		 * @see Builder#withCustomItem(NullableSupplier<ResourceLocation>)
+		 * @see Builder#withCustomItem(NullableSupplier)
 		 */
 		public Builder withCustomItem(ItemLike item) {
 			return withCustomItem(() -> BuiltInRegistries.ITEM.getKey(item.asItem()));

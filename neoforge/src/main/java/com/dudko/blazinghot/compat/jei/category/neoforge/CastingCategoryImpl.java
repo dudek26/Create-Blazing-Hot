@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.compat.jei.category.neoforge;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.dudko.blazinghot.compat.jei.category.CastingCategory;
@@ -14,10 +15,8 @@ public abstract class CastingCategoryImpl extends CastingCategory {
 	}
 
 	public static List<FluidState> getRequiredFluids(CastingRecipe recipe) {
-		return recipe
-				.getRequiredFluid()
-				.getMatchingFluidStacks()
-				.stream()
+		return Arrays
+				.stream(recipe.getRequiredFluid().getFluids())
 				.map(stack -> stack.getFluid().defaultFluidState())
 				.toList();
 	}

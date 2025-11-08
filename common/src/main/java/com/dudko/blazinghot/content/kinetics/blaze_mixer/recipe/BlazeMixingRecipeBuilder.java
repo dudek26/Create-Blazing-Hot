@@ -7,7 +7,6 @@ import com.dudko.blazinghot.foundation.multiloader.fluid.MultiFluidIngredient;
 import com.dudko.blazinghot.foundation.recipe.BlazingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -15,12 +14,13 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class BlazeMixingRecipeBuilder extends BlazingRecipeBuilder<ProcessingRecipeParams, BlazeMixingRecipe, BlazeMixingRecipeBuilder> {
 
-	protected FluidIngredient mixerFuel;
+	protected SizedFluidIngredient mixerFuel;
 
 	public BlazeMixingRecipeBuilder(ProcessingRecipe.Factory<ProcessingRecipeParams, BlazeMixingRecipe> factory, ResourceLocation recipeId) {
 		super(factory, recipeId);
@@ -43,7 +43,7 @@ public class BlazeMixingRecipeBuilder extends BlazingRecipeBuilder<ProcessingRec
 		super.build(consumer);
 	}
 
-	public BlazeMixingRecipeBuilder mixerFuel(FluidIngredient mixerFuel) {
+	public BlazeMixingRecipeBuilder mixerFuel(SizedFluidIngredient mixerFuel) {
 		this.mixerFuel = mixerFuel;
 		return self();
 	}

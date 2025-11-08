@@ -27,7 +27,6 @@ import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour.TankSegment;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.item.SmartInventory;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
 
@@ -60,6 +59,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import net.neoforged.neoforge.items.IItemHandler;
 
 @SuppressWarnings("UnstableApiUsage")
@@ -109,13 +109,12 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 
 	@Override
 	public boolean hasFuel(TagKey<Fluid> tag, long amount) {
-		return hasFuel(FluidIngredient.fromTag(tag, (int) amount));
+		return amount <= 0 || hasFuel(SizedFluidIngredient.of(tag, (int) amount));
 	}
 
 	@Override
-	public boolean hasFuel(FluidIngredient fluidIngredient) {
-		return (fluidIngredient.test(getFluidStack()) && fluidIngredient.getRequiredAmount() <= getFuelAmount())
-				|| fluidIngredient.getRequiredAmount() == 0;
+	public boolean hasFuel(SizedFluidIngredient fluidIngredient) {
+		return fluidIngredient.test(getFluidStack());
 	}
 
 	public long getFuelAmount() {
@@ -157,7 +156,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 						if (processingRecipe instanceof BlazeMixingRecipe blazeMixingRecipe && blazeMixingRecipe
 								.getMixerFuel()
 								.test(getFluidStack())) {
-							fuelCost = blazeMixingRecipe.getMixerFuel().getRequiredAmount();
+							fuelCost = blazeMixingRecipe.getMixerFuel().amount();
 						}
 					}
 					int calculatedCost = (int) getFuelCost(currentRecipe, level);
@@ -325,7 +324,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 			Optional<RecipeHolder<BlazeMixingRecipe>>
 					bmRecipe =
 					manager.getRecipeFor(BlazingRecipeTypes.BLAZE_MIXING.getType(),
-							basin.get().getInputInventory(),
+							(RecipeInput) basin.get().getInputInventory(),
 							level);
 
 			if (bmRecipe.isPresent()) return false;

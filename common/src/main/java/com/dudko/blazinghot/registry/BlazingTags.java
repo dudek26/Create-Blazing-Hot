@@ -116,7 +116,9 @@ public class BlazingTags {
 
 		NETHERRACK_DUSTS(Namespace.COMMON, "dusts/netherrack"),
 		STONE_DUSTS(Namespace.COMMON, "dusts/stone"),
-		SOUL_SAND_DUSTS(Namespace.COMMON, "dusts/soul_sand");
+		SOUL_SAND_DUSTS(Namespace.COMMON, "dusts/soul_sand"),
+
+		WRENCH(Namespace.COMMON, "tools/wrench");
 
 		public final Namespace namespace;
 		public final String path;

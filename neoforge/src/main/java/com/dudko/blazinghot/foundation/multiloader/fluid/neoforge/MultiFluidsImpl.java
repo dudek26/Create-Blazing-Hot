@@ -1,10 +1,10 @@
 package com.dudko.blazinghot.foundation.multiloader.fluid.neoforge;
 
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 public class MultiFluidsImpl {
 	public static long platformedAmount(long droplets) {
@@ -23,11 +23,11 @@ public class MultiFluidsImpl {
 		return r.getFluidResults().stream().anyMatch(fs -> fs.getFluid().defaultFluidState().is(fluid));
 	}
 
-	public static FluidIngredient fluidIngredientFromFluid(Fluid fluid, long amount) {
-		return FluidIngredient.fromFluid(fluid, (int) platformedAmount(amount));
+	public static SizedFluidIngredient fluidIngredientFromFluid(Fluid fluid, long amount) {
+		return SizedFluidIngredient.of(fluid, (int) platformedAmount(amount));
 	}
 
-	public static long getFluidAmount(FluidIngredient ingredient) {
-		return ingredient.getRequiredAmount();
+	public static long getFluidAmount(SizedFluidIngredient ingredient) {
+		return ingredient.amount();
 	}
 }

@@ -17,10 +17,10 @@ import com.dudko.blazinghot.content.casting.Molds;
 import com.dudko.blazinghot.content.item.BlazeArrowItem;
 import com.dudko.blazinghot.content.item.food.BlazingFoodItem;
 import com.dudko.blazinghot.data.lang.ItemDescriptions;
-import com.simibubi.create.AllTags.AllItemTags;
+import com.simibubi.create.api.data.datamaps.BlazeBurnerFuel;
+import com.simibubi.create.api.registry.CreateDataMaps;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.foundation.item.CombustibleItem;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.tterrag.registrate.util.entry.ItemEntry;
 
@@ -92,13 +92,13 @@ public class BlazingItems {
 
 	public static final ItemEntry<Item> NETHER_DOUGH = ingredient("nether_dough");
 
-	public static final ItemEntry<CombustibleItem>
+	public static final ItemEntry<Item>
 			BLAZE_ROLL =
 			REGISTRATE
-					.item("blaze_roll", CombustibleItem::new)
-					.tag(AllItemTags.BLAZE_BURNER_FUEL_SPECIAL.tag)
+					.item("blaze_roll", Item::new)
 					.onRegisterAfter(Registries.ITEM, v -> ItemDescription.useKey(v, "item.create.blaze_cake"))
-					.onRegister(i -> i.setBurnTime(4800))
+					.dataMap(CreateDataMaps.SUPERHEATED_BLAZE_BURNER_FUELS, new BlazeBurnerFuel(2400))
+					.burnTime(4800)
 					.register();
 
 	public static final ItemEntry<SequencedAssemblyItem>

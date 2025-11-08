@@ -10,7 +10,6 @@ import com.google.common.base.Joiner;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
@@ -22,6 +21,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 /**
  * Common methods for all Blazing Hot's recipe builders
@@ -36,7 +36,7 @@ public interface IBlazingRecipeBuilder<P extends ProcessingRecipeParams, R exten
 
 	S require(Ingredient ingredient);
 
-	S require(FluidIngredient fluidIngredient);
+	S require(SizedFluidIngredient fluidIngredient);
 
 	S output(Fluid fluid, MultiAmount amount);
 

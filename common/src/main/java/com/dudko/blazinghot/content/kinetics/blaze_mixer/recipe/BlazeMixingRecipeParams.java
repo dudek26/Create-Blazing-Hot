@@ -6,10 +6,10 @@ import java.util.function.Function;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 // useless for now
 public class BlazeMixingRecipeParams extends ProcessingRecipeParams {
@@ -18,7 +18,7 @@ public class BlazeMixingRecipeParams extends ProcessingRecipeParams {
 			CODEC =
 			RecordCodecBuilder.mapCodec(instance -> instance
 					.group(codec(BlazeMixingRecipeParams::new).forGetter(Function.identity()),
-							FluidIngredient.CODEC
+							SizedFluidIngredient.FLAT_CODEC
 									.optionalFieldOf("mixer_fuel")
 									.forGetter(BlazeMixingRecipeParams::getMixerFuel))
 					.apply(instance, (params, mixerFuel) -> {
@@ -29,13 +29,13 @@ public class BlazeMixingRecipeParams extends ProcessingRecipeParams {
 			STREAM_CODEC =
 			streamCodec(BlazeMixingRecipeParams::new);
 
-	protected FluidIngredient mixerFuel = null;
+	protected SizedFluidIngredient mixerFuel = null;
 
 	public BlazeMixingRecipeParams() {
 		super();
 	}
 
-	protected final Optional<FluidIngredient> getMixerFuel() {
+	protected final Optional<SizedFluidIngredient> getMixerFuel() {
 		return Optional.ofNullable(mixerFuel);
 	}
 

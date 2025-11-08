@@ -46,9 +46,9 @@ public class CastingBySpout {
 		return CastingBySpout.matchFilter(depot, castingRecipe) ? (RecipeHolder<CastingRecipe>) holder : null;
 	}
 
-	public static ItemStack getCastingResult(@Nullable CastingRecipe recipe) {
+	public static ItemStack getCastingResult(@Nullable CastingRecipe recipe, Level level) {
 		if (recipe == null) return null;
-		List<ItemStack> results = recipe.rollResults();
+		List<ItemStack> results = recipe.rollResults(level.getRandom());
 		return results.isEmpty() ? ItemStack.EMPTY : results.getFirst();
 	}
 

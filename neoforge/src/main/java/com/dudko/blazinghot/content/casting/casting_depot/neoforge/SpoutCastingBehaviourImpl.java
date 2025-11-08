@@ -129,7 +129,7 @@ public class SpoutCastingBehaviourImpl extends SpoutCastingBehaviour {
 				processingTicks = -1;
 				spoutTank.drain(requiredAmount, IFluidHandler.FluidAction.EXECUTE);
 				depot.setFluid(spoutTank.getFluid().getFluid(), requiredAmount);
-				castItem = CastingBySpout.getCastingResult(currentRecipe.value());
+				castItem = CastingBySpout.getCastingResult(currentRecipe.value(), level);
 				coolingDuration = currentRecipe.value().getCoolingDuration();
 				keepMold = currentRecipe.value().isKeepItem();
 			}

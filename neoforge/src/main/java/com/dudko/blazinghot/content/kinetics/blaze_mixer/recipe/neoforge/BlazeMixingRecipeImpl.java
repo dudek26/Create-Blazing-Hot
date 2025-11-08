@@ -2,9 +2,9 @@ package com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.neoforge;
 
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecipe;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import net.minecraft.world.item.crafting.Recipe;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 public class BlazeMixingRecipeImpl {
 
@@ -14,8 +14,8 @@ public class BlazeMixingRecipeImpl {
 				.isEmpty() && !basinRecipe.getFluidResults().isEmpty() && basinRecipe.getRollableResults().isEmpty();
 	}
 
-	public static boolean isPlaceholder(FluidIngredient fluidIngredient) {
-		return fluidIngredient.test(BlazeMixingRecipe.emptyMixerFuel().getMatchingFluidStacks().getFirst());
+	public static boolean isPlaceholder(SizedFluidIngredient fluidIngredient) {
+		return fluidIngredient.test(BlazeMixingRecipe.emptyMixerFuel().getFluids()[0]);
 	}
 
 }

@@ -2,7 +2,7 @@ package com.dudko.blazinghot.multiloader.fluid.fabric;
 
 import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.multiloader.fluid.MultiFluidStack;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
+
 
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;

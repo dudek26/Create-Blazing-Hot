@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
+
 
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import net.minecraft.resources.ResourceLocation;

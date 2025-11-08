@@ -1,7 +1,7 @@
 package com.dudko.blazinghot.multiloader.fluid.fabric;
 
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
+
 
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;

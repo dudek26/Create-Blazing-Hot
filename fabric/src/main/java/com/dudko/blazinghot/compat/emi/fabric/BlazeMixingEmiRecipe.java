@@ -15,7 +15,7 @@ import com.simibubi.create.compat.emi.CreateEmiPlugin;
 import com.simibubi.create.compat.emi.recipes.basin.BasinEmiRecipe;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
+
 
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;

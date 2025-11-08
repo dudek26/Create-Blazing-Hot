@@ -6,7 +6,7 @@ import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.google.gson.JsonObject;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder.ProcessingRecipeParams;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
+
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.FriendlyByteBuf;

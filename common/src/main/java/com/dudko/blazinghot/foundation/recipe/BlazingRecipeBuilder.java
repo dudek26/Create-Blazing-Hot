@@ -8,12 +8,12 @@ import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.Fluid;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 public abstract class BlazingRecipeBuilder<P extends ProcessingRecipeParams, R extends ProcessingRecipe<?, P>, S extends BlazingRecipeBuilder<P, R, S>> extends ProcessingRecipeBuilder<P, R, S> implements IBlazingRecipeBuilder<P, R, S> {
 
@@ -25,7 +25,7 @@ public abstract class BlazingRecipeBuilder<P extends ProcessingRecipeParams, R e
 	}
 
 	@Override
-	public S require(FluidIngredient fluidIngredient) {
+	public S require(SizedFluidIngredient fluidIngredient) {
 		return super.require(fluidIngredient);
 	}
 

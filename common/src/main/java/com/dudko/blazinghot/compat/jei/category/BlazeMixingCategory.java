@@ -11,7 +11,6 @@ import com.simibubi.create.compat.jei.category.BasinCategory;
 import com.simibubi.create.compat.jei.category.animations.AnimatedBlazeBurner;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -21,6 +20,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 public class BlazeMixingCategory extends BasinCategory {
 
@@ -51,16 +51,16 @@ public class BlazeMixingCategory extends BasinCategory {
 		this.type = type;
 	}
 
-	protected static FluidIngredient getFuelFromRecipe(MixingType type, BasinRecipe recipe) {
-		if (type == MixingType.AUTO_SHAPELESS) return FluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag(),
+	protected static SizedFluidIngredient getFuelFromRecipe(MixingType type, BasinRecipe recipe) {
+		if (type == MixingType.AUTO_SHAPELESS) return SizedFluidIngredient.of(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag(),
 				BlazingConfigs.server().recipes.blazeShapelessFuelUsage.get());
 		if (recipe instanceof BlazeMixingRecipe bmRecipe) return bmRecipe.getMixerFuel();
 		else {
 			assert Minecraft.getInstance().level != null;
 			int calculatedCost = (int) BlazeMixingRecipe.getFuelCost(recipe, Minecraft.getInstance().level);
 			return calculatedCost > 0 ?
-				   FluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag(), calculatedCost) :
-				   FluidIngredient.EMPTY;
+				   SizedFluidIngredient.of(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag(), calculatedCost) :
+				   new SizedFluidIngredient(net.neoforged.neoforge.fluids.crafting.FluidIngredient.empty(), 0);
 		}
 	}
 
@@ -78,7 +78,7 @@ public class BlazeMixingCategory extends BasinCategory {
 	public void setRecipe(IRecipeLayoutBuilder builder, BasinRecipe recipe, IFocusGroup focuses) {
 		super.setRecipe(builder, recipe, focuses);
 
-		FluidIngredient fuelFluid = getFuelFromRecipe(type, recipe);
+		SizedFluidIngredient fuelFluid = getFuelFromRecipe(type, recipe);
 
 		int vRows = (1 + recipe.getFluidResults().size() + recipe.getRollableResults().size()) / 2;
 
