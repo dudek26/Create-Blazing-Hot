@@ -102,14 +102,17 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 		fueled = fluidState.is(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag()) && getFuelAmount() > 0;
 	}
 
+	@Override
 	public boolean hasFuel(long amount) {
 		return hasFuel(BlazingTags.Fluids.BLAZE_MIXER_FUEL.tag(), amount);
 	}
 
+	@Override
 	public boolean hasFuel(TagKey<Fluid> tag, long amount) {
 		return hasFuel(FluidIngredient.fromTag(tag, (int) amount));
 	}
 
+	@Override
 	public boolean hasFuel(FluidIngredient fluidIngredient) {
 		return (fluidIngredient.test(getFluidStack()) && fluidIngredient.getRequiredAmount() <= getFuelAmount())
 				|| fluidIngredient.getRequiredAmount() == 0;
@@ -146,7 +149,6 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 				if (processingTicks < 0) {
 					float recipeSpeed = 1;
 					fuelCost = 0;
-					blazeMixing = false;
 					if (currentRecipe instanceof StandardProcessingRecipe<?> processingRecipe) {
 						int t = processingRecipe.getProcessingDuration();
 						if (t != 0) {
@@ -156,7 +158,6 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 								.getMixerFuel()
 								.test(getFluidStack())) {
 							fuelCost = blazeMixingRecipe.getMixerFuel().getRequiredAmount();
-							blazeMixing = true;
 						}
 					}
 					int calculatedCost = (int) getFuelCost(currentRecipe, level);
@@ -164,8 +165,9 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 						List<RecipeHolder<? extends Recipe<?>>> list = new ArrayList<>();
 						for (RecipeHolder<? extends Recipe<?>> r : RecipeFinder.get(getRecipeCacheKey(),
 								level,
-								this::matchStaticFilters))
+								this::matchStaticFilters)) {
 							if (matchBasinRecipe(r.value())) list.add(r);
+						}
 
 						if (!list.isEmpty()) {
 							list.sort((r1, r2) -> r2.value().getIngredients().size() - r1
@@ -175,7 +177,6 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 							recipeSpeed = multipliedRecipeSpeed(recipeSpeed, list.getFirst());
 						}
 
-						blazeMixing = true;
 						fuelCost = calculatedCost;
 					}
 
@@ -200,7 +201,6 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 						runningTicks++;
 						processingTicks = -1;
 						updateAdvancements(currentRecipe);
-						blazeMixing = false;
 						FluidStack updatedFuel = getFluidStack().copy();
 						if (updatedFuel.getAmount() != 0) // forge: check if empty to avoid crash
 							updatedFuel.shrink(Math.min(fuelCost, updatedFuel.getAmount()));
@@ -312,23 +312,26 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 
 	@Override
 	protected <I extends RecipeInput> boolean matchBasinRecipe(Recipe<I> recipe) {
-		if (!super.matchBasinRecipe(recipe)) return false;
-		BasinBlockEntity basin = getBasin().orElseThrow();
+		if (recipe == null) return false;
+		Optional<BasinBlockEntity> basin = getBasin();
+		if (basin.isEmpty()) return false;
 
 		if (recipe instanceof BlazeMixingRecipe bmxRecipe) {
-			return BasinRecipe.match(basin, bmxRecipe) && hasFuel(bmxRecipe.getMixerFuel());
+			return BasinRecipe.match(basin.get(), bmxRecipe) && hasFuel(bmxRecipe.getMixerFuel());
 		}
 		else if (recipe instanceof MixingRecipe) {
 			assert level != null;
 			RecipeManager manager = level.getRecipeManager();
 			Optional<RecipeHolder<BlazeMixingRecipe>>
 					bmRecipe =
-					manager.getRecipeFor(BlazingRecipeTypes.BLAZE_MIXING.getType(), basin.getInputInventory(), level);
+					manager.getRecipeFor(BlazingRecipeTypes.BLAZE_MIXING.getType(),
+							basin.get().getInputInventory(),
+							level);
 
 			if (bmRecipe.isPresent()) return false;
 		}
 
-		return BasinRecipe.match(basin, recipe);
+		return BasinRecipe.match(basin.get(), recipe);
 	}
 
 	@Override

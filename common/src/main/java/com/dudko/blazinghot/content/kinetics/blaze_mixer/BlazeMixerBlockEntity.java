@@ -55,7 +55,6 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 	public int dripTicks = 0;
 	public boolean running;
 	public boolean fueled;
-	public boolean blazeMixing;
 
 	private int ancientDebrisMelted;
 
@@ -68,6 +67,18 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 	@ExpectPlatform
 	public static BlazeMixerBlockEntity of(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		throw new AssertionError();
+	}
+
+	@Override
+	public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+		super.addBehaviours(behaviours);
+		registerAwardables(behaviours, AllAdvancements.MIXER);
+		registerAwardables(behaviours,
+				BlazingAdvancements.BLAZE_MIXER,
+				BlazingAdvancements.MOLTEN_GOLD,
+				BlazingAdvancements.MOLTEN_BLAZE_GOLD,
+				BlazingAdvancements.BLAZE_MIXER_MAX,
+				BlazingAdvancements.ANCIENT_DEBRIS_MELTING);
 	}
 
 	public float getRenderedHeadOffset(float partialTicks) {
@@ -91,18 +102,6 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 			}
 		}
 		return offset + 7 / 16f;
-	}
-
-	@Override
-	public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-		super.addBehaviours(behaviours);
-		registerAwardables(behaviours, AllAdvancements.MIXER);
-		registerAwardables(behaviours,
-				BlazingAdvancements.BLAZE_MIXER,
-				BlazingAdvancements.MOLTEN_GOLD,
-				BlazingAdvancements.MOLTEN_BLAZE_GOLD,
-				BlazingAdvancements.BLAZE_MIXER_MAX,
-				BlazingAdvancements.ANCIENT_DEBRIS_MELTING);
 	}
 
 	public float getRenderedHeadRotationSpeed(float partialTicks) {
@@ -129,7 +128,6 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 		running = compound.getBoolean("Running");
 		runningTicks = compound.getInt("Ticks");
 		fueled = compound.getBoolean("Fueled");
-		blazeMixing = compound.getBoolean("BlazeMixing");
 		ancientDebrisMelted = compound.getInt("AncientDebrisMelted");
 		super.read(compound, registries, clientPacket);
 		if (clientPacket && hasLevel())
@@ -141,7 +139,6 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 		compound.putBoolean("Running", running);
 		compound.putInt("Ticks", runningTicks);
 		compound.putBoolean("Fueled", fueled);
-		compound.putBoolean("BlazeMixing", blazeMixing);
 		compound.putInt("AncientDebrisMelted", ancientDebrisMelted);
 		super.write(compound, registries, clientPacket);
 	}
