@@ -62,7 +62,6 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import net.neoforged.neoforge.items.IItemHandler;
 
-@SuppressWarnings("UnstableApiUsage")
 public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 
 	public int fuelCost;
@@ -141,7 +140,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 		}
 
 		float speed = Math.abs(getSpeed());
-		if (running && level != null && currentRecipe != null) {
+		if (running && level != null) {
 			if (level.isClientSide && runningTicks == 20) renderParticles();
 
 			if ((!level.isClientSide || isVirtual()) && runningTicks == 20) {
@@ -187,7 +186,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 					if (processingTicks == 0) {
 						runningTicks++;
 						processingTicks = -1;
-						updateAdvancements(currentRecipe);
+						if (currentRecipe != null) updateAdvancements(currentRecipe);
 						FluidStack updatedFuel = getFluidStack().copy();
 						if (updatedFuel.getAmount() != 0) // forge: check if empty to avoid crash
 							updatedFuel.shrink(Math.min(fuelCost, updatedFuel.getAmount()));
@@ -326,8 +325,8 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 
 		List<FluidStack[]> allFluidsA = a.getFluidIngredients().stream().map(SizedFluidIngredient::getFluids).toList();
 		for (FluidStack[] matchingStacks : allFluidsA) {
-			boolean matched = false;
-			if (matchingStacks.length == 0) return matched;
+			boolean matched;
+			if (matchingStacks.length == 0) return false;
 
 			matched = b.getFluidIngredients().stream().anyMatch(i -> Arrays.stream(matchingStacks).allMatch(i::test));
 			if (matched) continue;
@@ -336,8 +335,8 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 
 		List<FluidStack[]> allFluidsB = b.getFluidIngredients().stream().map(SizedFluidIngredient::getFluids).toList();
 		for (FluidStack[] matchingStacks : allFluidsB) {
-			boolean matched = false;
-			if (matchingStacks.length == 0) return matched;
+			boolean matched;
+			if (matchingStacks.length == 0) return false;
 
 			matched = a.getFluidIngredients().stream().anyMatch(i -> Arrays.stream(matchingStacks).allMatch(i::test));
 			if (matched) continue;
