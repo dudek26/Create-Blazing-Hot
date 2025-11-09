@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.content.kinetics.blaze_mixer;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -235,24 +236,33 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 	}
 
 	public static boolean doItemInputsMatch(StandardProcessingRecipe<?> a, StandardProcessingRecipe<?> b) {
-		if (!a.getIngredients().isEmpty() && !b.getIngredients().isEmpty()) {
-			List<ItemStack[]> allItems = a.getIngredients().stream().map(Ingredient::getItems).toList();
-			for (ItemStack[] matchingStacks : allItems) {
-				boolean matched = false;
-				if (matchingStacks.length != 0) {
-					matched = b.getIngredients().stream().anyMatch(i -> i.test(matchingStacks[0]));
-				}
-				if (matched) continue;
-				return false;
-			}
-			return true;
+		if (a.getIngredients().isEmpty() && b.getIngredients().isEmpty()) return true;
+
+		List<ItemStack[]> allItemsA = a.getIngredients().stream().map(Ingredient::getItems).toList();
+		for (ItemStack[] matchingStacks : allItemsA) {
+			boolean matched = false;
+			if (matchingStacks.length == 0) return matched;
+
+			matched = b.getIngredients().stream().anyMatch(i -> Arrays.stream(matchingStacks).allMatch(i));
+			if (matched) continue;
+			return false;
 		}
-		else return !a.getFluidIngredients().isEmpty() && !b.getFluidIngredients().isEmpty();
+
+		List<ItemStack[]> allItemsB = b.getIngredients().stream().map(Ingredient::getItems).toList();
+		for (ItemStack[] matchingStacks : allItemsB) {
+			boolean matched = false;
+			if (matchingStacks.length == 0) return matched;
+
+			matched = a.getIngredients().stream().anyMatch(i -> Arrays.stream(matchingStacks).allMatch(i));
+			if (matched) continue;
+			return false;
+		}
+		return true;
 	}
 
 	@ExpectPlatform
 	public static boolean doFluidInputsMatch(StandardProcessingRecipe<?> a, StandardProcessingRecipe<?> b) {
-		return true; // no assertion error so IntelliJ doesn't cry
+		return true;
 	}
 
 

@@ -3,6 +3,7 @@ package com.dudko.blazinghot.content.kinetics.blaze_mixer.neoforge;
 import static com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecipe.getFuelCost;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -318,19 +319,54 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 		if (recipe instanceof BlazeMixingRecipe bmxRecipe) {
 			return BasinRecipe.match(basin.get(), bmxRecipe) && hasFuel(bmxRecipe.getMixerFuel());
 		}
-		else if (recipe instanceof MixingRecipe) {
+		else if (recipe instanceof MixingRecipe mxRecipe) {
 			assert level != null;
 			RecipeManager manager = level.getRecipeManager();
+
+			List<RecipeHolder<BlazeMixingRecipe>>
+					recipes =
+					manager.getAllRecipesFor(BlazingRecipeTypes.BLAZE_MIXING.getType());
+			for (RecipeHolder<BlazeMixingRecipe> mixing : recipes) {
+				if (doInputsMatch(mxRecipe, mixing.value())) return false;
+			}
+
+			/* todo: apparently this doesn't work?
 			Optional<RecipeHolder<BlazeMixingRecipe>>
 					bmRecipe =
 					manager.getRecipeFor(BlazingRecipeTypes.BLAZE_MIXING.getType(),
-							(RecipeInput) basin.get().getInputInventory(),
+							new RecipeWrapper(basin.get().getInputInventory()),
 							level);
 
 			if (bmRecipe.isPresent()) return false;
+			*/
 		}
 
 		return BasinRecipe.match(basin.get(), recipe);
+	}
+
+	public static boolean doFluidInputsMatch(StandardProcessingRecipe<?> a, StandardProcessingRecipe<?> b) {
+		if (a.getFluidIngredients().isEmpty() && b.getFluidIngredients().isEmpty()) return true;
+
+		List<FluidStack[]> allFluidsA = a.getFluidIngredients().stream().map(SizedFluidIngredient::getFluids).toList();
+		for (FluidStack[] matchingStacks : allFluidsA) {
+			boolean matched = false;
+			if (matchingStacks.length == 0) return matched;
+
+			matched = b.getFluidIngredients().stream().anyMatch(i -> Arrays.stream(matchingStacks).allMatch(i::test));
+			if (matched) continue;
+			return false;
+		}
+
+		List<FluidStack[]> allFluidsB = b.getFluidIngredients().stream().map(SizedFluidIngredient::getFluids).toList();
+		for (FluidStack[] matchingStacks : allFluidsB) {
+			boolean matched = false;
+			if (matchingStacks.length == 0) return matched;
+
+			matched = a.getFluidIngredients().stream().anyMatch(i -> Arrays.stream(matchingStacks).allMatch(i::test));
+			if (matched) continue;
+			return false;
+		}
+		return true;
 	}
 
 	@Override
