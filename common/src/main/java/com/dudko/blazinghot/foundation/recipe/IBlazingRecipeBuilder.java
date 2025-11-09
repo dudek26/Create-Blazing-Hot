@@ -48,6 +48,8 @@ public interface IBlazingRecipeBuilder<P extends ProcessingRecipeParams, R exten
 
 	ResourceLocation getRecipeId();
 
+	boolean isMechanicalMixerOnly();
+
 	default S require(TagKey<Fluid> fluidTag, MultiAmount amount) {
 		return require(MultiFluidIngredient.fromTag(fluidTag, amount));
 	}
@@ -73,7 +75,9 @@ public interface IBlazingRecipeBuilder<P extends ProcessingRecipeParams, R exten
 		IRecipeTypeInfo recipeType = recipe.getTypeInfo();
 		ResourceLocation typeId = recipeType.getId();
 		ResourceLocation id = getRecipeId().withPrefix(typeId.getPath() + "/");
-		var errors = recipe.validate();
+		if (isMechanicalMixerOnly()) id = id.withSuffix("_mixer_only");
+		
+		List<String> errors = recipe.validate();
 		if (!errors.isEmpty()) {
 			errors.add(recipe.getClass().getSimpleName() + "with id " + id + " failed validation:");
 			BlazingHot.LOGGER.warn(Joiner.on('\n').join(errors));

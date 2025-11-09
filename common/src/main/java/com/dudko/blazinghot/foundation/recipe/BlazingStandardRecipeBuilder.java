@@ -23,15 +23,11 @@ import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 public class BlazingStandardRecipeBuilder<R extends StandardProcessingRecipe<?>> extends StandardProcessingRecipe.Builder<R> implements IBlazingRecipeBuilder<ProcessingRecipeParams, R, BlazingStandardRecipeBuilder<R>> {
 
 	protected final List<LoadCondition<?>> loadConditions;
+	boolean mechanicalMixerOnly = false;
 
-	/**
-	 * TODO: Remove after <a href="https://github.com/Creators-of-Create/Create/pull/9070">#9070</a> is merged
-	 */
-//	protected FluidIngredient mixerFuel;
 	public BlazingStandardRecipeBuilder(StandardProcessingRecipe.Factory<R> factory, ResourceLocation recipeId) {
 		super(factory, recipeId);
 		this.loadConditions = new ArrayList<>();
-//		this.mixerFuel = FluidIngredient.EMPTY;
 	}
 
 	@Override
@@ -58,6 +54,11 @@ public class BlazingStandardRecipeBuilder<R extends StandardProcessingRecipe<?>>
 		return self();
 	}
 
+	public BlazingStandardRecipeBuilder<R> mechanicalMixerOnly() {
+		mechanicalMixerOnly = true;
+		return self();
+	}
+
 	@Override
 	public List<LoadCondition<?>> getLoadConditions() {
 		return loadConditions;
@@ -79,8 +80,12 @@ public class BlazingStandardRecipeBuilder<R extends StandardProcessingRecipe<?>>
 	}
 
 	@Override
+	public boolean isMechanicalMixerOnly() {
+		return mechanicalMixerOnly;
+	}
+
+	@Override
 	public void build(RecipeOutput consumer) {
-//		require(mixerFuel);
 		IBlazingRecipeBuilder.super.build(consumer);
 	}
 

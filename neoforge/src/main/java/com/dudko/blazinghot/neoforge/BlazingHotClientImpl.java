@@ -17,12 +17,12 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 @Mod(value = BlazingHot.ID, dist = Dist.CLIENT)
 public class BlazingHotClientImpl {
 
-	public static void initClient(IEventBus modEventBus) {
+	public BlazingHotClientImpl(IEventBus modEventBus) {
 		BlazingHotClient.init();
 
 		modEventBus.addListener(BlazingHotClientImpl::onLoadComplete);
 	}
-
+	
 	public static void onLoadComplete(FMLLoadCompleteEvent event) {
 		ModContainer
 				container =

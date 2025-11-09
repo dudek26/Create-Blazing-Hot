@@ -16,6 +16,7 @@ import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.advancement.AllAdvancements;
 import com.simibubi.create.foundation.advancement.CreateAdvancement;
@@ -226,11 +227,11 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 		level.addParticle(data, center.x, center.y - 1.75f, center.z, target.x, target.y, target.z);
 	}
 
-	public static boolean doInputsMatch(StandardProcessingRecipe<?> a, StandardProcessingRecipe<?> b) {
+	public static boolean doInputsMatch(ProcessingRecipe<?, ?> a, ProcessingRecipe<?, ?> b) {
 		return doItemInputsMatch(a, b) && doFluidInputsMatch(a, b);
 	}
 
-	public static boolean doItemInputsMatch(StandardProcessingRecipe<?> a, StandardProcessingRecipe<?> b) {
+	public static boolean doItemInputsMatch(ProcessingRecipe<?, ?> a, ProcessingRecipe<?, ?> b) {
 		if (a.getIngredients().isEmpty() && b.getIngredients().isEmpty()) return true;
 
 		List<ItemStack[]> allItemsA = a.getIngredients().stream().map(Ingredient::getItems).toList();
@@ -256,7 +257,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 	}
 
 	@ExpectPlatform
-	public static boolean doFluidInputsMatch(StandardProcessingRecipe<?> a, StandardProcessingRecipe<?> b) {
+	public static boolean doFluidInputsMatch(ProcessingRecipe<?, ?> a, ProcessingRecipe<?, ?> b) {
 		return true;
 	}
 

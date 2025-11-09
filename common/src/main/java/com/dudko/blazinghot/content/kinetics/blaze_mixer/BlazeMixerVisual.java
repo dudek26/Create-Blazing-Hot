@@ -48,23 +48,25 @@ public class BlazeMixerVisual extends SingleAxisRotatingVisual<BlazeMixerBlockEn
 	}
 
 	private void transformHead(float renderedHeadOffset, float pt) {
-		float speed = this.mixer.getRenderedHeadRotationSpeed(pt);
+		float speed = mixer.getRenderedHeadRotationSpeed(pt);
+
 		mixerHead
-				.setPosition(this.getVisualPosition())
-				.nudge(0.0F, -renderedHeadOffset, 0.0F)
-				.setRotationalSpeed(speed * 2.0F * 6.0F)
+				.setPosition(getVisualPosition())
+				.nudge(0, -renderedHeadOffset, 0)
+				.setRotationalSpeed(speed * 2 * RotatingInstance.SPEED_MULTIPLIER)
 				.setChanged();
 	}
 
 	private void transformPole(float renderedHeadOffset) {
-		mixerPole.position(this.getVisualPosition()).translatePosition(0.0F, -renderedHeadOffset, 0.0F).setChanged();
+		mixerPole.position(getVisualPosition()).translatePosition(0, -renderedHeadOffset, 0).setChanged();
 	}
 
 	@Override
 	public void updateLight(float partialTick) {
 		super.updateLight(partialTick);
-		this.relight(this.pos.below(), this.mixerHead);
-		this.relight(this.mixerPole);
+
+		relight(pos.below(), mixerHead);
+		relight(mixerPole);
 	}
 
 	@Override

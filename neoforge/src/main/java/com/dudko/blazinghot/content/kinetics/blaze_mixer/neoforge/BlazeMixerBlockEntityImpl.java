@@ -26,7 +26,6 @@ import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
-import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour.TankSegment;
@@ -49,7 +48,6 @@ import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeInput;
-import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -116,7 +114,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 
 	@Override
 	public boolean hasFuel(SizedFluidIngredient fluidIngredient) {
-		return fluidIngredient.test(getFluidStack());
+		return fluidIngredient.ingredient().isEmpty() || fluidIngredient.test(getFluidStack());
 	}
 
 	public long getFuelAmount() {
@@ -308,22 +306,22 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 		if (recipe instanceof BlazeMixingRecipe bmxRecipe) {
 			return BasinRecipe.match(basin.get(), bmxRecipe) && hasFuel(bmxRecipe.getMixerFuel());
 		}
-		else if (recipe instanceof MixingRecipe mxRecipe) {
-			assert level != null;
-			RecipeManager manager = level.getRecipeManager();
-
-			List<RecipeHolder<BlazeMixingRecipe>>
-					recipes =
-					manager.getAllRecipesFor(BlazingRecipeTypes.BLAZE_MIXING.getType());
-			for (RecipeHolder<BlazeMixingRecipe> mixing : recipes) {
-				if (doInputsMatch(mxRecipe, mixing.value())) return false;
-			}
-		}
+//		else if (recipe instanceof MixingRecipe mxRecipe) {
+//			assert level != null;
+//			RecipeManager manager = level.getRecipeManager();
+//
+//			List<RecipeHolder<BlazeMixingRecipe>>
+//					recipes =
+//					manager.getAllRecipesFor(BlazingRecipeTypes.BLAZE_MIXING.getType());
+//			for (RecipeHolder<BlazeMixingRecipe> mixing : recipes) {
+//				if (doInputsMatch(mxRecipe, mixing.value())) return false;
+//			}
+//		}
 
 		return BasinRecipe.match(basin.get(), recipe);
 	}
 
-	public static boolean doFluidInputsMatch(StandardProcessingRecipe<?> a, StandardProcessingRecipe<?> b) {
+	public static boolean doFluidInputsMatch(ProcessingRecipe<?, ?> a, ProcessingRecipe<?, ?> b) {
 		if (a.getFluidIngredients().isEmpty() && b.getFluidIngredients().isEmpty()) return true;
 
 		List<FluidStack[]> allFluidsA = a.getFluidIngredients().stream().map(SizedFluidIngredient::getFluids).toList();
@@ -357,7 +355,8 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 				&& recipe.getIngredients().size() > 1
 				&& !MechanicalPressBlockEntity.canCompress(recipe)) && !AllRecipeTypes.shouldIgnoreInAutomation(holder)
 				|| (recipe.getType() == AllRecipeTypes.MIXING.getType()
-				&& BlazingConfigs.server().recipes.allowMixingInBlazeMixer.get()))
+				&& BlazingConfigs.server().recipes.allowMixingInBlazeMixer.get()
+				&& BlazingRecipeTypes.shouldAllowBlazeMixing(holder)))
 				|| recipe.getType() == BlazingRecipeTypes.BLAZE_MIXING.getType();
 	}
 

@@ -54,8 +54,7 @@ public abstract class BlazingJEI implements IModPlugin {
 				blazeMixing =
 				builder(BasinRecipe.class)
 						.addTypedRecipes(BlazingRecipeTypes.BLAZE_MIXING)
-						.addTypedRecipesExcluding(AllRecipeTypes.MIXING::getType,
-								BlazingRecipeTypes.BLAZE_MIXING::getType)
+						.addTypedRecipesIf(AllRecipeTypes.MIXING::getType, BlazingRecipeTypes::shouldAllowBlazeMixing)
 						.catalyst(BlazingBlocks.BLAZE_MIXER::get)
 						.catalyst(AllBlocks.BASIN::get)
 						.doubleItemIcon(BlazingBlocks.BLAZE_MIXER.get(), AllBlocks.BASIN.get())

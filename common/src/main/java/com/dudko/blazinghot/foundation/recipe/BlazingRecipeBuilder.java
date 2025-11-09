@@ -18,6 +18,7 @@ import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 public abstract class BlazingRecipeBuilder<P extends ProcessingRecipeParams, R extends ProcessingRecipe<?, P>, S extends BlazingRecipeBuilder<P, R, S>> extends ProcessingRecipeBuilder<P, R, S> implements IBlazingRecipeBuilder<P, R, S> {
 
 	protected final List<LoadCondition<?>> loadConditions;
+	protected boolean mechanicalMixerOnly;
 
 	public BlazingRecipeBuilder(ProcessingRecipe.Factory<P, R> factory, ResourceLocation recipeId) {
 		super(factory, recipeId);
@@ -61,6 +62,11 @@ public abstract class BlazingRecipeBuilder<P extends ProcessingRecipeParams, R e
 	@Override
 	public ResourceLocation getRecipeId() {
 		return recipeId;
+	}
+
+	@Override
+	public boolean isMechanicalMixerOnly() {
+		return mechanicalMixerOnly;
 	}
 
 	@Override

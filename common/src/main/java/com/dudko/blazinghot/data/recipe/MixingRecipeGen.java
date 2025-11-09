@@ -65,6 +65,7 @@ public class MixingRecipeGen extends BlazingStandardRecipeGen<MixingRecipe> {
 									.output(BlazingMetals.BLAZE_GOLD.getFluid(), MultiAmount.ROD)
 									.requireMultiple(netherEssence(), 2)
 									.require(moltenGold(), MultiAmount.ROD)
+									.mechanicalMixerOnly()
 									.requiresHeat(HeatCondition.SUPERHEATED)
 									.duration(200)),
 			MOLTEN_NETHERITE =
@@ -108,6 +109,7 @@ public class MixingRecipeGen extends BlazingStandardRecipeGen<MixingRecipe> {
 							.withConditions(form.getMeltingLoadConditions(metal))
 							.output(metal.getFluid(), form.amount)
 							.require(form.getMeltingIngredient(metal))
+							.mechanicalMixerOnly()
 							.duration(form.meltingTime * 3)
 							.requiresHeat(HeatCondition.SUPERHEATED));
 		}

@@ -6,7 +6,6 @@ import com.dudko.blazinghot.content.kinetics.blaze_mixer.neoforge.BlazeMixerBloc
 import com.dudko.blazinghot.content.kinetics.mechanical_arm.BlazingArmInteractionPointTypes;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.advancement.BlazingTriggers;
-import com.dudko.blazinghot.foundation.multiloader.Env;
 import com.dudko.blazinghot.foundation.recipe.neoforge.BlazingRecipeTypeImpl;
 import com.dudko.blazinghot.registry.neoforge.BlazingConfigsImpl;
 import com.dudko.blazinghot.registry.neoforge.BlazingCreativeTabsImpl;
@@ -40,7 +39,6 @@ public class BlazingHotImpl {
 		modEventBus.addListener(EventPriority.LOWEST, BlazingHotDataNeoForge::gatherData);
 		modEventBus.addListener(EventPriority.HIGHEST, BlazingHotDataNeoForge::gatherDataHighPriority);
 		BlazingConfigsImpl.register(modLoadingContext, modContainer);
-		Env.CLIENT.runIfCurrent(() -> () -> BlazingHotClientImpl.initClient(modEventBus));
 	}
 
 	public static void init(final FMLCommonSetupEvent event) {
