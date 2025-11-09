@@ -24,12 +24,13 @@ import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour.TankSegment;
 import com.simibubi.create.foundation.item.SmartInventory;
-import com.simibubi.create.foundation.recipe.RecipeFinder;
 
 import net.createmod.catnip.animation.AnimationTickHolder;
 import net.createmod.catnip.data.Couple;
@@ -149,35 +150,23 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 				if (processingTicks < 0) {
 					float recipeSpeed = 1;
 					fuelCost = 0;
-					if (currentRecipe instanceof StandardProcessingRecipe<?> processingRecipe) {
+					if (currentRecipe instanceof ProcessingRecipe<?, ? extends ProcessingRecipeParams> processingRecipe) {
 						int t = processingRecipe.getProcessingDuration();
 						if (t != 0) {
 							recipeSpeed = t / 100f;
 						}
-						if (processingRecipe instanceof BlazeMixingRecipe blazeMixingRecipe && blazeMixingRecipe
-								.getMixerFuel()
-								.test(getFluidStack())) {
-							fuelCost = blazeMixingRecipe.getMixerFuel().amount();
+					}
+					if (currentRecipe instanceof BlazeMixingRecipe blazeMixingRecipe) {
+						if (blazeMixingRecipe.getMixerFuel().test(getFluidStack())) {
+							fuelCost = blazeMixingRecipe.getMixerFuelAmount();
 						}
 					}
-					int calculatedCost = (int) getFuelCost(currentRecipe, level);
-					if (hasFuel(calculatedCost) && !(currentRecipe instanceof BlazeMixingRecipe)) {
-						List<RecipeHolder<? extends Recipe<?>>> list = new ArrayList<>();
-						for (RecipeHolder<? extends Recipe<?>> r : RecipeFinder.get(getRecipeCacheKey(),
-								level,
-								this::matchStaticFilters)) {
-							if (matchBasinRecipe(r.value())) list.add(r);
+					else {
+						int calculatedCost = (int) getFuelCost(currentRecipe, level);
+						if (hasFuel(calculatedCost)) {
+							recipeSpeed = 1 / recipeSpeedMultiplier(currentRecipe);
+							fuelCost = calculatedCost;
 						}
-
-						if (!list.isEmpty()) {
-							list.sort((r1, r2) -> r2.value().getIngredients().size() - r1
-									.value()
-									.getIngredients()
-									.size());
-							recipeSpeed = multipliedRecipeSpeed(recipeSpeed, list.getFirst());
-						}
-
-						fuelCost = calculatedCost;
 					}
 
 					processingTicks =
@@ -329,16 +318,6 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 			for (RecipeHolder<BlazeMixingRecipe> mixing : recipes) {
 				if (doInputsMatch(mxRecipe, mixing.value())) return false;
 			}
-
-			/* todo: apparently this doesn't work?
-			Optional<RecipeHolder<BlazeMixingRecipe>>
-					bmRecipe =
-					manager.getRecipeFor(BlazingRecipeTypes.BLAZE_MIXING.getType(),
-							new RecipeWrapper(basin.get().getInputInventory()),
-							level);
-
-			if (bmRecipe.isPresent()) return false;
-			*/
 		}
 
 		return BasinRecipe.match(basin.get(), recipe);

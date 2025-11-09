@@ -4,13 +4,15 @@ import java.util.List;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiFluidIngredient;
 import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
+import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.AllRecipeTypes;
+import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
-import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
@@ -18,19 +20,12 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.component.DataComponentPatch;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 @ParametersAreNonnullByDefault
@@ -57,17 +52,20 @@ public class BlazeMixingRecipe extends BasinRecipe {
 	}
 
 	public static SizedFluidIngredient emptyMixerFuel() {
-		CompoundTag data = new CompoundTag();
-		data.putBoolean("blazinghot:placeholder_fluid", true);
-		return MultiFluidIngredient.fromFluid(BuiltInRegistries.FLUID.wrapAsHolder(Fluids.WATER),
-				MultiAmount.from(1),
-				DataComponentPatch.builder().set(DataComponents.CUSTOM_DATA, CustomData.of(data)).build());
+		return MultiFluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_PLACEHOLDER.tag(),
+				MultiAmount.fromBucketFraction(1, 10));
 	}
 
 	public SizedFluidIngredient getMixerFuel() {
 		SizedFluidIngredient fuel = super.getFluidIngredients().getLast();
 		if (isPlaceholder(fuel)) return MultiFluidIngredient.empty();
 		return fuel;
+	}
+
+	public int getMixerFuelAmount() {
+		SizedFluidIngredient fuel = getMixerFuel();
+		if (fuel.ingredient().isEmpty()) return 0;
+		return fuel.amount();
 	}
 
 	@Override
@@ -79,30 +77,28 @@ public class BlazeMixingRecipe extends BasinRecipe {
 	 * @apiNote Already platformed.
 	 */
 	public static long getFuelCost(Recipe<?> recipe, Level level) {
+
+		// brewing
 		if (recipe instanceof MixingRecipe mixingRecipe) {
 			for (Ingredient ingredient : mixingRecipe.getIngredients()) {
 				for (ItemStack stack : ingredient.getItems()) {
-					// TODO fix StackOverflow
-//					if (stack.isEmpty()) continue;
-//
-//					List<MixingRecipe> list = PotionMixingRecipes.sortRecipesByItem(level).get(stack.getItem());
-//					if (list == null) continue;
-//					for (MixingRecipe potionRecipe : list)
-//						if (BlazeMixerBlockEntity.doInputsMatch(potionRecipe, mixingRecipe))
-//							return BlazingConfigs.server().recipes.blazeBrewingFuelUsage.get();
+					if (stack.isEmpty()) continue;
+
+					List<MixingRecipe> list = PotionMixingRecipes.sortRecipesByItem(level).get(stack.getItem());
+					if (list == null) continue;
+					for (MixingRecipe potionRecipe : list)
+						if (BlazeMixerBlockEntity.doInputsMatch(potionRecipe, mixingRecipe))
+							return BlazingConfigs.server().recipes.blazeBrewingFuelUsage.get();
 				}
 			}
 		}
 
+		// mixing
 		if (recipe.getType() == AllRecipeTypes.MIXING.getType())
 			return durationToFuelCost(((ProcessingRecipe<?, ?>) recipe).getProcessingDuration());
 
-		else if ((recipe instanceof CraftingRecipe
-				&& !(recipe instanceof ShapedRecipe)
-				&& BlazingConfigs.server().recipes.allowShapelessInBlazeMixer.get()
-				&& recipe.getIngredients().size() > 1
-				&& !MechanicalPressBlockEntity.canCompress(recipe)))
-			return BlazingConfigs.server().recipes.blazeShapelessFuelUsage.get();
+		// shapeless
+		if (recipe instanceof CraftingRecipe) return BlazingConfigs.server().recipes.blazeShapelessFuelUsage.get();
 
 		return 0;
 	}

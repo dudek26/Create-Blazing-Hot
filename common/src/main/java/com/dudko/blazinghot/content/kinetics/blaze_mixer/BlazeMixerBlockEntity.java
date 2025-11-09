@@ -15,7 +15,6 @@ import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
-import com.simibubi.create.content.kinetics.press.MechanicalPressBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.advancement.AllAdvancements;
@@ -38,8 +37,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
@@ -92,7 +89,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 				num = ((2 - Mth.cos((float) (num * Math.PI))) / 2);
 				offset = num - .5f;
 			}
-			else if (runningTicks == 20) {
+			else if (runningTicks <= 20) {
 				offset = 1;
 			}
 			else {
@@ -144,10 +141,10 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 		super.write(compound, registries, clientPacket);
 	}
 
-	public float multipliedRecipeSpeed(float speed, RecipeHolder<? extends Recipe<?>> holder) {
-		if (holder == null) return speed;
-		Recipe<?> recipe = holder.value();
+	public float recipeSpeedMultiplier(Recipe<?> recipe) {
+		if (recipe == null) return 1;
 
+		// brewing
 		if (recipe instanceof MixingRecipe) {
 			for (ItemStack stack : getAvailableItems()) {
 				if (stack.isEmpty()) continue;
@@ -156,21 +153,20 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 				if (list == null) continue;
 				for (MixingRecipe mixingRecipe : list)
 					if (matchBasinRecipe(mixingRecipe))
-						return speed / BlazingConfigs.server().recipes.blazeBrewingSpeedMultiplier.getF();
+						return BlazingConfigs.server().recipes.blazeBrewingSpeedMultiplier.getF();
 			}
 		}
-		else if (recipe.getType() == AllRecipeTypes.MIXING.getType()) {
-			return speed / BlazingConfigs.server().recipes.blazeMixingSpeedMultiplier.getF();
+
+		// mixing
+		if (recipe.getType() == AllRecipeTypes.MIXING.getType()) {
+			return BlazingConfigs.server().recipes.blazeMixingSpeedMultiplier.getF();
 		}
-		else if ((recipe instanceof CraftingRecipe
-				&& !(recipe instanceof ShapedRecipe)
-				&& AllConfigs.server().recipes.allowShapelessInMixer.get()
-				&& recipe.getIngredients().size() > 1
-				&& !MechanicalPressBlockEntity.canCompress(recipe))
-				&& !AllRecipeTypes.shouldIgnoreInAutomation(holder)) {
-			return speed / BlazingConfigs.server().recipes.blazeShapelessSpeedMultiplier.getF();
+
+		// shapeless
+		if (recipe instanceof CraftingRecipe) {
+			return BlazingConfigs.server().recipes.blazeShapelessSpeedMultiplier.getF();
 		}
-		return speed;
+		return 1;
 	}
 
 	public void updateAdvancements(Recipe<?> r) {
@@ -231,8 +227,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 	}
 
 	public static boolean doInputsMatch(StandardProcessingRecipe<?> a, StandardProcessingRecipe<?> b) {
-//		return doItemInputsMatch(a, b) && doFluidInputsMatch(a, b);
-		return doItemInputsMatch(a, b);
+		return doItemInputsMatch(a, b) && doFluidInputsMatch(a, b);
 	}
 
 	public static boolean doItemInputsMatch(StandardProcessingRecipe<?> a, StandardProcessingRecipe<?> b) {
@@ -264,7 +259,6 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 	public static boolean doFluidInputsMatch(StandardProcessingRecipe<?> a, StandardProcessingRecipe<?> b) {
 		return true;
 	}
-
 
 	@Override
 	public void startProcessingBasin() {

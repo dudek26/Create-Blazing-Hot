@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-08T23:36:34.5055683	Create: Blazing Hot's Processing Recipes
+// 1.21.1	2025-11-09T12:20:31.6439603	Create: Blazing Hot's Processing Recipes
 c105b208267afef4def643f2367b6127f1c622f9 data/blazinghot/recipe/blaze_mixing/melting/ancient_debris.json
 81b017e26fe2ff565f776907a964deab4c72954a data/blazinghot/recipe/blaze_mixing/melting/andesite_alloy.json
 3f26ea91f58458497d4aa3d0afeeaf899798d9a4 data/blazinghot/recipe/blaze_mixing/melting/crushed_raw_copper.json
@@ -42,7 +42,7 @@ e520057be77a2990efd696a5b20a10df2c056bd8 data/blazinghot/recipe/blaze_mixing/mel
 a70cab6381bc4231b9b18cb9558176dfc4942fa0 data/blazinghot/recipe/blaze_mixing/melting/wires/gold.json
 11aba331978e352303a6bc891d278b65008b14d5 data/blazinghot/recipe/blaze_mixing/melting/wires/iron.json
 4e4a53377aca901fa770582e8a7fc032d8f45ef4 data/blazinghot/recipe/blaze_mixing/molten_blaze_gold.json
-363d42deef5aaa16a872a84354fe4e05c7eaaa7b data/blazinghot/recipe/blaze_mixing/nether_lava.json
+a2669f5821958a97520619ac3eb48426043a0561 data/blazinghot/recipe/blaze_mixing/nether_lava.json
 1515e2a196502ac959dbd9e2202cefa3b2a670d8 data/blazinghot/recipe/casting/compat/createaddition/porcelain/rod/brass.json
 6b86c260147e0245ba1fdf049854e835aa69e463 data/blazinghot/recipe/casting/compat/createaddition/porcelain/rod/copper.json
 32d2843f91d01983a0217d7d804f9669705d323c data/blazinghot/recipe/casting/compat/createaddition/porcelain/rod/gold.json

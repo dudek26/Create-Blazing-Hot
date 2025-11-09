@@ -149,7 +149,8 @@ public class BlazingTags {
 
 	public enum Fluids {
 		BLAZE_MIXER_FUEL("blaze_mixer_fuel"),
-		NETHER_LAVA("nether_lava");
+		NETHER_LAVA("nether_lava"),
+		BLAZE_MIXER_PLACEHOLDER("blaze_mixer_placeholder");
 
 		public final Namespace namespace;
 		public final String path;

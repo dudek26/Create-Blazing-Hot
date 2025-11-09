@@ -1,6 +1,5 @@
 package com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.neoforge;
 
-import com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecipe;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 
 import net.minecraft.world.item.crafting.Recipe;
@@ -15,7 +14,7 @@ public class BlazeMixingRecipeImpl {
 	}
 
 	public static boolean isPlaceholder(SizedFluidIngredient fluidIngredient) {
-		return fluidIngredient.test(BlazeMixingRecipe.emptyMixerFuel().getFluids()[0]);
+		return fluidIngredient.getFluids().length == 0;
 	}
 
 }

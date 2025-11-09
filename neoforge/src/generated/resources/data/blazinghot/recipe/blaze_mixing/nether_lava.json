@@ -14,9 +14,9 @@
       "fluid": "minecraft:lava"
     },
     {
-      "type": "neoforge:single",
-      "amount": 1,
-      "fluid": "minecraft:water"
+      "type": "neoforge:tag",
+      "amount": 100,
+      "tag": "blazinghot:blaze_mixer_placeholder"
     }
   ],
   "results": [
