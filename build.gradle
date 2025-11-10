@@ -99,7 +99,7 @@ String platform = System.getenv("PLATFORM")
 tasks.register("blazinghotPublish") {
     if (platform == "both") {
         dependsOn(tasks.build, ":publishMods", ":fabric:publishMods", ":forge:publishMods")
-    } else if (platform == "forge") {
+    } else if (platform == "neoforge") {
         dependsOn(":neoforge:build", ":publishMods", ":neoforge:publishMods")
     } else throw new NullPointerException("Invalid platform: " + platform)
 }

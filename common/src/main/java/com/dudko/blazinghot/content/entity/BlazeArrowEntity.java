@@ -7,14 +7,12 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
-import com.dudko.blazinghot.foundation.mixin.accessor.ProjectileAccessor;
 import com.dudko.blazinghot.registry.BlazingItems;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -84,17 +82,4 @@ public class BlazeArrowEntity extends AbstractArrow {
 		dimensionOrigin = dimensionFromString(compound.getString("DimensionOrigin"));
 	}
 
-	// TODO: check if it's still necessary
-	@Override
-	public @Nullable Entity getOwner() {
-		Entity entity = super.getOwner();
-		if (entity != null) return entity;
-		if (getServer() != null) {
-			Level overworld = getServer().getLevel(Level.OVERWORLD);
-			if (overworld != null) {
-				return overworld.getPlayerByUUID(((ProjectileAccessor) this).getOwnerUUID());
-			}
-		}
-		return null;
-	}
 }

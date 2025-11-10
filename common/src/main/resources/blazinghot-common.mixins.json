@@ -18,7 +18,6 @@
     "SmartBlockEntityMixin",
     "SpoutBlockEntityMixin",
     "SpoutBlockMixin",
-    "accessor.ProjectileAccessor",
     "accessor.SequencedAssemblyRecipeBuilderAccessor",
     "accessor.SpoutBlockEntityAccessor"
   ],
