@@ -1,12 +1,18 @@
 {
   "type": "blazinghot:casting",
+  "conditions": [
+    {
+      "type": "blazinghot:legacy_fluid_amounts",
+      "value": false
+    }
+  ],
   "coolingDuration": 300,
   "ingredients": [
     {
       "tag": "forge:plates"
     },
     {
-      "amount": 288,
+      "amount": 180,
       "fluidTag": "forge:molten_sturdy_alloy"
     }
   ],

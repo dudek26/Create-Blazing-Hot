@@ -13,11 +13,19 @@ public class MultiFluidStack {
 
 	private final Fluid fluid;
 	private final MultiAmount amount;
+	private final boolean legacy;
 	private CompoundTag tag;
 
 	public MultiFluidStack(Fluid fluid, MultiAmount amount) {
 		this.fluid = fluid;
 		this.amount = amount;
+		this.legacy = false;
+	}
+
+	public MultiFluidStack(Fluid fluid, MultiAmount amount, boolean legacy) {
+		this.fluid = fluid;
+		this.amount = amount;
+		this.legacy = legacy;
 	}
 
 	public Fluid getFluid() {
@@ -79,4 +87,7 @@ public class MultiFluidStack {
 		throw new AssertionError();
 	}
 
+	public boolean isLegacy() {
+		return legacy;
+	}
 }

@@ -1,0 +1,30 @@
+{
+  "type": "blazinghot:casting",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "createaddition"
+    },
+    {
+      "type": "blazinghot:legacy_fluid_amounts",
+      "value": true
+    }
+  ],
+  "coolingDuration": 75,
+  "ingredients": [
+    {
+      "item": "blazinghot:sturdy_rod_mold"
+    },
+    {
+      "amount": 72,
+      "fluidTag": "forge:molten_brass"
+    }
+  ],
+  "keepItem": true,
+  "processingTime": 25,
+  "results": [
+    {
+      "item": "createaddition:brass_rod"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.data.recipe.fabric;
 
 import com.dudko.blazinghot.data.recipe.BlazingProcessingRecipeBuilder;
+import com.google.gson.JsonObject;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 
@@ -28,6 +29,10 @@ public class BlazingProcessingRecipeBuilderImpl {
 		if (b.params.keepHeldItem) builder.toolNotConsumed();
 
 		return builder.build();
+	}
+
+	public static JsonObject legacyFluidCondition(boolean value) {
+		throw new RuntimeException("Legacy fluid condition does not exist on Fabric");
 	}
 
 }

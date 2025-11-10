@@ -1,5 +1,11 @@
 {
   "type": "create:sequenced_assembly",
+  "conditions": [
+    {
+      "type": "blazinghot:legacy_fluid_amounts",
+      "value": false
+    }
+  ],
   "ingredient": [
     {
       "item": "blazinghot:enchanted_blaze_apple"
@@ -22,7 +28,7 @@
           "item": "blazinghot:ancient_enchanted_apple"
         },
         {
-          "amount": 36,
+          "amount": 22,
           "fluidTag": "forge:molten_netherite"
         }
       ],

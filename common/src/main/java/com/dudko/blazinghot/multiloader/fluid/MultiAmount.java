@@ -2,7 +2,7 @@ package com.dudko.blazinghot.multiloader.fluid;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 
-public record MultiAmount(long droplets, int millibuckets) {
+public record MultiAmount(long droplets, int millibuckets, int millibucketsLegacy) {
 
 	public static final MultiAmount EMPTY = standard(0);
 	public static final MultiAmount BOTTLE = standard(20250);
@@ -22,40 +22,55 @@ public record MultiAmount(long droplets, int millibuckets) {
 		return get(this);
 	}
 
+	/**
+	 * Gets the platformed amount.
+	 */
+	public long get(boolean legacy) {
+		return get(this, legacy);
+	}
+
 	public MultiAmount multiply(float multiplier) {
 		if (multiplier == 0) {
 			return EMPTY;
 		}
-		return new MultiAmount((long) (droplets * multiplier), (int) (millibuckets * multiplier));
+		return new MultiAmount((long) (droplets * multiplier),
+				(int) (millibuckets * multiplier),
+				(int) (millibucketsLegacy * multiplier));
 	}
 
 	public MultiAmount divide(float divider) {
 		if (divider == 0) {
 			return EMPTY;
 		}
-		return new MultiAmount((long) (droplets / divider), (int) (millibuckets / divider));
+		return new MultiAmount((long) (droplets / divider),
+				(int) (millibuckets / divider),
+				(int) (millibucketsLegacy / divider));
 	}
 
 	/**
 	 * Uses the default conversion rate of 81 droplets per millibucket
 	 */
 	public static MultiAmount standard(long droplets) {
-		return new MultiAmount(droplets, (int) (droplets / 81));
+		return new MultiAmount(droplets, (int) (droplets / 81), (int) (droplets / 81));
 	}
 
 	/**
 	 * Uses the default conversion rate of 81 droplets per millibucket
 	 */
 	public static MultiAmount standardMb(int millibuckets) {
-		return new MultiAmount(millibuckets * 81L, millibuckets);
+		return new MultiAmount(millibuckets * 81L, millibuckets, millibuckets);
 	}
 
 	public static MultiAmount metal(long droplets) {
-		return new MultiAmount(droplets, (int) (droplets / MultiFluids.MELTABLE_CONVERSION));
+		return new MultiAmount(droplets,
+				(int) (droplets / MultiFluids.MELTABLE_CONVERSION),
+				(int) (droplets / MultiFluids.MELTABLE_CONVERSION_LEGACY));
 	}
 
 	public static MultiAmount metalMb(int millibuckets) {
-		return new MultiAmount((long) (millibuckets * MultiFluids.MELTABLE_CONVERSION), millibuckets);
+		return new MultiAmount((long) (millibuckets * MultiFluids.MELTABLE_CONVERSION),
+				millibuckets,
+				(int) (millibuckets * (MultiFluids.MELTABLE_CONVERSION_LEGACY / MultiFluids.MELTABLE_CONVERSION)));
 	}
 
 	public static MultiAmount fromBucketFraction(long numerator, long denominator) {
@@ -68,8 +83,12 @@ public record MultiAmount(long droplets, int millibuckets) {
 		return standard(total / denominator);
 	}
 
-	@ExpectPlatform
 	public static long get(MultiAmount amount) {
+		return get(amount, false);
+	}
+
+	@ExpectPlatform
+	public static long get(MultiAmount amount, boolean legacy) {
 		throw new AssertionError();
 	}
 

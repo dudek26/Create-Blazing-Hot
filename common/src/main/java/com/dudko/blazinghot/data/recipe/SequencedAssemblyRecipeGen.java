@@ -25,6 +25,7 @@ import static com.dudko.blazinghot.registry.BlazingItems.INCOMPLETE_BLAZE_MIXER;
 import java.util.function.Function;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.metal.BlazingMetal;
@@ -37,6 +38,7 @@ import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.press.PressingRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
 
+import net.createmod.catnip.data.Pair;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
@@ -48,7 +50,7 @@ public class SequencedAssemblyRecipeGen extends BlazingRecipeProvider {
 		super(dataOutput);
 	}
 
-	GeneratedRecipe
+	Pair<GeneratedRecipe, GeneratedRecipe>
 			ENCHANTED_GOLDEN_APPLE =
 			enchantedMetalApple(BlazingMetals.GOLD,
 					stellarGoldenApple(),
@@ -86,7 +88,7 @@ public class SequencedAssemblyRecipeGen extends BlazingRecipeProvider {
 					BlazingItems.ENCHANTED_COPPER_APPLE),
 
 	ENCHANTED_NETHERITE_APPLE =
-			create("enchanted_netherite_apple",
+			createLegacy("enchanted_netherite_apple",
 					b -> b
 							.require(netheriteAppleIngredients())
 							.transitionTo(ANCIENT_ENCHANTED_APPLE)
@@ -109,8 +111,8 @@ public class SequencedAssemblyRecipeGen extends BlazingRecipeProvider {
 							.addStep(DeployerApplicationRecipe::new, r -> r.require(cogwheel()))
 							.addStep(DeployerApplicationRecipe::new, r -> r.require(extensionPole())));
 
-	private GeneratedRecipe enchantedMetalApple(BlazingMetal metal, ItemLike input, ItemLike transition, ItemLike output) {
-		return create(output.asItem().toString(),
+	private Pair<GeneratedRecipe, GeneratedRecipe> enchantedMetalApple(BlazingMetal metal, ItemLike input, ItemLike transition, ItemLike output) {
+		return createLegacy(output.asItem().toString(),
 				b -> b
 						.require(input)
 						.transitionTo(transition)
@@ -123,11 +125,23 @@ public class SequencedAssemblyRecipeGen extends BlazingRecipeProvider {
 	}
 
 	private GeneratedRecipe create(String name, Function<BlazingSequencedAssemblyRecipeBuilder, SequencedAssemblyRecipeBuilder> transform) {
+		return create(name, transform, null);
+	}
+
+	private GeneratedRecipe create(String name, Function<BlazingSequencedAssemblyRecipeBuilder, SequencedAssemblyRecipeBuilder> transform, @Nullable Boolean legacy) {
 		GeneratedRecipe
 				generatedRecipe =
-				c -> transform.apply(new BlazingSequencedAssemblyRecipeBuilder(BlazingHot.asResource(name))).build(c);
+				c -> transform
+						.apply(new BlazingSequencedAssemblyRecipeBuilder(BlazingHot.asResource(name)).legacy(legacy))
+						.build(c);
 		all.add(generatedRecipe);
 		return generatedRecipe;
+	}
+
+	private Pair<GeneratedRecipe, GeneratedRecipe> createLegacy(String name, Function<BlazingSequencedAssemblyRecipeBuilder, SequencedAssemblyRecipeBuilder> transform) {
+		GeneratedRecipe firstRecipe = create(name, transform, false);
+		GeneratedRecipe secondRecipe = create(name, transform, true);
+		return Pair.of(firstRecipe, secondRecipe);
 	}
 
 	@Override

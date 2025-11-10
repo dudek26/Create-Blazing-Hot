@@ -1,0 +1,30 @@
+{
+  "type": "blazinghot:casting",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "createaddition"
+    },
+    {
+      "type": "blazinghot:legacy_fluid_amounts",
+      "value": true
+    }
+  ],
+  "coolingDuration": 150,
+  "ingredients": [
+    {
+      "item": "blazinghot:sturdy_sheet_mold"
+    },
+    {
+      "amount": 144,
+      "fluidTag": "forge:molten_zinc"
+    }
+  ],
+  "keepItem": true,
+  "processingTime": 50,
+  "results": [
+    {
+      "item": "createaddition:zinc_sheet"
+    }
+  ]
+}

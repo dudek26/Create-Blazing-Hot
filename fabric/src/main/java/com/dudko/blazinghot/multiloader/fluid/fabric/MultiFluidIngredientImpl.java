@@ -13,7 +13,7 @@ public class MultiFluidIngredientImpl {
 		return FluidIngredient.fromFluid(fluidStack.getFluid(), fluidStack.getAmount().get());
 	}
 
-	public static FluidIngredient fromTag(TagKey<Fluid> tag, MultiAmount amount) {
+	public static FluidIngredient fromTag(TagKey<Fluid> tag, MultiAmount amount, boolean legacy) {
 		return FluidIngredient.fromTag(tag, amount.get());
 	}
 

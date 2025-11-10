@@ -1,0 +1,26 @@
+{
+  "type": "blazinghot:blaze_mixing",
+  "conditions": [
+    {
+      "type": "blazinghot:legacy_fluid_amounts",
+      "value": true
+    }
+  ],
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "item": "create:crushed_raw_gold"
+    }
+  ],
+  "mixerFuel": {
+    "amount": 50,
+    "fluidTag": "blazinghot:blaze_mixer_fuel"
+  },
+  "processingTime": 250,
+  "results": [
+    {
+      "amount": 192,
+      "fluid": "blazinghot:molten_gold"
+    }
+  ]
+}

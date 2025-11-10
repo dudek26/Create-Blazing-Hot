@@ -1,20 +1,26 @@
 {
   "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "blazinghot:legacy_fluid_amounts",
+      "value": false
+    }
+  ],
   "heatRequirement": "superheated",
   "ingredients": [
     {
-      "amount": 144,
+      "amount": 90,
       "fluidTag": "forge:molten_gold"
     },
     {
-      "amount": 144,
+      "amount": 90,
       "fluidTag": "forge:molten_ancient_debris"
     }
   ],
   "processingTime": 200,
   "results": [
     {
-      "amount": 36,
+      "amount": 22,
       "fluid": "blazinghot:molten_netherite"
     }
   ]

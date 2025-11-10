@@ -5,12 +5,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.data.conditions.LoadCondition;
 import com.dudko.blazinghot.data.conditions.LoadConditionHelper;
+import com.dudko.blazinghot.multiloader.Platform;
 import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.multiloader.fluid.MultiFluidIngredient;
 import com.dudko.blazinghot.multiloader.fluid.MultiFluidStack;
@@ -144,6 +146,15 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 		return this;
 	}
 
+	public BlazingProcessingRecipeBuilder<T> legacy() {
+		return legacy(true);
+	}
+
+	public BlazingProcessingRecipeBuilder<T> legacy(Boolean legacy) {
+		params.legacy = legacy;
+		return this;
+	}
+
 	public T build() {
 		return platformBuild(this);
 	}
@@ -153,7 +164,8 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 				params.fuel,
 				params.coolingDuration,
 				params.keepHeldItem,
-				params.conditions));
+				params.conditions,
+				params.legacy));
 	}
 
 	@ExpectPlatform
@@ -191,7 +203,7 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 	}
 
 	public BlazingProcessingRecipeBuilder<T> require(Fluid fluid, MultiAmount amount) {
-		return require(MultiFluidIngredient.fromFluid(fluid, amount));
+		return require(MultiFluidIngredient.fromFluid(fluid, amount, params.isLegacy()));
 	}
 
 	public BlazingProcessingRecipeBuilder<T> require(TagKey<Fluid> fluidTag, long amount) {
@@ -199,7 +211,7 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 	}
 
 	public BlazingProcessingRecipeBuilder<T> require(TagKey<Fluid> fluidTag, MultiAmount amount) {
-		return require(MultiFluidIngredient.fromTag(fluidTag, amount));
+		return require(MultiFluidIngredient.fromTag(fluidTag, amount, params.isLegacy()));
 	}
 
 	public BlazingProcessingRecipeBuilder<T> require(FluidIngredient ingredient) {
@@ -290,7 +302,7 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 
 	public BlazingProcessingRecipeBuilder<T> output(Fluid fluid, MultiAmount amount) {
 		fluid = FluidHelper.convertToStill(fluid);
-		return output(new MultiFluidStack(fluid, amount));
+		return output(new MultiFluidStack(fluid, amount, params.isLegacy()));
 	}
 
 	public BlazingProcessingRecipeBuilder<T> output(Fluid fluid, long amount) {
@@ -325,6 +337,8 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 		public FluidIngredient fuel;
 		public NonNullList<LoadCondition<?>> conditions;
 
+		@Nullable
+		public Boolean legacy;
 		public boolean keepHeldItem;
 
 		protected BlazingProcessingRecipeParams(ResourceLocation id) {
@@ -341,6 +355,10 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 			conditions = NonNullList.create();
 		}
 
+		public boolean isLegacy() {
+			return Boolean.TRUE.equals(legacy);
+		}
+
 	}
 
 	@ParametersAreNonnullByDefault
@@ -354,8 +372,10 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 		private final int coolingDuration;
 		private final boolean keepItem;
 
+		private final Boolean legacy;
+
 		@SuppressWarnings("unchecked")
-		public BlazingDataGenResult(S recipe, FluidIngredient fuel, int coolingDuration, boolean keepItem, List<LoadCondition<?>> conditions) {
+		public BlazingDataGenResult(S recipe, FluidIngredient fuel, int coolingDuration, boolean keepItem, List<LoadCondition<?>> conditions, @Nullable Boolean legacy) {
 			this.recipe = recipe;
 			this.recipeConditions.addAll(conditions);
 			IRecipeTypeInfo recipeType = this.recipe.getTypeInfo();
@@ -366,12 +386,15 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 
 			this.id =
 					new ResourceLocation(recipe.getId().getNamespace(),
-							typeId.getPath() + "/" + recipe.getId().getPath());
+							typeId.getPath() + "/" + (Boolean.TRUE.equals(legacy) ? "legacy/" : "") + recipe
+									.getId()
+									.getPath());
 			this.serializer = (ProcessingRecipeSerializer<S>) recipe.getSerializer();
 
 			this.fuel = fuel;
 			this.coolingDuration = coolingDuration;
 			this.keepItem = keepItem;
+			this.legacy = legacy;
 		}
 
 		@Override
@@ -382,9 +405,14 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 
 			serializer.write(json, recipe);
 
-			if (recipeConditions.isEmpty()) return;
+			if (recipeConditions.isEmpty() && (legacy == null || Platform.FABRIC.isCurrent())) return;
 			JsonArray conds = new JsonArray();
 			recipeConditions.forEach(c -> conds.add(c.toJson()));
+
+			if (Platform.FORGE.isCurrent() && legacy != null) {
+				conds.add(legacyFluidCondition(legacy));
+			}
+
 			json.add(LoadConditionHelper.conditionsKey(), conds);
 		}
 
@@ -407,6 +435,11 @@ public class BlazingProcessingRecipeBuilder<T extends ProcessingRecipe<?>> {
 		public ResourceLocation getAdvancementId() {
 			return null;
 		}
+	}
+
+	@ExpectPlatform
+	public static JsonObject legacyFluidCondition(boolean value) {
+		throw new AssertionError();
 	}
 
 }

@@ -1,0 +1,23 @@
+{
+  "type": "create:filling",
+  "conditions": [
+    {
+      "type": "blazinghot:legacy_fluid_amounts",
+      "value": true
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "minecraft:melon"
+    },
+    {
+      "amount": 0,
+      "fluidTag": "forge:molten_gold"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:glistering_melon_slice"
+    }
+  ]
+}

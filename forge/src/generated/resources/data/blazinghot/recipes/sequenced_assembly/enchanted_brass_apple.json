@@ -1,5 +1,11 @@
 {
   "type": "create:sequenced_assembly",
+  "conditions": [
+    {
+      "type": "blazinghot:legacy_fluid_amounts",
+      "value": false
+    }
+  ],
   "ingredient": {
     "item": "blazinghot:stellar_brass_apple"
   },
@@ -17,7 +23,7 @@
           "item": "blazinghot:brassy_stellar_brass_apple"
         },
         {
-          "amount": 864,
+          "amount": 540,
           "fluidTag": "forge:molten_brass"
         }
       ],

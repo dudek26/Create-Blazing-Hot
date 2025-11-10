@@ -9,7 +9,8 @@ import net.minecraft.world.level.material.Fluid;
 
 public class MultiFluids {
 
-	public static final float MELTABLE_CONVERSION = 9000 / 144f;
+	public static final float MELTABLE_CONVERSION_LEGACY = 9000 / 144f;
+	public static final float MELTABLE_CONVERSION = 9000 / 90f;
 
 	@ExpectPlatform
 	public static String platformedName() {

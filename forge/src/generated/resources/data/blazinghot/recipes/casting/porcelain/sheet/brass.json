@@ -1,12 +1,18 @@
 {
   "type": "blazinghot:casting",
+  "conditions": [
+    {
+      "type": "blazinghot:legacy_fluid_amounts",
+      "value": false
+    }
+  ],
   "coolingDuration": 150,
   "ingredients": [
     {
       "item": "blazinghot:porcelain_sheet_mold"
     },
     {
-      "amount": 144,
+      "amount": 90,
       "fluidTag": "forge:molten_brass"
     }
   ],

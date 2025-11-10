@@ -4,6 +4,10 @@
     {
       "type": "forge:mod_loaded",
       "modid": "createaddition"
+    },
+    {
+      "type": "blazinghot:legacy_fluid_amounts",
+      "value": false
     }
   ],
   "coolingDuration": 150,
@@ -12,7 +16,7 @@
       "item": "blazinghot:sturdy_sheet_mold"
     },
     {
-      "amount": 144,
+      "amount": 90,
       "fluidTag": "forge:molten_zinc"
     }
   ],

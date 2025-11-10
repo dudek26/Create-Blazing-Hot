@@ -1,0 +1,29 @@
+{
+  "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:plates/zinc"
+      }
+    },
+    {
+      "type": "blazinghot:legacy_fluid_amounts",
+      "value": true
+    }
+  ],
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "forge:plates/zinc"
+    }
+  ],
+  "processingTime": 600,
+  "results": [
+    {
+      "amount": 144,
+      "fluid": "blazinghot:molten_zinc"
+    }
+  ]
+}

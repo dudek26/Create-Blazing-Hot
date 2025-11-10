@@ -1,0 +1,26 @@
+{
+  "type": "blazinghot:blaze_mixing",
+  "conditions": [
+    {
+      "type": "blazinghot:legacy_fluid_amounts",
+      "value": true
+    }
+  ],
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/netherite"
+    }
+  ],
+  "mixerFuel": {
+    "amount": 50,
+    "fluidTag": "blazinghot:blaze_mixer_fuel"
+  },
+  "processingTime": 200,
+  "results": [
+    {
+      "amount": 144,
+      "fluid": "blazinghot:molten_netherite"
+    }
+  ]
+}

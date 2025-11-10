@@ -13,12 +13,20 @@ public class MultiFluidIngredient {
 		throw new AssertionError();
 	}
 
+	public static FluidIngredient fromFluid(Fluid fluid, MultiAmount amount, boolean legacy) {
+		return fromStack(new MultiFluidStack(fluid, amount, legacy));
+	}
+
 	public static FluidIngredient fromFluid(Fluid fluid, MultiAmount amount) {
 		return fromStack(new MultiFluidStack(fluid, amount));
 	}
 
 	@ExpectPlatform
-	public static FluidIngredient fromTag(TagKey<Fluid> tag, MultiAmount amount) {
+	public static FluidIngredient fromTag(TagKey<Fluid> tag, MultiAmount amount, boolean legacy) {
 		throw new AssertionError();
+	}
+
+	public static FluidIngredient fromTag(TagKey<Fluid> tag, MultiAmount amount) {
+		return fromTag(tag, amount, false);
 	}
 }

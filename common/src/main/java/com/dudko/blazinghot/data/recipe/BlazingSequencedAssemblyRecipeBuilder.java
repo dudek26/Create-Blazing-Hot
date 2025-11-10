@@ -1,5 +1,7 @@
 package com.dudko.blazinghot.data.recipe;
 
+import static com.dudko.blazinghot.data.recipe.BlazingProcessingRecipeBuilder.legacyFluidCondition;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
@@ -8,10 +10,12 @@ import java.util.function.UnaryOperator;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.dudko.blazinghot.data.conditions.LoadCondition;
 import com.dudko.blazinghot.data.conditions.LoadConditionHelper;
 import com.dudko.blazinghot.mixin.accessor.SequencedAssemblyRecipeBuilderAccessor;
+import com.dudko.blazinghot.multiloader.Platform;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.simibubi.create.AllRecipeTypes;
@@ -35,6 +39,7 @@ import net.minecraft.world.level.ItemLike;
 public class BlazingSequencedAssemblyRecipeBuilder extends SequencedAssemblyRecipeBuilder {
 
 	protected NonNullList<LoadCondition<?>> conditions = NonNullList.create();
+	protected Boolean legacy;
 
 	public BlazingSequencedAssemblyRecipeBuilder(ResourceLocation id) {
 		super(id);
@@ -78,7 +83,7 @@ public class BlazingSequencedAssemblyRecipeBuilder extends SequencedAssemblyReci
 	public <T extends ProcessingRecipe<?>> BlazingSequencedAssemblyRecipeBuilder addBlazingStep(ProcessingRecipeBuilder.ProcessingRecipeFactory<T> factory, UnaryOperator<BlazingProcessingRecipeBuilder<T>> builder) {
 		BlazingProcessingRecipeBuilder<T>
 				recipeBuilder =
-				new BlazingProcessingRecipeBuilder<>(factory, new ResourceLocation("dummy"));
+				new BlazingProcessingRecipeBuilder<>(factory, new ResourceLocation("dummy")).legacy(legacy);
 		Item placeHolder = self().getRecipe().getTransitionalItem().getItem();
 		self()
 				.getRecipe()
@@ -109,13 +114,18 @@ public class BlazingSequencedAssemblyRecipeBuilder extends SequencedAssemblyReci
 		return this;
 	}
 
+	public BlazingSequencedAssemblyRecipeBuilder legacy(Boolean legacy) {
+		this.legacy = legacy;
+		return this;
+	}
+
 	private SequencedAssemblyRecipeBuilderAccessor self() {
 		return (SequencedAssemblyRecipeBuilderAccessor) this;
 	}
 
 	@Override
 	public void build(Consumer<FinishedRecipe> consumer) {
-		consumer.accept(new BlazingDataGenResult(build(), conditions));
+		consumer.accept(new BlazingDataGenResult(build(), conditions, legacy));
 	}
 
 	@ParametersAreNonnullByDefault
@@ -126,21 +136,31 @@ public class BlazingSequencedAssemblyRecipeBuilder extends SequencedAssemblyReci
 		private final ResourceLocation id;
 		private final SequencedAssemblyRecipeSerializer serializer;
 
-		public BlazingDataGenResult(SequencedAssemblyRecipe recipe, List<LoadCondition<?>> recipeConditions) {
+		private final Boolean legacy;
+
+		public BlazingDataGenResult(SequencedAssemblyRecipe recipe, List<LoadCondition<?>> recipeConditions, @Nullable Boolean legacy) {
 			this.recipeConditions = recipeConditions;
 			this.recipe = recipe;
 			String namespace = recipe.getId().getNamespace();
 			String path = AllRecipeTypes.SEQUENCED_ASSEMBLY.getId().getPath();
-			this.id = new ResourceLocation(namespace, path + "/" + recipe.getId().getPath());
+			this.id =
+					new ResourceLocation(namespace,
+							path + "/" + (Boolean.TRUE.equals(legacy) ? "legacy/" : "") + recipe.getId().getPath());
 			this.serializer = (SequencedAssemblyRecipeSerializer) recipe.getSerializer();
+			this.legacy = legacy;
 		}
 
 		public void serializeRecipeData(JsonObject json) {
 			this.serializer.write(json, this.recipe);
 
-			if (this.recipeConditions.isEmpty()) return;
+			if (recipeConditions.isEmpty() && (legacy == null || Platform.FABRIC.isCurrent())) return;
 			JsonArray conds = new JsonArray();
-			this.recipeConditions.forEach((c) -> conds.add(c.toJson()));
+			recipeConditions.forEach(c -> conds.add(c.toJson()));
+
+			if (Platform.FORGE.isCurrent() && legacy != null) {
+				conds.add(legacyFluidCondition(legacy));
+			}
+
 			json.add(LoadConditionHelper.conditionsKey(), conds);
 		}
 

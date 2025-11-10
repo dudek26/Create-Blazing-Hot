@@ -1,5 +1,11 @@
 {
   "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "blazinghot:legacy_fluid_amounts",
+      "value": false
+    }
+  ],
   "heatRequirement": "superheated",
   "ingredients": [
     {
@@ -9,7 +15,7 @@
   "processingTime": 375,
   "results": [
     {
-      "amount": 72,
+      "amount": 45,
       "fluid": "blazinghot:molten_blaze_gold"
     }
   ]

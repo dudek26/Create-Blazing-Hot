@@ -16,7 +16,7 @@ public class MultiFluidsImpl {
 	}
 
 	public static String conversionNote() {
-		return "(1 milibucket = 81 droplets)";
+		return "(1 millibucket = 81 droplets)";
 	}
 
 	public static boolean recipeResultContains(ProcessingRecipe<?> r, TagKey<Fluid> fluid) {

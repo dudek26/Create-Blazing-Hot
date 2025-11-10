@@ -9,6 +9,7 @@
   "mixins": [
     "DatagenModLoaderForgeMixin",
     "EntityMixin",
+    "ForgeHooksMixin",
     "JEIBasinCategoryMixin",
     "RecipeManagerAccessor"
   ],

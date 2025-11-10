@@ -28,6 +28,8 @@ public class BlazingHot {
 	public static final String NAME = "Create: Blazing Hot";
 	public static final Logger LOGGER = LoggerFactory.getLogger(NAME);
 
+	public static boolean USE_LEGACY_FLUID_AMOUNTS = false;
+
 	public static LangBuilder lang() {
 		return new LangBuilder(ID);
 	}

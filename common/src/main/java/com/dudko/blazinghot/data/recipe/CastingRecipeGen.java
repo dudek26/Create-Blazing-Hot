@@ -35,7 +35,7 @@ public class CastingRecipeGen extends BlazingProcessingRecipeGen {
 		if (mold.shape != null) base = Ingredient.of(mold.shape);
 		else base = Ingredient.of(Items.IRON_BARS);
 
-		create(mold.get(MoldType.STURDY).getId(),
+		createLegacy(mold.get(MoldType.STURDY).getId(),
 				b -> b
 						.require(base)
 						.require(BlazingMetals.STURDY_ALLOY.getFluidTag(), MultiAmount.INGOT.multiply(2))
@@ -55,7 +55,7 @@ public class CastingRecipeGen extends BlazingProcessingRecipeGen {
 							name =
 							(mod.alwaysIncluded ? "" : "compat/" + mod.id + "/") + form.getCastingRecipeName(moldType,
 									metal);
-					create(name, b -> {
+					createLegacy(name, b -> {
 						b
 								.require(mold.get(moldType))
 								.require(metal.getFluidTag(), form.amount)

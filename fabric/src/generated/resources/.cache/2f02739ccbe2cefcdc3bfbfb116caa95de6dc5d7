@@ -1,4 +1,4 @@
-// 1.20.1	2025-11-02T12:09:18.4073608	Create: Blazing Hot/Blazing Hot Crafting Recipes
+// 1.20.1	2025-11-10T18:22:27.6740195	Create: Blazing Hot/Blazing Hot Crafting Recipes
 8dda9fd8a4b2e4e3dd85c538a227dcd64243179a data\blazinghot\advancements\recipes\misc\crafting\blaze_whisk.json
 cc3f917bed9399c6b2366686d1706fabff48ebf9 data\blazinghot\advancements\recipes\misc\crafting\blaze_apple.json
 2384277f51d0533e9e08eca40b4ee8993cde137f data\blazinghot\recipes\crafting\casting_depot.json
@@ -18,9 +18,9 @@ d5a6fa655bd6fd725145628fe0d7740193516f58 data\blazinghot\recipes\crafting\blaze_
 b3e143ebb303b958e5f669eeb804cf852df27803 data\blazinghot\recipes\crafting\copper_carrot.json
 df6b6c8c4149b52398eff9d56fac7c4bc6310761 data\blazinghot\advancements\recipes\misc\crafting\blaze_arrow.json
 59d476d8ce8041d869c8f51bd573c336060738b0 data\blazinghot\advancements\recipes\misc\crafting\copper_carrot.json
+405d916db7ea0debe083865589f4c4a16e125c2f data\blazinghot\advancements\recipes\misc\crafting\brass_carrot.json
 69e3468056d79b72cce16da1797ccb47565a9d10 data\blazinghot\recipes\crafting\blaze_carrot.json
 c844dd4f005fe6c7d27fcb85c383350f0fee86a6 data\blazinghot\advancements\recipes\misc\crafting\iron_apple.json
-405d916db7ea0debe083865589f4c4a16e125c2f data\blazinghot\advancements\recipes\misc\crafting\brass_carrot.json
 0db25de9e7a7c17f7df8cce968f339c4712a16a9 data\blazinghot\advancements\recipes\misc\crafting\copper_apple.json
 4c0d6dae0a6330498ac4e36c43bf6785fd36ab61 data\blazinghot\recipes\crafting\blaze_arrow.json
 4b1e59e06265aaf15958fab6db45df6d7c61fbdf data\blazinghot\advancements\recipes\misc\crafting\brass_apple.json

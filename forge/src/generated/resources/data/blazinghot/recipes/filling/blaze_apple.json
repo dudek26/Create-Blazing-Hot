@@ -1,11 +1,17 @@
 {
   "type": "create:filling",
+  "conditions": [
+    {
+      "type": "blazinghot:legacy_fluid_amounts",
+      "value": false
+    }
+  ],
   "ingredients": [
     {
       "item": "minecraft:apple"
     },
     {
-      "amount": 864,
+      "amount": 540,
       "fluidTag": "forge:molten_blaze_gold"
     }
   ],

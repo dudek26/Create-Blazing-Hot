@@ -1,19 +1,25 @@
 {
   "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "blazinghot:legacy_fluid_amounts",
+      "value": false
+    }
+  ],
   "heatRequirement": "heated",
   "ingredients": [
     {
-      "amount": 144,
+      "amount": 90,
       "fluidTag": "forge:molten_copper"
     },
     {
-      "amount": 144,
+      "amount": 90,
       "fluidTag": "forge:molten_zinc"
     }
   ],
   "results": [
     {
-      "amount": 288,
+      "amount": 180,
       "fluid": "blazinghot:molten_brass"
     }
   ]

@@ -1,0 +1,23 @@
+{
+  "type": "create:filling",
+  "conditions": [
+    {
+      "type": "blazinghot:legacy_fluid_amounts",
+      "value": true
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "minecraft:apple"
+    },
+    {
+      "amount": 864,
+      "fluidTag": "forge:molten_brass"
+    }
+  ],
+  "results": [
+    {
+      "item": "blazinghot:brass_apple"
+    }
+  ]
+}

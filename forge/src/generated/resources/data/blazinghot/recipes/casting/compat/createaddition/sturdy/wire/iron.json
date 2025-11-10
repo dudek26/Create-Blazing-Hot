@@ -4,6 +4,10 @@
     {
       "type": "forge:mod_loaded",
       "modid": "createaddition"
+    },
+    {
+      "type": "blazinghot:legacy_fluid_amounts",
+      "value": false
     }
   ],
   "coolingDuration": 75,
@@ -12,7 +16,7 @@
       "item": "blazinghot:sturdy_rod_mold"
     },
     {
-      "amount": 72,
+      "amount": 45,
       "fluidTag": "forge:molten_iron"
     }
   ],

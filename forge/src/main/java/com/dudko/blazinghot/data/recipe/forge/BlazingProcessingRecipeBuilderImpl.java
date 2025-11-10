@@ -1,6 +1,8 @@
 package com.dudko.blazinghot.data.recipe.forge;
 
+import com.dudko.blazinghot.data.conditions.forge.LegacyFluidCondition;
 import com.dudko.blazinghot.data.recipe.BlazingProcessingRecipeBuilder;
+import com.google.gson.JsonObject;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 
@@ -19,7 +21,9 @@ public class BlazingProcessingRecipeBuilderImpl {
 				fluidStacks =
 				b.params.fluidResults
 						.stream()
-						.map(stack -> new FluidStack(stack.getFluid(), (int) stack.getAmount().get(), stack.getTag()))
+						.map(stack -> new FluidStack(stack.getFluid(),
+								(int) stack.getAmount().get(stack.isLegacy()),
+								stack.getTag()))
 						.collect(NonNullList::create, NonNullList::add, NonNullList::addAll);
 
 		builder.withFluidOutputs(fluidStacks);
@@ -28,6 +32,10 @@ public class BlazingProcessingRecipeBuilderImpl {
 		if (b.params.keepHeldItem) builder.toolNotConsumed();
 
 		return builder.build();
+	}
+
+	public static JsonObject legacyFluidCondition(boolean value) {
+		return LegacyFluidCondition.Serializer.INSTANCE.getJson(new LegacyFluidCondition(value));
 	}
 
 }

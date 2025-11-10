@@ -1,0 +1,26 @@
+{
+  "type": "blazinghot:casting",
+  "conditions": [
+    {
+      "type": "blazinghot:legacy_fluid_amounts",
+      "value": true
+    }
+  ],
+  "coolingDuration": 36,
+  "ingredients": [
+    {
+      "item": "blazinghot:sturdy_nugget_mold"
+    },
+    {
+      "amount": 16,
+      "fluidTag": "forge:molten_copper"
+    }
+  ],
+  "keepItem": true,
+  "processingTime": 12,
+  "results": [
+    {
+      "item": "create:copper_nugget"
+    }
+  ]
+}

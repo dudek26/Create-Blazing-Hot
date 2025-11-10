@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "conditions": [
+    {
+      "type": "blazinghot:legacy_fluid_amounts",
+      "value": true
+    }
+  ],
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "forge:nuggets/gold"
+    }
+  ],
+  "processingTime": 90,
+  "results": [
+    {
+      "amount": 16,
+      "fluid": "blazinghot:molten_gold"
+    }
+  ]
+}

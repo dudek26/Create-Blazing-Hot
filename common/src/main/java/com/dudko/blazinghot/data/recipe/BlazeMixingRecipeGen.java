@@ -17,6 +17,7 @@ import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
+import net.createmod.catnip.data.Pair;
 import net.minecraft.data.PackOutput;
 
 @SuppressWarnings({"unused"})
@@ -41,23 +42,25 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 							.require(lava(), MultiAmount.fromBucketFraction(1, 10))
 							.requiresHeat(HeatCondition.SUPERHEATED)
 							.output(MultiRegistries.getFluidFromRegistry(BlazingHot.asResource("nether_lava")).get(),
-									MultiAmount.fromBucketFraction(1, 10))),
+									MultiAmount.fromBucketFraction(1, 10)));
+
+	Pair<GeneratedRecipe, GeneratedRecipe>
 			MOLTEN_BLAZE_GOLD =
-					create("molten_blaze_gold",
-							b -> b
-									.requireMultiple(netherEssence(), 2)
-									.requireFuel(fuel(), MultiAmount.fromBucketFraction(1, 20))
-									.require(moltenGold(), MultiAmount.INGOT)
-									.requiresHeat(HeatCondition.SUPERHEATED)
-									.duration(200)
-									.output(BlazingMetals.BLAZE_GOLD.getFluid().get(), MultiAmount.INGOT)),
+			createLegacy("molten_blaze_gold",
+					b -> b
+							.requireMultiple(netherEssence(), 2)
+							.requireFuel(fuel(), MultiAmount.fromBucketFraction(1, 20))
+							.require(moltenGold(), MultiAmount.INGOT)
+							.requiresHeat(HeatCondition.SUPERHEATED)
+							.duration(200)
+							.output(BlazingMetals.BLAZE_GOLD.getFluid().get(), MultiAmount.INGOT)),
 			STURDY_MOLDS_MELTING =
 					moldMelting();
 
 	private void melting(BlazingMetal metal) {
 		for (BlazingForm form : metal.forms) {
 			if (!form.flags.contains(BlazingForm.Flag.MELTING)) continue;
-			create(form.getMeltingRecipeName(metal),
+			createLegacy(form.getMeltingRecipeName(metal),
 					b -> b
 							.withConditions(form.getMeltingLoadConditions(metal))
 							.requireFuel(fuel(), form.fuelCost)
@@ -68,9 +71,9 @@ public class BlazeMixingRecipeGen extends BlazingProcessingRecipeGen {
 		}
 	}
 
-	private GeneratedRecipe moldMelting() {
+	private Pair<GeneratedRecipe, GeneratedRecipe> moldMelting() {
 		BlazingForm form = BlazingForms.STURDY_MOLD;
-		return create("melting/sturdy_molds",
+		return createLegacy("melting/sturdy_molds",
 				b -> b
 						.requireFuel(fuel(), form.fuelCost)
 						.require(BlazingTags.Items.STURDY_MOLDS.tag)

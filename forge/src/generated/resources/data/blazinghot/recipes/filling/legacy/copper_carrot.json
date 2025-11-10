@@ -1,0 +1,23 @@
+{
+  "type": "create:filling",
+  "conditions": [
+    {
+      "type": "blazinghot:legacy_fluid_amounts",
+      "value": true
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "amount": 96,
+      "fluidTag": "forge:molten_copper"
+    }
+  ],
+  "results": [
+    {
+      "item": "blazinghot:copper_carrot"
+    }
+  ]
+}

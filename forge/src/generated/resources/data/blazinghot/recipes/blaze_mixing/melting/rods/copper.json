@@ -7,6 +7,10 @@
         "type": "forge:tag_empty",
         "tag": "forge:rods/copper"
       }
+    },
+    {
+      "type": "blazinghot:legacy_fluid_amounts",
+      "value": false
     }
   ],
   "heatRequirement": "superheated",
@@ -22,7 +26,7 @@
   "processingTime": 125,
   "results": [
     {
-      "amount": 72,
+      "amount": 45,
       "fluid": "blazinghot:molten_copper"
     }
   ]

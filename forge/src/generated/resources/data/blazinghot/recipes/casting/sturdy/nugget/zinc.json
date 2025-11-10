@@ -1,12 +1,18 @@
 {
   "type": "blazinghot:casting",
+  "conditions": [
+    {
+      "type": "blazinghot:legacy_fluid_amounts",
+      "value": false
+    }
+  ],
   "coolingDuration": 36,
   "ingredients": [
     {
       "item": "blazinghot:sturdy_nugget_mold"
     },
     {
-      "amount": 16,
+      "amount": 10,
       "fluidTag": "forge:molten_zinc"
     }
   ],

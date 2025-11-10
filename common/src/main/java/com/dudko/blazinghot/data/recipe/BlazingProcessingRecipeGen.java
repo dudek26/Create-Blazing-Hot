@@ -6,15 +6,19 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
+import javax.annotation.Nullable;
+
 import org.jetbrains.annotations.NotNull;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.multiloader.MultiRegistries;
+import com.dudko.blazinghot.multiloader.Platform;
 import com.dudko.blazinghot.multiloader.fluid.MultiAmount;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
+import net.createmod.catnip.data.Pair;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
@@ -89,13 +93,14 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 		return create(BlazingHot.ID, singleIngredient, transform);
 	}
 
-	protected <T extends ProcessingRecipe<?>> GeneratedRecipe createWithDeferredId(Supplier<ResourceLocation> name, UnaryOperator<BlazingProcessingRecipeBuilder<T>> transform) {
+	protected <T extends ProcessingRecipe<?>> GeneratedRecipe createWithDeferredId(Supplier<ResourceLocation> name, UnaryOperator<BlazingProcessingRecipeBuilder<T>> transform, @Nullable Boolean legacy) {
 		ProcessingRecipeSerializer<T> serializer = getSerializer();
 		GeneratedRecipe
 				generatedRecipe =
 				c -> transform
-						.apply(new BlazingProcessingRecipeBuilder<>(serializer.getFactory(), name.get()))
+						.apply(new BlazingProcessingRecipeBuilder<>(serializer.getFactory(), name.get()).legacy(legacy))
 						.build(c);
+		if (Platform.FABRIC.isCurrent() && Boolean.TRUE.equals(legacy)) return generatedRecipe;
 		all.add(generatedRecipe);
 		return generatedRecipe;
 	}
@@ -104,16 +109,24 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 	 * Create a new processing recipe, with recipe definitions provided by the
 	 * function
 	 */
-	protected <T extends ProcessingRecipe<?>> GeneratedRecipe create(ResourceLocation name, UnaryOperator<BlazingProcessingRecipeBuilder<T>> transform) {
-		return createWithDeferredId(() -> name, transform);
+	<T extends ProcessingRecipe<?>> GeneratedRecipe create(ResourceLocation name, UnaryOperator<BlazingProcessingRecipeBuilder<T>> transform, @Nullable Boolean legacy) {
+		return createWithDeferredId(() -> name, transform, legacy);
+	}
+
+	<T extends ProcessingRecipe<?>> GeneratedRecipe create(ResourceLocation name, UnaryOperator<BlazingProcessingRecipeBuilder<T>> transform) {
+		return create(name, transform, null);
 	}
 
 	/**
 	 * Create a new processing recipe, with recipe definitions provided by the
 	 * function
 	 */
+	<T extends ProcessingRecipe<?>> GeneratedRecipe create(String name, UnaryOperator<BlazingProcessingRecipeBuilder<T>> transform, @Nullable Boolean legacy) {
+		return create(BlazingHot.asResource(name), transform, legacy);
+	}
+
 	<T extends ProcessingRecipe<?>> GeneratedRecipe create(String name, UnaryOperator<BlazingProcessingRecipeBuilder<T>> transform) {
-		return create(BlazingHot.asResource(name), transform);
+		return create(name, transform, null);
 	}
 
 	protected abstract IRecipeTypeInfo getRecipeType();
@@ -129,6 +142,16 @@ public abstract class BlazingProcessingRecipeGen extends BlazingRecipeProvider {
 					MultiRegistries.getRegisteredObjectsHelper().getKeyOrThrow(item.get().asItem());
 			return BlazingHot.asResource(registryName.getPath() + suffix);
 		};
+	}
+
+	<T extends ProcessingRecipe<?>> Pair<GeneratedRecipe, GeneratedRecipe> createLegacy(ResourceLocation name, UnaryOperator<BlazingProcessingRecipeBuilder<T>> transform) {
+		GeneratedRecipe first = create(name, transform, false);
+		GeneratedRecipe second = create(name, transform, true);
+		return Pair.of(first, second);
+	}
+
+	<T extends ProcessingRecipe<?>> Pair<GeneratedRecipe, GeneratedRecipe> createLegacy(String name, UnaryOperator<BlazingProcessingRecipeBuilder<T>> transform) {
+		return createLegacy(BlazingHot.asResource(name), transform);
 	}
 
 	@Override
