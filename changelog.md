@@ -4,7 +4,15 @@ Create: Blazing Hot 0.7.1
 
 ### Added:
 
-* **1.21.1 support**
+* **1.21.1 NeoForge support**
+
+### Changed:
+
+* Updated to Create 6.0.8
+* [Forge] Updated ingot -> molten metal conversion rate
+    * Ingots now gives `90mb` of fluid
+    * [1.20.1] Worlds created before this version will still use the old system (1 ingot -> `144mb`)
+    * [1.20.1] Conversion rate can be manually changed by operators with the `/blazinghot fluid` command
 
 ### Fixed:
 

@@ -8,6 +8,7 @@ import com.dudko.blazinghot.content.kinetics.mechanicalArm.BlazingArmInteraction
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.advancement.BlazingTriggers;
 import com.dudko.blazinghot.data.conditions.forge.LegacyFluidCondition;
+import com.dudko.blazinghot.foundation.commands.forge.BlazingHotCommand;
 import com.dudko.blazinghot.multiloader.Env;
 import com.dudko.blazinghot.registry.forge.BlazingCreativeTabsImpl;
 import com.dudko.blazinghot.registry.forge.BlazingFluidsImpl;
@@ -15,6 +16,7 @@ import com.dudko.blazinghot.registry.forge.BlazingRecipeTypesImpl;
 
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.ModMismatchEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -74,6 +76,11 @@ public class BlazingHotImpl {
 	@SubscribeEvent
 	public static void onServerStop(ServerStoppedEvent event) {
 		BlazingHot.USE_LEGACY_FLUID_AMOUNTS = false;
+	}
+
+	@SubscribeEvent
+	public static void registerCommands(RegisterCommandsEvent event) {
+		BlazingHotCommand.register(event.getDispatcher());
 	}
 
 	public static void onRegister(final RegisterEvent event) {
