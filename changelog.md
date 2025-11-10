@@ -105,39 +105,6 @@ Create: Blazing Hot 0.6.4
 * [Forge] Fixed incorrect melting time for some metal forms
 
 ------------------------------------------------------
-Create: Blazing Hot 0.6.6
-------------------------------------------------------
-
-#### Forge-only update. Fabric version will release when Create Fabric updates to v6.
-
-### Changed:
-
-* Updated to Create 6.0.2
-* Made mod config accessible in Mods menu
-* Added config for Blaze Mixer stress impact
-
-### Fixed:
-
-* Fixed Blaze Mixer not having any stress impact
-
-------------------------------------------------------
-Create: Blazing Hot 0.6.5
-------------------------------------------------------
-
-### Changed:
-
-* [Forge] Updated to Create 6.0.1
-
-------------------------------------------------------
-Create: Blazing Hot 0.6.4
-------------------------------------------------------
-
-### Fixed:
-
-* Fixed a crash when joining a world with a working Mixer
-* [Forge] Fixed incorrect melting time for some metal forms
-
-------------------------------------------------------
 Create: Blazing Hot 0.6.3
 ------------------------------------------------------
 
