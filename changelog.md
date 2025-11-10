@@ -1,4 +1,24 @@
 ------------------------------------------------------
+Create: Blazing Hot 0.7.1
+------------------------------------------------------
+
+### Added:
+
+* **1.21.1 NeoForge support**
+
+### Changed:
+
+* Updated to Create 6.0.8
+* [Forge] Updated ingot -> molten metal conversion rate
+    * Ingots now gives `90mb` of fluid for compatibility with other mods that add molten metals
+    * [1.20.1] Worlds created before this version will still use the old system (1 ingot -> `144mb`)
+    * [1.20.1] Conversion rate can be manually changed by operators with the `/blazinghot fluid` command
+
+### Fixed:
+
+* Added missing modern lamp tags (#19)
+
+------------------------------------------------------
 Create: Blazing Hot 0.7
 ------------------------------------------------------
 
@@ -27,7 +47,7 @@ Create: Blazing Hot 0.7
 * Mixing Stone Dust and Cinder Flour now returns two netherrack dusts (previously 1)
 * Adjusted placement of Modern Lamp Half Panels
 * Reworked internal metal system
-* Renamed Nether Essence to Crimson Essence and updates its texture
+* Renamed Nether Essence to Crimson Essence and updated its texture
 * Updated Blaze Gold textures
 
 ### Fixed:
