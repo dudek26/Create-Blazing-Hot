@@ -10,7 +10,7 @@ Create: Blazing Hot 0.7.1
 
 * Updated to Create 6.0.8
 * [Forge] Updated ingot -> molten metal conversion rate
-    * Ingots now gives `90mb` of fluid for compatibility with other mods that add molten metals
+    * Ingots now give `90mb` of fluid for compatibility with other mods that add molten metals
     * [1.20.1] Worlds created before this version will still use the old system (1 ingot -> `144mb`)
     * [1.20.1] Conversion rate can be manually changed by operators with the `/blazinghot fluid` command
 
