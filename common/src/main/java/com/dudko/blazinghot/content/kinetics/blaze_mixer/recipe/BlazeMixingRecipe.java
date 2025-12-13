@@ -2,6 +2,7 @@ package com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
@@ -76,7 +77,8 @@ public class BlazeMixingRecipe extends BasinRecipe {
 	/**
 	 * @apiNote Already platformed.
 	 */
-	public static long getFuelCost(Recipe<?> recipe, Level level) {
+	public static long getFuelCost(@Nullable Recipe<?> recipe, Level level) {
+		if (recipe == null) return MultiAmount.BUCKET.get() + 1;
 
 		// brewing
 		if (recipe instanceof MixingRecipe mixingRecipe) {
