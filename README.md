@@ -1,6 +1,6 @@
 <p align="center" ><img src=".idea/icon.png" alt="Logo" width="200"></p>
 <h1 align="center">Create: Blazing Hot<br>
-<img alt="Modloader" src="https://img.shields.io/badge/Modloaders-Fabric_%7C_Quilt_%7C_Forge_%7C_NeoForge-blue?labelColor=%232c3e50&color=%232980b9">
+<img alt="Modloader" src="https://img.shields.io/badge/Modloaders-NeoForge-blue?labelColor=%232c3e50&color=%232980b9">
 <a href="https://modrinth.com/mod/create-blazing-hot/versions">
 <img alt="Game Versions" src="https://img.shields.io/modrinth/game-versions/create-blazing-hot?label=%20%20%20Available%20for%20%20%20&labelColor=%2334495e&color=%2327ae60">
 </a>
