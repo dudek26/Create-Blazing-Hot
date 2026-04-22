@@ -37,12 +37,6 @@ public abstract class MechanicalMixerBlockEntityMixin extends BasinOperatingBloc
 				BlazingAdvancements.MOLTEN_BLAZE_GOLD);
 	}
 
-	@ModifyArg(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(III)I"), index = 2)
-	protected int blazinghot$extendDuration(int max) {
-		if (currentRecipe == null || !BlazeMixingRecipe.isMeltingRecipe(currentRecipe)) return max;
-		return max * 16;
-	}
-
 	@Inject(method = "tick",
 			at = @At(value = "INVOKE",
 					target = "Lcom/simibubi/create/content/kinetics/mixer/MechanicalMixerBlockEntity;applyBasinRecipe()V"),

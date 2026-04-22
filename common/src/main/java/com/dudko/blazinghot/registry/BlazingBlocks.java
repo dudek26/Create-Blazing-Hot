@@ -4,6 +4,7 @@ import static com.dudko.blazinghot.foundation.multiloader.BlazingBuilderTransfor
 import static com.dudko.blazinghot.foundation.multiloader.BlazingBuilderTransformers.simpleBlockState;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
+import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +88,7 @@ public class BlazingBlocks {
 			REGISTRATE
 					.block("casting_depot", CastingDepotBlock::new)
 					.initialProperties(STURDY_CASING)
+					.transform(axeOrPickaxe())
 					.transform(castingDepotModel())
 					.register();
 
@@ -116,7 +118,7 @@ public class BlazingBlocks {
 			REGISTRATE
 					.block("blaze_gold_block", Block::new)
 					.initialProperties(() -> net.minecraft.world.level.block.Blocks.GOLD_BLOCK)
-					.tag(BlockTags.MINEABLE_WITH_PICKAXE)
+					.transform(pickaxeOnly())
 					.tag(BlockTags.NEEDS_IRON_TOOL)
 					.tag(BlockTags.BEACON_BASE_BLOCKS)
 					.tag(BlazingTags.Blocks.BLAZE_GOLD_BLOCKS.tag())

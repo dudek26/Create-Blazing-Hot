@@ -46,7 +46,6 @@ public class BlazingForms {
 							.withTagFolder("rods")
 							.withMeltingTime(125)
 							.mechanicalMixerMeltable(true)
-							.withMold(Molds.ROD)
 							.optional(true)
 							.setFlags(Flag.MELTING)),
 			OPTIONAL_WIRE =
@@ -106,7 +105,7 @@ public class BlazingForms {
 							b -> b.withAmount(MultiAmount.INGOT.multiply(2)).withMeltingTime(300));
 
 	// Compat forms
-	public static BlazingForm COMPAT_ROD = ROD.withFlags(Flag.CASTING).fromMods(Mods.CREATE_ADDITIONS),
+	public static BlazingForm COMPAT_ROD = ROD.createFrom("rod", b -> b.setFlags(Flag.CASTING).fromMods(Mods.CREATE_ADDITIONS).withMold(Molds.ROD)),
 			COMPAT_WIRE =
 					OPTIONAL_WIRE.asOptional(false).withFlags(Flag.CASTING).fromMods(Mods.CREATE_ADDITIONS),
 			ZINC_SHEET =

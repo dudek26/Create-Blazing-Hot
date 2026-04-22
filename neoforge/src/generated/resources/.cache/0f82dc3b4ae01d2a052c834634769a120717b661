@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-09T16:51:56.0511475	Create: Blazing Hot's Processing Recipes
+// 1.21.1	2026-04-22T18:03:20.6531666	Create: Blazing Hot's Processing Recipes
 c105b208267afef4def643f2367b6127f1c622f9 data/blazinghot/recipe/blaze_mixing/melting/ancient_debris.json
 81b017e26fe2ff565f776907a964deab4c72954a data/blazinghot/recipe/blaze_mixing/melting/andesite_alloy.json
 3f26ea91f58458497d4aa3d0afeeaf899798d9a4 data/blazinghot/recipe/blaze_mixing/melting/crushed_raw_copper.json
@@ -48,17 +48,11 @@ a2669f5821958a97520619ac3eb48426043a0561 data/blazinghot/recipe/blaze_mixing/net
 32d2843f91d01983a0217d7d804f9669705d323c data/blazinghot/recipe/casting/compat/createaddition/porcelain/rod/gold.json
 f29bcae9df3c62963f54f0860f29f1743ae9b7bf data/blazinghot/recipe/casting/compat/createaddition/porcelain/rod/iron.json
 cc4b0d6cb61e49ffe90ae5488661a62d513eaa61 data/blazinghot/recipe/casting/compat/createaddition/porcelain/sheet/zinc.json
-e2672da5700022bb8efc20c1a610bfa56fa9afc2 data/blazinghot/recipe/casting/compat/createaddition/porcelain/wire/copper.json
-f713571a34a1024cec81f2cf94ba2a7d06eb632b data/blazinghot/recipe/casting/compat/createaddition/porcelain/wire/gold.json
-b5fe1c502f87694b7a01b0890b32b80b1a8b3df6 data/blazinghot/recipe/casting/compat/createaddition/porcelain/wire/iron.json
 0db0912be699632a0eeda17973d7500ee4cb3ff7 data/blazinghot/recipe/casting/compat/createaddition/sturdy/rod/brass.json
 bd16de1ad4051bafbbc384a43c248f46935452d2 data/blazinghot/recipe/casting/compat/createaddition/sturdy/rod/copper.json
 28ccf44408dd62ae2ee42efaa8b6f668c8c00c21 data/blazinghot/recipe/casting/compat/createaddition/sturdy/rod/gold.json
 24377735000f75fba8fabff02ba82f2fbd50bfb7 data/blazinghot/recipe/casting/compat/createaddition/sturdy/rod/iron.json
 5733aada68fc6ff91ba0ae42ad6852ba5283fea0 data/blazinghot/recipe/casting/compat/createaddition/sturdy/sheet/zinc.json
-3433929eea049b9c3af1431caa4c163b8220fefa data/blazinghot/recipe/casting/compat/createaddition/sturdy/wire/copper.json
-a3bd7be6fca52928c774793f1799a497aa1d4e64 data/blazinghot/recipe/casting/compat/createaddition/sturdy/wire/gold.json
-32aa83ed10a38583a86e0a57b2eeba132a035077 data/blazinghot/recipe/casting/compat/createaddition/sturdy/wire/iron.json
 7b275c896289a7c7a6dde4914d0d6ffc56656f2a data/blazinghot/recipe/casting/porcelain/andesite_alloy.json
 cdb35bb19aa39cc05c82eb840c2560582af7fc21 data/blazinghot/recipe/casting/porcelain/golden_sheet.json
 6c20d5f4fb07ee86f6ac831198c6a6aabcbb46c6 data/blazinghot/recipe/casting/porcelain/ingot/blaze_gold.json
@@ -75,7 +69,6 @@ fd9f77370219ad7c463c544049d944ef6fade436 data/blazinghot/recipe/casting/porcelai
 01ca25f998194d118e53cf388a19dc75601560d4 data/blazinghot/recipe/casting/porcelain/nugget/gold.json
 1441476d122d2d4d3c4334fd3663c56d5961b213 data/blazinghot/recipe/casting/porcelain/nugget/iron.json
 c4cca0d63be9c553d8698eb80f4064bd10c3e739 data/blazinghot/recipe/casting/porcelain/nugget/zinc.json
-beeb88821cb152af95c8b68367f8c2345775bb23 data/blazinghot/recipe/casting/porcelain/rod/blaze_gold.json
 3b181d94306d79e3d7a86545c929af24b846b382 data/blazinghot/recipe/casting/porcelain/sheet/blaze_gold.json
 c127dd62efbd1ee72377bc39e24a75691db8e945 data/blazinghot/recipe/casting/porcelain/sheet/brass.json
 fe8ba06b669a7cabdf61c2203652d5d1199fe771 data/blazinghot/recipe/casting/porcelain/sheet/copper.json
@@ -98,7 +91,6 @@ e175026c1bad2d19a8594239dd7fd5d2bf200e89 data/blazinghot/recipe/casting/sturdy/n
 bba1363ceacd483317cd2db9d230c059837be7e2 data/blazinghot/recipe/casting/sturdy/nugget/gold.json
 40768d67ca11808bb8c7154e23d9666e81afde7a data/blazinghot/recipe/casting/sturdy/nugget/iron.json
 0b15685a89e6d4c1b9c7e36f15869bf544dd3cb3 data/blazinghot/recipe/casting/sturdy/nugget/zinc.json
-f3dc4409a01a64d3764e7d1f3ffdfc12e7d6ee6f data/blazinghot/recipe/casting/sturdy/rod/blaze_gold.json
 09c280857791fe24510949cb2f1ec0415164ec2c data/blazinghot/recipe/casting/sturdy/sheet/blaze_gold.json
 9d9c5c4e6121fe3d2e62711eb57f0afff34e8872 data/blazinghot/recipe/casting/sturdy/sheet/brass.json
 8fd7d32a19c22e5d2742fcb06f9f4e3447c8b9c8 data/blazinghot/recipe/casting/sturdy/sheet/copper.json
