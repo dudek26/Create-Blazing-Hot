@@ -31,7 +31,7 @@ public class BlazingRecipeTypes {
 	public static final Predicate<RecipeHolder<?>> CAN_BE_BLAZE_MIXED = r -> !r.id().getPath().endsWith("_mixer_only");
 
 	public static boolean shouldAllowBlazeMixing(RecipeHolder<?> recipe) {
-		return CAN_BE_BLAZE_MIXED.test(recipe);
+		return  CAN_BE_BLAZE_MIXED.test(recipe);
 	}
 
 	public static final Codec<BlazingRecipeType>

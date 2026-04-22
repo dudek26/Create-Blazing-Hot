@@ -63,9 +63,12 @@ public class CRecipes extends ConfigBase {
 		static String
 				blazeBrewingSpeedMultiplier =
 				"Fueled Blaze Mixer's speed multiplier when processing brewing recipes";
-		static String allowMixingInBlazeMixer = "Allow regular mixing recipes in the Blaze Mixer";
-		static String allowBrewingInBlazeMixer = "Allow brewing recipes in the Blaze Mixer";
-		static String allowShapelessInBlazeMixer = "Allow shapeless crafting recipes in the Blaze Mixer";
+		static String recipeReloadNoteLong = "Make sure to run /reload command after changing this option";
+
+		static String[] allowMixingInBlazeMixer = {"Allow regular mixing recipes in the Blaze Mixer", recipeReloadNoteLong};
+		static String[] allowBrewingInBlazeMixer = {"Allow brewing recipes in the Blaze Mixer", recipeReloadNoteLong};
+		static String[] allowShapelessInBlazeMixer = {"Allow shapeless crafting recipes in the Blaze Mixer", recipeReloadNoteLong};
+
 	}
 
 	@Override

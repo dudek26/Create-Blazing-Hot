@@ -122,7 +122,8 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 		super.read(nbt, registries, clientPacket);
 		coolingTicks = nbt.getFloat("CoolingTicks");
 		processingTicks = nbt.getInt("ProcessingTicks");
-		state = State.valueOf(nbt.getString("State").toUpperCase());
+		String serializedState = nbt.getString("State");
+		state = serializedState.isEmpty() ? State.NONE : State.valueOf(serializedState.toUpperCase());
 		ResourceLocation fluidId = ResourceLocation.tryParse(nbt.getString("VisualFluid"));
 		if (fluidId == null) visualFluid = Fluids.EMPTY;
 		else visualFluid = BuiltInRegistries.FLUID.get(fluidId);
