@@ -12,7 +12,7 @@ public class MultiFluidsImpl {
 	}
 
 	public static String platformedName() {
-		return "milibuckets";
+		return "millibuckets";
 	}
 
 	public static String conversionNote() {
