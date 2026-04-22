@@ -1,4 +1,16 @@
 ------------------------------------------------------
+Create: Blazing Hot 0.7.3
+------------------------------------------------------
+
+### Changed:
+* Updated to Create 6.0.10
+
+### Fixed:
+
+* Fixed Casting Depot not being pickable by pickaxe or axe
+* Fixed rod molds casting wires while Crafts & Additions was installed
+
+------------------------------------------------------
 Create: Blazing Hot 0.7.2
 ------------------------------------------------------
 
