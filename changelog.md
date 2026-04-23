@@ -1,4 +1,17 @@
 ------------------------------------------------------
+Create: Blazing Hot 0.8.0 (WIP)
+------------------------------------------------------
+
+### Added:
+
+* Crystal Mixture and its interactions with Molten Metals
+* [JEI] Metal Interactions recipe category
+
+### Changed:
+
+### Fixed:
+
+------------------------------------------------------
 Create: Blazing Hot 0.7.4
 ------------------------------------------------------
 
@@ -8,15 +21,16 @@ Create: Blazing Hot 0.7.4
 
 ### Fixed:
 
-* Fixed converted Blaze Mixing recipes showing up in recipe viewers even with "Allow Mixing in Blaze Burner" config option being disabled [#21]
+* Fixed converted Blaze Mixing recipes showing up in recipe viewers even with "Allow Mixing in Blaze Burner" config
+  option being disabled [#21]
 * Fixed a crash when placing Casting Depot with Schematicannon [#25]
-
 
 ------------------------------------------------------
 Create: Blazing Hot 0.7.3
 ------------------------------------------------------
 
 ### Changed:
+
 * Updated to Create 6.0.10
 
 ### Fixed:

@@ -8,6 +8,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.compat.jei.category.BlazeMixingCategory;
 import com.dudko.blazinghot.compat.jei.category.CastingCategory;
+import com.dudko.blazinghot.compat.jei.category.MetalInteractionsCategory;
 import com.dudko.blazinghot.content.casting.casting_depot.recipe.CastingRecipe;
 import com.dudko.blazinghot.registry.BlazingBlocks;
 import com.dudko.blazinghot.registry.BlazingConfigs;
@@ -46,6 +47,8 @@ public abstract class BlazingJEI implements IModPlugin {
 
 	public static IJeiRuntime runtime;
 
+	protected static MetalInteractionsCategory METAL_INTERACTIONS;
+
 	@SuppressWarnings("unused")
 	private void loadCategories() {
 		allCategories.clear();
@@ -54,7 +57,9 @@ public abstract class BlazingJEI implements IModPlugin {
 				blazeMixing =
 				builder(BasinRecipe.class)
 						.addTypedRecipes(BlazingRecipeTypes.BLAZE_MIXING)
-						.addTypedRecipesIf(AllRecipeTypes.MIXING::getType, (recipe) -> BlazingConfigs.server().recipes.allowMixingInBlazeMixer.get() && BlazingRecipeTypes.shouldAllowBlazeMixing(recipe))
+						.addTypedRecipesIf(AllRecipeTypes.MIXING::getType,
+								(recipe) -> BlazingConfigs.server().recipes.allowMixingInBlazeMixer.get()
+										&& BlazingRecipeTypes.shouldAllowBlazeMixing(recipe))
 						.catalyst(BlazingBlocks.BLAZE_MIXER::get)
 						.catalyst(AllBlocks.BASIN::get)
 						.doubleItemIcon(BlazingBlocks.BLAZE_MIXER.get(), AllBlocks.BASIN.get())
@@ -93,6 +98,8 @@ public abstract class BlazingJEI implements IModPlugin {
 								.doubleItemIcon(AllBlocks.SPOUT.get(), BlazingBlocks.CASTING_DEPOT.get())
 								.emptyBackground(177, 70)
 								.build("spout_casting", CastingCategory::new);
+
+		METAL_INTERACTIONS = new MetalInteractionsCategory();
 	}
 
 	protected <T extends Recipe<? extends RecipeInput>> CategoryBuilder<T> builder(Class<T> recipeClass) {
@@ -108,6 +115,7 @@ public abstract class BlazingJEI implements IModPlugin {
 	public void registerCategories(IRecipeCategoryRegistration registration) {
 		loadCategories();
 		registration.addRecipeCategories(allCategories.toArray(IRecipeCategory[]::new));
+		registration.addRecipeCategories(METAL_INTERACTIONS);
 	}
 
 	@Override

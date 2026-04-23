@@ -133,7 +133,7 @@ public class BlazingMetal {
 
 		public Builder crystalMixtureInteraction(NonNullSupplier<Block> block, double chance) {
 			hasCrystalMixtureInteraction = true;
-			return addFluidInteraction(BlazingFluids::getCrystalMixture, block, chance);
+			return addFluidInteraction(() -> BlazingFluids.getCrystalMixture().getSource(), block, chance);
 		}
 
 		public Builder crystalMixtureInteraction(NonNullSupplier<Block> block) {

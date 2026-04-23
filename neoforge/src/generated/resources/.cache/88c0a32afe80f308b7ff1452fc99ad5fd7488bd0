@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-22T17:59:02.700325	Registrate Provider for blazinghot [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
+// 1.21.1	2026-04-24T00:14:31.1998212	Registrate Provider for blazinghot [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
 f00ce73b2ba10d3d022c8cec15f98d4345b54a0f assets/blazinghot/blockstates/black_modern_lamp.json
 1b515ab855a765669e085696ccdb6d602b5ddcb9 assets/blazinghot/blockstates/black_modern_lamp_double_panel.json
 c1767b8a04e6ffe0c445c730aeb00f68c42a4936 assets/blazinghot/blockstates/black_modern_lamp_half_panel.json
@@ -21,6 +21,7 @@ ed1cb5d382ffb0f745f30917482295cbadcf8021 assets/blazinghot/blockstates/brown_mod
 01a1fd94efbcc936f3dc126a04d308b2b799d5e5 assets/blazinghot/blockstates/brown_modern_lamp_quad_panel.json
 c1d24de09363aaf631430fd112d67833a8aed288 assets/blazinghot/blockstates/brown_modern_lamp_small_panel.json
 26b8f65561681f6132e9c370c9407fc382ff321b assets/blazinghot/blockstates/casting_depot.json
+d6ac9882f44b4384d96346f75ed36819d1be7503 assets/blazinghot/blockstates/crystal_mixture.json
 c8c15bb63deb56a77f6f2ba4bef76b25ddd63458 assets/blazinghot/blockstates/cyan_modern_lamp.json
 b635182faad4c2521a32d6c4aa685f388c5ca40d assets/blazinghot/blockstates/cyan_modern_lamp_double_panel.json
 1ec928a2b294edc3ba287eb150339beba56c361b assets/blazinghot/blockstates/cyan_modern_lamp_half_panel.json
@@ -111,8 +112,8 @@ cc863cd8eebaed5a37b57b53f873adfc1cce262a assets/blazinghot/blockstates/yellow_mo
 a735791018f8abb4b78292870f420c53a5070523 assets/blazinghot/blockstates/yellow_modern_lamp_panel.json
 c9e3f398e0f8296d30b9a3651d8800f5c5554d00 assets/blazinghot/blockstates/yellow_modern_lamp_quad_panel.json
 4085b48ce1980ce1638918ad9eb9f71114c6369c assets/blazinghot/blockstates/yellow_modern_lamp_small_panel.json
-159a1767052ecf2ddd4a999d8e2322a6ff83e6ec assets/blazinghot/lang/en_ud.json
-062aa8fef3aef5e8b5959be4c21e438798751397 assets/blazinghot/lang/en_us.json
+9d7f6a56cc5957ad30321405395cc4635498141d assets/blazinghot/lang/en_ud.json
+5c95289a342509e6b5701127695e36ac322ea50a assets/blazinghot/lang/en_us.json
 20fba755fb03441f9f8a270f2193e75f07226d98 assets/blazinghot/models/block/black_modern_lamp.json
 3f213f560fc292a1231e5437155fcab43c580f9a assets/blazinghot/models/block/black_modern_lamp_powered.json
 14d84006ae1a050b0d028e3932068b0bbb955356 assets/blazinghot/models/block/blaze_casing.json
@@ -121,6 +122,7 @@ d168488fd378bc4994fd00184fbf6bbb515f760e assets/blazinghot/models/block/blue_mod
 95bbb645396f07348fb4b9bc669c026289e5c9bb assets/blazinghot/models/block/blue_modern_lamp_powered.json
 b2457448a16e48defd97ba6cc108ca08f8d1a8cd assets/blazinghot/models/block/brown_modern_lamp.json
 66af3c021b90d8f4a0c9f49f8b91cad3e778f3c1 assets/blazinghot/models/block/brown_modern_lamp_powered.json
+ae6689f78f9c6365a5b77ca71c6aaf32672dbbf4 assets/blazinghot/models/block/crystal_mixture.json
 71e5c4be40d85e33f410276e40f4817a6db93c84 assets/blazinghot/models/block/cyan_modern_lamp.json
 c625fe87164051d8e49cf1709b683ed7029c30f8 assets/blazinghot/models/block/cyan_modern_lamp_powered.json
 6af8a7954bfcd6e961bf0a49cd10675f4bcc9e6a assets/blazinghot/models/block/gray_modern_lamp.json
@@ -203,6 +205,7 @@ be575f6df2bee12b490a13a1451364ee38086d71 assets/blazinghot/models/item/burning_s
 c828d0daa7c589a6a24709345a1b48098611699d assets/blazinghot/models/item/coated_stellar_copper_apple.json
 1978ec3ec5356ff5722b4434ebf7c3dafb22f440 assets/blazinghot/models/item/copper_apple.json
 9c03bef6f8e5449accf9e0a95b9f1a23c6ee889c assets/blazinghot/models/item/copper_carrot.json
+fa5657f0dd629e2a785302e25f532fce3c6bb547 assets/blazinghot/models/item/crystal_mixture_bucket.json
 7512f6d5e3ba1f397059cfac3577d4f3a5184214 assets/blazinghot/models/item/cyan_modern_lamp.json
 82c6053feb211ea7b596a0f965aeefeb844df96c assets/blazinghot/models/item/cyan_modern_lamp_double_panel.json
 6149b8c07bb860a2747ce0b2c56a35317ae4180e assets/blazinghot/models/item/cyan_modern_lamp_half_panel.json

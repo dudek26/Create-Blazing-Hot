@@ -55,7 +55,9 @@ public class BlazingMetals {
 													BlazingForms.COPPER_NUGGET,
 													BlazingForms.RAW_COPPER,
 													BlazingForms.CRUSHED_RAW_COPPER)
-											.crystalMixtureInteraction(() -> AllPaletteStoneTypes.VERIDIUM.getBaseBlock().get())
+											.crystalMixtureInteraction(() -> AllPaletteStoneTypes.VERIDIUM
+													.getBaseBlock()
+													.get())
 											.waterCobble())
 							.register(),
 			GOLD =
@@ -71,7 +73,9 @@ public class BlazingMetals {
 													BlazingForms.GOLDEN_SHEET,
 													BlazingForms.RAW_GOLD,
 													BlazingForms.CRUSHED_RAW_GOLD)
-											.crystalMixtureInteraction(() -> AllPaletteStoneTypes.OCHRUM.getBaseBlock().get())
+											.crystalMixtureInteraction(() -> AllPaletteStoneTypes.OCHRUM
+													.getBaseBlock()
+													.get())
 											.waterCobble())
 							.register(),
 			ANCIENT_DEBRIS =
@@ -88,7 +92,10 @@ public class BlazingMetals {
 									b -> b
 											.withForms(BlazingForms.NETHERITE_INGOT)
 											.addFluidInteraction(() -> Fluids.WATER,
-													() -> AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get()))
+													() -> AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get())
+											.crystalMixtureInteraction(() -> AllPaletteStoneTypes.OCHRUM
+													.getBaseBlock()
+													.get()))
 							.register();
 
 	// Create
@@ -100,14 +107,20 @@ public class BlazingMetals {
 									.fromMods(Mods.CREATE)
 									.createForms()
 									.withForms(BlazingForms.OPTIONAL_ROD, BlazingForms.COMPAT_ROD)
-									.crystalMixtureInteraction(() -> AllPaletteStoneTypes.ASURINE.getBaseBlock().get(), 0.5)
-									.crystalMixtureInteraction(() -> AllPaletteStoneTypes.VERIDIUM.getBaseBlock().get(), 0.5)
+									.crystalMixtureInteraction(() -> AllPaletteStoneTypes.ASURINE.getBaseBlock().get(),
+											0.5)
+									.crystalMixtureInteraction(() -> AllPaletteStoneTypes.VERIDIUM.getBaseBlock().get(),
+											0.5)
 									.waterCobble())
 					.register(),
 			ANDESITE =
 					BlazingMetal
 							.create("andesite",
-									b -> b.fromMods(Mods.CREATE).withForms(BlazingForms.ANDESITE_ALLOY).crystalMixtureInteraction(() -> Blocks.ANDESITE).waterCobble())
+									b -> b
+											.fromMods(Mods.CREATE)
+											.withForms(BlazingForms.ANDESITE_ALLOY)
+											.crystalMixtureInteraction(() -> Blocks.ANDESITE)
+											.waterCobble())
 							.register(),
 			ZINC =
 					BlazingMetal
@@ -119,7 +132,9 @@ public class BlazingMetals {
 													BlazingForms.ZINC_SHEET,
 													BlazingForms.RAW_ZINC,
 													BlazingForms.CRUSHED_RAW_ZINC)
-											.crystalMixtureInteraction(() -> AllPaletteStoneTypes.ASURINE.getBaseBlock().get())
+											.crystalMixtureInteraction(() -> AllPaletteStoneTypes.ASURINE
+													.getBaseBlock()
+													.get())
 											.waterCobble())
 							.register();
 
@@ -141,7 +156,8 @@ public class BlazingMetals {
 									b -> b
 											.fromMods(Mods.BLAZINGHOT)
 											.withForms(BlazingForms.STURDY_ALLOY, BlazingForms.STURDY_SHEET)
-											.crystalMixtureInteraction(() -> Blocks.OBSIDIAN)
+											.crystalMixtureInteraction(() -> Blocks.OBSIDIAN, 0.5)
+											.crystalMixtureInteraction(() -> Blocks.CRYING_OBSIDIAN, 0.5)
 											.addFluidInteraction(() -> Fluids.WATER, () -> Blocks.COBBLED_DEEPSLATE))
 							.register();
 

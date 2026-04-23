@@ -49,26 +49,37 @@ public class BlazingFluidsImpl {
 
 	public static FluidEntry<BaseFlowingFluid.Flowing> NETHER_LAVA = createFromLava("nether_lava", 10, 1);
 
-	public static FluidEntry<BaseFlowingFluid.Flowing> CRYSTAL_MIXTURE = REGISTRATE.standardFluid("crystal_mixture").properties(p -> p.density(3000)
-					.viscosity(6000)
-					.temperature(300)
-					.canExtinguish(true)
-					.canHydrate(false)
-					.lightLevel(8)
-					.sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
-					.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
-					.motionScale(0.0023333333333333335D)
-					.canSwim(false)
-					.canDrown(true)
-					.pathType(PathType.WATER)
-					.adjacentPathType(null))
-			.fluidProperties(p -> p.tickRate(30).levelDecreasePerBlock(2).slopeFindDistance(3).explosionResistance(100f)).source(BaseFlowingFluid.Source::new).block()
-			.initialProperties(() -> Blocks.WATER)
-			.properties(p -> p.lightLevel($ -> 8))
-			.build()
-			.bucket()
-			.build()
-			.register();
+	public static FluidEntry<BaseFlowingFluid.Flowing>
+			CRYSTAL_MIXTURE =
+			REGISTRATE
+					.standardFluid("crystal_mixture")
+					.properties(p -> p
+							.density(3000)
+							.viscosity(6000)
+							.temperature(300)
+							.canExtinguish(true)
+							.canHydrate(false)
+							.lightLevel(8)
+							.sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+							.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
+							.motionScale(0.0023333333333333335D)
+							.canSwim(false)
+							.canDrown(true)
+							.pathType(PathType.WATER)
+							.adjacentPathType(null))
+					.fluidProperties(p -> p
+							.tickRate(30)
+							.levelDecreasePerBlock(2)
+							.slopeFindDistance(3)
+							.explosionResistance(100f))
+					.source(BaseFlowingFluid.Source::new)
+					.block()
+					.initialProperties(() -> Blocks.WATER)
+					.properties(p -> p.lightLevel($ -> 8))
+					.build()
+					.bucket()
+					.build()
+					.register();
 
 	public static FlowingFluid getCrystalMixture() {
 		return CRYSTAL_MIXTURE.get();
@@ -129,6 +140,15 @@ public class BlazingFluidsImpl {
 				AllFluids.CHOCOLATE.get(),
 				AllFluids.CHOCOLATE.get().getSource());
 
+		fluidInteraction(Fluids.LAVA,
+				() -> Blocks.COBBLESTONE,
+				CRYSTAL_MIXTURE.get(),
+				CRYSTAL_MIXTURE.get().getSource());
+		fluidInteraction(NETHER_LAVA,
+				() -> Blocks.COBBLESTONE,
+				CRYSTAL_MIXTURE.get(),
+				CRYSTAL_MIXTURE.get().getSource());
+
 		for (BlazingMetal metal : BlazingMetals.ALL) {
 			for (Map.Entry<NonNullSupplier<Fluid>, List<Pair<NonNullSupplier<Block>, Double>>> entry : metal.fluidInteractions.entrySet()) {
 				if (entry.getValue() == null) {
@@ -137,7 +157,9 @@ public class BlazingFluidsImpl {
 							BuiltInRegistries.FLUID.getKey(entry.getKey().get()));
 					continue;
 				}
-				fluidInteraction(MOLTEN_METALS.get(metal), () -> RandomUtil.rollFromPairList(entry.getValue()).get(), entry.getKey().get());
+				fluidInteraction(MOLTEN_METALS.get(metal),
+						() -> RandomUtil.rollFromPairList(entry.getValue()).get(),
+						entry.getKey().get());
 			}
 		}
 
@@ -150,18 +172,23 @@ public class BlazingFluidsImpl {
 
 	}
 
-	private static void fluidInteraction(FluidEntry<BaseFlowingFluid.Flowing> entry, NonNullSupplier<Block> result, Fluid... fluids) {
+	private static void fluidInteraction(FlowingFluid flowing, NonNullSupplier<Block> result, Fluid... fluids) {
 		for (Fluid fluid : fluids) {
-			FluidInteractionRegistry.addInteraction(entry.getType(),
+			FluidInteractionRegistry.addInteraction(flowing.getFluidType(),
 					new InteractionInformation(fluid.getFluidType(), fluidState -> {
 						Block block = result.get();
 						if (fluidState.isSource()) {
 							return Blocks.OBSIDIAN.defaultBlockState();
-						} else {
+						}
+						else {
 							return block.defaultBlockState();
 						}
 					}));
 		}
+	}
+
+	private static void fluidInteraction(FluidEntry<BaseFlowingFluid.Flowing> entry, NonNullSupplier<Block> result, Fluid... fluids) {
+		fluidInteraction(entry.get(), result, fluids);
 	}
 
 	private static void fluidInteraction(FluidEntry<BaseFlowingFluid.Flowing> entry, List<Pair<NonNullSupplier<Block>, Double>> results, Fluid... fluids) {
@@ -171,7 +198,8 @@ public class BlazingFluidsImpl {
 						Block block = RandomUtil.rollFromPairList(results).get();
 						if (fluidState.isSource()) {
 							return Blocks.OBSIDIAN.defaultBlockState();
-						} else {
+						}
+						else {
 							return block.defaultBlockState();
 						}
 					}));
@@ -180,13 +208,15 @@ public class BlazingFluidsImpl {
 
 	private static void crystalMixtureInteraction(FluidType fluidType, NonNullSupplier<Block> result) {
 		Block block = result.get();
-		FluidInteractionRegistry.addInteraction(fluidType, new InteractionInformation(CRYSTAL_MIXTURE.getType(), fluidState -> {
-			if (fluidState.isSource()) {
-				return Blocks.OBSIDIAN.defaultBlockState();
-			} else {
-				return block.defaultBlockState();
-			}
-		}));
+		FluidInteractionRegistry.addInteraction(fluidType,
+				new InteractionInformation(CRYSTAL_MIXTURE.getType(), fluidState -> {
+					if (fluidState.isSource()) {
+						return Blocks.OBSIDIAN.defaultBlockState();
+					}
+					else {
+						return block.defaultBlockState();
+					}
+				}));
 	}
 
 	@Nullable

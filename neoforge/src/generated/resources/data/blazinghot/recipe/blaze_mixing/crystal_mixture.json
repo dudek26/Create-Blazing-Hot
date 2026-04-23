@@ -1,0 +1,37 @@
+{
+  "type": "create:blaze_mixing",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "tag": "c:dusts/stone"
+    },
+    {
+      "tag": "c:dusts/stone"
+    },
+    {
+      "tag": "c:dusts/stone"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 125,
+      "fluid": "minecraft:water"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 100,
+      "tag": "blazinghot:blaze_mixer_placeholder"
+    }
+  ],
+  "results": [
+    {
+      "amount": 125,
+      "id": "blazinghot:crystal_mixture"
+    }
+  ]
+}

@@ -190,7 +190,7 @@ public class BlazingAdvancements implements DataProvider {
 					b -> b
 							.icon(BlazingMetals.BLAZE_GOLD.getBucket())
 							.title("Fake Alloys")
-							.description("Mix Molten Gold and Nether Essence together to obtain Molten Blaze Gold")
+							.description("Mix Molten Gold and Crimson Essence together to obtain Molten Blaze Gold")
 							.after(MOLTEN_GOLD)),
 
 	BLAZE_GOLD =

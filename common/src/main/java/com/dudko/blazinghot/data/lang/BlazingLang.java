@@ -49,7 +49,7 @@ public enum BlazingLang {
 	BLAZE_AUTO_SHAPELESS(RECIPE, "blaze_automatic_shapeless", "Blaze Automated Shapeless Crafting"),
 	BLAZE_AUTO_BREWING(RECIPE, "blaze_automatic_brewing", "Blaze Automated Brewing"),
 	SPOUT_CASTING(RECIPE, "spout_casting", "Casting by Spout"),
-	METAL_INTERACTION(RECIPE, "metal_interaction", "Metal Interaction"),
+	METAL_INTERACTION(RECIPE, "metal_interaction", "Metal Interactions"),
 
 	EMI_BLAZE_MIXING(EMI_RECIPE, "blaze_mixing", "Blaze Mixing"),
 	EMI_BLAZE_AUTO_SHAPELESS(EMI_RECIPE, "blaze_automatic_shapeless", "Blaze Automated Shapeless Crafting"),
@@ -74,8 +74,8 @@ public enum BlazingLang {
 		this.translation = translation;
 	}
 
-	public MutableComponent get() {
-		return Component.translatable(key);
+	public MutableComponent get(Object... args) {
+		return Component.translatable(key, args);
 	}
 
 	public LangBuilder translate() {

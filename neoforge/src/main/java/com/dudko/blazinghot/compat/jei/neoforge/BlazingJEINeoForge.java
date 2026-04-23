@@ -21,6 +21,7 @@ public class BlazingJEINeoForge extends BlazingJEI {
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
 		allCategories.forEach(c -> c.registerRecipes(registration));
+		METAL_INTERACTIONS.registerRecipes(registration);
 		registration.addIngredientInfo((new FluidStack(BlazingFluidsImpl.NETHER_LAVA.getDelegate(), 1000)),
 				NeoForgeTypes.FLUID_STACK,
 				BlazingLang.NETHER_LAVA_INFO.get());

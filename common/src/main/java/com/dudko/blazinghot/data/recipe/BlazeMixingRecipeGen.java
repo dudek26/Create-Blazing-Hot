@@ -1,9 +1,12 @@
 package com.dudko.blazinghot.data.recipe;
 
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.diamond;
 import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.fuel;
 import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.lava;
 import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.moltenGold;
 import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.netherEssence;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.stoneDust;
+import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.water;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -14,6 +17,7 @@ import com.dudko.blazinghot.content.metal.BlazingForm;
 import com.dudko.blazinghot.content.metal.BlazingMetal;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.foundation.recipe.BlazingRecipeGen;
+import com.dudko.blazinghot.registry.BlazingFluids;
 import com.dudko.blazinghot.registry.BlazingForms;
 import com.dudko.blazinghot.registry.BlazingMetals;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
@@ -54,7 +58,16 @@ public class BlazeMixingRecipeGen extends BlazingRecipeGen<ProcessingRecipeParam
 									.duration(200)
 									.output(BlazingMetals.BLAZE_GOLD.getFluid(), MultiAmount.INGOT)),
 			STURDY_MOLDS_MELTING =
-					moldMelting();
+					moldMelting(),
+			CRYSTAL_MIXTURE =
+					create("crystal_mixture",
+							b -> b
+									.requireMultiple(diamond(), 2)
+									.requireMultiple(stoneDust(), 3)
+									.require(water(), MultiAmount.fromBucketFraction(1, 8))
+									.requiresHeat(HeatCondition.HEATED)
+									.output(BlazingFluids.getCrystalMixture().getSource(),
+											MultiAmount.fromBucketFraction(1, 8)));
 
 	@Override
 	protected IRecipeTypeInfo getRecipeType() {
