@@ -71,6 +71,7 @@ public class BlazingMetal {
 		private final String name;
 		private final List<Mods> mods;
 		private final List<BlazingForm> forms;
+		private boolean hasCrystalMixtureInteraction;
 		private final Map<NonNullSupplier<Fluid>, List<Pair<NonNullSupplier<Block>, Double>>> fluidInteractions;
 
 		private Builder(String name) {
@@ -78,6 +79,7 @@ public class BlazingMetal {
 			this.mods = new ArrayList<>();
 			this.forms = new ArrayList<>();
 			this.fluidInteractions = new HashMap<>();
+			hasCrystalMixtureInteraction = false;
 		}
 
 		/**
@@ -130,6 +132,7 @@ public class BlazingMetal {
 		}
 
 		public Builder crystalMixtureInteraction(NonNullSupplier<Block> block, double chance) {
+			hasCrystalMixtureInteraction = true;
 			return addFluidInteraction(BlazingFluids::getCrystalMixture, block, chance);
 		}
 
@@ -149,6 +152,15 @@ public class BlazingMetal {
 		 */
 		public BlazingMetal build() {
 			if (mods.isEmpty()) mods.add(Mods.VANILLA);
+
+			if (!hasCrystalMixtureInteraction) {
+				var interactionsIterator = fluidInteractions.entrySet().iterator();
+				if (interactionsIterator.hasNext()) {
+					var interaction = interactionsIterator.next();
+					crystalMixtureInteraction(interaction.getValue().getFirst().getFirst());
+				}
+			}
+
 			return new BlazingMetal(this);
 		}
 

@@ -132,6 +132,7 @@ public class BlazingMetals {
 									.fromMods(Mods.BLAZINGHOT)
 									.createForms()
 									.withForms(BlazingForms.ROD)
+									.crystalMixtureInteraction(() -> AllPaletteStoneTypes.OCHRUM.getBaseBlock().get())
 									.addFluidInteraction(() -> Fluids.WATER, () -> Blocks.NETHERRACK))
 					.register(),
 			STURDY_ALLOY =
@@ -140,6 +141,7 @@ public class BlazingMetals {
 									b -> b
 											.fromMods(Mods.BLAZINGHOT)
 											.withForms(BlazingForms.STURDY_ALLOY, BlazingForms.STURDY_SHEET)
+											.crystalMixtureInteraction(() -> Blocks.OBSIDIAN)
 											.addFluidInteraction(() -> Fluids.WATER, () -> Blocks.COBBLED_DEEPSLATE))
 							.register();
 

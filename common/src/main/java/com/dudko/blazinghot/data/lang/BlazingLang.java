@@ -49,6 +49,7 @@ public enum BlazingLang {
 	BLAZE_AUTO_SHAPELESS(RECIPE, "blaze_automatic_shapeless", "Blaze Automated Shapeless Crafting"),
 	BLAZE_AUTO_BREWING(RECIPE, "blaze_automatic_brewing", "Blaze Automated Brewing"),
 	SPOUT_CASTING(RECIPE, "spout_casting", "Casting by Spout"),
+	METAL_INTERACTION(RECIPE, "metal_interaction", "Metal Interaction"),
 
 	EMI_BLAZE_MIXING(EMI_RECIPE, "blaze_mixing", "Blaze Mixing"),
 	EMI_BLAZE_AUTO_SHAPELESS(EMI_RECIPE, "blaze_automatic_shapeless", "Blaze Automated Shapeless Crafting"),
