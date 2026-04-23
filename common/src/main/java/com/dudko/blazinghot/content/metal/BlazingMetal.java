@@ -8,11 +8,13 @@ import java.util.function.UnaryOperator;
 
 import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.compat.Mods;
+import com.dudko.blazinghot.registry.BlazingFluids;
 import com.dudko.blazinghot.registry.BlazingForms;
 import com.dudko.blazinghot.registry.BlazingMetals;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 
+import net.createmod.catnip.data.Pair;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -27,7 +29,7 @@ public class BlazingMetal {
 	public final String name;
 	public final List<Mods> mods;
 	public final List<BlazingForm> forms;
-	public final Map<Fluid, NonNullSupplier<Block>> fluidInteractions;
+	public final Map<NonNullSupplier<Fluid>, List<Pair<NonNullSupplier<Block>, Double>>> fluidInteractions;
 
 	private BlazingMetal(Builder builder) {
 		name = builder.name;
@@ -69,7 +71,7 @@ public class BlazingMetal {
 		private final String name;
 		private final List<Mods> mods;
 		private final List<BlazingForm> forms;
-		private final Map<Fluid, NonNullSupplier<Block>> fluidInteractions;
+		private final Map<NonNullSupplier<Fluid>, List<Pair<NonNullSupplier<Block>, Double>>> fluidInteractions;
 
 		private Builder(String name) {
 			this.name = name;
@@ -108,18 +110,35 @@ public class BlazingMetal {
 		}
 
 		/**
-		 * <p>Defines the fluid interactions. </p>
+		 * <p>Defines a fluid interaction with a specified probability. </p>
 		 * <p>Never add AllPaletteStoneTypes directly by {@code [...].getBaseBlock()}! You should always add them by <code>() -> [...].getBaseBlock().get()</code></p>
 		 * <p>Fabric: remember to update {@link com.dudko.blazinghot.registry.fabric.BlazingFluidsImpl#fluidTags}</p>
 		 */
 		@SuppressWarnings("JavadocReference")
-		public Builder addFluidInteraction(Fluid fluid, NonNullSupplier<Block> block) {
-			this.fluidInteractions.put(fluid, block);
+		public Builder addFluidInteraction(NonNullSupplier<Fluid> fluid, NonNullSupplier<Block> block, double chance) {
+			List<Pair<NonNullSupplier<Block>, Double>> interactions = fluidInteractions.get(fluid);
+			if (interactions == null) {
+				interactions = new ArrayList<>();
+			}
+			interactions.add(Pair.of(block, chance));
+			this.fluidInteractions.put(fluid, interactions);
 			return this;
 		}
 
+		public Builder addFluidInteraction(NonNullSupplier<Fluid> fluid, NonNullSupplier<Block> block) {
+			return addFluidInteraction(fluid, block, 1);
+		}
+
+		public Builder crystalMixtureInteraction(NonNullSupplier<Block> block, double chance) {
+			return addFluidInteraction(BlazingFluids::getCrystalMixture, block, chance);
+		}
+
+		public Builder crystalMixtureInteraction(NonNullSupplier<Block> block) {
+			return crystalMixtureInteraction(block, 1);
+		}
+
 		public Builder waterCobble() {
-			return addFluidInteraction(Fluids.WATER, () -> Blocks.COBBLESTONE);
+			return addFluidInteraction(() -> Fluids.WATER, () -> Blocks.COBBLESTONE);
 		}
 
 		/**
@@ -134,4 +153,5 @@ public class BlazingMetal {
 		}
 
 	}
+
 }

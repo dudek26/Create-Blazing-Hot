@@ -2,6 +2,7 @@ package com.dudko.blazinghot.registry.neoforge;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.function.Function;
@@ -14,17 +15,20 @@ import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.metal.BlazingMetal;
 import com.dudko.blazinghot.registry.BlazingMetals;
 import com.dudko.blazinghot.registry.BlazingTags;
+import com.dudko.blazinghot.util.RandomUtil;
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 
+import net.createmod.catnip.data.Pair;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
@@ -33,6 +37,7 @@ import net.neoforged.neoforge.common.SoundActions;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 import net.neoforged.neoforge.fluids.FluidInteractionRegistry;
 import net.neoforged.neoforge.fluids.FluidInteractionRegistry.InteractionInformation;
+import net.neoforged.neoforge.fluids.FluidType;
 
 public class BlazingFluidsImpl {
 
@@ -44,6 +49,30 @@ public class BlazingFluidsImpl {
 
 	public static FluidEntry<BaseFlowingFluid.Flowing> NETHER_LAVA = createFromLava("nether_lava", 10, 1);
 
+	public static FluidEntry<BaseFlowingFluid.Flowing> CRYSTAL_MIXTURE = REGISTRATE.standardFluid("crystal_mixture").properties(p -> p.density(3000)
+					.viscosity(6000)
+					.temperature(300)
+					.canExtinguish(true)
+					.canHydrate(false)
+					.lightLevel(8)
+					.sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+					.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
+					.motionScale(0.0023333333333333335D)
+					.canSwim(false)
+					.canDrown(true)
+					.pathType(PathType.WATER)
+					.adjacentPathType(null))
+			.fluidProperties(p -> p.tickRate(30).levelDecreasePerBlock(2).slopeFindDistance(3).explosionResistance(100f)).source(BaseFlowingFluid.Source::new).block()
+			.initialProperties(() -> Blocks.WATER)
+			.properties(p -> p.lightLevel($ -> 8))
+			.build()
+			.bucket()
+			.build()
+			.register();
+
+	public static FlowingFluid getCrystalMixture() {
+		return CRYSTAL_MIXTURE.get();
+	}
 
 	public static FluidEntry<BaseFlowingFluid.Flowing> createFromLava(String name, int tickRate) {
 		return createFromLava(name, tickRate, 2);
@@ -101,14 +130,14 @@ public class BlazingFluidsImpl {
 				AllFluids.CHOCOLATE.get().getSource());
 
 		for (BlazingMetal metal : BlazingMetals.ALL) {
-			for (Map.Entry<Fluid, NonNullSupplier<Block>> entry : metal.fluidInteractions.entrySet()) {
+			for (Map.Entry<NonNullSupplier<Fluid>, List<Pair<NonNullSupplier<Block>, Double>>> entry : metal.fluidInteractions.entrySet()) {
 				if (entry.getValue() == null) {
 					BlazingHot.LOGGER.error("Null fluid interaction for {}, {}",
 							metal.getMoltenName(),
-							BuiltInRegistries.FLUID.getKey(entry.getKey()));
+							BuiltInRegistries.FLUID.getKey(entry.getKey().get()));
 					continue;
 				}
-				fluidInteraction(MOLTEN_METALS.get(metal), entry.getValue(), entry.getKey());
+				fluidInteraction(MOLTEN_METALS.get(metal), () -> RandomUtil.rollFromPairList(entry.getValue()).get(), entry.getKey().get());
 			}
 		}
 
@@ -122,34 +151,58 @@ public class BlazingFluidsImpl {
 	}
 
 	private static void fluidInteraction(FluidEntry<BaseFlowingFluid.Flowing> entry, NonNullSupplier<Block> result, Fluid... fluids) {
-		Block block = result.get();
 		for (Fluid fluid : fluids) {
 			FluidInteractionRegistry.addInteraction(entry.getType(),
 					new InteractionInformation(fluid.getFluidType(), fluidState -> {
+						Block block = result.get();
 						if (fluidState.isSource()) {
 							return Blocks.OBSIDIAN.defaultBlockState();
-						}
-						else {
+						} else {
 							return block.defaultBlockState();
 						}
 					}));
 		}
 	}
 
+	private static void fluidInteraction(FluidEntry<BaseFlowingFluid.Flowing> entry, List<Pair<NonNullSupplier<Block>, Double>> results, Fluid... fluids) {
+		for (Fluid fluid : fluids) {
+			FluidInteractionRegistry.addInteraction(entry.getType(),
+					new InteractionInformation(fluid.getFluidType(), fluidState -> {
+						Block block = RandomUtil.rollFromPairList(results).get();
+						if (fluidState.isSource()) {
+							return Blocks.OBSIDIAN.defaultBlockState();
+						} else {
+							return block.defaultBlockState();
+						}
+					}));
+		}
+	}
+
+	private static void crystalMixtureInteraction(FluidType fluidType, NonNullSupplier<Block> result) {
+		Block block = result.get();
+		FluidInteractionRegistry.addInteraction(fluidType, new InteractionInformation(CRYSTAL_MIXTURE.getType(), fluidState -> {
+			if (fluidState.isSource()) {
+				return Blocks.OBSIDIAN.defaultBlockState();
+			} else {
+				return block.defaultBlockState();
+			}
+		}));
+	}
+
 	@Nullable
 	public static BlockState getFluidInteraction(FluidState fluidState, FluidState metFluidState) {
 		for (BlazingMetal metal : BlazingMetals.ALL) {
-			for (Map.Entry<Fluid, NonNullSupplier<Block>> entry : metal.fluidInteractions.entrySet()) {
+			for (Map.Entry<NonNullSupplier<Fluid>, List<Pair<NonNullSupplier<Block>, Double>>> entry : metal.fluidInteractions.entrySet()) {
 				if (entry.getValue() == null) {
 					BlazingHot.LOGGER.debug("Null fluid interaction for {}, {}",
 							metal.getMoltenName(),
-							BuiltInRegistries.FLUID.getKey(entry.getKey()));
+							BuiltInRegistries.FLUID.getKey(entry.getKey().get()));
 					continue;
 				}
 				if (fluidState.getType().isSame(MOLTEN_METALS.getFluid(metal)) && metFluidState
 						.getType()
-						.isSame(entry.getKey())) {
-					return entry.getValue().get().defaultBlockState();
+						.isSame(entry.getKey().get())) {
+					return RandomUtil.rollFromPairList(entry.getValue()).get().defaultBlockState();
 				}
 			}
 		}

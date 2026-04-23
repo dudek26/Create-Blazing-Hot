@@ -1,6 +1,7 @@
 package com.dudko.blazinghot.registry;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
@@ -8,6 +9,11 @@ public class BlazingFluids {
 
 	public static void register() {
 		platformRegister();
+	}
+	
+	@ExpectPlatform
+	public static FlowingFluid getCrystalMixture() {
+		throw new AssertionError();
 	}
 
 	@ExpectPlatform
