@@ -91,6 +91,8 @@ repositories {
     maven { url = "https://maven.ithundxr.dev/snapshots" } // Registrate
     maven { url = "https://maven.neoforged.net/releases/" } // NeoForge
     maven { url = "https://api.modrinth.com/maven" }
+    maven { url "https://maven.dragons.plus/releases" } // DragonsPlusMinecraft Maven
+    maven { url "https://maven.fallenbreath.me/releases" } // Conditional Mixin
 }
 
 dependencies {
@@ -118,10 +120,14 @@ dependencies {
     implementation(include("io.github.llamalad7:mixinextras-neoforge:0.5.0"))
 
     modCompileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
+    modCompileOnly("plus.dragons.createdragonsplus:create-dragons-plus-${minecraft_version}:${create_dragons_plus_neoforge_version}")
+    modCompileOnly("maven.modrinth:create-dreams-and-desires:${create_dd_neoforge_version}")
 
     // Additional mods
     // Compat
     if (createaddition_neoforge == "true") modLocalRuntime("maven.modrinth:createaddition:${createaddition_neoforge_version}")
+    if (create_dragons_plus_neoforge == "true") modLocalRuntime("plus.dragons.createdragonsplus:create-dragons-plus-${minecraft_version}:${create_dragons_plus_neoforge_version}")
+    if (create_dd_neoforge == "true") modLocalRuntime("maven.modrinth:create-dreams-and-desires:${create_dd_neoforge_version}")
 }
 
 processResources {

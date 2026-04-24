@@ -8,6 +8,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.dudko.blazinghot.compat.CompatFanProcessing;
 import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.simibubi.create.content.fluids.spout.SpoutBlockEntity;
 import com.simibubi.create.content.kinetics.fan.processing.AllFanProcessingTypes;
@@ -166,9 +167,16 @@ public abstract class SpoutCastingBehaviour extends BlockEntityBehaviour {
 		if (type.equals(AllFanProcessingTypes.BLASTING)) {
 			return BlazingConfigs.server().casting.blastingCoolingModifier.getF();
 		}
-		if (type.equals(AllFanProcessingTypes.SPLASHING)) {
+		else if (type.equals(AllFanProcessingTypes.SPLASHING)) {
 			return BlazingConfigs.server().casting.splashingCoolingModifier.getF();
 		}
+		else if (CompatFanProcessing.isFreezing(type)) {
+			return BlazingConfigs.server().casting.freezingCoolingModifier.getF();
+		}
+		else if (CompatFanProcessing.isSeething(type)) {
+			return BlazingConfigs.server().casting.seethingCoolingModifier.getF();
+		}
+
 		return 0;
 	}
 }
