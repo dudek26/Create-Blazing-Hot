@@ -50,8 +50,10 @@ public class FluidReactionsImpl {
 			}
 		}
 
-		else if (BlazingFluidsImpl.MOLTEN_METALS.contains(f1) && f2 == Fluids.WATER) metalInteraction(event, f1, f2);
-		else if (BlazingFluidsImpl.MOLTEN_METALS.contains(f2) && f1 == Fluids.WATER) metalInteraction(event, f2, f1);
+		else if (BlazingFluidsImpl.MOLTEN_METALS.contains(f1) && (f2 == Fluids.WATER || isCrystalMixture(f2)))
+			metalInteraction(event, f1, f2);
+		else if (BlazingFluidsImpl.MOLTEN_METALS.contains(f2) && (f1 == Fluids.WATER || isCrystalMixture(f1)))
+			metalInteraction(event, f2, f1);
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGH)
@@ -78,13 +80,19 @@ public class FluidReactionsImpl {
 		if (pf == NETHER_LAVA.getSource()) lavaInteraction(event, wf);
 		else if (wf == NETHER_LAVA.getSource() && FluidHelper.hasBlockState(pf)) lavaInteraction(event, pf);
 
-		else if (BlazingFluidsImpl.MOLTEN_METALS.contains(pf) && FluidHelper.isTag(wf, FluidTags.WATER)) {
+		else if (BlazingFluidsImpl.MOLTEN_METALS.contains(pf) && (FluidHelper.isTag(wf, FluidTags.WATER)
+				|| isCrystalMixture(wf))) {
 			metalInteraction(event, pf, wf);
 		}
 
-		else if (BlazingFluidsImpl.MOLTEN_METALS.contains(wf) && FluidHelper.isTag(pf, FluidTags.WATER)) {
+		else if (BlazingFluidsImpl.MOLTEN_METALS.contains(wf) && (FluidHelper.isTag(pf, FluidTags.WATER)
+				|| isCrystalMixture(pf))) {
 			metalInteraction(event, wf, pf);
 		}
+	}
+
+	private static boolean isCrystalMixture(Fluid fluid) {
+		return fluid.getFluidType().equals(BlazingFluidsImpl.CRYSTAL_MIXTURE.getType());
 	}
 
 	private static void metalInteraction(PipeCollisionEvent event, Fluid metal, Fluid waterLike) {
