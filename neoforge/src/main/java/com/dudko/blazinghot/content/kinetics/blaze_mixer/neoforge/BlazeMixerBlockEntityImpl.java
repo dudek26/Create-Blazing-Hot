@@ -147,25 +147,25 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 				if (processingTicks < 0) {
 					float recipeSpeed = 1;
 					fuelCost = 0;
-					if (currentRecipe instanceof ProcessingRecipe<?, ? extends ProcessingRecipeParams> processingRecipe) {
-						int t = processingRecipe.getProcessingDuration();
-						if (t != 0) {
-							recipeSpeed = t / 100f;
+					if (mode == Mode.BLAZE) {
+						if (currentRecipe instanceof ProcessingRecipe<?, ? extends ProcessingRecipeParams> processingRecipe) {
+							int t = processingRecipe.getProcessingDuration();
+							if (t != 0) {
+								recipeSpeed = t / 100f;
+							}
+						}
+						if (currentRecipe instanceof BlazeMixingRecipe blazeMixingRecipe) {
+							if (blazeMixingRecipe.getMixerFuel().test(getFluidStack())) {
+								fuelCost = blazeMixingRecipe.getMixerFuelAmount();
+							}
+						} else {
+							int calculatedCost = (int) getFuelCost(currentRecipe, level);
+							if (hasFuel(calculatedCost)) {
+								recipeSpeed = 1 / recipeSpeedMultiplier(currentRecipe);
+								fuelCost = calculatedCost;
+							}
 						}
 					}
-					if (currentRecipe instanceof BlazeMixingRecipe blazeMixingRecipe) {
-						if (blazeMixingRecipe.getMixerFuel().test(getFluidStack())) {
-							fuelCost = blazeMixingRecipe.getMixerFuelAmount();
-						}
-					}
-					else {
-						int calculatedCost = (int) getFuelCost(currentRecipe, level);
-						if (hasFuel(calculatedCost)) {
-							recipeSpeed = 1 / recipeSpeedMultiplier(currentRecipe);
-							fuelCost = calculatedCost;
-						}
-					}
-
 					processingTicks =
 							Mth.clamp((Mth.log2((int) (512 / speed))) * Mth.ceil(recipeSpeed * 15) + 1, 1, 8192);
 
@@ -180,8 +180,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 								speed < 65 ? .75f : 1.5f);
 					}
 
-				}
-				else {
+				} else {
 					processingTicks--;
 					if (processingTicks == 0) {
 						runningTicks++;
@@ -305,17 +304,6 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 		if (recipe instanceof BlazeMixingRecipe bmxRecipe) {
 			return BasinRecipe.match(basin.get(), bmxRecipe) && hasFuel(bmxRecipe.getMixerFuel());
 		}
-//		else if (recipe instanceof MixingRecipe mxRecipe) {
-//			assert level != null;
-//			RecipeManager manager = level.getRecipeManager();
-//
-//			List<RecipeHolder<BlazeMixingRecipe>>
-//					recipes =
-//					manager.getAllRecipesFor(BlazingRecipeTypes.BLAZE_MIXING.getType());
-//			for (RecipeHolder<BlazeMixingRecipe> mixing : recipes) {
-//				if (doInputsMatch(mxRecipe, mixing.value())) return false;
-//			}
-//		}
 
 		return BasinRecipe.match(basin.get(), recipe);
 	}
@@ -348,6 +336,10 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 	@Override
 	protected boolean matchStaticFilters(RecipeHolder<? extends Recipe<?>> holder) {
 		Recipe<?> recipe = holder.value();
+		if (mode == Mode.INFERNO) {
+			return false;
+		}
+
 		return ((recipe instanceof CraftingRecipe
 				&& !(recipe instanceof ShapedRecipe)
 				&& BlazingConfigs.server().recipes.allowShapelessInBlazeMixer.get()

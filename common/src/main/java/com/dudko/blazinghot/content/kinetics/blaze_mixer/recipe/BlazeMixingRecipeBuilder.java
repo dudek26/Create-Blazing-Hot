@@ -18,13 +18,13 @@ import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlazeMixingRecipeBuilder extends BlazingRecipeBuilder<ProcessingRecipeParams, BlazeMixingRecipe, BlazeMixingRecipeBuilder> {
+public class BlazeMixingRecipeBuilder<R extends AbstractBlazeMixingRecipe> extends BlazingRecipeBuilder<ProcessingRecipeParams, R, BlazeMixingRecipeBuilder<R>> {
 
 	protected SizedFluidIngredient mixerFuel;
 
-	public BlazeMixingRecipeBuilder(ProcessingRecipe.Factory<ProcessingRecipeParams, BlazeMixingRecipe> factory, ResourceLocation recipeId) {
+	public BlazeMixingRecipeBuilder(ProcessingRecipe.Factory<ProcessingRecipeParams, R> factory, ResourceLocation recipeId) {
 		super(factory, recipeId);
-		mixerFuel = BlazeMixingRecipe.emptyMixerFuel();
+		mixerFuel = BlazeMixingRecipe.mixerFuelPlaceholder();
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class BlazeMixingRecipeBuilder extends BlazingRecipeBuilder<ProcessingRec
 	}
 
 	@Override
-	public BlazeMixingRecipeBuilder self() {
+	public BlazeMixingRecipeBuilder<R> self() {
 		return this;
 	}
 
@@ -43,16 +43,16 @@ public class BlazeMixingRecipeBuilder extends BlazingRecipeBuilder<ProcessingRec
 		super.build(consumer);
 	}
 
-	public BlazeMixingRecipeBuilder mixerFuel(SizedFluidIngredient mixerFuel) {
+	public BlazeMixingRecipeBuilder<R> mixerFuel(SizedFluidIngredient mixerFuel) {
 		this.mixerFuel = mixerFuel;
 		return self();
 	}
 
-	public BlazeMixingRecipeBuilder mixerFuel(Fluid fluid, MultiAmount amount) {
+	public BlazeMixingRecipeBuilder<R> mixerFuel(Fluid fluid, MultiAmount amount) {
 		return mixerFuel(MultiFluidIngredient.fromFluid(BuiltInRegistries.FLUID.wrapAsHolder(fluid), amount));
 	}
 
-	public BlazeMixingRecipeBuilder mixerFuel(TagKey<Fluid> fluidTag, MultiAmount amount) {
+	public BlazeMixingRecipeBuilder<R> mixerFuel(TagKey<Fluid> fluidTag, MultiAmount amount) {
 		return mixerFuel(MultiFluidIngredient.fromTag(fluidTag, amount));
 	}
 

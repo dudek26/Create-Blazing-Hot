@@ -54,6 +54,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 	public int dripTicks = 0;
 	public boolean running;
 	public boolean fueled;
+	protected Mode mode = Mode.BLAZE;
 
 	private int ancientDebrisMelted;
 
@@ -89,11 +90,9 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 				float num = (localTick + partialTicks) / 20f;
 				num = ((2 - Mth.cos((float) (num * Math.PI))) / 2);
 				offset = num - .5f;
-			}
-			else if (runningTicks <= 20) {
+			} else if (runningTicks == 20) {
 				offset = 1;
-			}
-			else {
+			} else {
 				localTick = 40 - runningTicks;
 				float num = (localTick - partialTicks) / 20f;
 				num = ((2 - Mth.cos((float) (num * Math.PI))) / 2);
@@ -308,5 +307,17 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 
 	public void awardPlayerIfNear(BlazingAdvancement advancement, int maxDistance) {
 		((IAdvancementBehaviour) this).blazinghot$award(advancement);
+	}
+
+	public void setMode(Mode mode) {
+		this.mode = mode;
+	}
+
+	public Mode getMode() {
+		return mode;
+	}
+
+	public enum Mode {
+		BLAZE, INFERNO;
 	}
 }

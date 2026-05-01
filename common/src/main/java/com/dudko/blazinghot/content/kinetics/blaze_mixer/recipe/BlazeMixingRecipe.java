@@ -7,71 +7,28 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
-import com.dudko.blazinghot.foundation.multiloader.fluid.MultiFluidIngredient;
 import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
-import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
-import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.core.NonNullList;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlazeMixingRecipe extends BasinRecipe {
+public class BlazeMixingRecipe extends AbstractBlazeMixingRecipe {
 
 	public BlazeMixingRecipe(ProcessingRecipeParams params) {
 		super(BlazingRecipeTypes.BLAZE_MIXING, params);
-	}
-
-	@Override
-	public List<String> validate() {
-		List<String> errors = super.validate();
-		if (super.getFluidIngredients().isEmpty()) errors.add("Recipe doesn't have any mixer fuel.");
-		return errors;
-	}
-
-	@Override
-	public NonNullList<SizedFluidIngredient> getFluidIngredients() {
-		NonNullList<SizedFluidIngredient> fluidIngredients = NonNullList.create();
-		fluidIngredients.addAll(super.getFluidIngredients());
-		fluidIngredients.removeLast();
-		return fluidIngredients;
-	}
-
-	public static SizedFluidIngredient emptyMixerFuel() {
-		return MultiFluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_PLACEHOLDER.tag(),
-				MultiAmount.fromBucketFraction(1, 10));
-	}
-
-	public SizedFluidIngredient getMixerFuel() {
-		SizedFluidIngredient fuel = super.getFluidIngredients().getLast();
-		if (isPlaceholder(fuel)) return MultiFluidIngredient.empty();
-		return fuel;
-	}
-
-	public int getMixerFuelAmount() {
-		SizedFluidIngredient fuel = getMixerFuel();
-		if (fuel.ingredient().isEmpty()) return 0;
-		return fuel.amount();
-	}
-
-	@Override
-	protected int getMaxFluidInputCount() {
-		return super.getMaxFluidInputCount() + 1;
 	}
 
 	/**
@@ -116,20 +73,10 @@ public class BlazeMixingRecipe extends BasinRecipe {
 		return Mth.ceil(recipeSpeed * BlazingConfigs.server().recipes.blazeMixingFuelUsage.get());
 	}
 
-	@FunctionalInterface
-	public interface Factory {
-		BlazeMixingRecipe create(BlazeMixingRecipeParams params);
-	}
-
-	@ExpectPlatform
-	public static boolean isMeltingRecipe(Recipe<?> recipe) {
-		return true;
-	}
-
-	@ExpectPlatform
-	public static boolean isPlaceholder(SizedFluidIngredient fluidIngredient) {
-		return true;
-	}
+//	@FunctionalInterface
+//	public interface Factory {
+//		BlazeMixingRecipe create(BlazeMixingRecipeParams params);
+//	}
 
 //	public static MapCodec<BlazeMixingRecipe> codec(Factory factory, MapCodec<BlazeMixingRecipeParams> paramsCodec) {
 //		return paramsCodec.xmap(factory::create, BlazeMixingRecipe::getParams).validate(recipe -> {

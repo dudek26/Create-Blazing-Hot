@@ -31,7 +31,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 
-public class BlazeMixingRecipeGen extends BlazingRecipeGen<ProcessingRecipeParams, BlazeMixingRecipe, BlazeMixingRecipeBuilder> {
+public class BlazeMixingRecipeGen extends BlazingRecipeGen<ProcessingRecipeParams, BlazeMixingRecipe, BlazeMixingRecipeBuilder<BlazeMixingRecipe>> {
 
 	public BlazeMixingRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
 		super(output, registries);
@@ -75,8 +75,8 @@ public class BlazeMixingRecipeGen extends BlazingRecipeGen<ProcessingRecipeParam
 	}
 
 	@Override
-	protected BlazeMixingRecipeBuilder getBuilder(ResourceLocation id) {
-		return new BlazeMixingRecipeBuilder(BlazeMixingRecipe::new, id);
+	protected BlazeMixingRecipeBuilder<BlazeMixingRecipe> getBuilder(ResourceLocation id) {
+		return new BlazeMixingRecipeBuilder<>(BlazeMixingRecipe::new, id);
 	}
 
 	private void melting(BlazingMetal metal) {
