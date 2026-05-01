@@ -9,7 +9,7 @@ import com.dudko.blazinghot.data.advancement.BlazingTriggers;
 import com.dudko.blazinghot.foundation.recipe.neoforge.BlazingRecipeTypeImpl;
 import com.dudko.blazinghot.registry.neoforge.BlazingConfigsImpl;
 import com.dudko.blazinghot.registry.neoforge.BlazingCreativeTabsImpl;
-import com.dudko.blazinghot.registry.neoforge.BlazingDataTypesNeoForge;
+import com.dudko.blazinghot.registry.neoforge.BlazingDataMapsNeoForge;
 import com.dudko.blazinghot.registry.neoforge.BlazingFluidsImpl;
 
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -41,7 +41,7 @@ public class BlazingHotImpl {
 
 		modEventBus.addListener(EventPriority.LOWEST, BlazingHotDataNeoForge::gatherData);
 		modEventBus.addListener(EventPriority.HIGHEST, BlazingHotDataNeoForge::gatherDataHighPriority);
-		
+
 		BlazingConfigsImpl.register(modLoadingContext, modContainer);
 	}
 
@@ -66,7 +66,7 @@ public class BlazingHotImpl {
 
 	@SubscribeEvent
 	public static void registerDataMapTypes(RegisterDataMapTypesEvent event) {
-		BlazingDataTypesNeoForge.register(event);
+		BlazingDataMapsNeoForge.register(event);
 	}
 
 	public static void finalizeRegistrate() {

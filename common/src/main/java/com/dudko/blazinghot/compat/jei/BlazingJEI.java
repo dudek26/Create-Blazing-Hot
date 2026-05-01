@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.dudko.blazinghot.BlazingHot;
+import com.dudko.blazinghot.compat.jei.category.BlazeMixerFuelCategory;
 import com.dudko.blazinghot.compat.jei.category.BlazeMixingCategory;
 import com.dudko.blazinghot.compat.jei.category.CastingCategory;
 import com.dudko.blazinghot.compat.jei.category.MetalInteractionsCategory;
@@ -25,6 +26,7 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
+import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
@@ -48,58 +50,60 @@ public abstract class BlazingJEI implements IModPlugin {
 	public static IJeiRuntime runtime;
 
 	protected static MetalInteractionsCategory METAL_INTERACTIONS;
+	protected static BlazeMixerFuelCategory BLAZE_MIXER_FUEL;
 
 	@SuppressWarnings("unused")
 	private void loadCategories() {
 		allCategories.clear();
 
 		CreateRecipeCategory<?>
-				blazeMixing =
+			blazeMixing =
+			builder(BasinRecipe.class)
+				.addTypedRecipes(BlazingRecipeTypes.BLAZE_MIXING)
+				.addTypedRecipesIf(AllRecipeTypes.MIXING::getType,
+					(recipe) -> BlazingConfigs.server().recipes.allowMixingInBlazeMixer.get()
+						&& BlazingRecipeTypes.shouldAllowBlazeMixing(recipe))
+				.catalyst(BlazingBlocks.BLAZE_MIXER::get)
+				.catalyst(AllBlocks.BASIN::get)
+				.doubleItemIcon(BlazingBlocks.BLAZE_MIXER.get(), AllBlocks.BASIN.get())
+				.emptyBackground(177, 103)
+				.build("blaze_mixing", BlazeMixingCategory::standard),
+
+			blazeAutoShapeless =
 				builder(BasinRecipe.class)
-						.addTypedRecipes(BlazingRecipeTypes.BLAZE_MIXING)
-						.addTypedRecipesIf(AllRecipeTypes.MIXING::getType,
-								(recipe) -> BlazingConfigs.server().recipes.allowMixingInBlazeMixer.get()
-										&& BlazingRecipeTypes.shouldAllowBlazeMixing(recipe))
-						.catalyst(BlazingBlocks.BLAZE_MIXER::get)
-						.catalyst(AllBlocks.BASIN::get)
-						.doubleItemIcon(BlazingBlocks.BLAZE_MIXER.get(), AllBlocks.BASIN.get())
-						.emptyBackground(177, 103)
-						.build("blaze_mixing", BlazeMixingCategory::standard),
+					.enableWhen(BlazingConfigs.server().recipes.allowShapelessInBlazeMixer)
+					.addAllRecipesIf(r -> r.value() instanceof CraftingRecipe
+						&& !(r.value() instanceof ShapedRecipe)
+						&& r.value().getIngredients().size() > 1
+						&& !MechanicalPressBlockEntity.canCompress(r.value())
+						&& !AllRecipeTypes.shouldIgnoreInAutomation(r), BasinRecipe::convertShapeless)
+					.catalyst(BlazingBlocks.BLAZE_MIXER::get)
+					.catalyst(AllBlocks.BASIN::get)
+					.doubleItemIcon(BlazingBlocks.BLAZE_MIXER.get(), Items.CRAFTING_TABLE)
+					.emptyBackground(177, 103)
+					.build("blaze_automatic_shapeless", BlazeMixingCategory::autoShapeless),
 
-				blazeAutoShapeless =
-						builder(BasinRecipe.class)
-								.enableWhen(BlazingConfigs.server().recipes.allowShapelessInBlazeMixer)
-								.addAllRecipesIf(r -> r.value() instanceof CraftingRecipe
-										&& !(r.value() instanceof ShapedRecipe)
-										&& r.value().getIngredients().size() > 1
-										&& !MechanicalPressBlockEntity.canCompress(r.value())
-										&& !AllRecipeTypes.shouldIgnoreInAutomation(r), BasinRecipe::convertShapeless)
-								.catalyst(BlazingBlocks.BLAZE_MIXER::get)
-								.catalyst(AllBlocks.BASIN::get)
-								.doubleItemIcon(BlazingBlocks.BLAZE_MIXER.get(), Items.CRAFTING_TABLE)
-								.emptyBackground(177, 103)
-								.build("blaze_automatic_shapeless", BlazeMixingCategory::autoShapeless),
+			blazeBrewing =
+				builder(BasinRecipe.class)
+					.enableWhen(BlazingConfigs.server().recipes.allowBrewingInBlazeMixer)
+					.addRecipes(() -> RecipeGenericsUtil.cast(PotionMixingRecipes.createRecipes(Minecraft.getInstance().level)))
+					.catalyst(BlazingBlocks.BLAZE_MIXER::get)
+					.catalyst(AllBlocks.BASIN::get)
+					.doubleItemIcon(BlazingBlocks.BLAZE_MIXER.get(), Blocks.BREWING_STAND)
+					.emptyBackground(177, 103)
+					.build("blaze_automatic_brewing", BlazeMixingCategory::autoBrewing),
 
-				blazeBrewing =
-						builder(BasinRecipe.class)
-								.enableWhen(BlazingConfigs.server().recipes.allowBrewingInBlazeMixer)
-								.addRecipes(() -> RecipeGenericsUtil.cast(PotionMixingRecipes.createRecipes(Minecraft.getInstance().level)))
-								.catalyst(BlazingBlocks.BLAZE_MIXER::get)
-								.catalyst(AllBlocks.BASIN::get)
-								.doubleItemIcon(BlazingBlocks.BLAZE_MIXER.get(), Blocks.BREWING_STAND)
-								.emptyBackground(177, 103)
-								.build("blaze_automatic_brewing", BlazeMixingCategory::autoBrewing),
-
-				casting =
-						builder(CastingRecipe.class)
-								.addTypedRecipes(BlazingRecipeTypes.CASTING)
-								.catalyst(AllBlocks.SPOUT::get)
-								.catalyst(BlazingBlocks.CASTING_DEPOT::get)
-								.doubleItemIcon(AllBlocks.SPOUT.get(), BlazingBlocks.CASTING_DEPOT.get())
-								.emptyBackground(177, 70)
-								.build("spout_casting", CastingCategory::new);
+			casting =
+				builder(CastingRecipe.class)
+					.addTypedRecipes(BlazingRecipeTypes.CASTING)
+					.catalyst(AllBlocks.SPOUT::get)
+					.catalyst(BlazingBlocks.CASTING_DEPOT::get)
+					.doubleItemIcon(AllBlocks.SPOUT.get(), BlazingBlocks.CASTING_DEPOT.get())
+					.emptyBackground(177, 70)
+					.build("spout_casting", CastingCategory::new);
 
 		METAL_INTERACTIONS = new MetalInteractionsCategory();
+		BLAZE_MIXER_FUEL = BlazeMixerFuelCategory.create();
 	}
 
 	protected <T extends Recipe<? extends RecipeInput>> CategoryBuilder<T> builder(Class<T> recipeClass) {
@@ -116,11 +120,20 @@ public abstract class BlazingJEI implements IModPlugin {
 		loadCategories();
 		registration.addRecipeCategories(allCategories.toArray(IRecipeCategory[]::new));
 		registration.addRecipeCategories(METAL_INTERACTIONS);
+		registration.addRecipeCategories(BLAZE_MIXER_FUEL);
+	}
+
+	@Override
+	public void registerRecipes(IRecipeRegistration registration) {
+		allCategories.forEach(c -> c.registerRecipes(registration));
+		METAL_INTERACTIONS.registerRecipes(registration);
+		BLAZE_MIXER_FUEL.registerRecipes(registration);
 	}
 
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
 		allCategories.forEach(c -> c.registerCatalysts(registration));
+		BLAZE_MIXER_FUEL.registerCatalysts(registration);
 	}
 
 	protected class CategoryBuilder<T extends Recipe<?>> extends CreateRecipeCategory.Builder<T> {

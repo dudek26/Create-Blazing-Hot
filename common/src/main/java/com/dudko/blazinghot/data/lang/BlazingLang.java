@@ -41,8 +41,8 @@ public enum BlazingLang {
 	CASTING_GOGGLE_COOLING(GOGGLES, "casting_depot.cooling", "Cooling"),
 
 	NETHER_LAVA_INFO(INFO,
-			"nether_lava_cobblestone",
-			"You can build faster Cobblestone generators when using Nether Lava instead of regular Lava."),
+		"nether_lava_cobblestone",
+		"You can build faster Cobblestone generators when using Nether Lava instead of regular Lava."),
 	BLAZE_MIXER_FUEL(RECIPE_TOOLTIP, "blaze_mixing.fuel", "Blaze Mixer's fuel"),
 	MOLD_CONSUMED(RECIPE_TOOLTIP, "spout_casting.consumed", "Consumed on cast"),
 	BLAZE_MIXING(RECIPE, "blaze_mixing", "Blaze Mixing"),
@@ -50,6 +50,9 @@ public enum BlazingLang {
 	BLAZE_AUTO_BREWING(RECIPE, "blaze_automatic_brewing", "Blaze Automated Brewing"),
 	SPOUT_CASTING(RECIPE, "spout_casting", "Casting by Spout"),
 	METAL_INTERACTION(RECIPE, "metal_interaction", "Metal Interactions"),
+	BLAZE_MIXER_FUEL_CATEGORY(RECIPE, "blaze_mixer_fuel", "Blaze Mixer Fuel"),
+	BLAZE_MIXER_FUEL_SPEED(RECIPE, "blaze_mixer_fuel.speed", "%1$s%% processing speed"),
+	BLAZE_MIXER_FUEL_USAGE(RECIPE, "blaze_mixer_fuel.usage", "%1$s%% fuel usage"),
 
 	EMI_BLAZE_MIXING(EMI_RECIPE, "blaze_mixing", "Blaze Mixing"),
 	EMI_BLAZE_AUTO_SHAPELESS(EMI_RECIPE, "blaze_automatic_shapeless", "Blaze Automated Shapeless Crafting"),
@@ -80,8 +83,8 @@ public enum BlazingLang {
 
 	public LangBuilder translate() {
 		String
-				key =
-				this.key.startsWith(BlazingHot.ID + ".") ? this.key.replaceFirst(BlazingHot.ID + ".", "") : this.key;
+			key =
+			this.key.startsWith(BlazingHot.ID + ".") ? this.key.replaceFirst(BlazingHot.ID + ".", "") : this.key;
 		return Lang.builder(BlazingHot.ID).translate(key);
 	}
 

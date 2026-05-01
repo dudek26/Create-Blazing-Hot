@@ -2,7 +2,7 @@
   "values": {
     "blazinghot:nether_lava": {
       "speed": 2.5,
-      "usage": 1.0
+      "usage": 0.5
     },
     "minecraft:lava": {
       "speed": 2.0,
