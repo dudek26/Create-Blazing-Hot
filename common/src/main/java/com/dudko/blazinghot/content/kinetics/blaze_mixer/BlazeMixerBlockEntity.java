@@ -43,6 +43,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements IHaveGoggleInformation {
@@ -74,11 +75,11 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 		super.addBehaviours(behaviours);
 		registerAwardables(behaviours, AllAdvancements.MIXER);
 		registerAwardables(behaviours,
-				BlazingAdvancements.BLAZE_MIXER,
-				BlazingAdvancements.MOLTEN_GOLD,
-				BlazingAdvancements.MOLTEN_BLAZE_GOLD,
-				BlazingAdvancements.BLAZE_MIXER_MAX,
-				BlazingAdvancements.ANCIENT_DEBRIS_MELTING);
+			BlazingAdvancements.BLAZE_MIXER,
+			BlazingAdvancements.MOLTEN_GOLD,
+			BlazingAdvancements.MOLTEN_BLAZE_GOLD,
+			BlazingAdvancements.BLAZE_MIXER_MAX,
+			BlazingAdvancements.ANCIENT_DEBRIS_MELTING);
 	}
 
 	public float getRenderedHeadOffset(float partialTicks) {
@@ -127,6 +128,11 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 		runningTicks = compound.getInt("Ticks");
 		fueled = compound.getBoolean("Fueled");
 		ancientDebrisMelted = compound.getInt("AncientDebrisMelted");
+
+		String modeSerialized = compound.getString("Mode").toUpperCase();
+		if (modeSerialized.isEmpty()) mode = Mode.BLAZE;
+		else mode = Mode.valueOf(modeSerialized);
+
 		super.read(compound, registries, clientPacket);
 		if (clientPacket && hasLevel())
 			getBasin().ifPresent(bte -> bte.setAreFluidsMoving(running && runningTicks <= 20));
@@ -138,6 +144,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 		compound.putInt("Ticks", runningTicks);
 		compound.putBoolean("Fueled", fueled);
 		compound.putInt("AncientDebrisMelted", ancientDebrisMelted);
+		compound.putString("Mode", mode.toString());
 		super.write(compound, registries, clientPacket);
 	}
 
@@ -153,18 +160,18 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 				if (list == null) continue;
 				for (MixingRecipe mixingRecipe : list)
 					if (matchBasinRecipe(mixingRecipe))
-						return BlazingConfigs.server().recipes.blazeBrewingSpeedMultiplier.getF();
+						return BlazingConfigs.server().recipes.fueledBrewingSpeedMultiplier.getF();
 			}
 		}
 
 		// mixing
 		if (recipe.getType() == AllRecipeTypes.MIXING.getType()) {
-			return BlazingConfigs.server().recipes.blazeMixingSpeedMultiplier.getF();
+			return BlazingConfigs.server().recipes.fueledMixingSpeedMultiplier.getF();
 		}
 
 		// shapeless
 		if (recipe instanceof CraftingRecipe) {
-			return BlazingConfigs.server().recipes.blazeShapelessSpeedMultiplier.getF();
+			return BlazingConfigs.server().recipes.fueledShapelessSpeedMultiplier.getF();
 		}
 		return 1;
 	}
@@ -173,9 +180,9 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 		award(BlazingAdvancements.BLAZE_MIXER);
 		if (r instanceof StandardProcessingRecipe<?> recipe) {
 			if (MultiFluids.recipeResultContains(recipe, BlazingMetals.ANCIENT_DEBRIS.getFluidTag()) && recipe
-					.getIngredients()
-					.stream()
-					.anyMatch(i -> i.test(Items.ANCIENT_DEBRIS.getDefaultInstance()))) {
+				.getIngredients()
+				.stream()
+				.anyMatch(i -> i.test(Items.ANCIENT_DEBRIS.getDefaultInstance()))) {
 				ancientDebrisMelted++;
 				if (ancientDebrisMelted >= 15) {
 					award(BlazingAdvancements.ANCIENT_DEBRIS_MELTING);
@@ -193,7 +200,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 
 			//noinspection ConstantValue
 			if (Mth.abs(getSpeed()) >= AllConfigs.server().kinetics.maxRotationSpeed.get()
-					&& hasFuel(MultiAmount.BUCKET.get())) {
+				&& hasFuel(MultiAmount.BUCKET.get())) {
 				award(BlazingAdvancements.BLAZE_MIXER_MAX);
 			}
 		}

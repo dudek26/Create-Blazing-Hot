@@ -60,14 +60,22 @@ public abstract class BlazingJEI implements IModPlugin {
 			blazeMixing =
 			builder(BasinRecipe.class)
 				.addTypedRecipes(BlazingRecipeTypes.BLAZE_MIXING)
-				.addTypedRecipesIf(AllRecipeTypes.MIXING::getType,
-					(recipe) -> BlazingConfigs.server().recipes.allowMixingInBlazeMixer.get()
-						&& BlazingRecipeTypes.shouldAllowBlazeMixing(recipe))
 				.catalyst(BlazingBlocks.BLAZE_MIXER::get)
 				.catalyst(AllBlocks.BASIN::get)
 				.doubleItemIcon(BlazingBlocks.BLAZE_MIXER.get(), AllBlocks.BASIN.get())
 				.emptyBackground(177, 103)
-				.build("blaze_mixing", BlazeMixingCategory::standard),
+				.build("blaze_mixing", BlazeMixingCategory::blazeMixing),
+
+			blazeFueledMixing =
+				builder(BasinRecipe.class)
+					.addTypedRecipesIf(AllRecipeTypes.MIXING::getType,
+						(recipe) -> BlazingConfigs.server().recipes.allowMixingInBlazeMixer.get()
+							&& BlazingRecipeTypes.shouldAllowBlazeMixing(recipe))
+					.catalyst(BlazingBlocks.BLAZE_MIXER::get)
+					.catalyst(AllBlocks.BASIN::get)
+					.doubleItemIcon(BlazingBlocks.BLAZE_MIXER.get(), AllBlocks.MECHANICAL_MIXER.get())
+					.emptyBackground(177, 103)
+					.build("blaze_fueled_mixing", BlazeMixingCategory::converted),
 
 			blazeAutoShapeless =
 				builder(BasinRecipe.class)

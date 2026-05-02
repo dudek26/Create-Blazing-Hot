@@ -5,10 +5,8 @@ import java.util.List;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecipe;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.foundation.mixin_interfaces.IAdvancementBehaviour;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiFluids;
@@ -33,14 +31,14 @@ public abstract class MechanicalMixerBlockEntityMixin extends BasinOperatingBloc
 	@Inject(method = "addBehaviours", at = @At("TAIL"), remap = false)
 	private void blazinghot$addAdvancements(List<BlockEntityBehaviour> behaviours, CallbackInfo ci) {
 		blazinghot$registerAwardables(behaviours,
-				BlazingAdvancements.MOLTEN_GOLD,
-				BlazingAdvancements.MOLTEN_BLAZE_GOLD);
+			BlazingAdvancements.MOLTEN_GOLD,
+			BlazingAdvancements.MOLTEN_BLAZE_GOLD);
 	}
 
 	@Inject(method = "tick",
-			at = @At(value = "INVOKE",
-					target = "Lcom/simibubi/create/content/kinetics/mixer/MechanicalMixerBlockEntity;applyBasinRecipe()V"),
-			remap = false)
+		at = @At(value = "INVOKE",
+			target = "Lcom/simibubi/create/content/kinetics/mixer/MechanicalMixerBlockEntity;applyBasinRecipe()V"),
+		remap = false)
 	private void blazinghot$meltingAdvancements(CallbackInfo ci) {
 		if (currentRecipe instanceof MixingRecipe recipe) {
 			if (MultiFluids.recipeResultContains(recipe, BlazingMetals.GOLD.getFluidTag())) {

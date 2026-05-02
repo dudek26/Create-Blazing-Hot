@@ -14,11 +14,12 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
+
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlazeMixingRecipeBuilder<R extends AbstractBlazeMixingRecipe> extends BlazingRecipeBuilder<ProcessingRecipeParams, R, BlazeMixingRecipeBuilder<R>> {
+public class BlazeMixingRecipeBuilder<R extends BlazeMixingRecipe> extends BlazingRecipeBuilder<ProcessingRecipeParams, R, BlazeMixingRecipeBuilder<R>> {
 
 	protected SizedFluidIngredient mixerFuel;
 

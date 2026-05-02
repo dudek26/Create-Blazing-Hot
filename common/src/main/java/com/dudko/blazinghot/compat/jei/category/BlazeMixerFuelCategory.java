@@ -1,5 +1,6 @@
 package com.dudko.blazinghot.compat.jei.category;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.dudko.blazinghot.compat.jei.info.JEIBlazeMixerFuelRecipe;
@@ -26,6 +27,8 @@ public abstract class BlazeMixerFuelCategory extends AbstractRecipeCategory<JEIB
 	private static final int recipeWidth = 170;
 	private static final int recipeHeight = 29;
 
+	public static final List<JEIBlazeMixerFuelRecipe> RECIPES = new ArrayList<>();
+
 	protected BlazeMixerFuelCategory() {
 		super(JEIBlazeMixerFuelRecipe.TYPE,
 			BlazingLang.BLAZE_MIXER_FUEL_CATEGORY.get(),
@@ -43,7 +46,9 @@ public abstract class BlazeMixerFuelCategory extends AbstractRecipeCategory<JEIB
 	protected abstract List<JEIBlazeMixerFuelRecipe> getRecipes();
 
 	public void registerRecipes(IRecipeRegistration registration) {
-		registration.addRecipes(JEIBlazeMixerFuelRecipe.TYPE, getRecipes());
+		RECIPES.clear();
+		RECIPES.addAll(getRecipes());
+		registration.addRecipes(JEIBlazeMixerFuelRecipe.TYPE, RECIPES);
 	}
 
 	@Override
@@ -51,7 +56,7 @@ public abstract class BlazeMixerFuelCategory extends AbstractRecipeCategory<JEIB
 		IRecipeSlotBuilder
 			fluidInputSlot =
 			builder.addInputSlot(6, 6).setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1);
-		
+
 		fluidInputSlot.addFluidStack(recipe.fluid());
 	}
 
