@@ -40,34 +40,34 @@ public class BlazeMixingRecipeGen extends BlazingRecipeGen<ProcessingRecipeParam
 	}
 
 	GeneratedRecipe
-			NETHER_LAVA =
-			create("nether_lava",
-					b -> b
-							.requireMultiple(netherEssence(), 2)
-							.require(lava(), MultiAmount.fromBucketFraction(1, 10))
-							.requiresHeat(HeatCondition.SUPERHEATED)
-							.output(BuiltInRegistries.FLUID.get(BlazingHot.asResource("nether_lava")),
-									MultiAmount.fromBucketFraction(1, 10))),
-			MOLTEN_BLAZE_GOLD =
-					create("molten_blaze_gold",
-							b -> b
-									.requireMultiple(netherEssence(), 2)
-									.mixerFuel(fuel(), MultiAmount.fromBucketFraction(1, 20))
-									.require(moltenGold(), MultiAmount.INGOT)
-									.requiresHeat(HeatCondition.SUPERHEATED)
-									.duration(200)
-									.output(BlazingMetals.BLAZE_GOLD.getFluid(), MultiAmount.INGOT)),
-			STURDY_MOLDS_MELTING =
-					moldMelting(),
-			CRYSTAL_MIXTURE =
-					create("crystal_mixture",
-							b -> b
-									.requireMultiple(diamond(), 2)
-									.requireMultiple(stoneDust(), 3)
-									.require(water(), MultiAmount.fromBucketFraction(1, 8))
-									.requiresHeat(HeatCondition.HEATED)
-									.output(BlazingFluids.getCrystalMixture().getSource(),
-											MultiAmount.fromBucketFraction(1, 8)));
+		NETHER_LAVA =
+		create("nether_lava",
+			b -> b
+				.requireMultiple(netherEssence(), 2)
+				.require(lava(), MultiAmount.fromBucketFraction(1, 10))
+				.requiresHeat(HeatCondition.SUPERHEATED)
+				.output(BuiltInRegistries.FLUID.get(BlazingHot.asResource("nether_lava")),
+					MultiAmount.fromBucketFraction(1, 10))),
+		MOLTEN_BLAZE_GOLD =
+			create("molten_blaze_gold",
+				b -> b
+					.requireMultiple(netherEssence(), 2)
+					.mixerFuel(fuel(), MultiAmount.fromBucketFraction(1, 20))
+					.require(moltenGold(), MultiAmount.INGOT)
+					.requiresHeat(HeatCondition.SUPERHEATED)
+					.duration(200)
+					.output(BlazingMetals.BLAZE_GOLD.getFluid(), MultiAmount.INGOT)),
+		STURDY_MOLDS_MELTING =
+			moldMelting(),
+		CRYSTAL_MIXTURE =
+			create("crystal_mixture",
+				b -> b
+					.requireMultiple(diamond(), 2)
+					.requireMultiple(stoneDust(), 3)
+					.require(water(), MultiAmount.fromBucketFraction(1, 8))
+					.requiresHeat(HeatCondition.HEATED)
+					.output(BlazingFluids.getCrystalMixture().getSource(),
+						MultiAmount.fromBucketFraction(1, 8)));
 
 	@Override
 	protected IRecipeTypeInfo getRecipeType() {
@@ -76,31 +76,31 @@ public class BlazeMixingRecipeGen extends BlazingRecipeGen<ProcessingRecipeParam
 
 	@Override
 	protected BlazeMixingRecipeBuilder<BlazeMixingRecipe> getBuilder(ResourceLocation id) {
-		return new BlazeMixingRecipeBuilder<>(BlazeMixingRecipe::new, id);
+		return new BlazeMixingRecipeBuilder<>(BlazeMixingRecipe::create, id);
 	}
 
 	private void melting(BlazingMetal metal) {
 		for (BlazingForm form : metal.forms) {
 			if (!form.flags.contains(BlazingForm.Flag.MELTING)) continue;
 			create(form.getMeltingRecipeName(metal),
-					b -> b
-							.withConditions(form.getMeltingLoadConditions(metal))
-							.mixerFuel(fuel(), form.fuelCost)
-							.require(form.getMeltingIngredient(metal))
-							.duration(form.meltingTime)
-							.requiresHeat(HeatCondition.SUPERHEATED)
-							.output(metal.getFluid(), form.amount));
+				b -> b
+					.withConditions(form.getMeltingLoadConditions(metal))
+					.mixerFuel(fuel(), form.fuelCost)
+					.require(form.getMeltingIngredient(metal))
+					.duration(form.meltingTime)
+					.requiresHeat(HeatCondition.SUPERHEATED)
+					.output(metal.getFluid(), form.amount));
 		}
 	}
 
 	private GeneratedRecipe moldMelting() {
 		BlazingForm form = BlazingForms.STURDY_MOLD;
 		return create("melting/sturdy_molds",
-				b -> b
-						.mixerFuel(fuel(), form.fuelCost)
-						.require(BlazingTags.Items.STURDY_MOLDS.tag())
-						.duration(form.meltingTime)
-						.requiresHeat(HeatCondition.SUPERHEATED)
-						.output(BlazingMetals.STURDY_ALLOY.getFluid(), form.amount));
+			b -> b
+				.mixerFuel(fuel(), form.fuelCost)
+				.require(BlazingTags.Items.STURDY_MOLDS.tag())
+				.duration(form.meltingTime)
+				.requiresHeat(HeatCondition.SUPERHEATED)
+				.output(BlazingMetals.STURDY_ALLOY.getFluid(), form.amount));
 	}
 }

@@ -4,18 +4,24 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecipe;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancement;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
+import com.dudko.blazinghot.data.lang.BlazingLang;
+import com.dudko.blazinghot.foundation.datamap.BlazeMixerFuelData;
 import com.dudko.blazinghot.foundation.mixin_interfaces.IAdvancementBehaviour;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiFluids;
 import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.dudko.blazinghot.registry.BlazingMetals;
-import com.simibubi.create.AllRecipeTypes;
+import com.dudko.blazinghot.registry.BlazingPartialModels;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
+import com.simibubi.create.content.kinetics.base.IRotate.StressImpact;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
+import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
+import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.advancement.AllAdvancements;
@@ -25,26 +31,27 @@ import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTank
 import com.simibubi.create.infrastructure.config.AllConfigs;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.createmod.catnip.math.VecHelper;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.tags.TagKey;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-
-import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity implements IHaveGoggleInformation {
 
@@ -55,7 +62,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 	public int dripTicks = 0;
 	public boolean running;
 	public boolean fueled;
-	protected Mode mode = Mode.BLAZE;
+	protected Mode mode = Mode.FUELED;
 
 	private int ancientDebrisMelted;
 
@@ -130,7 +137,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 		ancientDebrisMelted = compound.getInt("AncientDebrisMelted");
 
 		String modeSerialized = compound.getString("Mode").toUpperCase();
-		if (modeSerialized.isEmpty()) mode = Mode.BLAZE;
+		if (modeSerialized.isEmpty()) mode = Mode.FUELED;
 		else mode = Mode.valueOf(modeSerialized);
 
 		super.read(compound, registries, clientPacket);
@@ -149,31 +156,40 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 	}
 
 	public float recipeSpeedMultiplier(Recipe<?> recipe) {
-		if (recipe == null) return 1;
+		float base = getFuelData().speed();
 
-		// brewing
-		if (recipe instanceof MixingRecipe) {
-			for (ItemStack stack : getAvailableItems()) {
-				if (stack.isEmpty()) continue;
+		// TODO: replace this with overrides for individual fuel fluids
+		switch (recipe) {
 
-				List<MixingRecipe> list = PotionMixingRecipes.sortRecipesByItem(level).get(stack.getItem());
-				if (list == null) continue;
-				for (MixingRecipe mixingRecipe : list)
-					if (matchBasinRecipe(mixingRecipe))
-						return BlazingConfigs.server().recipes.fueledBrewingSpeedMultiplier.getF();
+			// blaze mixing
+			case BlazeMixingRecipe $ -> {
+				return base;
+			}
+
+			// brewing
+			case MixingRecipe $ -> {
+				for (ItemStack stack : getAvailableItems()) {
+					if (stack.isEmpty()) continue;
+
+					List<MixingRecipe> list = PotionMixingRecipes.sortRecipesByItem(level).get(stack.getItem());
+					if (list == null) continue;
+					for (MixingRecipe mixingRecipe : list)
+						if (matchBasinRecipe(mixingRecipe))
+							return base * BlazingConfigs.server().recipes.fueledBrewingSpeedMultiplier.getF();
+				}
+				// mixing
+				return base * BlazingConfigs.server().recipes.fueledMixingSpeedMultiplier.getF();
+			}
+			// shapeless
+
+			case CraftingRecipe $ -> {
+				return base * BlazingConfigs.server().recipes.fueledShapelessSpeedMultiplier.getF();
+			}
+
+			default -> {
+				return base;
 			}
 		}
-
-		// mixing
-		if (recipe.getType() == AllRecipeTypes.MIXING.getType()) {
-			return BlazingConfigs.server().recipes.fueledMixingSpeedMultiplier.getF();
-		}
-
-		// shapeless
-		if (recipe instanceof CraftingRecipe) {
-			return BlazingConfigs.server().recipes.fueledShapelessSpeedMultiplier.getF();
-		}
-		return 1;
 	}
 
 	public void updateAdvancements(Recipe<?> r) {
@@ -200,7 +216,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 
 			//noinspection ConstantValue
 			if (Mth.abs(getSpeed()) >= AllConfigs.server().kinetics.maxRotationSpeed.get()
-				&& hasFuel(MultiAmount.BUCKET.get())) {
+				&& hasFuelAbsolute(MultiAmount.BUCKET.get())) {
 				award(BlazingAdvancements.BLAZE_MIXER_MAX);
 			}
 		}
@@ -208,11 +224,21 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 
 	public abstract long getFuelAmount();
 
-	public abstract boolean hasFuel(long amount);
+	public boolean hasFuelAbsolute(long amount) {
+		return getFuelAmount() >= amount;
+	}
 
-	public abstract boolean hasFuel(TagKey<Fluid> tag, long amount);
+	public boolean hasFuel(long amount) {
+		return hasFuel(getFluid(), amount);
+	}
 
-	public abstract boolean hasFuel(SizedFluidIngredient fluidIngredient);
+	public boolean hasFuel(Fluid fluid, long amount) {
+		BlazeMixerFuelData data = BlazeMixerFuelData.getFuelData(fluid);
+		if (data == null) return false;
+		return data.calculateFuelUsage(amount) <= getFuelAmount();
+	}
+
+	protected abstract Fluid getFluid();
 
 	public abstract void updateFueled();
 
@@ -316,6 +342,56 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 		((IAdvancementBehaviour) this).blazinghot$award(advancement);
 	}
 
+	@Override
+	public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+		boolean added = false;
+		boolean kinetics = true;
+
+		if (!StressImpact.isEnabled())
+			kinetics = false;
+		float stressAtBase = calculateStressApplied();
+		if (Mth.equal(stressAtBase, 0))
+			kinetics = false;
+
+		BlazingLang.BLAZE_MIXER_GOGGLE.forGoggles(tooltip);
+
+		BlazingLang.BLAZE_MIXER_GOGGLE_MODE
+			.translate()
+			.add(Component.literal(" "))
+			.add(getModeName())
+			.color(ChatFormatting.YELLOW.getColor())
+			.forGoggles(tooltip);
+		tooltip.add(Component.empty());
+
+		if (kinetics) {
+			addStressImpactStats(tooltip, stressAtBase);
+		}
+
+		if (!tooltip.isEmpty()) tooltip.add(Component.empty());
+		return added;
+	}
+
+	@Override
+	protected <I extends RecipeInput> boolean matchBasinRecipe(Recipe<I> recipe) {
+		if (recipe == null) return false;
+		Optional<BasinBlockEntity> basin = getBasin();
+		if (basin.isEmpty()) return false;
+
+		if (recipe instanceof BlazeMixingRecipe bmxRecipe) {
+			return mode == Mode.BLAZE && BasinRecipe.match(basin.get(), bmxRecipe) && hasFuel(bmxRecipe.getMixerFuelAmount());
+		}
+
+		return mode == Mode.FUELED && BasinRecipe.match(basin.get(), recipe);
+	}
+
+	protected long convertFluidUsage(long original) {
+		return getFuelData().calculateFuelUsage(original);
+	}
+
+	protected BlazeMixerFuelData getFuelData() {
+		return BlazeMixerFuelData.getFuelData(getFluid());
+	}
+
 	public void setMode(Mode mode) {
 		this.mode = mode;
 	}
@@ -324,7 +400,33 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 		return mode;
 	}
 
+	public void cycleMode() {
+		if (mode == Mode.BLAZE)
+			mode = Mode.FUELED;
+		else
+			mode = Mode.BLAZE;
+		notifyUpdate();
+		updateBasin();
+	}
+
+	public PartialModel getHeadModel() {
+		return getModeRelated(
+			BlazingPartialModels.BLAZE_MIXER_HEAD,
+			BlazingPartialModels.BLAZE_MIXER_HEAD_INFERNO);
+	}
+
+	public Component getModeName() {
+		return getModeRelated(
+			BlazingLang.BLAZE_MIXER_GOGGLE_MODE_BLAZE.get(),
+			BlazingLang.BLAZE_MIXER_GOGGLE_MODE_INFERNO.get());
+	}
+
+	public <T> T getModeRelated(T blaze, T inferno) {
+		if (mode == Mode.BLAZE) return inferno;
+		else return blaze;
+	}
+
 	public enum Mode {
-		BLAZE, INFERNO;
+		FUELED, BLAZE;
 	}
 }

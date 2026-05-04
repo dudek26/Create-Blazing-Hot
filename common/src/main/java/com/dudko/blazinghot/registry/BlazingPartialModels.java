@@ -7,7 +7,7 @@ import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 public class BlazingPartialModels {
 
 	public static final PartialModel BLAZE_MIXER_HEAD = block("blaze_mixer/head");
-	public static final PartialModel BLAZE_MIXER_HEAD_BLAZE = block("blaze_mixer/head_blaze");
+	public static final PartialModel BLAZE_MIXER_HEAD_INFERNO = block("blaze_mixer/head_inferno");
 	public static final PartialModel BLAZE_MIXER_POLE = block("blaze_mixer/pole");
 	public static final PartialModel SHAFTLESS_CRIMSON_COGWHEEL = block("crimson_cogwheel_shaftless");
 

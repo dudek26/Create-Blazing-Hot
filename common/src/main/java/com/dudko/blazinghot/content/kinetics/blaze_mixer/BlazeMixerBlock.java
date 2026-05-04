@@ -13,7 +13,9 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -39,7 +41,7 @@ public class BlazeMixerBlock extends KineticBlock implements IBE<BlazeMixerBlock
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 		if (context instanceof EntityCollisionContext
-				&& ((EntityCollisionContext) context).getEntity() instanceof Player)
+			&& ((EntityCollisionContext) context).getEntity() instanceof Player)
 			return AllShapes.CASING_14PX.get(Direction.DOWN);
 
 		return AllShapes.MECHANICAL_PROCESSOR_SHAPE;
@@ -73,6 +75,14 @@ public class BlazeMixerBlock extends KineticBlock implements IBE<BlazeMixerBlock
 	@Override
 	public BlockEntityType<? extends BlazeMixerBlockEntity> getBlockEntityType() {
 		return BlazingBlockEntityTypes.BLAZE_MIXER.get();
+	}
+
+	@Override
+	public InteractionResult onWrenched(BlockState state, UseOnContext context) {
+		BlazeMixerBlockEntity be = getBlockEntity(context.getLevel(), context.getClickedPos());
+		assert be != null;
+		be.cycleMode();
+		return super.onWrenched(state, context);
 	}
 
 	@Override

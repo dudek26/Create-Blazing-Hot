@@ -80,7 +80,6 @@ public class BlazeMixingCategory extends BasinCategory {
 					.withStyle(ChatFormatting.DARK_GREEN))
 			);
 		}
-
 	}
 
 	@Override
@@ -88,7 +87,6 @@ public class BlazeMixingCategory extends BasinCategory {
 		super.draw(recipe, iRecipeSlotsView, graphics, mouseX, mouseY);
 
 		int fuelAmount = getFuelAmount(recipe);
-
 		if (fuelAmount != 0) {
 			int vRows = (1 + getFluidResultsSize(recipe) + recipe.getRollableResults().size()) / 2;
 			BlazingGuiTextures.JEI_SHORT_ARROW_LEFT.render(graphics, 124, 16 - 19 * (vRows - 1));

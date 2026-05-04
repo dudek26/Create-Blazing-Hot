@@ -75,7 +75,7 @@ public abstract class BlazingJEI implements IModPlugin {
 					.catalyst(AllBlocks.BASIN::get)
 					.doubleItemIcon(BlazingBlocks.BLAZE_MIXER.get(), AllBlocks.MECHANICAL_MIXER.get())
 					.emptyBackground(177, 103)
-					.build("blaze_fueled_mixing", BlazeMixingCategory::converted),
+					.build("fueled_mixing", BlazeMixingCategory::converted),
 
 			blazeAutoShapeless =
 				builder(BasinRecipe.class)
@@ -89,7 +89,7 @@ public abstract class BlazingJEI implements IModPlugin {
 					.catalyst(AllBlocks.BASIN::get)
 					.doubleItemIcon(BlazingBlocks.BLAZE_MIXER.get(), Items.CRAFTING_TABLE)
 					.emptyBackground(177, 103)
-					.build("blaze_automatic_shapeless", BlazeMixingCategory::autoShapeless),
+					.build("fueled_automatic_shapeless", BlazeMixingCategory::autoShapeless),
 
 			blazeBrewing =
 				builder(BasinRecipe.class)
@@ -99,7 +99,7 @@ public abstract class BlazingJEI implements IModPlugin {
 					.catalyst(AllBlocks.BASIN::get)
 					.doubleItemIcon(BlazingBlocks.BLAZE_MIXER.get(), Blocks.BREWING_STAND)
 					.emptyBackground(177, 103)
-					.build("blaze_automatic_brewing", BlazeMixingCategory::autoBrewing),
+					.build("fueled_automatic_brewing", BlazeMixingCategory::autoBrewing),
 
 			casting =
 				builder(CastingRecipe.class)
@@ -133,9 +133,9 @@ public abstract class BlazingJEI implements IModPlugin {
 
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
-		allCategories.forEach(c -> c.registerRecipes(registration));
 		METAL_INTERACTIONS.registerRecipes(registration);
 		BLAZE_MIXER_FUEL.registerRecipes(registration);
+		allCategories.forEach(c -> c.registerRecipes(registration));
 	}
 
 	@Override

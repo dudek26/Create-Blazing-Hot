@@ -45,7 +45,7 @@ public class AnimatedBlazeMixer extends AnimatedKinetics {
 
 		blockElement(BlazingPartialModels.BLAZE_MIXER_POLE).atLocal(0, animation, 0).scale(scale).render(graphics);
 
-		blockElement(inferno ? BlazingPartialModels.BLAZE_MIXER_HEAD_BLAZE : BlazingPartialModels.BLAZE_MIXER_HEAD)
+		blockElement(inferno ? BlazingPartialModels.BLAZE_MIXER_HEAD_INFERNO : BlazingPartialModels.BLAZE_MIXER_HEAD)
 			.rotateBlock(0, getCurrentAngle() * 4, 0)
 			.atLocal(0, animation, 0)
 			.scale(scale)

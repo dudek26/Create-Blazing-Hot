@@ -20,7 +20,6 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.core.NonNullList;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingRecipe;
@@ -32,10 +31,15 @@ import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlazeMixingRecipe extends BasinRecipe {
+public abstract class BlazeMixingRecipe extends BasinRecipe {
 
-	public BlazeMixingRecipe(ProcessingRecipeParams params) {
+	protected BlazeMixingRecipe(ProcessingRecipeParams params) {
 		super(BlazingRecipeTypes.BLAZE_MIXING, params);
+	}
+
+	@ExpectPlatform
+	public static BlazeMixingRecipe create(ProcessingRecipeParams params) {
+		throw new AssertionError();
 	}
 
 	/**
@@ -87,45 +91,16 @@ public class BlazeMixingRecipe extends BasinRecipe {
 		return errors;
 	}
 
-	@Override
-	public NonNullList<SizedFluidIngredient> getFluidIngredients() {
-		NonNullList<SizedFluidIngredient> fluidIngredients = NonNullList.create();
-		fluidIngredients.addAll(super.getFluidIngredients());
-		fluidIngredients.removeLast();
-		return fluidIngredients;
-	}
-
 	public static SizedFluidIngredient mixerFuelPlaceholder() {
 		return MultiFluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_PLACEHOLDER.tag(),
 			MultiAmount.fromBucketFraction(1, 10));
 	}
 
-	@Deprecated
-	public SizedFluidIngredient getMixerFuel() {
-		if (super.getFluidIngredients().isEmpty()) {
-			return MultiFluidIngredient.empty();
-		}
-		return super.getFluidIngredients()
-			.stream()
-			.filter(BlazeMixingRecipe::isPlaceholder)
-			.findFirst()
-			.orElse(MultiFluidIngredient.empty());
-	}
-
-	public int getMixerFuelAmount() {
-		SizedFluidIngredient fuel = getMixerFuel();
-		if (fuel.ingredient().isEmpty()) return 0;
-		return fuel.amount();
-	}
+	public abstract int getMixerFuelAmount();
 
 	@Override
 	protected int getMaxFluidInputCount() {
 		return super.getMaxFluidInputCount() + 1;
-	}
-
-	@ExpectPlatform
-	public static boolean isPlaceholder(SizedFluidIngredient fluidIngredient) {
-		return true;
 	}
 
 //	public static MapCodec<BlazeMixingRecipe> codec(Factory factory, MapCodec<BlazeMixingRecipeParams> paramsCodec) {
