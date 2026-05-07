@@ -3,18 +3,39 @@ package com.dudko.blazinghot.foundation.datamap.fuel;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.dudko.blazinghot.foundation.codec.BlazingCodecs;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.material.Fluid;
 
-public record BlazeMixerFuelData(Object2ObjectMap<MixingType, BlazeMixerFuelDataEntry> entries) {
+public record BlazeMixerFuelData(BlazeMixerFuelDataEntry base,
+								 Map<MixingType, BlazeMixerFuelDataEntry> overrides) {
 
-	private static final Map<Holder<Fluid>, BlazeMixerFuelDataEntry> FUELS = new HashMap<>();
+	public static final Codec<BlazeMixerFuelData> CODEC =
+		RecordCodecBuilder.create(instance -> instance.group(
+			Codec.floatRange(0, 100)
+				.fieldOf("speed")
+				.forGetter(data -> data.base.speed()),
+			Codec.floatRange(0, 100)
+				.fieldOf("usage")
+				.forGetter(data -> data.base.usage()),
+			Codec.unboundedMap(BlazingCodecs.stringEnum(MixingType.class), BlazeMixerFuelDataEntry.CODEC)
+				.fieldOf("overrides")
+				.forGetter(BlazeMixerFuelData::overrides)
+		).apply(instance, (speed, usage, overrides) -> new BlazeMixerFuelData(new BlazeMixerFuelDataEntry(speed, usage), overrides)));
+
+	public static BlazeMixerFuelBuilder builder() {
+		return new BlazeMixerFuelBuilder();
+	}
+
+	private static final Map<Holder<Fluid>, BlazeMixerFuelData> FUELS = new HashMap<>();
 	public static boolean updated = false;
 
-	public static Map<Holder<Fluid>, BlazeMixerFuelDataEntry> getFuels() {
+	public static Map<Holder<Fluid>, BlazeMixerFuelData> getFuels() {
 		if (!updated) {
 			updateFuels();
 		}
@@ -24,7 +45,7 @@ public record BlazeMixerFuelData(Object2ObjectMap<MixingType, BlazeMixerFuelData
 	private static void updateFuels() {
 		FUELS.clear();
 		BuiltInRegistries.FLUID.holders().forEach(fluid -> {
-			BlazeMixerFuelDataEntry data = getData(fluid);
+			BlazeMixerFuelData data = getData(fluid);
 			if (data == null) return;
 			FUELS.put(fluid, data);
 		});
@@ -32,16 +53,28 @@ public record BlazeMixerFuelData(Object2ObjectMap<MixingType, BlazeMixerFuelData
 	}
 
 	@ExpectPlatform
-	public static BlazeMixerFuelDataEntry getData(Holder<Fluid> fluid) {
+	public static BlazeMixerFuelData getData(Holder<Fluid> fluid) {
 		throw new AssertionError();
 	}
 
-	public static BlazeMixerFuelDataEntry getFuelData(Holder<Fluid> fluid) {
+	public static BlazeMixerFuelData getFuelData(Holder<Fluid> fluid) {
 		return FUELS.get(fluid);
 	}
 
-	public static BlazeMixerFuelDataEntry getFuelData(Fluid fluid) {
+	public static BlazeMixerFuelData getFuelData(Fluid fluid) {
 		return getFuels().get(BuiltInRegistries.FLUID.wrapAsHolder(fluid));
+	}
+
+	public BlazeMixerFuelDataEntry getForType(MixingType type) {
+		return overrides.get(type);
+	}
+
+	public long calculateFuelUsage(MixingType type, long amount) {
+		return getForType(type).calculateFuelUsage(amount);
+	}
+
+	public float getSpeed(MixingType type) {
+		return getForType(type).speed();
 	}
 
 	public enum MixingType {

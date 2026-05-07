@@ -6,7 +6,6 @@ import com.dudko.blazinghot.compat.jei.category.BlazeMixingCategory;
 import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.dudko.blazinghot.foundation.datamap.fuel.BlazeMixerFuelData;
 import com.dudko.blazinghot.foundation.datamap.fuel.BlazeMixerFuelData.MixingType;
-import com.dudko.blazinghot.foundation.datamap.fuel.BlazeMixerFuelDataEntry;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 
 import mezz.jei.api.gui.builder.ITooltipBuilder;
@@ -31,7 +30,7 @@ public class BlazeMixingCategoryImpl extends BlazeMixingCategory {
 		Optional<FluidStack> optionalFluid = view.getDisplayedIngredient(NeoForgeTypes.FLUID_STACK);
 		if (optionalFluid.isPresent()) {
 			FluidStack fluidStack = optionalFluid.get();
-			BlazeMixerFuelDataEntry fuelData = BlazeMixerFuelData.getFuelData(fluidStack.getFluid());
+			BlazeMixerFuelData fuelData = BlazeMixerFuelData.getFuelData(fluidStack.getFluid());
 			if (fuelData != null) {
 				tooltip.add(BlazingLang.BLAZE_MIXER_FUEL_SPEED.get((int) (fuelData.speed() * 100)).withStyle(ChatFormatting.GREEN));
 			}

@@ -1,7 +1,7 @@
 package com.dudko.blazinghot.registry.neoforge;
 
 import com.dudko.blazinghot.BlazingHot;
-import com.dudko.blazinghot.foundation.datamap.fuel.BlazeMixerFuelDataEntry;
+import com.dudko.blazinghot.foundation.datamap.fuel.BlazeMixerFuelData;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.material.Fluid;
@@ -15,12 +15,12 @@ public class BlazingDataMapsNeoForge {
 		event.register(BlazingDataMapsNeoForge.BLAZE_MIXER_FUEL);
 	}
 
-	public static final DataMapType<Fluid, BlazeMixerFuelDataEntry> BLAZE_MIXER_FUEL =
+	public static final DataMapType<Fluid, BlazeMixerFuelData> BLAZE_MIXER_FUEL =
 		DataMapType.builder(
 				BlazingHot.asResource("blaze_mixer_fuel"),
 				Registries.FLUID,
-				BlazeMixerFuelDataEntry.CODEC
-			).synced(BlazeMixerFuelDataEntry.CODEC, true)
+				BlazeMixerFuelData.CODEC
+			).synced(BlazeMixerFuelData.CODEC, true)
 			.build();
 
 }

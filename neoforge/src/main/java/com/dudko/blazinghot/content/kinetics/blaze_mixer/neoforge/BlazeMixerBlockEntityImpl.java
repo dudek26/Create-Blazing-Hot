@@ -133,9 +133,10 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 				if (processingTicks < 0) {
 					float recipeSpeed = 1;
 					fuelCost = 0;
+					mixingType = getMixingTypeFromRecipe(currentRecipe);
 					if (mode == Mode.BLAZE) {
 						if (currentRecipe instanceof BlazeMixingRecipe blazeMixingRecipe) {
-							fuelCost = (int) convertFluidUsage(blazeMixingRecipe.getMixerFuelAmount());
+							fuelCost = (int) convertFluidUsage(mixingType, blazeMixingRecipe.getMixerFuelAmount());
 						}
 					} else {
 						if (currentRecipe instanceof ProcessingRecipe<?, ? extends ProcessingRecipeParams> processingRecipe) {
@@ -145,9 +146,9 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 							}
 						}
 						int calculatedCost = (int) BlazeMixingRecipe.getFuelCost(currentRecipe, level);
-						if (hasFuel(calculatedCost)) {
-							recipeSpeed = 1 / recipeSpeedMultiplier(currentRecipe);
-							fuelCost = (int) convertFluidUsage(calculatedCost);
+						if (hasFuel(mixingType, calculatedCost)) {
+							recipeSpeed = 1 / getFuelData().getSpeed(mixingType);
+							fuelCost = (int) convertFluidUsage(mixingType, calculatedCost);
 						}
 					}
 					processingTicks =
