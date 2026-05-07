@@ -3,7 +3,6 @@ package com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.neoforge;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecipe;
-import com.dudko.blazinghot.foundation.multiloader.fluid.MultiFluidIngredient;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -23,7 +22,7 @@ public class BlazeMixingRecipeImpl extends BlazeMixingRecipe {
 	public NonNullList<SizedFluidIngredient> getFluidIngredients() {
 		NonNullList<SizedFluidIngredient> fluidIngredients = NonNullList.create();
 		fluidIngredients.addAll(super.getFluidIngredients());
-		fluidIngredients.removeLast();
+		fluidIngredients.removeIf(BlazeMixingRecipeImpl::isFuelIngredient);
 		return fluidIngredients;
 	}
 
@@ -32,21 +31,23 @@ public class BlazeMixingRecipeImpl extends BlazeMixingRecipe {
 	}
 
 	@Override
-	public int getMixerFuelAmount() {
+	public long getMixerFuelAmount() {
 		if (super.getFluidIngredients().isEmpty()) {
 			return 0;
 		}
 		SizedFluidIngredient fuel = super.getFluidIngredients()
 			.stream()
-			.filter(BlazeMixingRecipeImpl::isPlaceholder)
+			.filter(BlazeMixingRecipeImpl::isFuelIngredient)
 			.findFirst()
-			.orElse(MultiFluidIngredient.empty());
-		if (fuel.ingredient().isEmpty()) return 0;
+			.orElse(null);
+		if (fuel == null) {
+			return 0;
+		}
 		return fuel.amount();
 	}
 
-	public static boolean isPlaceholder(SizedFluidIngredient fluidIngredient) {
-		return fluidIngredient.getFluids().length == 0;
+	public static boolean isFuelIngredient(SizedFluidIngredient fluidIngredient) {
+		return fluidIngredient.ingredient().isEmpty();
 	}
 
 }

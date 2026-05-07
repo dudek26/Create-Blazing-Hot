@@ -75,7 +75,7 @@ public abstract class BlazingJEI implements IModPlugin {
 					.catalyst(AllBlocks.BASIN::get)
 					.doubleItemIcon(BlazingBlocks.BLAZE_MIXER.get(), AllBlocks.MECHANICAL_MIXER.get())
 					.emptyBackground(177, 103)
-					.build("fueled_mixing", BlazeMixingCategory::converted),
+					.build("fueled_mixing", BlazeMixingCategory::fueled),
 
 			blazeAutoShapeless =
 				builder(BasinRecipe.class)

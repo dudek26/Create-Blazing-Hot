@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-03T18:54:27.2328868	Registrate Provider for blazinghot [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
+// 1.21.1	2026-05-05T23:22:35.4204386	Registrate Provider for blazinghot [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
 f00ce73b2ba10d3d022c8cec15f98d4345b54a0f assets/blazinghot/blockstates/black_modern_lamp.json
 1b515ab855a765669e085696ccdb6d602b5ddcb9 assets/blazinghot/blockstates/black_modern_lamp_double_panel.json
 c1767b8a04e6ffe0c445c730aeb00f68c42a4936 assets/blazinghot/blockstates/black_modern_lamp_half_panel.json
@@ -112,8 +112,8 @@ cc863cd8eebaed5a37b57b53f873adfc1cce262a assets/blazinghot/blockstates/yellow_mo
 a735791018f8abb4b78292870f420c53a5070523 assets/blazinghot/blockstates/yellow_modern_lamp_panel.json
 c9e3f398e0f8296d30b9a3651d8800f5c5554d00 assets/blazinghot/blockstates/yellow_modern_lamp_quad_panel.json
 4085b48ce1980ce1638918ad9eb9f71114c6369c assets/blazinghot/blockstates/yellow_modern_lamp_small_panel.json
-655def023ff39ba4cf3749cf8f9dc6be2ed92dd9 assets/blazinghot/lang/en_ud.json
-8ceb7c02c3e3c4eefae41549e62102200763fee1 assets/blazinghot/lang/en_us.json
+617adb953b3d131136cccad89c5c9bb4407ede44 assets/blazinghot/lang/en_ud.json
+ed5a7c2cf5b25daa9b0a4962dcd429e31a7ef4b2 assets/blazinghot/lang/en_us.json
 20fba755fb03441f9f8a270f2193e75f07226d98 assets/blazinghot/models/block/black_modern_lamp.json
 3f213f560fc292a1231e5437155fcab43c580f9a assets/blazinghot/models/block/black_modern_lamp_powered.json
 14d84006ae1a050b0d028e3932068b0bbb955356 assets/blazinghot/models/block/blaze_casing.json
@@ -1323,7 +1323,6 @@ f7fd195aa757413823385b3bb91b54c105c35036 data/blazinghot/tags/block/modern_lamps
 984533a94157e24ecfb7aacbb1649acca9dcc026 data/blazinghot/tags/block/modern_lamps/panels.json
 158400f3c2b915715310577fcc71691921030991 data/blazinghot/tags/block/modern_lamps/quad_panels.json
 4b37536f9f0e0aa91f6b43689a158ce8992f6c98 data/blazinghot/tags/block/modern_lamps/small_panels.json
-b2c643e4ab327e60c9b1b792b2cdad767bfefc71 data/blazinghot/tags/fluid/blaze_mixer_fuel.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/blazinghot/tags/fluid/blaze_mixer_placeholder.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/blazinghot/tags/fluid/nether_lava.json
 fc461111291033bac0b1fc68c11ccb7ac48a56b9 data/blazinghot/tags/item/metal_foods.json

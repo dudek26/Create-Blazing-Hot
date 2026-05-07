@@ -54,8 +54,9 @@ public abstract class BlazeMixerFuelCategory extends AbstractRecipeCategory<JEIB
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, JEIBlazeMixerFuelRecipe recipe, IFocusGroup focuses) {
 		IRecipeSlotBuilder
-			fluidInputSlot =
-			builder.addInputSlot(6, 6).setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1);
+			fluidInputSlot = builder
+			.addInputSlot(6, 6)
+			.setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1);
 
 		fluidInputSlot.addFluidStack(recipe.fluid());
 	}

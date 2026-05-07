@@ -8,7 +8,8 @@ import com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecip
 import com.dudko.blazinghot.data.advancement.BlazingAdvancement;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.lang.BlazingLang;
-import com.dudko.blazinghot.foundation.datamap.BlazeMixerFuelData;
+import com.dudko.blazinghot.foundation.datamap.fuel.BlazeMixerFuelData;
+import com.dudko.blazinghot.foundation.datamap.fuel.BlazeMixerFuelDataEntry;
 import com.dudko.blazinghot.foundation.mixin_interfaces.IAdvancementBehaviour;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiFluids;
@@ -233,7 +234,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 	}
 
 	public boolean hasFuel(Fluid fluid, long amount) {
-		BlazeMixerFuelData data = BlazeMixerFuelData.getFuelData(fluid);
+		BlazeMixerFuelDataEntry data = BlazeMixerFuelData.getFuelData(fluid);
 		if (data == null) return false;
 		return data.calculateFuelUsage(amount) <= getFuelAmount();
 	}
@@ -388,7 +389,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 		return getFuelData().calculateFuelUsage(original);
 	}
 
-	protected BlazeMixerFuelData getFuelData() {
+	protected BlazeMixerFuelDataEntry getFuelData() {
 		return BlazeMixerFuelData.getFuelData(getFluid());
 	}
 

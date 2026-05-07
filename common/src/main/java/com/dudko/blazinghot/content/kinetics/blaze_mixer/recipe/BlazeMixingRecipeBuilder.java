@@ -2,30 +2,26 @@ package com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
-import com.dudko.blazinghot.foundation.multiloader.fluid.MultiFluidIngredient;
 import com.dudko.blazinghot.foundation.recipe.BlazingRecipeBuilder;
+import com.dudko.blazinghot.registry.BlazingTags.Fluids;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.level.material.Fluid;
 
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class BlazeMixingRecipeBuilder<R extends BlazeMixingRecipe> extends BlazingRecipeBuilder<ProcessingRecipeParams, R, BlazeMixingRecipeBuilder<R>> {
+public class BlazeMixingRecipeBuilder extends BlazingRecipeBuilder<ProcessingRecipeParams, BlazeMixingRecipe, BlazeMixingRecipeBuilder> {
 
-	protected SizedFluidIngredient mixerFuel;
+	protected long fuelAmount;
 
-	public BlazeMixingRecipeBuilder(ProcessingRecipe.Factory<ProcessingRecipeParams, R> factory, ResourceLocation recipeId) {
+	public BlazeMixingRecipeBuilder(ProcessingRecipe.Factory<ProcessingRecipeParams, BlazeMixingRecipe> factory, ResourceLocation recipeId) {
 		super(factory, recipeId);
-		mixerFuel = BlazeMixingRecipe.mixerFuelPlaceholder();
+		fuelAmount = 0;
 	}
 
 	@Override
@@ -34,27 +30,19 @@ public class BlazeMixingRecipeBuilder<R extends BlazeMixingRecipe> extends Blazi
 	}
 
 	@Override
-	public BlazeMixingRecipeBuilder<R> self() {
+	public BlazeMixingRecipeBuilder self() {
 		return this;
 	}
 
 	@Override
 	public void build(RecipeOutput consumer) {
-		require(mixerFuel);
+		if (fuelAmount > 0) require(SizedFluidIngredient.of(Fluids.BLAZE_MIXER_FUEL.tag(), (int) fuelAmount));
 		super.build(consumer);
 	}
 
-	public BlazeMixingRecipeBuilder<R> mixerFuel(SizedFluidIngredient mixerFuel) {
-		this.mixerFuel = mixerFuel;
+	public BlazeMixingRecipeBuilder mixerFuel(long fuelAmount) {
+		this.fuelAmount = fuelAmount;
 		return self();
-	}
-
-	public BlazeMixingRecipeBuilder<R> mixerFuel(Fluid fluid, MultiAmount amount) {
-		return mixerFuel(MultiFluidIngredient.fromFluid(BuiltInRegistries.FLUID.wrapAsHolder(fluid), amount));
-	}
-
-	public BlazeMixingRecipeBuilder<R> mixerFuel(TagKey<Fluid> fluidTag, MultiAmount amount) {
-		return mixerFuel(MultiFluidIngredient.fromTag(fluidTag, amount));
 	}
 
 }

@@ -7,15 +7,11 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
-import com.dudko.blazinghot.foundation.multiloader.fluid.MultiFluidIngredient;
 import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
-import com.dudko.blazinghot.registry.BlazingTags;
-import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
@@ -26,8 +22,6 @@ import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
-
-import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -46,31 +40,39 @@ public abstract class BlazeMixingRecipe extends BasinRecipe {
 	 * @apiNote Already platformed.
 	 */
 	public static long getFuelCost(@Nullable Recipe<?> recipe, Level level) {
-		if (recipe == null) return MultiAmount.BUCKET.get() + 1;
+		switch (recipe) {
+			// blaze mixing
+			case BlazeMixingRecipe blazeMixingRecipe -> {
+				return blazeMixingRecipe.getMixerFuelAmount();
+			}
 
-		// brewing
-		if (recipe instanceof MixingRecipe mixingRecipe) {
-			for (Ingredient ingredient : mixingRecipe.getIngredients()) {
-				for (ItemStack stack : ingredient.getItems()) {
-					if (stack.isEmpty()) continue;
+			case MixingRecipe mixingRecipe -> {
+				// brewing
+				for (Ingredient ingredient : mixingRecipe.getIngredients()) {
+					for (ItemStack stack : ingredient.getItems()) {
+						if (stack.isEmpty()) continue;
 
-					List<MixingRecipe> list = PotionMixingRecipes.sortRecipesByItem(level).get(stack.getItem());
-					if (list == null) continue;
-					for (MixingRecipe potionRecipe : list)
-						if (BlazeMixerBlockEntity.doInputsMatch(potionRecipe, mixingRecipe))
-							return BlazingConfigs.server().recipes.fueledBrewingFuelUsage.get();
+						List<MixingRecipe> list = PotionMixingRecipes.sortRecipesByItem(level).get(stack.getItem());
+						if (list == null) continue;
+						for (MixingRecipe potionRecipe : list)
+							if (BlazeMixerBlockEntity.doInputsMatch(potionRecipe, mixingRecipe))
+								return BlazingConfigs.server().recipes.fueledBrewingFuelUsage.get();
+					}
 				}
+
+				// mixing
+				return BlazeMixingRecipe.durationToFuelCost(mixingRecipe.getProcessingDuration());
+			}
+			case CraftingRecipe craftingRecipe -> {
+				return BlazingConfigs.server().recipes.fueledShapelessFuelUsage.get();
+			}
+			case null -> {
+				return MultiAmount.BUCKET.get() + 1;
+			}
+			default -> {
+				return 0;
 			}
 		}
-
-		// mixing
-		if (recipe.getType() == AllRecipeTypes.MIXING.getType())
-			return BlazeMixingRecipe.durationToFuelCost(((ProcessingRecipe<?, ?>) recipe).getProcessingDuration());
-
-		// shapeless
-		if (recipe instanceof CraftingRecipe) return BlazingConfigs.server().recipes.fueledShapelessFuelUsage.get();
-
-		return 0;
 	}
 
 	/**
@@ -91,12 +93,7 @@ public abstract class BlazeMixingRecipe extends BasinRecipe {
 		return errors;
 	}
 
-	public static SizedFluidIngredient mixerFuelPlaceholder() {
-		return MultiFluidIngredient.fromTag(BlazingTags.Fluids.BLAZE_MIXER_PLACEHOLDER.tag(),
-			MultiAmount.fromBucketFraction(1, 10));
-	}
-
-	public abstract int getMixerFuelAmount();
+	public abstract long getMixerFuelAmount();
 
 	@Override
 	protected int getMaxFluidInputCount() {

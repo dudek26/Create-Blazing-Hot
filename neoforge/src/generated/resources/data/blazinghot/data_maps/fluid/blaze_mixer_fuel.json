@@ -4,6 +4,10 @@
       "speed": 2.5,
       "usage": 0.5
     },
+    "create:honey": {
+      "speed": 1.25,
+      "usage": 0.75
+    },
     "minecraft:lava": {
       "speed": 2.0,
       "usage": 1.0

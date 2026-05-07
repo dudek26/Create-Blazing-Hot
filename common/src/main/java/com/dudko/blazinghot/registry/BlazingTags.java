@@ -148,7 +148,7 @@ public class BlazingTags {
 	}
 
 	public enum Fluids {
-		BLAZE_MIXER_FUEL("blaze_mixer_fuel"),
+		BLAZE_MIXER_FUEL(Namespace.BLAZINGHOT, "blaze_mixer_fuel", false),
 		NETHER_LAVA("nether_lava"),
 		BLAZE_MIXER_PLACEHOLDER("blaze_mixer_placeholder");
 
@@ -212,21 +212,21 @@ public class BlazingTags {
 			if (!blockTag.alwaysDatagen) continue;
 			ResourceLocation loc = blockTag.tag().location();
 			consumer.accept("tag.block." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
-					LangUtil.titleCaseConversion(blockTag.name()).replace('_', ' '));
+				LangUtil.titleCaseConversion(blockTag.name()).replace('_', ' '));
 		}
 
 		for (Items itemTag : Items.values()) {
 			if (!itemTag.alwaysDatagen) continue;
 			ResourceLocation loc = itemTag.tag().location();
 			consumer.accept("tag.item." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
-					LangUtil.titleCaseConversion(itemTag.name().replace('_', ' ')));
+				LangUtil.titleCaseConversion(itemTag.name().replace('_', ' ')));
 		}
 
 		for (Fluids itemTag : Fluids.values()) {
 			if (!itemTag.alwaysDatagen) continue;
 			ResourceLocation loc = itemTag.tag().location();
 			consumer.accept("tag.fluid." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
-					LangUtil.titleCaseConversion(itemTag.name().replace('_', ' ')));
+				LangUtil.titleCaseConversion(itemTag.name().replace('_', ' ')));
 		}
 	}
 

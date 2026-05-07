@@ -1,7 +1,6 @@
 package com.dudko.blazinghot.data.recipe;
 
 import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.diamond;
-import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.fuel;
 import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.lava;
 import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.moltenGold;
 import static com.dudko.blazinghot.foundation.recipe.BlazingIngredients.netherEssence;
@@ -31,7 +30,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 
-public class BlazeMixingRecipeGen extends BlazingRecipeGen<ProcessingRecipeParams, BlazeMixingRecipe, BlazeMixingRecipeBuilder<BlazeMixingRecipe>> {
+public class BlazeMixingRecipeGen extends BlazingRecipeGen<ProcessingRecipeParams, BlazeMixingRecipe, BlazeMixingRecipeBuilder> {
 
 	public BlazeMixingRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
 		super(output, registries);
@@ -52,7 +51,7 @@ public class BlazeMixingRecipeGen extends BlazingRecipeGen<ProcessingRecipeParam
 			create("molten_blaze_gold",
 				b -> b
 					.requireMultiple(netherEssence(), 2)
-					.mixerFuel(fuel(), MultiAmount.fromBucketFraction(1, 20))
+					.mixerFuel(MultiAmount.fromBucketFraction(1, 20).get())
 					.require(moltenGold(), MultiAmount.INGOT)
 					.requiresHeat(HeatCondition.SUPERHEATED)
 					.duration(200)
@@ -75,8 +74,8 @@ public class BlazeMixingRecipeGen extends BlazingRecipeGen<ProcessingRecipeParam
 	}
 
 	@Override
-	protected BlazeMixingRecipeBuilder<BlazeMixingRecipe> getBuilder(ResourceLocation id) {
-		return new BlazeMixingRecipeBuilder<>(BlazeMixingRecipe::create, id);
+	protected BlazeMixingRecipeBuilder getBuilder(ResourceLocation id) {
+		return new BlazeMixingRecipeBuilder(BlazeMixingRecipe::create, id);
 	}
 
 	private void melting(BlazingMetal metal) {
@@ -85,7 +84,7 @@ public class BlazeMixingRecipeGen extends BlazingRecipeGen<ProcessingRecipeParam
 			create(form.getMeltingRecipeName(metal),
 				b -> b
 					.withConditions(form.getMeltingLoadConditions(metal))
-					.mixerFuel(fuel(), form.fuelCost)
+					.mixerFuel(form.fuelCost.get())
 					.require(form.getMeltingIngredient(metal))
 					.duration(form.meltingTime)
 					.requiresHeat(HeatCondition.SUPERHEATED)
@@ -97,7 +96,7 @@ public class BlazeMixingRecipeGen extends BlazingRecipeGen<ProcessingRecipeParam
 		BlazingForm form = BlazingForms.STURDY_MOLD;
 		return create("melting/sturdy_molds",
 			b -> b
-				.mixerFuel(fuel(), form.fuelCost)
+				.mixerFuel(form.fuelCost.get())
 				.require(BlazingTags.Items.STURDY_MOLDS.tag())
 				.duration(form.meltingTime)
 				.requiresHeat(HeatCondition.SUPERHEATED)
