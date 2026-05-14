@@ -147,7 +147,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 						}
 						int calculatedCost = (int) BlazeMixingRecipe.getFuelCost(currentRecipe, level);
 						if (hasFuel(mixingType, calculatedCost)) {
-							recipeSpeed = 1 / getFuelData().getSpeed(mixingType);
+							recipeSpeed = 1 / getFuelSpeed(mixingType);
 							fuelCost = (int) convertFluidUsage(mixingType, calculatedCost);
 						}
 					}
@@ -308,19 +308,24 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 	@Override
 	protected boolean matchStaticFilters(RecipeHolder<? extends Recipe<?>> holder) {
 		Recipe<?> recipe = holder.value();
-		if (mode == Mode.BLAZE) {
-			return false;
+
+		if (recipe.getType() == BlazingRecipeTypes.BLAZE_MIXING.getType()) {
+			return true;
 		}
 
-		return ((recipe instanceof CraftingRecipe
-			&& !(recipe instanceof ShapedRecipe)
-			&& BlazingConfigs.server().recipes.allowShapelessInBlazeMixer.get()
-			&& recipe.getIngredients().size() > 1
-			&& !MechanicalPressBlockEntity.canCompress(recipe)) && !AllRecipeTypes.shouldIgnoreInAutomation(holder)
-			|| (recipe.getType() == AllRecipeTypes.MIXING.getType()
-			&& BlazingConfigs.server().recipes.allowMixingInBlazeMixer.get()
-			&& BlazingRecipeTypes.shouldAllowBlazeMixing(holder)))
-			|| recipe.getType() == BlazingRecipeTypes.BLAZE_MIXING.getType();
+		if (recipe.getType() == AllRecipeTypes.MIXING.getType()) {
+			return BlazingConfigs.server().recipes.allowMixingInBlazeMixer.get() && BlazingRecipeTypes.shouldAllowBlazeMixing(holder);
+		}
+
+		if (recipe instanceof CraftingRecipe) {
+			return !(recipe instanceof ShapedRecipe)
+				&& BlazingConfigs.server().recipes.allowShapelessInBlazeMixer.get()
+				&& recipe.getIngredients().size() > 1
+				&& !MechanicalPressBlockEntity.canCompress(recipe)
+				&& !AllRecipeTypes.shouldIgnoreInAutomation(holder);
+		}
+
+		return false;
 	}
 
 	@Override

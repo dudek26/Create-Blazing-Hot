@@ -3,9 +3,9 @@ package com.dudko.blazinghot.compat.jei.category.neoforge;
 import java.util.Optional;
 
 import com.dudko.blazinghot.compat.jei.category.BlazeMixingCategory;
+import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity.MixingType;
 import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.dudko.blazinghot.foundation.datamap.fuel.BlazeMixerFuelData;
-import com.dudko.blazinghot.foundation.datamap.fuel.BlazeMixerFuelData.MixingType;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 
 import mezz.jei.api.gui.builder.ITooltipBuilder;
@@ -32,13 +32,9 @@ public class BlazeMixingCategoryImpl extends BlazeMixingCategory {
 			FluidStack fluidStack = optionalFluid.get();
 			BlazeMixerFuelData fuelData = BlazeMixerFuelData.getFuelData(fluidStack.getFluid());
 			if (fuelData != null) {
-				tooltip.add(BlazingLang.BLAZE_MIXER_FUEL_SPEED.get((int) (fuelData.speed() * 100)).withStyle(ChatFormatting.GREEN));
+				tooltip.add(BlazingLang.BLAZE_MIXER_FUEL_SPEED.get((int) (fuelData.getSpeed(type) * 100)).withStyle(ChatFormatting.GREEN));
 			}
 		}
-
-//		tooltip.add(BlazingLang.BLAZE_MIXER_FUEL
-//			.get()
-//			.withStyle(ChatFormatting.DARK_GREEN));
 	}
 
 	public static BlazeMixingCategory create(Info<BasinRecipe> info, MixingType type) {

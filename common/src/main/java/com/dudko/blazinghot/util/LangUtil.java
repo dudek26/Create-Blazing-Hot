@@ -19,12 +19,18 @@ public class LangUtil {
 
 		Stream.of(inputString.split(" ")).forEach(stringPart -> {
 			if (stringPart.length() > 1) resultPlaceHolder
-					.append(stringPart.substring(0, 1).toUpperCase(Locale.ROOT))
-					.append(stringPart.substring(1).toLowerCase(Locale.ROOT));
+				.append(stringPart.substring(0, 1).toUpperCase(Locale.ROOT))
+				.append(stringPart.substring(1).toLowerCase(Locale.ROOT));
 			else resultPlaceHolder.append(stringPart.toUpperCase(Locale.ROOT));
 
 			resultPlaceHolder.append(" ");
 		});
 		return StringUtils.trim(resultPlaceHolder.toString());
 	}
+
+	public static String formattedPercentage(float percentage, int decimalPlaces) {
+		int rounded = Math.round(percentage * 100 * (decimalPlaces + 1));
+		return String.valueOf(rounded);
+	}
 }
+

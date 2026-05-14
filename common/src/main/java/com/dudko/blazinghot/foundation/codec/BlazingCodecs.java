@@ -13,8 +13,8 @@ public class BlazingCodecs {
 		}
 		List<S> values = Arrays.asList(clazz.getEnumConstants());
 
-		return Codec.STRING.xmap(s -> values.stream().filter(i -> i.equals(s.toUpperCase())).findFirst().orElseThrow(),
-			Object::toString);
+		return Codec.STRING.xmap(s -> values.stream().filter(i -> i.toString().equals(s.toUpperCase())).findFirst().orElseThrow(),
+			e -> e.toString().toLowerCase());
 	}
 
 }

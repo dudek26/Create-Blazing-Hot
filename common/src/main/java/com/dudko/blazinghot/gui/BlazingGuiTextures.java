@@ -9,7 +9,8 @@ import net.minecraft.resources.ResourceLocation;
 public enum BlazingGuiTextures {
 
 	JEI_SHORT_ARROW_LEFT("jei/widgets", 0, 0, 15, 9),
-	JEI_PLUS("jei/widgets", 16, 0, 9, 9);
+	JEI_PLUS("jei/widgets", 16, 0, 9, 9),
+	JEI_MIXER_FUEL_TABLE("jei/widgets", 0, 9, 142, 56);
 
 	public final ResourceLocation location;
 	public final int width, height;

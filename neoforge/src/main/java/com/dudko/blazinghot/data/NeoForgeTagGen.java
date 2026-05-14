@@ -3,6 +3,7 @@ package com.dudko.blazinghot.data;
 import com.dudko.blazinghot.content.metal.BlazingMetal;
 import com.dudko.blazinghot.registry.BlazingMetals;
 import com.dudko.blazinghot.registry.BlazingTags;
+import com.dudko.blazinghot.registry.BlazingTags.Fluids;
 import com.dudko.blazinghot.util.DyeUtil;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 
@@ -43,6 +44,8 @@ public class NeoForgeTagGen {
 				tagAppender(prov, tag);
 			}
 		}
+
+		prov.addTag(Fluids.BLAZE_MIXER_FUEL.tag()).replace();
 
 		for (BlazingMetal metal : BlazingMetals.ALL) {
 			TagKey<Fluid> tag = BlazingTags.fluidTag(BlazingTags.Namespace.COMMON.asResource(metal.getMoltenName()));

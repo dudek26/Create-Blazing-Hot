@@ -3,7 +3,7 @@ package com.dudko.blazinghot.foundation.datamap.fuel;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.dudko.blazinghot.foundation.datamap.fuel.BlazeMixerFuelData.MixingType;
+import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity.MixingType;
 
 public class BlazeMixerFuelBuilder {
 

@@ -1,9 +1,9 @@
 package com.dudko.blazinghot.compat.jei.category;
 
 import com.dudko.blazinghot.compat.jei.category.animations.AnimatedBlazeMixer;
+import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
+import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity.MixingType;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecipe;
-import com.dudko.blazinghot.foundation.datamap.fuel.BlazeMixerFuelData;
-import com.dudko.blazinghot.foundation.datamap.fuel.BlazeMixerFuelData.MixingType;
 import com.dudko.blazinghot.gui.BlazingGuiTextures;
 import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.simibubi.create.compat.jei.category.BasinCategory;
@@ -26,28 +26,28 @@ public abstract class BlazeMixingCategory extends BasinCategory {
 
 	private final AnimatedBlazeMixer mixer;
 	private final AnimatedBlazeBurner heater = new AnimatedBlazeBurner();
-	MixingType type;
+	protected MixingType type;
 
 	protected BlazeMixingCategory(Info<BasinRecipe> info, MixingType type) {
-		super(info, type != BlazeMixerFuelData.MixingType.AUTO_SHAPELESS);
+		super(info, type != BlazeMixerBlockEntity.MixingType.AUTO_SHAPELESS);
 		this.type = type;
-		this.mixer = new AnimatedBlazeMixer(type == BlazeMixerFuelData.MixingType.BLAZE_MIXING);
+		this.mixer = new AnimatedBlazeMixer(type == BlazeMixerBlockEntity.MixingType.BLAZE_MIXING);
 	}
 
 	public static BlazeMixingCategory fueled(Info<BasinRecipe> info) {
-		return create(info, BlazeMixerFuelData.MixingType.MIXING);
+		return create(info, BlazeMixerBlockEntity.MixingType.MIXING);
 	}
 
 	public static BlazeMixingCategory autoShapeless(Info<BasinRecipe> info) {
-		return create(info, BlazeMixerFuelData.MixingType.AUTO_SHAPELESS);
+		return create(info, BlazeMixerBlockEntity.MixingType.AUTO_SHAPELESS);
 	}
 
 	public static BlazeMixingCategory autoBrewing(Info<BasinRecipe> info) {
-		return create(info, BlazeMixerFuelData.MixingType.AUTO_BREWING);
+		return create(info, BlazeMixerBlockEntity.MixingType.AUTO_BREWING);
 	}
 
 	public static BlazeMixingCategory blazeMixing(Info<BasinRecipe> info) {
-		return create(info, BlazeMixerFuelData.MixingType.BLAZE_MIXING);
+		return create(info, BlazeMixerBlockEntity.MixingType.BLAZE_MIXING);
 	}
 
 	@ExpectPlatform
@@ -56,7 +56,7 @@ public abstract class BlazeMixingCategory extends BasinCategory {
 	}
 
 	protected long getFuelAmount(BasinRecipe recipe) {
-		if (type == BlazeMixerFuelData.MixingType.AUTO_SHAPELESS)
+		if (type == BlazeMixerBlockEntity.MixingType.AUTO_SHAPELESS)
 			return BlazingConfigs.server().recipes.fueledShapelessFuelUsage.get();
 		if (recipe instanceof BlazeMixingRecipe bmRecipe) return bmRecipe.getMixerFuelAmount();
 
@@ -73,15 +73,15 @@ public abstract class BlazeMixingCategory extends BasinCategory {
 	public void setRecipe(IRecipeLayoutBuilder builder, BasinRecipe recipe, IFocusGroup focuses) {
 		super.setRecipe(builder, recipe, focuses);
 
-		long fluidAmount = getFuelAmount(recipe);
+		long fuelAmount = getFuelAmount(recipe);
 
 		int vRows = (1 + recipe.getFluidResults().size() + recipe.getRollableResults().size()) / 2;
 
-		if (fluidAmount != 0) {
+		if (fuelAmount != 0) {
 			IRecipeSlotBuilder fuelSlot = builder.addInputSlot(142, 11 - (19 * (vRows - 1)));
 			BlazeMixerFuelCategory.RECIPES.forEach(fuel ->
 				fuelSlot
-					.addFluidStack(fuel.fluid(), (long) (fluidAmount * fuel.usage()))
+					.addFluidStack(fuel.fluid(), fuel.data().calculateFuelUsage(type, fuelAmount))
 					.setFluidRenderer(1, false, 16, 16)
 					.setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1)
 			);

@@ -11,13 +11,12 @@ import com.dudko.blazinghot.data.advancement.BlazingAdvancement;
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.dudko.blazinghot.foundation.datamap.fuel.BlazeMixerFuelData;
-import com.dudko.blazinghot.foundation.datamap.fuel.BlazeMixerFuelData.MixingType;
-import com.dudko.blazinghot.foundation.datamap.fuel.BlazeMixerFuelDataEntry;
 import com.dudko.blazinghot.foundation.mixin_interfaces.IAdvancementBehaviour;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiFluids;
 import com.dudko.blazinghot.registry.BlazingMetals;
 import com.dudko.blazinghot.registry.BlazingPartialModels;
+import com.dudko.blazinghot.registry.BlazingRecipeTypes;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.kinetics.base.IRotate.StressImpact;
@@ -39,10 +38,11 @@ import net.createmod.catnip.math.VecHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction.Axis;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -53,6 +53,7 @@ import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
@@ -134,7 +135,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 	}
 
 	@Override
-	protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+	protected void read(CompoundTag compound, Provider registries, boolean clientPacket) {
 		running = compound.getBoolean("Running");
 		runningTicks = compound.getInt("Ticks");
 		fueled = compound.getBoolean("Fueled");
@@ -150,7 +151,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 	}
 
 	@Override
-	protected void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
+	protected void write(CompoundTag compound, Provider registries, boolean clientPacket) {
 		compound.putBoolean("Running", running);
 		compound.putInt("Ticks", runningTicks);
 		compound.putBoolean("Fueled", fueled);
@@ -189,8 +190,9 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 		}
 	}
 
-	protected MixingType getMixingTypeFromRecipe(Recipe<?> recipe) {
-		switch (currentRecipe) {
+	@Nullable
+	protected MixingType getMixingTypeFromRecipe(@Nullable Recipe<?> recipe) {
+		switch (recipe) {
 			// blaze mixing
 			case BlazeMixingRecipe $ -> {
 				return MixingType.BLAZE_MIXING;
@@ -216,6 +218,10 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 				return MixingType.AUTO_SHAPELESS;
 			}
 
+			case null -> {
+				return null;
+			}
+
 			default -> {
 				return MixingType.BLAZE_MIXING;
 			}
@@ -233,8 +239,11 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 	}
 
 	public boolean hasFuel(MixingType type, Fluid fluid, long amount) {
+		if (fluid == Fluids.EMPTY && amount == 0) return true;
 		BlazeMixerFuelData data = BlazeMixerFuelData.getFuelData(fluid);
-		if (data == null) return false;
+		if (data == null) {
+			return false;
+		}
 		return data.calculateFuelUsage(type, amount) <= getFuelAmount();
 	}
 
@@ -377,23 +386,31 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 		Optional<BasinBlockEntity> basin = getBasin();
 		if (basin.isEmpty()) return false;
 
-		if (recipe instanceof BlazeMixingRecipe bmxRecipe) {
-			return mode == Mode.BLAZE && BasinRecipe.match(basin.get(), bmxRecipe) && hasFuel(getMixingTypeFromRecipe(bmxRecipe), bmxRecipe.getMixerFuelAmount());
+		boolean match = BasinRecipe.match(basin.get(), recipe);
+		if (!match) return false;
+
+		if (mode == Mode.BLAZE) {
+			return recipe instanceof BlazeMixingRecipe bmxRecipe && hasFuel(MixingType.BLAZE_MIXING, bmxRecipe.getMixerFuelAmount());
 		}
 
-		return mode == Mode.FUELED && BasinRecipe.match(basin.get(), recipe);
+		return recipe.getType() != BlazingRecipeTypes.BLAZE_MIXING.getType();
 	}
 
 	protected long convertFluidUsage(MixingType mixingType, long original) {
-		return getFuelData().calculateFuelUsage(mixingType, original);
+		BlazeMixerFuelData data = getFuelData();
+		if (data == null) return original;
+		return data.calculateFuelUsage(mixingType, original);
 	}
 
+	protected float getFuelSpeed(MixingType mixingType) {
+		BlazeMixerFuelData data = getFuelData();
+		if (data == null) return 1;
+		return data.getSpeed(mixingType);
+	}
+
+	@Nullable
 	protected BlazeMixerFuelData getFuelData() {
 		return BlazeMixerFuelData.getFuelData(getFluid());
-	}
-
-	protected BlazeMixerFuelDataEntry getFuelDataEntry(MixingType mixingType) {
-		return getFuelData().getForType(mixingType);
 	}
 
 	public void setMode(Mode mode) {
@@ -425,12 +442,34 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 			BlazingLang.BLAZE_MIXER_GOGGLE_MODE_INFERNO.get());
 	}
 
-	public <T> T getModeRelated(T blaze, T inferno) {
-		if (mode == Mode.BLAZE) return inferno;
-		else return blaze;
+	public <T> T getModeRelated(T fueled, T blaze) {
+		if (mode == Mode.BLAZE) return blaze;
+		else return fueled;
 	}
 
 	public enum Mode {
 		FUELED, BLAZE;
+	}
+
+	public enum MixingType {
+		BLAZE_MIXING(BlazingLang.BLAZE_MIXING),
+		MIXING(BlazingLang.FUELED_MIXING),
+		AUTO_BREWING(BlazingLang.FUELED_AUTO_BREWING),
+		AUTO_SHAPELESS(BlazingLang.FUELED_AUTO_SHAPELESS);
+
+		private final BlazingLang localisationKey;
+
+		MixingType(BlazingLang localisationKey) {
+			this.localisationKey = localisationKey;
+		}
+
+		public BlazingLang getLocalisationKey() {
+			return this.localisationKey;
+		}
+
+		public MutableComponent getComponent() {
+			return getLocalisationKey().get();
+		}
+
 	}
 }

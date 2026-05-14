@@ -3,6 +3,10 @@ package com.dudko.blazinghot.foundation.datamap.fuel;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity.MixingType;
 import com.dudko.blazinghot.foundation.codec.BlazingCodecs;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -61,12 +65,17 @@ public record BlazeMixerFuelData(BlazeMixerFuelDataEntry base,
 		return FUELS.get(fluid);
 	}
 
+	@Nullable
 	public static BlazeMixerFuelData getFuelData(Fluid fluid) {
 		return getFuels().get(BuiltInRegistries.FLUID.wrapAsHolder(fluid));
 	}
 
+	@NotNull
 	public BlazeMixerFuelDataEntry getForType(MixingType type) {
-		return overrides.get(type);
+		BlazeMixerFuelDataEntry override = overrides.get(type);
+		if (override != null) return override;
+
+		return base;
 	}
 
 	public long calculateFuelUsage(MixingType type, long amount) {
@@ -77,10 +86,4 @@ public record BlazeMixerFuelData(BlazeMixerFuelDataEntry base,
 		return getForType(type).speed();
 	}
 
-	public enum MixingType {
-		MIXING,
-		AUTO_SHAPELESS,
-		AUTO_BREWING,
-		BLAZE_MIXING
-	}
 }
