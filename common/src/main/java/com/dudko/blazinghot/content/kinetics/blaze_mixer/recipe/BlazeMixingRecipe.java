@@ -86,13 +86,6 @@ public abstract class BlazeMixingRecipe extends BasinRecipe {
 		return Mth.ceil(recipeSpeed * BlazingConfigs.server().recipes.fueledMixingFuelUsage.get());
 	}
 
-	@Override
-	public List<String> validate() {
-		List<String> errors = super.validate();
-		if (super.getFluidIngredients().isEmpty()) errors.add("Recipe doesn't have any mixer fuel.");
-		return errors;
-	}
-
 	public abstract long getMixerFuelAmount();
 
 	@Override
