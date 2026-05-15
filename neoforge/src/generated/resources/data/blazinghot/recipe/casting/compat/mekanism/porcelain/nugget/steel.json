@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mekanism"
+    }
+  ],
+  "type": "create:casting",
+  "cooling_duration": 36,
+  "ingredients": [
+    {
+      "item": "blazinghot:porcelain_nugget_mold"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 10,
+      "tag": "c:molten_steel"
+    }
+  ],
+  "processing_time": 12,
+  "results": [
+    {
+      "id": "mekanism:steel_nugget"
+    }
+  ]
+}

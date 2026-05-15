@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "tfmg"
+    }
+  ],
+  "type": "create:casting",
+  "cooling_duration": 36,
+  "ingredients": [
+    {
+      "item": "blazinghot:sturdy_nugget_mold"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 10,
+      "tag": "c:molten_steel"
+    }
+  ],
+  "keep_mold": true,
+  "processing_time": 12,
+  "results": [
+    {
+      "id": "tfmg:steel_nugget"
+    }
+  ]
+}

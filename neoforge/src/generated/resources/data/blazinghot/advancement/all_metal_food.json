@@ -20,7 +20,7 @@
     "10": {
       "conditions": {
         "item": {
-          "items": "blazinghot:enchanted_netherite_apple"
+          "items": "blazinghot:stellar_zinc_apple"
         }
       },
       "trigger": "minecraft:consume_item"
@@ -28,7 +28,7 @@
     "11": {
       "conditions": {
         "item": {
-          "items": "blazinghot:brass_apple"
+          "items": "blazinghot:brass_carrot"
         }
       },
       "trigger": "minecraft:consume_item"
@@ -36,7 +36,7 @@
     "12": {
       "conditions": {
         "item": {
-          "items": "blazinghot:enchanted_iron_apple"
+          "items": "blazinghot:stellar_blaze_apple"
         }
       },
       "trigger": "minecraft:consume_item"
@@ -44,7 +44,7 @@
     "13": {
       "conditions": {
         "item": {
-          "items": "blazinghot:stellar_blaze_apple"
+          "items": "blazinghot:enchanted_blaze_apple"
         }
       },
       "trigger": "minecraft:consume_item"
@@ -52,7 +52,7 @@
     "14": {
       "conditions": {
         "item": {
-          "items": "blazinghot:blaze_apple"
+          "items": "blazinghot:stellar_iron_apple"
         }
       },
       "trigger": "minecraft:consume_item"
@@ -60,7 +60,7 @@
     "15": {
       "conditions": {
         "item": {
-          "items": "blazinghot:enchanted_blaze_apple"
+          "items": "blazinghot:stellar_golden_apple"
         }
       },
       "trigger": "minecraft:consume_item"
@@ -68,7 +68,7 @@
     "16": {
       "conditions": {
         "item": {
-          "items": "blazinghot:stellar_copper_apple"
+          "items": "blazinghot:zinc_apple"
         }
       },
       "trigger": "minecraft:consume_item"
@@ -76,7 +76,7 @@
     "17": {
       "conditions": {
         "item": {
-          "items": "blazinghot:stellar_iron_apple"
+          "items": "blazinghot:enchanted_brass_apple"
         }
       },
       "trigger": "minecraft:consume_item"
@@ -84,7 +84,7 @@
     "18": {
       "conditions": {
         "item": {
-          "items": "blazinghot:copper_carrot"
+          "items": "blazinghot:enchanted_netherite_apple"
         }
       },
       "trigger": "minecraft:consume_item"
@@ -92,7 +92,7 @@
     "19": {
       "conditions": {
         "item": {
-          "items": "blazinghot:enchanted_brass_apple"
+          "items": "blazinghot:enchanted_copper_apple"
         }
       },
       "trigger": "minecraft:consume_item"
@@ -108,7 +108,7 @@
     "20": {
       "conditions": {
         "item": {
-          "items": "blazinghot:stellar_golden_apple"
+          "items": "blazinghot:brass_apple"
         }
       },
       "trigger": "minecraft:consume_item"
@@ -116,7 +116,7 @@
     "21": {
       "conditions": {
         "item": {
-          "items": "blazinghot:enchanted_copper_apple"
+          "items": "blazinghot:stellar_brass_apple"
         }
       },
       "trigger": "minecraft:consume_item"
@@ -124,7 +124,7 @@
     "22": {
       "conditions": {
         "item": {
-          "items": "blazinghot:zinc_apple"
+          "items": "blazinghot:stellar_copper_apple"
         }
       },
       "trigger": "minecraft:consume_item"
@@ -132,7 +132,7 @@
     "23": {
       "conditions": {
         "item": {
-          "items": "blazinghot:stellar_zinc_apple"
+          "items": "blazinghot:iron_apple"
         }
       },
       "trigger": "minecraft:consume_item"
@@ -156,7 +156,7 @@
     "4": {
       "conditions": {
         "item": {
-          "items": "blazinghot:brass_carrot"
+          "items": "blazinghot:copper_carrot"
         }
       },
       "trigger": "minecraft:consume_item"
@@ -172,7 +172,7 @@
     "6": {
       "conditions": {
         "item": {
-          "items": "blazinghot:iron_apple"
+          "items": "blazinghot:copper_apple"
         }
       },
       "trigger": "minecraft:consume_item"
@@ -180,7 +180,7 @@
     "7": {
       "conditions": {
         "item": {
-          "items": "blazinghot:stellar_brass_apple"
+          "items": "blazinghot:blaze_apple"
         }
       },
       "trigger": "minecraft:consume_item"
@@ -188,7 +188,7 @@
     "8": {
       "conditions": {
         "item": {
-          "items": "blazinghot:copper_apple"
+          "items": "blazinghot:zinc_carrot"
         }
       },
       "trigger": "minecraft:consume_item"
@@ -196,7 +196,7 @@
     "9": {
       "conditions": {
         "item": {
-          "items": "blazinghot:zinc_carrot"
+          "items": "blazinghot:enchanted_iron_apple"
         }
       },
       "trigger": "minecraft:consume_item"

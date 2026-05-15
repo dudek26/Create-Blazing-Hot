@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-14T00:16:06.6244396	Registrate Provider for blazinghot [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
+// 1.21.1	2026-05-15T12:33:53.2534624	Registrate Provider for blazinghot [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
 f00ce73b2ba10d3d022c8cec15f98d4345b54a0f assets/blazinghot/blockstates/black_modern_lamp.json
 1b515ab855a765669e085696ccdb6d602b5ddcb9 assets/blazinghot/blockstates/black_modern_lamp_double_panel.json
 c1767b8a04e6ffe0c445c730aeb00f68c42a4936 assets/blazinghot/blockstates/black_modern_lamp_half_panel.json
@@ -72,6 +72,7 @@ ed577cd7d42b84d75e073d12c984c9fe21fdc6df assets/blazinghot/blockstates/molten_co
 65f47c24863f5958865568093030d02112457111 assets/blazinghot/blockstates/molten_gold.json
 250f862e0bfcc6241681356dec23c7cf6ee0f79c assets/blazinghot/blockstates/molten_iron.json
 f48bc7f67d21ba5ed27d3411411416727c9a9fe0 assets/blazinghot/blockstates/molten_netherite.json
+28d03d9bba4d741dbf05cd6d54f362b414b25bdc assets/blazinghot/blockstates/molten_steel.json
 62594a594cf8815317d4f4c1fe1e554a312a41a1 assets/blazinghot/blockstates/molten_sturdy_alloy.json
 09c1d7a4fec3b093a50d5b86dfc8ba9d72995997 assets/blazinghot/blockstates/molten_zinc.json
 17561507f0becaa718a250eb023010d6a99dfe79 assets/blazinghot/blockstates/nether_lava.json
@@ -112,8 +113,8 @@ cc863cd8eebaed5a37b57b53f873adfc1cce262a assets/blazinghot/blockstates/yellow_mo
 a735791018f8abb4b78292870f420c53a5070523 assets/blazinghot/blockstates/yellow_modern_lamp_panel.json
 c9e3f398e0f8296d30b9a3651d8800f5c5554d00 assets/blazinghot/blockstates/yellow_modern_lamp_quad_panel.json
 4085b48ce1980ce1638918ad9eb9f71114c6369c assets/blazinghot/blockstates/yellow_modern_lamp_small_panel.json
-ad13dd0c8201d936f943b02fa3573b12615dfa97 assets/blazinghot/lang/en_ud.json
-5277c962cfb519e5a050b7ea00022e5b763ce7bf assets/blazinghot/lang/en_us.json
+2ba00fe68d1c7c9f595149afe4b56f8db085563f assets/blazinghot/lang/en_ud.json
+fa51879a168a6b9c9b01ceb48b69abdc954b4cab assets/blazinghot/lang/en_us.json
 20fba755fb03441f9f8a270f2193e75f07226d98 assets/blazinghot/models/block/black_modern_lamp.json
 3f213f560fc292a1231e5437155fcab43c580f9a assets/blazinghot/models/block/black_modern_lamp_powered.json
 14d84006ae1a050b0d028e3932068b0bbb955356 assets/blazinghot/models/block/blaze_casing.json
@@ -145,6 +146,7 @@ c4a11a37f2282eee1f55408fedabd7bbe6701012 assets/blazinghot/models/block/molten_b
 9ab7a5d9be84c0218d8b2c9fd2a01a4d47577148 assets/blazinghot/models/block/molten_gold.json
 a590a23b122c283991ff608a5b63fd42a560c2ba assets/blazinghot/models/block/molten_iron.json
 c4d70b32414788f214b2e0509cb51f93e3fab1df assets/blazinghot/models/block/molten_netherite.json
+77c3dc8b387b783feb97f727d0ce40b000cbf5f7 assets/blazinghot/models/block/molten_steel.json
 25d7301101f7cc0947cc6c0f2dc121449f6bcaa7 assets/blazinghot/models/block/molten_sturdy_alloy.json
 00853d693bcbc64c3932cdf704629014a10d5553 assets/blazinghot/models/block/molten_zinc.json
 c872206183fa100f1fd5c158e6c837bd9ed1f9a4 assets/blazinghot/models/block/nether_lava.json
@@ -268,6 +270,7 @@ b3a239c3a0ba87b846b99fdce539b6faa47be8de assets/blazinghot/models/item/molten_co
 3ac195a1bef2c14c737c600a2a4f166f61c27694 assets/blazinghot/models/item/molten_gold_bucket.json
 2430927f18c3e9eeecb2620d735163c5bdcb9eb1 assets/blazinghot/models/item/molten_iron_bucket.json
 f4708e5143a35f16fdc96afea919993c499b78d2 assets/blazinghot/models/item/molten_netherite_bucket.json
+a25e883c390248f7325c1f9bac99d0d049d6eb39 assets/blazinghot/models/item/molten_steel_bucket.json
 8c463280ecc7ac2687ba9ee3eb7aa7ca637dff5f assets/blazinghot/models/item/molten_sturdy_alloy_bucket.json
 fcdb858346b871785d2279af1bc956aeae84545b assets/blazinghot/models/item/molten_zinc_bucket.json
 2716b75c7df9178d8b543940b2454a56af9e0937 assets/blazinghot/models/item/netherrack_dust.json
@@ -1356,6 +1359,7 @@ e2dc7e5f0ac377dd2059b875433a22c371f432a8 data/c/tags/fluid/molten_copper.json
 177eb766a607c7afc15de03c19053bca91326019 data/c/tags/fluid/molten_gold.json
 401e07fef04267820f7aee0f65e78f42075ab0cd data/c/tags/fluid/molten_iron.json
 2d4188c447c0b3b84eb9c3108ea31855400eff43 data/c/tags/fluid/molten_netherite.json
+8ef86a1b8a2c0db524ec7803dd343bdc4ada85b3 data/c/tags/fluid/molten_steel.json
 69398f2e81c873f49ee4621193309f01a76ce061 data/c/tags/fluid/molten_sturdy_alloy.json
 25b5c8b252ebf30b4558af8cf9d58844d4ba979a data/c/tags/fluid/molten_zinc.json
 62ddb1124014f57d58a0e4e4a690aff2e56bef12 data/c/tags/fluid/nether_lava.json
@@ -1367,6 +1371,7 @@ dcc5747a9d989de6d34c7bb655715af494fc5044 data/c/tags/item/bucket/molten_copper.j
 7d7f9353d5cdace03dd6d47afc836fc6258b45d3 data/c/tags/item/bucket/molten_gold.json
 c4f5bc783810669a0eae0dc1e81a10cc745aed59 data/c/tags/item/bucket/molten_iron.json
 5fe08cd462c2474d9e548011154c16ad8a0bcd3a data/c/tags/item/bucket/molten_netherite.json
+2d37aed1a68a5b2ef466526fce1c5785f2bd8364 data/c/tags/item/bucket/molten_steel.json
 c5a9edf5cbfb0f9d753515ceeefdfca4c2832d2e data/c/tags/item/bucket/molten_sturdy_alloy.json
 d6e161ad0803541ea6d09560ac8bbd12c587d0ef data/c/tags/item/bucket/molten_zinc.json
 70ffc848e434a9077ade71ba01367a381c7d38ee data/c/tags/item/bucket/nether_lava.json

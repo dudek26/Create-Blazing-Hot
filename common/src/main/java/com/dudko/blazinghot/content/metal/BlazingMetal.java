@@ -105,6 +105,10 @@ public class BlazingMetal {
 			return withForms(BlazingForms.INGOT, BlazingForms.NUGGET);
 		}
 
+		public Builder basicCompatForms(Mods... mods) {
+			return withForms(BlazingForms.INGOT.asOptional(true).fromMods(mods), BlazingForms.NUGGET.asOptional(true).fromMods(mods));
+		}
+
 		public Builder createForms() {
 			if (mods.isEmpty() || mods.contains(Mods.VANILLA) || mods.contains(Mods.CREATE))
 				return vanillaForms().withForms(BlazingForms.CREATE_SHEET);
