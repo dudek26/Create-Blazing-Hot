@@ -49,7 +49,7 @@ public class BlazeMixingRecipeImpl extends BlazeMixingRecipe {
 	}
 
 	public static boolean isFuelIngredient(SizedFluidIngredient fluidIngredient) {
-		return fluidIngredient.ingredient() instanceof TagFluidIngredient tagIngredient && tagIngredient.tag() == Fluids.BLAZE_MIXER_FUEL.tag();
+		return fluidIngredient.ingredient().isEmpty() || fluidIngredient.ingredient() instanceof TagFluidIngredient tagIngredient && tagIngredient.tag() == Fluids.BLAZE_MIXER_FUEL.tag();
 	}
 
 }

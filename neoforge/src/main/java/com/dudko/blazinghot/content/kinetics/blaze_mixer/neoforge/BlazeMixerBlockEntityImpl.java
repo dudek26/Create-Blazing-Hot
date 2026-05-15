@@ -136,6 +136,7 @@ public class BlazeMixerBlockEntityImpl extends BlazeMixerBlockEntity {
 					mixingType = getMixingTypeFromRecipe(currentRecipe);
 					if (mode == Mode.BLAZE) {
 						if (currentRecipe instanceof BlazeMixingRecipe blazeMixingRecipe) {
+							recipeSpeed = 1 / getFuelSpeed(mixingType);
 							fuelCost = (int) convertFluidUsage(mixingType, blazeMixingRecipe.getMixerFuelAmount());
 						}
 					} else {
