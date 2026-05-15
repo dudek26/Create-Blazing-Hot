@@ -21,9 +21,7 @@ import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.kinetics.base.IRotate.StressImpact;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
-import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
-import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import com.simibubi.create.foundation.advancement.AllAdvancements;
@@ -382,11 +380,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 
 	@Override
 	protected <I extends RecipeInput> boolean matchBasinRecipe(Recipe<I> recipe) {
-		if (recipe == null) return false;
-		Optional<BasinBlockEntity> basin = getBasin();
-		if (basin.isEmpty()) return false;
-
-		boolean match = BasinRecipe.match(basin.get(), recipe);
+		boolean match = super.matchBasinRecipe(recipe);
 		if (!match) return false;
 
 		if (mode == Mode.BLAZE) {
@@ -428,6 +422,10 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 			mode = Mode.BLAZE;
 		notifyUpdate();
 		updateBasin();
+		processingTicks = -1;
+		if (!running) return;
+		runningTicks = 40;
+		running = false;
 	}
 
 	public PartialModel getHeadModel() {

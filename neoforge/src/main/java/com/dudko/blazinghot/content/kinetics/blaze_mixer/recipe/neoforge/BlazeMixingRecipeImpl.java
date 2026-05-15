@@ -3,12 +3,14 @@ package com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.neoforge;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe.BlazeMixingRecipe;
+import com.dudko.blazinghot.registry.BlazingTags.Fluids;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.NonNullList;
 
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.TagFluidIngredient;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -47,7 +49,7 @@ public class BlazeMixingRecipeImpl extends BlazeMixingRecipe {
 	}
 
 	public static boolean isFuelIngredient(SizedFluidIngredient fluidIngredient) {
-		return fluidIngredient.ingredient().isEmpty();
+		return fluidIngredient.ingredient() instanceof TagFluidIngredient tagIngredient && tagIngredient.tag() == Fluids.BLAZE_MIXER_FUEL.tag();
 	}
 
 }
