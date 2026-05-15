@@ -21,11 +21,6 @@
       "type": "neoforge:single",
       "amount": 125,
       "fluid": "minecraft:water"
-    },
-    {
-      "type": "neoforge:tag",
-      "amount": 100,
-      "tag": "blazinghot:blaze_mixer_placeholder"
     }
   ],
   "results": [

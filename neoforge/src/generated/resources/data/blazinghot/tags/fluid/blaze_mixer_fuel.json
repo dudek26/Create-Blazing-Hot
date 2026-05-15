@@ -1,6 +1,4 @@
 {
-  "values": [
-    "minecraft:lava",
-    "blazinghot:nether_lava"
-  ]
+  "replace": true,
+  "values": []
 }

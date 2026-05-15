@@ -12,6 +12,7 @@ import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.lang.BlazingLangGen;
 import com.dudko.blazinghot.data.recipe.SequencedAssemblyRecipeGen;
 import com.dudko.blazinghot.data.recipe.StandardRecipeGen;
+import com.dudko.blazinghot.foundation.datamap.neoforge.NeoForgeDataMapProvider;
 import com.dudko.blazinghot.foundation.recipe.BlazingRecipeProvider;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.providers.ProviderType;
@@ -22,6 +23,7 @@ import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
+
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 @ParametersAreNonnullByDefault
@@ -41,11 +43,11 @@ public class BlazingHotDataNeoForge {
 		PackOutput output = generator.getPackOutput();
 		CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-
-		// todo: sequenced recipes, finish processing
 		generator.addProvider(event.includeServer(), new BlazingAdvancements(output, lookupProvider));
 		generator.addProvider(event.includeServer(), new StandardRecipeGen(output, lookupProvider));
 		generator.addProvider(event.includeServer(), new SequencedAssemblyRecipeGen(output, lookupProvider));
+
+		generator.addProvider(event.includeServer(), new NeoForgeDataMapProvider(output, lookupProvider));
 
 		if (event.includeServer()) {
 			BlazingRecipeProvider.registerAllProcessing(output, lookupProvider);
@@ -59,9 +61,9 @@ public class BlazingHotDataNeoForge {
 				@Override
 				public CompletableFuture<?> run(CachedOutput dc) {
 					return CompletableFuture.allOf(GENERATORS
-							.stream()
-							.map(gen -> gen.run(dc))
-							.toArray(CompletableFuture[]::new));
+						.stream()
+						.map(gen -> gen.run(dc))
+						.toArray(CompletableFuture[]::new));
 				}
 			});
 		}

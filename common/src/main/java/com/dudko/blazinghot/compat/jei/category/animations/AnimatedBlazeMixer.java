@@ -14,6 +14,12 @@ import net.minecraft.util.Mth;
 
 public class AnimatedBlazeMixer extends AnimatedKinetics {
 
+	private final boolean inferno;
+
+	public AnimatedBlazeMixer(boolean inferno) {
+		this.inferno = inferno;
+	}
+
 	protected PartialModel crimsonCogwheel() {
 		return BlazingPartialModels.SHAFTLESS_CRIMSON_COGWHEEL;
 	}
@@ -28,10 +34,10 @@ public class AnimatedBlazeMixer extends AnimatedKinetics {
 		int scale = 23;
 
 		blockElement(crimsonCogwheel())
-				.rotateBlock(0, getCurrentAngle() * 2, 0)
-				.atLocal(0, 0, 0)
-				.scale(scale)
-				.render(graphics);
+			.rotateBlock(0, getCurrentAngle() * 2, 0)
+			.atLocal(0, 0, 0)
+			.scale(scale)
+			.render(graphics);
 
 		blockElement(BlazingBlocks.BLAZE_MIXER.getDefaultState()).atLocal(0, 0, 0).scale(scale).render(graphics);
 
@@ -39,11 +45,11 @@ public class AnimatedBlazeMixer extends AnimatedKinetics {
 
 		blockElement(BlazingPartialModels.BLAZE_MIXER_POLE).atLocal(0, animation, 0).scale(scale).render(graphics);
 
-		blockElement(BlazingPartialModels.BLAZE_MIXER_HEAD)
-				.rotateBlock(0, getCurrentAngle() * 4, 0)
-				.atLocal(0, animation, 0)
-				.scale(scale)
-				.render(graphics);
+		blockElement(inferno ? BlazingPartialModels.BLAZE_MIXER_HEAD_INFERNO : BlazingPartialModels.BLAZE_MIXER_HEAD)
+			.rotateBlock(0, getCurrentAngle() * 4, 0)
+			.atLocal(0, animation, 0)
+			.scale(scale)
+			.render(graphics);
 
 		blockElement(AllBlocks.BASIN.getDefaultState()).atLocal(0, 1.65, 0).scale(scale).render(graphics);
 

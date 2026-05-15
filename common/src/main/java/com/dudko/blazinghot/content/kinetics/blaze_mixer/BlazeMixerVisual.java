@@ -9,10 +9,12 @@ import com.simibubi.create.foundation.render.AllInstanceTypes;
 
 import dev.engine_room.flywheel.api.instance.Instance;
 import dev.engine_room.flywheel.api.visual.DynamicVisual;
+import dev.engine_room.flywheel.api.visual.TickableVisual;
 import dev.engine_room.flywheel.api.visualization.VisualizationContext;
 import dev.engine_room.flywheel.lib.instance.InstanceTypes;
 import dev.engine_room.flywheel.lib.instance.OrientedInstance;
 import dev.engine_room.flywheel.lib.model.Models;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import dev.engine_room.flywheel.lib.visual.SimpleDynamicVisual;
 import net.minecraft.core.Direction;
 
@@ -21,19 +23,35 @@ public class BlazeMixerVisual extends SingleAxisRotatingVisual<BlazeMixerBlockEn
 	private final OrientedInstance mixerPole;
 	private final BlazeMixerBlockEntity mixer;
 
+	private PartialModel currentHead;
+
 	public BlazeMixerVisual(VisualizationContext context, BlazeMixerBlockEntity blockEntity, float partialTick) {
 		super(context, blockEntity, partialTick, Models.partial(BlazingPartialModels.SHAFTLESS_CRIMSON_COGWHEEL));
 		this.mixer = blockEntity;
+		currentHead = mixer.getHeadModel();
 		mixerHead =
-				instancerProvider()
-						.instancer(AllInstanceTypes.ROTATING, Models.partial(BlazingPartialModels.BLAZE_MIXER_HEAD))
-						.createInstance();
+			instancerProvider()
+				.instancer(
+					AllInstanceTypes.ROTATING,
+					Models.partial(currentHead)
+				).createInstance();
 		mixerHead.setRotationAxis(Direction.Axis.Y);
 		mixerPole =
-				instancerProvider()
-						.instancer(InstanceTypes.ORIENTED, Models.partial(BlazingPartialModels.BLAZE_MIXER_POLE))
-						.createInstance();
+			instancerProvider()
+				.instancer(InstanceTypes.ORIENTED, Models.partial(BlazingPartialModels.BLAZE_MIXER_POLE))
+				.createInstance();
 		animate(partialTick);
+	}
+
+	@Override
+	public void tick(TickableVisual.Context context) {
+		PartialModel headModel = blockEntity.getHeadModel();
+
+		if (currentHead != headModel) {
+			currentHead = headModel;
+			instancerProvider().instancer(AllInstanceTypes.ROTATING, Models.partial(currentHead))
+				.stealInstance(mixerHead);
+		}
 	}
 
 	@Override
@@ -51,10 +69,10 @@ public class BlazeMixerVisual extends SingleAxisRotatingVisual<BlazeMixerBlockEn
 		float speed = mixer.getRenderedHeadRotationSpeed(pt);
 
 		mixerHead
-				.setPosition(getVisualPosition())
-				.nudge(0, -renderedHeadOffset, 0)
-				.setRotationalSpeed(speed * 2 * RotatingInstance.SPEED_MULTIPLIER)
-				.setChanged();
+			.setPosition(getVisualPosition())
+			.nudge(0, -renderedHeadOffset, 0)
+			.setRotationalSpeed(speed * 2 * RotatingInstance.SPEED_MULTIPLIER)
+			.setChanged();
 	}
 
 	private void transformPole(float renderedHeadOffset) {

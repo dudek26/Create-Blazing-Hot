@@ -21,22 +21,22 @@ public class BlazingRecipeTypes {
 	public static final List<BlazingRecipeType> ALL = new ArrayList<>();
 
 	public static final BlazingRecipeType
-			BLAZE_MIXING =
-			BlazingRecipeType.create("blaze_mixing", BlazeMixingRecipe::new).register(),
-			CASTING =
-					BlazingRecipeType
-							.create("casting", () -> new CastingRecipe.Serializer(CastingRecipe::new))
-							.register();
+		BLAZE_MIXING =
+		BlazingRecipeType.create("blaze_mixing", BlazeMixingRecipe::create).register(),
+		CASTING =
+			BlazingRecipeType
+				.create("casting", () -> new CastingRecipe.Serializer(CastingRecipe::new))
+				.register();
 
 	public static final Predicate<RecipeHolder<?>> CAN_BE_BLAZE_MIXED = r -> !r.id().getPath().endsWith("_mixer_only");
 
 	public static boolean shouldAllowBlazeMixing(RecipeHolder<?> recipe) {
-		return  CAN_BE_BLAZE_MIXED.test(recipe);
+		return CAN_BE_BLAZE_MIXED.test(recipe);
 	}
 
 	public static final Codec<BlazingRecipeType>
-			CODEC =
-			StringRepresentable.fromValues(() -> ALL.toArray(new BlazingRecipeType[]{}));
+		CODEC =
+		StringRepresentable.fromValues(() -> ALL.toArray(new BlazingRecipeType[]{}));
 
 	public static void register() {
 

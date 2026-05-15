@@ -3,6 +3,9 @@ package com.dudko.blazinghot.compat.jei.category;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jetbrains.annotations.Nullable;
+
+import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.compat.jei.info.JEIMetalInteractionRecipe;
 import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.dudko.blazinghot.gui.BlazingGuiTextures;
@@ -23,6 +26,8 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import net.createmod.catnip.data.Pair;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
@@ -32,11 +37,11 @@ public class MetalInteractionsCategory extends AbstractRecipeCategory<JEIMetalIn
 
 	public MetalInteractionsCategory() {
 		super(JEIMetalInteractionRecipe.TYPE,
-				BlazingLang.METAL_INTERACTION.get(),
-				new DoubleItemIcon(() -> AllPaletteStoneTypes.OCHRUM.getBaseBlock().get().asItem().getDefaultInstance(),
-						() -> BlazingMetals.GOLD.getBucket().getDefaultInstance()),
-				recipeWidth,
-				recipeHeight);
+			BlazingLang.METAL_INTERACTION.get(),
+			new DoubleItemIcon(() -> AllPaletteStoneTypes.OCHRUM.getBaseBlock().get().asItem().getDefaultInstance(),
+				() -> BlazingMetals.GOLD.getBucket().getDefaultInstance()),
+			recipeWidth,
+			recipeHeight);
 	}
 
 	private List<JEIMetalInteractionRecipe> getRecipes() {
@@ -56,11 +61,11 @@ public class MetalInteractionsCategory extends AbstractRecipeCategory<JEIMetalIn
 	public void setRecipe(IRecipeLayoutBuilder builder, JEIMetalInteractionRecipe recipe, IFocusGroup focuses) {
 
 		IRecipeSlotBuilder
-				metalInputSlotBuilder =
-				builder.addInputSlot(3, 1).setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1);
+			metalInputSlotBuilder =
+			builder.addInputSlot(3, 1).setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1);
 		IRecipeSlotBuilder
-				fluidInputSlotBuilder =
-				builder.addInputSlot(41, 1).setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1);
+			fluidInputSlotBuilder =
+			builder.addInputSlot(41, 1).setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1);
 
 		int outputPos = 112;
 
@@ -73,16 +78,16 @@ public class MetalInteractionsCategory extends AbstractRecipeCategory<JEIMetalIn
 			double chance = result.getSecond();
 
 			IRecipeSlotBuilder
-					outputSlotBuilder =
-					builder
-							.addOutputSlot(outputPos, 1)
-							.setBackground(CreateRecipeCategory.getRenderedSlot((float) chance), -1, -1);
+				outputSlotBuilder =
+				builder
+					.addOutputSlot(outputPos, 1)
+					.setBackground(CreateRecipeCategory.getRenderedSlot((float) chance), -1, -1);
 			outputPos += 20;
 
 			if (chance < 1) {
 				outputSlotBuilder.addRichTooltipCallback((v, t) -> t.add(CreateLang
-						.translateDirect("recipe.processing.chance", chance < 0.01 ? "<1" : (int) (chance * 100))
-						.withStyle(ChatFormatting.GOLD)));
+					.translateDirect("recipe.processing.chance", chance < 0.01 ? "<1" : (int) (chance * 100))
+					.withStyle(ChatFormatting.GOLD)));
 			}
 
 			outputSlotBuilder.addItemStack(stack);
@@ -93,5 +98,10 @@ public class MetalInteractionsCategory extends AbstractRecipeCategory<JEIMetalIn
 	public void draw(JEIMetalInteractionRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
 		AllGuiTextures.JEI_ARROW.render(guiGraphics, (recipeWidth - AllGuiTextures.JEI_ARROW.getWidth()) / 2, 5);
 		BlazingGuiTextures.JEI_PLUS.render(guiGraphics, 25, 5);
+	}
+
+	@Override
+	public @Nullable ResourceLocation getRegistryName(JEIMetalInteractionRecipe recipe) {
+		return BlazingHot.asResource("metal_interaction/" + recipe.metal().name + "/" + BuiltInRegistries.FLUID.wrapAsHolder(recipe.fluid().get()).unwrapKey().orElseThrow().location().getPath());
 	}
 }
