@@ -2,25 +2,26 @@
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
-      "modid": "dndesires"
+      "modid": "immersiveengineering"
     }
   ],
   "type": "create:casting",
-  "cooling_duration": 150,
+  "cooling_duration": 36,
   "ingredients": [
     {
-      "item": "blazinghot:porcelain_ingot_mold"
+      "item": "blazinghot:sturdy_nugget_mold"
     },
     {
       "type": "neoforge:tag",
-      "amount": 90,
+      "amount": 10,
       "tag": "c:molten_steel"
     }
   ],
-  "processing_time": 50,
+  "keep_mold": true,
+  "processing_time": 12,
   "results": [
     {
-      "id": "dndesires:steel_ingot"
+      "id": "immersiveengineering:steel_nugget"
     }
   ]
 }

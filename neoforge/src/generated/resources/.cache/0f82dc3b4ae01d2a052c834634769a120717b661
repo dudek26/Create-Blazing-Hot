@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-15T12:51:54.1449305	Create: Blazing Hot's Processing Recipes
+// 1.21.1	2026-05-15T17:39:30.8436408	Create: Blazing Hot's Processing Recipes
 ed75dd8f77f9b8194fef053e8d28bda447fcd2c4 data/blazinghot/recipe/blaze_mixing/crystal_mixture.json
 c105b208267afef4def643f2367b6127f1c622f9 data/blazinghot/recipe/blaze_mixing/melting/ancient_debris.json
 81b017e26fe2ff565f776907a964deab4c72954a data/blazinghot/recipe/blaze_mixing/melting/andesite_alloy.json
@@ -28,6 +28,7 @@ e4e8497403fd53e2039cb6b4f578cb82b563021a data/blazinghot/recipe/blaze_mixing/mel
 c70ef489e44e2002f30d1fbeb5369c5911c6b879 data/blazinghot/recipe/blaze_mixing/melting/plates/copper.json
 4c99f2bd29cbf41c4450e2293df68ff8517897b3 data/blazinghot/recipe/blaze_mixing/melting/plates/gold.json
 ce6d3f39cac2ce50be1174a601f3e1e9e0f8dbe4 data/blazinghot/recipe/blaze_mixing/melting/plates/iron.json
+a39b527bf6c5144c5e893beb7201fdcddd9eb27f data/blazinghot/recipe/blaze_mixing/melting/plates/steel.json
 56c49ae6854ef91134e97683dca35c318c2e2058 data/blazinghot/recipe/blaze_mixing/melting/plates/zinc.json
 d5973ca43ed9627f2cc4eb3c47562dd0453e5c8d data/blazinghot/recipe/blaze_mixing/melting/raw_copper.json
 05905cd729d858ebbeae5d39bae9d32a9e562d5d data/blazinghot/recipe/blaze_mixing/melting/raw_gold.json
@@ -57,20 +58,26 @@ bd16de1ad4051bafbbc384a43c248f46935452d2 data/blazinghot/recipe/casting/compat/c
 28ccf44408dd62ae2ee42efaa8b6f668c8c00c21 data/blazinghot/recipe/casting/compat/createaddition/sturdy/rod/gold.json
 24377735000f75fba8fabff02ba82f2fbd50bfb7 data/blazinghot/recipe/casting/compat/createaddition/sturdy/rod/iron.json
 5733aada68fc6ff91ba0ae42ad6852ba5283fea0 data/blazinghot/recipe/casting/compat/createaddition/sturdy/sheet/zinc.json
-3aa9062dbdb672fd577f88e84272076f256fdabb data/blazinghot/recipe/casting/compat/dndesires/porcelain/ingot/steel.json
-d0af4a6d0a3d2727d57b2052ea1cf51bf524388c data/blazinghot/recipe/casting/compat/dndesires/porcelain/nugget/steel.json
-d9a72a4cb26145956b8e1ab5644fc9a135b9ab7a data/blazinghot/recipe/casting/compat/dndesires/sturdy/ingot/steel.json
-5bfeb6e9518e9840d78f9da5ab5c49c2792ca51f data/blazinghot/recipe/casting/compat/dndesires/sturdy/nugget/steel.json
+5843e9a75cc5dc06d090ff6870c526e8a3c56e54 data/blazinghot/recipe/casting/compat/createbigcannons/porcelain/ingot/steel.json
+8f504cd023cf8e8fb48bcde296a4d90e412b2a90 data/blazinghot/recipe/casting/compat/createbigcannons/sturdy/ingot/steel.json
+cbc69a20ff11938c2a037092b86e09b62862beca data/blazinghot/recipe/casting/compat/immersiveengineering/porcelain/ingot/steel.json
+80effed1f3d11a1b739944d0d787ba6462ef2c17 data/blazinghot/recipe/casting/compat/immersiveengineering/porcelain/nugget/steel.json
+f871b2f4cf2dc64545169c3ec41909b34a01186c data/blazinghot/recipe/casting/compat/immersiveengineering/porcelain/plate/steel.json
+e361f1830afc81b579f6f6309d0d08eb27cac480 data/blazinghot/recipe/casting/compat/immersiveengineering/porcelain/rod/iron.json
+06ac4399010fcf22ff5d433a072a058433bf02cf data/blazinghot/recipe/casting/compat/immersiveengineering/porcelain/rod/steel.json
+d820ed50d0e831345691c881417b625c18fe69cb data/blazinghot/recipe/casting/compat/immersiveengineering/sturdy/ingot/steel.json
+965586cd79e7aef8e6179ba76177f79467eefcf9 data/blazinghot/recipe/casting/compat/immersiveengineering/sturdy/nugget/steel.json
+739cfb2fb2175e61a249a485b5f824fc84258e75 data/blazinghot/recipe/casting/compat/immersiveengineering/sturdy/plate/steel.json
+684ffa1af5c25ebee3dd22d1bde10af2bb9e6ee9 data/blazinghot/recipe/casting/compat/immersiveengineering/sturdy/rod/iron.json
+6ef3e8698573c6fc708d936a8b555641dc81747e data/blazinghot/recipe/casting/compat/immersiveengineering/sturdy/rod/steel.json
 da201ec396a77321d566f5633b9bb09e34fc1bee data/blazinghot/recipe/casting/compat/mekanism/porcelain/ingot/steel.json
 19ab1cd9c0870229e4191ef5d62e69b2c4913e9d data/blazinghot/recipe/casting/compat/mekanism/porcelain/nugget/steel.json
 faf7149eaf92a90db0c4bd1c90278cf0810f963f data/blazinghot/recipe/casting/compat/mekanism/sturdy/ingot/steel.json
 662a8bac00cfad266d375ca6d4d5593e1034c54a data/blazinghot/recipe/casting/compat/mekanism/sturdy/nugget/steel.json
 29606310d3fab7137ccbc69d4b2e9bbd2a759c4e data/blazinghot/recipe/casting/compat/tfmg/porcelain/ingot/steel.json
 59a0d78f36e4480d1edc0760568a6052b68c128d data/blazinghot/recipe/casting/compat/tfmg/porcelain/nugget/steel.json
-df1ab2b407c6bbc4c472d8595ae8310ed6554c10 data/blazinghot/recipe/casting/compat/tfmg/porcelain/rod/steel.json
 d52cd08c3779a9207e46ec1c70930250eec8449d data/blazinghot/recipe/casting/compat/tfmg/sturdy/ingot/steel.json
 3cec00244538a88a926b0087c2ded4bff6f857c6 data/blazinghot/recipe/casting/compat/tfmg/sturdy/nugget/steel.json
-f19a50e08c041b5bc35d51290c80f84e265bbf92 data/blazinghot/recipe/casting/compat/tfmg/sturdy/rod/steel.json
 7b275c896289a7c7a6dde4914d0d6ffc56656f2a data/blazinghot/recipe/casting/porcelain/andesite_alloy.json
 cdb35bb19aa39cc05c82eb840c2560582af7fc21 data/blazinghot/recipe/casting/porcelain/golden_sheet.json
 6c20d5f4fb07ee86f6ac831198c6a6aabcbb46c6 data/blazinghot/recipe/casting/porcelain/ingot/blaze_gold.json
@@ -173,6 +180,7 @@ d846ecc4b87e808481d5ea0111ed4b74025742d8 data/blazinghot/recipe/mixing/melting/p
 515cc95947dae5f2d4c039ff946b7f30638d1a4b data/blazinghot/recipe/mixing/melting/plates/copper_mixer_only.json
 7e8e4e2d765f31a1a29265320af7a9b7c7f3e96c data/blazinghot/recipe/mixing/melting/plates/gold_mixer_only.json
 4245c8dc412bab837573c3816e55a7021bbbd17e data/blazinghot/recipe/mixing/melting/plates/iron_mixer_only.json
+3348af0b30f1118f4eef558a55cd7d9c7f3744d3 data/blazinghot/recipe/mixing/melting/plates/steel_mixer_only.json
 b24e7cf0f6a07b2604835c2fefc71ed2c28a4687 data/blazinghot/recipe/mixing/melting/plates/zinc_mixer_only.json
 cac4209f6f7aa1cfb97796703e5ec718e4b1d3a1 data/blazinghot/recipe/mixing/melting/rods/blaze_gold_mixer_only.json
 e33d8220067b25afffaf3149d636143673eadc54 data/blazinghot/recipe/mixing/melting/rods/brass_mixer_only.json

@@ -1,0 +1,25 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:plates/steel"
+      }
+    }
+  ],
+  "type": "create:mixing",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "c:plates/steel"
+    }
+  ],
+  "processing_time": 600,
+  "results": [
+    {
+      "amount": 90,
+      "id": "blazinghot:molten_steel"
+    }
+  ]
+}

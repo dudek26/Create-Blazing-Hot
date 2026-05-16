@@ -19,6 +19,7 @@ import com.dudko.blazinghot.util.RandomUtil;
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.util.entry.FluidEntry;
@@ -30,6 +31,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
@@ -122,13 +124,19 @@ public class BlazingFluidsImpl {
 				.levelDecreasePerBlock(decreaseRate)
 				.slopeFindDistance(3)
 				.explosionResistance(100f))
-			.source(BaseFlowingFluid.Source::new)
-			.block()
-			.initialProperties(() -> Blocks.LAVA)
-			.properties(p -> p.lightLevel(b -> 15))
-			.build();
+			.source(BaseFlowingFluid.Source::new);
 
 		if (lang != null) builder.lang(lang);
+
+		BlockBuilder<LiquidBlock, FluidBuilder<Flowing, CreateRegistrate>> block = builder.block()
+			.initialProperties(() -> Blocks.LAVA)
+			.properties(p -> p.lightLevel(b -> 15));
+
+		if (lang != null) {
+			block.lang(lang);
+		}
+
+		builder = block.build();
 
 		ItemBuilder<BucketItem, FluidBuilder<Flowing, CreateRegistrate>> bucket = builder.bucket()
 			.tag(BlazingTags.itemTag(BlazingTags.Namespace.COMMON.id, "bucket/" + name));

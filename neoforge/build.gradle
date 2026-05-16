@@ -128,15 +128,19 @@ dependencies {
     if (createaddition_neoforge == "true") modLocalRuntime("maven.modrinth:createaddition:${createaddition_neoforge_version}")
     if (create_dragons_plus_neoforge == "true") modLocalRuntime("plus.dragons.createdragonsplus:create-dragons-plus-${minecraft_version}:${create_dragons_plus_neoforge_version}")
     if (create_dd_neoforge == "true") modLocalRuntime("maven.modrinth:create-dreams-and-desires:${create_dd_neoforge_version}")
+    if (create_tfmg_neoforge == "true") modLocalRuntime("maven.modrinth:create-tfmg:${create_tfmg_neoforge_version}")
+    if (mekanism_neoforge == "true") modLocalRuntime("maven.modrinth:mekanism:${mekanism_neoforge_version}")
+    if (immersive_engineering_neoforge == "false") modLocalRuntime("maven.modrinth:immersiveengineering:${immersive_engineering_neoforge_version}")
+
 }
 
 processResources {
     // set up properties for filling into metadata
     Map<String, String> properties = Map.of(
-            "version", version as String,
-            "neoforge_version", neoforge_version.split("\\.")[0], // only specify major version of neoforge
-            "minecraft_version", minecraft_version,
-            "create_version", create_neoforge_version.split("-")[0] // cut off build number
+        "version", version as String,
+        "neoforge_version", neoforge_version.split("\\.")[0], // only specify major version of neoforge
+        "minecraft_version", minecraft_version,
+        "create_version", create_neoforge_version.split("-")[0] // cut off build number
     )
     properties.forEach((k, v) -> inputs.property(k, v))
 

@@ -34,7 +34,7 @@ public class BlazingMetals {
 					.createForms()
 					.withForms(BlazingForms.OPTIONAL_ROD,
 						BlazingForms.OPTIONAL_WIRE,
-						BlazingForms.COMPAT_ROD.fromMods(Mods.CREATE_ADDITIONS),
+						BlazingForms.COMPAT_ROD.fromMods(Mods.CREATE_ADDITIONS, Mods.IMMERSIVE_ENGINEERING),
 						BlazingForms.COMPAT_CA_WIRE,
 						BlazingForms.RAW_IRON,
 						BlazingForms.CRUSHED_RAW_IRON)
@@ -165,8 +165,10 @@ public class BlazingMetals {
 	public static BlazingMetal STEEL =
 		BlazingMetal.create("steel", b -> b
 				.fromMods(Mods.MEKANISM, Mods.CREATE_TFMG, Mods.CREATE_DREAMS_AND_DESIRES)
-				.basicCompatForms(Mods.MEKANISM, Mods.CREATE_TFMG)
-				.withForms(BlazingForms.OPTIONAL_ROD, BlazingForms.COMPAT_ROD.fromMods(Mods.CREATE_TFMG)))
+				.basicCompatForms(Mods.MEKANISM, Mods.IMMERSIVE_ENGINEERING, Mods.CREATE_TFMG, Mods.CREATE_BIG_CANNONS)
+				.withForms(BlazingForms.COMPAT_ROD.fromMods(Mods.IMMERSIVE_ENGINEERING),
+					BlazingForms.COMPAT_NUGGET.fromMods(Mods.MEKANISM, Mods.IMMERSIVE_ENGINEERING, Mods.CREATE_TFMG),
+					BlazingForms.COMPAT_PLATE.fromMods(Mods.IMMERSIVE_ENGINEERING)))
 			.register();
 
 	/**

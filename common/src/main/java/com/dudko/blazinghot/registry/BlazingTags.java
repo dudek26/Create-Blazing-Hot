@@ -149,7 +149,7 @@ public class BlazingTags {
 
 	public enum Fluids {
 		BLAZE_MIXER_FUEL(Namespace.BLAZINGHOT, "blaze_mixer_fuel", false),
-		NETHER_LAVA("nether_lava");
+		NETHER_LAVA(Namespace.COMMON, "nether_lava", true);
 
 		public final Namespace namespace;
 		public final String path;
@@ -221,11 +221,13 @@ public class BlazingTags {
 				LangUtil.titleCaseConversion(itemTag.name().replace('_', ' ')));
 		}
 
-		for (Fluids itemTag : Fluids.values()) {
-			if (!itemTag.alwaysDatagen) continue;
-			ResourceLocation loc = itemTag.tag().location();
+		for (Fluids fluidTag : Fluids.values()) {
+			if (!fluidTag.alwaysDatagen) continue;
+			ResourceLocation loc = fluidTag.tag().location();
+			String name = LangUtil.titleCaseConversion(fluidTag.name().replace('_', ' '));
+			if (fluidTag == Fluids.NETHER_LAVA) name = "Crimson Lava";
 			consumer.accept("tag.fluid." + loc.getNamespace() + "." + loc.getPath().replace('/', '.'),
-				LangUtil.titleCaseConversion(itemTag.name().replace('_', ' ')));
+				name);
 		}
 	}
 

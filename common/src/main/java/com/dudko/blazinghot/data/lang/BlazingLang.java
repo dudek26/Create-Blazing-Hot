@@ -47,7 +47,7 @@ public enum BlazingLang {
 
 	NETHER_LAVA_INFO(INFO,
 		"nether_lava_cobblestone",
-		"You can build faster Cobblestone generators when using Nether Lava instead of regular Lava."),
+		"You can build faster Cobblestone generators when using Crimson Lava instead of regular Lava."),
 	BLAZE_MIXER_FUEL(RECIPE_TOOLTIP, "blaze_mixing.fuel", "Blaze Mixer's fuel"),
 	MOLD_CONSUMED(RECIPE_TOOLTIP, "spout_casting.consumed", "Consumed on cast"),
 	BLAZE_MIXING(RECIPE, "blaze_mixing", "Blaze Mixing"),

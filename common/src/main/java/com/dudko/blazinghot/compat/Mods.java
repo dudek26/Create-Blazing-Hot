@@ -21,11 +21,13 @@ public enum Mods {
 	CREATE_DREAMS_AND_DESIRES("dndesires"), // Create: Dreams & Desires
 	CREATE_DRAGONS_PLUS("create_dragons_plus"), // Create: Dragons Plus
 	CREATE_TFMG("tfmg"), // Create: The Factory Must Grow
+	CREATE_BIG_CANNONS("createbigcannons"), // Create: Big Cannons
 
 	// Other
 	TECH_REBORN("tech_reborn"), // fabric-exclusive
 	MEKANISM("mekanism"), // neoforge-exclusive
-	AD_ASTRA("ad_astra"); // 1.20.1
+	AD_ASTRA("ad_astra"), // 1.20.1
+	IMMERSIVE_ENGINEERING("immersiveengineering");
 
 	public final String id;
 	public final boolean alwaysIncluded;

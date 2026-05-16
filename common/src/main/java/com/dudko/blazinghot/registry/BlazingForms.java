@@ -51,7 +51,9 @@ public class BlazingForms {
 		OPTIONAL_WIRE =
 			OPTIONAL_ROD.createFrom("wire", b -> b.withTagFolder("wires")),
 		OPTIONAL_SHEET =
-			SHEET.withFlags(Flag.MELTING).asOptional(true);
+			SHEET.withFlags(Flag.MELTING).asOptional(true),
+		OPTIONAL_INGOT = INGOT.withFlags(Flag.MELTING).asOptional(true),
+		OPTIONAL_NUGGET = NUGGET.withFlags(Flag.MELTING).asOptional(true);
 
 	// Netherite
 	public static BlazingForm
@@ -108,7 +110,16 @@ public class BlazingForms {
 	public static BlazingForm COMPAT_ROD =
 		ROD.createFrom("rod", b -> b
 			.setFlags(Flag.CASTING)
-			.withMold(Molds.ROD));
+			.withMold(Molds.ROD)),
+		COMPAT_NUGGET = NUGGET.createFrom("nugget", b -> b
+			.setFlags(Flag.CASTING)
+			.withMold(Molds.NUGGET)),
+		COMPAT_INGOT = INGOT.createFrom("ingot", b -> b
+			.setFlags(Flag.CASTING)
+			.withMold(Molds.INGOT)),
+		COMPAT_PLATE = SHEET.createFrom("plate", b -> b
+			.setFlags(Flag.CASTING)
+			.withMold(Molds.SHEET));
 	// Create: Crafts & Additions
 	public static BlazingForm
 		COMPAT_CA_WIRE =

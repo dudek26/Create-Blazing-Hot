@@ -2,7 +2,7 @@
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
-      "modid": "tfmg"
+      "modid": "immersiveengineering"
     }
   ],
   "type": "create:casting",
@@ -14,13 +14,13 @@
     {
       "type": "neoforge:tag",
       "amount": 45,
-      "tag": "c:molten_steel"
+      "tag": "c:molten_iron"
     }
   ],
   "processing_time": 25,
   "results": [
     {
-      "id": "tfmg:steel_rod"
+      "id": "immersiveengineering:iron_rod"
     }
   ]
 }
