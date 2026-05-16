@@ -11,7 +11,7 @@ Create: Blazing Hot 0.8.0 (WIP)
 ### Changed:
 
 * Split Blaze Mixer into two modes:
-    * **Fueled** for faster mixing/brewing/auto-shapeless recipes
+    * **Fueled** for faster mixing/auto-brewing/auto-shapeless recipes
     * **Blaze** for recipes exclusive to Blaze Mixer
 * Blaze Mixer fuel is now data-driven:
     * Fluids can be defined as fuel in `data/blazinghot/data_maps/fluid/blaze_mixer_fuel.json`
