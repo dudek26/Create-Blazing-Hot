@@ -4,10 +4,19 @@ Create: Blazing Hot 0.8.0 (WIP)
 
 ### Added:
 
-* Crystal Mixture and its interactions with Molten Metals
+* Crystal Mixture - a new fluid that is reactive to molten metals, creating their respective stone types
 * [JEI] Metal Interactions recipe category
+* [JEI] Blaze Mixer Fuel recipe category
 
 ### Changed:
+
+* Split Blaze Mixer into two modes:
+    * **Fueled** for faster mixing/brewing/auto-shapeless recipes
+    * **Blaze** for recipes exclusive to Blaze Mixer
+* Blaze Mixer fuel is now data-driven:
+    * Fluids can be defined as fuel in `data/blazinghot/data_maps/fluid/blaze_mixer_fuel.json`
+    * Different fluids can have different processing speeds and usage
+    * You can also override these values for 4 different processing types: `mixing`, `auto_brewing`, `auto_shapeless`, `blaze_mixing`
 
 ### Fixed:
 
