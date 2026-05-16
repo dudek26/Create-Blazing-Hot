@@ -17,6 +17,9 @@ Create: Blazing Hot 0.8.0 (WIP)
     * Fluids can be defined as fuel in `data/blazinghot/data_maps/fluid/blaze_mixer_fuel.json`
     * Different fluids can have different processing speeds and usage
     * You can also override these values for 4 different processing types: `mixing`, `auto_brewing`, `auto_shapeless`, `blaze_mixing`
+* Increased processing speed and decreased fuel usage when using Crimson Lava (previously Nether Lava) as Blaze Mixer fuel
+* [JEI] Split Blaze Mixing and Fueled Mixing recipe categories
+* [JEI] Updated recipe category names
 
 ### Fixed:
 
