@@ -7,6 +7,8 @@ Create: Blazing Hot 0.8.0 (WIP)
 * Crystal Mixture - a new fluid that is reactive to molten metals, creating their respective stone types
 * [JEI] Metal Interactions recipe category
 * [JEI] Blaze Mixer Fuel recipe category
+* New compat Molten Metals:
+    * Steel (Mekanism, Immersive Engineering, Create: The Factory Must Grow, Create: Big Cannons)
 
 ### Changed:
 
@@ -16,12 +18,20 @@ Create: Blazing Hot 0.8.0 (WIP)
 * Blaze Mixer fuel is now data-driven:
     * Fluids can be defined as fuel in `data/blazinghot/data_maps/fluid/blaze_mixer_fuel.json`
     * Different fluids can have different processing speeds and usage
-    * You can also override these values for 4 different processing types: `mixing`, `auto_brewing`, `auto_shapeless`, `blaze_mixing`
+    * You can also override these values for 4 different processing types: `mixing`, `auto_brewing`, `auto_shapeless`,
+      `blaze_mixing`
 * Increased processing speed and decreased fuel usage when using Crimson Lava (previously Nether Lava) as Blaze Mixer fuel
 * [JEI] Split Blaze Mixing and Fueled Mixing recipe categories
 * [JEI] Updated recipe category names
+* Renamed Nether Lava into Crimson Lava and updated its texture
+* Updated ids:
+    * item `blazinghot:nether_essence` -> `blazinghot:crimson_essence`
+    * item `blazinghot:nether_lava_bucket` -> `blazinghot:crimson_lava_bucket`
+    * block & fluid `blazinghot:nether_lava` -> `blazinghot:crimson_lava`
 
 ### Fixed:
+
+* [JEI] Crimson Lava cobblegen note no longer uses the flowing variant of fluid
 
 ------------------------------------------------------
 Create: Blazing Hot 0.7.4

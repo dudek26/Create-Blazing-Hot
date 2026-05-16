@@ -164,7 +164,7 @@ public class BlazingMetals {
 	// Compat
 	public static BlazingMetal STEEL =
 		BlazingMetal.create("steel", b -> b
-				.fromMods(Mods.MEKANISM, Mods.CREATE_TFMG, Mods.CREATE_DREAMS_AND_DESIRES)
+				.fromMods(Mods.MEKANISM, Mods.IMMERSIVE_ENGINEERING, Mods.CREATE_TFMG, Mods.CREATE_BIG_CANNONS)
 				.basicCompatForms(Mods.MEKANISM, Mods.IMMERSIVE_ENGINEERING, Mods.CREATE_TFMG, Mods.CREATE_BIG_CANNONS)
 				.withForms(BlazingForms.COMPAT_ROD.fromMods(Mods.IMMERSIVE_ENGINEERING),
 					BlazingForms.COMPAT_NUGGET.fromMods(Mods.MEKANISM, Mods.IMMERSIVE_ENGINEERING, Mods.CREATE_TFMG),
