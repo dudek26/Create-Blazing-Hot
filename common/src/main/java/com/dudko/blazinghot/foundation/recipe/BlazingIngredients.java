@@ -126,7 +126,7 @@ public class BlazingIngredients {
 	//    Materials
 
 	public static Item netherEssence() {
-		return BlazingItems.NETHER_ESSENCE.get();
+		return BlazingItems.CRIMSON_ESSENCE.get();
 	}
 
 	public static Item diamond() {

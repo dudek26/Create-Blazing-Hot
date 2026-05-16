@@ -1,6 +1,6 @@
-// 1.21.1	2026-05-16T13:16:41.2843488	Blazing Hot's Advancements
-01a5bd53b62f43cebc9f0f023e92cc539b3e6f01 data/blazinghot/advancement/all_metal_food.json
-43203ab1676d22e83c588bd0d8b3f78cbfc9a1f2 data/blazinghot/advancement/all_molten_metals.json
+// 1.21.1	2026-05-16T21:29:19.116234	Blazing Hot's Advancements
+cfd4c678419a4a6d53d20d2acc94762a9af3fc2e data/blazinghot/advancement/all_metal_food.json
+708f373f3fdc2417fe6c91e129998bb8ddd61686 data/blazinghot/advancement/all_molten_metals.json
 c1938f8be3c2708d1402af047b76dee324f1c7f3 data/blazinghot/advancement/ancient_debris_melting.json
 0979b45d1592094109b9b7650b94b51c97486c29 data/blazinghot/advancement/blaze_arrow.json
 bdc294a56456e9550d7c95b3a74276a8679d7677 data/blazinghot/advancement/blaze_arrow_interdimensional.json
@@ -17,7 +17,7 @@ e955488b5c4c9d43b1c76ff670fbb526e8abc6f7 data/blazinghot/advancement/casting.jso
 9f5be23a259cae73bc6fa2db3052c7b1dcb56306 data/blazinghot/advancement/molten_blaze_gold_00.json
 e6410962ebab31ac564067aab957d315e5ab6c30 data/blazinghot/advancement/molten_gold.json
 33d6d49d96af43732e6949c52e8ee2b030adcaf8 data/blazinghot/advancement/nether_compound.json
-68c927ff0a7695c34004eefbf72448e3266b43c9 data/blazinghot/advancement/nether_essence.json
+1fd331d6d4147ed40b3202060325fc2d9d978dfb data/blazinghot/advancement/nether_essence.json
 da8a2bef493c2701b6672c73ff179406d4611ae0 data/blazinghot/advancement/root.json
 552002c27d471000af215ed8bc380f4597b401bc data/blazinghot/advancement/sturdy_alloy.json
 bb704917695ea4bbfff337188c2282f950c53dd4 data/blazinghot/advancement/sturdy_casing.json

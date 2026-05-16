@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "blazinghot:nether_essence"
+            "items": "blazinghot:crimson_essence"
           }
         ]
       },
@@ -20,7 +20,7 @@
     },
     "icon": {
       "count": 1,
-      "id": "blazinghot:nether_essence"
+      "id": "blazinghot:crimson_essence"
     },
     "title": {
       "translate": "advancement.blazinghot.nether_essence"

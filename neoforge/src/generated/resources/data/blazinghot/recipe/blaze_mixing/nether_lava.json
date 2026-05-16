@@ -3,10 +3,10 @@
   "heat_requirement": "superheated",
   "ingredients": [
     {
-      "item": "blazinghot:nether_essence"
+      "item": "blazinghot:crimson_essence"
     },
     {
-      "item": "blazinghot:nether_essence"
+      "item": "blazinghot:crimson_essence"
     },
     {
       "type": "neoforge:single",
@@ -17,7 +17,7 @@
   "results": [
     {
       "amount": 100,
-      "id": "blazinghot:nether_lava"
+      "id": "blazinghot:crimson_lava"
     }
   ]
 }

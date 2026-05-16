@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "blazinghot:item/nether_lava_bucket"
+    "layer0": "blazinghot:item/crimson_essence"
   }
 }

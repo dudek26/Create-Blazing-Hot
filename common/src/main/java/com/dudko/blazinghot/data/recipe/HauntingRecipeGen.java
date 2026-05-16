@@ -17,7 +17,7 @@ public class HauntingRecipeGen extends com.simibubi.create.api.data.recipe.Haunt
 	}
 
 	GeneratedRecipe
-			NETHER_COMPOUND =
-			create("nether_compound", b -> b.require(netherCompound()).output(BlazingItems.NETHER_ESSENCE));
+		NETHER_COMPOUND =
+		create("nether_compound", b -> b.require(netherCompound()).output(BlazingItems.CRIMSON_ESSENCE));
 
 }

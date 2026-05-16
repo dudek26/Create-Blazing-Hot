@@ -3,10 +3,10 @@
   "heat_requirement": "superheated",
   "ingredients": [
     {
-      "item": "blazinghot:nether_essence"
+      "item": "blazinghot:crimson_essence"
     },
     {
-      "item": "blazinghot:nether_essence"
+      "item": "blazinghot:crimson_essence"
     },
     {
       "type": "neoforge:tag",

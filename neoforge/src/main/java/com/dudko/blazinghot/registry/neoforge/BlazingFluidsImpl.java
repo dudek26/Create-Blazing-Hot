@@ -19,19 +19,14 @@ import com.dudko.blazinghot.util.RandomUtil;
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.tterrag.registrate.builders.BlockBuilder;
-import com.tterrag.registrate.builders.FluidBuilder;
-import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 
 import net.createmod.catnip.data.Pair;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
@@ -41,7 +36,6 @@ import net.minecraft.world.level.pathfinder.PathType;
 
 import net.neoforged.neoforge.common.SoundActions;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
-import net.neoforged.neoforge.fluids.BaseFlowingFluid.Flowing;
 import net.neoforged.neoforge.fluids.FluidInteractionRegistry;
 import net.neoforged.neoforge.fluids.FluidInteractionRegistry.InteractionInformation;
 import net.neoforged.neoforge.fluids.FluidType;
@@ -54,7 +48,7 @@ public class BlazingFluidsImpl {
 		MOLTEN_METALS =
 		new MoltenMetalsList<>(metal -> createFromLava(metal.getMoltenName()));
 
-	public static FluidEntry<BaseFlowingFluid.Flowing> NETHER_LAVA = createFromLava("nether_lava", "Crimson Lava", 10, 1);
+	public static FluidEntry<BaseFlowingFluid.Flowing> NETHER_LAVA = createFromLava("crimson_lava", 10, 1);
 
 	public static FluidEntry<BaseFlowingFluid.Flowing>
 		CRYSTAL_MIXTURE =
@@ -93,15 +87,15 @@ public class BlazingFluidsImpl {
 	}
 
 	public static FluidEntry<BaseFlowingFluid.Flowing> createFromLava(String name, int tickRate) {
-		return createFromLava(name, null, tickRate, 2);
+		return createFromLava(name, tickRate, 2);
 	}
 
 	public static FluidEntry<BaseFlowingFluid.Flowing> createFromLava(String name) {
 		return createFromLava(name, 30);
 	}
 
-	public static FluidEntry<BaseFlowingFluid.Flowing> createFromLava(String name, @Nullable String lang, int tickRate, int decreaseRate) {
-		FluidBuilder<Flowing, CreateRegistrate> builder = REGISTRATE
+	public static FluidEntry<BaseFlowingFluid.Flowing> createFromLava(String name, int tickRate, int decreaseRate) {
+		return REGISTRATE
 			.standardFluid(name)
 			.tag(BlazingTags.fluidTag(BlazingTags.Namespace.COMMON.id, name))
 			.properties(p -> p
@@ -124,26 +118,14 @@ public class BlazingFluidsImpl {
 				.levelDecreasePerBlock(decreaseRate)
 				.slopeFindDistance(3)
 				.explosionResistance(100f))
-			.source(BaseFlowingFluid.Source::new);
-
-		if (lang != null) builder.lang(lang);
-
-		BlockBuilder<LiquidBlock, FluidBuilder<Flowing, CreateRegistrate>> block = builder.block()
+			.source(BaseFlowingFluid.Source::new)
+			.block()
 			.initialProperties(() -> Blocks.LAVA)
-			.properties(p -> p.lightLevel(b -> 15));
-
-		if (lang != null) {
-			block.lang(lang);
-		}
-
-		builder = block.build();
-
-		ItemBuilder<BucketItem, FluidBuilder<Flowing, CreateRegistrate>> bucket = builder.bucket()
-			.tag(BlazingTags.itemTag(BlazingTags.Namespace.COMMON.id, "bucket/" + name));
-
-		if (lang != null) bucket.lang(lang + " Bucket");
-
-		return bucket.build()
+			.properties(p -> p.lightLevel(b -> 15))
+			.build()
+			.bucket()
+			.tag(BlazingTags.itemTag(BlazingTags.Namespace.COMMON.id, "bucket/" + name))
+			.build()
 			.register();
 	}
 

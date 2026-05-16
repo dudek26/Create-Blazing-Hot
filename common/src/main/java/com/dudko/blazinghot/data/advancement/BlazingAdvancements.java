@@ -44,230 +44,230 @@ public class BlazingAdvancements implements DataProvider {
 	public static final BlazingAdvancement START = null,
 
 	ROOT =
-			create("root",
-					b -> b
-							.icon(BlazingItems.BLAZE_WHISK)
-							.title("Blazing Hot")
-							.description("Create: Hell Edition")
-							.awardedForFree()
-							.special(SILENT)),
+		create("root",
+			b -> b
+				.icon(BlazingItems.BLAZE_WHISK)
+				.title("Blazing Hot")
+				.description("Create: Hell Edition")
+				.awardedForFree()
+				.special(SILENT)),
 
 	// The beginning
 
 	NETHER_COMPOUND =
-			create("nether_compound",
-					b -> b
-							.icon(BlazingItems.NETHER_COMPOUND)
-							.title("Mixing the Nether")
-							.description("Obtain a Nether Compound")
-							.after(ROOT)
-							.whenIconCollected()),
+		create("nether_compound",
+			b -> b
+				.icon(BlazingItems.NETHER_COMPOUND)
+				.title("Mixing the Nether")
+				.description("Obtain a Nether Compound")
+				.after(ROOT)
+				.whenIconCollected()),
 
 	// Blaze Roll
 
 	BLAZE_ROLL =
-			create("blaze_roll",
-					b -> b
-							.icon(BlazingItems.BLAZE_ROLL)
-							.title("Forbidden Sweets")
-							.description("\"Bake\" a Blaze Roll")
-							.after(NETHER_COMPOUND)
-							.whenIconCollected()),
+		create("blaze_roll",
+			b -> b
+				.icon(BlazingItems.BLAZE_ROLL)
+				.title("Forbidden Sweets")
+				.description("\"Bake\" a Blaze Roll")
+				.after(NETHER_COMPOUND)
+				.whenIconCollected()),
 
 	// Sturdy Alloy - Casting branch
 
 	STURDY_ALLOY =
-			create("sturdy_alloy",
-					b -> b
-							.icon(BlazingItems.STURDY_ALLOY)
-							.title("Tough Alloys")
-							.description("Obtain a Sturdy Alloy")
-							.after(NETHER_COMPOUND)
-							.whenIconCollected()),
+		create("sturdy_alloy",
+			b -> b
+				.icon(BlazingItems.STURDY_ALLOY)
+				.title("Tough Alloys")
+				.description("Obtain a Sturdy Alloy")
+				.after(NETHER_COMPOUND)
+				.whenIconCollected()),
 
 	STURDY_CASING =
-			create("sturdy_casing",
-					b -> b
-							.icon(BlazingBlocks.STURDY_CASING)
-							.title("The Sturdy Age")
-							.description("Use your Sturdy Alloys to make some Andesite Casings sturdy")
-							.special(NOISY)
-							.after(STURDY_ALLOY)),
+		create("sturdy_casing",
+			b -> b
+				.icon(BlazingBlocks.STURDY_CASING)
+				.title("The Sturdy Age")
+				.description("Use your Sturdy Alloys to make some Andesite Casings sturdy")
+				.special(NOISY)
+				.after(STURDY_ALLOY)),
 
 	CASTING =
-			create("casting",
-					b -> b
-							.icon(BlazingBlocks.CASTING_DEPOT)
-							.title("Casting Apprentice")
-							.description("Cast an item using a mold in a Casting Depot")
-							.after(STURDY_CASING)),
+		create("casting",
+			b -> b
+				.icon(BlazingBlocks.CASTING_DEPOT)
+				.title("Casting Apprentice")
+				.description("Cast an item using a mold in a Casting Depot")
+				.after(STURDY_CASING)),
 
 	STURDY_MOLD =
-			create("sturdy_mold",
-					b -> b
-							.icon(Molds.INGOT.get(Molds.MoldType.STURDY))
-							.title("Experienced Founder")
-							.description("Create a sturdy mold")
-							.after(CASTING)),
+		create("sturdy_mold",
+			b -> b
+				.icon(Molds.INGOT.get(Molds.MoldType.STURDY))
+				.title("Experienced Founder")
+				.description("Create a sturdy mold")
+				.after(CASTING)),
 
 	// Nether Essence - Molten Metal branch
 
 	NETHER_ESSENCE =
-			create("nether_essence",
-					b -> b
-							.icon(BlazingItems.NETHER_ESSENCE)
-							.title("Synthetic Hell")
-							.description("Haunt Nether Compound into Nether Essence")
-							.after(NETHER_COMPOUND)
-							.whenIconCollected()),
+		create("nether_essence",
+			b -> b
+				.icon(BlazingItems.CRIMSON_ESSENCE)
+				.title("Synthetic Hell")
+				.description("Haunt Nether Compound into Nether Essence")
+				.after(NETHER_COMPOUND)
+				.whenIconCollected()),
 
 	MOLTEN_GOLD =
-			create("molten_gold",
-					b -> b
-							.icon(BlazingMetals.GOLD.getBucket())
-							.title("Flowing Riches")
-							.description("Melt Gold in Mixer")
-							.special(NOISY)
-							.after(NETHER_ESSENCE)),
+		create("molten_gold",
+			b -> b
+				.icon(BlazingMetals.GOLD.getBucket())
+				.title("Flowing Riches")
+				.description("Melt Gold in Mixer")
+				.special(NOISY)
+				.after(NETHER_ESSENCE)),
 
 	// All Molten Metals
 
 	ALL_MOLTEN_METALS =
-			create("all_molten_metals",
-					b -> b
-							.icon(BlazingMetals.NETHERITE.getBucket())
-							.title("Tinkers' Construct")
-							.description("Obtain a bucket of every non-compat molten metal.")
-							.after(MOLTEN_GOLD)
-							.special(CHALLENGE)
-							.rewards(r -> r.addExperience(100).build())
-							.whenItemsCollected(BlazingMetals.allBuckets(false))),
+		create("all_molten_metals",
+			b -> b
+				.icon(BlazingMetals.NETHERITE.getBucket())
+				.title("Tinkers' Construct")
+				.description("Obtain a bucket of every non-compat molten metal.")
+				.after(MOLTEN_GOLD)
+				.special(CHALLENGE)
+				.rewards(r -> r.addExperience(100).build())
+				.whenItemsCollected(BlazingMetals.allBuckets(false))),
 
 	// Metal Food
 
 	METAL_APPLE_SPOUT =
-			create("metal_apple_spout_0000",
-					b -> b
-							.icon(BlazingItems.IRON_APPLE)
-							.title("Budget Snacks")
-							.description("Obtain any Metal Apple by filling regular Apple in Spout")
-							.after(MOLTEN_GOLD)),
+		create("metal_apple_spout_0000",
+			b -> b
+				.icon(BlazingItems.IRON_APPLE)
+				.title("Budget Snacks")
+				.description("Obtain any Metal Apple by filling regular Apple in Spout")
+				.after(MOLTEN_GOLD)),
 
 	GOLDEN_APPLE_FACTORY =
-			create("golden_apple_factory",
-					b -> b
-							.icon(Items.GOLDEN_APPLE)
-							.title("Gold Addiction")
-							.description("Produce 64 Golden Apples with one Spout")
-							.special(EXPERT)
-							.after(METAL_APPLE_SPOUT)),
+		create("golden_apple_factory",
+			b -> b
+				.icon(Items.GOLDEN_APPLE)
+				.title("Gold Addiction")
+				.description("Produce 64 Golden Apples with one Spout")
+				.special(EXPERT)
+				.after(METAL_APPLE_SPOUT)),
 
 	ALL_METAL_FOOD =
-			create("all_metal_food",
-					b -> b
-							.icon(Items.ENCHANTED_GOLDEN_APPLE)
-							.title("A Heavy Diet")
-							.description("Eat every Metal Apple and Carrot")
-							.after(GOLDEN_APPLE_FACTORY)
-							.special(CHALLENGE)
-							.rewards(r -> r.addExperience(100).build())
-							.whenAllUsed(BlazingItems.METAL_FOOD)),
+		create("all_metal_food",
+			b -> b
+				.icon(Items.ENCHANTED_GOLDEN_APPLE)
+				.title("A Heavy Diet")
+				.description("Eat every Metal Apple and Carrot")
+				.after(GOLDEN_APPLE_FACTORY)
+				.special(CHALLENGE)
+				.rewards(r -> r.addExperience(100).build())
+				.whenAllUsed(BlazingItems.METAL_FOOD)),
 
 	EXTINGUISHING_FOOD_SAVE =
-			create("extinguishing_food_save",
-					b -> b
-							.icon(BlazingItems.BLAZE_CARROT)
-							.title("Last Resort")
-							.description(
-									"Save yourself from burning down by eating any extinguishing food when under 2 hearts of health.")
-							.after(ALL_METAL_FOOD)
-							.special(SECRET)),
+		create("extinguishing_food_save",
+			b -> b
+				.icon(BlazingItems.BLAZE_CARROT)
+				.title("Last Resort")
+				.description(
+					"Save yourself from burning down by eating any extinguishing food when under 2 hearts of health.")
+				.after(ALL_METAL_FOOD)
+				.special(SECRET)),
 
 	// Blaze Gold
 
 	MOLTEN_BLAZE_GOLD =
-			create("molten_blaze_gold_00",
-					b -> b
-							.icon(BlazingMetals.BLAZE_GOLD.getBucket())
-							.title("Fake Alloys")
-							.description("Mix Molten Gold and Crimson Essence together to obtain Molten Blaze Gold")
-							.after(MOLTEN_GOLD)),
+		create("molten_blaze_gold_00",
+			b -> b
+				.icon(BlazingMetals.BLAZE_GOLD.getBucket())
+				.title("Fake Alloys")
+				.description("Mix Molten Gold and Crimson Essence together to obtain Molten Blaze Gold")
+				.after(MOLTEN_GOLD)),
 
 	BLAZE_GOLD =
-			create("blaze_gold",
-					b -> b
-							.icon(BlazingItems.BLAZE_GOLD_INGOT)
-							.title("Hot Treasure")
-							.description("Compact Molten Blaze Gold in Basin to obtain a Blaze Gold Ingot")
-							.after(MOLTEN_BLAZE_GOLD)
-							.whenIconCollected()),
+		create("blaze_gold",
+			b -> b
+				.icon(BlazingItems.BLAZE_GOLD_INGOT)
+				.title("Hot Treasure")
+				.description("Compact Molten Blaze Gold in Basin to obtain a Blaze Gold Ingot")
+				.after(MOLTEN_BLAZE_GOLD)
+				.whenIconCollected()),
 
 	BLAZE_CASING =
-			create("blaze_casing",
-					b -> b
-							.icon(BlazingBlocks.BLAZE_CASING)
-							.title("The Blaze Age")
-							.description("Use Blaze Gold Sheets to upgrade your Copper Casings")
-							.special(NOISY)
-							.after(BLAZE_GOLD)),
+		create("blaze_casing",
+			b -> b
+				.icon(BlazingBlocks.BLAZE_CASING)
+				.title("The Blaze Age")
+				.description("Use Blaze Gold Sheets to upgrade your Copper Casings")
+				.special(NOISY)
+				.after(BLAZE_GOLD)),
 
 	BLAZE_MIXER =
-			create("blaze_mixer",
-					b -> b
-							.icon(BlazingBlocks.BLAZE_MIXER)
-							.title("New Era of Mixing")
-							.description("Combine or melt ingredients in a Blaze Mixer")
-							.after(BLAZE_CASING)),
+		create("blaze_mixer",
+			b -> b
+				.icon(BlazingBlocks.BLAZE_MIXER)
+				.title("New Era of Mixing")
+				.description("Combine or melt ingredients in a Blaze Mixer")
+				.after(BLAZE_CASING)),
 
 	// Blaze Gold - Combat
 
 	BLAZE_ARROW =
-			create("blaze_arrow",
-					b -> b
-							.icon(BlazingItems.BLAZE_ARROW)
-							.title("Power of the Nether")
-							.description("Shoot something with a Blaze Arrow in the Nether")
-							.special(NOISY)
-							.after(BLAZE_MIXER)),
+		create("blaze_arrow",
+			b -> b
+				.icon(BlazingItems.BLAZE_ARROW)
+				.title("Power of the Nether")
+				.description("Shoot something with a Blaze Arrow in the Nether")
+				.special(NOISY)
+				.after(BLAZE_MIXER)),
 
 	BLAZE_ARROW_INTERDIMENSIONAL =
-			create("blaze_arrow_interdimensional",
-					b -> b
-							.icon(BlazingItems.BLAZE_ARROW)
-							.title("Interdimensional Sniper")
-							.description("Kill an enemy in the Nether with a Blaze Arrow shot in the Overworld")
-							.special(CHALLENGE)
-							.after(BLAZE_ARROW)),
+		create("blaze_arrow_interdimensional",
+			b -> b
+				.icon(BlazingItems.BLAZE_ARROW)
+				.title("Interdimensional Sniper")
+				.description("Kill an enemy in the Nether with a Blaze Arrow shot in the Overworld")
+				.special(CHALLENGE)
+				.after(BLAZE_ARROW)),
 
 	// Blaze Gold - Machines
 
 	MODERN_LAMP =
-			create("modern_lamp",
-					b -> b
-							.icon(BlazingBlocks.MODERN_LAMP_BLOCKS.get(DyeColor.WHITE))
-							.title("Modern Technology")
-							.description("Manually activate any Modern Lamp")
-							.after(BLAZE_MIXER)),
+		create("modern_lamp",
+			b -> b
+				.icon(BlazingBlocks.MODERN_LAMP_BLOCKS.get(DyeColor.WHITE))
+				.title("Modern Technology")
+				.description("Manually activate any Modern Lamp")
+				.after(BLAZE_MIXER)),
 
 	// Blaze Mixer - Expert
 
 	BLAZE_MIXER_MAX =
-			create("blaze_mixer_max",
-					b -> b
-							.icon(BlazingBlocks.BLAZE_MIXER)
-							.title("Fast and Furious")
-							.description("Run a fully fueled Blaze Mixer at max speed")
-							.after(BLAZE_MIXER)
-							.special(EXPERT)),
+		create("blaze_mixer_max",
+			b -> b
+				.icon(BlazingBlocks.BLAZE_MIXER)
+				.title("Fast and Furious")
+				.description("Run a fully fueled Blaze Mixer at max speed")
+				.after(BLAZE_MIXER)
+				.special(EXPERT)),
 
 	ANCIENT_DEBRIS_MELTING =
-			create("ancient_debris_melting",
-					b -> b
-							.icon(Items.ANCIENT_DEBRIS)
-							.title("Debris Utilisation")
-							.description("Melt 15 Ancient Debris in a single Blaze Mixer")
-							.after(BLAZE_MIXER_MAX)
-							.special(EXPERT)),
+		create("ancient_debris_melting",
+			b -> b
+				.icon(Items.ANCIENT_DEBRIS)
+				.title("Debris Utilisation")
+				.description("Melt 15 Ancient Debris in a single Blaze Mixer")
+				.after(BLAZE_MIXER_MAX)
+				.special(EXPERT)),
 
 	//
 	END = null;

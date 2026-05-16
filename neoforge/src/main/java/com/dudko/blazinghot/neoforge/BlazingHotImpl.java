@@ -7,6 +7,7 @@ import com.dudko.blazinghot.content.kinetics.mechanical_arm.BlazingArmInteractio
 import com.dudko.blazinghot.data.advancement.BlazingAdvancements;
 import com.dudko.blazinghot.data.advancement.BlazingTriggers;
 import com.dudko.blazinghot.foundation.recipe.neoforge.BlazingRecipeTypeImpl;
+import com.dudko.blazinghot.registry.neoforge.BlazingAliasesNeoForge;
 import com.dudko.blazinghot.registry.neoforge.BlazingConfigsImpl;
 import com.dudko.blazinghot.registry.neoforge.BlazingCreativeTabsImpl;
 import com.dudko.blazinghot.registry.neoforge.BlazingDataMapsNeoForge;
@@ -38,6 +39,8 @@ public class BlazingHotImpl {
 
 		BlazingCreativeTabsImpl.register(modEventBus);
 		BlazingHot.init();
+
+		BlazingAliasesNeoForge.register(modEventBus);
 
 		modEventBus.addListener(EventPriority.LOWEST, BlazingHotDataNeoForge::gatherData);
 		modEventBus.addListener(EventPriority.HIGHEST, BlazingHotDataNeoForge::gatherDataHighPriority);
