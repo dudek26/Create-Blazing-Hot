@@ -6,60 +6,49 @@ import java.util.List;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import org.jetbrains.annotations.Nullable;
-
+import com.dudko.blazinghot.content.block.modern_lamp.AbstractModernLamp.ModernLampValueBox;
+import com.dudko.blazinghot.content.block.modern_lamp.AbstractModernLampPanel.ModernLampPanelValueBox;
 import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
+import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
 
 import net.createmod.catnip.lang.LangBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ModernLampBlockEntity extends BlockEntity implements IHaveGoggleInformation {
+public class ModernLampBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
 
 	public boolean powered;
 	public boolean locked;
+
+	public ModernLampBehaviour behaviour;
+	public ScrollValueBehaviour scrollValue;
 
 	public ModernLampBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
 		super(type, pos, blockState);
 	}
 
-
 	@Override
-	protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-		tag.putBoolean("powered", powered);
-		tag.putBoolean("locked", locked);
-		super.saveAdditional(tag, registries);
+	public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+		behaviours.add(behaviour = new ModernLampBehaviour(this));
+		behaviours.add(scrollValue = new ScrollValueBehaviour(BlazingLang.LAMP_LIGHT.get(), this, getValueBoxTransform()));
 	}
 
-	@Override
-	protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-		powered = tag.getBoolean("powered");
-		locked = tag.getBoolean("locked");
-		super.loadAdditional(tag, registries);
-	}
-
-	@Override
-	public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
-		return ClientboundBlockEntityDataPacket.create(this);
-	}
-
-	@Override
-	public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
-		return saveWithFullMetadata(registries);
+	protected ValueBoxTransform getValueBoxTransform() {
+		if (getBlockState().getBlock() instanceof AbstractModernLampPanel) {
+			return new ModernLampPanelValueBox();
+		}
+		return new ModernLampValueBox();
 	}
 
 	@Override
@@ -69,8 +58,8 @@ public class ModernLampBlockEntity extends BlockEntity implements IHaveGoggleInf
 			BlazingLang.LAMP_GOGGLE_STATE.translate().style(GRAY).forGoggles(tooltip);
 
 			LangBuilder
-					lockTranslation =
-					locked ? BlazingLang.LAMP_GOGGLE_LOCKED.translate() : BlazingLang.LAMP_GOGGLE_UNLOCKED.translate();
+				lockTranslation =
+				locked ? BlazingLang.LAMP_GOGGLE_LOCKED.translate() : BlazingLang.LAMP_GOGGLE_UNLOCKED.translate();
 			ChatFormatting lockStyle = locked ? ChatFormatting.RED : ChatFormatting.GREEN;
 
 			lockTranslation.style(lockStyle).forGoggles(tooltip, 1);

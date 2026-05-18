@@ -6,6 +6,7 @@ import static com.dudko.blazinghot.data.lang.BlazingLang.Prefix.GOGGLES;
 import static com.dudko.blazinghot.data.lang.BlazingLang.Prefix.INFO;
 import static com.dudko.blazinghot.data.lang.BlazingLang.Prefix.ITEM_GROUP;
 import static com.dudko.blazinghot.data.lang.BlazingLang.Prefix.MESSAGE;
+import static com.dudko.blazinghot.data.lang.BlazingLang.Prefix.MOD_ID;
 import static com.dudko.blazinghot.data.lang.BlazingLang.Prefix.RECIPE;
 import static com.dudko.blazinghot.data.lang.BlazingLang.Prefix.RECIPE_TOOLTIP;
 
@@ -30,6 +31,9 @@ public enum BlazingLang {
 
 	LAMP_LOCKED_MESSAGE(MESSAGE, "modern_lamp.lock", "Lamp locked"),
 	LAMP_UNLOCKED_MESSAGE(MESSAGE, "modern_lamp.unlock", "Lamp unlocked"),
+	LAMP_SETTINGS(MOD_ID, "modern_lamp.settings", "Lamp settings"),
+	LAMP_STATE(MOD_ID, "modern_lamp.state", "Lamp state"),
+	LAMP_LIGHT(MOD_ID, "modern_lamp.light", "Lamp light level"),
 
 	LAMP_GOGGLE_TITLE(GOGGLES, "modern_lamp", "Modern Lamp"),
 	LAMP_GOGGLE_STATE(GOGGLES, "modern_lamp.state", "Current state:"),
@@ -68,18 +72,13 @@ public enum BlazingLang {
 	public final String key;
 	private final String translation;
 
-	BlazingLang(String key, String translation) {
-		this.key = key;
+	BlazingLang(String prefix, String key, String translation) {
+		this.key = prefix + "." + key;
 		this.translation = translation;
 	}
 
-	BlazingLang(Prefix prefix, String key, String translation) {
-		this.key = prefix.key + "." + key;
-		this.translation = translation;
-	}
-
-	BlazingLang(Prefix prefix, String translation) {
-		this.key = prefix.key;
+	BlazingLang(String prefix, String translation) {
+		this.key = prefix;
 		this.translation = translation;
 	}
 
@@ -109,22 +108,17 @@ public enum BlazingLang {
 		throw new AssertionError();
 	}
 
-	enum Prefix {
-		RECIPE("blazinghot.recipe"),
-		RECIPE_TOOLTIP("blazinghot.tooltip"),
-		INFO("blazinghot.info"),
-		EMI_RECIPE("emi.category.blazinghot"),
-		ITEM_GROUP("itemGroup.blazinghot"),
-		MESSAGE("message.blazinghot"),
-		ITEM("item.blazinghot"),
-		GOGGLES("blazinghot.gui.goggles"),
-		CATNIP("catnip." + BlazingHot.ID);
-
-		public final String key;
-
-		Prefix(String key) {
-			this.key = key;
-		}
+	static class Prefix {
+		static final String MOD_ID = "blazinghot";
+		static final String RECIPE = "blazinghot.recipe";
+		static final String RECIPE_TOOLTIP = "blazinghot.tooltip";
+		static final String INFO = "blazinghot.info";
+		static final String EMI_RECIPE = "emi.category.blazinghot";
+		static final String ITEM_GROUP = "itemGroup.blazinghot";
+		static final String MESSAGE = "message.blazinghot";
+		static final String ITEM = "item.blazinghot";
+		static final String GOGGLES = "blazinghot.gui.goggles";
+		static final String CATNIP = "catnip." + BlazingHot.ID;
 	}
 
 }

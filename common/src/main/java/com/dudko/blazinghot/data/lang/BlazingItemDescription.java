@@ -22,7 +22,7 @@ public class BlazingItemDescription {
 	}
 
 	public String getKey() {
-		return BlazingLang.Prefix.ITEM.key + "." + key;
+		return BlazingLang.Prefix.ITEM + "." + key;
 	}
 
 	public void provideLang(BiConsumer<String, String> consumer) {

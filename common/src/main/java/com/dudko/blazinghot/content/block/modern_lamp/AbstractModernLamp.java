@@ -9,7 +9,9 @@ import com.dudko.blazinghot.data.lang.BlazingLang;
 import com.dudko.blazinghot.registry.BlazingBlockEntityTypes;
 import com.dudko.blazinghot.registry.BlazingTags;
 import com.simibubi.create.foundation.block.IBE;
+import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
 
+import net.createmod.catnip.math.VecHelper;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -32,6 +34,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -162,5 +165,14 @@ public abstract class AbstractModernLamp extends Block implements IBE<ModernLamp
 	@Override
 	public BlockEntityType<? extends ModernLampBlockEntity> getBlockEntityType() {
 		return BlazingBlockEntityTypes.MODERN_LAMP.get();
+	}
+
+	protected static class ModernLampValueBox extends ValueBoxTransform.Sided {
+
+		@Override
+		protected Vec3 getSouthLocation() {
+			return VecHelper.voxelSpace(8, 8, 16.05);
+		}
+
 	}
 }
