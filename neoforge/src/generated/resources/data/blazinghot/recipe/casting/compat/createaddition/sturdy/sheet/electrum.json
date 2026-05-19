@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "createaddition"
+    }
+  ],
+  "type": "create:casting",
+  "cooling_duration": 150,
+  "ingredients": [
+    {
+      "item": "blazinghot:sturdy_sheet_mold"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 90,
+      "tag": "c:molten_electrum"
+    }
+  ],
+  "keep_mold": true,
+  "processing_time": 50,
+  "results": [
+    {
+      "id": "createaddition:electrum_sheet"
+    }
+  ]
+}

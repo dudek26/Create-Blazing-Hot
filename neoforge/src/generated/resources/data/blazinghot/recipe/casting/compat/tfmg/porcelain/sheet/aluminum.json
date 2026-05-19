@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:and",
+      "values": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "tfmg"
+        },
+        {
+          "type": "neoforge:not",
+          "value": {
+            "type": "neoforge:mod_loaded",
+            "modid": "tfmg"
+          }
+        }
+      ]
+    }
+  ],
+  "type": "create:casting",
+  "cooling_duration": 150,
+  "ingredients": [
+    {
+      "item": "blazinghot:porcelain_sheet_mold"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 90,
+      "tag": "c:molten_aluminum"
+    }
+  ],
+  "processing_time": 50,
+  "results": [
+    {
+      "id": "tfmg:aluminum_sheet"
+    }
+  ]
+}

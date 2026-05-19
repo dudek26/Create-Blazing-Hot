@@ -1,8 +1,29 @@
 {
   "neoforge:conditions": [
     {
-      "type": "neoforge:mod_loaded",
-      "modid": "createaddition"
+      "type": "neoforge:and",
+      "values": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "createaddition"
+        },
+        {
+          "type": "neoforge:not",
+          "value": {
+            "type": "neoforge:or",
+            "values": [
+              {
+                "type": "neoforge:mod_loaded",
+                "modid": "createaddition"
+              },
+              {
+                "type": "neoforge:mod_loaded",
+                "modid": "immersiveengineering"
+              }
+            ]
+          }
+        }
+      ]
     }
   ],
   "type": "create:casting",

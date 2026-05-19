@@ -106,7 +106,7 @@ public class BlazingMetal {
 		}
 
 		public Builder basicCompatForms(Mods... mods) {
-			return withForms(BlazingForms.OPTIONAL_INGOT, BlazingForms.OPTIONAL_NUGGET, BlazingForms.OPTIONAL_SHEET, BlazingForms.OPTIONAL_ROD, BlazingForms.COMPAT_INGOT.fromMods(mods));
+			return withForms(BlazingForms.OPTIONAL_INGOT, BlazingForms.OPTIONAL_NUGGET, BlazingForms.OPTIONAL_SHEET, BlazingForms.OPTIONAL_ROD, BlazingForms.OPTIONAL_WIRE, BlazingForms.COMPAT_INGOT.fromMods(mods));
 		}
 
 		public Builder createForms() {

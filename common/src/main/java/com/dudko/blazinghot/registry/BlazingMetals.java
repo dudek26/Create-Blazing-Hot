@@ -169,7 +169,78 @@ public class BlazingMetals {
 				.withForms(BlazingForms.COMPAT_ROD.fromMods(Mods.IMMERSIVE_ENGINEERING),
 					BlazingForms.COMPAT_NUGGET.fromMods(Mods.MEKANISM, Mods.IMMERSIVE_ENGINEERING, Mods.CREATE_TFMG),
 					BlazingForms.COMPAT_PLATE.fromMods(Mods.IMMERSIVE_ENGINEERING)))
-			.register();
+			.register(),
+		ALUMINUM =
+			BlazingMetal.create("aluminum", b -> b
+					.fromMods(Mods.IMMERSIVE_ENGINEERING, Mods.CREATE_TFMG)
+					.basicCompatForms(Mods.IMMERSIVE_ENGINEERING, Mods.CREATE_TFMG)
+					.withForms(BlazingForms.COMPAT_ROD.fromMods(Mods.IMMERSIVE_ENGINEERING),
+						BlazingForms.COMPAT_NUGGET.fromMods(Mods.IMMERSIVE_ENGINEERING, Mods.CREATE_TFMG),
+						BlazingForms.COMPAT_PLATE.fromMods(Mods.IMMERSIVE_ENGINEERING),
+						BlazingForms.COMPAT_SHEET.fromMods(Mods.CREATE_TFMG)))
+				.register(),
+		TIN =
+			BlazingMetal.create("tin", b -> b
+					.fromMods(Mods.MEKANISM)
+					.basicCompatForms(Mods.MEKANISM)
+					.withForms(BlazingForms.COMPAT_NUGGET.fromMods(Mods.MEKANISM)))
+				.register(),
+		BRONZE =
+			BlazingMetal.create("bronze", b -> b
+					.fromMods(Mods.MEKANISM)
+					.basicCompatForms(Mods.MEKANISM)
+					.withForms(BlazingForms.COMPAT_NUGGET.fromMods(Mods.MEKANISM)))
+				.register(),
+		LEAD =
+			BlazingMetal.create("lead", b -> b
+					.fromMods(Mods.MEKANISM, Mods.IMMERSIVE_ENGINEERING, Mods.CREATE_TFMG)
+					.basicCompatForms(Mods.MEKANISM, Mods.IMMERSIVE_ENGINEERING, Mods.CREATE_TFMG)
+					.withForms(BlazingForms.COMPAT_ROD.fromMods(Mods.IMMERSIVE_ENGINEERING),
+						BlazingForms.COMPAT_NUGGET.fromMods(Mods.MEKANISM, Mods.IMMERSIVE_ENGINEERING, Mods.CREATE_TFMG),
+						BlazingForms.COMPAT_PLATE.fromMods(Mods.IMMERSIVE_ENGINEERING)))
+				.register(),
+		OSMIUM =
+			BlazingMetal.create("osmium", b -> b
+					.fromMods(Mods.MEKANISM)
+					.basicCompatForms(Mods.MEKANISM)
+					.withForms(BlazingForms.COMPAT_NUGGET.fromMods(Mods.MEKANISM)))
+				.register(),
+		SILVER =
+			BlazingMetal.create("silver", b -> b
+					.fromMods(Mods.IMMERSIVE_ENGINEERING)
+					.basicCompatForms(Mods.IMMERSIVE_ENGINEERING)
+					.withForms(BlazingForms.COMPAT_NUGGET.fromMods(Mods.IMMERSIVE_ENGINEERING),
+						BlazingForms.COMPAT_PLATE.fromMods(Mods.IMMERSIVE_ENGINEERING)))
+				.register(),
+		NICKEL =
+			BlazingMetal.create("nickel", b -> b
+					.fromMods(Mods.IMMERSIVE_ENGINEERING, Mods.CREATE_TFMG)
+					.basicCompatForms(Mods.IMMERSIVE_ENGINEERING, Mods.CREATE_TFMG)
+					.withForms(BlazingForms.COMPAT_NUGGET.fromMods(Mods.IMMERSIVE_ENGINEERING, Mods.CREATE_TFMG),
+						BlazingForms.COMPAT_PLATE.fromMods(Mods.IMMERSIVE_ENGINEERING),
+						BlazingForms.COMPAT_SHEET.fromMods(Mods.CREATE_TFMG)))
+				.register(),
+		CONSTANTAN =
+			BlazingMetal.create("constantan", b -> b
+					.fromMods(Mods.IMMERSIVE_ENGINEERING, Mods.CREATE_TFMG)
+					.basicCompatForms(Mods.IMMERSIVE_ENGINEERING, Mods.CREATE_TFMG)
+					.withForms(BlazingForms.COMPAT_NUGGET.fromMods(Mods.IMMERSIVE_ENGINEERING, Mods.CREATE_TFMG),
+						BlazingForms.COMPAT_PLATE.fromMods(Mods.IMMERSIVE_ENGINEERING)))
+				.register(),
+		ELECTRUM =
+			BlazingMetal.create("electrum", b -> b
+					.fromMods(Mods.CREATE_ADDITIONS, Mods.IMMERSIVE_ENGINEERING)
+					.basicCompatForms(Mods.CREATE_ADDITIONS, Mods.IMMERSIVE_ENGINEERING)
+					.withForms(BlazingForms.COMPAT_NUGGET.fromMods(Mods.CREATE_ADDITIONS, Mods.IMMERSIVE_ENGINEERING),
+						BlazingForms.COMPAT_SHEET.fromMods(Mods.CREATE_ADDITIONS),
+						BlazingForms.COMPAT_PLATE.fromMods(Mods.IMMERSIVE_ENGINEERING)))
+				.register(),
+		LITHIUM =
+			BlazingMetal.create("lithium", b -> b
+					.fromMods(Mods.CREATE_TFMG)
+					.basicCompatForms(Mods.CREATE_TFMG)
+					.withForms(BlazingForms.COMPAT_NUGGET.fromMods(Mods.CREATE_TFMG)))
+				.register();
 
 	/**
 	 * @see BlazingAdvancements#ALL_MOLTEN_METALS

@@ -119,7 +119,11 @@ public class BlazingForms {
 			.withMold(Molds.INGOT)),
 		COMPAT_PLATE = SHEET.createFrom("plate", b -> b
 			.setFlags(Flag.CASTING)
-			.withMold(Molds.SHEET));
+			.withMold(Molds.SHEET)),
+		COMPAT_SHEET = SHEET.createFrom("sheet", b -> b
+			.setFlags(Flag.CASTING)
+			.withMold(Molds.SHEET)
+			.withDatagenName("plate"));
 	// Create: Crafts & Additions
 	public static BlazingForm
 		COMPAT_CA_WIRE =

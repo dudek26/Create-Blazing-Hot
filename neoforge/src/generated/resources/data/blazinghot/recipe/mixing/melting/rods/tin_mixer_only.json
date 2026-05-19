@@ -1,0 +1,25 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:rods/tin"
+      }
+    }
+  ],
+  "type": "create:mixing",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "c:rods/tin"
+    }
+  ],
+  "processing_time": 375,
+  "results": [
+    {
+      "amount": 45,
+      "id": "blazinghot:molten_tin"
+    }
+  ]
+}

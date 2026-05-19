@@ -5,7 +5,9 @@ import static com.dudko.blazinghot.data.conditions.DefaultLoadConditions.anyModL
 import static com.dudko.blazinghot.data.conditions.DefaultLoadConditions.not;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 import com.dudko.blazinghot.compat.Mods;
@@ -66,9 +68,9 @@ public class CastingRecipeGen extends BlazingRecipeGen<CastingRecipeParams, Cast
 			if (!form.flags.contains(BlazingForm.Flag.CASTING)) continue;
 			Molds.Mold mold = form.mold;
 			if (mold == null) continue;
+			Map<String, List<Mods>> modsIncluded = new HashMap<>();
 			for (Molds.MoldType moldType : Molds.MoldType.values()) {
 				if (!moldType.usable) continue;
-				List<Mods> modsIncluded = new ArrayList<>();
 				for (Mods mod : form.getMods(metal)) {
 					String
 						name =
@@ -86,10 +88,10 @@ public class CastingRecipeGen extends BlazingRecipeGen<CastingRecipeParams, Cast
 							LoadCondition<?> condition;
 							if (modsIncluded.isEmpty()) condition = anyModLoaded(mod);
 							else {
-								condition = and(anyModLoaded(mod), not(anyModLoaded(modsIncluded)));
+								condition = and(anyModLoaded(mod), not(anyModLoaded(modsIncluded.getOrDefault(form.getDatagenName(), List.of()))));
 							}
 							b.withConditions(condition);
-							modsIncluded.add(mod);
+							modsIncluded.computeIfAbsent(form.getDatagenName(), k -> new ArrayList<>()).add(mod);
 						}
 						return b;
 					});

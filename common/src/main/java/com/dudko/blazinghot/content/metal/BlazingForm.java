@@ -30,6 +30,7 @@ import net.minecraft.world.level.ItemLike;
 public class BlazingForm {
 
 	public final String name;
+	private final String datagenName;
 	public final String tagFolder;
 	public final List<Mods> mods;
 	protected final NullableSupplier<ResourceLocation> customLocation;
@@ -48,6 +49,7 @@ public class BlazingForm {
 
 	private BlazingForm(Builder builder) {
 		name = builder.name;
+		datagenName = builder.datagenName;
 		tagFolder = builder.tagFolder;
 		mods = List.copyOf(builder.mods);
 		customLocation = builder.customLocation;
@@ -163,6 +165,10 @@ public class BlazingForm {
 		return mods;
 	}
 
+	public String getDatagenName() {
+		return datagenName;
+	}
+
 	// Shortcuts
 
 	/**
@@ -190,6 +196,7 @@ public class BlazingForm {
 	public static class Builder {
 
 		private final String name;
+		private String datagenName;
 		private String tagFolder;
 		private List<Mods> mods;
 		private NullableSupplier<ResourceLocation> customLocation;
@@ -208,6 +215,7 @@ public class BlazingForm {
 
 		private Builder(String name) {
 			this.name = name;
+			this.datagenName = "";
 			this.tagFolder = "";
 			this.mods = new ArrayList<>();
 			this.customLocation = () -> null;
@@ -347,6 +355,14 @@ public class BlazingForm {
 		}
 
 		/**
+		 * Datagen name defines whether some forms should exclude each other when loading recipes from different mods
+		 */
+		public Builder withDatagenName(String datagenName) {
+			this.datagenName = datagenName;
+			return this;
+		}
+
+		/**
 		 * Builds and returns the form.
 		 * <ul>
 		 *  If not overridden:
@@ -366,6 +382,8 @@ public class BlazingForm {
 				+ " is invalid ("
 				+ meltingTime
 				+ ")");
+
+			if (datagenName.isEmpty()) datagenName = name;
 
 			int coolingMultiplier = 3;
 			int baseDuration = 50;

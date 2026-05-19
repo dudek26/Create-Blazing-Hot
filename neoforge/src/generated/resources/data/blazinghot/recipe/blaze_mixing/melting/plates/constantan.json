@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:plates/constantan"
+      }
+    }
+  ],
+  "type": "create:blaze_mixing",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "c:plates/constantan"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 50,
+      "tag": "blazinghot:blaze_mixer_fuel"
+    }
+  ],
+  "processing_time": 200,
+  "results": [
+    {
+      "amount": 90,
+      "id": "blazinghot:molten_constantan"
+    }
+  ]
+}
