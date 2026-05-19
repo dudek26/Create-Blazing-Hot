@@ -25,16 +25,22 @@ public enum Mods {
 
 	// Other
 	TECH_REBORN("tech_reborn"), // fabric-exclusive
-	MEKANISM("mekanism"), // neoforge-exclusive
+	MEKANISM("mekanism", false, true), // neoforge-exclusive
 	AD_ASTRA("ad_astra"), // 1.20.1
 	IMMERSIVE_ENGINEERING("immersiveengineering");
 
 	public final String id;
 	public final boolean alwaysIncluded;
+	public final boolean reverseMetalNames;
 
 	Mods(String id, boolean alwaysIncluded) {
+		this(id, alwaysIncluded, false);
+	}
+
+	Mods(String id, boolean alwaysIncluded, boolean reverseMetalNames) {
 		this.id = id;
 		this.alwaysIncluded = alwaysIncluded;
+		this.reverseMetalNames = reverseMetalNames;
 	}
 
 	Mods(String id) {

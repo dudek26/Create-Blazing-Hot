@@ -1,5 +1,11 @@
 package com.dudko.blazinghot.data.recipe;
 
+import static com.dudko.blazinghot.data.conditions.DefaultLoadConditions.and;
+import static com.dudko.blazinghot.data.conditions.DefaultLoadConditions.anyModLoaded;
+import static com.dudko.blazinghot.data.conditions.DefaultLoadConditions.not;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import com.dudko.blazinghot.compat.Mods;
@@ -9,7 +15,7 @@ import com.dudko.blazinghot.content.casting.casting_depot.recipe.CastingRecipeBu
 import com.dudko.blazinghot.content.casting.casting_depot.recipe.CastingRecipeParams;
 import com.dudko.blazinghot.content.metal.BlazingForm;
 import com.dudko.blazinghot.content.metal.BlazingMetal;
-import com.dudko.blazinghot.data.conditions.DefaultLoadConditions;
+import com.dudko.blazinghot.data.conditions.LoadCondition;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.foundation.recipe.BlazingRecipeGen;
 import com.dudko.blazinghot.registry.BlazingMetals;
@@ -48,11 +54,11 @@ public class CastingRecipeGen extends BlazingRecipeGen<CastingRecipeParams, Cast
 		else base = Ingredient.of(Items.IRON_BARS);
 
 		create(BuiltInRegistries.ITEM.getKey(mold.get(Molds.MoldType.STURDY).asItem()),
-				b -> b
-						.require(base)
-						.require(BlazingMetals.STURDY_ALLOY.getFluidTag(), MultiAmount.INGOT.multiply(2))
-						.castingDuration(MultiAmount.INGOT.multiply(2))
-						.output(mold.get(Molds.MoldType.STURDY)));
+			b -> b
+				.require(base)
+				.require(BlazingMetals.STURDY_ALLOY.getFluidTag(), MultiAmount.INGOT.multiply(2))
+				.castingDuration(MultiAmount.INGOT.multiply(2))
+				.output(mold.get(Molds.MoldType.STURDY)));
 	}
 
 	private void casting(BlazingMetal metal) {
@@ -62,21 +68,28 @@ public class CastingRecipeGen extends BlazingRecipeGen<CastingRecipeParams, Cast
 			if (mold == null) continue;
 			for (Molds.MoldType moldType : Molds.MoldType.values()) {
 				if (!moldType.usable) continue;
+				List<Mods> modsIncluded = new ArrayList<>();
 				for (Mods mod : form.getMods(metal)) {
 					String
-							name =
-							(mod.alwaysIncluded ? "" : "compat/" + mod.id + "/") + form.getCastingRecipeName(moldType,
-									metal);
+						name =
+						(mod.alwaysIncluded ? "" : "compat/" + mod.id + "/") + form.getCastingRecipeName(moldType,
+							metal);
 					create(name, b -> {
 						b
-								.require(mold.get(moldType))
-								.require(metal.getFluidTag(), form.amount)
-								.duration(form.castingTime)
-								.coolingDuration(form.coolingTime)
-								.keepMold(moldType.reusable)
-								.output(form.getCastingResult(metal, mod));
+							.require(mold.get(moldType))
+							.require(metal.getFluidTag(), form.amount)
+							.duration(form.castingTime)
+							.coolingDuration(form.coolingTime)
+							.keepMold(moldType.reusable)
+							.output(form.getCastingResult(metal, mod));
 						if (!mod.alwaysIncluded) {
-							b.withConditions(DefaultLoadConditions.anyModLoaded(mod));
+							LoadCondition<?> condition;
+							if (modsIncluded.isEmpty()) condition = anyModLoaded(mod);
+							else {
+								condition = and(anyModLoaded(mod), not(anyModLoaded(modsIncluded)));
+							}
+							b.withConditions(condition);
+							modsIncluded.add(mod);
 						}
 						return b;
 					});

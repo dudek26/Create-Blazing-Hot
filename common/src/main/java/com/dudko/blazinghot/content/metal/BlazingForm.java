@@ -127,8 +127,7 @@ public class BlazingForm {
 			if (!metalMods.isEmpty()) conditions.add(DefaultLoadConditions.anyModLoaded(metalMods));
 			if (!formMods.isEmpty()) conditions.add(DefaultLoadConditions.anyModLoaded(formMods));
 			return conditions;
-		}
-		else if (optional) {
+		} else if (optional) {
 			conditions.add(DefaultLoadConditions.tagsPopulated(getItemTag(metal)));
 		}
 
@@ -142,6 +141,7 @@ public class BlazingForm {
 
 	public ResourceLocation getCastingResult(BlazingMetal metal, Mods mod) {
 		if (getCustomLocation() != null) return getCustomLocation();
+		if (mod.reverseMetalNames) return mod.asResource(name + "_" + metal.name);
 		return mod.asResource(metal.name + "_" + name);
 	}
 
@@ -362,10 +362,10 @@ public class BlazingForm {
 			if (amount == null) throw new NullPointerException("Amount of form " + name + " is null");
 
 			if (meltingTime < 0) throw new UnsupportedOperationException("Melting time of form "
-					+ name
-					+ " is invalid ("
-					+ meltingTime
-					+ ")");
+				+ name
+				+ " is invalid ("
+				+ meltingTime
+				+ ")");
 
 			int coolingMultiplier = 3;
 			int baseDuration = 50;
@@ -380,9 +380,9 @@ public class BlazingForm {
 			}
 			if (fuelCost == null) {
 				fuelCost =
-						MultiAmount
-								.fromBucketFraction(1, 20)
-								.multiply((float) amount.droplets() / MultiAmount.INGOT.droplets());
+					MultiAmount
+						.fromBucketFraction(1, 20)
+						.multiply((float) amount.droplets() / MultiAmount.INGOT.droplets());
 			}
 
 			return new BlazingForm(this);
