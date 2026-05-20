@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-20T00:00:53.4396718	Create: Blazing Hot's Processing Recipes
+// 1.21.1	2026-05-20T22:06:29.1209636	Create: Blazing Hot's Processing Recipes
 ed75dd8f77f9b8194fef053e8d28bda447fcd2c4 data/blazinghot/recipe/blaze_mixing/crystal_mixture.json
 c105b208267afef4def643f2367b6127f1c622f9 data/blazinghot/recipe/blaze_mixing/melting/ancient_debris.json
 81b017e26fe2ff565f776907a964deab4c72954a data/blazinghot/recipe/blaze_mixing/melting/andesite_alloy.json
@@ -200,8 +200,6 @@ b8d6945f0acb2315d8315b0a08fa6f428b8cfc0e data/blazinghot/recipe/casting/compat/t
 55609f14eed346b51082caa92fe1e4bb41191ea9 data/blazinghot/recipe/casting/compat/tfmg/porcelain/nugget/nickel.json
 5a7d2cdf98905490e16558f0df13a7a4b736f664 data/blazinghot/recipe/casting/compat/tfmg/porcelain/nugget/steel.json
 3a5e5ebb20a6858caa2b1ebc85d73adf80079b0b data/blazinghot/recipe/casting/compat/tfmg/porcelain/sheet/aluminum.json
-048091914caa0a6e26ca03acc1313d7827210b18 data/blazinghot/recipe/casting/compat/tfmg/porcelain/sheet/constantan.json
-92468015da135117bf09e3f2a8699cdb072bcf25 data/blazinghot/recipe/casting/compat/tfmg/porcelain/sheet/lithium.json
 d64c4bb81e2b3f7cd45e5d599d4dd539b1ae9a43 data/blazinghot/recipe/casting/compat/tfmg/porcelain/sheet/nickel.json
 70e84543b4fedd3bd2f16e597fd8cfff71df79be data/blazinghot/recipe/casting/compat/tfmg/sturdy/ingot/aluminum.json
 5a0e844f2ab0d50fd633cbf00ca87779ea183344 data/blazinghot/recipe/casting/compat/tfmg/sturdy/ingot/constantan.json
@@ -216,8 +214,6 @@ ec5493533d9d35c0cce5bed233b3fa902c488179 data/blazinghot/recipe/casting/compat/t
 f05203c50d473bbb9d88084eb5cf1f12c78e15ac data/blazinghot/recipe/casting/compat/tfmg/sturdy/nugget/nickel.json
 7a564e6d74f7953e238ce7f2488a58916658ffe6 data/blazinghot/recipe/casting/compat/tfmg/sturdy/nugget/steel.json
 8b15f34e2a173c295e469c573ea0a8d5a7f2636f data/blazinghot/recipe/casting/compat/tfmg/sturdy/sheet/aluminum.json
-a32938d0d3570a9e284e8f6e07cc94597510bb0e data/blazinghot/recipe/casting/compat/tfmg/sturdy/sheet/constantan.json
-bd3fdd54555bf3226311d3f4f5eb127bcf99a77b data/blazinghot/recipe/casting/compat/tfmg/sturdy/sheet/lithium.json
 8254f8afb8e39c2063413a0a39dfec0966354f5d data/blazinghot/recipe/casting/compat/tfmg/sturdy/sheet/nickel.json
 7b275c896289a7c7a6dde4914d0d6ffc56656f2a data/blazinghot/recipe/casting/porcelain/andesite_alloy.json
 cdb35bb19aa39cc05c82eb840c2560582af7fc21 data/blazinghot/recipe/casting/porcelain/golden_sheet.json
