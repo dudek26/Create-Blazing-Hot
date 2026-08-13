@@ -384,7 +384,7 @@ public abstract class BlazeMixerBlockEntity extends BasinOperatingBlockEntity im
 		if (!match) return false;
 
 		if (mode == Mode.BLAZE) {
-			return recipe instanceof BlazeMixingRecipe bmxRecipe && hasFuel(MixingType.BLAZE_MIXING, bmxRecipe.getMixerFuelAmount());
+			return recipe instanceof BlazeMixingRecipe bmxRecipe && hasFuel(MixingType.BLAZE_MIXING, bmxRecipe.getLegacyMixerFuelAmount());
 		}
 
 		return recipe.getType() != BlazingRecipeTypes.BLAZE_MIXING.getType();

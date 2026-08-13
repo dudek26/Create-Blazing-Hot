@@ -1,14 +1,18 @@
 package com.dudko.blazinghot.content.kinetics.blaze_mixer.recipe;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.dudko.blazinghot.BlazingHot;
 import com.dudko.blazinghot.content.kinetics.blaze_mixer.BlazeMixerBlockEntity;
+import com.dudko.blazinghot.foundation.mixin_interfaces.IProcessingRecipeParams;
 import com.dudko.blazinghot.foundation.multiloader.fluid.MultiAmount;
 import com.dudko.blazinghot.registry.BlazingConfigs;
 import com.dudko.blazinghot.registry.BlazingRecipeTypes;
+import com.mojang.datafixers.util.Either;
 import com.simibubi.create.content.fluids.potion.PotionMixingRecipes;
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
@@ -16,12 +20,15 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.Fluid;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -43,7 +50,7 @@ public abstract class BlazeMixingRecipe extends BasinRecipe {
 		switch (recipe) {
 			// blaze mixing
 			case BlazeMixingRecipe blazeMixingRecipe -> {
-				return blazeMixingRecipe.getMixerFuelAmount();
+				return blazeMixingRecipe.getLegacyMixerFuelAmount();
 			}
 
 			case MixingRecipe mixingRecipe -> {
@@ -86,14 +93,28 @@ public abstract class BlazeMixingRecipe extends BasinRecipe {
 		return Mth.ceil(recipeSpeed * BlazingConfigs.server().recipes.fueledMixingFuelUsage.get());
 	}
 
-	public abstract long getMixerFuelAmount();
+	public Optional<MixerFuel> getFuel() {
+		return IProcessingRecipeParams.cast(params).blazinghot$getMixerFuel();
+	}
+
+	public long getFuelAmount(Either<TagKey<Fluid>, ResourceKey<Fluid>> fluid) {
+		return getFuel().map(fuel -> fuel.amount()).orElse(0L);
+	}
+
+	public abstract long getLegacyMixerFuelAmount();
 
 	@Override
 	protected int getMaxFluidInputCount() {
 		return super.getMaxFluidInputCount() + 1;
 	}
 
-//	public static MapCodec<BlazeMixingRecipe> codec(Factory factory, MapCodec<BlazeMixingRecipeParams> paramsCodec) {
+	@Override
+	public List<String> validate() {
+		BlazingHot.LOGGER.warn("A Blaze Mixing Recipe uses legacy mixer fuel definition! This definition won't be supported in the future.");
+		return super.validate();
+	}
+
+	//	public static MapCodec<BlazeMixingRecipe> codec(Factory factory, MapCodec<BlazeMixingRecipeParams> paramsCodec) {
 //		return paramsCodec.xmap(factory::create, BlazeMixingRecipe::getParams).validate(recipe -> {
 //			var errors = recipe.validate();
 //			if (errors.isEmpty()) return DataResult.success(recipe);

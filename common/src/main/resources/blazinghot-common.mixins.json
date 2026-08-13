@@ -15,6 +15,7 @@
     "KineticBlockMixin",
     "ManualApplicationRecipeMixin",
     "MechanicalMixerBlockEntityMixin",
+    "ProcessingRecipeParamsMixin",
     "SmartBlockEntityMixin",
     "SpoutBlockEntityMixin",
     "SpoutBlockMixin",

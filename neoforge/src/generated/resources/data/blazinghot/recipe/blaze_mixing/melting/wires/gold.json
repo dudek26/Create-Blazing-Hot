@@ -9,15 +9,13 @@
     }
   ],
   "type": "create:blaze_mixing",
+  "blazinghot:fuel": {
+    "amount": 25
+  },
   "heat_requirement": "superheated",
   "ingredients": [
     {
       "tag": "c:wires/gold"
-    },
-    {
-      "type": "neoforge:tag",
-      "amount": 25,
-      "tag": "blazinghot:blaze_mixer_fuel"
     }
   ],
   "processing_time": 125,

@@ -1,14 +1,12 @@
 {
   "type": "create:blaze_mixing",
+  "blazinghot:fuel": {
+    "amount": 50
+  },
   "heat_requirement": "superheated",
   "ingredients": [
     {
       "tag": "c:plates/copper"
-    },
-    {
-      "type": "neoforge:tag",
-      "amount": 50,
-      "tag": "blazinghot:blaze_mixer_fuel"
     }
   ],
   "processing_time": 200,

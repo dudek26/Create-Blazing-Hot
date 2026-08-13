@@ -58,7 +58,7 @@ public abstract class BlazeMixingCategory extends BasinCategory {
 	protected long getFuelAmount(BasinRecipe recipe) {
 		if (type == BlazeMixerBlockEntity.MixingType.AUTO_SHAPELESS)
 			return BlazingConfigs.server().recipes.fueledShapelessFuelUsage.get();
-		if (recipe instanceof BlazeMixingRecipe bmRecipe) return bmRecipe.getMixerFuelAmount();
+		if (recipe instanceof BlazeMixingRecipe bmRecipe) return bmRecipe.getLegacyMixerFuelAmount();
 
 		assert Minecraft.getInstance().level != null;
 		return BlazeMixingRecipe.getFuelCost(recipe, Minecraft.getInstance().level);
@@ -92,7 +92,11 @@ public abstract class BlazeMixingCategory extends BasinCategory {
 	protected abstract void fuelTooltip(IRecipeSlotView view, ITooltipBuilder tooltip);
 
 	@Override
-	public void draw(BasinRecipe recipe, IRecipeSlotsView iRecipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
+	public void draw(BasinRecipe recipe,
+	                 IRecipeSlotsView iRecipeSlotsView,
+	                 GuiGraphics graphics,
+	                 double mouseX,
+	                 double mouseY) {
 		super.draw(recipe, iRecipeSlotsView, graphics, mouseX, mouseY);
 
 		long fuelAmount = getFuelAmount(recipe);

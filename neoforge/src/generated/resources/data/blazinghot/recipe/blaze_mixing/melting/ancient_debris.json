@@ -1,14 +1,12 @@
 {
   "type": "create:blaze_mixing",
+  "blazinghot:fuel": {
+    "amount": 66
+  },
   "heat_requirement": "superheated",
   "ingredients": [
     {
       "item": "minecraft:ancient_debris"
-    },
-    {
-      "type": "neoforge:tag",
-      "amount": 66,
-      "tag": "blazinghot:blaze_mixer_fuel"
     }
   ],
   "processing_time": 300,

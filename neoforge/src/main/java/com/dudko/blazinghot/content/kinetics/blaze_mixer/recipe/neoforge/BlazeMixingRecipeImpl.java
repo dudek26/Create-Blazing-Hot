@@ -33,7 +33,7 @@ public class BlazeMixingRecipeImpl extends BlazeMixingRecipe {
 	}
 
 	@Override
-	public long getMixerFuelAmount() {
+	public long getLegacyMixerFuelAmount() {
 		if (super.getFluidIngredients().isEmpty()) {
 			return 0;
 		}
